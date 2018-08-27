@@ -1,0 +1,11 @@
+fileFormatVersion: 2
+guid: 6232bcc85652cd34ba91b617e4e12a6f
+timeCreated: 1498859169
+licenseType: Pro
+ShaderImporter:
+  defaultTextures:
+  - _Grass: {fileID: 2800000, guid: 732c3e90ef442d6418df24c490553483, type: 3}
+  - _GrassNormal: {fileID: 2800000, guid: 563f14cd42be4ce469ad528d579d2e04, type: 3}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
