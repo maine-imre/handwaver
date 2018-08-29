@@ -11,6 +11,10 @@ using UnityEngine.Networking;
  * Example of calling this script:
  * generateData(DateTime.Now);			//Will get the data for the current time.
  * To get the outputted data, look in the "planets" when planetsHaveValues is true.
+ *
+ * V4.1 Released 08.28.18 By Timothy Bruce
+ * Added to the Minute, Second, and Millisecond accuracy. 
+ * Also, I think this version has been edited by IMRE for HandWaver.
  */
 
 
@@ -41,9 +45,9 @@ namespace IMRE.HandWaver.Space {
     /// <summary>
     /// 
     /// </summary>
-    public class HorizonsV4 : MonoBehaviour
+    public class Horizons : MonoBehaviour
     {
-		public static HorizonsV4 ins;
+		public static Horizons ins;
 
         public static int[] ids = new int[] { 10, 399, 301 };              //This is the list of objects that the function will calling.
 
@@ -185,27 +189,43 @@ namespace IMRE.HandWaver.Space {
             return url;
         }
 
-        private static  string generateDateInput(DateTime time)
-        {                                                           //Generates a date field in the format that the horizons database likes.
-            string targetDateTime = time.Year.ToString() + "-";
+    	private string generateDateInput(DateTime time)
+		{          													//Generates a date field in the format that the horizons database likes.
+			string targetDateTime = time.Year.ToString() + "-";
 
-            if (time.Month < 10)
-            {
-                targetDateTime += "0";
-            }
-            targetDateTime += time.Month + "-";
+			if (time.Month < 10)
+			{
+				targetDateTime += "0";
+			}
+			targetDateTime += time.Month + "-";
 
-            if (time.Day < 10)
-            {
-                targetDateTime += "0";
-            }
-            targetDateTime += time.Day.ToString() + "%20";
-            if (time.Hour < 10)
-            {
-                targetDateTime += "0";
-            }
-            targetDateTime += time.Hour + ":00%27%20&";              //To the closest hour
-            return targetDateTime;
-        }
+			if (time.Day < 10)
+			{
+				targetDateTime += "0";
+			}
+			targetDateTime += time.Day.ToString() + "%20";
+			if (time.Hour < 10)
+			{
+				targetDateTime += "0";
+			}
+			targetDateTime += time.Hour + ":";
+			if (time.Minute < 10) {
+				targetDateTime += "0";
+			}
+			targetDateTime += time.Minute + ":";
+			if (time.Second < 10) {
+				targetDateTime += "0";
+			}
+			targetDateTime += time.Second + ".";
+			if (time.Millisecond < 10) {
+				targetDateTime += "000";
+			} else if (time.Millisecond < 100) {
+				targetDateTime += "00";
+			} else if (time.Millisecond < 1000) {
+				targetDateTime += "0";
+			}
+			targetDateTime += time.Millisecond + "%27%20&";
+			return targetDateTime;
+		}
     }
 }
