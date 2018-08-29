@@ -206,7 +206,7 @@ namespace IMRE.HandWaver.Space
 			set
 			{
 				simulationTime = value;
-				HorizonsV4.ins.generateData(value);
+				Horizons.ins.generateData(value);
 				if (timeDateGlobalMenuText != null)
 					timeDateGlobalMenuText.SetText(value.ToString("yyyy/MM/dd HH:mm"));
 
@@ -217,21 +217,21 @@ namespace IMRE.HandWaver.Space
 		private void SetSunMoonPositions()
 		{
 			Vector3 EarthOffset = Vector3.zero;
-			if (HorizonsV4.planetsHaveValues)
+			if (Horizons.planetsHaveValues)
 			{
-				EarthOffset = HorizonsV4.Planets.Find(p => p.id == 399).position;
+				EarthOffset = Horizons.Planets.Find(p => p.id == 399).position;
 			}
-			if (Sun != null && sunPin != null && HorizonsV4.planetsHaveValues)
+			if (Sun != null && sunPin != null && Horizons.planetsHaveValues)
 			{
 				if (sunBetweenTropics)
 				{
-					Vector2 tmp = GeoPlanetMaths.latlong(HorizonsV4.Planets.Find(p => p.id == 10).position - EarthOffset);
+					Vector2 tmp = GeoPlanetMaths.latlong(Horizons.Planets.Find(p => p.id == 10).position - EarthOffset);
 					tmp.x = (tmp.x / realEarthtilt) * earthTiltDeg;
 					sunPin.Latlong = tmp;
 				}
 				else
 				{
-					sunPin.Latlong = GeoPlanetMaths.latlong(HorizonsV4.Planets.Find(p => p.id == 10).position - EarthOffset);
+					sunPin.Latlong = GeoPlanetMaths.latlong(Horizons.Planets.Find(p => p.id == 10).position - EarthOffset);
 				}
 			}
 			else
@@ -240,9 +240,9 @@ namespace IMRE.HandWaver.Space
 				Transform tmp = PoolManager.Pools["GeoPlanet"].Spawn("RSDESpushPinPreFab");
 				tmp.GetComponent<RSDESPin>().setupSun();
 			}
-			if (Moon != null && moonPin != null && HorizonsV4.planetsHaveValues)
+			if (Moon != null && moonPin != null && Horizons.planetsHaveValues)
 			{
-				moonPin.Latlong = GeoPlanetMaths.latlong(HorizonsV4.Planets.Find(p => p.id == 301).position-EarthOffset);
+				moonPin.Latlong = GeoPlanetMaths.latlong(Horizons.Planets.Find(p => p.id == 301).position-EarthOffset);
 			}
 			else
 			{
@@ -317,7 +317,7 @@ namespace IMRE.HandWaver.Space
 			//timeScaleSlider.OnSliderValueChanged.AddListener(setTimeScale);
 			clock = clockUpdate();
 				StartCoroutine(clock);
-			HorizonsV4.planetsDataUpdated += SetSunMoonPositions;
+			Horizons.planetsDataUpdated += SetSunMoonPositions;
 			
 		}
 		private void Awake()
