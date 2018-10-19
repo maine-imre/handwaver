@@ -243,9 +243,9 @@ namespace IMRE.HandWaver
 				mesh.triangles = triangles;
 				mesh.RecalculateNormals();
 
-				GameObject planeHandle = Instantiate(Resources.Load("HandlePreFab", typeof(GameObject))) as GameObject;
-				planeHandle.transform.parent = this.transform;
-				planeHandle.transform.localPosition = Vector3.zero;
+				//GameObject planeHandle = Instantiate(Resources.Load("HandlePreFab", typeof(GameObject))) as GameObject;
+				//planeHandle.transform.parent = this.transform;
+				//planeHandle.transform.localPosition = Vector3.zero;
 				StartCoroutine(recalcMesh(mesh));
 
 			}

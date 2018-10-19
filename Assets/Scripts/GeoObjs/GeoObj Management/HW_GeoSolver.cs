@@ -10,6 +10,7 @@ www.imrelab.org
 **/
 
 using UnityEngine;
+using System;
 
 namespace IMRE.HandWaver.Solver
 {
@@ -22,7 +23,14 @@ namespace IMRE.HandWaver.Solver
     {
         #region PositionTransformations
         Quaternion globalRotation = Quaternion.identity;
-        float globalScale = 1f;
+        float globalScale
+		{
+			get
+			{
+				//we need an event so that this updates on the fly!  (the value does but we need to re-render everything).
+				return Interface.worldScaleModifier.ins.AbsoluteScale;
+			}
+		}
         Vector4 globalTranslate4 = Vector4.zero;
         Vector3 globalTranslate = Vector3.zero;
 
@@ -72,10 +80,16 @@ namespace IMRE.HandWaver.Solver
 		void Start()
         {
 			ins = this;
+			LoadToolbox();
         }
 
+		public Transform toolbox;
+		private void LoadToolbox()
+		{
+			toolbox.gameObject.SetActive(true);
+		}
 
-        public void addToReactionManager(Node<string> node)
+		public void addToReactionManager(Node<string> node)
         {
             if (!rManList.Contains(node))
             {
