@@ -81,6 +81,8 @@ namespace IMRE.HandWaver.Solver
         {
 			ins = this;
 			LoadToolbox();
+			//we need to have an event here that tells us to log the scale change.
+			Interface.worldScaleModifier.ins.OnGestureDeactivated += logScaleChange;
         }
 
 		public Transform toolbox;
@@ -113,6 +115,12 @@ namespace IMRE.HandWaver.Solver
             }
         }
 
+		private void logScaleChange()
+		{
+			ScaleHasChanged = true;
+		}
+		private bool ScaleHasChanged = false;
+
         /// <summary>
         /// During update, this recursively handles chagnes to other figures from the user's input.
         /// It goes up and down the dependency tree.
@@ -123,6 +131,11 @@ namespace IMRE.HandWaver.Solver
         {
             if (nodeList == null)
             {
+				if (ScaleHasChanged)
+				{
+					ScaleHasChanged = false;
+					GameObject.FindObjectsOfType<MasterGeoObj>().ToList().ForEach(mgo => mgo.updateFigure());
+				}
                 return;
             }
             NodeList<string> thisPassTrue = new NodeList<string>();
@@ -148,7 +161,12 @@ namespace IMRE.HandWaver.Solver
                 //;for some reason we neglect figures that are built on intersections.
                 //this needs to be refactored to consider that inersections are not necessairly the end.
                 updateManager(updateNodeList);
-            }
+				if (ScaleHasChanged)
+				{
+					ScaleHasChanged = false;
+					GameObject.FindObjectsOfType<MasterGeoObj>().ToList().ForEach(mgo => mgo.updateFigure());
+				}
+			}
         }
 
         /// <summary>
