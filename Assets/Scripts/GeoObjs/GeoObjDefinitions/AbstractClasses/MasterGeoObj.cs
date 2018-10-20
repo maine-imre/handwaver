@@ -49,7 +49,7 @@ namespace IMRE.HandWaver
             {
                 if(_position3 == Vector3.zero || actualPos != transform.position)
                 {
-                    _position3 = systemPosition(this.transform.position);
+                    Position3 = systemPosition(this.transform.position);
 					actualPos = transform.position;
                 }
 
@@ -60,8 +60,9 @@ namespace IMRE.HandWaver
             {
                 _position3 = value;
                 this.transform.position = LocalPosition(_position3);
-            }
-        }
+				actualPos = transform.position;
+			}
+		}
         #endregion
 
         public bool allowDelete = true;
@@ -403,7 +404,7 @@ namespace IMRE.HandWaver
             {
                 intersectionManager.ins.updateIntersectionProduct(this);
             }
-            return rMotion(inputNodeList);
+			return rMotion(inputNodeList);
         }
 		internal abstract bool rMotion(NodeList<string> inputNodeList);
 		public abstract void updateFigure();

@@ -168,6 +168,11 @@ namespace IMRE.HandWaver
 
 		internal bool checkForMGOmatch(List<MasterGeoObj> mgoList)
 		{
+			if(mgoList.Any<MasterGeoObj>(mgo => mgo.figType == GeoObjType.prism))
+			{
+				Debug.Log("THERE WAS A PRISM CALLED BEFORE I WAS CALLED");
+			}
+
 			string[] listA = new string[Items.Count];
 			string[] listB = new string[mgoList.Count];
 

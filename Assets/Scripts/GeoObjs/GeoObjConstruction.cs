@@ -192,7 +192,7 @@ namespace IMRE.HandWaver {
 
 			foreach (AbstractLineSegment line in lineList)
 			{
-				HW_GeoSolver.ins.addDependence(plane.transform, line.transform);
+				//HW_GeoSolver.ins.addDependence(plane.transform, line.transform);
 			}
 
 			foreach (AbstractPoint point in pointList)
@@ -557,17 +557,10 @@ namespace IMRE.HandWaver {
 			prism.bases = baseList;
 			prism.sides = sideList;
 
-			foreach (AbstractPolygon poly in baseList)
-			{
-				HW_GeoSolver.ins.addDependence(prism.transform, poly.transform);
-			}
-			foreach (AbstractPolygon poly in sideList)
-			{
-				HW_GeoSolver.ins.addDependence(prism.transform, poly.transform);
-			}
-
 			prism.vertexPoints.ForEach(p => HW_GeoSolver.ins.addDependence(prism.transform, p.transform));
-			prism.lineSegments.ForEach(l => HW_GeoSolver.ins.addDependence(prism.transform, l.transform));
+			//prism.lineSegments.ForEach(l => HW_GeoSolver.ins.addDependence(prism.transform, l.transform));
+			prism.bases.ForEach(b => HW_GeoSolver.ins.addDependence(prism.transform, b.transform));
+			prism.sides.ForEach(b => HW_GeoSolver.ins.addDependence(prism.transform, b.transform));
 			prism.initializefigure();
 
 			return prism;

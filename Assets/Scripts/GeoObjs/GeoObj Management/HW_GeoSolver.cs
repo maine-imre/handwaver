@@ -156,11 +156,11 @@ namespace IMRE.HandWaver.Solver
             }
             else
             {
-                //try moving this to the top.
-                //intersectionManager.ins.UpdateIntersections(updateNodeList);
-                //;for some reason we neglect figures that are built on intersections.
-                //this needs to be refactored to consider that inersections are not necessairly the end.
-                updateManager(updateNodeList);
+				//try moving this to the top.
+				//intersectionManager.ins.UpdateIntersections(updateNodeList);
+				//;for some reason we neglect figures that are built on intersections.
+				//this needs to be refactored to consider that inersections are not necessairly the end.
+				updateManager(updateNodeList);
 				if (ScaleHasChanged)
 				{
 					ScaleHasChanged = false;
@@ -269,6 +269,7 @@ namespace IMRE.HandWaver.Solver
 
 		internal void removeComponent(MasterGeoObj geoComp)
         {
+			Debug.Log(geoComp.figName + " is being removed from the graph. Refer to trace for reason.");
 
 			if (blockDelete == false)
 			{
