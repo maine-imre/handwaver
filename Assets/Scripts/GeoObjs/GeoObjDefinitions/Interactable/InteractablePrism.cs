@@ -204,8 +204,9 @@ namespace IMRE.HandWaver
 		/// <param name="polys">List to remove all nonenabled from</param>
 		private void checkActive(List<AbstractPolygon> polys)
 		{
-			List<AbstractPolygon> polyToRemove = polys.Where(p => !p.gameObject.activeSelf).ToList();
-			polyToRemove.ForEach(p => polys.Remove(p));
+			polys.RemoveAll(p => !p.gameObject.activeSelf);
+			//List<AbstractPolygon> polyToRemove = polys.Where(p => !p.gameObject.activeSelf).ToList();	optimized above
+			//polyToRemove.ForEach(p => polys.Remove(p));
 		}
 
 		private bool checkForPointsInNodeList(NodeList<string> nodeList)

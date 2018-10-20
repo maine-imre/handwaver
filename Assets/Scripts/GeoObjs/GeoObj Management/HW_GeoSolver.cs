@@ -233,13 +233,13 @@ namespace IMRE.HandWaver.Solver
         /// <param name="toGeoComp">to the object that the new object depends on</param>
         public void addDependence(Transform fromGeoComp, Transform toGeoComp)
         {
-            //Debug.Log("adding directed edge from " + fromGeoComp.transform.GetComponent<LifeManager>().myNAME + " to " + toGeoComp.transform.GetComponent<LifeManager>().myNAME);
+            //Debug.Log("adding directed edge from " + fromGeoComp.transform.GetComponent<MasterGeoObj>().figName + " to " + toGeoComp.transform.GetComponent<MasterGeoObj>().figName);
             geomanager.AddDirectedEdge(fromGeoComp.transform.GetComponent<MasterGeoObj>().figName, toGeoComp.transform.GetComponent<MasterGeoObj>().figName, 1);
         }
 
 		void AddDependenceMGO(MasterGeoObj fromMGO, MasterGeoObj toMGO)
 		{
-			//Debug.Log("adding directed edge from " + fromGeoComp.transform.GetComponent<LifeManager>().myNAME + " to " + toGeoComp.transform.GetComponent<LifeManager>().myNAME);
+			//Debug.Log("adding directed edge from " + fromGeoComp.transform.GetComponent<MasterGeoObj>().figName + " to " + toGeoComp.transform.GetComponent<MasterGeoObj>().figName);
 			geomanager.AddDirectedEdge(fromMGO.figName, toMGO.figName, 1);
 		}
 
