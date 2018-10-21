@@ -381,16 +381,9 @@ namespace IMRE.HandWaver {
 			prism.bases = baseList;
             prism.sides = sideList;
 
-            foreach (AbstractPolygon poly in baseList)
-            {
-				HW_GeoSolver.ins.addDependence(prism.transform, poly.transform);
-            }
-            foreach (AbstractPolygon poly in sideList)
-            {
-				HW_GeoSolver.ins.addDependence(prism.transform, poly.transform);
-            }
-
-            prism.vertexPoints.ForEach(p => HW_GeoSolver.ins.addDependence(prism.transform, p.transform));
+			prism.bases.ForEach(p => HW_GeoSolver.ins.addDependence(prism.transform, p.transform));
+			prism.sides.ForEach(p => HW_GeoSolver.ins.addDependence(prism.transform, p.transform));
+			prism.vertexPoints.ForEach(p => HW_GeoSolver.ins.addDependence(prism.transform, p.transform));
 
             prism.initializefigure();
 
@@ -558,7 +551,7 @@ namespace IMRE.HandWaver {
 			prism.sides = sideList;
 
 			prism.vertexPoints.ForEach(p => HW_GeoSolver.ins.addDependence(prism.transform, p.transform));
-			//prism.lineSegments.ForEach(l => HW_GeoSolver.ins.addDependence(prism.transform, l.transform));
+			prism.lineSegments.ForEach(l => HW_GeoSolver.ins.addDependence(prism.transform, l.transform));
 			prism.bases.ForEach(b => HW_GeoSolver.ins.addDependence(prism.transform, b.transform));
 			prism.sides.ForEach(b => HW_GeoSolver.ins.addDependence(prism.transform, b.transform));
 			prism.initializefigure();
@@ -610,7 +603,7 @@ namespace IMRE.HandWaver {
 			line2.transform.GetComponent<AbstractLineSegment>().initializefigure();
 			line3.transform.GetComponent<AbstractLineSegment>().initializefigure();
 
-			Transform newPlane = PoolManager.Pools["GeoObj"].Spawn("PlanePreFab");
+			//Transform newPlane = PoolManager.Pools["GeoObj"].Spawn("PlanePreFab");
 			List<AbstractLineSegment> lineList = new List<AbstractLineSegment>();
 			lineList.Add(line0);
 			lineList.Add(line1);
@@ -623,21 +616,22 @@ namespace IMRE.HandWaver {
 			pointList.Add(point12);
 			pointList.Add(point11);
 
-			newPlane.GetComponent<AbstractPolygon>().lineList = lineList;
-			newPlane.GetComponent<AbstractPolygon>().pointList = pointList;
 
-			foreach (AbstractLineSegment line in lineList)
-			{
-				HW_GeoSolver.ins.addDependence(newPlane.transform, line.transform);
-			}
-			foreach (AbstractPoint point in pointList)
-			{
-				HW_GeoSolver.ins.addDependence(newPlane.transform, point.transform);
-			}
+			//newPlane.GetComponent<AbstractPolygon>().lineList = lineList;
+			//newPlane.GetComponent<AbstractPolygon>().pointList = pointList;
 
-			newPlane.transform.GetComponent<AbstractPolygon>().initializefigure();
+			//foreach (AbstractLineSegment line in lineList)
+			//{
+			//	HW_GeoSolver.ins.addDependence(newPlane.transform, line.transform);
+			//}
+			//foreach (AbstractPoint point in pointList)
+			//{
+			//	HW_GeoSolver.ins.addDependence(newPlane.transform, point.transform);
+			//}
 
-            return newPlane.GetComponent<AbstractPolygon>();
+			//newPlane.transform.GetComponent<AbstractPolygon>().initializefigure();
+
+            return iPolygon(lineList,pointList);
 
 		}
 

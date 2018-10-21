@@ -70,7 +70,6 @@ namespace IMRE.HandWaver
         {
 			bool result = (oldPos == null) || (this.Position3 == oldPos);			 
             oldPos = this.Position3;
-			Debug.Log(result + figName);
             return result;
         }
 
