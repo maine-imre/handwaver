@@ -68,7 +68,8 @@ namespace IMRE.HandWaver
 
         public bool hasMoved()
         {
-			bool result = (oldPos == null) || (this.Position3 == oldPos);			 
+			bool result = (oldPos == null) || (this.Position3 == oldPos);
+			this.Position3 = this.Position3;
             oldPos = this.Position3;
             return result;
         }

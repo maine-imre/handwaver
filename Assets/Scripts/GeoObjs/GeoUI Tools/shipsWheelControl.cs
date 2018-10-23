@@ -232,141 +232,143 @@ namespace IMRE.HandWaver
 		#endregion
 
 		#region Operations
-		public void revolve()
+
+		internal void revolve(bool v)
 		{
-			#region Revolve
-			if (newTurn())
+			Vector3 spindleCenter = parentSE.GetComponent<straightEdgeBehave>().center;
+			Vector3 normal = parentSE.GetComponent<straightEdgeBehave>().normalDir;
+
+			foreach (MasterGeoObj geoObj in FindObjectsOfType<MasterGeoObj>().Where(geoObj => (geoObj.IsSelected && geoObj.figType != GeoObjType.straightedge)))
 			{
-				Vector3 spindleCenter = parentSE.GetComponent<straightEdgeBehave>().center;
-				Vector3 normal = parentSE.GetComponent<straightEdgeBehave>().normalDir;
-
-				foreach (MasterGeoObj geoObj in FindObjectsOfType<MasterGeoObj>().Where(geoObj => (geoObj.IsSelected && geoObj.figType != GeoObjType.straightedge)))
+				switch (geoObj.figType)
 				{
-					switch (geoObj.figType)
-					{
-						case GeoObjType.point:
-							Vector3 center = Vector3.Project(geoObj.gameObject.transform.position - spindleCenter, parentSE.normalDir) + spindleCenter;
-							makeCircle(center, geoObj.transform, normal);
-							//geoObj.IsSelected = false;
-							break;
-						case GeoObjType.line:
-							Vector3 center2 = Vector3.Project(geoObj.gameObject.transform.position - spindleCenter, parentSE.normalDir) + spindleCenter;
+					case GeoObjType.point:
+						Vector3 center = Vector3.Project(geoObj.gameObject.transform.position - spindleCenter, parentSE.normalDir) + spindleCenter;
+						makeCircle(center, geoObj.transform, normal);
+						//geoObj.IsSelected = false;
+						break;
+					case GeoObjType.line:
+						Vector3 center2 = Vector3.Project(geoObj.gameObject.transform.position - spindleCenter, parentSE.normalDir) + spindleCenter;
 
-							makeRevolvedSurface(geoObj.gameObject.transform, center2, normal);
+						makeRevolvedSurface(geoObj.gameObject.transform, center2, normal);
 
-							AbstractLineSegment lineALS = geoObj.GetComponent<AbstractLineSegment>();
+						AbstractLineSegment lineALS = geoObj.GetComponent<AbstractLineSegment>();
 
-							Vector3 diff1 = Vector3.Project(lineALS.vertex0 - lineALS.transform.position, normal);
-							Vector3 diff2 = Vector3.Project(lineALS.vertex1 - lineALS.transform.position, normal);
+						Vector3 diff1 = Vector3.Project(lineALS.vertex0 - lineALS.transform.position, normal);
+						Vector3 diff2 = Vector3.Project(lineALS.vertex1 - lineALS.transform.position, normal);
 
-							if (geoObj.GetComponent<InteractableLineSegment>() != null)
+						if (geoObj.GetComponent<InteractableLineSegment>() != null)
+						{
+							makeCircle(center2 + diff1, geoObj.GetComponent<InteractableLineSegment>().point1.transform, normal);
+
+							makeCircle(center2 + diff2, geoObj.GetComponent<InteractableLineSegment>().point2.transform, normal);
+						}
+						else if (geoObj.GetComponent<DependentLineSegment>() != null)
+						{
+							makeCircle(center2 + diff1, geoObj.GetComponent<DependentLineSegment>().point1.transform, normal);
+
+							makeCircle(center2 + diff2, geoObj.GetComponent<DependentLineSegment>().point2.transform, normal);
+						}
+						else
+						{
+							Debug.LogWarning("Can't work with abstractlinesegments yet");
+						}
+						//geoObj.IsSelected = false;
+						break;
+					case GeoObjType.polygon:
+						foreach (AbstractLineSegment lineObj in geoObj.transform.GetComponent<AbstractPolygon>().lineList)
+						{
+							Vector3 center3 = Vector3.Project(lineObj.gameObject.transform.position - spindleCenter, parentSE.normalDir) + spindleCenter;
+
+							makeRevolvedSurface(lineObj.gameObject.transform, center3, normal);
+
+							if (lineObj.GetComponent<InteractableLineSegment>() != null)
 							{
-								makeCircle(center2 + diff1, geoObj.GetComponent<InteractableLineSegment>().point1.transform, normal);
 
-								makeCircle(center2 + diff2, geoObj.GetComponent<InteractableLineSegment>().point2.transform, normal);
+								Vector3 diff12 = Vector3.Project(lineObj.GetComponent<InteractableLineSegment>().point1.transform.position - lineObj.transform.position, normal);
+								Vector3 diff22 = Vector3.Project(lineObj.GetComponent<InteractableLineSegment>().point2.transform.position - lineObj.transform.position, normal);
+
+								makeCircle(center3 + diff12, lineObj.GetComponent<InteractableLineSegment>().point1.transform, normal);
+								makeCircle(center3 + diff22, lineObj.GetComponent<InteractableLineSegment>().point2.transform, normal);
 							}
-							else if (geoObj.GetComponent<DependentLineSegment>() != null)
+							else if (lineObj.GetComponent<DependentLineSegment>() != null)
 							{
-								makeCircle(center2 + diff1, geoObj.GetComponent<DependentLineSegment>().point1.transform, normal);
+								Vector3 diff12 = Vector3.Project(lineObj.GetComponent<DependentLineSegment>().point1.transform.position - lineObj.transform.position, normal);
+								Vector3 diff22 = Vector3.Project(lineObj.GetComponent<DependentLineSegment>().point2.transform.position - lineObj.transform.position, normal);
 
-								makeCircle(center2 + diff2, geoObj.GetComponent<DependentLineSegment>().point2.transform, normal);
+								makeCircle(center3 + diff12, lineObj.GetComponent<DependentLineSegment>().point1.transform, normal);
+								makeCircle(center3 + diff22, lineObj.GetComponent<DependentLineSegment>().point2.transform, normal);
 							}
 							else
 							{
 								Debug.LogWarning("Can't work with abstractlinesegments yet");
 							}
-							//geoObj.IsSelected = false;
-							break;
-						case GeoObjType.polygon:
-							foreach (AbstractLineSegment lineObj in geoObj.transform.GetComponent<AbstractPolygon>().lineList)
+						}
+						//geoObj.IsSelected = false;
+						break;
+					case GeoObjType.revolvedsurface:
+						break;
+					case GeoObjType.circle:
+						//    //check if the circle and the axis are orthagonal.  This is a trivial case.
+						//    //if (Vector3.Magnitude(Vector3.Cross(arcObj.GetComponent<ArcBehave>().normalDirection, parentSE.normalDir())) > 0)
+						//    //{
+						//    //check if the circle's center is on the axis of rotation.  This  produces a sphere.  Else produce a torus.
+						//    if (Vector3.Magnitude(Vector3.ProjectOnPlane(arcObj.GetComponent<ArcBehave>().centerPoint.transform.position - parentSE.center(), parentSE.normalDir())) < .05f)
+						//    {
+						//        //make sphere
+						//        if (Vector3.Magnitude(Vector3.Cross(Vector3.Normalize(arcObj.GetComponent<ArcBehave>().normalDirection), Vector3.Normalize(parentSE.normalDir()))) - 1 < .01f)
+						//        {
+						//            makeSphere(arcObj.transform, Vector3.Magnitude(Vector3.ProjectOnPlane(arcObj.GetComponent<ArcBehave>().attachedPoint.transform.position - parentSE.center(), parentSE.normalDir())));
+						//        }else
+						//        {
+						//            Debug.Log("Arc not Orthagonal, Doesn't make a sphere.");
+						//        }
+						//    }
+						//    else
+						//    {
+						//        makeTorus(arcObj.transform, parentSE.normalDir());
+						//    }
+						break;
+					case GeoObjType.prism:
+
+						foreach (AbstractLineSegment line in geoObj.GetComponent<InteractablePrism>().lineSegments)
+						{
+							Vector3 center3 = Vector3.Project(geoObj.gameObject.transform.position - spindleCenter, parentSE.normalDir) + spindleCenter;
+
+							makeRevolvedSurface(geoObj.gameObject.transform, center3, normal);
+
+							AbstractLineSegment lineALS2 = geoObj.GetComponent<AbstractLineSegment>();
+
+							Vector3 diff1b = Vector3.Project(lineALS2.vertex0 - lineALS2.transform.position, normal);
+							Vector3 diff2b = Vector3.Project(lineALS2.vertex1 - lineALS2.transform.position, normal);
+
+							if (geoObj.GetComponent<InteractableLineSegment>() != null)
 							{
-								Vector3 center3 = Vector3.Project(lineObj.gameObject.transform.position - spindleCenter, parentSE.normalDir) + spindleCenter;
+								makeCircle(center3 + diff1b, geoObj.GetComponent<InteractableLineSegment>().point1.transform, normal);
 
-								makeRevolvedSurface(lineObj.gameObject.transform, center3, normal);
-
-								if (lineObj.GetComponent<InteractableLineSegment>() != null)
-								{
-
-									Vector3 diff12 = Vector3.Project(lineObj.GetComponent<InteractableLineSegment>().point1.transform.position - lineObj.transform.position, normal);
-									Vector3 diff22 = Vector3.Project(lineObj.GetComponent<InteractableLineSegment>().point2.transform.position - lineObj.transform.position, normal);
-
-									makeCircle(center3 + diff12, lineObj.GetComponent<InteractableLineSegment>().point1.transform, normal);
-									makeCircle(center3 + diff22, lineObj.GetComponent<InteractableLineSegment>().point2.transform, normal);
-								} else if (lineObj.GetComponent<DependentLineSegment>() != null)
-								{
-									Vector3 diff12 = Vector3.Project(lineObj.GetComponent<DependentLineSegment>().point1.transform.position - lineObj.transform.position, normal);
-									Vector3 diff22 = Vector3.Project(lineObj.GetComponent<DependentLineSegment>().point2.transform.position - lineObj.transform.position, normal);
-
-									makeCircle(center3 + diff12, lineObj.GetComponent<DependentLineSegment>().point1.transform, normal);
-									makeCircle(center3 + diff22, lineObj.GetComponent<DependentLineSegment>().point2.transform, normal);
-								}
-								else
-								{
-									Debug.LogWarning("Can't work with abstractlinesegments yet");
-								}
+								makeCircle(center3 + diff2b, geoObj.GetComponent<InteractableLineSegment>().point2.transform, normal);
 							}
-							//geoObj.IsSelected = false;
-							break;
-						case GeoObjType.revolvedsurface:
-							break;
-						case GeoObjType.circle:
-							//    //check if the circle and the axis are orthagonal.  This is a trivial case.
-							//    //if (Vector3.Magnitude(Vector3.Cross(arcObj.GetComponent<ArcBehave>().normalDirection, parentSE.normalDir())) > 0)
-							//    //{
-							//    //check if the circle's center is on the axis of rotation.  This  produces a sphere.  Else produce a torus.
-							//    if (Vector3.Magnitude(Vector3.ProjectOnPlane(arcObj.GetComponent<ArcBehave>().centerPoint.transform.position - parentSE.center(), parentSE.normalDir())) < .05f)
-							//    {
-							//        //make sphere
-							//        if (Vector3.Magnitude(Vector3.Cross(Vector3.Normalize(arcObj.GetComponent<ArcBehave>().normalDirection), Vector3.Normalize(parentSE.normalDir()))) - 1 < .01f)
-							//        {
-							//            makeSphere(arcObj.transform, Vector3.Magnitude(Vector3.ProjectOnPlane(arcObj.GetComponent<ArcBehave>().attachedPoint.transform.position - parentSE.center(), parentSE.normalDir())));
-							//        }else
-							//        {
-							//            Debug.Log("Arc not Orthagonal, Doesn't make a sphere.");
-							//        }
-							//    }
-							//    else
-							//    {
-							//        makeTorus(arcObj.transform, parentSE.normalDir());
-							//    }
-							break;
-						case GeoObjType.prism:
-
-							foreach(AbstractLineSegment line in geoObj.GetComponent<InteractablePrism>().lineSegments)
+							else if (geoObj.GetComponent<DependentLineSegment>() != null)
 							{
-								Vector3 center3 = Vector3.Project(geoObj.gameObject.transform.position - spindleCenter, parentSE.normalDir) + spindleCenter;
+								makeCircle(center3 + diff1b, geoObj.GetComponent<DependentLineSegment>().point1.transform, normal);
 
-								makeRevolvedSurface(geoObj.gameObject.transform, center3, normal);
-
-								AbstractLineSegment lineALS2 = geoObj.GetComponent<AbstractLineSegment>();
-
-								Vector3 diff1b = Vector3.Project(lineALS2.vertex0 - lineALS2.transform.position, normal);
-								Vector3 diff2b = Vector3.Project(lineALS2.vertex1 - lineALS2.transform.position, normal);
-
-								if (geoObj.GetComponent<InteractableLineSegment>() != null)
-								{
-									makeCircle(center3 + diff1b, geoObj.GetComponent<InteractableLineSegment>().point1.transform, normal);
-
-									makeCircle(center3 + diff2b, geoObj.GetComponent<InteractableLineSegment>().point2.transform, normal);
-								}
-								else if (geoObj.GetComponent<DependentLineSegment>() != null)
-								{
-									makeCircle(center3 + diff1b, geoObj.GetComponent<DependentLineSegment>().point1.transform, normal);
-
-									makeCircle(center3 + diff2b, geoObj.GetComponent<DependentLineSegment>().point2.transform, normal);
-								}
-								else
-								{
-									Debug.LogWarning("Can't work with abstractlinesegments yet");
-								}
+								makeCircle(center3 + diff2b, geoObj.GetComponent<DependentLineSegment>().point2.transform, normal);
 							}
-							break;
-					}
-					#endregion
-
+							else
+							{
+								Debug.LogWarning("Can't work with abstractlinesegments yet");
+							}
+						}
+						break;
 				}
 			}
 		}
+
+		public void revolve()
+		{
+			revolve(newTurn());
+		}
+
 		public void hoist()
 		{
 			Debug.Log("attempting hoist");

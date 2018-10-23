@@ -49,7 +49,7 @@ namespace IMRE.HandWaver.Solver
 
         internal IntersectionMode thisMode = IntersectionMode.none;
 
-		public enum InteractionMode { rigid, freeform };
+		public enum InteractionMode { rigid, freeform, lattice };
 		public InteractionMode thisInteractionMode = InteractionMode.freeform;
 
 		private int _currentIndex = 4;

@@ -77,10 +77,15 @@ namespace IMRE.HandWaver
             }
         }
 
-        //private int initLayer;
+		internal void snapToFloor()
+		{
+			normalDir = Vector3.up;
+		}
 
-        // Use this for initialization
-        internal new void OnSpawned()
+		//private int initLayer;
+
+		// Use this for initialization
+		internal new void OnSpawned()
         {
 			base.OnSpawned();
 
@@ -114,11 +119,6 @@ namespace IMRE.HandWaver
 			//thisIbehave.OnGraspEndEvent += onGraspEnd;
 		}
 
-		//private void onGraspEnd()
-		//{
-		//	isTriggerCollider.gameObject.layer = initLayer;
-		//}
-
 		// Update is called once per frame
 		void Update()
         {
@@ -146,6 +146,7 @@ namespace IMRE.HandWaver
 				case shipWheelOffStraightedge.wheelType.revolve:
 					shipsWheel = shipsWheel_revolve;
 					break;
+				//the hoist case should be depreciated.
 				case shipWheelOffStraightedge.wheelType.hoist:
 					shipsWheel = shipsWheel_hoist;
 					break;
@@ -188,9 +189,12 @@ namespace IMRE.HandWaver
         {
             get
             {
-
                 return (seHandle1.transform.position - seHandle2.transform.position);
             }
+			set
+			{
+				this.transform.rotation *= Quaternion.FromToRotation(this.transform.up,value);
+			}
         }
 
         public Vector3 center

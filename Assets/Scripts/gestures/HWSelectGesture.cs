@@ -55,7 +55,7 @@ namespace IMRE.HandWaver {
 		[Space]
 
 		public AudioClip successSound;
-		public AudioClip errorSound;
+		//public AudioClip errorSound;
 
 		private AudioSource _myAudioSource;
 
@@ -129,25 +129,36 @@ namespace IMRE.HandWaver {
 		/// <param name="reason">reason the gesture was ended</param>
 		protected override void WhenGestureDeactivated(Hand maybeNullHand, DeactivationReason reason)
 		{
+			//sethandMNodeNone
+
 			switch (reason)
 			{
 				case DeactivationReason.FinishedGesture:
 					break;
-				case DeactivationReason.CancelledGesture:
-					if (!completeBool)
-						playErrorSound();
-					break;
+				//case DeactivationReason.CancelledGesture:
+				//	if (!completeBool)
+				//		//playErrorSound();
+				//	break;
 				default:
 					break;
 			}
-			StartCoroutine(gestureCooldown());
+			if (maybeNullHand != null)
+			{
+				Chirality chirality = Chirality.Right;
+				if (maybeNullHand.IsLeft)
+				{
+					chirality = Chirality.Left;
+				}
+				handColourManager.setHandColorMode(chirality, handColourManager.handModes.none);
+				StartCoroutine(gestureCooldown());
+			}
 
 
 		}
 
 		IEnumerator gestureCooldown()
 		{
-			yield return new WaitForSeconds(0.35f);
+			yield return new WaitForSeconds(1f);
 			completeBool = false;
 		}
 
@@ -157,6 +168,7 @@ namespace IMRE.HandWaver {
 		/// <param name="hand">The hand completing the gesture</param>
 		protected override void WhileGestureActive(Hand hand)
 		{
+			//sethandtomodeSelect
 			float shortestDist = Mathf.Infinity;
 			closestObj = null;
 
@@ -175,10 +187,20 @@ namespace IMRE.HandWaver {
 				}
 			}
 
+
+			Chirality chirality = Chirality.Right;
+			if (hand.IsLeft)
+			{
+				chirality = Chirality.Left;
+			}
+				handColourManager.setHandColorMode(chirality, handColourManager.handModes.select);
+
 			if (closestObj != null  && shortestDist <= maximumRangeToSelect)
 			{
 				if(debugSelect)
 					Debug.Log(closestObj + " is the object toggling selection state.");
+
+
 
 				//switch on mode:
 				//				Select
@@ -324,13 +346,13 @@ namespace IMRE.HandWaver {
 		}
 
 
-		private void playErrorSound()
-		{
-			myAudioSource.clip = (errorSound);
-			if (myAudioSource.isPlaying)
-				myAudioSource.Stop();
-			myAudioSource.Play();
-		}
+		//private void playErrorSound()
+		//{
+		//	myAudioSource.clip = (errorSound);
+		//	if (myAudioSource.isPlaying)
+		//		myAudioSource.Stop();
+		//	myAudioSource.Play();
+		//}
 
 	}
 }

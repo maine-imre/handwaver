@@ -59,6 +59,12 @@ namespace IMRE.HandWaver
             set
             {
                 _position3 = value;
+				if (HW_GeoSolver.ins.thisInteractionMode == HW_GeoSolver.InteractionMode.lattice)
+				{
+					_position3.x = Mathf.RoundToInt(value.x);
+					_position3.y = Mathf.RoundToInt(value.y);
+					_position3.z = Mathf.RoundToInt(value.z);
+				}
                 this.transform.position = LocalPosition(_position3);
 				actualPos = transform.position;
 			}
