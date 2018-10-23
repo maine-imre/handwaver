@@ -106,7 +106,6 @@ namespace IMRE.HandWaver
 
                 bool isTrue = mesh.vertices == vertices;
                 mesh.vertices = vertices;
-				Debug.Log(figName + " : " + isTrue);
                 return isTrue;
 
             }
