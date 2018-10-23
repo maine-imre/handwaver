@@ -4,7 +4,6 @@ using UnityEngine;
 
 namespace IMRE.HandWaver
 {
-
 	public class ProjectedPolygon : MonoBehaviour
 	{
 		internal AbstractPolygon myPoly;
