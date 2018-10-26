@@ -9,10 +9,7 @@ using Leap.Unity.Interaction;
 using Leap.Unity;
 
 namespace IMRE.HandWaver {
-	[RequireComponent(typeof(AudioSource))]
-	public class HWSelectGesture : OneHandedGesture
-	{
-		[System.Serializable]
+	[System.Serializable]
 		public struct fingerExtentionBools
 		{
 			public bool thumbExtended;
@@ -22,6 +19,10 @@ namespace IMRE.HandWaver {
 			public bool pinkyFingerExtended;
 
 		}
+	[RequireComponent(typeof(AudioSource))]
+	public class HWSelectGesture : OneHandedGesture
+	{
+		
 		[Space]
 		[Header("Select Gesture Properties")]
 		[Space]

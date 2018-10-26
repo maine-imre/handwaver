@@ -9,7 +9,6 @@ using Leap.Unity.Gestures;
 
 namespace IMRE.HandWaver.Interface
 {
-
 	public enum referenceFigureSet
 	{
 		none,

@@ -27,8 +27,9 @@ namespace IMRE.HandWaver.Solver
 		{
 			get
 			{
+				return 1f;
 				//we need an event so that this updates on the fly!  (the value does but we need to re-render everything).
-				return Interface.worldScaleModifier.ins.AbsoluteScale;
+				//return Interface.worldScaleModifier.ins.AbsoluteScale;
 			}
 		}
         Vector4 globalTranslate4 = Vector4.zero;

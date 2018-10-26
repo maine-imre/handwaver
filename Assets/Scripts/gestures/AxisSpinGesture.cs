@@ -31,19 +31,19 @@ namespace IMRE.HandWaver
 
 		protected override bool ShouldGestureActivate(Hand hand)
 		{
-			return ((hand.Fingers.Where(finger => finger.IsExtended).Count() == 5) &&
-				Vector3.Angle(hand.PalmNormal.ToVector3(), hand.StabilizedPalmPosition.ToVector3() - myStraightEdge.center) < angleTolerance
-				&& Vector3.Cross(hand.PalmVelocity.ToVector3(), hand.StabilizedPalmPosition.ToVector3() - myStraightEdge.center).magnitude > velocityTolerance
-				&& (hand.StabilizedPalmPosition.ToVector3() - myStraightEdge.center).magnitude < roughDistance
+			return ((hand.Fingers.Where(finger => finger.IsExtended).Count() == 5)
+				//&& (Vector3.Angle(hand.PalmNormal.ToVector3(), hand.PalmPosition.ToVector3() - myStraightEdge.center) < angleTolerance)
+				&& hand.PalmVelocity.ToVector3().magnitude > velocityTolerance
+				&& (hand.PalmPosition.ToVector3() - myStraightEdge.center).magnitude < roughDistance
 				);
 		}
 
 		protected override bool ShouldGestureDeactivate(Hand hand, out DeactivationReason? deactivationReason)
 		{
-			if (!((hand.Fingers.Where(finger => finger.IsExtended).Count() == 5) &&
-				Vector3.Angle(hand.PalmNormal.ToVector3(), hand.StabilizedPalmPosition.ToVector3() - myStraightEdge.center) < angleTolerance
-				&& Vector3.Cross(hand.PalmVelocity.ToVector3(), hand.StabilizedPalmPosition.ToVector3() - myStraightEdge.center).magnitude > velocityTolerance
-				&& (hand.StabilizedPalmPosition.ToVector3() - myStraightEdge.center).magnitude < roughDistance
+			if (!((hand.Fingers.Where(finger => finger.IsExtended).Count() == 5) 
+				//&& (Vector3.Angle(hand.PalmNormal.ToVector3(), hand.PalmPosition.ToVector3() - myStraightEdge.center) < angleTolerance)
+				&& hand.PalmVelocity.ToVector3().magnitude > velocityTolerance
+				&& (hand.PalmPosition.ToVector3() - myStraightEdge.center).magnitude < roughDistance
 				)
 			)
 			{
@@ -75,7 +75,8 @@ namespace IMRE.HandWaver
 
 			if(reason == DeactivationReason.FinishedGesture)
 			{
-				myStraightEdge.shipsWheel_revolve.GetComponent<shipsWheelControl>().revolve(true);
+				Debug.Log("REVOLVE NOW");
+				myStraightEdge.shipsWheel_revolve.GetComponentInChildren<shipsWheelControl>().revolve(true);
 			}
 		}
 
@@ -84,12 +85,9 @@ namespace IMRE.HandWaver
 			base.WhileGestureActive(hand);
 
 			Chirality chirality = Chirality.Right;
-			//choose opposite hand for iHand;
-			InteractionHand iHand = leapHandDataLogger.ins.currHands.rIhand;
 			if (hand.IsLeft)
 			{
-				iHand = leapHandDataLogger.ins.currHands.lIhand;
-				chirality = Chirality.Left;
+ 				chirality = Chirality.Left;
 			}
 
 			handColourManager.setHandColorMode(chirality, handColourManager.handModes.snappingPalm);

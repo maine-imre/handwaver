@@ -84,7 +84,9 @@ namespace IMRE.HandWaver
 						return;
 					}
 					other.GetComponent<MasterGeoObj>().deleteGeoObj();
-				}else if(other.GetComponent<Space.RSDESPin>() != null)
+					Debug.Log("Trying to erase GeoObject");
+				}
+				else if(other.GetComponent<Space.RSDESPin>() != null)
 				{
 					other.GetComponent<Space.RSDESPin>().despawn();
 				}

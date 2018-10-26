@@ -33,14 +33,14 @@ namespace IMRE.HandWaver.Solver
 
         internal void UpdateIntersections(NodeList<string> input)
         {
-            foreach (Node<string> node in input)
-            {
-                if (hashIntersectionProducts.Contains(node.Value))
-                {
-                    //run this on result figures not products.
-                    updateIntersectionProduct(node.mytransform.GetComponent<MasterGeoObj>());
-                }
-            }
+            //foreach (Node<string> node in input)
+            //{
+            //    if (hashIntersectionProducts.Contains(node.Value))
+            //    {
+            //        //run this on result figures not products.
+            //        updateIntersectionProduct(node.mytransform.GetComponent<MasterGeoObj>());
+            //    }
+            //}
         }
 
         public void updateIntersectionProduct(MasterGeoObj mgo)

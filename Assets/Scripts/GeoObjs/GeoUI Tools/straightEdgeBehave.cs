@@ -193,7 +193,7 @@ namespace IMRE.HandWaver
             }
 			set
 			{
-				this.transform.rotation *= Quaternion.FromToRotation(this.transform.up,value);
+				this.transform.rotation *= Quaternion.FromToRotation(this.transform.right,value);
 			}
         }
 

@@ -49,6 +49,7 @@ namespace IMRE.HandWaver
 		private InteractionBehaviour thisIBehave;
 
 		private DateTime actionTime;
+		public bool pinchToSpinEnabled = false;
 		#endregion
 
 		public void Start()
@@ -366,7 +367,10 @@ namespace IMRE.HandWaver
 
 		public void revolve()
 		{
-			revolve(newTurn());
+			if (pinchToSpinEnabled)
+			{
+				revolve(newTurn());
+			}
 		}
 
 		public void hoist()

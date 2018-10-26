@@ -54,14 +54,18 @@ namespace IMRE.HandWaver
 			InteractionHand iHand = leapHandDataLogger.ins.currHands.rIhand;
 			if (hand.IsLeft)
 			{
-				iHand = leapHandDataLogger.ins.currHands.lIhand;
+				iHand = leapHandDataLogger.ins.currHands.rIhand;
 				chirality = Chirality.Left;
 			}
 
 			handColourManager.setHandColorMode(chirality,handColourManager.handModes.snappingPalm);
 
-			if (iHand.isGraspingObject && iHand.graspedObject.gameObject.GetComponent<arctusBehaveV3>()  == myStraightEdge)
+			Debug.Log(iHand.graspedObject);
+			if (iHand.isGraspingObject && iHand.graspedObject.gameObject.GetComponent<straightEdgeBehave>()  == myStraightEdge)
 			{
+				Debug.Log("Trying to snap to floor");
+				iHand.ReleaseObject(myStraightEdge.GetComponent<InteractionBehaviour>());
+
 				myStraightEdge.snapToFloor();
 			}
 

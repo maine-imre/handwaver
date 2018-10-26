@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Leap.Unity.Interaction;
 using IMRE.HandWaver.Solver;
+using PathologicalGames;
 
 
 namespace IMRE.HandWaver
@@ -361,6 +362,7 @@ namespace IMRE.HandWaver
 			if (allowDelete)
 			{
 				HW_GeoSolver.ins.removeComponent(this);
+				PoolManager.Pools["GeoObj"].Despawn(this.transform);
 			}
         }
 
