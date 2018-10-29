@@ -145,12 +145,7 @@ namespace IMRE.HandWaver {
 			}
 			if (maybeNullHand != null)
 			{
-				Chirality chirality = Chirality.Right;
-				if (maybeNullHand.IsLeft)
-				{
-					chirality = Chirality.Left;
-				}
-				handColourManager.setHandColorMode(chirality, handColourManager.handModes.none);
+				handColourManager.setHandColorMode(whichHand, handColourManager.handModes.none);
 				StartCoroutine(gestureCooldown());
 			}
 
@@ -189,12 +184,7 @@ namespace IMRE.HandWaver {
 			}
 
 
-			Chirality chirality = Chirality.Right;
-			if (hand.IsLeft)
-			{
-				chirality = Chirality.Left;
-			}
-				handColourManager.setHandColorMode(chirality, handColourManager.handModes.select);
+			handColourManager.setHandColorMode(whichHand, handColourManager.handModes.select);
 
 			if (closestObj != null  && shortestDist <= maximumRangeToSelect)
 			{
