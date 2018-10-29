@@ -9,10 +9,11 @@ namespace IMRE.HandWaver
 		internal AbstractPolygon myPoly;
 		private Mesh mesh0;
 		private Mesh mesh1;
+		private GameObject child;
 
 		private float functionMap(Vector3 input)
 		{
-			return input.x*input.x + input.z*input.z;
+			return .3f*input.x + input.z*-.5f+myPoly.transform.position.y;
 		}
 
 		private Vector3 vectorMap(Vector3 input)
@@ -24,16 +25,19 @@ namespace IMRE.HandWaver
 		{
 			for (int i = 0; i < input.Length; i++)
 			{
-				input = vectorMap(input);
+				input[i] = vectorMap(input[i]);
 			}
 			return input;
 		}
 
-		private void Start()
+		public void Initialize()
 		{
 			myPoly = GetComponent<AbstractPolygon>();
 			mesh0 = GetComponent<MeshFilter>().mesh;
-			mesh1 = myPoly.gameObject.AddComponent<MeshFilter>().mesh;
+			child = new GameObject();
+			child.transform.parent = this.transform;
+			mesh1 = child.AddComponent<MeshFilter>().mesh;
+			child.AddComponent<MeshRenderer>().material = myPoly.GetComponent<MeshRenderer>().material;
 			mesh1.vertices = mesh0.vertices;
 			mesh1.triangles = mesh0.triangles;
 			mesh1.normals = mesh0.normals;
@@ -41,6 +45,7 @@ namespace IMRE.HandWaver
 
 		private void LateUpdate()
 		{
+			//this is too low res for polynomials.
 			mesh1.vertices = vectorMap(mesh0.vertices);
 		}
 	}

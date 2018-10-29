@@ -111,7 +111,7 @@ namespace IMRE.HandWaver.Shearing
 		private void updateDiagram()
 		{
 			controllPoint.Position3 = Vector3.Project(controllPoint.Position3 - this.transform.position, (Vector3.right + Vector3.forward).normalized) + this.transform.position;
-			//update xLen
+
 			xLen = Vector3.Distance(controllPoint.Position3, cutoutRectangle[1].Position3);
 
 			//each corner moves in.

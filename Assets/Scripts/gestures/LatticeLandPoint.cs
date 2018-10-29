@@ -12,24 +12,16 @@ using UnityEngine.Events;
 using PathologicalGames;
 using IMRE.HandWaver.Solver;
 
-namespace IMRE.HandWaver.Lattice
+namespace IMRE.HandWaver.Interface
 {
+	[RequireComponent(typeof(LineRenderer))]
+	[RequireComponent(typeof(AudioSource))]
 	public class LatticeLandPoint : OneHandedGesture
 	{
 
 		[Space]
 		[Header("LatticeLand Point Gesture Properties")]
 		[Space]
-
-		/// <summary>
-		/// Desired State for extended fingers.
-		/// </summary>
-		public fingerExtentionBools fingerExtentionState;
-
-		/// <summary>
-		/// Whether you have selected something previously with the same instance of a gesture.
-		/// </summary>
-		public bool completeBool = false;
 
 		/// <summary>
 		/// Toggles the debugging out of closest object when it toggles selection state.
@@ -47,19 +39,10 @@ namespace IMRE.HandWaver.Lattice
 
 		private MasterGeoObj closestObj;
 
-		public enum pinType { polymaker, wireframe, solidmaker, polycut, none, eraser };
-		private LineRenderer thisLR;
-		private pinType _thisPinType = pinType.none;
-
-		public pinType thisPinType
-		{
-			get
+		private LineRenderer thisLR {
+		get
 			{
-				return _thisPinType;
-			}
-			set
-			{
-				_thisPinType = value;
+				return this.GetComponent<LineRenderer>();
 			}
 		}
 		internal List<AbstractPoint> pointList;
@@ -73,15 +56,12 @@ namespace IMRE.HandWaver.Lattice
 		private bool updateLine;
 		private bool successfullyMade = false;
 
-		private eraserBehave eraser;
-		[Space]
-
 		public AudioClip successSound;
 		//public AudioClip errorSound;
 
 		private AudioSource _myAudioSource;
 
-		private AudioSource myAudioSource
+		private AudioSource MyAudioSource
 		{
 			get
 			{
@@ -91,39 +71,20 @@ namespace IMRE.HandWaver.Lattice
 			}
 		}
 
-		private void Start()
+		private void Awake()
 		{
-
-			if (this.GetComponent<LatticeLandOpenVR>() == null)
-			{
-				//fingerDetectors = GetComponents<>().ToList();
-				//setupDetectors();
-			}
-
 			pointList = new List<AbstractPoint>();
 			lineList = new List<AbstractLineSegment>();
 
-			thisLR = GetComponent<LineRenderer>();
+			if(this.thisLR == null)
+			{
+				this.gameObject.AddComponent<LineRenderer>();
+			}
 			thisLR.useWorldSpace = true;
 			thisLR.positionCount = 2;
 			thisLR.enabled = false;
 			thisLR.startWidth = .005f;
 			thisLR.endWidth = .005f;
-			SceneManager.sceneUnloaded += changeActiveStateByScene;
-
-			//lineMaker = GetComponentInChildren<fingerPointLineMakerHandle>();
-			//if (lineMaker != null)
-			//{
-			//	lineMaker.transform.parent = indexAttachment;
-			//	lineMaker.transform.localPosition = Vector3.zero;
-			//	lineMaker.lineSegmentMaker = this;
-			//}
-			//else
-			//{
-			//	Debug.LogWarning("Requires lineMaker to function " + name);
-			//}
-
-			//endofPin = fingerTip(hand);
 		}
 
 		/// <summary>
@@ -135,11 +96,10 @@ namespace IMRE.HandWaver.Lattice
 		{
 			bool tmp =
 			(/*(fingerExtentionState.thumbExtended && hand.Fingers[0].IsExtended) &&*/
-			(fingerExtentionState.pointerFingerExtended && hand.Fingers[1].IsExtended) &&
-			!(fingerExtentionState.middleFingerExtended && hand.Fingers[2].IsExtended) &&
-			!(fingerExtentionState.ringFingerExtended && hand.Fingers[3].IsExtended) &&
-			!(fingerExtentionState.pinkyFingerExtended && hand.Fingers[4].IsExtended) &&
-			!completeBool &&
+			(hand.Fingers[1].IsExtended) &&
+			!(hand.Fingers[2].IsExtended) &&
+			!(hand.Fingers[3].IsExtended) &&
+			!(hand.Fingers[4].IsExtended) &&
 			!hand.IsPinching()
 			);
 			return tmp;
@@ -155,18 +115,19 @@ namespace IMRE.HandWaver.Lattice
 		{
 			if (!isHandTracked ||
 					!(/*(fingerExtentionState.thumbExtended && hand.Fingers[0].IsExtended) &&*/
-					(fingerExtentionState.pointerFingerExtended && hand.Fingers[1].IsExtended) &&
-					!(fingerExtentionState.middleFingerExtended && hand.Fingers[2].IsExtended) &&
-					!(fingerExtentionState.ringFingerExtended && hand.Fingers[3].IsExtended) &&
-					!(fingerExtentionState.pinkyFingerExtended && hand.Fingers[4].IsExtended) &&
-					!completeBool &&
+					(hand.Fingers[1].IsExtended) &&
+					!(hand.Fingers[2].IsExtended) &&
+					!(hand.Fingers[3].IsExtended) &&
+					!(hand.Fingers[4].IsExtended) &&
 					!hand.IsPinching()
 					))
 			{
 				deactivationReason = DeactivationReason.CancelledGesture;
+				prevSet = false;
+				currSet = false;
 				return true;
 			}
-			else if (completeBool)
+			else if (foundMGO(hand))
 			{
 				deactivationReason = DeactivationReason.FinishedGesture;
 				return true;
@@ -178,57 +139,12 @@ namespace IMRE.HandWaver.Lattice
 			}
 		}
 
-		/// <summary>
-		/// On Gesture end
-		/// </summary>
-		/// <param name="maybeNullHand">Hand reference that ended the gesture</param>
-		/// <param name="reason">reason the gesture was ended</param>
-		protected override void WhenGestureDeactivated(Hand maybeNullHand, DeactivationReason reason)
+		public bool foundMGO(Hand hand)
 		{
-			//sethandMNodeNone
-
-			switch (reason)
-			{
-				case DeactivationReason.FinishedGesture:
-					break;
-				//case DeactivationReason.CancelledGesture:
-				//	if (!completeBool)
-				//		//playErrorSound();
-				//	break;
-				default:
-					break;
-			}
-			if (maybeNullHand != null)
-			{
-				Chirality chirality = Chirality.Right;
-				if (maybeNullHand.IsLeft)
-				{
-					chirality = Chirality.Left;
-				}
-				handColourManager.setHandColorMode(chirality, handColourManager.handModes.none);
-				StartCoroutine(gestureCooldown());
-			}
-
-
-		}
-
-		IEnumerator gestureCooldown()
-		{
-			yield return new WaitForSeconds(1f);
-			completeBool = false;
-		}
-
-		/// <summary>
-		/// Called each frame the gesture is active
-		/// </summary>
-		/// <param name="hand">The hand completing the gesture</param>
-		protected override void WhileGestureActive(Hand hand)
-		{
-			//sethandtomodeSelect
 			float shortestDist = Mathf.Infinity;
 			closestObj = null;
 
-			foreach (MasterGeoObj mgo in FindObjectsOfType<MasterGeoObj>().Where(g => (g.GetComponent<AnchorableBehaviour>() == null || (g.GetComponent<AnchorableBehaviour>() != null && !g.GetComponent<AnchorableBehaviour>().isAttached))))
+			foreach (StaticPoint mgo in FindObjectsOfType<StaticPoint>().Where(g => (g.GetComponent<AnchorableBehaviour>() == null || (g.GetComponent<AnchorableBehaviour>() != null && !g.GetComponent<AnchorableBehaviour>().isAttached))))
 			{
 				float distance = distHandToMGO(hand, mgo);
 				float angle = angleHandToMGO(hand, mgo);
@@ -242,7 +158,76 @@ namespace IMRE.HandWaver.Lattice
 					}
 				}
 			}
+			if(shortestDist < maximumRangeToSelect)
+			{
+				currPoint = closestObj.GetComponent<AbstractPoint>();
+			}
+			return shortestDist < maximumRangeToSelect;
+		}
 
+		/// <summary>
+		/// On Gesture end
+		/// </summary>
+		/// <param name="maybeNullHand">Hand reference that ended the gesture</param>
+		/// <param name="reason">reason the gesture was ended</param>
+		protected override void WhenGestureDeactivated(Hand maybeNullHand, DeactivationReason reason)
+		{
+			this.thisLR.enabled = false;
+
+			if (maybeNullHand != null)
+			{
+
+				switch (reason)
+				{
+					case DeactivationReason.FinishedGesture:
+						if (maybeNullHand.Fingers[0].IsExtended)
+						{
+							//thumb up is draw polygon
+							if (prevSet && currSet && _prevPoint != _currPoint)
+							{
+								lineList.Add(GeoObjConstruction.dLineSegment(currPoint, prevPoint));
+								playSuccessSound();
+								if (_currPoint == pointList[0] && lineList.Count > 1)
+								{
+									GeoObjConstruction.iPolygon(lineList, pointList);
+									endInteraction();
+								}
+							}
+						}
+						else
+						{
+							//thumb down is draw wireframe
+							if (prevSet && currSet && _prevPoint != _currPoint)
+							{
+								lineList.Add(GeoObjConstruction.dLineSegment(currPoint, prevPoint));
+								playSuccessSound();
+							}
+						}
+					break;
+					default:
+						break;
+				}
+
+				Chirality chirality = Chirality.Right;
+				if (maybeNullHand.IsLeft)
+				{
+					chirality = Chirality.Left;
+				}
+				handColourManager.setHandColorMode(chirality, handColourManager.handModes.none);
+			}
+
+
+		}
+
+		/// <summary>
+		/// Draw the line between the last point and the current finger.
+		/// </summary>
+		/// <param name="hand">The hand completing the gesture</param>
+		protected override void WhileGestureActive(Hand hand)
+		{
+			//needs to draw that line.
+			thisLR.SetPosition(1, hand.Fingers[1].TipPosition.ToVector3());
+			thisLR.enabled = currPoint != null;
 
 			Chirality chirality = Chirality.Right;
 			if (hand.IsLeft)
@@ -251,136 +236,16 @@ namespace IMRE.HandWaver.Lattice
 			}
 			handColourManager.setHandColorMode(chirality, handColourManager.handModes.select);
 
-			if (closestObj != null && shortestDist <= maximumRangeToSelect)
-			{
-				if (debugSelect)
-					Debug.Log(closestObj + " is the object toggling selection state.");
-
-
-
-				//switch on mode:
-				//				Select
-				//				Colour
-				if (closestObj.IsSelected)
-					closestObj.thisSelectStatus = MasterGeoObj.SelectionStatus.none;
-				else
-					closestObj.thisSelectStatus = MasterGeoObj.SelectionStatus.selected;
-
-
-				playSuccessSound();
-
-				//This determines if you have to cancel the gesture to select another object
-				completeBool = true;
-			}
-
 		}
 
-		private float angleHandToMGO(Hand hand, MasterGeoObj mgo)
+		private float angleHandToMGO(Hand hand, StaticPoint mgo)
 		{
-			float angle = 370;
-			switch (mgo.figType)
-			{
-				case GeoObjType.point:
-					angle = Vector3.Angle(fingerTip(hand) - mgo.transform.position, fingerDirection(hand));
-					break;
-				//case GeoObjType.line:
-				//	angle = Vector3.Angle(Vector3.Project(transform.position - mgo.transform.position, mgo.GetComponent<AbstractLineSegment>().vertex0 - mgo.GetComponent<AbstractLineSegment>().vertex1) + mgo.transform.position - fingerTip(hand), fingerDirection(hand));
-				//	break;
-				//case GeoObjType.polygon:
-				//	Vector3 positionOnPlane = Vector3.ProjectOnPlane(transform.position - mgo.transform.position, mgo.GetComponent<AbstractPolygon>().normDir) + mgo.transform.position;
-				//	angle = Vector3.Angle(positionOnPlane - fingerTip(hand), fingerDirection(hand));
-				//	Debug.LogWarning("Polygon doesn't check boundariers");
-				//	break;
-				//case GeoObjType.prism:
-				//	angle = Vector3.Angle(mgo.transform.position - fingerTip(hand), fingerDirection(hand));
-				//	break;
-				//case GeoObjType.pyramid:
-				//	Debug.LogWarning("Pyramids not yet supported");
-				//	break;
-				//case GeoObjType.circle:
-				//	Vector3 positionOnPlane2 = Vector3.ProjectOnPlane(transform.position - mgo.transform.position, mgo.GetComponent<AbstractCircle>().normalDir) + mgo.transform.position;
-				//	Vector3 positionOnCircle = Vector3.Normalize(positionOnPlane2 - mgo.GetComponent<AbstractCircle>().centerPos) * mgo.GetComponent<AbstractCircle>().Radius + mgo.GetComponent<AbstractCircle>().centerPos;
-				//	angle = Vector3.Angle(fingerTip(hand) - positionOnCircle, fingerDirection(hand));
-				//	break;
-				//case GeoObjType.sphere:
-				//	Vector3 lineDir = Vector3.Normalize(transform.position - mgo.transform.position);
-				//	Vector3 positionOnSphere1 = mgo.GetComponent<AbstractSphere>().radius * lineDir + mgo.transform.position;
-				//	angle = Vector3.Angle(positionOnSphere1 - fingerTip(hand), fingerDirection(hand));
-				//	break;
-				//case GeoObjType.revolvedsurface:
-				//	Debug.LogWarning("RevoledSurface not yet supported");
-				//	break;
-				//case GeoObjType.torus:
-				//	Debug.LogWarning("Torus not yet supported");
-				//	break;
-				//case GeoObjType.flatface:
-				//	Vector3 positionOnPlane3 = Vector3.ProjectOnPlane(transform.position - mgo.transform.position, mgo.GetComponent<flatfaceBehave>().normalDir) + mgo.transform.position;
-				//	angle = Vector3.Angle(positionOnPlane3 - fingerTip(hand), fingerDirection(hand));
-				//	break;
-				//case GeoObjType.straightedge:
-				//	Vector3 positionOnStraightedge = Vector3.Project(transform.position - mgo.transform.position, mgo.GetComponent<straightEdgeBehave>().normalDir) + mgo.transform.position;
-				//	angle = Vector3.Angle(positionOnStraightedge - fingerTip(hand), fingerDirection(hand));
-				//	break;
-				default:
-					Debug.LogWarning("Something went wrong in the selection.... :(");
-					break;
-			}
-
-			return angle;
+			return Vector3.Angle(mgo.transform.position-fingerTip(hand), fingerDirection(hand));
 		}
 
-		private float distHandToMGO(Hand hand, MasterGeoObj mgo)
+		private float distHandToMGO(Hand hand, StaticPoint mgo)
 		{
-			float distance = 15;
-			switch (mgo.figType)
-			{
-				case GeoObjType.point:
-					distance = Vector3.Magnitude(fingerTip(hand) - mgo.transform.position);
-					break;
-				//case GeoObjType.line:
-				//	distance = Vector3.Magnitude(Vector3.Project(transform.position - mgo.transform.position, mgo.GetComponent<AbstractLineSegment>().vertex0 - mgo.GetComponent<AbstractLineSegment>().vertex1) + mgo.transform.position - fingerTip(hand));
-				//	break;
-				//case GeoObjType.polygon:
-				//	Vector3 positionOnPlane = Vector3.ProjectOnPlane(transform.position - mgo.transform.position, mgo.GetComponent<AbstractPolygon>().normDir) + mgo.transform.position;
-				//	distance = Vector3.Magnitude(positionOnPlane - fingerTip(hand));
-				//	Debug.LogWarning("Polygon doesn't check boundariers");
-				//	break;
-				//case GeoObjType.prism:
-				//	distance = Vector3.Magnitude(mgo.transform.position - fingerTip(hand));
-				//	break;
-				//case GeoObjType.pyramid:
-				//	Debug.LogWarning("Pyramids not yet supported");
-				//	break;
-				//case GeoObjType.circle:
-				//	Vector3 positionOnPlane2 = Vector3.ProjectOnPlane(transform.position - mgo.transform.position, mgo.GetComponent<AbstractCircle>().normalDir) + mgo.transform.position;
-				//	Vector3 positionOnCircle = Vector3.Normalize(positionOnPlane2 - mgo.GetComponent<AbstractCircle>().centerPos) * mgo.GetComponent<AbstractCircle>().Radius + mgo.GetComponent<AbstractCircle>().centerPos;
-				//	distance = Vector3.Magnitude(fingerTip(hand) - positionOnCircle);
-				//	break;
-				//case GeoObjType.sphere:
-				//	Vector3 lineDir = Vector3.Normalize(transform.position - mgo.transform.position);
-				//	Vector3 positionOnSphere1 = mgo.GetComponent<AbstractSphere>().radius * lineDir + mgo.transform.position;
-				//	distance = Vector3.Magnitude(positionOnSphere1 - fingerTip(hand));
-				//	break;
-				//case GeoObjType.revolvedsurface:
-				//	Debug.LogWarning("RevoledSurface not yet supported");
-				//	break;
-				//case GeoObjType.torus:
-				//	Debug.LogWarning("Torus not yet supported");
-				//	break;
-				//case GeoObjType.flatface:
-				//	Vector3 positionOnPlane3 = Vector3.ProjectOnPlane(transform.position - mgo.transform.position, mgo.GetComponent<flatfaceBehave>().normalDir) + mgo.transform.position;
-				//	distance = Vector3.Magnitude(positionOnPlane3 - fingerTip(hand));
-				//	break;
-				//case GeoObjType.straightedge:
-				//	Vector3 positionOnStraightedge = Vector3.Project(transform.position - mgo.transform.position, mgo.GetComponent<straightEdgeBehave>().normalDir) + mgo.transform.position;
-				//	distance = Vector3.Magnitude(positionOnStraightedge - fingerTip(hand));
-				//	break;
-				default:
-					Debug.LogWarning("Something went wrong in the selection.... :(");
-					break;
-			}
-
-			return distance;
+			return Vector3.Magnitude(fingerTip(hand) - mgo.transform.position);
 		}
 
 		public Vector3 fingerTip(Hand hand)
@@ -395,87 +260,26 @@ namespace IMRE.HandWaver.Lattice
 
 		private void playSuccessSound()
 		{
-			myAudioSource.clip = (successSound);
-			if (myAudioSource.isPlaying)
-				myAudioSource.Stop();
-			myAudioSource.Play();
-		}
-
-		private void setUnactive()
-		{
-			thisPinType = pinType.none;
-			endInteraction();
-			eraserDetach();
-		}
-
-		internal void eraserDetach()
-		{
-			if (eraser != null)
+			if (MyAudioSource != null)
 			{
-				eraser.follow(false);
-				eraser.transform.position = Vector3.down;
-				PoolManager.Pools["Tools"].Despawn(eraser.transform);
-				eraser = null;
-			}
-		}
-
-		internal void eraserAttach()
-		{
-			eraser = PoolManager.Pools["Tools"].Spawn("eraser2Prefab").GetComponent<eraserBehave>();
-			//eraser.transform.position = palmAttachment.position;
-			eraser.transform.localPosition = new Vector3(0, 1, 0);
-			//eraser.transform.parent = palmAttachment;
-			//eraser.follow(palmAttachment);
-			eraser.hideMesh();
-		}
-
-		internal void setActiveFourFinger()
-		{
-			Debug.Log("eraser mode");
-			thisPinType = pinType.eraser;
-			eraserAttach();
-		}
-
-		internal void setActiveTwoFinger()
-		{
-			thisPinType = pinType.polymaker;
-		}
-
-		internal void setActiveOneFinger()
-		{
-			thisPinType = pinType.wireframe;
-		}
-
-		private void changeActiveStateByScene(Scene arg0)
-		{
-			if (arg0.name == "LatticeLand" || arg0.name == "ShearingLab")
-			{
-				gameObject.SetActive(false);
+				MyAudioSource.clip = (successSound);
+				if (MyAudioSource.isPlaying)
+					MyAudioSource.Stop();
+				MyAudioSource.Play();
 			}
 		}
 
 		public void endInteraction()
 		{
 			thisLR.SetPositions(new Vector3[] { Vector3.zero, Vector3.zero });
+			thisLR.enabled = false;
 			updateLine = false;
 			pointList.Clear();
 			lineList.Clear();
 			prevSet = false;
 			currSet = false;
 			successfullyMade = false;
-			//lineMaker.delaySearch();
-			if (!successfullyMade)
-			{
 				lineList.ForEach(l => l.deleteGeoObj());
-			}
-		}
-
-		void Update()
-		{
-			if (updateLine)
-			{
-				//thisLR.SetPosition(1, endofPin.position);
-			}
 		}
 
 		internal AbstractPoint prevPoint
@@ -490,7 +294,6 @@ namespace IMRE.HandWaver.Lattice
 				prevLine(value);
 				_prevPoint = value;
 				prevSet = (value != null);
-				//checkTwoPoints();
 			}
 		}
 
@@ -521,124 +324,19 @@ namespace IMRE.HandWaver.Lattice
 
 			set
 			{
+				if(_currPoint != null)
+					prevPoint = _currPoint;
+
 				_currPoint = value;
 				currSet = (value != null);
+				thisLR.SetPosition(0, _currPoint.transform.position);
 				if (_currPoint != null)
 				{
 					pointList.Add(_currPoint);
 				}
-				checkTwoPoints();
-				prevPoint = _currPoint;
 			}
 		}
-
-		private void checkTwoPoints()
-		{
-			if (prevSet && currSet && _prevPoint != _currPoint)
-			{
-				currPoint.tag = "Untagged";
-				prevPoint.tag = "Untagged";
-				switch (thisPinType)
-				{
-					case pinType.polymaker:
-						lineList.Add(GeoObjConstruction.dLineSegment(currPoint, prevPoint));
-						//if (_currPoint == pointList[0] && lineList.Count > 1 && pointsAreCoPlanar(pointList,lineList))
-						if (_currPoint == pointList[0] && lineList.Count > 1)
-						{
-							GeoObjConstruction.iPolygon(lineList, pointList);
-							endInteraction();
-						}
-						successfullyMade = true;
-						break;
-					case pinType.wireframe:
-						lineList.Add(GeoObjConstruction.dLineSegment(currPoint, prevPoint));
-						successfullyMade = true;
-						polyCut();
-						break;
-					case pinType.solidmaker:
-						Debug.Log("This isn't setup yet do not use! Object: " + gameObject.name);
-						Destroy(gameObject, Time.fixedDeltaTime);
-						break;
-					default:
-						break;
-
-				}
-			}
-		}
-
-		private void polyCut()
-		{
-			List<AbstractPolygon> prevPointPolygons = new List<AbstractPolygon>();
-			List<AbstractPolygon> currPointPolygons = new List<AbstractPolygon>();
-			HW_GeoSolver.ins.geomanager.bidirectionalNeighborsOfNode(_prevPoint.figName)//all bidirectional neighbors
-				.Where(d => HW_GeoSolver.ins.geomanager.findGraphNode(d.Value).mytransform.GetComponent<AbstractPolygon>() != null).ToList()// list of all abstractpolygons in prev list
-				.ForEach(d => prevPointPolygons.Add(HW_GeoSolver.ins.geomanager.findGraphNode(d.Value).mytransform.GetComponent<AbstractPolygon>()));   //foreach adds the polygon to final list
-			HW_GeoSolver.ins.geomanager.bidirectionalNeighborsOfNode(_currPoint.figName)//same as above but with other point
-				.Where(d => HW_GeoSolver.ins.geomanager.findGraphNode(d.Value).mytransform.GetComponent<AbstractPolygon>() != null).ToList()
-				.ForEach(d => currPointPolygons.Add(HW_GeoSolver.ins.geomanager.findGraphNode(d.Value).mytransform.GetComponent<AbstractPolygon>()));
-			//prevPointPolygons.ForEach(p => Debug.Log(_prevPoint.figName + " is in the following: " + p.figName));
-			//Debug.Log("_____+_____");
-			//currPointPolygons.ForEach(p => Debug.Log(_currPoint.figName + " is in the following: " + p.figName));
-			//Debug.Log("_____=_____");
-			List<AbstractPolygon> sharedPolygons;
-			if (prevPointPolygons.Count > currPointPolygons.Count)
-			{
-				sharedPolygons = prevPointPolygons.Intersect(currPointPolygons).Where(poly => poly.lineList.Count > 3).ToList();
-			}
-			else
-			{
-				sharedPolygons = currPointPolygons.Intersect(prevPointPolygons).Where(poly => poly.lineList.Count > 3).ToList();
-			}
-			//sharedPolygons.ForEach(p => Debug.Log("Both are in the following: " + p.figName));
-			//list created from any duplicates from two prev lists that have more than 3 sides
-			//Debug.Log(_prevPoint.figName + " and " + _currPoint.figName + " are both on " + sharedPolygons.Count + " together.");
-			if (sharedPolygons.Count > 0)
-			{
-				DependentLineSegment cutLine = GeoObjConstruction.dLineSegment(_prevPoint, _currPoint);
-				foreach (AbstractPolygon p in sharedPolygons)
-				{
-					List<AbstractPoint> currPointList = p.pointList;
-					List<AbstractLineSegment> currLineList = p.lineList;
-					if (Mathf.Abs(currPointList.IndexOf(_prevPoint) - currPointList.IndexOf(_currPoint)) > 1)
-					{
-						List<AbstractPoint> newPointList1 = newPointListGen(currPointList, currPointList.IndexOf(_prevPoint), currPointList.IndexOf(_currPoint));
-						List<AbstractPoint> newPointList2 = newPointListGen(currPointList, currPointList.IndexOf(_currPoint), currPointList.IndexOf(_prevPoint));
-
-						List<AbstractLineSegment> newLineList1 = new List<AbstractLineSegment>() { cutLine };//creates list and adds the line created by the cut
-						List<AbstractLineSegment> newLineList2 = new List<AbstractLineSegment>() { cutLine };//creates list and adds the line created by the cut
-						foreach (AbstractLineSegment currLine in currLineList                        //newLineList1 Generator
-							.Where(cL => ((cL.GetComponent<InteractableLineSegment>() != null &&         //is interactable line segment and point1 or point2 is found in newPointList1
-								newPointList1.Any(point => point == cL.GetComponent<InteractableLineSegment>().point1 || point == cL.GetComponent<InteractableLineSegment>().point2))
-						|| ((cL.GetComponent<DependentLineSegment>() != null &&                      //is dependent line segment and point1 or point2 is found in newPointList1
-								newPointList1.Any(point => point == cL.GetComponent<DependentLineSegment>().point1 || point == cL.GetComponent<DependentLineSegment>().point2))))))
-						{
-							newLineList1.Add(currLine);
-						}
-						foreach (AbstractLineSegment currLine in currLineList                           //newLineList2 Generator
-								.Where(cL => ((cL.GetComponent<InteractableLineSegment>() != null &&    //is interactable line segment and point1 or point2 is found in newPointList1
-									newPointList2.Any(point => point == cL.GetComponent<InteractableLineSegment>().point1 || point == cL.GetComponent<InteractableLineSegment>().point2))
-							|| ((cL.GetComponent<DependentLineSegment>() != null &&                     //is dependent line segment and point1 or point2 is found in newPointList1
-									newPointList2.Any(point => point == cL.GetComponent<DependentLineSegment>().point1 || point == cL.GetComponent<DependentLineSegment>().point2))))))
-						{
-							newLineList2.Add(currLine);
-						}
-						AbstractPolygon newPoly1 = GeoObjConstruction.iPolygon(newLineList1, newPointList1);
-						AbstractPolygon newPoly2 = GeoObjConstruction.iPolygon(newLineList2, newPointList2);
-						List<InteractablePrism> currPrismList = new List<InteractablePrism>();
-						HW_GeoSolver.ins.geomanager.bidirectionalNeighborsOfNode(p.figName)//all bidirectional neighbors
-							.Where(d => HW_GeoSolver.ins.geomanager.findGraphNode(d.Value).mytransform.GetComponent<InteractablePrism>() != null).ToList().ForEach(prism => currPrismList.Add(prism.mytransform.GetComponent<InteractablePrism>()));
-						foreach (InteractablePrism cPrism in currPrismList)
-						{
-							HW_GeoSolver.ins.addDependence(newPoly1.transform, cPrism.transform);
-							HW_GeoSolver.ins.addDependence(newPoly2.transform, cPrism.transform);
-						}
-						HW_GeoSolver.ins.removeComponent(p);
-					}
-				}
-
-			}
-		}
-
+		
 		private bool pointsAreCoPlanar(List<AbstractPoint> pointList, List<AbstractLineSegment> lineList)
 		{
 			Vector3[] pointPos = new Vector3[pointList.Count];
@@ -711,15 +409,5 @@ namespace IMRE.HandWaver.Lattice
 			result.Add(currPointList[index2]);
 			return result;
 		}
-
-
-		//private void playErrorSound()
-		//{
-		//	myAudioSource.clip = (errorSound);
-		//	if (myAudioSource.isPlaying)
-		//		myAudioSource.Stop();
-		//	myAudioSource.Play();
-		//}
-
 	}
 }	

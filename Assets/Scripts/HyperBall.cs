@@ -1,40 +1,60 @@
-namespacce IMRE.HandWaver.FourthDimension{
+#region Dependencies
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using Leap.Unity.Interaction;
+using PathologicalGames;
+using System;
+using System.Linq;
+using IMRE.HandWaver.Solver;
+#endregion
 
-public class HyperBall : MonoBehaviour {
+namespace IMRE.HandWaver.FourthDimension {
 
-void Update() {
+	/// <summary>
+	/// @Nathan please network this.
+	/// 
+	/// We may need to network the physics values (Rigidbody) in addition to the transform.
+	/// </summary>
+	[RequireComponent(typeof(InteractionBehaviour))]
+	public class HyperBall : MonoBehaviour {
 
-this.transform.position = positionMap();
+		private float scaleOfBox = 2f;
+		private Vector3 worldSpaceOrigin = Vector3.up * 1.8f;
 
-}
+		private void Start()
+		{
+			this.GetComponent<MeshRenderer>().materials[0].color = UnityEngine.Random.ColorHSV(0,1,1,1,1,1);
+		}
 
-private Vector3 positionMap()
-{
+		void Update() {
+			this.transform.position = positionMap()+worldSpaceOrigin;
+		}
 
-	Vector3 pos = this.transform.position;
+		private Vector3 positionMap()
+		{
+			Vector3 pos = this.transform.position-worldSpaceOrigin;
 
-	if (pos.x > 1){
-		pos += Vector3.;left;
+			if (pos.x > scaleOfBox) {
+				pos += scaleOfBox*Vector3.left;
+			}
+
+			if (pos.x < -scaleOfBox) {
+				pos += scaleOfBox*2*Vector3.right;
+			}
+
+			if (pos.y > scaleOfBox) {
+				pos += 0*Vector3.down;
+			}
+
+			if (pos.y < -scaleOfBox) {
+				pos += scaleOfBox*Vector3.forward;
+			}
+
+			if (pos.z > scaleOfBox) {
+				pos += scaleOfBox*Vector3.back;
+			}
+			return pos;
+		}
 	}
-
-	if(pos.x < -1){
-		pos += Vector3.right;
-	}
-
-	if(pos.y > 1){
-		pos += Vector3.down;
-	}
-
-	if(pos.y < -1){
-		pos += Vector3.forward;
-	}
-
-	if(pos.z > 1){
-		pos += Vector3.back
-	}
-
-	return pos;
-}
-
-}
 }
