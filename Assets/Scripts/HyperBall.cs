@@ -7,6 +7,7 @@ using PathologicalGames;
 using System;
 using System.Linq;
 using IMRE.HandWaver.Solver;
+using Photon.Pun;
 #endregion
 
 namespace IMRE.HandWaver.FourthDimension {
@@ -17,7 +18,9 @@ namespace IMRE.HandWaver.FourthDimension {
 	/// We may need to network the physics values (Rigidbody) in addition to the transform.
 	/// </summary>
 	[RequireComponent(typeof(InteractionBehaviour))]
-	public class HyperBall : MonoBehaviour {
+	[RequireComponent(typeof(PhotonView))]
+	[RequireComponent(typeof(PhotonTransformView))]
+	public class HyperBall : MonoBehaviourPunCallbacks {
 
 		private float scaleOfBox = 2f;
 		private Vector3 worldSpaceOrigin = Vector3.up * 1.8f;
@@ -25,10 +28,39 @@ namespace IMRE.HandWaver.FourthDimension {
 		private void Start()
 		{
 			this.GetComponent<MeshRenderer>().materials[0].color = UnityEngine.Random.ColorHSV(0,1,1,1,1,1);
+
+			GetComponent<InteractionBehaviour>().OnContactStay += whileContact;
+			GetComponent<InteractionBehaviour>().OnContactBegin += startTakeOver;
+			GetComponent<InteractionBehaviour>().OnContactEnd += endTakeOver;
 		}
 
 		void Update() {
-			this.transform.position = positionMap()+worldSpaceOrigin;
+			if (GetComponent<PhotonView>().IsMine)
+			{
+				this.transform.position = positionMap() + worldSpaceOrigin;
+			}
+			
+		}
+
+		private void startTakeOver()
+		{
+			//take ownserhip for me, to keep while I hit with my hands.
+			GetComponent<PhotonView>().RequestOwnership();
+		}
+
+		private void endTakeOver()
+		{
+			//return ownership to master.
+			GetComponent<PhotonView>().TransferOwnership(0);
+		}
+
+		private void whileContact()
+		{
+			if (GetComponent<PhotonView>().IsMine)
+			{
+				//@Nathan we need to sync the force on the rigidbody here.
+
+			}
 		}
 
 		private Vector3 positionMap()
