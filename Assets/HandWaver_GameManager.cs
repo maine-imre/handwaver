@@ -14,6 +14,10 @@ namespace Com.MyCompany.MyGame
 {
 	public class HandWaver_GameManager : MonoBehaviourPunCallbacks
 	{
+		/// <summary>
+		/// This is the scene to be loaded after disconnecting
+		/// </summary>
+		public string lobbyScene;
 
 
 		#region Photon Callbacks
@@ -24,7 +28,7 @@ namespace Com.MyCompany.MyGame
 		/// </summary>
 		public override void OnLeftRoom()
 		{
-			//SceneManager.LoadScene(0);
+			Application.Quit();
 		}
 
 

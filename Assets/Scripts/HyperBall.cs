@@ -12,14 +12,11 @@ using Photon.Pun;
 
 namespace IMRE.HandWaver.FourthDimension {
 
-	/// <summary>
-	/// @Nathan please network this.
-	/// 
-	/// We may need to network the physics values (Rigidbody) in addition to the transform.
-	/// </summary>
+
 	[RequireComponent(typeof(InteractionBehaviour))]
 	[RequireComponent(typeof(PhotonView))]
 	[RequireComponent(typeof(PhotonTransformView))]
+	[RequireComponent(typeof(PhotonRigidbodyView))]
 	public class HyperBall : MonoBehaviourPunCallbacks {
 
 		private float scaleOfBox = 2f;
@@ -29,7 +26,6 @@ namespace IMRE.HandWaver.FourthDimension {
 		{
 			this.GetComponent<MeshRenderer>().materials[0].color = UnityEngine.Random.ColorHSV(0,1,1,1,1,1);
 
-			GetComponent<InteractionBehaviour>().OnContactStay += whileContact;
 			GetComponent<InteractionBehaviour>().OnContactBegin += startTakeOver;
 			GetComponent<InteractionBehaviour>().OnContactEnd += endTakeOver;
 		}
@@ -52,15 +48,6 @@ namespace IMRE.HandWaver.FourthDimension {
 		{
 			//return ownership to master.
 			GetComponent<PhotonView>().TransferOwnership(0);
-		}
-
-		private void whileContact()
-		{
-			if (GetComponent<PhotonView>().IsMine)
-			{
-				//@Nathan we need to sync the force on the rigidbody here.
-
-			}
 		}
 
 		private Vector3 positionMap()

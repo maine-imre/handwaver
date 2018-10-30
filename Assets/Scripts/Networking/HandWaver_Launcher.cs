@@ -41,7 +41,7 @@ namespace IMRE.HandWaver.Networking
 			Connect();
 		}
 
-		private void Connect()
+		public void Connect()
 		{
 			if (PhotonNetwork.IsConnected)
 			{
