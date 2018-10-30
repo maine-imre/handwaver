@@ -110,8 +110,13 @@ namespace IMRE.HandWaver.Shearing
 
 		private void updateDiagram()
 		{
+		//use the trianngle inequality to determine if the control Point is out of bounds.
+			if((controlPoint.Position3 - cutoutRectangle[1].Position3).magnitude + (controlPoint.Position3 - cutoutRectangle[3].Position3).magnitude <= (cutoutRectangle[1].Position3 - cutoutRectangle[3].Position3).magnitude){
 			controllPoint.Position3 = Vector3.Project(controllPoint.Position3 - this.transform.position, (Vector3.right + Vector3.forward).normalized) + this.transform.position;
-
+}else{
+			controlPoint.Position3 = cutoutRectangle[1].Position3;
+			controlPoint.GetComponent<InteractionBehaviour>().GraspingController.Release();
+}
 			xLen = Vector3.Distance(controllPoint.Position3, cutoutRectangle[1].Position3);
 
 			//each corner moves in.
