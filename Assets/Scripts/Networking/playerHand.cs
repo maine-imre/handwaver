@@ -38,23 +38,13 @@ namespace IMRE.HandWaver.Networking
 				if(iHand == null)
 				{
 					Debug.LogError("Failed to find local player hand. Disabling hand preview on cilent "+PhotonNetwork.NickName);
-					photonView.RPC("disableHand", RpcTarget.AllBuffered);
 				}
 				else
 				{
 					Debug.Log("Local Player " + whichHand + " was set to be interaction hand" + iHand.name);
 				}
-
+				GetComponent<MeshRenderer>().enabled = false;
 			}
-		}
-
-		/// <summary>
-		/// Disables hand
-		/// </summary>
-		[PunRPC]
-		private void disableHand()
-		{
-			enabled = false;
 		}
 
 		[PunRPC]
@@ -69,7 +59,7 @@ namespace IMRE.HandWaver.Networking
 			{
 				transform.position = iHand.position;
 
-				photonView.RPC("showHand", RpcTarget.All, iHand.isTracked);
+				photonView.RPC("showHand", RpcTarget.OthersBuffered, iHand.isTracked);
 			}
 		}
 	}
