@@ -24,8 +24,11 @@ namespace IMRE.HandWaver.FourthDimension {
 
 		private void Start()
 		{
-			float tmp = UnityEngine.Random.Range(0, 1);
-			photonView.RPC("setColorOnBall", RpcTarget.All, tmp);
+			if (!PhotonNetwork.IsMasterClient)
+			{
+				float tmp = UnityEngine.Random.Range(0, 255);
+				photonView.RPC("setColorOnBall", RpcTarget.All, tmp);
+			}
 
 			GetComponent<InteractionBehaviour>().OnContactBegin += startTakeOver;
 			GetComponent<InteractionBehaviour>().OnContactEnd += endTakeOver;
@@ -39,7 +42,6 @@ namespace IMRE.HandWaver.FourthDimension {
 		void setColorOnBall(float hue)
 		{
 			this.GetComponent<MeshRenderer>().materials[0].color = Color.HSVToRGB(hue, 1, 1);
-
 		}
 
 		void Update() {
