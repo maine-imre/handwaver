@@ -34,11 +34,16 @@ namespace IMRE.HandWaver
 		{
 			foreach (Leap.Unity.Interaction.InteractionHand hand in iHands)
 			{
-				Chirality chirality = Chirality.Right;
-				if (hand.isLeft)
+				Chirality chirality = hand.isLeft ? Chirality.Left : Chirality.Right;
+
+				if (!hand.isTracked)
 				{
-					chirality = Chirality.Left;
+					for (int i = 0; i < 5; i++)
+					{
+						changeFingerIDX(chirality, i, startingColor);
+					}
 				}
+
 				if (hand.isGraspingObject)
 				{
 					setHandColorMode(chirality, handModes.grasp);
