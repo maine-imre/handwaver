@@ -48,12 +48,12 @@ namespace IMRE.HandWaver.Networking
 
 		private void notifyNotTracked(XRNodeState obj)
 		{
-			photonView.RPC("showHand", RpcTarget.OthersBuffered, false);
+			photonView.RPC("showHead", RpcTarget.OthersBuffered, false);
 		}
 
 		private void notifyTracked(XRNodeState obj)
 		{
-			photonView.RPC("showHand", RpcTarget.OthersBuffered, true);
+			photonView.RPC("showHead", RpcTarget.OthersBuffered, true);
 		}
 
 		private void Update()
