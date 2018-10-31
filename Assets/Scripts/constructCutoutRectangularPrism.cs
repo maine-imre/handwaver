@@ -139,7 +139,7 @@ namespace IMRE.HandWaver.Shearing
 			//the prism moves to reflect this...
 			for (int i = 0; i < 4; i++)
 			{
-				prismTopPoly.pointList[i].Position3 = prismBasePoly.pointList[i].Position3 + Vector3.up * xLen;
+				prismTopPoly.pointList[i].Position3 = prismBasePoly.pointList[i].Position3 + Mathf.Sign(xLen * (sideLength1 - 2 * xLen) * (sideLength2 - 2 * xLen)) *Vector3.up * xLen;
 			}
 
 			foreach (MasterGeoObj mgo in prism.vertexPoints)
@@ -154,7 +154,12 @@ namespace IMRE.HandWaver.Shearing
 
 			volumeLineRenderer.transform.GetChild(0).transform.localPosition = volumeForLineRenderer;
 
+			//cody add this tmp pro back into the scene.
+			//cody also add the interaction behaviours on  the text mesh pro.
+			//cody add interaction behaviour to "handle" on graph
 			//TMPro.SetText("x = " + Math.Round(volumeForLineRenderer.x, 2) + " cm                        V = " + Math.Round(volumeForLineRenderer.y, 2) + " cm^3");
+
+			//play sound when max volume is reached.
 		}
 
 		private Vector3 volumeForLineRenderer

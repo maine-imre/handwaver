@@ -33,6 +33,7 @@ namespace IMRE.HandWaver.Interface
 		private void startScaleControl()
 		{
 			scaleControlled = true;
+			this.transform.parent = defaultParent;
 		}
 
 		private void resetScale()
