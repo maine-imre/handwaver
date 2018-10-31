@@ -38,7 +38,7 @@ namespace IMRE.HandWaver.FourthDimension {
 		[PunRPC]
 		void setColorOnBall(float hue)
 		{
-			this.GetComponent<MeshRenderer>().materials[0].color = UnityEngine.Random.ColorHSV(hue, hue, 1, 1, 1, 1);
+			this.GetComponent<MeshRenderer>().materials[0].color = Color.HSVToRGB(hue, 1, 1);
 
 		}
 
