@@ -46,7 +46,7 @@ namespace IMRE.HandWaver.FourthDimension {
 		}
 
 		void Update() {
-			if (GetComponent<PhotonView>().IsMine)
+			if (!PhotonNetwork.IsMasterClient)
 			{
 				this.transform.position = positionMap() + worldSpaceOrigin;
 			}
