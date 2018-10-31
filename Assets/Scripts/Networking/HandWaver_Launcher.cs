@@ -80,6 +80,7 @@ namespace IMRE.HandWaver.Networking
 		public override void OnJoinedRoom()
 		{
 			Debug.Log("PUN Basics Tutorial/Launcher: OnJoinedRoom() called by PUN. Now this client is in a room.");
+			PhotonNetwork.NickName = SystemInfo.deviceName;
 			PhotonNetwork.LoadLevel("ThreeTorus");
 		}
 		#endregion

@@ -54,7 +54,7 @@ namespace IMRE.HandWaver.Networking
 		{
 			this.playerPort = newPlayerNumber;
 			setColor(newPlayerColor);
-			this.name = "Player " + newPlayerNumber;
+			this.name = "Player " + PhotonNetwork.NickName;
 			lHand.name = "Player Hand (" + newPlayerNumber+"L)";
 			rHand.name = "Player Hand (" + newPlayerNumber+"R)";
 
