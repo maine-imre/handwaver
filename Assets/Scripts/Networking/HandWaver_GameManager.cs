@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Collections;
-
-
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
 using Photon.Pun;
 using Photon.Realtime;
+using System.Collections.Generic;
 
-
-namespace Com.MyCompany.MyGame
-{
+namespace IMRE.HandWaver.Networking { 
 	public class HandWaver_GameManager : MonoBehaviourPunCallbacks
 	{
 		/// <summary>
@@ -19,12 +16,31 @@ namespace Com.MyCompany.MyGame
 		/// </summary>
 		public string lobbyScene;
 
+		[Tooltip("The prefab to use for representing the player")]
+		public GameObject playerPrefab;
+
+		public List<GameObject> localPlayers;
 
 		#region Photon Callbacks
 
+		private void Start()
+		{
+			if (playerPrefab == null)
+			{
+				Debug.LogError("Missing playerPrefab Reference. Please set it up in Game Manager");
+			}
+			else
+			{
+				Debug.LogFormat("We are Instantiating localPlayer");
+				// we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
+				GameObject newPlayer = PhotonNetwork.Instantiate(this.playerPrefab.name, new Vector3(0f, 0f, 0f), Quaternion.identity, 0);
+				localPlayers.Add(newPlayer);
+				newPlayer.GetComponent<playerHead>().setupPlayer(localPlayers.IndexOf(newPlayer), UnityEngine.Random.ColorHSV(0, 1, 1, 1, 1, 1));
+			}
+		}
 
 		/// <summary>
-		/// Called when the local player left the room. We need to load the launcher scene.
+		/// Called when the local player left the room.
 		/// </summary>
 		public override void OnLeftRoom()
 		{
