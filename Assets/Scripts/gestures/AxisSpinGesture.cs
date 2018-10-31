@@ -75,8 +75,8 @@ namespace IMRE.HandWaver
 
 			if(reason == DeactivationReason.FinishedGesture)
 			{
-				Debug.Log("REVOLVE NOW");
 				myStraightEdge.shipsWheel_revolve.GetComponentInChildren<shipsWheelControl>().revolve(true);
+				//cody add sound feedback.
 			}
 		}
 
