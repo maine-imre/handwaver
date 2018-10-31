@@ -51,7 +51,7 @@ namespace IMRE.HandWaver
 
 				return true;
 			}
-			else if(inBounds((hand.StabilizedPalmPosition.ToVector3()-myStraightEdge.center).magnitude,exactBounds))
+			else if(inBounds((hand.StabilizedPalmPosition.ToVector3()-myStraightEdge.center).magnitude,exactBounds) && myStraightEdge.spindle)
 			{
 				deactivationReason = DeactivationReason.FinishedGesture;
 				return true;

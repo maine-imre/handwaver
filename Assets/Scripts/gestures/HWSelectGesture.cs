@@ -216,13 +216,13 @@ namespace IMRE.HandWaver {
 			switch (mgo.figType)
 			{
 				case GeoObjType.point:
-					angle = Vector3.Angle(fingerTip(hand) - mgo.transform.position,fingerDirection(hand));
+					angle = Vector3.Angle(mgo.transform.position - fingerTip(hand),fingerDirection(hand));
 					break;
 				case GeoObjType.line:
-					angle = Vector3.Angle(Vector3.Project(transform.position - mgo.transform.position, mgo.GetComponent<AbstractLineSegment>().vertex0 - mgo.GetComponent<AbstractLineSegment>().vertex1) + mgo.transform.position - fingerTip(hand),fingerDirection(hand));
+					angle = Vector3.Angle(Vector3.Project(mgo.transform.position - transform.position, mgo.GetComponent<AbstractLineSegment>().vertex0 - mgo.GetComponent<AbstractLineSegment>().vertex1) + mgo.transform.position - fingerTip(hand),fingerDirection(hand));
 					break;
 				case GeoObjType.polygon:
-					Vector3 positionOnPlane = Vector3.ProjectOnPlane(transform.position - mgo.transform.position, mgo.GetComponent<AbstractPolygon>().normDir) + mgo.transform.position;
+					Vector3 positionOnPlane = Vector3.ProjectOnPlane(mgo.transform.position - transform.position, mgo.GetComponent<AbstractPolygon>().normDir) + mgo.transform.position;
 					angle = Vector3.Angle(positionOnPlane - fingerTip(hand),fingerDirection(hand));
 					Debug.LogWarning("Polygon doesn't check boundariers");
 					break;
@@ -233,12 +233,12 @@ namespace IMRE.HandWaver {
 					Debug.LogWarning("Pyramids not yet supported");
 					break;
 				case GeoObjType.circle:
-					Vector3 positionOnPlane2 = Vector3.ProjectOnPlane(transform.position - mgo.transform.position, mgo.GetComponent<AbstractCircle>().normalDir) + mgo.transform.position;
+					Vector3 positionOnPlane2 = Vector3.ProjectOnPlane(mgo.transform.position - transform.position, mgo.GetComponent<AbstractCircle>().normalDir) + mgo.transform.position;
 					Vector3 positionOnCircle = Vector3.Normalize(positionOnPlane2 - mgo.GetComponent<AbstractCircle>().centerPos) * mgo.GetComponent<AbstractCircle>().Radius + mgo.GetComponent<AbstractCircle>().centerPos;
 					angle = Vector3.Angle(fingerTip(hand) - positionOnCircle, fingerDirection(hand));
 					break;
 				case GeoObjType.sphere:
-					Vector3 lineDir = Vector3.Normalize(transform.position - mgo.transform.position);
+					Vector3 lineDir = Vector3.Normalize(mgo.transform.position - transform.position);
 					Vector3 positionOnSphere1 = mgo.GetComponent<AbstractSphere>().radius * lineDir + mgo.transform.position;
 					angle = Vector3.Angle(positionOnSphere1 - fingerTip(hand), fingerDirection(hand));
 					break;
@@ -249,11 +249,11 @@ namespace IMRE.HandWaver {
 					Debug.LogWarning("Torus not yet supported");
 					break;
 				case GeoObjType.flatface:
-					Vector3 positionOnPlane3 = Vector3.ProjectOnPlane(transform.position - mgo.transform.position, mgo.GetComponent<flatfaceBehave>().normalDir) + mgo.transform.position;
+					Vector3 positionOnPlane3 = Vector3.ProjectOnPlane(mgo.transform.position - transform.position, mgo.GetComponent<flatfaceBehave>().normalDir) + mgo.transform.position;
 					angle = Vector3.Angle(positionOnPlane3 - fingerTip(hand),fingerDirection(hand));
 					break;
 				case GeoObjType.straightedge:
-					Vector3 positionOnStraightedge = Vector3.Project(transform.position - mgo.transform.position, mgo.GetComponent<straightEdgeBehave>().normalDir) + mgo.transform.position;
+					Vector3 positionOnStraightedge = Vector3.Project(mgo.transform.position - transform.position, mgo.GetComponent<straightEdgeBehave>().normalDir) + mgo.transform.position;
 					angle = Vector3.Angle(positionOnStraightedge - fingerTip(hand), fingerDirection(hand));
 					break;
 				default:
