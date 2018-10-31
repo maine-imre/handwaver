@@ -24,10 +24,21 @@ namespace IMRE.HandWaver.FourthDimension {
 
 		private void Start()
 		{
-			this.GetComponent<MeshRenderer>().materials[0].color = UnityEngine.Random.ColorHSV(0,1,1,1,1,1);
+			Color tmp = UnityEngine.Random.ColorHSV(0, 1, 1, 1, 1, 1); 
+			photonView.RPC("setColorOnBall", RpcTarget.All, tmp);
 
 			GetComponent<InteractionBehaviour>().OnContactBegin += startTakeOver;
 			GetComponent<InteractionBehaviour>().OnContactEnd += endTakeOver;
+		}
+
+		/// <summary>
+		/// This should sync the colors between clients... IDK tho
+		/// </summary>
+		/// <param name="tmpColor">color to set for this ball</param>
+		[PunRPC]
+		void setColorOnBall(Color tmpColor)
+		{
+			this.GetComponent<MeshRenderer>().materials[0].color = tmpColor;
 		}
 
 		void Update() {
