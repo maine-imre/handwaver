@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using System;
+using UnityEngine.XR;
 
 namespace IMRE.HandWaver.Networking
 {
@@ -30,6 +32,8 @@ namespace IMRE.HandWaver.Networking
 		[Range(0, MAXPLAYERCOUNT)]
 		public int playerPort;
 
+		public TMPro.TextMeshPro text;
+
 		#region Mono Funcs
 		private void Start()
 		{
@@ -37,7 +41,19 @@ namespace IMRE.HandWaver.Networking
 			{
 
 				GetComponent<MeshRenderer>().enabled = false;
+				UnityEngine.XR.InputTracking.trackingAcquired += notifyTracked;
+				UnityEngine.XR.InputTracking.trackingLost += notifyNotTracked;
 			}
+		}
+
+		private void notifyNotTracked(XRNodeState obj)
+		{
+			photonView.RPC("showHand", RpcTarget.OthersBuffered, false);
+		}
+
+		private void notifyTracked(XRNodeState obj)
+		{
+			photonView.RPC("showHand", RpcTarget.OthersBuffered, true);
 		}
 
 		private void Update()
@@ -57,16 +73,22 @@ namespace IMRE.HandWaver.Networking
 			this.name = "Player " + PhotonNetwork.NickName;
 			lHand.name = "Player Hand (" + newPlayerNumber+"L)";
 			rHand.name = "Player Hand (" + newPlayerNumber+"R)";
-
-
+			text.text = PhotonNetwork.NickName;
 		}
+
+		[PunRPC]
+		private void showHead(bool show)
+		{
+			GetComponent<MeshRenderer>().enabled = show;
+		}
+
+
 
 		private void setColor(Color newColor)
 		{
 			GetComponent<MeshRenderer>().materials[0].color = newColor;
 			lHand.GetComponent<MeshRenderer>().materials[0].color = newColor;
 			rHand.GetComponent<MeshRenderer>().materials[0].color = newColor;
-
 		}
 
 	}
