@@ -56,7 +56,7 @@ namespace IMRE.HandWaver.FourthDimension {
 		private void startTakeOver()
 		{
 			//take ownserhip for me, to keep while I hit with my hands.
-			GetComponent<PhotonView>().RequestOwnership();
+			GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.LocalPlayer);
 		}
 
 		private void endTakeOver()
