@@ -80,6 +80,7 @@ namespace IMRE.HandWaver
 		internal void snapToFloor()
 		{
 			normalDir = Vector3.up;
+			Debug.Log(normalDir);
 		}
 
 		//private int initLayer;
@@ -193,7 +194,7 @@ namespace IMRE.HandWaver
             }
 			set
 			{
-				this.transform.rotation *= Quaternion.FromToRotation(normalDir,value);
+				this.transform.rotation = Quaternion.FromToRotation(Vector3.forward, value);
 			}
         }
 

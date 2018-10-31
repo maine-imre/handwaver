@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e711b8bac466f574589ad1b82880bb02
+guid: dc2f6462c2f0c90489b3321a8c5ee122
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -8,7 +8,7 @@ ModelImporter:
     2100000: No Name
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Cone
+    4300000: Vert
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -81,7 +81,6 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     rootMotionBoneName: 
-    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1

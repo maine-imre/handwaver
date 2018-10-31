@@ -60,11 +60,10 @@ namespace IMRE.HandWaver
 
 			handColourManager.setHandColorMode(chirality,handColourManager.handModes.snappingPalm);
 
-			Debug.Log(iHand.graspedObject);
 			if (iHand.isGraspingObject && iHand.graspedObject.gameObject.GetComponent<straightEdgeBehave>()  == myStraightEdge)
 			{
 				Debug.Log("Trying to snap to floor");
-				iHand.ReleaseObject(myStraightEdge.GetComponent<InteractionBehaviour>());
+				//iHand.ReleaseObject(myStraightEdge.GetComponent<InteractionBehaviour>());
 
 				myStraightEdge.snapToFloor();
 			}
