@@ -24,8 +24,9 @@ namespace IMRE.HandWaver.FourthDimension {
 
 		private void Start()
 		{
-			Color tmp = UnityEngine.Random.ColorHSV(0, 1, 1, 1, 1, 1); 
-			photonView.RPC("setColorOnBall", RpcTarget.All, tmp);
+			Color tmp = UnityEngine.Random.ColorHSV(0, 1, 1, 1, 1, 1);
+			Vector4 tmpVec = new Vector4(tmp.r, tmp.g, tmp.b, tmp.a);
+			photonView.RPC("setColorOnBall", RpcTarget.All, tmpVec);
 
 			GetComponent<InteractionBehaviour>().OnContactBegin += startTakeOver;
 			GetComponent<InteractionBehaviour>().OnContactEnd += endTakeOver;
@@ -36,9 +37,9 @@ namespace IMRE.HandWaver.FourthDimension {
 		/// </summary>
 		/// <param name="tmpColor">color to set for this ball</param>
 		[PunRPC]
-		void setColorOnBall(Color tmpColor)
+		void setColorOnBall(Vector4 tmpColor)
 		{
-			this.GetComponent<MeshRenderer>().materials[0].color = tmpColor;
+			this.GetComponent<MeshRenderer>().materials[0].color = new Color(tmpColor.x, tmpColor.y, tmpColor.z, tmpColor.w);
 		}
 
 		void Update() {
