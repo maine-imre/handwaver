@@ -26,7 +26,7 @@ namespace IMRE.HandWaver.FourthDimension {
 		{
 			if (!PhotonNetwork.IsMasterClient)
 			{
-				float tmp = UnityEngine.Random.Range(0, 255);
+				float tmp = UnityEngine.Random.Range(0, 1);
 				photonView.RPC("setColorOnBall", RpcTarget.All, tmp);
 			}
 
