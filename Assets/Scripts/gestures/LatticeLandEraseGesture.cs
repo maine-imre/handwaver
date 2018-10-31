@@ -139,7 +139,10 @@ namespace IMRE.HandWaver.Interface
 					distance = Vector3.Magnitude(hand.PalmPosition.ToVector3() - mgo.transform.position);
 					break;
 				case GeoObjType.line:
-					distance = Vector3.Magnitude(Vector3.Project(hand.PalmPosition.ToVector3() - mgo.transform.position, mgo.GetComponent<AbstractLineSegment>().vertex0 - mgo.GetComponent<AbstractLineSegment>().vertex1) + mgo.transform.position - hand.PalmPosition.ToVector3());
+					Vector3 a = mgo.GetComponent<AbstractLineSegment>().vertex0;
+					Vector3 b = mgo.GetComponent<AbstractLineSegment>().vertex1;
+					Vector3 c = hand.PalmPosition.ToVector3();
+					distance = Mathf.Max((c - a).magnitude * Mathf.Sin(Mathf.Abs(Vector3.Angle(c - a, b - a))), Mathf.Min((c - a).magnitude, (b - a).magnitude));
 					break;
 				case GeoObjType.polygon:
 					Vector3 positionOnPlane = Vector3.ProjectOnPlane(transform.position - mgo.transform.position, mgo.GetComponent<AbstractPolygon>().normDir) + mgo.transform.position;

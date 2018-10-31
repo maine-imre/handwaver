@@ -219,7 +219,8 @@ namespace IMRE.HandWaver {
 					angle = Vector3.Angle(mgo.transform.position - fingerTip(hand),fingerDirection(hand));
 					break;
 				case GeoObjType.line:
-					angle = Vector3.Angle(Vector3.Project(mgo.transform.position - transform.position, mgo.GetComponent<AbstractLineSegment>().vertex0 - mgo.GetComponent<AbstractLineSegment>().vertex1) + mgo.transform.position - fingerTip(hand),fingerDirection(hand));
+					//isn't this wrong?
+					angle = 0f;
 					break;
 				case GeoObjType.polygon:
 					Vector3 positionOnPlane = Vector3.ProjectOnPlane(mgo.transform.position - transform.position, mgo.GetComponent<AbstractPolygon>().normDir) + mgo.transform.position;
@@ -273,7 +274,10 @@ namespace IMRE.HandWaver {
 					distance = Vector3.Magnitude(fingerTip(hand) - mgo.transform.position);
 					break;
 				case GeoObjType.line:
-					distance = Vector3.Magnitude(Vector3.Project(transform.position - mgo.transform.position, mgo.GetComponent<AbstractLineSegment>().vertex0 - mgo.GetComponent<AbstractLineSegment>().vertex1) + mgo.transform.position - fingerTip(hand));
+					Vector3 a = mgo.GetComponent<AbstractLineSegment>().vertex0;
+					Vector3 b = mgo.GetComponent<AbstractLineSegment>().vertex1;
+					Vector3 c = fingerTip(hand);
+					distance = Mathf.Max((c - a).magnitude * Mathf.Sin(Mathf.Abs(Vector3.Angle(c - a, b - a))), Mathf.Min((c - a).magnitude, (b - a).magnitude));
 					break;
 				case GeoObjType.polygon:
 					Vector3 positionOnPlane = Vector3.ProjectOnPlane(transform.position - mgo.transform.position, mgo.GetComponent<AbstractPolygon>().normDir) + mgo.transform.position;
