@@ -10,6 +10,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Linq;
+
 
 
 namespace IMRE.HandWaver
@@ -35,10 +37,10 @@ namespace IMRE.HandWaver
 		/// </summary>
 		public List<string> loadScenesOnStart = new List<string>();
 
-        void Start()
-        {
+		void Start()
+		{
 
-			commandLineArgumentParse.logOverride |= interalBuild;	//or equal the internal build bool so that if its internal it automatically starts logging
+			commandLineArgumentParse.logOverride |= interalBuild;   //or equal the internal build bool so that if its internal it automatically starts logging
 
 			if (loadBackground)
 				loadSceneAsyncByName(backgroundName, false);
@@ -50,7 +52,7 @@ namespace IMRE.HandWaver
 				FindObjectOfType<HWMixcastIO>().currMode = mixCastTargetMode.primaryAlt;
 			}
 #endif
-			foreach(string name in loadScenesOnStart)
+			foreach (string name in loadScenesOnStart)
 			{
 				loadSceneAsyncByName(name, unloadBool);
 			}
@@ -192,8 +194,15 @@ namespace IMRE.HandWaver
                 {
 
 					if (!(SceneManager.GetSceneAt(i).name.Contains("Base")))
+					{
+						if (SceneManager.GetSceneAt(i).name.Contains("LatticeLand"))
+						{
+							FindObjectsOfType<HWSelectGesture>().ToList().ForEach(sg => sg.enabled = false);
+						}
 						layers.Add(SceneManager.GetSceneAt(i));
-                }
+
+					}
+				}
                 foreach (Scene s in layers)
                 {
                     SceneManager.UnloadSceneAsync(s);
