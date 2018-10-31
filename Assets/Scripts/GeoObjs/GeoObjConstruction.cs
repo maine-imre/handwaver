@@ -192,7 +192,7 @@ namespace IMRE.HandWaver {
 
 			foreach (AbstractLineSegment line in lineList)
 			{
-				//HW_GeoSolver.ins.addDependence(plane.transform, line.transform);
+				HW_GeoSolver.ins.addDependence(plane.transform, line.transform);
 			}
 
 			foreach (AbstractPoint point in pointList)

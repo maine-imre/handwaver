@@ -189,6 +189,7 @@ namespace IMRE.HandWaver.Interface
 								playSuccessSound();
 								if (_currPoint == pointList[0] && lineList.Count > 1)
 								{
+									//TODO: Point list is overpopulated. CodyCodyCodyCodyCodyCody
 									GeoObjConstruction.iPolygon(lineList, pointList);
 									endInteraction();
 								}
