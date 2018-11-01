@@ -173,7 +173,6 @@ namespace IMRE.HandWaver.Interface
 		protected override void WhenGestureDeactivated(Hand maybeNullHand, DeactivationReason reason)
 		{
 			this.thisLR.enabled = false;
-
 			if (maybeNullHand != null)
 			{
 
@@ -187,10 +186,16 @@ namespace IMRE.HandWaver.Interface
 							{
 								lineList.Add(GeoObjConstruction.dLineSegment(currPoint, prevPoint));
 								playSuccessSound();
-								if (_currPoint == pointList[0] && lineList.Count > 1)
+								int idx = pointList.LastIndexOf(_currPoint);
+								int idx2 = pointList.IndexOf(_currPoint);
+
+								if (idx -1> idx2 && lineList.Count > 1)
 								{
+
+									List<AbstractPoint> p1 = pointList.GetRange(idx2, (idx - 1)-idx2);
+									List<AbstractLineSegment> l1 = lineList.Where(l => p1.Contains(l.GetComponent<DependentLineSegment>().point1) || p1.Contains(l.GetComponent<DependentLineSegment>().point2)).ToList();
 									//TODO: Point list is overpopulated. CodyCodyCodyCodyCodyCody
-									GeoObjConstruction.iPolygon(lineList, pointList);
+									GeoObjConstruction.iPolygon(l1, p1);
 									endInteraction();
 								}
 							}
@@ -261,6 +266,8 @@ namespace IMRE.HandWaver.Interface
 			currSet = false;
 			successfullyMade = false;
 				lineList.ForEach(l => l.deleteGeoObj());
+			prevPoint = null;
+			currPoint = null;
 		}
 
 		internal AbstractPoint prevPoint
@@ -287,7 +294,7 @@ namespace IMRE.HandWaver.Interface
 			}
 			else
 			{
-				thisLR.enabled = true;
+				thisLR.enabled = prevPoint != null;
 				thisLR.SetPosition(0, value.transform.position);
 				updateLine = true;
 				//thisLR.SetPosition(1, endofPin.position);
@@ -310,7 +317,10 @@ namespace IMRE.HandWaver.Interface
 
 				_currPoint = value;
 				currSet = (value != null);
-				thisLR.SetPosition(0, _currPoint.transform.position);
+				if (_currPoint != null)
+				{
+					thisLR.SetPosition(0, _currPoint.transform.position);
+				}
 				if (_currPoint != null)
 				{
 					pointList.Add(_currPoint);
