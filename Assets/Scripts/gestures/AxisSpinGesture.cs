@@ -21,6 +21,19 @@ namespace IMRE.HandWaver
 		public float roughDistance = 0.3f;
 		public Vector2 exactBounds;
 
+		public AudioClip successSound;
+		private AudioSource _myAudioSource;
+
+		private AudioSource myAudioSource
+		{
+			get
+			{
+				if (_myAudioSource == null)
+					_myAudioSource = GetComponent<AudioSource>();
+				return _myAudioSource;
+			}
+		}
+
 		internal straightEdgeBehave myStraightEdge
 		{
 			get
@@ -76,7 +89,7 @@ namespace IMRE.HandWaver
 			if(reason == DeactivationReason.FinishedGesture)
 			{
 				myStraightEdge.shipsWheel_revolve.GetComponentInChildren<shipsWheelControl>().revolve(true);
-				//cody add sound feedback.
+				playSuccessSound();
 			}
 		}
 
@@ -91,6 +104,14 @@ namespace IMRE.HandWaver
 			}
 
 			handColourManager.setHandColorMode(chirality, handColourManager.handModes.snappingPalm);
+		}
+
+		private void playSuccessSound()
+		{
+			myAudioSource.clip = (successSound);
+			if (myAudioSource.isPlaying)
+				myAudioSource.Stop();
+			myAudioSource.Play();
 		}
 	}
 }
