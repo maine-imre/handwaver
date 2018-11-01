@@ -78,9 +78,10 @@ namespace IMRE.HandWaver
 			{
 				return LocalPosition(ClosestSystemPosition(systemPosition(localPos)));
 			}
-			catch
+			catch(NotImplementedException e)
 			{
 				//if an object doesn't have a closest point say that it is infinitely far away.
+				Debug.LogWarning(e);
 				return Mathf.Infinity * Vector3.one;
 			}
 		}
