@@ -51,7 +51,6 @@ namespace IMRE.HandWaver.Networking
 			else
 			{
 				photonView.RPC("setHeadName", RpcTarget.AllBuffered);
-				photonView.RPC("setColor", RpcTarget.AllBuffered);
 			}
 		}
 
@@ -119,6 +118,7 @@ namespace IMRE.HandWaver.Networking
 			photonView.RPC("setColor", RpcTarget.OthersBuffered, newPlayerHue);
 
 		}
+
 		private void setColor()
 		{
 			GetComponent<MeshRenderer>().materials[0].color = myColor;
