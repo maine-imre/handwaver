@@ -27,6 +27,7 @@ namespace IMRE.HandWaver.Shearing
 
 		private TextMeshPro TMPro;
 		private AudioSource myAudioSource;
+		const float MAXVALUE = 0.060685f;
 
 
 		// Use this for initialization
@@ -160,7 +161,7 @@ namespace IMRE.HandWaver.Shearing
 			TMPro.SetText("x = " + Math.Round(volumeForLineRenderer.x, 2) + " cm                        V = " + Math.Round(volumeForLineRenderer.y, 2) + " cm^3");
 
 			//play sound when max volume is reached.
-			if (volumeForLineRenderer.y == 1787581.25)
+			if (xLen == MAXVALUE)
 			{
 				myAudioSource.Play();
 			}
