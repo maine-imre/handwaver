@@ -21,7 +21,7 @@ namespace IMRE.HandWaver.FourthDimension {
 
 		public static float scaleOfBox = 2f;
 		private Rigidbody myRB;
-		internal static Vector3 origin = Vector3.zero;
+		internal static Vector3 origin = Vector3.up*scaleOfBox;
 
 		//public Transform wallPrefab;
 
