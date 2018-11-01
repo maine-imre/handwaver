@@ -50,8 +50,8 @@ namespace IMRE.HandWaver.Networking
 			}
 			else
 			{
-				photonView.RPC("setHeadName", RpcTarget.AllBuffered, PhotonNetwork.NickName);
-				photonView.RPC("setColor", RpcTarget.AllBuffered, myColor);
+				photonView.RPC("setHeadName", RpcTarget.AllBuffered);
+				photonView.RPC("setColor", RpcTarget.AllBuffered);
 			}
 		}
 
@@ -92,6 +92,14 @@ namespace IMRE.HandWaver.Networking
 		}
 
 		[PunRPC]
+		private void setHeadName()
+		{
+			text.text = playerName;
+		}
+
+
+
+		[PunRPC]
 		private void showHead(bool show)
 		{
 			GetComponent<MeshRenderer>().enabled = show;
@@ -105,6 +113,12 @@ namespace IMRE.HandWaver.Networking
 			GetComponent<MeshRenderer>().materials[0].color = newColor;
 			lHand.GetComponent<MeshRenderer>().materials[0].color = newColor;
 			rHand.GetComponent<MeshRenderer>().materials[0].color = newColor;
+		}
+		private void setColor()
+		{
+			GetComponent<MeshRenderer>().materials[0].color = myColor;
+			lHand.GetComponent<MeshRenderer>().materials[0].color = myColor;
+			rHand.GetComponent<MeshRenderer>().materials[0].color = myColor;
 		}
 
 	}
