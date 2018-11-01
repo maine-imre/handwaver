@@ -80,7 +80,7 @@ namespace IMRE.HandWaver.FourthDimension {
 				pos += scaleOfBox*Vector3.left;
 			}
 
-			if (pos.x < 0) {
+			if (pos.x < scaleOfBox) {
 				pos += scaleOfBox*Vector3.right;
 			}
 
