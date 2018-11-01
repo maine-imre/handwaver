@@ -73,9 +73,15 @@ namespace IMRE.HandWaver.Networking
 			this.playerPort = newPlayerNumber;
 			setColor(newPlayerColor);
 			this.name = "Player " + PhotonNetwork.NickName;
-			lHand.name = "Player Hand (" + newPlayerNumber+"L)";
-			rHand.name = "Player Hand (" + newPlayerNumber+"R)";
-			text.text = PhotonNetwork.NickName;
+			lHand.name = "Player Hand (" + newPlayerNumber + "L)";
+			rHand.name = "Player Hand (" + newPlayerNumber + "R)";
+			photonView.RPC("setHeadName", RpcTarget.AllBuffered, PhotonNetwork.NickName);
+		}
+
+		[PunRPC]
+		private void setHeadName(string newName)
+		{
+			text.text = newName;
 		}
 
 		[PunRPC]

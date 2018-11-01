@@ -50,6 +50,8 @@ namespace IMRE.HandWaver.FourthDimension {
 			{
 				this.transform.position = positionMap() + worldSpaceOrigin;
 			}
+			if (Vector3.Magnitude(transform.position) > 5f)
+				transform.position = Vector3.up * 1.4f;
 			
 		}
 
