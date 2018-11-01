@@ -20,7 +20,6 @@ namespace IMRE.HandWaver.FourthDimension {
 	public class HyperBall : MonoBehaviourPunCallbacks {
 
 		public static float scaleOfBox = 2f;
-		private Vector3 worldSpaceOrigin = Vector3.up * 1.8f;
 		private Rigidbody myRB;
 		//public Transform wallPrefab;
 
@@ -51,7 +50,7 @@ namespace IMRE.HandWaver.FourthDimension {
 		void Update() {
 			if (GetComponent<PhotonView>().IsMine)
 			{
-				this.transform.position = positionMap();
+				//this.transform.position = positionMap();
 			}
 			//}else if (transform.position.magnitude > 10f|| transform.position.magnitude > 5f && myRB.velocity.magnitude <= 0.5f )
 			//{
@@ -74,28 +73,28 @@ namespace IMRE.HandWaver.FourthDimension {
 
 		private Vector3 positionMap()
 		{
-			Vector3 pos = this.transform.position-worldSpaceOrigin;
+			Vector3 pos = this.transform.position;
 
 			if (pos.x > scaleOfBox) {
 				pos += scaleOfBox*Vector3.left;
 			}
 
-			if (pos.x < scaleOfBox) {
+			if (pos.x < -scaleOfBox) {
 				pos += scaleOfBox*Vector3.right;
 			}
 
-			if (pos.y > 2*scaleOfBox) {
+			if (pos.y > scaleOfBox) {
 				pos += scaleOfBox*Vector3.down;
 			}
 
-			if (pos.y < 0) {
+			if (pos.y < -scaleOfBox) {
 				pos += scaleOfBox*Vector3.up;
 			}
 
 			if (pos.z > scaleOfBox) {
 				pos += scaleOfBox*Vector3.back;
 			}
-			if (pos.z < scaleOfBox)
+			if (pos.z < -scaleOfBox)
 			{
 				pos += scaleOfBox * Vector3.forward;
 			}
