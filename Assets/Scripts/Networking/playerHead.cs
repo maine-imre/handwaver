@@ -78,6 +78,7 @@ namespace IMRE.HandWaver.Networking
 		public void setupPlayer(int newPlayerNumber, Color newPlayerColor)
 		{
 			this.playerPort = newPlayerNumber;
+			myColor = newPlayerColor;
 			this.name = "Player " + PhotonNetwork.NickName;
 			lHand.name = "Player Hand (" + newPlayerNumber + "L)";
 			rHand.name = "Player Hand (" + newPlayerNumber + "R)";
@@ -94,6 +95,7 @@ namespace IMRE.HandWaver.Networking
 		[PunRPC]
 		private void setHeadName()
 		{
+			playerName = PhotonNetwork.NickName;
 			text.text = playerName;
 		}
 
