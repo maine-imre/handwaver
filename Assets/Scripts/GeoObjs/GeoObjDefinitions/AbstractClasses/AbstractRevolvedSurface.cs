@@ -5,7 +5,8 @@ See license info in readme.md.
 www.imrelab.org
 **/
 
-﻿using System.Collections;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -30,6 +31,10 @@ namespace IMRE.HandWaver
         private float radius2;
         public float phaseshiftAdjust = 0f;
 
+		internal override Vector3 ClosestSystemPosition(Vector3 abstractPosition)
+		{
+			throw new NotImplementedException();
+		}
 
 		public override void initializefigure()
         {

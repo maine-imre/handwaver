@@ -20,6 +20,11 @@ namespace IMRE.HandWaver
 
     abstract class AbstractArc : MasterGeoObj
     {
+		internal override Vector3 ClosestSystemPosition(Vector3 abstractPosition)
+		{
+			Debug.LogWarning("This FIG TYPE DOESN'T SUPPORT CLOSEST SYS POS : " + figType);
 
-    }
+			throw new NotImplementedException();
+		}
+	}
 }

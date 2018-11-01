@@ -236,5 +236,15 @@ namespace IMRE.HandWaver
 		{
 			//do nothing
 		}
+
+		internal override Vector3 ClosestSystemPosition(Vector3 abstractPosition)
+		{
+			Vector3 a = Position3;
+			Vector3 b = normalDir + Position3;
+			Vector3 c = abstractPosition;
+			float dist =(c - a).magnitude * Mathf.Sin(Mathf.Abs(Vector3.Angle(c - a, b - a)));
+
+			return a + (b - a).normalized * Mathf.Sqrt(Mathf.Pow((a - c).magnitude, 2) + Mathf.Pow(dist, 2));
+		}
 	}
 }

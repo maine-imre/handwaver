@@ -17,19 +17,43 @@ namespace IMRE.HandWaver
 	/// Status: ???
 	/// </summary>
 	abstract class AbstractLineSegment : MasterGeoObj
-    {
-        public Vector3 vertex0;
-        public Vector3 vertex1;
+	{
+		public Vector3 vertex0;
+		public Vector3 vertex1;
 
-        private Vector3[] vertices = new Vector3[2];
+		private Vector3[] vertices = new Vector3[2];
 
-        public Color startColor = Color.blue;
-        public Color endColor = Color.blue;
+		public Color startColor = Color.blue;
+		public Color endColor = Color.blue;
 
-        public float apothem = .01f;
+		public float apothem = .01f;
 
+		internal override Vector3 ClosestSystemPosition(Vector3 abstractPosition)
+		{
+			Vector3 a = vertex0;
+			Vector3 b = vertex1;
+			Vector3 c = abstractPosition;
+			float dist = (c - a).magnitude * Mathf.Sin(Mathf.Abs(Vector3.Angle(c - a, b - a))));
+			Vector3 result = a + (b - a).normalized * Mathf.Sqrt(Mathf.Pow((a - c).magnitude, 2) + Mathf.Pow(dist, 2));
+			float distToA = (result - a).magnitude;
+			float distToB = (result - b).magnitude;
+			float distToC = (result - c).magnitude;
+			if (distToC < Mathf.Min(distToA,distToB))
+			{
+				//the point is outside the endpoints, find closest endpoint instead.
+				if(distToA < distToB)
+				{
+					result = a;
+				}
+				else
+				{
+					result = b;
+				}
+			}
+			return result;
+		}
 
-        public override void initializefigure()
+		public override void initializefigure()
         {
             this.figType = GeoObjType.line;
             this.Position3 = (vertex0 + vertex1) / 2f;

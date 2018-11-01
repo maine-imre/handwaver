@@ -36,7 +36,14 @@ namespace IMRE.HandWaver
 		public int[] triangles;
         private Color defaultColor = new Color(133 / 255f, 130 / 255f, 225 / 255f, 0.43137254902f);
 
-        internal Vector3[] basisSystem
+		internal override Vector3 ClosestSystemPosition(Vector3 abstractPosition)
+		{
+			Debug.LogWarning("This FIG TYPE DOESN'T SUPPORT CLOSEST SYS POS : " + figType);
+
+			throw new NotImplementedException();
+		}
+
+		internal Vector3[] basisSystem
 		{
 			get
 			{

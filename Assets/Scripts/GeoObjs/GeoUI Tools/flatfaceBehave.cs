@@ -20,21 +20,6 @@ namespace IMRE.HandWaver
 	/// </summary>
 	class flatfaceBehave : MasterGeoObj
 	{
-        //public bool snap = false;
-
-        //private void OnCollisionStay(Collision collision)
-        //{
-        //    if (snap)
-        //    {
-        //        MasterGeoOBj thisGeoObj = collision.transform.GetComponent<MasterGeoOBj>();
-        //        if (thisGeoObj != null)
-        //        {
-        //            thisGeoObj.transform.position = Vector3.ProjectOnPlane(thisGeoObj.transform.position - this.transform.position, normalDir()) + this.transform.position;
-        //            thisGeoObj.addToRManager();
-        //        }
-        //    }
-        //}
-
         public Vector3 normalDir
         {
             get
@@ -71,6 +56,11 @@ namespace IMRE.HandWaver
 		public override void Stretch(InteractionController obj)
 		{
 			// do nothing
+		}
+
+		internal override Vector3 ClosestSystemPosition(Vector3 abstractPosition)
+		{
+			return Vector3.Project(abstractPosition - Position3, normalDir) + Position3;
 		}
 	}
 }

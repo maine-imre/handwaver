@@ -146,8 +146,8 @@ namespace IMRE.HandWaver.Interface
 
 			foreach (StaticPoint mgo in FindObjectsOfType<StaticPoint>().Where(g => (g.GetComponent<AnchorableBehaviour>() == null || (g.GetComponent<AnchorableBehaviour>() != null && !g.GetComponent<AnchorableBehaviour>().isAttached))))
 			{
-				float distance = distHandToMGO(hand, mgo);
-				float angle = angleHandToMGO(hand, mgo);
+				float distance = mgo.LocalDistanceToClosestPoint(hand.Fingers[1].TipPosition.ToVector3());
+				float angle = mgo.PointingAngleDiff(hand.Fingers[1].TipPosition.ToVector3(), hand.Fingers[1].Direction.ToVector3());
 
 				if (Mathf.Abs(distance) < shortestDist)
 				{
@@ -237,26 +237,6 @@ namespace IMRE.HandWaver.Interface
 			}
 			handColourManager.setHandColorMode(chirality, handColourManager.handModes.select);
 
-		}
-
-		private float angleHandToMGO(Hand hand, StaticPoint mgo)
-		{
-			return Vector3.Angle(mgo.transform.position-fingerTip(hand), fingerDirection(hand));
-		}
-
-		private float distHandToMGO(Hand hand, StaticPoint mgo)
-		{
-			return Vector3.Magnitude(fingerTip(hand) - mgo.transform.position);
-		}
-
-		public Vector3 fingerTip(Hand hand)
-		{
-			return hand.Fingers[1].TipPosition.ToVector3();
-		}
-
-		public Vector3 fingerDirection(Hand hand)
-		{
-			return hand.Fingers[1].Direction.ToVector3();
 		}
 
 		private void playSuccessSound()

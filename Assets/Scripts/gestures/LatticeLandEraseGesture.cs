@@ -115,7 +115,7 @@ namespace IMRE.HandWaver.Interface
 
 			foreach (MasterGeoObj mgo in FindObjectsOfType<MasterGeoObj>().Where(g => (g.GetComponent<AnchorableBehaviour>() == null || (g.GetComponent<AnchorableBehaviour>() != null && !g.GetComponent<AnchorableBehaviour>().isAttached))).Where(g => g.GetComponent<MasterGeoObj>().figType != GeoObjType.point))
 			{
-				float distance = distHandToMGO(hand, mgo);
+				float distance = mgo.LocalDistanceToClosestPoint(hand.PalmPosition.ToVector3());
 
 				if (Mathf.Abs(distance) < shortestDist)
 				{
@@ -127,64 +127,6 @@ namespace IMRE.HandWaver.Interface
 				}
 			}
 			return shortestDist < maximumRangeToSelect;
-		}
-
-
-		private float distHandToMGO(Hand hand, MasterGeoObj mgo)
-		{
-			float distance = 15;
-			switch (mgo.figType)
-			{
-				case GeoObjType.point:
-					distance = Vector3.Magnitude(hand.PalmPosition.ToVector3() - mgo.transform.position);
-					break;
-				case GeoObjType.line:
-					Vector3 a = mgo.GetComponent<AbstractLineSegment>().vertex0;
-					Vector3 b = mgo.GetComponent<AbstractLineSegment>().vertex1;
-					Vector3 c = hand.PalmPosition.ToVector3();
-					distance = Mathf.Max((c - a).magnitude * Mathf.Sin(Mathf.Abs(Vector3.Angle(c - a, b - a))), Mathf.Min((c - a).magnitude, (b - a).magnitude));
-					break;
-				case GeoObjType.polygon:
-					Vector3 positionOnPlane = Vector3.ProjectOnPlane(transform.position - mgo.transform.position, mgo.GetComponent<AbstractPolygon>().normDir) + mgo.transform.position;
-					distance = Vector3.Magnitude(positionOnPlane - hand.PalmPosition.ToVector3());
-					Debug.LogWarning("Polygon doesn't check boundariers");
-					break;
-				case GeoObjType.prism:
-					distance = Vector3.Magnitude(mgo.transform.position - hand.PalmPosition.ToVector3());
-					break;
-				case GeoObjType.pyramid:
-					Debug.LogWarning("Pyramids not yet supported");
-					break;
-				case GeoObjType.circle:
-					Vector3 positionOnPlane2 = Vector3.ProjectOnPlane(transform.position - mgo.transform.position, mgo.GetComponent<AbstractCircle>().normalDir) + mgo.transform.position;
-					Vector3 positionOnCircle = Vector3.Normalize(positionOnPlane2 - mgo.GetComponent<AbstractCircle>().centerPos) * mgo.GetComponent<AbstractCircle>().Radius + mgo.GetComponent<AbstractCircle>().centerPos;
-					distance = Vector3.Magnitude(hand.PalmPosition.ToVector3() - positionOnCircle);
-					break;
-				case GeoObjType.sphere:
-					Vector3 lineDir = Vector3.Normalize(transform.position - mgo.transform.position);
-					Vector3 positionOnSphere1 = mgo.GetComponent<AbstractSphere>().radius * lineDir + mgo.transform.position;
-					distance = Vector3.Magnitude(positionOnSphere1 - hand.PalmPosition.ToVector3());
-					break;
-				case GeoObjType.revolvedsurface:
-					Debug.LogWarning("RevoledSurface not yet supported");
-					break;
-				case GeoObjType.torus:
-					Debug.LogWarning("Torus not yet supported");
-					break;
-				case GeoObjType.flatface:
-					Vector3 positionOnPlane3 = Vector3.ProjectOnPlane(transform.position - mgo.transform.position, mgo.GetComponent<flatfaceBehave>().normalDir) + mgo.transform.position;
-					distance = Vector3.Magnitude(positionOnPlane3 - hand.PalmPosition.ToVector3());
-					break;
-				case GeoObjType.straightedge:
-					Vector3 positionOnStraightedge = Vector3.Project(transform.position - mgo.transform.position, mgo.GetComponent<straightEdgeBehave>().normalDir) + mgo.transform.position;
-					distance = Vector3.Magnitude(positionOnStraightedge - hand.PalmPosition.ToVector3());
-					break;
-				default:
-					Debug.LogWarning("Something went wrong in the selection.... :(");
-					break;
-			}
-
-			return distance;
 		}
 	}
 }

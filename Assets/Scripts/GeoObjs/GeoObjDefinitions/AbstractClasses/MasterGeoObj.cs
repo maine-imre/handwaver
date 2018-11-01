@@ -25,7 +25,7 @@ namespace IMRE.HandWaver
 	/// The main contributor(s) to this script is __
 	/// Status: ???
 	/// </summary>
-	abstract class MasterGeoObj : MonoBehaviour, UpdatableFigure
+	internal abstract class MasterGeoObj : MonoBehaviour, UpdatableFigure, IEquatable<MasterGeoObj>
 	{
 
         #region Local Positions
@@ -34,12 +34,12 @@ namespace IMRE.HandWaver
         private Quaternion _rotation3;
         private float _scale;
 
-        internal Vector3 LocalPosition(Vector3 systemPosition)
+        internal static Vector3 LocalPosition(Vector3 systemPosition)
         {
             return HW_GeoSolver.ins.localPosition(systemPosition);
         }
 
-        internal Vector3 systemPosition(Vector3 localPosition)
+        internal static Vector3 systemPosition(Vector3 localPosition)
         {
             return HW_GeoSolver.ins.systemPosition(localPosition);
         }
@@ -69,6 +69,28 @@ namespace IMRE.HandWaver
                 this.transform.position = LocalPosition(_position3);
 				actualPos = transform.position;
 			}
+		}
+
+		internal Vector3 ClosestLocalPosition(Vector3 localPos)
+		{
+			return LocalPosition(ClosestSystemPosition(systemPosition(localPos)));
+		}
+
+		internal abstract Vector3 ClosestSystemPosition(Vector3 abstractPosition);
+
+		internal float PointingAngleDiff(Vector3 localPos, Vector3 localDir)
+		{
+			return Vector3.Angle(ClosestLocalPosition(localPos) - localPos, localDir);
+		}
+
+		internal float LocalDistanceToClosestPoint(Vector3 localPos)
+		{
+			return Vector3.Distance(ClosestLocalPosition(localPos), localPos);
+		}
+
+		internal float SystemDistanceToClosestPoint(Vector3 sysPos)
+		{
+			return Vector3.Distance(ClosestSystemPosition(sysPos), sysPos);
 		}
         #endregion
 
@@ -479,6 +501,23 @@ namespace IMRE.HandWaver
 		public void debugPoisiton3()
 		{
 			Debug.Log("The stored position of " + name + " is " + Position3+".");
+		}
+
+		public override bool Equals(object obj)
+		{
+			return Equals(obj as MasterGeoObj);
+		}
+
+		public bool Equals(MasterGeoObj other)
+		{
+			return other != null &&
+				   base.Equals(other) &&
+				   figType == other.figType &&
+				   intersectionMultipleIDX == other.intersectionMultipleIDX &&
+				   intersectionFigure == other.intersectionFigure &&
+				   figName == other.figName &&
+				   figIndex == other.figIndex &&
+				   EqualityComparer<Node<string>>.Default.Equals(myGraphNode, other.myGraphNode);
 		}
 	}
 
