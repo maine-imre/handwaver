@@ -122,9 +122,12 @@ namespace IMRE.HandWaver.Networking {
 		{
 			for (int i = 0; i < balls.Count; i++)
 			{
+				balls[i].GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.LocalPlayer);
 				balls[i].position = ballSpawnPos[i];
 				balls[i].GetComponent<Rigidbody>().velocity = Vector3.zero;
 				balls[i].GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+				balls[i].GetComponent<PhotonView>().TransferOwnership(0);
+
 			}
 		}
 
