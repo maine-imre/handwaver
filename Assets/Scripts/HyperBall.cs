@@ -21,6 +21,7 @@ namespace IMRE.HandWaver.FourthDimension {
 
 		private float scaleOfBox = 2f;
 		private Vector3 worldSpaceOrigin = Vector3.up * 1.8f;
+		private Rigidbody myRB;
 
 		private void Start()
 		{
@@ -30,7 +31,7 @@ namespace IMRE.HandWaver.FourthDimension {
 				Debug.Log(tmp);
 				photonView.RPC("setColorOnBall", RpcTarget.All, tmp);
 			}
-
+			myRB = GetComponent<Rigidbody>();
 			GetComponent<InteractionBehaviour>().OnContactBegin += startTakeOver;
 			GetComponent<InteractionBehaviour>().OnContactEnd += endTakeOver;
 		}
@@ -50,9 +51,11 @@ namespace IMRE.HandWaver.FourthDimension {
 			{
 				this.transform.position = positionMap() + worldSpaceOrigin;
 			}
-			if (Vector3.Magnitude(transform.position) > 10f)
+			if (transform.position.magnitude > 10f|| transform.position.magnitude > 5f && myRB.velocity.magnitude <= 0.5f )
+			{
 				transform.position = Vector3.up * 1.4f;
-			
+				myRB.velocity = Vector3.zero;
+			}
 		}
 
 		private void startTakeOver()
