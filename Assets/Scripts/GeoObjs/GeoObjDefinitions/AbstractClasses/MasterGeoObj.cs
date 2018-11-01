@@ -74,7 +74,15 @@ namespace IMRE.HandWaver
 		internal Vector3 ClosestLocalPosition(Vector3 localPos)
 		{
 			//do we need a try-catch to handle not implemented exceptions?
-			return LocalPosition(ClosestSystemPosition(systemPosition(localPos)));
+			try
+			{
+				return LocalPosition(ClosestSystemPosition(systemPosition(localPos)));
+			}
+			catch
+			{
+				//if an object doesn't have a closest point say that it is infinitely far away.
+				return Mathf.Infinity * Vector3.one;
+			}
 		}
 
 		internal abstract Vector3 ClosestSystemPosition(Vector3 abstractPosition);
@@ -94,7 +102,15 @@ namespace IMRE.HandWaver
 		internal float SystemDistanceToClosestPoint(Vector3 sysPos)
 		{
 			//do we need a try-catch to handle not implemented exceptions?
-			return Vector3.Distance(ClosestSystemPosition(sysPos), sysPos);
+			try
+			{
+				return Vector3.Distance(ClosestSystemPosition(sysPos), sysPos);
+			}
+			catch
+			{
+				//if an object doesn't have a closest point say that it is infinitely far away.
+				return Mathf.Infinity;
+			}	
 		}
         #endregion
 
