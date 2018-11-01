@@ -154,12 +154,10 @@ namespace IMRE.HandWaver.Shearing
 
 			volumeLineRenderer.transform.GetChild(0).transform.localPosition = volumeForLineRenderer;
 
-			//cody add this tmp pro back into the scene.
-			//cody also add the interaction behaviours on  the text mesh pro.
-			//cody add interaction behaviour to "handle" on graph
-			//TMPro.SetText("x = " + Math.Round(volumeForLineRenderer.x, 2) + " cm                        V = " + Math.Round(volumeForLineRenderer.y, 2) + " cm^3");
+			TMPro.SetText("x = " + Math.Round(volumeForLineRenderer.x, 2) + " cm                        V = " + Math.Round(volumeForLineRenderer.y, 2) + " cm^3");
 
 			//play sound when max volume is reached.
+			if (volumeForLineRenderer)
 		}
 
 		private Vector3 volumeForLineRenderer
