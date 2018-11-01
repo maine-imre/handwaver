@@ -79,7 +79,7 @@ namespace IMRE.HandWaver {
 		protected override bool ShouldGestureActivate(Hand hand)
 		{
 			bool tmp =
-			(/*(fingerExtentionState.thumbExtended && hand.Fingers[0].IsExtended) &&*/
+			(debugkeyboardinput.PointToSelectEnabled &&
 			(fingerExtentionState.pointerFingerExtended && hand.Fingers[1].IsExtended)  &&
 			!(fingerExtentionState.middleFingerExtended && hand.Fingers[2].IsExtended)  &&
 			!(fingerExtentionState.ringFingerExtended && hand.Fingers[3].IsExtended)    &&
@@ -98,7 +98,7 @@ namespace IMRE.HandWaver {
 		/// <returns>desired gesture completion state</returns>
 		protected override bool ShouldGestureDeactivate(Hand hand, out DeactivationReason? deactivationReason)
 		{
-			if (!isHandTracked ||
+			if (!isHandTracked || !debugkeyboardinput.PointToSelectEnabled ||
 					!(/*(fingerExtentionState.thumbExtended && hand.Fingers[0].IsExtended) &&*/
 					(fingerExtentionState.pointerFingerExtended && hand.Fingers[1].IsExtended) &&
 					!(fingerExtentionState.middleFingerExtended && hand.Fingers[2].IsExtended) &&
