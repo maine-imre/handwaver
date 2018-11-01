@@ -24,12 +24,13 @@ namespace IMRE.HandWaver.Networking
 		public playerHand lHand;
 		public playerHand rHand;
 		public Vector3 rotOffset;
+		public Color myColor;
 
 
 		[Space]
 
 		[Tooltip("Player Information")]
-		public string playerName = "DEFAULTNAME";
+		public string playerName = SystemInfo.deviceName;
 
 		[Range(0, MAXPLAYERCOUNT)]
 		public int playerPort;
@@ -46,6 +47,11 @@ namespace IMRE.HandWaver.Networking
 				text.renderer.enabled = false;
 				UnityEngine.XR.InputTracking.trackingAcquired += notifyTracked;
 				UnityEngine.XR.InputTracking.trackingLost += notifyNotTracked;
+			}
+			else
+			{
+				photonView.RPC("setHeadName", RpcTarget.AllBuffered, PhotonNetwork.NickName);
+				photonView.RPC("setColor", RpcTarget.AllBuffered, myColor);
 			}
 		}
 
@@ -72,11 +78,11 @@ namespace IMRE.HandWaver.Networking
 		public void setupPlayer(int newPlayerNumber, Color newPlayerColor)
 		{
 			this.playerPort = newPlayerNumber;
-			setColor(newPlayerColor);
 			this.name = "Player " + PhotonNetwork.NickName;
 			lHand.name = "Player Hand (" + newPlayerNumber + "L)";
 			rHand.name = "Player Hand (" + newPlayerNumber + "R)";
 			photonView.RPC("setHeadName", RpcTarget.AllBuffered, PhotonNetwork.NickName);
+			photonView.RPC("setColor", RpcTarget.AllBuffered, newPlayerColor);
 		}
 
 		[PunRPC]
@@ -95,6 +101,7 @@ namespace IMRE.HandWaver.Networking
 
 		private void setColor(Color newColor)
 		{
+			myColor = newColor;
 			GetComponent<MeshRenderer>().materials[0].color = newColor;
 			lHand.GetComponent<MeshRenderer>().materials[0].color = newColor;
 			rHand.GetComponent<MeshRenderer>().materials[0].color = newColor;
