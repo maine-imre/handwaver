@@ -43,6 +43,7 @@ namespace IMRE.HandWaver.Networking
 			{
 
 				GetComponent<MeshRenderer>().enabled = false;
+				text.renderer.enabled = false;
 				UnityEngine.XR.InputTracking.trackingAcquired += notifyTracked;
 				UnityEngine.XR.InputTracking.trackingLost += notifyNotTracked;
 			}
