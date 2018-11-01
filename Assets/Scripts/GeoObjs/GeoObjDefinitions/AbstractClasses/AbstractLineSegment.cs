@@ -33,7 +33,7 @@ namespace IMRE.HandWaver
 			Vector3 a = vertex0;
 			Vector3 b = vertex1;
 			Vector3 c = abstractPosition;
-			float dist = (c - a).magnitude * Mathf.Sin(Mathf.Abs(Vector3.Angle(c - a, b - a))));
+			float dist = (c - a).magnitude * Mathf.Sin(Mathf.Abs(Vector3.Angle(c - a, b - a)));
 			Vector3 result = a + (b - a).normalized * Mathf.Sqrt(Mathf.Pow((a - c).magnitude, 2) + Mathf.Pow(dist, 2));
 			float distToA = (result - a).magnitude;
 			float distToB = (result - b).magnitude;
