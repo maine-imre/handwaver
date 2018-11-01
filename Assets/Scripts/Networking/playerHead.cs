@@ -75,10 +75,11 @@ namespace IMRE.HandWaver.Networking
 		}
 		#endregion
 
-		public void setupPlayer(int newPlayerNumber, Color newPlayerColor)
+		public void setupPlayer(string newNick, int newPlayerNumber, Color newPlayerColor)
 		{
 			this.playerPort = newPlayerNumber;
 			myColor = newPlayerColor;
+			playerName = newNick;
 			this.name = "Player " + PhotonNetwork.NickName;
 			lHand.name = "Player Hand (" + newPlayerNumber + "L)";
 			rHand.name = "Player Hand (" + newPlayerNumber + "R)";
@@ -115,12 +116,15 @@ namespace IMRE.HandWaver.Networking
 			GetComponent<MeshRenderer>().materials[0].color = newColor;
 			lHand.GetComponent<MeshRenderer>().materials[0].color = newColor;
 			rHand.GetComponent<MeshRenderer>().materials[0].color = newColor;
+			photonView.RPC("setColor", RpcTarget.OthersBuffered, myColor);
+
 		}
 		private void setColor()
 		{
 			GetComponent<MeshRenderer>().materials[0].color = myColor;
 			lHand.GetComponent<MeshRenderer>().materials[0].color = myColor;
 			rHand.GetComponent<MeshRenderer>().materials[0].color = myColor;
+
 		}
 
 	}
