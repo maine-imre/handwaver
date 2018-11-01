@@ -23,6 +23,8 @@ namespace IMRE.HandWaver.Networking
 		[Tooltip("Player Hands")]
 		public playerHand lHand;
 		public playerHand rHand;
+		public Vector3 rotOffset;
+
 
 		[Space]
 
@@ -61,7 +63,7 @@ namespace IMRE.HandWaver.Networking
 			if (photonView.IsMine)
 			{
 				transform.position = Camera.main.transform.position;
-				transform.rotation = Camera.main.transform.rotation;
+				transform.rotation = Camera.main.transform.rotation*Quaternion.Euler(rotOffset);
 			}
 		}
 		#endregion
