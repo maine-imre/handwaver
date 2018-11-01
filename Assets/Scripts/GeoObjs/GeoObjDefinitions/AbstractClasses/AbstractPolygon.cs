@@ -298,6 +298,11 @@ namespace IMRE.HandWaver
             {
                 return Vector3.Cross(pointList[0].Position3 - pointList[1].Position3, pointList[1].Position3 - pointList[2].Position3).normalized;
             }
+			set
+			{
+				pointList.ForEach(p => p.Position3 = Vector3.ProjectOnPlane(p.Position3 - Position3, value) + Position3);
+				addToRManager();
+			}
         }
 
         internal bool checkInPolygon(Vector3 positionOnPlane)
