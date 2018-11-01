@@ -30,7 +30,7 @@ namespace IMRE.HandWaver.Networking
 		[Space]
 
 		[Tooltip("Player Information")]
-		public string playerName = SystemInfo.deviceName;
+		public string playerName = "JOHN MADDEN";
 
 		[Range(0, MAXPLAYERCOUNT)]
 		public int playerPort;
@@ -75,16 +75,16 @@ namespace IMRE.HandWaver.Networking
 		}
 		#endregion
 
-		public void setupPlayer(string newNick, int newPlayerNumber, Color newPlayerColor)
+		public void setupPlayer(string newNick, int newPlayerNumber, float newPlayerHue)
 		{
 			this.playerPort = newPlayerNumber;
-			myColor = newPlayerColor;
+			myColor = Color.HSVToRGB(newPlayerHue, 1, 1);
 			playerName = newNick;
 			this.name = "Player " + PhotonNetwork.NickName;
 			lHand.name = "Player Hand (" + newPlayerNumber + "L)";
 			rHand.name = "Player Hand (" + newPlayerNumber + "R)";
 			photonView.RPC("setHeadName", RpcTarget.AllBuffered, PhotonNetwork.NickName);
-			photonView.RPC("setColor", RpcTarget.AllBuffered, newPlayerColor);
+			photonView.RPC("setColor", RpcTarget.AllBuffered, newPlayerHue);
 		}
 
 		[PunRPC]
@@ -109,14 +109,14 @@ namespace IMRE.HandWaver.Networking
 		}
 
 
-
-		private void setColor(Color newColor)
+		[PunRPC]
+		private void setColor(float newPlayerHue)
 		{
-			myColor = newColor;
-			GetComponent<MeshRenderer>().materials[0].color = newColor;
-			lHand.GetComponent<MeshRenderer>().materials[0].color = newColor;
-			rHand.GetComponent<MeshRenderer>().materials[0].color = newColor;
-			photonView.RPC("setColor", RpcTarget.OthersBuffered, myColor);
+			myColor = Color.HSVToRGB(newPlayerHue, 1, 1);
+			GetComponent<MeshRenderer>().materials[0].color = myColor;
+			lHand.GetComponent<MeshRenderer>().materials[0].color = myColor;
+			rHand.GetComponent<MeshRenderer>().materials[0].color = myColor;
+			photonView.RPC("setColor", RpcTarget.OthersBuffered, newPlayerHue);
 
 		}
 		private void setColor()
