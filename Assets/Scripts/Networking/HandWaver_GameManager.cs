@@ -69,7 +69,7 @@ namespace IMRE.HandWaver.Networking {
 			}
 			if (Input.GetKeyDown(KeyCode.F4))
 			{
-				photonView.RPC("resetBall", RpcTarget.All);
+				resetBalls();
 			}
 		}
 
@@ -118,7 +118,6 @@ namespace IMRE.HandWaver.Networking {
 			}
 		}
 
-		[PunRPC]
 		private void resetBalls()
 		{
 			for (int i = 0; i < balls.Count; i++)
