@@ -26,12 +26,15 @@ namespace IMRE.HandWaver.Shearing
 		private int numFrames = 0;
 
 		private TextMeshPro TMPro;
+		private AudioSource myAudioSource;
+
 
 		// Use this for initialization
 		private void Start()
 		{
 			volumeLineRenderer = GetComponentInChildren<LineRenderer>();
 			TMPro = GetComponentInChildren<TextMeshPro>();
+			myAudioSource = GetComponent<AudioSource>();
 
 			xLen = .1f;
 			controllPoint = GeoObjConstruction.iPoint(this.transform.position);
@@ -157,7 +160,10 @@ namespace IMRE.HandWaver.Shearing
 			TMPro.SetText("x = " + Math.Round(volumeForLineRenderer.x, 2) + " cm                        V = " + Math.Round(volumeForLineRenderer.y, 2) + " cm^3");
 
 			//play sound when max volume is reached.
-			if (volumeForLineRenderer)
+			if (volumeForLineRenderer.y == 1787581.25)
+			{
+				myAudioSource.Play();
+			}
 		}
 
 		private Vector3 volumeForLineRenderer
