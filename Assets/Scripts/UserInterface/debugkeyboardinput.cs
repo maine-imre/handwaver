@@ -28,7 +28,7 @@ namespace IMRE.HandWaver
 
         public bool loadBackground = true;
         public string backgroundName = "darkPrototype";
-		public bool autoLoadPlaintains;
+		public static bool autoLoadPlaintains;
 		public Transform Plaintains;
 
 		/// <summary>
@@ -36,6 +36,9 @@ namespace IMRE.HandWaver
 		/// this will disable keyboard input.
 		/// </summary>
 		public List<string> loadScenesOnStart = new List<string>();
+
+		public static bool PointToSelectEnabled = true;
+
 
 		void Start()
 		{
@@ -52,6 +55,7 @@ namespace IMRE.HandWaver
 				FindObjectOfType<HWMixcastIO>().currMode = mixCastTargetMode.primaryAlt;
 			}
 #endif
+			autoLoadPlaintains = loadScenesOnStart.Count == 0;
 			foreach (string name in loadScenesOnStart)
 			{
 				loadSceneAsyncByName(name, unloadBool);
@@ -197,11 +201,10 @@ namespace IMRE.HandWaver
 					{
 						if (SceneManager.GetSceneAt(i).name.Contains("LatticeLand"))
 						{
-							FindObjectsOfType<HWSelectGesture>().ToList().ForEach(sg => sg.enabled = false);
+							PointToSelectEnabled = false;
 						}
 						layers.Add(SceneManager.GetSceneAt(i));
-
-					}
+											}
 				}
                 foreach (Scene s in layers)
                 {
