@@ -73,6 +73,7 @@ namespace IMRE.HandWaver
 
 		internal Vector3 ClosestLocalPosition(Vector3 localPos)
 		{
+			//do we need a try-catch to handle not implemented exceptions?
 			return LocalPosition(ClosestSystemPosition(systemPosition(localPos)));
 		}
 
@@ -80,16 +81,19 @@ namespace IMRE.HandWaver
 
 		internal float PointingAngleDiff(Vector3 localPos, Vector3 localDir)
 		{
+			//do we need a try-catch to handle not implemented exceptions?
 			return Vector3.Angle(ClosestLocalPosition(localPos) - localPos, localDir);
 		}
 
 		internal float LocalDistanceToClosestPoint(Vector3 localPos)
 		{
+			//do we need a try-catch to handle not implemented exceptions?
 			return Vector3.Distance(ClosestLocalPosition(localPos), localPos);
 		}
 
 		internal float SystemDistanceToClosestPoint(Vector3 sysPos)
 		{
+			//do we need a try-catch to handle not implemented exceptions?
 			return Vector3.Distance(ClosestSystemPosition(sysPos), sysPos);
 		}
         #endregion
