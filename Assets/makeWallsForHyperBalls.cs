@@ -18,6 +18,8 @@ namespace IMRE.HandWaver.FourthDimension
 		// Use this for initialization
 		void Start()
 		{
+			this.transform.position = Vector3.zero;
+
 			GameObject.Instantiate(wallPrefab, Vector3.forward * scaleOfBox+Vector3.up*scaleOfBox, Quaternion.FromToRotation(Vector3.up, Vector3.forward), this.transform).localScale = Vector3.one * scaleOfBox / 5f;
 			GameObject.Instantiate(wallPrefab, Vector3.back * scaleOfBox + Vector3.up * scaleOfBox, Quaternion.FromToRotation(Vector3.up, Vector3.back), this.transform).localScale = Vector3.one *  scaleOfBox / 5f;
 			GameObject.Instantiate(wallPrefab, Vector3.up * scaleOfBox, Quaternion.FromToRotation(Vector3.up, Vector3.up), this.transform).localScale = Vector3.one *  scaleOfBox / 5f;
