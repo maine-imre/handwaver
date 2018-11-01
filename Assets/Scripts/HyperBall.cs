@@ -22,7 +22,7 @@ namespace IMRE.HandWaver.FourthDimension {
 		public static float scaleOfBox = 2f;
 		private Vector3 worldSpaceOrigin = Vector3.up * 1.8f;
 		private Rigidbody myRB;
-		public Transform wallPrefab;
+		//public Transform wallPrefab;
 
 
 		private void Start()
@@ -51,7 +51,7 @@ namespace IMRE.HandWaver.FourthDimension {
 		void Update() {
 			if (GetComponent<PhotonView>().IsMine)
 			{
-				this.transform.position = positionMap() + worldSpaceOrigin;
+				this.transform.position = positionMap();
 			}
 			//}else if (transform.position.magnitude > 10f|| transform.position.magnitude > 5f && myRB.velocity.magnitude <= 0.5f )
 			//{
