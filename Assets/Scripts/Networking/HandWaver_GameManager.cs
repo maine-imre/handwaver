@@ -35,7 +35,7 @@ namespace IMRE.HandWaver.Networking {
 				// we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
 				GameObject newPlayer = PhotonNetwork.Instantiate(this.playerPrefab.name, new Vector3(0f, 0f, 0f), Quaternion.identity, 0);
 				localPlayers.Add(newPlayer);
-				newPlayer.GetComponent<playerHead>().setupPlayer(localPlayers.IndexOf(newPlayer), UnityEngine.Random.ColorHSV(0, 1, 1, 1, 1, 1));
+				newPlayer.GetComponent<playerHead>().setupPlayer(PhotonNetwork.NickName, localPlayers.IndexOf(newPlayer), UnityEngine.Random.ColorHSV(0, 1, 1, 1, 1, 1));
 			}
 		}
 
