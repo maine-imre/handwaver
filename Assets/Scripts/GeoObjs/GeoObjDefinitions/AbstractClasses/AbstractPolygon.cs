@@ -38,9 +38,26 @@ namespace IMRE.HandWaver
 
 		internal override Vector3 ClosestSystemPosition(Vector3 abstractPosition)
 		{
-			Debug.LogWarning("This FIG TYPE DOESN'T SUPPORT CLOSEST SYS POS : " + figType);
-
-			throw new NotImplementedException();
+			result = Vector3.ProjectOnPlane(abstractPosition-Position3,normDir) + Position3;
+			
+			if(!checkInPolygon(result))
+			{
+				Vector3 best = lineList[0];
+				foreach(AbstractLineSegment l in lineList)
+				{
+					dist = l.ClosestSystemPosition(result) - result;
+					l.ClosestSystemPosition(result);
+					if (dist < (best - result).magnitude)
+					{
+						best = l.ClosestSystemPosition(result);
+					}
+				}
+				return best
+			}
+			else
+			{
+			return result;
+			}
 		}
 
 		internal Vector3[] basisSystem
@@ -307,7 +324,8 @@ namespace IMRE.HandWaver
 
         internal bool checkInPolygon(Vector3 positionOnPlane)
 		{
-			throw new NotImplementedException();
+			positionOnPlane = Vector3.project(positionOnPlane - Position3) + Position3;
+			return (lineList.Where(l => l.ClosestSystemPosition(positionOnPlane) != l.vertex0 && l.ClosestSystemPosition(positionOnPlane) ~= l.vertex1).Count %2 == 0);
 		}
 
         internal bool CheckSkewPolygon()
