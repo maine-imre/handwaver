@@ -324,8 +324,9 @@ namespace IMRE.HandWaver
 
         internal bool checkInPolygon(Vector3 positionOnPlane)
 		{
-			positionOnPlane = Vector3.project(positionOnPlane - Position3) + Position3;
-			return (lineList.Where(l => l.ClosestSystemPosition(positionOnPlane) != l.vertex0 && l.ClosestSystemPosition(positionOnPlane) ~= l.vertex1).Count %2 == 0);
+			Vector3 positionOnPlane = Vector3.project(positionOnPlane - Position3) + Position3;
+			Vector3[] basis = basisSystem;
+			Vector2 point = (Vector3.Dot(positionOnPlane,basis[0],Vector3.Dot(positionOnPlane,basis[1]));
 		}
 
         internal bool CheckSkewPolygon()
