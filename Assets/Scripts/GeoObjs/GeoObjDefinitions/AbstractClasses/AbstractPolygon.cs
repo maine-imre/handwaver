@@ -320,7 +320,7 @@ namespace IMRE.HandWaver
 			set
 			{
 				pointList.ForEach(p => p.Position3 = Vector3.ProjectOnPlane(p.Position3 - Position3, value) + Position3);
-				addToRManager();
+				AddToRManager();
 			}
 		}
 

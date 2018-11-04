@@ -53,7 +53,7 @@ namespace IMRE.HandWaver
             yield return new WaitForSeconds(3.5f);
             snapBool = true;
         }
-        internal override bool rMotion(NodeList<string> inputNodeList)
+        internal override bool RMotion(NodeList<string> inputNodeList)
         {
 
             //if this has moved return true.
@@ -123,19 +123,19 @@ namespace IMRE.HandWaver
                 /*InteractableLineSegment newLineSegment = */GeoObjConstruction.iLineSegment(this, newPoint);
 				if(HW_GeoSolver.ins.thisInteractionMode == HW_GeoSolver.InteractionMode.rigid)
 				{
-					newPoint.leapInteraction = false;
-					this.leapInteraction = false;
+					newPoint.LeapInteraction = false;
+					this.LeapInteraction = false;
 				}
                 StartCoroutine(waitForStretch);
             }
         }
 
-		internal override void snapToFigure(MasterGeoObj toObj)
+		internal override void SnapToFigure(MasterGeoObj toObj)
 		{
 			//do nothing
 		}
 
-		internal override void glueToFigure(MasterGeoObj toObj)
+		internal override void GlueToFigure(MasterGeoObj toObj)
         {
             if ((toObj.gameObject.tag.Contains("Point") && (toObj.figIndex > this.figIndex)) && ((this.GetComponent<InteractionBehaviour>().isGrasped) || (toObj.transform.GetComponent<InteractionBehaviour>().isGrasped)))
             {

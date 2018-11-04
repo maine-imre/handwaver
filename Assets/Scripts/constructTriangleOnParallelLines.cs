@@ -216,7 +216,7 @@ namespace IMRE.HandWaver.Shearing
 					lineDir = -lineDir;
 				}
 				point.Position3 += lineDir * Time.smoothDeltaTime * 2f;
-				point.addToRManager();
+				point.AddToRManager();
 				yield return new WaitForEndOfFrame();
 			}
 		}

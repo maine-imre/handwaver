@@ -265,7 +265,7 @@ namespace IMRE.HandWaver.Interface
 			prevSet = false;
 			currSet = false;
 			successfullyMade = false;
-				lineList.ForEach(l => l.deleteGeoObj());
+				lineList.ForEach(l => l.DeleteGeoObj());
 			prevPoint = null;
 			currPoint = null;
 		}

@@ -138,15 +138,15 @@ namespace IMRE.HandWaver.Shearing
 
             myPyramid = GeoObjConstruction.dPyramid(basePoly, apexPoint);
 
-            foreach (AbstractLineSegment line in myPyramid.allEdges) { line.leapInteraction = false; }
+            foreach (AbstractLineSegment line in myPyramid.allEdges) { line.LeapInteraction = false; }
 			foreach(AbstractPoint point in basePoly.pointList)
 			{
-				point.leapInteraction = false;
+				point.LeapInteraction = false;
 				flatface1.attachedObjs.Add(point);
 			}
             foreach(AbstractPolygon face in myPyramid.allfaces)
             {
-                face.leapInteraction = false;
+                face.LeapInteraction = false;
             }
 			flatface2.attachedObjs.Add(apexPoint);
             flatface2.attachedObjs.Add(basePoly);
@@ -493,7 +493,7 @@ namespace IMRE.HandWaver.Shearing
             while (true)
             {
                 point.Position3 += lineDir * Time.smoothDeltaTime * 2f;
-                point.addToRManager();
+                point.AddToRManager();
                 yield return new WaitForEndOfFrame();
             }
         }

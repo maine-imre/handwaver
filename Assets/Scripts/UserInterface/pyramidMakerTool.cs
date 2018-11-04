@@ -69,7 +69,7 @@ namespace IMRE.HandWaver
 			while (apexFollow)
 			{
 				apexOfPyramid.transform.position = transform.position;
-				apexOfPyramid.addToRManager();
+				apexOfPyramid.AddToRManager();
 				yield return new WaitForEndOfFrame();
 			}
 		}

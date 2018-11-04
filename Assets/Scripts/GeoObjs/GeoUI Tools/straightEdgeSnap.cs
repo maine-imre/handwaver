@@ -25,7 +25,7 @@ namespace IMRE.HandWaver
             {
                 if (other.transform.position != Vector3.Project(other.transform.position - this.GetComponentInParent<straightEdgeBehave>().center, this.GetComponentInParent<straightEdgeBehave>().normalDir) + this.GetComponentInParent<straightEdgeBehave>().center){
                     other.transform.position = Vector3.Project(other.transform.position - this.GetComponentInParent<straightEdgeBehave>().center, this.GetComponentInParent<straightEdgeBehave>().normalDir) + this.GetComponentInParent<straightEdgeBehave>().center;
-                    other.GetComponent<MasterGeoObj>().addToRManager();
+                    other.GetComponent<MasterGeoObj>().AddToRManager();
                 }
             }
         }

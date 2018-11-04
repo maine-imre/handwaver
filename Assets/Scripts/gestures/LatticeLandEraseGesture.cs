@@ -87,7 +87,7 @@ namespace IMRE.HandWaver.Interface
 					else if (foundMGO(maybeNullHand))
 					{
 						Debug.Log("Try to delete " + closestObj.name);
-						closestObj.deleteGeoObj();
+						closestObj.DeleteGeoObj();
 					}
 					break;
 				case DeactivationReason.CancelledGesture:

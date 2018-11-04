@@ -34,7 +34,7 @@ namespace IMRE.HandWaver
 			{
 				if (value!= null)
 				{
-					snapToFigure(value);
+					SnapToFigure(value);
                     setupRelativePosition(value);
 				}
 				_attachedObject = value;
@@ -87,7 +87,7 @@ namespace IMRE.HandWaver
 
         private MasterGeoObj _attachedObject;
 
-		internal override void snapToFigure(MasterGeoObj toObj)
+		internal override void SnapToFigure(MasterGeoObj toObj)
 		{
 			Debug.Log(name + " is attempting to snap to " + toObj.name + ".");
 			//if object and child objects are not being grasped

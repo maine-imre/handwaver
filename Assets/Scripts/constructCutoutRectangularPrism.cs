@@ -81,7 +81,7 @@ namespace IMRE.HandWaver.Shearing
 			{
 				if (mgo != controllPoint)
 				{
-					mgo.leapInteraction = false;
+					mgo.LeapInteraction = false;
 				}
 			}
 
@@ -148,7 +148,7 @@ namespace IMRE.HandWaver.Shearing
 
 			foreach (MasterGeoObj mgo in prism.vertexPoints)
 			{
-				mgo.addToRManager();
+				mgo.AddToRManager();
 			}
 
 			//plot the volume on the line renderer

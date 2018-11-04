@@ -177,10 +177,10 @@ namespace IMRE.HandWaver
 						case tutorialStep.movePoint:
 							//want to show a line segment.
 							activeObjDemo = GeoObjConstruction.iLineSegment(GeoObjConstruction.iPoint(ped1.transform.position + Vector3.up * 1f + Vector3.right * .2f), GeoObjConstruction.iPoint(ped1.transform.position + Vector3.up * 1f + Vector3.right * .1f));
-							activeObjDemo.leapInteraction = false;
+							activeObjDemo.LeapInteraction = false;
 							activeObjDemo.GetComponent<CapsuleCollider>().enabled = false;
-							activeObjDemo.GetComponent<InteractableLineSegment>().point1.leapInteraction = false;
-							activeObjDemo.GetComponent<InteractableLineSegment>().point2.leapInteraction = false;
+							activeObjDemo.GetComponent<InteractableLineSegment>().point1.LeapInteraction = false;
+							activeObjDemo.GetComponent<InteractableLineSegment>().point2.LeapInteraction = false;
 							activeObjDemo.GetComponent<InteractableLineSegment>().point1.GetComponent<SphereCollider>().enabled = false;
 							activeObjDemo.GetComponent<InteractableLineSegment>().point2.GetComponent<SphereCollider>().enabled = false;
 							CurrStep = tutorialStep.strechPoint;
@@ -216,11 +216,11 @@ namespace IMRE.HandWaver
 						case tutorialStep.strechPoly:
 
 							//need to show that this is needing to be selected???
-							activeObjDemo.GetComponent<InteractablePrism>().sides.ForEach(p => p.deleteGeoObj());
-							activeObjDemo.GetComponent<InteractablePrism>().bases.ForEach(p => p.deleteGeoObj());
-							activeObjDemo.GetComponent<InteractablePrism>().lineSegments.ForEach(p => p.deleteGeoObj());
-							activeObjDemo.GetComponent<InteractablePrism>().vertexPoints.ForEach(p => p.deleteGeoObj());
-							activeObjDemo.deleteGeoObj();
+							activeObjDemo.GetComponent<InteractablePrism>().sides.ForEach(p => p.DeleteGeoObj());
+							activeObjDemo.GetComponent<InteractablePrism>().bases.ForEach(p => p.DeleteGeoObj());
+							activeObjDemo.GetComponent<InteractablePrism>().lineSegments.ForEach(p => p.DeleteGeoObj());
+							activeObjDemo.GetComponent<InteractablePrism>().vertexPoints.ForEach(p => p.DeleteGeoObj());
+							activeObjDemo.DeleteGeoObj();
 
                             //skip directly to pins.
                             resetMGO();

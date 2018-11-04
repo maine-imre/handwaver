@@ -282,7 +282,7 @@ namespace IMRE.HandWaver.Solver
 
 				if (geoComp.GetComponent<straightEdgeBehave>() != null || geoComp.GetComponent<flatfaceBehave>() != null)
 				{	
-					Node<string> meNode = geoComp.findGraphNode();
+					Node<string> meNode = geoComp.FindGraphNode();
 					if (rManList.Contains(meNode))
 					{
 						rManList.Remove(meNode);
@@ -321,7 +321,7 @@ namespace IMRE.HandWaver.Solver
 
             bool killorder = false;
 
-			NodeList<string> neighborList = geoComp.findGraphNode().Neighbors;
+			NodeList<string> neighborList = geoComp.FindGraphNode().Neighbors;
 
             GeoObjType type = geoComp.figType;
 

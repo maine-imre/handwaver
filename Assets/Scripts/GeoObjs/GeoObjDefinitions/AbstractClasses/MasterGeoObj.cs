@@ -16,8 +16,14 @@ using PathologicalGames;
 
 namespace IMRE.HandWaver
 {
+	/// <summary>
+	/// 
+	/// </summary>
 	public enum GeoObjType { point, line, polygon, prism, pyramid, circle, sphere, revolvedsurface, torus, flatface, straightedge, none };
 
+	/// <summary>
+	/// 
+	/// </summary>
 	public enum GeoObjDef { Abstract, Dependent, Interactable, Static, none};
 
 	/// <summary>
@@ -25,7 +31,7 @@ namespace IMRE.HandWaver
 	/// The main contributor(s) to this script is __
 	/// Status: ???
 	/// </summary>
-	internal abstract class MasterGeoObj : MonoBehaviour, UpdatableFigure, IEquatable<MasterGeoObj>
+	internal abstract class MasterGeoObj : MonoBehaviour, UpdatableFigure
 	{
 
         #region Local Positions
@@ -71,6 +77,11 @@ namespace IMRE.HandWaver
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="localPos"></param>
+		/// <returns></returns>
 		internal Vector3 ClosestLocalPosition(Vector3 localPos)
 		{
 			//do we need a try-catch to handle not implemented exceptions?
@@ -86,20 +97,41 @@ namespace IMRE.HandWaver
 			}
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="abstractPosition"></param>
+		/// <returns></returns>
 		internal abstract Vector3 ClosestSystemPosition(Vector3 abstractPosition);
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="localPos"></param>
+		/// <param name="localDir"></param>
+		/// <returns></returns>
 		internal float PointingAngleDiff(Vector3 localPos, Vector3 localDir)
 		{
 			//do we need a try-catch to handle not implemented exceptions?
 			return Vector3.Angle(ClosestLocalPosition(localPos) - localPos, localDir);
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="localPos"></param>
+		/// <returns></returns>
 		internal float LocalDistanceToClosestPoint(Vector3 localPos)
 		{
 			//do we need a try-catch to handle not implemented exceptions?
 			return Vector3.Distance(ClosestLocalPosition(localPos), localPos);
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="sysPos"></param>
+		/// <returns></returns>
 		internal float SystemDistanceToClosestPoint(Vector3 sysPos)
 		{
 			//do we need a try-catch to handle not implemented exceptions?
@@ -115,10 +147,19 @@ namespace IMRE.HandWaver
 		}
         #endregion
 
+		/// <summary>
+		/// 
+		/// </summary>
         public bool allowDelete = true;
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public GeoObjType figType;
 
+		/// <summary>
+		/// 
+		/// </summary>
         internal int intersectionMultipleIDX;
 
         public bool intersectionFigure = false;
@@ -286,7 +327,7 @@ namespace IMRE.HandWaver
 			}
 		}
 
-		public bool leapInteraction
+		public bool LeapInteraction
 		{
 			get
 			{
@@ -297,17 +338,17 @@ namespace IMRE.HandWaver
 			{
 				if (value)
 				{
-					StartCoroutine(enableLeapInteraction());
+					StartCoroutine(EnableLeapInteraction());
 				}
 				else
 				{
-					StartCoroutine(disableLeapInteraction());
+					StartCoroutine(DisableLeapInteraction());
 				}
 				_leapInteraction = value;
 			}
 		}
 
-		public string label
+		public string Label
 		{
 			get
 			{
@@ -346,7 +387,7 @@ namespace IMRE.HandWaver
 				thisIBehave.OnPerControllerGraspBegin += Stretch;
 				thisIBehave.OnGraspEnd += EndInteraction;
 			//}
-			cUpdateRMan = updateRMan();
+			cUpdateRMan = UpdateRMan();
 			waitForStretch = WaitForStretch();
 		}
 
@@ -378,11 +419,11 @@ namespace IMRE.HandWaver
 			StartCoroutine(cUpdateRMan);
 		}
 
-		private IEnumerator updateRMan()
+		private IEnumerator UpdateRMan()
 		{
 			while (true)
 			{
-				addToRManager();
+				AddToRManager();
 				yield return new WaitForEndOfFrame();
 			}
 		}
@@ -394,13 +435,13 @@ namespace IMRE.HandWaver
 			stretchEnabled = true;
 		}
 
-		public void addToRManager()
+		public void AddToRManager()
 		{
 			if (transform != null)
-				HW_GeoSolver.ins.addToReactionManager(findGraphNode());
+				HW_GeoSolver.ins.addToReactionManager(FindGraphNode());
 		}
 
-        public void deleteGeoObj()
+        public void DeleteGeoObj()
         {
 			if (allowDelete)
 			{
@@ -411,7 +452,7 @@ namespace IMRE.HandWaver
 
 		private Node<string> myGraphNode;
 
-		public Node<string> findGraphNode()
+		public Node<string> FindGraphNode()
 		{
 			if(myGraphNode == null)
 			{
@@ -437,15 +478,15 @@ namespace IMRE.HandWaver
                 //         geoManager.GetComponent<intersectionManager>().checkIntersection(this, other.GetComponent<MasterGeoOBj>());
                 //         break;
 				//		case ObjManHelper.IntersectionMode.snap:
-                        snapToFigure(other.GetComponent<MasterGeoObj>());
+                        SnapToFigure(other.GetComponent<MasterGeoObj>());
                 //        break;
                 //}
 
             }
         }
 
-        internal abstract void snapToFigure(MasterGeoObj toObj);
-        internal abstract void glueToFigure(MasterGeoObj toObj);
+        internal abstract void SnapToFigure(MasterGeoObj toObj);
+        internal abstract void GlueToFigure(MasterGeoObj toObj);
 
 		[ContextMenu("Initialize Figure")]
 		public abstract void initializefigure();
@@ -455,14 +496,14 @@ namespace IMRE.HandWaver
             {
                 intersectionManager.ins.updateIntersectionProduct(this);
             }
-			return rMotion(inputNodeList);
+			return RMotion(inputNodeList);
         }
-		internal abstract bool rMotion(NodeList<string> inputNodeList);
+		internal abstract bool RMotion(NodeList<string> inputNodeList);
 		public abstract void updateFigure();
 
 		public abstract void Stretch(InteractionController obj);
 
-		private IEnumerator disableLeapInteraction()
+		private IEnumerator DisableLeapInteraction()
 		{
             yield return new WaitForEndOfFrame();
             GetComponent<InteractionBehaviour>().ignoreContact = true;
@@ -472,7 +513,7 @@ namespace IMRE.HandWaver
             yield return new WaitForEndOfFrame();
 		}
 
-		private IEnumerator enableLeapInteraction()
+		private IEnumerator EnableLeapInteraction()
 		{
 			while (GetComponent<InteractionBehaviour>().isGrasped)
 				yield return new WaitForEndOfFrame();
@@ -485,7 +526,7 @@ namespace IMRE.HandWaver
         }
 
         [ContextMenu("List Bidir neighbors")]
-		public void listBiDirDependencies()
+		public void ListBiDirDependencies()
 		{
 
 			Debug.Log("********");
@@ -502,7 +543,7 @@ namespace IMRE.HandWaver
 		}
 
 		[ContextMenu("List Dependencies")]
-		public void listDependencies()
+		public void ListDependencies()
 		{
 
 			Debug.Log("********");
@@ -519,27 +560,27 @@ namespace IMRE.HandWaver
 		}
 
 		[ContextMenu("Output position3 variable")]
-		public void debugPoisiton3()
+		public void DebugPoisiton3()
 		{
 			Debug.Log("The stored position of " + name + " is " + Position3+".");
 		}
 
-		public override bool Equals(object obj)
-		{
-			return Equals(obj as MasterGeoObj);
-		}
+		//public override bool Equals(object obj)
+		//{
+		//	return Equals(obj as MasterGeoObj);
+		//}
 
-		public bool Equals(MasterGeoObj other)
-		{
-			return other != null &&
-				   base.Equals(other) &&
-				   figType == other.figType &&
-				   intersectionMultipleIDX == other.intersectionMultipleIDX &&
-				   intersectionFigure == other.intersectionFigure &&
-				   figName == other.figName &&
-				   figIndex == other.figIndex &&
-				   EqualityComparer<Node<string>>.Default.Equals(myGraphNode, other.myGraphNode);
-		}
+		//public bool Equals(MasterGeoObj other)
+		//{
+		//	return other != null &&
+		//		   base.Equals(other) &&
+		//		   figType == other.figType &&
+		//		   intersectionMultipleIDX == other.intersectionMultipleIDX &&
+		//		   intersectionFigure == other.intersectionFigure &&
+		//		   figName == other.figName &&
+		//		   figIndex == other.figIndex &&
+		//		   EqualityComparer<Node<string>>.Default.Equals(myGraphNode, other.myGraphNode);
+		//}
 	}
 
 }

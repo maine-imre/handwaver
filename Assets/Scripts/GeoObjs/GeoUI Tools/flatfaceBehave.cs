@@ -28,12 +28,12 @@ namespace IMRE.HandWaver
             }
         }
 
-        internal override void snapToFigure(MasterGeoObj toObj)
+        internal override void SnapToFigure(MasterGeoObj toObj)
 		{
 			// do nothing
 		}
 
-		internal override void glueToFigure(MasterGeoObj toObj)
+		internal override void GlueToFigure(MasterGeoObj toObj)
 		{
 			// do nothing
 		}
@@ -43,7 +43,7 @@ namespace IMRE.HandWaver
 			// do nothing
 		}
 
-		internal override bool rMotion(NodeList<string> inputNodeList)
+		internal override bool RMotion(NodeList<string> inputNodeList)
 		{
 			return false;
 		}
