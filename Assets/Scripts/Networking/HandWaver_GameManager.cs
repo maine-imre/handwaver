@@ -24,7 +24,7 @@ namespace IMRE.HandWaver.Networking {
 		public List<MeshRenderer> walls;
 		public List<Transform> balls;
 		public List<Vector3> ballSpawnPos;
-		public makeWallsForHyperBalls makeWallScript;
+		public HyperBallBoundaries makeWallScript;
 
 		public static HandWaver_GameManager ins;
 
@@ -45,7 +45,7 @@ namespace IMRE.HandWaver.Networking {
 				localPlayers.Add(newPlayer);
 				newPlayer.GetComponent<playerHead>().setupPlayer(PhotonNetwork.NickName, localPlayers.IndexOf(newPlayer), UnityEngine.Random.Range(0f,1f));
 			}
-			walls.AddRange(makeWallScript.wallsTMP);
+			makeWallScript.rectangularWalls.ForEach(wall => walls.Add(wall.GetComponent<MeshRenderer>()));
 
 			photonView.RPC("setWallState", RpcTarget.AllBuffered, 0);
 
@@ -71,6 +71,10 @@ namespace IMRE.HandWaver.Networking {
 			{
 				resetBalls();
 			}
+			if (Input.GetKeyDown(KeyCode.F5))
+			{
+				makeWallScript.GetComponent<PhotonView>().RPC("setSpaceType", RpcTarget.All, HyperBallBoundaries.Space++);
+			}
 		}
 
 		[PunRPC]
@@ -86,7 +90,6 @@ namespace IMRE.HandWaver.Networking {
 					Color transparentBlack = Color.black;
 					transparentBlack.a = 0.6f;
 					walls.ForEach(w => w.material.color = transparentBlack);
-
 					break;
 				case 2:
 					walls.ForEach(w => w.enabled = true);

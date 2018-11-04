@@ -31,7 +31,6 @@ namespace IMRE.HandWaver.FourthDimension {
 			if (!PhotonNetwork.IsMasterClient)
 			{
 				float tmp = UnityEngine.Random.Range(0f, 1f);
-				Debug.Log(tmp);
 				photonView.RPC("setColorOnBall", RpcTarget.All, tmp);
 			}
 			myRB = GetComponent<Rigidbody>();
@@ -44,7 +43,7 @@ namespace IMRE.HandWaver.FourthDimension {
 		/// </summary>
 		/// <param name="tmpColor">color to set for this ball</param>
 		[PunRPC]
-		void setColorOnBall(float hue)
+		void SetColorOnBall(float hue)
 		{
 			this.GetComponent<MeshRenderer>().materials[0].color = Color.HSVToRGB(hue, 1, 1);
 		}
@@ -71,30 +70,120 @@ namespace IMRE.HandWaver.FourthDimension {
 		private Vector3 positionMap()
 		{
 			Vector3 pos = this.transform.position - origin;
-
-			if (pos.x > scaleOfBox) {
-				pos += 2*scaleOfBox*Vector3.left;
-			}
-
-			if (pos.x < -scaleOfBox) {
-				pos += 2 * scaleOfBox *Vector3.right;
-			}
-
-			if (pos.y > scaleOfBox) {
-				pos += 2 * scaleOfBox *Vector3.down;
-			}
-
-			if (pos.y < -scaleOfBox) {
-				pos += 2 * scaleOfBox *Vector3.up;
-			}
-
-			if (pos.z > scaleOfBox) {
-				pos += 2 * scaleOfBox *Vector3.back;
-			}
-			if (pos.z < -scaleOfBox)
+			switch (HyperBallBoundaries.Space)
 			{
-				pos += 2 * scaleOfBox * Vector3.forward;
+				case HyperBallBoundaries.SpaceType.ThreeTorus:
+
+					if (pos.x > scaleOfBox)
+					{
+						pos += 2 * scaleOfBox * Vector3.left;
+					}
+
+					if (pos.x < -scaleOfBox)
+					{
+						pos += 2 * scaleOfBox * Vector3.right;
+					}
+
+					if (pos.y > scaleOfBox)
+					{
+						pos += 2 * scaleOfBox * Vector3.down;
+					}
+
+					if (pos.y < -scaleOfBox)
+					{
+						pos += 2 * scaleOfBox * Vector3.up;
+					}
+
+					if (pos.z > scaleOfBox)
+					{
+						pos += 2 * scaleOfBox * Vector3.back;
+					}
+					if (pos.z < -scaleOfBox)
+					{
+						pos += 2 * scaleOfBox * Vector3.forward;
+					}
+					break;
+				case HyperBallBoundaries.SpaceType.ThreeSphere:
+					if(pos.magnitude > scaleOfBox)
+					{
+						pos *= -1f;
+					}
+					break;
+				case HyperBallBoundaries.SpaceType.KleinBottle:
+					//also need to change velocity direction.
+					if (pos.x > scaleOfBox)
+					{
+						pos += 2 * scaleOfBox * Vector3.left;
+					}
+
+					if (pos.x < -scaleOfBox)
+					{
+						pos += 2 * scaleOfBox * Vector3.right;
+					}
+
+					if (pos.y > scaleOfBox)
+					{
+						pos += 2 * scaleOfBox * Vector3.down;
+						pos = Quaternion.AngleAxis(180f, Vector3.up)*pos;
+					}
+
+					if (pos.y < -scaleOfBox)
+					{
+						pos += 2 * scaleOfBox * Vector3.up;
+						pos = Quaternion.AngleAxis(180f, Vector3.up)*pos;
+					}
+
+					if (pos.z > scaleOfBox)
+					{
+						pos += 2 * scaleOfBox * Vector3.back;
+					}
+					if (pos.z < -scaleOfBox)
+					{
+						pos += 2 * scaleOfBox * Vector3.forward;
+					}
+					break;
+				case HyperBallBoundaries.SpaceType.TrippleTwist:
+					//some sort of a klein bottle in every direction???
+					if (pos.x > scaleOfBox)
+					{
+						pos += 2 * scaleOfBox * Vector3.left;
+						pos = Quaternion.AngleAxis(180f, Vector3.left) * pos;
+					}
+
+					if (pos.x < -scaleOfBox)
+					{
+						pos += 2 * scaleOfBox * Vector3.right;
+						pos = Quaternion.AngleAxis(180f, Vector3.right) * pos;
+					}
+
+					if (pos.y > scaleOfBox)
+					{
+						pos += 2 * scaleOfBox * Vector3.down;
+						pos = Quaternion.AngleAxis(180f, Vector3.down) * pos;
+					}
+
+					if (pos.y < -scaleOfBox)
+					{
+						pos += 2 * scaleOfBox * Vector3.up;
+						pos = Quaternion.AngleAxis(180f, Vector3.up) * pos;
+					}
+
+					if (pos.z > scaleOfBox)
+					{
+						pos += 2 * scaleOfBox * Vector3.back;
+						pos = Quaternion.AngleAxis(180f, Vector3.back) * pos;
+					}
+					if (pos.z < -scaleOfBox)
+					{
+						pos += 2 * scaleOfBox * Vector3.forward;
+						pos = Quaternion.AngleAxis(180f, Vector3.forward) * pos;
+					}
+					break;
+					break;
+				default:
+					break;
 			}
+
 			return pos + origin;
 		}
 	}
