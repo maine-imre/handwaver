@@ -73,7 +73,7 @@ namespace IMRE.HandWaver.Networking {
 			}
 			if (Input.GetKeyDown(KeyCode.F5))
 			{
-				makeWallScript.GetComponent<PhotonView>().RPC("setSpaceType", RpcTarget.All, HyperBallBoundaries.Space++);
+				makeWallScript.GetComponent<PhotonView>().RPC("setSpaceType", RpcTarget.All, (HyperBallBoundaries.Space++%4));
 			}
 		}
 
