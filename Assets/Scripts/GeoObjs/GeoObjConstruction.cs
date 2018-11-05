@@ -190,10 +190,11 @@ namespace IMRE.HandWaver {
 			plane.transform.GetComponent<InteractablePolygon>().pointList = pointList;
 			plane.transform.GetComponent<InteractablePolygon>().initializefigure();
 
-			foreach (AbstractLineSegment line in lineList)
-			{
-				HW_GeoSolver.ins.addDependence(plane.transform, line.transform);
-			}
+			//for some reason this makes a shortcut in the network.
+			//foreach (AbstractLineSegment line in lineList)
+			//{
+			//	HW_GeoSolver.ins.addDependence(plane.transform, line.transform);
+			//}
 
 			foreach (AbstractPoint point in pointList)
 			{
