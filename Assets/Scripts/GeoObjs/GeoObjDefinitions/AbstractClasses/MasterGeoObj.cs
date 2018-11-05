@@ -93,7 +93,8 @@ namespace IMRE.HandWaver
 			{
 				//if an object doesn't have a closest point say that it is infinitely far away.
 				Debug.LogWarning(e);
-				return Mathf.Infinity * Vector3.one;
+				//this compalins a lot when this is at infinity, so that itsn't an option.  need a real fix soon.
+				return 100f * Vector3.one;
 			}
 		}
 
