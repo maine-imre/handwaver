@@ -270,6 +270,7 @@ namespace IMRE.HandWaver.Space
 		private LineRenderer[] longRenderer;
 		private LineRenderer[] ghaRenderer;
 		private LineRenderer[] decRenderer;
+		private LineRenderer poleRenderer;
 
 		private float[] _specialLat = { 0f, 0f, 0f, 0f, 0f };
 
@@ -317,8 +318,12 @@ namespace IMRE.HandWaver.Space
 			//timeScaleSlider.OnSliderValueChanged.AddListener(setTimeScale);
 			clock = clockUpdate();
 				StartCoroutine(clock);
+<<<<<<< HEAD
 			Horizons.planetsDataUpdated += SetSunMoonPositions;
 			
+=======
+			HorizonsV4.planetsDataUpdated += SetSunMoonPositions;
+>>>>>>> master
 		}
 		private void Awake()
 		{
@@ -353,6 +358,7 @@ namespace IMRE.HandWaver.Space
 			onEarthTilt += updateLatLongLines;
 			onEarthTilt += SetSunMoonPositions;
 			onEarthTilt += updateNightSky;
+			onEarthTilt += updatePoleLine;
 
 			//resetEarthTilt();
 
@@ -635,6 +641,26 @@ namespace IMRE.HandWaver.Space
 			}
 		}
 
+
+		public void updatePoleLine()
+		{
+			if (poleRenderer == null)
+			{
+				poleRenderer = PoolManager.Pools["GeoPlanet"].Spawn("RSDESGeneratedLine").GetComponent<LineRenderer>();
+			}
+			else
+			{ 
+				Vector3[] positions = new Vector3[2];
+				positions[0] = northPolePin.pinTip.transform.position;
+				positions[1] = southPolePin.pinTip.transform.position;
+				//polesExist.Add(northPolePin.gameObject.name + southPolePin.gameObject.name);
+				//LineRenderer poleRenderer = PoolManager.Pools["GeoPlanet"].Spawn("RSDESGeneratedLine").GetComponent<LineRenderer>();
+				//poleRenderer.positionCount = positions.Length;
+				poleRenderer.SetPositions(positions);
+				//poleRenderer.SetPositions(test[northPolePin.pinTip.transform.position, southPolePin.pinTip.transform.position]);
+			}
+		}
+
 		private List<string> circlesExist = new List<string>();
 
 		public void toggleCircles()
@@ -725,6 +751,7 @@ namespace IMRE.HandWaver.Space
 			timeScale = value;
 			timeScaleDisplay.text = value.ToString();
 		}
+
 
 		#endregion Toggles and Interface Functions
 

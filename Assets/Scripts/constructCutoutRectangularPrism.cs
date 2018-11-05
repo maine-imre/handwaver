@@ -1,48 +1,44 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-using IMRE.HandWaver.Solver;
-using Leap.Unity.Interaction;
+﻿using Leap.Unity.Interaction;
 using System;
-
+using System.Collections.Generic;
 using TMPro;
+using UnityEngine;
 
 namespace IMRE.HandWaver.Shearing
 {
-    public class constructCutoutRectangularPrism : MonoBehaviour
-    {
-        private AbstractPoint controllPoint;
-        public float sideLength1 = .3f;
-        public float sideLength2 = .5f;
+	public class constructCutoutRectangularPrism : MonoBehaviour
+	{
+		private AbstractPoint controllPoint;
+		public float sideLength1 = .3f;
+		public float sideLength2 = .5f;
 
-        private List<AbstractPoint> prismBase = new List<AbstractPoint>();
-        private List<AbstractPoint> cutoutRectangle = new List<AbstractPoint>();
-        private InteractablePrism prism;
-        private AbstractPolygon prismBasePoly;
+		private List<AbstractPoint> prismBase = new List<AbstractPoint>();
+		private List<AbstractPoint> cutoutRectangle = new List<AbstractPoint>();
+		private InteractablePrism prism;
+		private AbstractPolygon prismBasePoly;
 		private AbstractPolygon prismTopPoly;
 
-        private AbstractPolygon cutoutRectanglePoly;
+		private AbstractPolygon cutoutRectanglePoly;
 
-        private float xLen;
+		private float xLen;
 
-        private LineRenderer volumeLineRenderer;
-        private int numFrames = 0;
+		private LineRenderer volumeLineRenderer;
+		private int numFrames = 0;
 
 		private TextMeshPro TMPro;
 
-        // Use this for initialization
-        void Start()
-        {
+		// Use this for initialization
+		private void Start()
+		{
 			volumeLineRenderer = GetComponentInChildren<LineRenderer>();
 			TMPro = GetComponentInChildren<TextMeshPro>();
 
-            xLen = .1f;
-            controllPoint = GeoObjConstruction.iPoint(this.transform.position);
+			xLen = .1f;
+			controllPoint = GeoObjConstruction.iPoint(this.transform.position);
 			prismBase.Add(controllPoint);
-            prismBase.Add(GeoObjConstruction.dPoint(controllPoint.Position3 + Vector3.right * (sideLength1 - 2 * xLen)));
-            prismBase.Add(GeoObjConstruction.dPoint(controllPoint.Position3 + Vector3.right * (sideLength1 - 2 * xLen) + Vector3.forward * (sideLength2 - 2 * xLen)));
-            prismBase.Add(GeoObjConstruction.dPoint(controllPoint.Position3 + Vector3.forward * (sideLength2 - 2 * xLen)));
+			prismBase.Add(GeoObjConstruction.dPoint(controllPoint.Position3 + Vector3.right * (sideLength1 - 2 * xLen)));
+			prismBase.Add(GeoObjConstruction.dPoint(controllPoint.Position3 + Vector3.right * (sideLength1 - 2 * xLen) + Vector3.forward * (sideLength2 - 2 * xLen)));
+			prismBase.Add(GeoObjConstruction.dPoint(controllPoint.Position3 + Vector3.forward * (sideLength2 - 2 * xLen)));
 
 			List<AbstractLineSegment> prismBaseLines = new List<AbstractLineSegment>();
 			for (int i = 0; i < 3; i++)
@@ -51,32 +47,31 @@ namespace IMRE.HandWaver.Shearing
 			}
 			prismBaseLines.Add(GeoObjConstruction.dLineSegment(prismBase[prismBase.Count - 1], prismBase[0]));
 
-            prismBasePoly = GeoObjConstruction.dPolygon(prismBaseLines, prismBase);
-            prism = GeoObjConstruction.dPrism(prismBasePoly, prismBasePoly.center + Vector3.up * xLen);
+			prismBasePoly = GeoObjConstruction.dPolygon(prismBaseLines, prismBase);
+			prism = GeoObjConstruction.dPrism(prismBasePoly, prismBasePoly.center + Vector3.up * xLen);
 			prismTopPoly = prism.bases[1];
 
-            cutoutRectangle.Add(prismBase[0]);
-            cutoutRectangle.Add(GeoObjConstruction.dPoint(prismBase[0].Position3 + Vector3.back * xLen));
-            cutoutRectangle.Add(GeoObjConstruction.dPoint(prismBase[1].Position3 + Vector3.back * xLen));
-            cutoutRectangle.Add(prismBase[1]);
-            cutoutRectangle.Add(GeoObjConstruction.dPoint(prismBase[1].Position3 + Vector3.right * xLen));
-            cutoutRectangle.Add(GeoObjConstruction.dPoint(prismBase[2].Position3 + Vector3.right * xLen));
-            cutoutRectangle.Add(prismBase[2]);
-            cutoutRectangle.Add(GeoObjConstruction.dPoint(prismBase[2].Position3 + Vector3.forward * xLen));
-            cutoutRectangle.Add(GeoObjConstruction.dPoint(prismBase[3].Position3 + Vector3.forward * xLen));
-            cutoutRectangle.Add(prismBase[3]);
-            cutoutRectangle.Add(GeoObjConstruction.dPoint(prismBase[3].Position3 + Vector3.left * xLen));
-            cutoutRectangle.Add(GeoObjConstruction.dPoint(prismBase[0].Position3 + Vector3.left * xLen));
+			cutoutRectangle.Add(prismBase[0]);
+			cutoutRectangle.Add(GeoObjConstruction.dPoint(prismBase[0].Position3 + Vector3.back * xLen));
+			cutoutRectangle.Add(GeoObjConstruction.dPoint(prismBase[1].Position3 + Vector3.back * xLen));
+			cutoutRectangle.Add(prismBase[1]);
+			cutoutRectangle.Add(GeoObjConstruction.dPoint(prismBase[1].Position3 + Vector3.right * xLen));
+			cutoutRectangle.Add(GeoObjConstruction.dPoint(prismBase[2].Position3 + Vector3.right * xLen));
+			cutoutRectangle.Add(prismBase[2]);
+			cutoutRectangle.Add(GeoObjConstruction.dPoint(prismBase[2].Position3 + Vector3.forward * xLen));
+			cutoutRectangle.Add(GeoObjConstruction.dPoint(prismBase[3].Position3 + Vector3.forward * xLen));
+			cutoutRectangle.Add(prismBase[3]);
+			cutoutRectangle.Add(GeoObjConstruction.dPoint(prismBase[3].Position3 + Vector3.left * xLen));
+			cutoutRectangle.Add(GeoObjConstruction.dPoint(prismBase[0].Position3 + Vector3.left * xLen));
 
-            List<AbstractLineSegment> cutoutLines = new List<AbstractLineSegment>();
-            for (int i = 0; i < cutoutRectangle.Count - 1; i++)
-            {
-                cutoutLines.Add(GeoObjConstruction.dLineSegment(cutoutRectangle[i], cutoutRectangle[i + 1]));
-            }
-            cutoutLines.Add(GeoObjConstruction.dLineSegment(cutoutRectangle[0], cutoutRectangle[cutoutRectangle.Count-1]));
+			List<AbstractLineSegment> cutoutLines = new List<AbstractLineSegment>();
+			for (int i = 0; i < cutoutRectangle.Count - 1; i++)
+			{
+				cutoutLines.Add(GeoObjConstruction.dLineSegment(cutoutRectangle[i], cutoutRectangle[i + 1]));
+			}
+			cutoutLines.Add(GeoObjConstruction.dLineSegment(cutoutRectangle[0], cutoutRectangle[cutoutRectangle.Count - 1]));
 
-
-            cutoutRectanglePoly = GeoObjConstruction.dPolygon(cutoutLines,cutoutRectangle);
+			cutoutRectanglePoly = GeoObjConstruction.dPolygon(cutoutLines, cutoutRectangle);
 
 			foreach (MasterGeoObj mgo in prism.transform.parent.GetComponentsInChildren<MasterGeoObj>())
 			{
@@ -86,7 +81,7 @@ namespace IMRE.HandWaver.Shearing
 				}
 			}
 
-            controllPoint.GetComponent<Leap.Unity.Interaction.InteractionBehaviour>().OnGraspedMovement += updateDiagram;
+			controllPoint.GetComponent<Leap.Unity.Interaction.InteractionBehaviour>().OnGraspedMovement += updateDiagram;
 			controllPoint.GetComponent<Leap.Unity.Interaction.InteractionBehaviour>().OnGraspEnd += updateDiagram;
 			volumeLineRenderer.useWorldSpace = false;
 
@@ -110,8 +105,16 @@ namespace IMRE.HandWaver.Shearing
 
 		private void updateDiagram()
 		{
-			controllPoint.Position3 = Vector3.Project(controllPoint.Position3 - this.transform.position, (Vector3.right + Vector3.forward).normalized) + this.transform.position;
-			//update xLen
+			//use the trianngle inequality to determine if the control Point is out of bounds.
+			if ((controllPoint.Position3 - cutoutRectangle[1].Position3).magnitude + (controllPoint.Position3 - cutoutRectangle[3].Position3).magnitude <= (cutoutRectangle[1].Position3 - cutoutRectangle[3].Position3).magnitude)
+			{
+				controllPoint.Position3 = Vector3.Project(controllPoint.Position3 - this.transform.position, (Vector3.right + Vector3.forward).normalized) + this.transform.position;
+			}
+			else
+			{
+				controllPoint.Position3 = cutoutRectangle[1].Position3;
+				controllPoint.GetComponent<InteractionBehaviour>().graspingController.ReleaseGrasp();
+			}
 			xLen = Vector3.Distance(controllPoint.Position3, cutoutRectangle[1].Position3);
 
 			//each corner moves in.
@@ -150,17 +153,15 @@ namespace IMRE.HandWaver.Shearing
 			volumeLineRenderer.transform.GetChild(0).transform.localPosition = volumeForLineRenderer;
 
 			TMPro.SetText("x = " + Math.Round(volumeForLineRenderer.x, 2) + " cm                        V = " + Math.Round(volumeForLineRenderer.y, 2) + " cm^3");
+		}
 
-
-        }
-
-        private Vector3 volumeForLineRenderer
-        {
-            get
-            {
-                float volume = xLen * (sideLength1 - 2 * xLen) * (sideLength2 - 2 * xLen);
-                return new Vector3(xLen*100f, volume * 100f * 100f * 100f, 0);
-            }
-        }
-    }
+		private Vector3 volumeForLineRenderer
+		{
+			get
+			{
+				float volume = xLen * (sideLength1 - 2 * xLen) * (sideLength2 - 2 * xLen);
+				return new Vector3(xLen * 100f, volume * 100f * 100f * 100f, 0);
+			}
+		}
+	}
 }

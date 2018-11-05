@@ -54,8 +54,9 @@ namespace IMRE.HandWaver
 			thisABehave = GetComponent<AnchorableBehaviour>();
 			thisWS = GetComponent<WorkstationBehaviourExample>();
 			iBehave = GetComponent<InteractionBehaviour>();
-			thisABehave.OnDetachedFromAnchor += detach;
-			thisABehave.OnAttachedToAnchor += attach;
+			//temporairly disable functionality.
+			//thisABehave.OnDetachedFromAnchor += detach;
+			//thisABehave.OnAttachedToAnchor += attach;
 			iBehave.OnGraspEnd += interactionEnd;
 			left.OnPress += (prevActive);
 			right.OnPress += (nextActive);

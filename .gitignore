@@ -18,6 +18,9 @@
 /[Aa]ssets/[Ll]eap[Mm]otion/*
 /Assets/MixCast/*
 /Assets/Plugins/*
+/Assets/Photon Unity Networking/*
+/Assets/PhotonChatApi/*
+/Assets/PoolManagerExampleFiles/*
 /Assets/SteamVR/*
 /Assets/StreamingAssets/*
 /Assets/TextMesh Pro/*
@@ -30,6 +33,7 @@
 /Assets/Editor/Steamwork.NET/*
 /Assets/LeapMotion/*
 /Assets/HTC.UnityPlugin/*
+/Assets/Photon/*
 
 
 

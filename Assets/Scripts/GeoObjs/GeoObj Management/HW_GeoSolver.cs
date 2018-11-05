@@ -10,6 +10,7 @@ www.imrelab.org
 **/
 
 using UnityEngine;
+using System;
 
 namespace IMRE.HandWaver.Solver
 {
@@ -22,7 +23,15 @@ namespace IMRE.HandWaver.Solver
     {
         #region PositionTransformations
         Quaternion globalRotation = Quaternion.identity;
-        float globalScale = 1f;
+        float globalScale
+		{
+			get
+			{
+				return 1f;
+				//we need an event so that this updates on the fly!  (the value does but we need to re-render everything).
+				//return Interface.worldScaleModifier.ins.AbsoluteScale;
+			}
+		}
         Vector4 globalTranslate4 = Vector4.zero;
         Vector3 globalTranslate = Vector3.zero;
 
@@ -41,7 +50,7 @@ namespace IMRE.HandWaver.Solver
 
         internal IntersectionMode thisMode = IntersectionMode.none;
 
-		public enum InteractionMode { rigid, freeform };
+		public enum InteractionMode { rigid, freeform, lattice };
 		public InteractionMode thisInteractionMode = InteractionMode.freeform;
 
 		private int _currentIndex = 4;
@@ -72,10 +81,18 @@ namespace IMRE.HandWaver.Solver
 		void Start()
         {
 			ins = this;
+			LoadToolbox();
+			//we need to have an event here that tells us to log the scale change.
+			Interface.worldScaleModifier.ins.OnGestureDeactivated += logScaleChange;
         }
 
+		public Transform toolbox;
+		private void LoadToolbox()
+		{
+			toolbox.gameObject.SetActive(true);
+		}
 
-        public void addToReactionManager(Node<string> node)
+		public void addToReactionManager(Node<string> node)
         {
             if (!rManList.Contains(node))
             {
@@ -99,6 +116,12 @@ namespace IMRE.HandWaver.Solver
             }
         }
 
+		private void logScaleChange()
+		{
+			ScaleHasChanged = true;
+		}
+		private bool ScaleHasChanged = false;
+
         /// <summary>
         /// During update, this recursively handles chagnes to other figures from the user's input.
         /// It goes up and down the dependency tree.
@@ -109,6 +132,11 @@ namespace IMRE.HandWaver.Solver
         {
             if (nodeList == null)
             {
+				if (ScaleHasChanged)
+				{
+					ScaleHasChanged = false;
+					GameObject.FindObjectsOfType<MasterGeoObj>().ToList().ForEach(mgo => mgo.updateFigure());
+				}
                 return;
             }
             NodeList<string> thisPassTrue = new NodeList<string>();
@@ -129,12 +157,17 @@ namespace IMRE.HandWaver.Solver
             }
             else
             {
-                //try moving this to the top.
-                //intersectionManager.ins.UpdateIntersections(updateNodeList);
-                //;for some reason we neglect figures that are built on intersections.
-                //this needs to be refactored to consider that inersections are not necessairly the end.
-                updateManager(updateNodeList);
-            }
+				//try moving this to the top.
+				//intersectionManager.ins.UpdateIntersections(updateNodeList);
+				//;for some reason we neglect figures that are built on intersections.
+				//this needs to be refactored to consider that inersections are not necessairly the end.
+				updateManager(updateNodeList);
+				if (ScaleHasChanged)
+				{
+					ScaleHasChanged = false;
+					GameObject.FindObjectsOfType<MasterGeoObj>().ToList().ForEach(mgo => mgo.updateFigure());
+				}
+			}
         }
 
         /// <summary>
@@ -201,13 +234,13 @@ namespace IMRE.HandWaver.Solver
         /// <param name="toGeoComp">to the object that the new object depends on</param>
         public void addDependence(Transform fromGeoComp, Transform toGeoComp)
         {
-            //Debug.Log("adding directed edge from " + fromGeoComp.transform.GetComponent<LifeManager>().myNAME + " to " + toGeoComp.transform.GetComponent<LifeManager>().myNAME);
+            //Debug.Log("adding directed edge from " + fromGeoComp.transform.GetComponent<MasterGeoObj>().figName + " to " + toGeoComp.transform.GetComponent<MasterGeoObj>().figName);
             geomanager.AddDirectedEdge(fromGeoComp.transform.GetComponent<MasterGeoObj>().figName, toGeoComp.transform.GetComponent<MasterGeoObj>().figName, 1);
         }
 
 		void AddDependenceMGO(MasterGeoObj fromMGO, MasterGeoObj toMGO)
 		{
-			//Debug.Log("adding directed edge from " + fromGeoComp.transform.GetComponent<LifeManager>().myNAME + " to " + toGeoComp.transform.GetComponent<LifeManager>().myNAME);
+			//Debug.Log("adding directed edge from " + fromGeoComp.transform.GetComponent<MasterGeoObj>().figName + " to " + toGeoComp.transform.GetComponent<MasterGeoObj>().figName);
 			geomanager.AddDirectedEdge(fromMGO.figName, toMGO.figName, 1);
 		}
 
@@ -237,6 +270,7 @@ namespace IMRE.HandWaver.Solver
 
 		internal void removeComponent(MasterGeoObj geoComp)
         {
+			Debug.Log(geoComp.figName + " is being removed from the graph. Refer to trace for reason.");
 
 			if (blockDelete == false)
 			{

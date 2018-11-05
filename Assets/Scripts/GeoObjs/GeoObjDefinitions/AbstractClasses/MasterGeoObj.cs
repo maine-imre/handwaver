@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Leap.Unity.Interaction;
 using IMRE.HandWaver.Solver;
+using PathologicalGames;
 
 
 namespace IMRE.HandWaver
@@ -49,7 +50,7 @@ namespace IMRE.HandWaver
             {
                 if(_position3 == Vector3.zero || actualPos != transform.position)
                 {
-                    _position3 = systemPosition(this.transform.position);
+                    Position3 = systemPosition(this.transform.position);
 					actualPos = transform.position;
                 }
 
@@ -59,9 +60,16 @@ namespace IMRE.HandWaver
             set
             {
                 _position3 = value;
+				if (HW_GeoSolver.ins.thisInteractionMode == HW_GeoSolver.InteractionMode.lattice)
+				{
+					_position3.x = Mathf.RoundToInt(value.x);
+					_position3.y = Mathf.RoundToInt(value.y);
+					_position3.z = Mathf.RoundToInt(value.z);
+				}
                 this.transform.position = LocalPosition(_position3);
-            }
-        }
+				actualPos = transform.position;
+			}
+		}
         #endregion
 
         public bool allowDelete = true;
@@ -354,6 +362,7 @@ namespace IMRE.HandWaver
 			if (allowDelete)
 			{
 				HW_GeoSolver.ins.removeComponent(this);
+				PoolManager.Pools["GeoObj"].Despawn(this.transform);
 			}
         }
 
@@ -403,7 +412,7 @@ namespace IMRE.HandWaver
             {
                 intersectionManager.ins.updateIntersectionProduct(this);
             }
-            return rMotion(inputNodeList);
+			return rMotion(inputNodeList);
         }
 		internal abstract bool rMotion(NodeList<string> inputNodeList);
 		public abstract void updateFigure();

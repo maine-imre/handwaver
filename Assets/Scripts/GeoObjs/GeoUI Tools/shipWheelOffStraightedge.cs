@@ -51,13 +51,5 @@ namespace IMRE.HandWaver
 		{
 			this.transform.localScale = .25f * initialScale;
 		}
-
-		//private void OnTriggerEnter(Collider col)
-  //      {
-  //          if (attachedToObj && col.gameObject.GetComponent<straightEdgeBehave>()!=null )
-  //          {
-  //              col.gameObject.GetComponent<straightEdgeBehave>().WheelType = thisWheelType;
-  //          }
-  //      }
     }
 }

@@ -108,7 +108,6 @@ namespace IMRE.HandWaver.Lattice
 						StaticPoint curr = GeoObjConstruction.sPoint(scaleFactor * ((i - (size / 2)) * basisSystem[0] + j * basisSystem[1] + (k - (size / 2)) * basisSystem[2]) + translation);
 						curr.transform.SetParent(transform);
 						//curr.GetComponent<InteractionBehaviour>().enabled = false;
-						curr.tag = "NoSave";
 
 						curr.GetComponent<MasterGeoObj>().allowDelete = false;
 					}

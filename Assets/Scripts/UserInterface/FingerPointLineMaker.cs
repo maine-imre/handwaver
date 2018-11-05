@@ -82,7 +82,7 @@ namespace IMRE.HandWaver.Lattice
 		{
 			if (this.GetComponent<LatticeLandOpenVR>() == null)
 			{
-				fingerDetectors = GetComponents<ExtendedFingerDetector>().ToList();
+				//fingerDetectors = GetComponents<>().ToList();
 				setupDetectors();
 
 				switch (handedness)
@@ -101,32 +101,6 @@ namespace IMRE.HandWaver.Lattice
 						break;
 				}
 			}
-
-
-			pointList = new List<AbstractPoint>();
-			lineList = new List<AbstractLineSegment>();
-
-			thisLR = GetComponent<LineRenderer>();
-			thisLR.useWorldSpace = true;
-			thisLR.positionCount = 2;
-			thisLR.enabled = false;
-			thisLR.startWidth = .005f;
-			thisLR.endWidth = .005f;
-			SceneManager.sceneUnloaded += changeActiveStateByScene;
-
-			lineMaker = GetComponentInChildren<fingerPointLineMakerHandle>();
-			if (lineMaker != null)
-			{
-				lineMaker.transform.parent = indexAttachment;
-				lineMaker.transform.localPosition = Vector3.zero;
-				lineMaker.lineSegmentMaker = this;
-			}
-			else
-			{
-				Debug.LogWarning("Requires lineMaker to function "+name);
-			}
-
-			endofPin = indexAttachment;
 		}
 
 		public void setupDetectors()
