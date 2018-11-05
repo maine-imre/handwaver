@@ -146,8 +146,8 @@ namespace IMRE.HandWaver.Interface
 
 			foreach (StaticPoint mgo in FindObjectsOfType<StaticPoint>().Where(g => (g.GetComponent<AnchorableBehaviour>() == null || (g.GetComponent<AnchorableBehaviour>() != null && !g.GetComponent<AnchorableBehaviour>().isAttached))))
 			{
-				float distance = distHandToMGO(hand, mgo);
-				float angle = angleHandToMGO(hand, mgo);
+				float distance = mgo.LocalDistanceToClosestPoint(hand.Fingers[1].TipPosition.ToVector3());
+				float angle = mgo.PointingAngleDiff(hand.Fingers[1].TipPosition.ToVector3(), hand.Fingers[1].Direction.ToVector3());
 
 				if (Mathf.Abs(distance) < shortestDist)
 				{
@@ -173,7 +173,6 @@ namespace IMRE.HandWaver.Interface
 		protected override void WhenGestureDeactivated(Hand maybeNullHand, DeactivationReason reason)
 		{
 			this.thisLR.enabled = false;
-
 			if (maybeNullHand != null)
 			{
 
@@ -187,9 +186,16 @@ namespace IMRE.HandWaver.Interface
 							{
 								lineList.Add(GeoObjConstruction.dLineSegment(currPoint, prevPoint));
 								playSuccessSound();
-								if (_currPoint == pointList[0] && lineList.Count > 1)
+								int idx = pointList.LastIndexOf(_currPoint);
+								int idx2 = pointList.IndexOf(_currPoint);
+
+								if (idx -1> idx2 && lineList.Count > 1)
 								{
-									GeoObjConstruction.iPolygon(lineList, pointList);
+
+									List<AbstractPoint> p1 = pointList.GetRange(idx2, (idx - 1)-idx2);
+									List<AbstractLineSegment> l1 = lineList.Where(l => p1.Contains(l.GetComponent<DependentLineSegment>().point1) || p1.Contains(l.GetComponent<DependentLineSegment>().point2)).ToList();
+									//TODO: Point list is overpopulated. CodyCodyCodyCodyCodyCody
+									GeoObjConstruction.iPolygon(l1, p1);
 									endInteraction();
 								}
 							}
@@ -238,26 +244,6 @@ namespace IMRE.HandWaver.Interface
 
 		}
 
-		private float angleHandToMGO(Hand hand, StaticPoint mgo)
-		{
-			return Vector3.Angle(mgo.transform.position-fingerTip(hand), fingerDirection(hand));
-		}
-
-		private float distHandToMGO(Hand hand, StaticPoint mgo)
-		{
-			return Vector3.Magnitude(fingerTip(hand) - mgo.transform.position);
-		}
-
-		public Vector3 fingerTip(Hand hand)
-		{
-			return hand.Fingers[1].TipPosition.ToVector3();
-		}
-
-		public Vector3 fingerDirection(Hand hand)
-		{
-			return hand.Fingers[1].Direction.ToVector3();
-		}
-
 		private void playSuccessSound()
 		{
 			if (MyAudioSource != null)
@@ -279,7 +265,9 @@ namespace IMRE.HandWaver.Interface
 			prevSet = false;
 			currSet = false;
 			successfullyMade = false;
-				lineList.ForEach(l => l.deleteGeoObj());
+				lineList.ForEach(l => l.DeleteGeoObj());
+			prevPoint = null;
+			currPoint = null;
 		}
 
 		internal AbstractPoint prevPoint
@@ -306,7 +294,7 @@ namespace IMRE.HandWaver.Interface
 			}
 			else
 			{
-				thisLR.enabled = true;
+				thisLR.enabled = prevPoint != null;
 				thisLR.SetPosition(0, value.transform.position);
 				updateLine = true;
 				//thisLR.SetPosition(1, endofPin.position);
@@ -329,7 +317,10 @@ namespace IMRE.HandWaver.Interface
 
 				_currPoint = value;
 				currSet = (value != null);
-				thisLR.SetPosition(0, _currPoint.transform.position);
+				if (_currPoint != null)
+				{
+					thisLR.SetPosition(0, _currPoint.transform.position);
+				}
 				if (_currPoint != null)
 				{
 					pointList.Add(_currPoint);

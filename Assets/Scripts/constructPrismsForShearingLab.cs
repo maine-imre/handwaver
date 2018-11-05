@@ -37,17 +37,17 @@ namespace IMRE.HandWaver.Shearing
         private void Start()
         {
             myPrism = GeoObjConstruction.iPrism(GeoObjConstruction.rPoly(nSides, Mathf.Abs(height1 - height2) / 2f, Vector3.ProjectOnPlane(this.transform.position, Vector3.up) + Vector3.up * height1), Vector3.ProjectOnPlane(this.transform.position, Vector3.up) + Vector3.up * height2);
-            myPrism.leapInteraction = false;
+            myPrism.LeapInteraction = false;
             foreach(AbstractLineSegment mgo in myPrism.allEdges)
             {
-                mgo.leapInteraction = false;
+                mgo.LeapInteraction = false;
             }
             foreach (AbstractPolygon mgo in myPrism.bases)
             {
-                mgo.leapInteraction = false;
+                mgo.LeapInteraction = false;
                 foreach(AbstractPoint mgol2 in mgo.pointList)
                 {
-                    mgol2.leapInteraction = false;
+                    mgol2.LeapInteraction = false;
                 }
             }
 

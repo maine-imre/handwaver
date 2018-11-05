@@ -60,6 +60,8 @@ namespace IMRE.HandWaver.Interface
 		{
 			base.WhenGestureDeactivated(maybeNullHand, reason);
 
+			Debug.Log(reason);
+
 			Chirality chirality = Chirality.Right;
 			if (maybeNullHand.IsLeft)
 			{
@@ -77,13 +79,15 @@ namespace IMRE.HandWaver.Interface
 							float distance = (Vector3.Project(maybeNullHand.PalmPosition.ToVector3() - (lp.GetComponent<LineRenderer>().GetPosition(0) - lp.GetComponent<LineRenderer>().GetPosition(1)) / 2f, lp.GetComponent<LineRenderer>().GetPosition(0) - lp.GetComponent<LineRenderer>().GetPosition(1)) + lp.transform.position - maybeNullHand.PalmPosition.ToVector3()).magnitude;
 							if(distance < maximumRangeToSelect)
 							{
+								Debug.Log("Try to cancel gesture " + lp.name);
 								lp.endInteraction();
 							}
 						}
 					}
 					else if (foundMGO(maybeNullHand))
 					{
-						closestObj.deleteGeoObj();
+						Debug.Log("Try to delete " + closestObj.name);
+						closestObj.DeleteGeoObj();
 					}
 					break;
 				case DeactivationReason.CancelledGesture:
@@ -111,7 +115,7 @@ namespace IMRE.HandWaver.Interface
 
 			foreach (MasterGeoObj mgo in FindObjectsOfType<MasterGeoObj>().Where(g => (g.GetComponent<AnchorableBehaviour>() == null || (g.GetComponent<AnchorableBehaviour>() != null && !g.GetComponent<AnchorableBehaviour>().isAttached))).Where(g => g.GetComponent<MasterGeoObj>().figType != GeoObjType.point))
 			{
-				float distance = distHandToMGO(hand, mgo);
+				float distance = mgo.LocalDistanceToClosestPoint(hand.PalmPosition.ToVector3());
 
 				if (Mathf.Abs(distance) < shortestDist)
 				{
@@ -123,72 +127,6 @@ namespace IMRE.HandWaver.Interface
 				}
 			}
 			return shortestDist < maximumRangeToSelect;
-		}
-
-
-		private float distHandToMGO(Hand hand, MasterGeoObj mgo)
-		{
-			float distance = 15;
-			switch (mgo.figType)
-			{
-				case GeoObjType.point:
-					distance = Vector3.Magnitude(fingerTip(hand) - mgo.transform.position);
-					break;
-				case GeoObjType.line:
-					distance = Vector3.Magnitude(Vector3.Project(fingerTip(hand) - mgo.transform.position, mgo.GetComponent<AbstractLineSegment>().vertex0 - mgo.GetComponent<AbstractLineSegment>().vertex1) + mgo.transform.position - fingerTip(hand));
-					break;
-				case GeoObjType.polygon:
-					Vector3 positionOnPlane = Vector3.ProjectOnPlane(transform.position - mgo.transform.position, mgo.GetComponent<AbstractPolygon>().normDir) + mgo.transform.position;
-					distance = Vector3.Magnitude(positionOnPlane - fingerTip(hand));
-					Debug.LogWarning("Polygon doesn't check boundariers");
-					break;
-				case GeoObjType.prism:
-					distance = Vector3.Magnitude(mgo.transform.position - fingerTip(hand));
-					break;
-				case GeoObjType.pyramid:
-					Debug.LogWarning("Pyramids not yet supported");
-					break;
-				case GeoObjType.circle:
-					Vector3 positionOnPlane2 = Vector3.ProjectOnPlane(transform.position - mgo.transform.position, mgo.GetComponent<AbstractCircle>().normalDir) + mgo.transform.position;
-					Vector3 positionOnCircle = Vector3.Normalize(positionOnPlane2 - mgo.GetComponent<AbstractCircle>().centerPos) * mgo.GetComponent<AbstractCircle>().Radius + mgo.GetComponent<AbstractCircle>().centerPos;
-					distance = Vector3.Magnitude(fingerTip(hand) - positionOnCircle);
-					break;
-				case GeoObjType.sphere:
-					Vector3 lineDir = Vector3.Normalize(transform.position - mgo.transform.position);
-					Vector3 positionOnSphere1 = mgo.GetComponent<AbstractSphere>().radius * lineDir + mgo.transform.position;
-					distance = Vector3.Magnitude(positionOnSphere1 - fingerTip(hand));
-					break;
-				case GeoObjType.revolvedsurface:
-					Debug.LogWarning("RevoledSurface not yet supported");
-					break;
-				case GeoObjType.torus:
-					Debug.LogWarning("Torus not yet supported");
-					break;
-				case GeoObjType.flatface:
-					Vector3 positionOnPlane3 = Vector3.ProjectOnPlane(transform.position - mgo.transform.position, mgo.GetComponent<flatfaceBehave>().normalDir) + mgo.transform.position;
-					distance = Vector3.Magnitude(positionOnPlane3 - fingerTip(hand));
-					break;
-				case GeoObjType.straightedge:
-					Vector3 positionOnStraightedge = Vector3.Project(transform.position - mgo.transform.position, mgo.GetComponent<straightEdgeBehave>().normalDir) + mgo.transform.position;
-					distance = Vector3.Magnitude(positionOnStraightedge - fingerTip(hand));
-					break;
-				default:
-					Debug.LogWarning("Something went wrong in the selection.... :(");
-					break;
-			}
-
-			return distance;
-		}
-
-
-		public Vector3 fingerTip(Hand hand)
-		{
-			return hand.Fingers[1].TipPosition.ToVector3();
-		}
-
-		public Vector3 fingerDirection(Hand hand)
-		{
-			return hand.Fingers[1].Direction.ToVector3();
 		}
 	}
 }

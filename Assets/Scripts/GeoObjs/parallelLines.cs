@@ -36,7 +36,7 @@ namespace IMRE.HandWaver
                 if (obj.Position3 != newpos)
                 {
                     obj.Position3 = newpos;
-                    obj.addToRManager();
+                    obj.AddToRManager();
                 }
             }
         }

@@ -80,6 +80,7 @@ namespace IMRE.HandWaver
 		internal void snapToFloor()
 		{
 			normalDir = Vector3.up;
+			Debug.Log(normalDir);
 		}
 
 		//private int initLayer;
@@ -193,7 +194,7 @@ namespace IMRE.HandWaver
             }
 			set
 			{
-				this.transform.rotation *= Quaternion.FromToRotation(normalDir,value);
+				this.transform.rotation = Quaternion.FromToRotation(Vector3.forward, value);
 			}
         }
 
@@ -206,12 +207,12 @@ namespace IMRE.HandWaver
             }
         }
 
-        internal override void snapToFigure(MasterGeoObj toObj)
+        internal override void SnapToFigure(MasterGeoObj toObj)
 		{
 			//throw new NotImplementedException();
 		}
 
-		internal override void glueToFigure(MasterGeoObj toObj)
+		internal override void GlueToFigure(MasterGeoObj toObj)
 		{
 			throw new NotImplementedException();
 		}
@@ -221,7 +222,7 @@ namespace IMRE.HandWaver
 			//do nothing
 		}
 
-		internal override bool rMotion(NodeList<string> inputNodeList)
+		internal override bool RMotion(NodeList<string> inputNodeList)
 		{
 			return false;
 		}
@@ -234,6 +235,16 @@ namespace IMRE.HandWaver
 		public override void Stretch(InteractionController obj)
 		{
 			//do nothing
+		}
+
+		internal override Vector3 ClosestSystemPosition(Vector3 abstractPosition)
+		{
+			Vector3 a = Position3;
+			Vector3 b = normalDir + Position3;
+			Vector3 c = abstractPosition;
+			float dist =(c - a).magnitude * Mathf.Sin(Mathf.Abs(Vector3.Angle(c - a, b - a)));
+
+			return a + (b - a).normalized * Mathf.Sqrt(Mathf.Pow((a - c).magnitude, 2) + Mathf.Pow(dist, 2));
 		}
 	}
 }

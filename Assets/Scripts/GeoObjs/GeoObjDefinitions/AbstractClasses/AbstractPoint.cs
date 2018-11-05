@@ -23,5 +23,10 @@ namespace IMRE.HandWaver
     {
         public Vector3 initialScale;
         public bool changedNeighborNum;
-    }
+
+		internal override Vector3 ClosestSystemPosition(Vector3 abstractPosition)
+		{
+			return this.Position3;
+		}
+	}
 }

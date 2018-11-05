@@ -82,7 +82,7 @@ namespace IMRE.HandWaver
 
 			this.initializefigure();
 
-            this.addToRManager();
+            this.AddToRManager();
         }
 
     }

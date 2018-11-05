@@ -142,11 +142,11 @@ namespace IMRE.HandWaver.Solver
             {
                 //point only option.
                 mgo.Position3 = data.vectordata[0];
-                mgo.addToRManager();
+                mgo.AddToRManager();
             }
             else if(data.figtype == GeoObjType.none)
             {
-                mgo.deleteGeoObj();
+                mgo.DeleteGeoObj();
             }
             else
             {
@@ -161,11 +161,11 @@ namespace IMRE.HandWaver.Solver
             {
                 //point only option;
                 mgo.Position3 = data.vectordata[0];
-                mgo.addToRManager();
+                mgo.AddToRManager();
             }
             else if (data.figtype == GeoObjType.none)
             {
-                mgo.deleteGeoObj();
+                mgo.DeleteGeoObj();
             }
             else
             {
@@ -180,11 +180,11 @@ namespace IMRE.HandWaver.Solver
             {
                 //line only option
                 mgo.Position3 = data.vectordata[0];
-                mgo.addToRManager();
+                mgo.AddToRManager();
             }
             else if (data.figtype == GeoObjType.none)
             {
-                mgo.deleteGeoObj();
+                mgo.DeleteGeoObj();
             }
             else
             {
@@ -209,7 +209,7 @@ namespace IMRE.HandWaver.Solver
             }
             else if (data.figtype == GeoObjType.none)
             {
-                mgo.deleteGeoObj();
+                mgo.DeleteGeoObj();
             }
             else
             {
@@ -226,7 +226,7 @@ namespace IMRE.HandWaver.Solver
                 {
                     case GeoObjType.point:
                         mgo.Position3 = data.vectordata[0];
-                        mgo.addToRManager();
+                        mgo.AddToRManager();
                         break;
                     case GeoObjType.circle:
                         DependentCircle circle = mgo.GetComponent<DependentCircle>();
@@ -235,9 +235,9 @@ namespace IMRE.HandWaver.Solver
                         circle.center.Position3 = data.vectordata[0];
                         circle.edgePos = data.vectordata[2];
                         circle.edge.Position3 = data.vectordata[2];
-                        circle.addToRManager();
-                        circle.edge.addToRManager();
-                        circle.center.addToRManager();
+                        circle.AddToRManager();
+                        circle.edge.AddToRManager();
+                        circle.center.AddToRManager();
                         break;
                     default:
                         break;
@@ -245,7 +245,7 @@ namespace IMRE.HandWaver.Solver
             }
             else if (data.figtype == GeoObjType.none)
             {
-                mgo.deleteGeoObj();
+                mgo.DeleteGeoObj();
             }
             else
             {
@@ -262,7 +262,7 @@ namespace IMRE.HandWaver.Solver
                 {
                     case GeoObjType.point:
                         mgo.Position3 = data.vectordata[0];
-                        mgo.addToRManager();
+                        mgo.AddToRManager();
                         break;
                     case GeoObjType.circle:
                         DependentCircle circle = mgo.GetComponent<DependentCircle>();
@@ -271,9 +271,9 @@ namespace IMRE.HandWaver.Solver
                         circle.center.Position3 = data.vectordata[0];
                         circle.edgePos = data.vectordata[2];
                         circle.edge.Position3 = data.vectordata[2];
-                        circle.addToRManager();
-                        circle.edge.addToRManager();
-                        circle.center.addToRManager();
+                        circle.AddToRManager();
+                        circle.edge.AddToRManager();
+                        circle.center.AddToRManager();
                         break;
                     default:
                         break;
@@ -281,7 +281,7 @@ namespace IMRE.HandWaver.Solver
             }
             else if (data.figtype == GeoObjType.none)
             {
-                mgo.deleteGeoObj();
+                mgo.DeleteGeoObj();
             }
             else
             {
@@ -305,7 +305,7 @@ namespace IMRE.HandWaver.Solver
             }
             else if (data.figtype == GeoObjType.none)
             {
-                mgo.deleteGeoObj();
+                mgo.DeleteGeoObj();
             }
             else
             {
@@ -322,7 +322,7 @@ namespace IMRE.HandWaver.Solver
                 {
                     case GeoObjType.point:
                         mgo.Position3 = data.vectordata[0];
-                        mgo.addToRManager();
+                        mgo.AddToRManager();
                         break;
                     case GeoObjType.circle:
                         DependentCircle circle = mgo.GetComponent<DependentCircle>();
@@ -331,9 +331,9 @@ namespace IMRE.HandWaver.Solver
                         circle.center.Position3 = data.vectordata[0];
                         circle.edgePos = data.vectordata[2];
                         circle.edge.Position3 = data.vectordata[2];
-                        circle.addToRManager();
-                        circle.edge.addToRManager();
-                        circle.center.addToRManager();
+                        circle.AddToRManager();
+                        circle.edge.AddToRManager();
+                        circle.center.AddToRManager();
                         break;
                     default:
                         break;
@@ -341,7 +341,7 @@ namespace IMRE.HandWaver.Solver
             }
             else if (data.figtype == GeoObjType.none)
             {
-                mgo.deleteGeoObj();
+                mgo.DeleteGeoObj();
             }
             else
             {
@@ -359,7 +359,7 @@ namespace IMRE.HandWaver.Solver
                 {
                     case GeoObjType.point:
                         mgo.Position3 = data.vectordata[0];
-                        mgo.addToRManager();
+                        mgo.AddToRManager();
                         break;
                     case GeoObjType.circle:
                         DependentCircle circle = mgo.GetComponent<DependentCircle>();
@@ -368,9 +368,9 @@ namespace IMRE.HandWaver.Solver
                         circle.center.Position3 = data.vectordata[0];
                         circle.edgePos = data.vectordata[2];
                         circle.edge.Position3 = data.vectordata[2];
-                        circle.addToRManager();
-                        circle.edge.addToRManager();
-                        circle.center.addToRManager();
+                        circle.AddToRManager();
+                        circle.edge.AddToRManager();
+                        circle.center.AddToRManager();
                         break;
                     default:
                         break;
@@ -379,7 +379,7 @@ namespace IMRE.HandWaver.Solver
             }
             else if (data.figtype == GeoObjType.none)
             {
-                mgo.deleteGeoObj();
+                mgo.DeleteGeoObj();
             }
             else
             {
@@ -396,7 +396,7 @@ namespace IMRE.HandWaver.Solver
                 {
                     case GeoObjType.point:
                         mgo.Position3 = data.vectordata[0];
-                        mgo.addToRManager();
+                        mgo.AddToRManager();
                         break;
                     case GeoObjType.circle:
                         DependentCircle circle = mgo.GetComponent<DependentCircle>();
@@ -405,9 +405,9 @@ namespace IMRE.HandWaver.Solver
                         circle.center.Position3 = data.vectordata[0];
                         circle.edgePos = data.vectordata[2];
                         circle.edge.Position3 = data.vectordata[2];
-                        circle.addToRManager();
-                        circle.edge.addToRManager();
-                        circle.center.addToRManager();
+                        circle.AddToRManager();
+                        circle.edge.AddToRManager();
+                        circle.center.AddToRManager();
                         break;
                     default:
                         break;
@@ -415,7 +415,7 @@ namespace IMRE.HandWaver.Solver
             }
             else if (data.figtype == GeoObjType.none)
             {
-                mgo.deleteGeoObj();
+                mgo.DeleteGeoObj();
             }
             else
             {

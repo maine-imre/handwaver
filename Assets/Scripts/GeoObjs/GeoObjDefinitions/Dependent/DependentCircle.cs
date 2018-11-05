@@ -25,7 +25,7 @@ namespace IMRE.HandWaver
 
 		public bool freeAxis = false;
 
-        internal override bool rMotion(NodeList<string> inputNodeList)
+        internal override bool RMotion(NodeList<string> inputNodeList)
         {
             if (checkForPointsInNodeList(inputNodeList))
             {
@@ -63,20 +63,20 @@ namespace IMRE.HandWaver
 			throw new NotImplementedException();
 		}
 
-        internal override void glueToFigure(MasterGeoObj toObj)
+        internal override void GlueToFigure(MasterGeoObj toObj)
         {
             throw new NotImplementedException();
         }
 
-        internal override void snapToFigure(MasterGeoObj toObj)
+        internal override void SnapToFigure(MasterGeoObj toObj)
         {
 			//do nothing
 		}
 
         private bool checkForPointsInNodeList(NodeList<string> nodeList)
         {
-            if (nodeList.Contains(center.findGraphNode()) && (center.Position3 != centerPos)) { return true; }
-            if (nodeList.Contains(edge.findGraphNode()) && (edge.Position3 != edgePos)) { return true; }
+            if (nodeList.Contains(center.FindGraphNode()) && (center.Position3 != centerPos)) { return true; }
+            if (nodeList.Contains(edge.FindGraphNode()) && (edge.Position3 != edgePos)) { return true; }
             return false;
         }
     }

@@ -192,7 +192,7 @@ namespace IMRE.HandWaver {
 
 			foreach (AbstractLineSegment line in lineList)
 			{
-				//HW_GeoSolver.ins.addDependence(plane.transform, line.transform);
+				HW_GeoSolver.ins.addDependence(plane.transform, line.transform);
 			}
 
 			foreach (AbstractPoint point in pointList)
@@ -438,7 +438,7 @@ namespace IMRE.HandWaver {
 			}
 
 			AbstractPolygon plane1 = dPolygon(lineList1, pointList1);
-			plane1.addToRManager();
+			plane1.AddToRManager();
 
 			foreach (AbstractLineSegment line in lineList1)
 			{

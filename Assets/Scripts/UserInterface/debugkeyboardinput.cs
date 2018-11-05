@@ -10,6 +10,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Linq;
+
 
 
 namespace IMRE.HandWaver
@@ -26,7 +28,7 @@ namespace IMRE.HandWaver
 
         public bool loadBackground = true;
         public string backgroundName = "darkPrototype";
-		public bool autoLoadPlaintains;
+		public static bool autoLoadPlaintains = false;
 		public Transform Plaintains;
 
 		/// <summary>
@@ -35,10 +37,13 @@ namespace IMRE.HandWaver
 		/// </summary>
 		public List<string> loadScenesOnStart = new List<string>();
 
-        void Start()
-        {
+		public static bool PointToSelectEnabled = false;
 
-			commandLineArgumentParse.logOverride |= interalBuild;	//or equal the internal build bool so that if its internal it automatically starts logging
+
+		void Start()
+		{
+
+			commandLineArgumentParse.logOverride |= interalBuild;   //or equal the internal build bool so that if its internal it automatically starts logging
 
 			if (loadBackground)
 				loadSceneAsyncByName(backgroundName, false);
@@ -50,7 +55,11 @@ namespace IMRE.HandWaver
 				FindObjectOfType<HWMixcastIO>().currMode = mixCastTargetMode.primaryAlt;
 			}
 #endif
-			foreach(string name in loadScenesOnStart)
+			autoLoadPlaintains = (loadScenesOnStart.Count == 0);
+			PointToSelectEnabled = !loadScenesOnStart.Contains("LatticeLand");
+			Debug.Log("TOOLS: " + autoLoadPlaintains);
+			Debug.Log("PointSELECT: " + PointToSelectEnabled);
+			foreach (string name in loadScenesOnStart)
 			{
 				loadSceneAsyncByName(name, unloadBool);
 			}
@@ -59,99 +68,6 @@ namespace IMRE.HandWaver
 				StartCoroutine(enablePlaintains());
 			}
 		}
-
-        void Update()
-        {
-			//locks out of other scenes.
-			if (loadScenesOnStart.Count > 0)
-			{
-				unloadBool = Input.GetKey(KeyCode.U);//if you are pressing U it will unload other active scenes excluding base layer
-
-				if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
-				{
-					if (Input.GetKeyDown(KeyCode.U))
-					{
-						removeAllLayers();
-					}
-
-					if (Input.GetKeyDown(KeyCode.P))
-					{
-						loadNewBaseScene("GeometersPlanetariumBase");
-					}
-
-					if (Input.GetKeyDown(KeyCode.H))
-					{
-						loadNewBaseScene("HandWaverBase");
-					}
-
-					if (Input.GetKeyDown(KeyCode.L))
-					{
-						commandLineArgumentParse.logOverride = true;
-					}
-				}
-				else
-				{
-					if (Input.GetKeyDown(KeyCode.R))
-					{
-						resetCurrentScenes();
-					}
-
-					if (Input.GetKeyDown(KeyCode.B))
-					{
-						loadNewBaseScene("LittleBeartha");
-					}
-
-					if (Input.GetKeyDown(KeyCode.C))
-					{
-						loadSceneAsyncByName("Chess3DLayer", true);
-					}
-
-					//if (Input.GetKeyDown(KeyCode.D))
-					//{
-					//	loadSceneAsyncByName("HigherDimensionsLayer", unloadBool);
-					//}
-
-					if (Input.GetKeyDown(KeyCode.H))
-					{
-						loadNewBaseScene("HorizonAnalysis");
-					}
-
-					if (Input.GetKeyDown(KeyCode.L))
-					{
-						loadSceneAsyncByName("LatticeLand", true);
-					}
-
-					if (Input.GetKeyDown(KeyCode.P))
-					{
-						Plaintains.gameObject.SetActive(true);
-					}
-
-					if (Input.GetKeyDown(KeyCode.T))
-					{
-						loadSceneAsyncByName("tutorialLayer", unloadBool);
-					}
-
-					if (Input.GetKeyDown(KeyCode.V))
-					{
-						toggleMixCastCamera();
-					}
-
-					if (Input.GetKeyDown(KeyCode.F11))
-					{
-						Interface.worldScaleModifier.advanceFigureType();
-					}
-					if (Input.GetKeyDown(KeyCode.F10))
-					{
-						if(Space.RSDESManager.ins != null)
-							Space.RSDESManager.ins.toggleNightSky();
-					}
-					//if (Input.GetKeyDown(KeyCode.S) && !Input.GetKey(KeyCode.LeftControl) && !Input.GetKey(KeyCode.RightControl))
-					//{
-					//	loadSceneAsyncByName("ShearingLab", true);
-					//}
-				}
-			}
-        }
 
 		private void loadSceneByName(string scene)
 		{
@@ -192,8 +108,10 @@ namespace IMRE.HandWaver
                 {
 
 					if (!(SceneManager.GetSceneAt(i).name.Contains("Base")))
+					{
 						layers.Add(SceneManager.GetSceneAt(i));
-                }
+					}
+				}
                 foreach (Scene s in layers)
                 {
                     SceneManager.UnloadSceneAsync(s);

@@ -21,7 +21,7 @@ namespace IMRE.HandWaver
         public AbstractPoint center;
         public AbstractPoint edge;
 
-        internal override bool rMotion(NodeList<string> inputNodeList)
+        internal override bool RMotion(NodeList<string> inputNodeList)
         {
             if (checkForPointsInNodeList(inputNodeList))
             {
@@ -41,12 +41,12 @@ namespace IMRE.HandWaver
 			throw new NotImplementedException();
 		}
 
-        internal override void glueToFigure(MasterGeoObj toObj)
+        internal override void GlueToFigure(MasterGeoObj toObj)
         {
             throw new NotImplementedException();
         }
 
-        internal override void snapToFigure(MasterGeoObj toObj)
+        internal override void SnapToFigure(MasterGeoObj toObj)
 		{
 			//do nothing
 		}

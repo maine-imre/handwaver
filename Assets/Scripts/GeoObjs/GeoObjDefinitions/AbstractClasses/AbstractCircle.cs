@@ -5,7 +5,8 @@ See license info in readme.md.
 www.imrelab.org
 **/
 
-﻿using System.Collections;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -35,7 +36,14 @@ namespace IMRE.HandWaver
             }
         }
 
-        public override void initializefigure()
+		internal override Vector3 ClosestSystemPosition(Vector3 abstractPosition)
+		{
+			Debug.LogWarning("This FIG TYPE DOESN'T SUPPORT CLOSEST SYS POS : " + figType);
+
+			throw new NotImplementedException();
+		}
+
+		public override void initializefigure()
         {
             this.figType = GeoObjType.circle;
 

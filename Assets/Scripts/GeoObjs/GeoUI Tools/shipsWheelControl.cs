@@ -201,7 +201,7 @@ namespace IMRE.HandWaver
 			sphere.centerPosition = circle.centerPos;
 
 			sphere.initializefigure();
-			sphere.addToRManager();
+			sphere.AddToRManager();
 
 
 			sphereMesh.gameObject.tag = "Sphere";
@@ -460,9 +460,9 @@ namespace IMRE.HandWaver
 					case GeoObjType.line:
 						if (geoObj.GetComponent<InteractableLineSegment>() != null)
 						{
-							geoObj.GetComponent<MasterGeoObj>().addToRManager();
-							geoObj.GetComponent<InteractableLineSegment>().point1.addToRManager();
-							geoObj.GetComponent<InteractableLineSegment>().point2.addToRManager();
+							geoObj.GetComponent<MasterGeoObj>().AddToRManager();
+							geoObj.GetComponent<InteractableLineSegment>().point1.AddToRManager();
+							geoObj.GetComponent<InteractableLineSegment>().point2.AddToRManager();
 							if (!objToRotate.Contains(geoObj.GetComponent<InteractableLineSegment>().point1.GetComponent<MasterGeoObj>()))
 							{
 								objToRotate.Add(geoObj.GetComponent<InteractableLineSegment>().point1.GetComponent<MasterGeoObj>());
@@ -479,7 +479,7 @@ namespace IMRE.HandWaver
 							if (!objToRotate.Contains(point))
 							{
 								objToRotate.Add(point);
-								point.GetComponent<MasterGeoObj>().addToRManager();
+								point.GetComponent<MasterGeoObj>().AddToRManager();
 							}
 						}
 						break;
@@ -488,7 +488,7 @@ namespace IMRE.HandWaver
 						geoObj.GetComponent<AbstractCircle>().normalDir = Quaternion.AngleAxis(deltaRotate, parentSE.normalDir) * geoObj.GetComponent<AbstractCircle>().normalDir;
 						geoObj.transform.RotateAround(parentSE.center, parentSE.normalDir, deltaRotate);
 
-						geoObj.GetComponent<MasterGeoObj>().addToRManager();
+						geoObj.GetComponent<MasterGeoObj>().AddToRManager();
 
 						if (!geoObj.GetComponent<DependentCircle>().edge.GetComponent<MasterGeoObj>().IsSelected)
 						{
@@ -496,7 +496,7 @@ namespace IMRE.HandWaver
 						}
 						break;
 					case GeoObjType.revolvedsurface:
-						geoObj.GetComponent<MasterGeoObj>().addToRManager();
+						geoObj.GetComponent<MasterGeoObj>().AddToRManager();
 
 						attachedGeoObjs.Add(geoObj.transform);
 						if (!objToRotate.Contains(geoObj.GetComponent<DependentRevolvedSurface>().attachedLine.GetComponent<InteractableLineSegment>().point1.GetComponent<MasterGeoObj>()))
@@ -509,7 +509,7 @@ namespace IMRE.HandWaver
 						}
 						break;
 					default:
-						geoObj.GetComponent<MasterGeoObj>().addToRManager();
+						geoObj.GetComponent<MasterGeoObj>().AddToRManager();
 
 						geoObj.transform.Rotate(parentSE.normalDir, deltaRotate);
 						//geoObj.transform.rotation = Quaternion.Euler(rotationVal, 0f, 0f);
@@ -527,7 +527,7 @@ namespace IMRE.HandWaver
 					case GeoObjType.point:
 						geoObj.transform.RotateAround(parentSE.center, parentSE.normalDir, deltaRotate);
 						geoObj.transform.Rotate(parentSE.normalDir, deltaRotate);
-						geoObj.GetComponent<MasterGeoObj>().addToRManager();
+						geoObj.GetComponent<MasterGeoObj>().AddToRManager();
 						break;
 				}
 			}

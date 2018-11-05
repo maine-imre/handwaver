@@ -81,7 +81,6 @@ namespace IMRE.HandWaver.Solver
 		void Start()
         {
 			ins = this;
-			LoadToolbox();
 			//we need to have an event here that tells us to log the scale change.
 			Interface.worldScaleModifier.ins.OnGestureDeactivated += logScaleChange;
         }
@@ -283,7 +282,7 @@ namespace IMRE.HandWaver.Solver
 
 				if (geoComp.GetComponent<straightEdgeBehave>() != null || geoComp.GetComponent<flatfaceBehave>() != null)
 				{	
-					Node<string> meNode = geoComp.findGraphNode();
+					Node<string> meNode = geoComp.FindGraphNode();
 					if (rManList.Contains(meNode))
 					{
 						rManList.Remove(meNode);
@@ -322,7 +321,7 @@ namespace IMRE.HandWaver.Solver
 
             bool killorder = false;
 
-			NodeList<string> neighborList = geoComp.findGraphNode().Neighbors;
+			NodeList<string> neighborList = geoComp.FindGraphNode().Neighbors;
 
             GeoObjType type = geoComp.figType;
 

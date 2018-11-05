@@ -75,16 +75,16 @@ namespace IMRE.HandWaver
             if (prism)
             {
 
-				dPyramid.sides.ForEach(p => p.leapInteraction = false);
+				dPyramid.sides.ForEach(p => p.LeapInteraction = false);
 				dPyramid.sides.ForEach(p => p.transform.GetChild(0).gameObject.SetActive(false));
 
 				iPrism = GeoObjConstruction.iPrism(basePoly, spawnPoint.position + unit * Vector3.up);
-				iPrism.leapInteraction = false;
+				iPrism.LeapInteraction = false;
 
-				iPrism.sides.ForEach(p => GeoObjConstruction.dPyramid(p, apex).sides.ForEach(q => q.leapInteraction = false));
-				iPrism.sides.ForEach(p => p.leapInteraction = false);
+				iPrism.sides.ForEach(p => GeoObjConstruction.dPyramid(p, apex).sides.ForEach(q => q.LeapInteraction = false));
+				iPrism.sides.ForEach(p => p.LeapInteraction = false);
 
-				iPrism.bases.ForEach(p => p.pointList.ForEach(q => q.leapInteraction = false));
+				iPrism.bases.ForEach(p => p.pointList.ForEach(q => q.LeapInteraction = false));
 				iPrism.bases.ForEach(p => p.pointList.ForEach(q => q.GetComponent<MeshRenderer>().enabled = false));
 
                 HW_GeoSolver.ins.addDependence(basePoly2.transform, apex.transform);

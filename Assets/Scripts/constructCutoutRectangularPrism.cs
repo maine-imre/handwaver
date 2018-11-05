@@ -26,12 +26,16 @@ namespace IMRE.HandWaver.Shearing
 		private int numFrames = 0;
 
 		private TextMeshPro TMPro;
+		private AudioSource myAudioSource;
+		const float MAXVALUE = 0.060685f;
+
 
 		// Use this for initialization
 		private void Start()
 		{
 			volumeLineRenderer = GetComponentInChildren<LineRenderer>();
 			TMPro = GetComponentInChildren<TextMeshPro>();
+			myAudioSource = GetComponent<AudioSource>();
 
 			xLen = .1f;
 			controllPoint = GeoObjConstruction.iPoint(this.transform.position);
@@ -77,7 +81,7 @@ namespace IMRE.HandWaver.Shearing
 			{
 				if (mgo != controllPoint)
 				{
-					mgo.leapInteraction = false;
+					mgo.LeapInteraction = false;
 				}
 			}
 
@@ -106,15 +110,17 @@ namespace IMRE.HandWaver.Shearing
 		private void updateDiagram()
 		{
 			//use the trianngle inequality to determine if the control Point is out of bounds.
-			if ((controllPoint.Position3 - cutoutRectangle[1].Position3).magnitude + (controllPoint.Position3 - cutoutRectangle[3].Position3).magnitude <= (cutoutRectangle[1].Position3 - cutoutRectangle[3].Position3).magnitude)
-			{
+			//if ((controllPoint.Position3 - prismBase[1].Position3).magnitude <= sideLength1)
+			//{
 				controllPoint.Position3 = Vector3.Project(controllPoint.Position3 - this.transform.position, (Vector3.right + Vector3.forward).normalized) + this.transform.position;
-			}
-			else
-			{
-				controllPoint.Position3 = cutoutRectangle[1].Position3;
-				controllPoint.GetComponent<InteractionBehaviour>().graspingController.ReleaseGrasp();
-			}
+			//}
+			//else
+			//{
+			//	Debug.Log("Triangle Inequality Failed");
+
+			//	controllPoint.Position3 = prismBase[0].Position3;
+			//	controllPoint.GetComponent<InteractionBehaviour>().graspingController.ReleaseGrasp();
+			//}
 			xLen = Vector3.Distance(controllPoint.Position3, cutoutRectangle[1].Position3);
 
 			//each corner moves in.
@@ -137,12 +143,12 @@ namespace IMRE.HandWaver.Shearing
 			//the prism moves to reflect this...
 			for (int i = 0; i < 4; i++)
 			{
-				prismTopPoly.pointList[i].Position3 = prismBasePoly.pointList[i].Position3 + Vector3.up * xLen;
+				prismTopPoly.pointList[i].Position3 = prismBasePoly.pointList[i].Position3 + Mathf.Sign(xLen * (sideLength1 - 2 * xLen) * (sideLength2 - 2 * xLen)) *Vector3.up * xLen;
 			}
 
 			foreach (MasterGeoObj mgo in prism.vertexPoints)
 			{
-				mgo.addToRManager();
+				mgo.AddToRManager();
 			}
 
 			//plot the volume on the line renderer
@@ -153,6 +159,12 @@ namespace IMRE.HandWaver.Shearing
 			volumeLineRenderer.transform.GetChild(0).transform.localPosition = volumeForLineRenderer;
 
 			TMPro.SetText("x = " + Math.Round(volumeForLineRenderer.x, 2) + " cm                        V = " + Math.Round(volumeForLineRenderer.y, 2) + " cm^3");
+
+			//play sound when max volume is reached.
+			if (xLen == MAXVALUE)
+			{
+				myAudioSource.Play();
+			}
 		}
 
 		private Vector3 volumeForLineRenderer

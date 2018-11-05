@@ -104,7 +104,7 @@ namespace IMRE.HandWaver
 			thisIBehave.ignoreGrasping= true;
 			thisABehave.enabled = false;
 			transform.SetParent(recentHit.transform);
-			recentHit.label = Label;
+			recentHit.Label = Label;
 			Destroy(transform.GetChild(0).gameObject);
 			StartCoroutine(transformFollow(recentHit));
 		}

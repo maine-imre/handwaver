@@ -29,7 +29,7 @@ namespace IMRE.HandWaver
         }
 
 
-        internal override bool rMotion(NodeList<string> inputNodeList)
+        internal override bool RMotion(NodeList<string> inputNodeList)
         {
             bool hasChanged = false;
 
@@ -117,8 +117,8 @@ namespace IMRE.HandWaver
 
 				if (HW_GeoSolver.ins.thisInteractionMode == HW_GeoSolver.InteractionMode.rigid)
 				{
-					lineList.ForEach(l=> l.leapInteraction = false);
-					pointList.ForEach(p => p.leapInteraction = false);
+					lineList.ForEach(l=> l.LeapInteraction = false);
+					pointList.ForEach(p => p.LeapInteraction = false);
 				}
 
 				StartCoroutine(waitForStretch);
@@ -126,12 +126,12 @@ namespace IMRE.HandWaver
             }
         }
 
-        internal override void glueToFigure(MasterGeoObj toObj)
+        internal override void GlueToFigure(MasterGeoObj toObj)
         {
             throw new NotImplementedException();
         }
 
-        internal override void snapToFigure(MasterGeoObj toObj)
+        internal override void SnapToFigure(MasterGeoObj toObj)
 		{
 			//do nothing
 		}

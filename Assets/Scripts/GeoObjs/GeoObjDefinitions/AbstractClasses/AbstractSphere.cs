@@ -32,7 +32,13 @@ namespace IMRE.HandWaver
         // Latitude ---
         private int nbLat = 100;
 
-        public override void initializefigure()
+		internal override Vector3 ClosestSystemPosition(Vector3 abstractPosition)
+		{
+			Debug.LogWarning("This FIG TYPE DOESN'T SUPPORT CLOSEST SYS POS : " + figType);
+			throw new NotImplementedException();
+		}
+
+		public override void initializefigure()
         {
             thisCollider = this.GetComponent<SphereCollider>();
 

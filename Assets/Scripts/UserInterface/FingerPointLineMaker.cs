@@ -239,7 +239,7 @@ namespace IMRE.HandWaver.Lattice
 			lineMaker.delaySearch();
 			if (!successfullyMade)
 			{
-				lineList.ForEach(l => l.deleteGeoObj());
+				lineList.ForEach(l => l.DeleteGeoObj());
 			}
 		}
 

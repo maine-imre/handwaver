@@ -27,6 +27,13 @@ public class sceneChangerMenuItem : MonoBehaviour
 		EditorSceneManager.OpenScene("Assets/Scenes/BaseScenes/GeometersPlanetariumBase.unity");
 	}
 
+	[MenuItem("Load Scene/Base Scene/Network Base")]
+	private static void OpenNetworkBase()
+	{
+		EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
+		EditorSceneManager.OpenScene("Assets/Scenes/BaseScenes/networkingBase.unity");
+	}
+
 	[MenuItem("Load Scene/Content Layer/RSDES")]
 	private static void openRSDES()
 	{
@@ -46,5 +53,12 @@ public class sceneChangerMenuItem : MonoBehaviour
 	{
 		EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
 		EditorSceneManager.OpenScene("Assets/Scenes/ContentLayers/ShearingLab.unity");
+	}
+
+	[MenuItem("Load Scene/Content Layer/Three Torus")]
+	private static void openTorus()
+	{
+		EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
+		EditorSceneManager.OpenScene("Assets/Scenes/ContentLayers/ThreeTorus.unity");
 	}
 }

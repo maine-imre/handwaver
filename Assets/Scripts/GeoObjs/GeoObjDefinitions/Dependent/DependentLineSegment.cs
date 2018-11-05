@@ -22,7 +22,7 @@ namespace IMRE.HandWaver
         public AbstractPoint point1;
         public AbstractPoint point2;
 
-        internal override bool rMotion(NodeList<string> inputNodeList)
+        internal override bool RMotion(NodeList<string> inputNodeList)
         {
 			bool hasChanged = false;
 
@@ -73,12 +73,12 @@ namespace IMRE.HandWaver
 			throw new NotImplementedException();
 		}
 
-        internal override void glueToFigure(MasterGeoObj toObj)
+        internal override void GlueToFigure(MasterGeoObj toObj)
         {
             throw new NotImplementedException();
         }
 
-        internal override void snapToFigure(MasterGeoObj toObj)
+        internal override void SnapToFigure(MasterGeoObj toObj)
         {
 			//do nothing
 		}

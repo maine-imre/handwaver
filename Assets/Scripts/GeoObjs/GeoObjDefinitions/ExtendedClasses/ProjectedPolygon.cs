@@ -13,12 +13,12 @@ namespace IMRE.HandWaver
 
 		private float functionMap(Vector3 input)
 		{
-			return .3f*input.x + input.z*-.5f+myPoly.transform.position.y;
+			return .3f*input.x + input.z*-.5f;
 		}
 
 		private Vector3 vectorMap(Vector3 input)
 		{
-			return new Vector3(input.x, functionMap(input), input.z);
+			return new Vector3(input.x + MasterGeoObj.LocalPosition(myPoly.Position3).x, functionMap(input), input.z + MasterGeoObj.LocalPosition(myPoly.Position3).z) +Vector3.up;
 		}
 
 		private Vector3[] vectorMap(Vector3[] input)
@@ -35,12 +35,18 @@ namespace IMRE.HandWaver
 			myPoly = GetComponent<AbstractPolygon>();
 			mesh0 = GetComponent<MeshFilter>().mesh;
 			child = new GameObject();
-			child.transform.parent = this.transform;
+			child.transform.parent = this.transform.parent;
 			mesh1 = child.AddComponent<MeshFilter>().mesh;
 			child.AddComponent<MeshRenderer>().material = myPoly.GetComponent<MeshRenderer>().material;
 			mesh1.vertices = mesh0.vertices;
 			mesh1.triangles = mesh0.triangles;
 			mesh1.normals = mesh0.normals;
+		}
+
+		private void Update()
+		{
+			//myPoly.Position3 = Vector3.Project(myPoly.Position3, Vector3.up) + Vector3.up * 1.3f;
+			myPoly.normDir = Vector3.up;
 		}
 
 		private void LateUpdate()

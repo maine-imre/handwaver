@@ -22,7 +22,7 @@ namespace IMRE.HandWaver
 	/// </summary>
 	class InteractablePolygon : AbstractPolygon, InteractiveFigure
     {
-		internal override bool rMotion(NodeList<string> inputNodeList)
+		internal override bool RMotion(NodeList<string> inputNodeList)
         {
             bool tempValue = false;
 
@@ -127,20 +127,20 @@ namespace IMRE.HandWaver
 
 				if (HW_GeoSolver.ins.thisInteractionMode == HW_GeoSolver.InteractionMode.rigid)
 				{ 
-					prism.lineSegments.ForEach(p => p.leapInteraction = false);
-					prism.vertexPoints.ForEach(p => p.leapInteraction = false);
+					prism.lineSegments.ForEach(p => p.LeapInteraction = false);
+					prism.vertexPoints.ForEach(p => p.LeapInteraction = false);
 				}
 
 				StartCoroutine(waitForStretch);
             }
         }
 
-        internal override void snapToFigure(MasterGeoObj toObj)
+        internal override void SnapToFigure(MasterGeoObj toObj)
 		{
 			//do nothing
 		}
 
-		internal override void glueToFigure(MasterGeoObj toObj)
+		internal override void GlueToFigure(MasterGeoObj toObj)
         {
             throw new NotImplementedException();
         }

@@ -51,17 +51,17 @@ namespace IMRE.HandWaver.Shearing {
             myPyramids = new List<DependentPyramid>();
 
             myPrism = GeoObjConstruction.iPrism(GeoObjConstruction.rPoly(nSides, apothem, Vector3.ProjectOnPlane(this.transform.position, Vector3.up) + Vector3.up * height1), Vector3.ProjectOnPlane(this.transform.position, Vector3.up) + Vector3.up * height2);
-            myPrism.leapInteraction = false;
+            myPrism.LeapInteraction = false;
             foreach (AbstractLineSegment mgo in myPrism.allEdges)
             {
-                mgo.leapInteraction = false;
+                mgo.LeapInteraction = false;
             }
             foreach (AbstractPolygon mgo in myPrism.allfaces)
             {
-                mgo.leapInteraction = false;
+                mgo.LeapInteraction = false;
                 foreach (AbstractPoint mgol2 in mgo.pointList)
                 {
-                    mgol2.leapInteraction = false;
+                    mgol2.LeapInteraction = false;
                 }
             }
             foreach(AbstractPolygon side in myPrism.sides)
@@ -87,15 +87,15 @@ namespace IMRE.HandWaver.Shearing {
                 foreach(AbstractPolygon face in myPyramids[i].allfaces)
                 {
                     face.figColor = mgoColor[i];
-                    face.leapInteraction = false;
+                    face.LeapInteraction = false;
                 }
                 foreach(AbstractLineSegment line in myPyramids[i].allEdges)
                 {
-                    line.leapInteraction = false;
+                    line.LeapInteraction = false;
                 }
                 foreach(AbstractPoint point in myPyramids[i].basePolygon.pointList)
                 {
-                    point.leapInteraction = false;
+                    point.LeapInteraction = false;
                 }
             }
             foreach (DependentPyramid pyramid in myPyramids)
