@@ -184,8 +184,8 @@ namespace IMRE.HandWaver.Space {
         {                                                           //Generates a url to access using the inputted time and bodyID number.
             string url = string.Format("https://ssd.jpl.nasa.gov/horizons_batch.cgi?batch=1%20&COMMAND=%27{0}%27%20&TABLE_TYPE=%27VECTORS%27%20&CENTER=%27399%27%20&START_TIME=%27{1}STOP_TIME=%27{2}STEP_SIZE=%2760%20min%27%20&OUT_UNITS%20%20=%20%27KM-D%27%20&VEC_TABLE%20=%20%273%27%20&CSV_FORMAT=%27YES%27"
                 , bodyID
-                , generateDateInput(time)
-                , generateDateInput(time.AddHours(1)));
+                , ins.generateDateInput(time)
+                , ins.generateDateInput(time.AddHours(1)));
             return url;
         }
 

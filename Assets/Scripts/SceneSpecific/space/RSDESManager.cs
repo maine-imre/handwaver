@@ -318,12 +318,8 @@ namespace IMRE.HandWaver.Space
 			//timeScaleSlider.OnSliderValueChanged.AddListener(setTimeScale);
 			clock = clockUpdate();
 				StartCoroutine(clock);
-<<<<<<< HEAD
 			Horizons.planetsDataUpdated += SetSunMoonPositions;
 			
-=======
-			HorizonsV4.planetsDataUpdated += SetSunMoonPositions;
->>>>>>> master
 		}
 		private void Awake()
 		{
