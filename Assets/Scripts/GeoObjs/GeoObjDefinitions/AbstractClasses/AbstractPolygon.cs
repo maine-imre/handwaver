@@ -399,6 +399,7 @@ namespace IMRE.HandWaver
 		}
 
 		// Returns true if the point p lies inside the polygon[] with n vertices 
+		//this boolean isn't working properly.
 		private bool isInside(Vector2[] polygon, Vector2 p)
 		{
 			int n = polygon.Length;
