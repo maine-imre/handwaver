@@ -55,7 +55,7 @@ namespace IMRE.HandWaver
 				FindObjectOfType<HWMixcastIO>().currMode = mixCastTargetMode.primaryAlt;
 			}
 #endif
-			autoLoadPlaintains = (loadScenesOnStart.Count == 0);
+			autoLoadPlaintains = (loadScenesOnStart.Count == 0 && !(SceneManager.GetSceneAt(0).name == "ThreeTorus"));
 			PointToSelectEnabled = !loadScenesOnStart.Contains("LatticeLand");
 			Debug.Log("TOOLS: " + autoLoadPlaintains);
 			Debug.Log("PointSELECT: " + PointToSelectEnabled);

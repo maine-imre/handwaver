@@ -59,41 +59,59 @@ namespace IMRE.HandWaver.Interface
 		protected override void WhenGestureDeactivated(Hand maybeNullHand, DeactivationReason reason)
 		{
 			base.WhenGestureDeactivated(maybeNullHand, reason);
-
-			Debug.Log(reason);
-
-			Chirality chirality = Chirality.Right;
-			if (maybeNullHand.IsLeft)
+			if (maybeNullHand != null)
 			{
-				chirality = Chirality.Left;
-			}
-			handColourManager.setHandColorMode(chirality, handColourManager.handModes.none);
-			//erase.
-			switch (reason)
-			{
-				case DeactivationReason.FinishedGesture:
-					if (cancelLatticeLandPoint(maybeNullHand))
-					{
-						foreach (LatticeLandPoint lp in GameObject.FindObjectsOfType<LatticeLandPoint>())
+				Chirality chirality = Chirality.Right;
+				if (maybeNullHand.IsLeft)
+				{
+					chirality = Chirality.Left;
+				}
+				handColourManager.setHandColorMode(chirality, handColourManager.handModes.none);
+				//erase.
+
+
+				switch (reason)
+				{
+					case DeactivationReason.FinishedGesture:
+						if (cancelLatticeLandPoint(maybeNullHand))
 						{
-							float distance = (Vector3.Project(maybeNullHand.PalmPosition.ToVector3() - (lp.GetComponent<LineRenderer>().GetPosition(0) - lp.GetComponent<LineRenderer>().GetPosition(1)) / 2f, lp.GetComponent<LineRenderer>().GetPosition(0) - lp.GetComponent<LineRenderer>().GetPosition(1)) + lp.transform.position - maybeNullHand.PalmPosition.ToVector3()).magnitude;
-							if(distance < maximumRangeToSelect)
+							foreach (LatticeLandPoint lp in GameObject.FindObjectsOfType<LatticeLandPoint>().Where(l => l.GetComponent<LineRenderer>() != null).ToList())
 							{
-								Debug.Log("Try to cancel gesture " + lp.name);
-								lp.endInteraction();
+								//steal this from AbstractLineSegment
+								Vector3 a = lp.GetComponent<LineRenderer>().GetPosition(0);
+								Vector3 b = lp.GetComponent<LineRenderer>().GetPosition(1);
+								Vector3 c = maybeNullHand.PalmPosition.ToVector3();
+								Vector3 result = Vector3.Dot(c - a, (b - a).normalized) * (b - a).normalized + a;
+								if ((result - a).magnitude + (result - b).magnitude > (a - b).magnitude)
+								{
+									//the point is outside the endpoints, find closest endpoint instead.
+									if ((result - a).magnitude < (result - b).magnitude)
+									{
+										result = a;
+									}
+									else
+									{
+										result = b;
+									}
+								}
+
+								float distance = (maybeNullHand.PalmPosition.ToVector3() - result).magnitude;
+								if (distance < maximumRangeToSelect && lp.whichHand != this.whichHand)
+								{
+									lp.endInteraction();
+								}
 							}
 						}
-					}
-					else if (foundMGO(maybeNullHand))
-					{
-						Debug.Log("Try to delete " + closestObj.name);
-						closestObj.DeleteGeoObj();
-					}
-					break;
-				case DeactivationReason.CancelledGesture:
-					break;
-				default:
-					break;
+						else if (foundMGO(maybeNullHand))
+						{
+							closestObj.DeleteGeoObj();
+						}
+						break;
+					case DeactivationReason.CancelledGesture:
+						break;
+					default:
+						break;
+				}
 			}
 		}
 
@@ -102,7 +120,26 @@ namespace IMRE.HandWaver.Interface
 			bool result = false;
 			foreach (LatticeLandPoint lp in GameObject.FindObjectsOfType<LatticeLandPoint>())
 			{
-				float distance = (Vector3.Project(hand.PalmPosition.ToVector3() - (lp.GetComponent<LineRenderer>().GetPosition(0) - lp.GetComponent<LineRenderer>().GetPosition(1))/2f, lp.GetComponent<LineRenderer>().GetPosition(0) - lp.GetComponent<LineRenderer>().GetPosition(1)) + lp.transform.position - hand.PalmPosition.ToVector3()).magnitude;
+				//steal this from AbstractLineSegment
+				Vector3 a = lp.GetComponent<LineRenderer>().GetPosition(0);
+				Vector3 b = lp.GetComponent<LineRenderer>().GetPosition(1);
+				Vector3 c = hand.PalmPosition.ToVector3();
+				Vector3 r = Vector3.Dot(c - a, (b - a).normalized) * (b - a).normalized + a;
+				if ((r - a).magnitude + (r - b).magnitude > (a - b).magnitude)
+				{
+					//the point is outside the endpoints, find closest endpoint instead.
+					if ((r - a).magnitude < (r - b).magnitude)
+					{
+						r = a;
+					}
+					else
+					{
+						r = b;
+					}
+				}
+
+				float distance = (hand.PalmPosition.ToVector3() - r).magnitude;
+
 				result = result || distance < maximumRangeToSelect;
 			}
 			return result;

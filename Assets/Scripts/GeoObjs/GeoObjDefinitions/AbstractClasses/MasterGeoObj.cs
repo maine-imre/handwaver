@@ -241,7 +241,18 @@ namespace IMRE.HandWaver
 						mat = HW_GeoSolver.ins.canidateMaterial;
 						break;
 					case SelectionStatus.none:
-						mat = StandardMaterial;
+						mat = HW_GeoSolver.ins.standardMaterial;
+						switch (myAbility)
+						{
+							case updateCapability.interactable:
+								break;
+							case updateCapability.dependent:
+								mat.color = Color.grey;
+								break;
+							case updateCapability.geoStatic:
+								mat.color = Color.gray;
+								break;
+						}
 						break;
 				}
 				if (GetComponent<MeshRenderer>() != null)
@@ -253,6 +264,19 @@ namespace IMRE.HandWaver
 					GetComponent<LineRenderer>().material = mat;
 				}
 				_thisSelectStatus = value;
+			}
+		}
+
+		public enum updateCapability {interactable,dependent,geoStatic}
+		internal updateCapability myAbility
+		{
+			get
+			{
+				if (this.GetComponent<InteractiveFigure>() != null)
+					return updateCapability.interactable;
+				if (this.GetComponent<DependentFigure>() != null)
+					return updateCapability.dependent;
+				return updateCapability.geoStatic;
 			}
 		}
 
@@ -369,11 +393,11 @@ namespace IMRE.HandWaver
 
 		public void Start()
 		{
-			if (this.GetComponent<Renderer>() != null)
-			{
-				_standardMaterial = GetComponent<Renderer>().material;
-			}
-			_thisSelectStatus = MasterGeoObj.SelectionStatus.none;
+			//if (this.GetComponent<Renderer>() != null)
+			//{
+			//	_standardMaterial = GetComponent<Renderer>().material;
+			//}
+			thisSelectStatus = MasterGeoObj.SelectionStatus.none;
 
 			if (this.GetComponent("Halo")!= null)
 			{
@@ -446,7 +470,7 @@ namespace IMRE.HandWaver
         {
 			if (allowDelete)
 			{
-				HW_GeoSolver.ins.removeComponent(this);
+				//HW_GeoSolver.ins.removeComponent(this);
 				PoolManager.Pools["GeoObj"].Despawn(this.transform);
 			}
         }

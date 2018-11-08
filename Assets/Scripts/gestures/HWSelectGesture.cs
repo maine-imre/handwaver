@@ -10,19 +10,19 @@ using Leap.Unity;
 
 namespace IMRE.HandWaver {
 	[System.Serializable]
-		public struct fingerExtentionBools
-		{
-			public bool thumbExtended;
-			public bool pointerFingerExtended;
-			public bool middleFingerExtended;
-			public bool ringFingerExtended;
-			public bool pinkyFingerExtended;
+	public struct fingerExtentionBools
+	{
+		public bool thumbExtended;
+		public bool pointerFingerExtended;
+		public bool middleFingerExtended;
+		public bool ringFingerExtended;
+		public bool pinkyFingerExtended;
 
-		}
+	}
 	[RequireComponent(typeof(AudioSource))]
 	public class HWSelectGesture : OneHandedGesture
 	{
-		
+
 		[Space]
 		[Header("Select Gesture Properties")]
 		[Space]
@@ -80,11 +80,11 @@ namespace IMRE.HandWaver {
 		{
 			bool tmp =
 			(debugkeyboardinput.PointToSelectEnabled &&
-			(fingerExtentionState.pointerFingerExtended && hand.Fingers[1].IsExtended)  &&
-			!(fingerExtentionState.middleFingerExtended && hand.Fingers[2].IsExtended)  &&
-			!(fingerExtentionState.ringFingerExtended && hand.Fingers[3].IsExtended)    &&
-			!(fingerExtentionState.pinkyFingerExtended && hand.Fingers[4].IsExtended)   &&
-			!completeBool																&&
+			(fingerExtentionState.pointerFingerExtended && hand.Fingers[1].IsExtended) &&
+			!(fingerExtentionState.middleFingerExtended && hand.Fingers[2].IsExtended) &&
+			!(fingerExtentionState.ringFingerExtended && hand.Fingers[3].IsExtended) &&
+			!(fingerExtentionState.pinkyFingerExtended && hand.Fingers[4].IsExtended) &&
+			!completeBool &&
 			!hand.IsPinching()
 			);
 			return tmp;
@@ -171,11 +171,24 @@ namespace IMRE.HandWaver {
 			foreach (MasterGeoObj mgo in FindObjectsOfType<MasterGeoObj>().Where(g => (g.GetComponent<AnchorableBehaviour>() == null || (g.GetComponent<AnchorableBehaviour>() != null && !g.GetComponent<AnchorableBehaviour>().isAttached))))
 			{
 				float distance = mgo.LocalDistanceToClosestPoint(hand.Fingers[1].TipPosition.ToVector3());
-				float angle = mgo.PointingAngleDiff(hand.Fingers[1].TipPosition.ToVector3(),hand.Fingers[1].Direction.ToVector3());
+				float angle = mgo.PointingAngleDiff(hand.Fingers[1].TipPosition.ToVector3(), hand.Fingers[1].Direction.ToVector3());
 
 				if (Mathf.Abs(distance) < shortestDist)
 				{
 					if (distance < shortestDist && angle < angleTolerance)
+					{
+						closestObj = mgo;
+						shortestDist = distance;
+					}
+				}
+				else
+				{
+					//check to see if any higher priority objectes lie within epsilon
+					bool v = (Mathf.Abs(distance) - shortestDist <= maximumRangeToSelect) && (
+					  ((closestObj.figType == GeoObjType.line || closestObj.figType == GeoObjType.polygon) && mgo.figType == GeoObjType.point)
+					  || (closestObj.figType == GeoObjType.polygon && mgo.figType == GeoObjType.point)
+					  );
+					if (v)
 					{
 						closestObj = mgo;
 						shortestDist = distance;
@@ -186,9 +199,9 @@ namespace IMRE.HandWaver {
 
 			handColourManager.setHandColorMode(whichHand, handColourManager.handModes.select);
 
-			if (closestObj != null  && shortestDist <= maximumRangeToSelect)
+			if (closestObj != null && shortestDist <= maximumRangeToSelect)
 			{
-				if(debugSelect)
+				if (debugSelect)
 					Debug.Log(closestObj + " is the object toggling selection state.");
 
 
