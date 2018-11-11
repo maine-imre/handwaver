@@ -67,6 +67,8 @@ namespace IMRE.HandWaver.Solver
 		public Material selectedMaterial;
 		public Material activeMaterial;
 		public Material canidateMaterial;
+		public Material standardMaterial;
+
 		public static HW_GeoSolver ins;
 
 		public int currentIndex
@@ -121,13 +123,13 @@ namespace IMRE.HandWaver.Solver
 		}
 		private bool ScaleHasChanged = false;
 
-        /// <summary>
-        /// During update, this recursively handles chagnes to other figures from the user's input.
-        /// It goes up and down the dependency tree.
-        /// </summary>
-        /// <param name="nodeList"></param>
-        /// <param name="newItems">List of items that returned true or ween't in the nodeList</param>
-        public void ReactionManager(NodeList<string> nodeList, NodeList<string> LastPassTrue)
+		/// <summary>
+		/// During update, this recursively handles chagnes to other figures from the user's input.
+		/// It goes up and down the dependency tree.
+		/// </summary>
+		/// <param name="nodeList"></param>
+		/// <param name="newItems">List of items that returned true or ween't in the nodeList</param>
+		public void ReactionManager(NodeList<string> nodeList, NodeList<string> LastPassTrue)
         {
             if (nodeList == null)
             {
@@ -348,9 +350,9 @@ namespace IMRE.HandWaver.Solver
                     break;
                 case GeoObjType.polygon:
                     pointCount = neighborTypeCount(neighborList, GeoObjType.point);
-                    lineCount = neighborTypeCount(neighborList, GeoObjType.line);
+                    //lineCount = neighborTypeCount(neighborList, GeoObjType.line);
                     //TOFIX:  add cycle check
-                    if ((lineCount < 3) || (pointCount < lineCount))
+                    if (pointCount < 3)
                     {
                         killorder = true;
                     }

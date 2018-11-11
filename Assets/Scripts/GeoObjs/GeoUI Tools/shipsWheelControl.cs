@@ -80,13 +80,10 @@ namespace IMRE.HandWaver
 		public void Update()
 		{
 			//consider moving this to an enumerator triggered by an event on Ibehave.
+			float tmp = Vector3.SignedAngle(Quaternion.FromToRotation(Vector3.up, thisIBehave.transform.right)*Vector3.right, thisIBehave.transform.forward, thisIBehave.transform.right);
+			deltaRotate = tmp-rotationVal;
+			rotationVal = tmp;
 
-			deltaRotate = Mathf.Sign(Vector3.Cross(this.transform.up, this.transform.forward).x) * Mathf.Sign(this.GetComponent<Rigidbody>().angularVelocity.x) * Vector3.Magnitude(this.GetComponent<Rigidbody>().angularVelocity) * (180f / Mathf.PI) * Time.deltaTime;
-			rotationVal += deltaRotate;
-			//if(actionTime == null)
-			//{
-			//	actionTime = DateTime.Now;
-			//}
 			coolDownBool = DateTime.Now.Subtract(actionTime).TotalSeconds > 3.0f;
 			#region Rotate Selected & Attached Geo Objects
 
@@ -128,16 +125,6 @@ namespace IMRE.HandWaver
 
 
 			#endregion
-		}
-
-		float rotationAroundX()
-		{
-			float angle = this.transform.localRotation.eulerAngles.x;
-			if (Vector3.Dot(Quaternion.Euler(angle, 0, 0) * Vector3.up, Vector3.Normalize(this.transform.up)) != 1)
-			{
-				angle = 180 - angle;
-			}
-			return angle;
 		}
 
 		#region Check number of turns, and if this turn is new.
