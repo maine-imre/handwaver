@@ -33,15 +33,13 @@ namespace IMRE.HandWaver
 			Vector3 a = vertex0;
 			Vector3 b = vertex1;
 			Vector3 c = abstractPosition;
-			float dist = (c - a).magnitude * Mathf.Sin(Mathf.Abs(Vector3.Angle(c - a, b - a)));
-			Vector3 result = a + (b - a).normalized * Mathf.Sqrt(Mathf.Pow((a - c).magnitude, 2) + Mathf.Pow(dist, 2));
-			float distToA = (result - a).magnitude;
-			float distToB = (result - b).magnitude;
-			float distToC = (result - c).magnitude;
-			if (distToC < Mathf.Min(distToA,distToB))
+			//float dist = (c - a).magnitude * Mathf.Sin(Mathf.Abs(Vector3.Angle(c-a,b-a)));
+			//Vector3 result = a + (b - a).normalized * Mathf.Sqrt(Mathf.Pow((a - c).magnitude, 2) + Mathf.Pow(dist, 2));
+			Vector3 result = Vector3.Dot(c - a, (b - a).normalized) * (b - a).normalized + a;
+			if ((result-a).magnitude + (result-b).magnitude > (a-b).magnitude)
 			{
 				//the point is outside the endpoints, find closest endpoint instead.
-				if(distToA < distToB)
+				if((result-a).magnitude < (result-b).magnitude)
 				{
 					result = a;
 				}
