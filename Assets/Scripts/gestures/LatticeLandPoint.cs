@@ -179,20 +179,21 @@ namespace IMRE.HandWaver.Interface
 				switch (reason)
 				{
 					case DeactivationReason.FinishedGesture:
+						playSuccessSound();
+
 						if (maybeNullHand.Fingers[0].IsExtended)
 						{
 							//thumb up is draw polygon
 							if (prevSet && currSet && _prevPoint != _currPoint)
 							{
 								lineList.Add(GeoObjConstruction.dLineSegment(currPoint, prevPoint));
-								playSuccessSound();
 								int idx = pointList.LastIndexOf(_currPoint);
 								int idx2 = pointList.IndexOf(_currPoint);
 
-								if (idx -1> idx2 && lineList.Count > 1)
+								if (idx> idx2 && lineList.Count > 1)
 								{
 
-									List<AbstractPoint> p1 = pointList.GetRange(idx2, (idx - 1)-idx2);
+									List<AbstractPoint> p1 = pointList.GetRange(idx2, (idx)-idx2);
 									List<AbstractLineSegment> l1 = lineList.Where(l => p1.Contains(l.GetComponent<DependentLineSegment>().point1) || p1.Contains(l.GetComponent<DependentLineSegment>().point2)).ToList();
 									//TODO: Point list is overpopulated. CodyCodyCodyCodyCodyCody
 									GeoObjConstruction.iPolygon(l1, p1);
@@ -206,7 +207,6 @@ namespace IMRE.HandWaver.Interface
 							if (prevSet && currSet && _prevPoint != _currPoint)
 							{
 								lineList.Add(GeoObjConstruction.dLineSegment(currPoint, prevPoint));
-								playSuccessSound();
 							}
 						}
 					break;
@@ -260,12 +260,18 @@ namespace IMRE.HandWaver.Interface
 			thisLR.SetPositions(new Vector3[] { Vector3.zero, Vector3.zero });
 			thisLR.enabled = false;
 			updateLine = false;
-			pointList.Clear();
-			lineList.Clear();
+			if (pointList != null)
+			{
+				pointList.Clear();
+			}
+			if (lineList != null)
+			{
+				lineList.Clear();
+			}
 			prevSet = false;
 			currSet = false;
 			successfullyMade = false;
-				lineList.ForEach(l => l.DeleteGeoObj());
+				//lineList.ForEach(l => l.DeleteGeoObj());
 			prevPoint = null;
 			currPoint = null;
 		}
@@ -321,7 +327,7 @@ namespace IMRE.HandWaver.Interface
 				{
 					thisLR.SetPosition(0, _currPoint.transform.position);
 				}
-				if (_currPoint != null)
+				if (_currPoint != null && _currPoint != _prevPoint)
 				{
 					pointList.Add(_currPoint);
 				}

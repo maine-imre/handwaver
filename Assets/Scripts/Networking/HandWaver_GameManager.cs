@@ -22,7 +22,7 @@ namespace IMRE.HandWaver.Networking {
 
 		public List<GameObject> localPlayers;
 		public List<MeshRenderer> walls;
-		public List<Transform> balls;
+		public List<HyperBall> balls;
 		public List<Vector3> ballSpawnPos;
 		public HyperBallBoundaries makeWallScript;
 
@@ -30,9 +30,13 @@ namespace IMRE.HandWaver.Networking {
 
 		#region Photon Callbacks
 
-		private void Start()
+		private void Awake()
 		{
 			ins = this;
+		}
+
+		private void Start()
+		{
 			if (playerPrefab == null)
 			{
 				Debug.LogError("Missing playerPrefab Reference. Please set it up in Game Manager");
@@ -45,7 +49,6 @@ namespace IMRE.HandWaver.Networking {
 				localPlayers.Add(newPlayer);
 				newPlayer.GetComponent<playerHead>().setupPlayer(PhotonNetwork.NickName, localPlayers.IndexOf(newPlayer), UnityEngine.Random.Range(0f,1f));
 			}
-			makeWallScript.rectangularWalls.ForEach(wall => walls.Add(wall.GetComponent<MeshRenderer>()));
 
 			photonView.RPC("setWallState", RpcTarget.AllBuffered, 0);
 
@@ -73,27 +76,32 @@ namespace IMRE.HandWaver.Networking {
 			}
 			if (Input.GetKeyDown(KeyCode.F5))
 			{
-				makeWallScript.GetComponent<PhotonView>().RPC("setSpaceType", RpcTarget.All, HyperBallBoundaries.Space++);
+				makeWallScript.advanceGeometeryType();
 			}
 		}
 
 		[PunRPC]
 		private void setWallState(int v)
 		{
+			bool boxOn = HyperBallBoundaries.myGeometery != HyperBallBoundaries.GeometeryType.ThreeSphere;
+
 			switch (v)
 			{
 				case 0:
 					walls.ForEach(w => w.enabled = false);
+					makeWallScript.sphereWall.GetComponent<MeshRenderer>().enabled = false;
 					break;
 				case 1:
-					walls.ForEach(w => w.enabled = true);
+					walls.ForEach(w => w.enabled = boxOn);
+					makeWallScript.sphereWall.GetComponent<MeshRenderer>().enabled = !boxOn;
 					Color transparentBlack = Color.black;
 					transparentBlack.a = 0.6f;
 					walls.ForEach(w => w.material.color = transparentBlack);
+					makeWallScript.sphereWall.GetComponent<MeshRenderer>().material.color = transparentBlack;
 					break;
 				case 2:
-					walls.ForEach(w => w.enabled = true);
-
+					walls.ForEach(w => w.enabled = boxOn);
+					makeWallScript.sphereWall.GetComponent<MeshRenderer>().enabled = !boxOn;
 					for (int i = 0; i < 6; i++)
 					{
 						Color newWallColor;
@@ -114,6 +122,8 @@ namespace IMRE.HandWaver.Networking {
 						}
 						walls[i].material.color = newWallColor;
 					}
+					makeWallScript.sphereWall.GetComponent<MeshRenderer>().material.color = Color.blue;
+
 					break;
 				default:
 					Debug.LogError("you coded this wrong. Only accepts 0..2");
@@ -126,7 +136,7 @@ namespace IMRE.HandWaver.Networking {
 			for (int i = 0; i < balls.Count; i++)
 			{
 				balls[i].GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.LocalPlayer);
-				balls[i].position = ballSpawnPos[i];
+				balls[i].transform.position = ballSpawnPos[i];
 				balls[i].GetComponent<Rigidbody>().velocity = Vector3.zero;
 				balls[i].GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
 				balls[i].GetComponent<PhotonView>().TransferOwnership(0);
@@ -141,7 +151,7 @@ namespace IMRE.HandWaver.Networking {
 		/// </summary>
 		public override void OnLeftRoom()
 		{
-			Application.Quit();
+			//Application.Quit();
 		}
 
 
@@ -188,7 +198,7 @@ namespace IMRE.HandWaver.Networking {
 
 			if (PhotonNetwork.IsMasterClient)
 			{
-				Debug.LogFormat("OnPlayerEnteredRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient); // called before OnPlayerLeftRoom
+				Debug.LogFormat("OnPlayerEnteredRoom IsMasterClient {0}", other.IsMasterClient); // called before OnPlayerLeftRoom
 
 
 				//LoadArena();
@@ -203,7 +213,7 @@ namespace IMRE.HandWaver.Networking {
 
 			if (PhotonNetwork.IsMasterClient)
 			{
-				Debug.LogFormat("OnPlayerLeftRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient); // called before OnPlayerLeftRoom
+				Debug.LogFormat("OnPlayerLeftRoom IsMasterClient {0}", other.IsMasterClient); // called before OnPlayerLeftRoom
 
 
 				//LoadArena();
@@ -217,9 +227,10 @@ namespace IMRE.HandWaver.Networking {
 		public void getBallPos()
 		{
 			ballSpawnPos.Clear();
-			foreach (Transform ball in balls)
+			foreach (HyperBall ball in FindObjectsOfType<HyperBall>())
 			{
-				ballSpawnPos.Add(ball.position);
+				balls.Add(ball);
+				ballSpawnPos.Add(ball.transform.position);
 			}
 		}
 	}
