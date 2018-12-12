@@ -13,10 +13,10 @@ using UnityEngine;
 
 namespace IMRE.HandWaver
 {
+
 	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
+	/// An anchor spawner unique to our repo, inheriting from LeapMotion.
+	/// Consider depreciating.
 	/// </summary>
 	class tutAnchorSpawner : anchorSpawner
 	{
