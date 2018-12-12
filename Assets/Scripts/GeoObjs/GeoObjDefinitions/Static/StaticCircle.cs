@@ -13,11 +13,9 @@ namespace IMRE.HandWaver
 {
     [RequireComponent(typeof(LineRenderer))]
 
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// Circles that aren't dynamic
+/// </summary>
 	class StaticCircle : AbstractCircle, StaticFigure
     {
         internal override bool RMotion(NodeList<string> inputNodeList)

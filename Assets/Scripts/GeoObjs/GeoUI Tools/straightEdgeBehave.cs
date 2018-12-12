@@ -16,14 +16,11 @@ using System;
 
 namespace IMRE.HandWaver
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// A mastergeoobj for lines. These are rendered to be 100s of meters long, to approximate infinite lines.
+/// </summary>
 	class straightEdgeBehave : MasterGeoObj
 	{
-#pragma warning disable 0649
 
 		public shipWheelOffStraightedge.wheelType wheelType;
 
@@ -43,7 +40,6 @@ namespace IMRE.HandWaver
 
 		private AnchorableBehaviour thisAbehave;
 		private InteractionBehaviour thisIbehave;
-#pragma warning restore 0649
 
 		new void Start()
 		{

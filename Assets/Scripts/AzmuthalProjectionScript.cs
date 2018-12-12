@@ -4,13 +4,18 @@ using UnityEngine;
 
 namespace IMRE.HandWaver
 {
-	/// <summary>
-	/// This script ___
-	/// The main contributor(s) to this script is CB
-	/// Status: WORKING
-	/// </summary>
+    /// <summary>
+    /// 
+    /// </summary>
 	public static class AzmuthalProjectionScript
     {
+        
+        /// <summary>
+        /// This script is used to map a equiangular rectangular projection of the globe onto a azmuthal projection of the globe
+        /// For rendering "flat earth disk"
+        /// </summary>
+        /// <param name="count">the number of verticies per side of equirectangular</param>
+        /// <returns>the disk mesh that will accept an equirectuangular image</returns>
         public static Mesh azmuthalUVMesh(int count)
         {
             Mesh myMesh = new Mesh();

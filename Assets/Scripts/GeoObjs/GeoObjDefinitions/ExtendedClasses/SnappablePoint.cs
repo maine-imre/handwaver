@@ -14,11 +14,10 @@ using System.Linq;
 
 namespace IMRE.HandWaver
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// Points that snap to other geometeric objects
+/// will be depreciated with new geometery kernel.
+/// </summary>
 	class SnappablePoint : DependentPoint
 	{
 		private List<MasterGeoObj> relativeObjects;

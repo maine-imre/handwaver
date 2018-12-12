@@ -8,6 +8,7 @@ namespace IMRE.HandWaver.Shearing
 {
 	/// <summary>
 	/// This script is the main managing script for the ShearingLab scene in HandWaver.
+ /// Build for Bock's MST Thesis.   
 	/// The main contributor(s) to this script is CB
 	/// Status: WORKING
 	/// </summary>

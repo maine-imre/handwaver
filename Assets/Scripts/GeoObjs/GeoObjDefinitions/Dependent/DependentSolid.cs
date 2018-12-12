@@ -11,11 +11,9 @@ using System.Collections.Generic;
 
 namespace IMRE.HandWaver
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// will be depreciated with new geometery kernel.
+/// </summary>
 	class DependentSolid : AbstractSolid, DependentFigure
     {
         internal override float volume

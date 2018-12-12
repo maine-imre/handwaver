@@ -12,11 +12,10 @@ using UnityEngine;
 
 namespace IMRE.HandWaver
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// Polygon from list of points
+/// Will be refactored in new geometery kernel.
+/// </summary>
 	abstract class AbstractPolygon : MasterGeoObj
 	{
 		public bool skewable = true;

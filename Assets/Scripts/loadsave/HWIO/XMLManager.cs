@@ -19,11 +19,10 @@ using IMRE.HandWaver.Solver;
 
 namespace IMRE.HandWaver.HWIO
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// Creates and saves XML files for saving and loading geo objs.
+/// Will be refactored with new geometery solver.
+/// </summary>
 	class XMLManager : MonoBehaviour
 	{
 		public static XMLManager ins;

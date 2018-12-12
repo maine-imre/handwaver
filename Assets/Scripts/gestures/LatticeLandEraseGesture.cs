@@ -10,6 +10,9 @@ using System;
 
 namespace IMRE.HandWaver.Interface
 {
+	/// <summary>
+	/// Open palm to erase points in latticeland.
+	/// </summary>
 	public class LatticeLandEraseGesture : Leap.Unity.Gestures.OneHandedGesture
 	{
 		private float maximumRangeToSelect = .05f;

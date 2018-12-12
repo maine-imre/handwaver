@@ -10,11 +10,9 @@ using System;
 
 namespace IMRE.HandWaver
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// Arcs that aren't dynamic
+/// </summary>
 	class StaticArc : AbstractArc, StaticFigure
     {
         public override void initializefigure()

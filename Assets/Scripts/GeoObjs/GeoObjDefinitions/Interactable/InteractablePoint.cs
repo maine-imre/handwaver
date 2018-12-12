@@ -14,11 +14,10 @@ using IMRE.HandWaver.Solver;
 
 namespace IMRE.HandWaver
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// An interactable point, the basis for the sandbox.
+/// Will be depreciated with new Geometery kernel
+/// </summary>
 	class InteractablePoint : AbstractPoint, InteractiveFigure
     {
         public bool controllCollide = false;

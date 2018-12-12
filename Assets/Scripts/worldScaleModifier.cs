@@ -19,6 +19,7 @@ namespace IMRE.HandWaver.Interface
 	[RequireComponent(typeof(LineRenderer), typeof(AudioSource))]
 	/// <summary>
 	/// This script allows for double pinch scaling to occur in a scene. Objects need to be subscribed for this to function.
+	/// This script needs to be abstracted as part of the control abstraction.
 	/// The main contributor(s) to this script is CB, JH
 	/// Status: WORKING
 	/// </summary>

@@ -5,6 +5,9 @@ using Leap.Unity.Interaction;
 using PathologicalGames;
 
 namespace IMRE.HandWaver.Shearing {
+    /// <summary>
+    /// Constructs a pyramid in "cube jail" for Bock's Thesis.
+    /// </summary>
     class constructPyramidPrismForShearing : MonoBehaviour {
 
         public List<Color> mgoColor = new List<Color>();

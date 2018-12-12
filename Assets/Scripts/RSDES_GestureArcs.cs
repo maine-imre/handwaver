@@ -13,7 +13,7 @@ namespace IMRE.HandWaver.Space
 	/// <summary>
 	/// This script allows for arcs to be created between RSDESpushPinPreFabs with hand gestures in the RSDES scene.
 	/// The main contributor(s) to this script is  CB, NG
-	/// Status: WORKING
+	/// Status: Needs abstraction.
 	/// </summary>
 	public class RSDES_GestureArcs : OneHandedGesture
 	{

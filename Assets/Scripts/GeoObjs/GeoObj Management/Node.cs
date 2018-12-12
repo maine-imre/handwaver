@@ -15,10 +15,10 @@ using System.Linq;
 namespace IMRE.HandWaver
 {
 	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
+	/// Graph theory for Greg's geometery kernel.
+	/// Will be depreciated with new geometery kernel.
 	/// </summary>
+	/// <typeparam name="T"></typeparam>
 	public class GraphNode<T> : Node<T>
     {
 		private List<int> costs;

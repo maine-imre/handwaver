@@ -15,11 +15,10 @@ using System.Linq;
 
 namespace IMRE.HandWaver
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// An interactable polygon.  Allows for skew polygons
+/// Will be depreciated with new Geometery kernel
+/// </summary>
 	class InteractablePolygon : AbstractPolygon, InteractiveFigure
     {
 		internal override bool RMotion(NodeList<string> inputNodeList)

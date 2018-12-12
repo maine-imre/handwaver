@@ -6,11 +6,10 @@ using System.Linq;
 
 namespace IMRE.HandWaver.HigherDimensions
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// Net of hypercube for scale and dimension study
+/// Projected to 3D
+/// </summary>
 	public class HypercubeNet : AbstractHigherDimSolid
     {
 

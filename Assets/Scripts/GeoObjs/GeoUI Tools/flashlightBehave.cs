@@ -13,11 +13,9 @@ using System;
 
 namespace IMRE.HandWaver
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// Flashlight tool using light source
+/// </summary>
 	class flashlightBehave : HandWaverTools
 	{
 #pragma warning disable 0649

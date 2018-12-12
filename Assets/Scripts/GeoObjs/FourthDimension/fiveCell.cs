@@ -14,11 +14,9 @@ using System.Linq;
 
 namespace IMRE.HandWaver.HigherDimensions
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// Five cell for scale and dimension study.
+/// </summary>
 	public class fiveCell : AbstractHigherDimSolid
     {
         readonly static float GoldenRatio = (1f + Mathf.Sqrt(5f)) / 2f;

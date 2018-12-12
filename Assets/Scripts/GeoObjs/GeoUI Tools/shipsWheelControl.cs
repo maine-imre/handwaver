@@ -18,11 +18,9 @@ using IMRE.HandWaver.Solver;
 
 namespace IMRE.HandWaver
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// This is placed on the ships wheen on the straightedge and allows for rotations of figrues  with LeapMotionOrion/Physics
+/// </summary>
 	class shipsWheelControl : MonoBehaviour
 	{
 		#region Public Variables

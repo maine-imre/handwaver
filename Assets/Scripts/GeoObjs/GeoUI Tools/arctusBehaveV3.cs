@@ -15,11 +15,10 @@ using IMRE.HandWaver.Solver;
 
 namespace IMRE.HandWaver
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// A 3d analoug of a compass.  Place handles on two points to determine radius, and construct sphere.
+/// Needs refactoring in UX overhaul.
+/// </summary>
 	class arctusBehaveV3 : HandWaverTools
 	{
 #pragma warning disable 0649
