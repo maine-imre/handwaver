@@ -5,6 +5,9 @@ using Leap.Unity.Gestures;
 using Leap;
 
 namespace IMRE.HandWaver.Interface {
+	/// <summary>
+	/// A gesture for
+	/// </summary>
 	public class pointingGesture : OneHandedGesture
 	{
 		protected override bool ShouldGestureActivate(Hand hand)

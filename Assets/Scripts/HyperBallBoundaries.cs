@@ -7,6 +7,10 @@ using UnityEngine;
 
 namespace IMRE.HandWaver.FourthDimension
 {
+	/// <summary>
+	/// Graphics for boundaries of hyperball.
+	/// Part of a networking proof of concept.
+	/// </summary>
 	public class HyperBallBoundaries : MonoBehaviourPunCallbacks
 	{
 		public enum GeometeryType {ThreeTorus,ThreeSphere,KleinBottle,TrippleTwist};

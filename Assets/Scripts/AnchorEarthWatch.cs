@@ -4,8 +4,16 @@ using UnityEngine;
 
 namespace IMRE.HandWaver.Space
 {
+	/// <summary>
+	/// The anchro earth watch script turns off the anchor when it might intersect the earth.
+	/// This prevents anchored items from meeting the earth in error.
+	/// Will be depreciated when the Geometer's Planetarium UX design is redone.
+	/// </summary>
 	public class AnchorEarthWatch : MonoBehaviour
 	{
+		/// <summary>
+		/// The anchor spawner script that manages the anchored item.
+		/// </summary>
 		public anchorSpawner spawner;
 
 		private void Update()

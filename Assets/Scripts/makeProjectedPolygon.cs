@@ -4,6 +4,10 @@ using UnityEngine;
 
 namespace IMRE.HandWaver.Solver
 {
+	/// <summary>
+	/// This constructs projected polygons for the linear programing test scene.
+	/// May be depreciated in the future.
+	/// </summary>
 	public class makeProjectedPolygon : MonoBehaviour
 	{
 
