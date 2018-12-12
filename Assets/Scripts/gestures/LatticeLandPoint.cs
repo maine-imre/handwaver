@@ -16,6 +16,9 @@ namespace IMRE.HandWaver.Interface
 {
 	[RequireComponent(typeof(LineRenderer))]
 	[RequireComponent(typeof(AudioSource))]
+	/// <summary>
+	/// Point to draw line segments in latticeland
+	/// </summary>
 	public class LatticeLandPoint : OneHandedGesture
 	{
 
