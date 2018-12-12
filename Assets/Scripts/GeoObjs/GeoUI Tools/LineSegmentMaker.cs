@@ -18,11 +18,12 @@ namespace IMRE.HandWaver
 
 	[RequireComponent(typeof(AudioSource))]
 
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// Uses a pin to draw line segments between points.
+/// Developed for lattice land
+/// Moved to sandbox.
+/// Currently depreciated.
+/// </summary>
 	class LineSegmentMaker : HandWaverTools
     {
 #pragma warning disable 0649

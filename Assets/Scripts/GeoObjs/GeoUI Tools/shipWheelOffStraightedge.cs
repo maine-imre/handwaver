@@ -13,11 +13,10 @@ using System;
 
 namespace IMRE.HandWaver
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// This script controls the icon for the ships wheel that can be taken from the toolbox and "placed onto the striaghtedge"
+/// Needs to be repalced with UX overhaul.
+/// </summary>
 	class shipWheelOffStraightedge : HandWaverTools
 	{
 #pragma warning disable 0649

@@ -15,11 +15,10 @@ using IMRE.HandWaver.Solver;
 
 namespace IMRE.HandWaver
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// Eraser tool.  deletes geoobjs and tools.
+/// need to be refactored in ux overhaul.
+/// </summary>
 	public class eraserBehave : HandWaverTools
 	{
         private InteractionBehaviour thisIBehave;

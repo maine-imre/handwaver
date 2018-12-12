@@ -13,11 +13,11 @@ using Leap.Unity.Interaction;
 
 namespace IMRE.HandWaver.Lattice
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+
+/// <summary>
+/// Spawns the array for  the LatticeLand scene.
+/// May depreciate with movement towards an anchor-based system.
+/// </summary>
 	public class PinBoard3D : MonoBehaviour
     {
         /// <summary>

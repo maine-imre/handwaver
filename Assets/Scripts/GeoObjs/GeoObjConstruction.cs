@@ -15,6 +15,11 @@ using Leap.Unity.Interaction;
 using IMRE.HandWaver.Solver;
 
 namespace IMRE.HandWaver {
+	/// <summary>
+	/// A script used to interface between the geometry kernel (GeoSolver) and scripts that interpret user input.
+	/// Takes a variety of  inputs to allow for construction of figures both at runtime and in onstart scripts.
+	/// Will need to be entirely refactored for new Geometery kernel.
+	/// </summary>
 	class GeoObjConstruction
 	{
 		//internal static IntersectionPolygon intersectPoly(AbstractSolid solid, CrossSectionBehave csPlane)

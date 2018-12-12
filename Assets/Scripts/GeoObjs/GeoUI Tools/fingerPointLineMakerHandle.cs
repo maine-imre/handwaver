@@ -15,11 +15,9 @@ namespace IMRE.HandWaver.Lattice
 {
 	[RequireComponent(typeof(AudioSource))]
 
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// Depreciated. Point to draw with line segments.
+/// </summary>
 	public class fingerPointLineMakerHandle : MonoBehaviour
 	{
 		internal FingerPointLineMaker lineSegmentMaker;

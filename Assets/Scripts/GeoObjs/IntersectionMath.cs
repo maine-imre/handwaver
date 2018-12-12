@@ -13,11 +13,10 @@ using UnityEngine;
 
 namespace IMRE.HandWaver.Solver
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// A set of data that is passed to and from interseciton figures to pass a generic form of their attributes.
+/// this lets us use sub-methods while keeping everything generic engouh to both construct and update intersectionFigrues.
+/// </summary>
 	internal struct intersectionFigData
     {
         internal GeoObjType figtype;
@@ -49,7 +48,12 @@ namespace IMRE.HandWaver.Solver
 
         }
     }
-
+/// <summary>
+/// This script holds all of the calculations necessary to compute intersections between figures.
+/// Needs it's set of figures to be expanded.
+/// Not yet reliable.
+/// Will be depreciated with new Geometery kernel.
+/// </summary>
     internal class IntersectionMath
     {
         internal static bool withinEpsilon(float value1, float value2)

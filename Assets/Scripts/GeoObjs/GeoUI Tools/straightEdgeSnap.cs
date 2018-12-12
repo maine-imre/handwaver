@@ -11,11 +11,10 @@ using UnityEngine;
 
 namespace IMRE.HandWaver
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+    /// <summary>
+    /// Allows MasterGeoObjs to snap to straightedgebehaves (lines)
+    /// Currently depreciated.
+    /// </summary>
 	public class straightEdgeSnap : MonoBehaviour
     {
 
