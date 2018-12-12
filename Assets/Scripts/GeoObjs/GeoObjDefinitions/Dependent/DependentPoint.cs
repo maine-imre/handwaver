@@ -11,11 +11,9 @@ using UnityEngine;
 
 namespace IMRE.HandWaver
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// will be depreciated with new geometery kernel.
+/// </summary>
 	class DependentPoint : AbstractPoint, DependentFigure
     {
 		private Vector3 oldPos;

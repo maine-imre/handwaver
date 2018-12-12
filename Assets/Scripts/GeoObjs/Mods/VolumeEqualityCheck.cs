@@ -15,6 +15,7 @@ namespace IMRE.HandWaver
 {
 /// <summary>
 /// Sets that color of objects based on a property: volume equality.
+/// will be depreciated with new geometery kernel.
 /// </summary>
 	public class VolumeEqualityCheck : MonoBehaviour
     {

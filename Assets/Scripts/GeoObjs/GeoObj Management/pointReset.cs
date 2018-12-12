@@ -9,11 +9,10 @@ using UnityEngine;
 
 namespace IMRE.HandWaver
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// Moves points back to thier intiial position.
+/// Used in Bock thesis study.
+/// </summary>
 	public class pointReset : MonoBehaviour
     {
 

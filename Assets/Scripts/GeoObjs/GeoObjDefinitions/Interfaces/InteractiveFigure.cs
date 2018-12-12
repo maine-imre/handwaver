@@ -13,11 +13,10 @@ using Leap.Unity.Interaction;
 
 namespace IMRE.HandWaver
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// apparently this interface doesn't matter.
+/// Depreciated when new geoemtery kernel is implemented.
+/// </summary>
 	interface InteractiveFigure
     {
     }

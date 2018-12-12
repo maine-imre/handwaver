@@ -4,6 +4,11 @@ using UnityEngine;
 
 namespace IMRE.HandWaver
 {
+	/// <summary>
+	/// A polygon projected onto a surface. (no longer a polygon)
+	/// for linear programming test scene.
+	/// will be depreciated with new geometery kernel.
+	/// </summary>
 	public class ProjectedPolygon : MonoBehaviour
 	{
 		internal AbstractPolygon myPoly;

@@ -17,6 +17,7 @@ namespace IMRE.HandWaver
 /// Sets the color of figures to match based on area equality. Allows for approximations with gradients.!--
 /// Attempt at measurement tool.
 /// Currently deprecaited.
+/// will be depreciated with new geometery kernel.
 /// </summary>
 	public class AreaEqualityCheck : MonoBehaviour
     {

@@ -12,11 +12,11 @@ using UnityEngine;
 
 namespace IMRE.HandWaver
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// abstract verison of the sphere
+/// handles rendering
+/// Will be refactored in new geometery kernel.
+/// </summary>
 	abstract class AbstractSphere : MasterGeoObj
     {
 

@@ -14,11 +14,10 @@ using PathologicalGames;
 
 namespace IMRE.HandWaver
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// Point in space. zero dim figure.
+/// Will be refactored in new geometery kernel.
+/// </summary>
 	abstract class AbstractPoint : MasterGeoObj
     {
         public Vector3 initialScale;

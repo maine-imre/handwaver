@@ -14,11 +14,11 @@ using System.Linq;
 
 namespace IMRE.HandWaver.Solver
 {
-	/// <summary>
-	/// Manages calls for intersections between objects in the scene.
-	/// The main contributor(s) to this script is __
-	/// Status: Holy shit does this need optimization!
-	/// </summary>
+/// <summary>
+/// Finds intersections between geometric figures
+/// Runs automatically.
+/// Will be depreciated with new geometery kernel.
+/// </summary>
 	class intersectionManager : MonoBehaviour
 	{
 		 public Dictionary<MasterGeoObj, MasterGeoObj[]> pastIntersections;
