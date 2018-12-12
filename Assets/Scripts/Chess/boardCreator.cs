@@ -14,9 +14,7 @@ using Leap.Unity.Interaction;
 namespace IMRE.Chess3D
 {
 	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
+	/// Builds an array for  the spatial chess board.
 	/// </summary>
 	public class boardCreator : MonoBehaviour
 	{

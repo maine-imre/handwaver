@@ -12,11 +12,10 @@ using UnityEngine;
 
 namespace IMRE.Chess3D {
 
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// The board that keeps track of pieces and moves for spatial chess.
+/// This is central to the game.
+/// </summary>
 	public class chessBoard : MonoBehaviour{
 
         public static int boardSize = 9;

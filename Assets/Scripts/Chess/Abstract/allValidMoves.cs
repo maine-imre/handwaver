@@ -10,12 +10,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace IMRE.Chess3D {
-
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+    /// <summary>
+    /// A list of all of  the valid moves for each piece type in spatial chess.
+    /// This needs to be checked, only works in one direction.
+    /// Maybe we can express these in terms of a basis system?
+    /// </summary>
 	public static class allValidMoves {
 
         public static List<Vector3> kingMoves(Vector3 position, List<AbstractPiece> friendlyPieces)
