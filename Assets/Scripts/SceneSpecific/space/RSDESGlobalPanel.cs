@@ -9,7 +9,7 @@ namespace IMRE.HandWaver.Space
 	/// <summary>
 	/// This script controls the functionality of the Global Menu panel in the RSDES scene.
 	/// The main contributor(s) to this script is NG
-	/// Status: WORKING
+	/// Will be replaced in UX overhaul.
 	/// </summary>
 	public class RSDESGlobalPanel : MonoBehaviour
 	{

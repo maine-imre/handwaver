@@ -41,7 +41,9 @@ namespace IMRE.HandWaver.Space
 	#endregion Structs
 
 	/// <summary>
-	/// This script is the main managing script for the RSDES scene.
+	/// Handles interactions between pins and the Room-scale dynamic earth.
+	/// Handles instation of  arcs and circles
+	/// needs to be integrated into the kernel.
 	/// The main contributor(s) to this script is NG
 	/// Status: WORKING
 	/// </summary>
