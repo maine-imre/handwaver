@@ -15,11 +15,10 @@ using UnityEngine.Events;
 
 namespace IMRE.HandWaver
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// Constructs pyramids using in game UI.
+/// Depreciated.
+/// </summary>
 	public class pyramidGeneratorMenu : MonoBehaviour
 	{
 
