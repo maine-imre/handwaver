@@ -12,7 +12,7 @@ namespace IMRE.HandWaver.Space
 	[RequireComponent(typeof(LineRenderer), typeof(InteractionBehaviour), typeof(AnchorableBehaviour))]
 
 	/// <summary>
-	/// This script is the main managing script for the RSDESpushPinPreFab in the RSDES scene.
+	/// Handels user interaction with the RSDES Pins and renders features local to the pin.
 	/// The main contributor(s) to this script is NG
 	/// Status: WORKING
 	/// </summary>

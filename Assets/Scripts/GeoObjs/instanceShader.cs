@@ -12,11 +12,9 @@ using UnityEngine;
 
 namespace IMRE.HandWaver
 {
-	/// <summary>
-	/// This script does Instances the Material on object and moves it down one in the render queue.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+    /// <summary>
+    /// Changes the renderQueue on a figure.
+    /// </summary>
 	public class instanceShader : MonoBehaviour
     {
         public int change = -1;

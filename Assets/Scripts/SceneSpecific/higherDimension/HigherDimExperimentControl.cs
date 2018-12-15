@@ -6,11 +6,10 @@ using System;
 
 namespace IMRE.HandWaver.HigherDimensions
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+    /// <summary>
+    /// Central control for scale and dimension study.
+    /// needs to be renamed to reflect this.
+    /// </summary>
 	public class HigherDimExperimentControl : MonoBehaviour
     {
         public InteractionSlider foldSlider_lm;

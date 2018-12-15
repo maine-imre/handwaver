@@ -11,11 +11,9 @@ using System;
 
 namespace IMRE.HandWaver
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// Polygons that aren't dynamic
+/// </summary>
 	class StaticPolygon : AbstractPolygon, StaticFigure
     {
         public override void initializefigure()

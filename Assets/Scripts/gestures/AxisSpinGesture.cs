@@ -10,6 +10,11 @@ using System;
 
 namespace IMRE.HandWaver
 {
+	/// <summary>
+	/// swipe gesture for revolving figures using ships wheel.
+	/// will be abstracted.
+	/// will be overhauled with UX overhaul.
+	/// </summary>
 	public class AxisSpinGesture : OneHandedGesture
 	{
 		/// <summary>

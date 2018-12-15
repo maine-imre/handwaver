@@ -13,6 +13,9 @@ using IMRE.HandWaver.Solver;
 
 namespace IMRE.HandWaver.Shearing
 {
+    /// <summary>
+    /// Constructs a pyramid with a given number of sides bound to parallel planes for Bock's MST Thesis.
+    /// </summary>
     public class constructPyramidOnParallelPlanes : MonoBehaviour
     {
         [Range(3, 10)]

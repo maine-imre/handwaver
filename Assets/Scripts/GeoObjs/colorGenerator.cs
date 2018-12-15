@@ -12,11 +12,10 @@ using UnityEngine;
 
 namespace IMRE.HandWaver
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// Alternates between random colors.
+/// Currently depreciated.
+/// </summary>
 	public static class colorGenerator
     {
         private static bool experimental = false;

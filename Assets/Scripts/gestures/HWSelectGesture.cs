@@ -20,6 +20,9 @@ namespace IMRE.HandWaver {
 
 	}
 	[RequireComponent(typeof(AudioSource))]
+/// <summary>
+/// Point to select gesture in the sandbox
+/// </summary>
 	public class HWSelectGesture : OneHandedGesture
 	{
 

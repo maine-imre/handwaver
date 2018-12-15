@@ -11,11 +11,9 @@ using System.Collections.Generic;
 
 namespace IMRE.HandWaver
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// Definition for solid figures that don't change.
+/// </summary>
 	class StaticSolid : AbstractSolid, StaticFigure
     {
         internal override float volume

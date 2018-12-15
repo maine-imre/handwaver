@@ -13,6 +13,10 @@ using System;
 
 namespace IMRE.HandWaver
 {
+	/// <summary>
+	/// Depreciated.
+	/// Controls rotaitona nd scale for a unit vector prefab.
+	/// </summary>
     public class unitvectorScript : MonoBehaviour
     {
 		private AnchorableBehaviour thisAbehave;

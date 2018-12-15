@@ -14,11 +14,9 @@ using UnityEngine.SceneManagement;
 
 namespace IMRE.HandWaver
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+    /// <summary>
+    /// A script to extend the Unity editor that adds buttons to switch to important scenes for our build.
+    /// </summary>
 	public class IMREEditorLayerLoad : MonoBehaviour
     {
 

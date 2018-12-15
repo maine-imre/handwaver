@@ -5,16 +5,10 @@ using UnityEngine;
 
 namespace IMRE.HandWaver
 {
-	/// <summary>
-	/// 
-	/// </summary>
-	/// 
-
-	/// <summary>
-	/// This script is used to move the playerspace around according to movement by keyboard or by controller use.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// Move the payer with the keyboard.
+/// May be extended to align physical and virtual spaces for networking.
+/// </summary>
 	public class cameraRigController : MonoBehaviour
 	{
 		/// <summary>

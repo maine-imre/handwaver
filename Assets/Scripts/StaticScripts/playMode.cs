@@ -13,11 +13,11 @@ using UnityEngine;
 
 namespace IMRE.HandWaver
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// Mode to determine how many tools are loaded at a time.
+/// Meant to integrate with tutorial.
+/// Depreciated.
+/// </summary>
 	public static class playMode
 	{
 		/// <summary>

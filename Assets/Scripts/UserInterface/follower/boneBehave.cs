@@ -13,6 +13,11 @@ using System;
 
 namespace IMRE.HandWaver
 {
+/// <summary>
+/// A script for a "dog bone" that the toolbox will chase
+/// Both a fun tool to add to the toolbox when the toolbox is represented by an animal
+/// and a practical way to get the toolbox to move away when following agressively.
+/// </summary>
     class boneBehave : HandWaverTools
     {
 

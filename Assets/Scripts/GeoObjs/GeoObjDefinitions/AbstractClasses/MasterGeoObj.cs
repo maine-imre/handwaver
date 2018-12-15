@@ -17,20 +17,20 @@ using PathologicalGames;
 namespace IMRE.HandWaver
 {
 	/// <summary>
-	/// 
+	/// enumerator to help select child type
 	/// </summary>
 	public enum GeoObjType { point, line, polygon, prism, pyramid, circle, sphere, revolvedsurface, torus, flatface, straightedge, none };
 
-	/// <summary>
-	/// 
-	/// </summary>
+/// <summary>
+/// enumerator to help select child type
+/// </summary>
 	public enum GeoObjDef { Abstract, Dependent, Interactable, Static, none};
 
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// The most abstract class for all geo objs.
+/// Basic features that llow geo objs to interact wil controls
+/// Will be refactored in new geometery kernel.
+/// </summary>
 	internal abstract class MasterGeoObj : MonoBehaviour, UpdatableFigure
 	{
 

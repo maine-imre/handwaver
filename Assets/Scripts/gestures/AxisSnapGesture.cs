@@ -10,6 +10,9 @@ using Leap.Unity;
 
 namespace IMRE.HandWaver
 {
+	/// <summary>
+	/// snapping gesture for straightedges (lines) orthagonal to the floor.
+	/// </summary>
 	public class AxisSnapGesture : OneHandedGesture
 	{
 		/// <summary>

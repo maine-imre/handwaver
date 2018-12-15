@@ -12,11 +12,10 @@ using UnityEngine;
 
 namespace IMRE.HandWaver
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// Circle from radius
+/// Will be refactored in new geometery kernel.s
+/// </summary>
 	abstract class AbstractCircle : MasterGeoObj
     {
 

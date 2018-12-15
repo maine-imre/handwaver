@@ -13,6 +13,9 @@ using Leap.Unity.Interaction.Internal;
 
 namespace IMRE.HandWaver.Shearing
 { 
+	/// <summary>
+	/// Constructs a triangle bound to two parallel lines for Bock's MST Thesis.
+	/// </summary>
     public class constructTriangleOnParallelLines : MonoBehaviour
     {
         public Color mgoColor;

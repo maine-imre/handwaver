@@ -13,11 +13,11 @@ using IMRE.HandWaver.Solver;
 
 namespace IMRE.HandWaver
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// Interactable line segments, using two abstract points.
+/// Note that your line segment can be interactable while the endpoints are dependent.
+/// Will be depreciated with new Geometery kernel
+/// </summary>
 	class InteractableLineSegment : AbstractLineSegment, InteractiveFigure
     {
         public AbstractPoint point1;

@@ -15,11 +15,10 @@ namespace IMRE.HandWaver
 {
 	[RequireComponent(typeof(AudioSource))]
 
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// Handle for  arctus tool
+/// Needs some refactoring in UX overhaul.
+/// </summary>
 	class arctusHandle : HandWaverTools
 	{
 #pragma warning disable 0649

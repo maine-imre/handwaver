@@ -4,12 +4,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
-/* Script Created 8.13.18 by Timothy Bruce
- * Based on the SkyboxGenerator script, this takes star data and returns the data as cartesian coordinates.
- * This program uses the HYG database to get its data.
- */
+
 namespace IMRE.HandWaver.Space
 {
+	/// <summary>
+	/// Script Created 8.13.18 by Timothy Bruce
+	/// Based on the SkyboxGenerator script, this takes star data and returns the data as cartesian coordinates.
+	/// This program uses the HYG database to get its data.
+	/// </summary>
 	public static class StellarData
 	{
 		

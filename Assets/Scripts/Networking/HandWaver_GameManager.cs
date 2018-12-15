@@ -10,6 +10,10 @@ using System.Collections.Generic;
 using IMRE.HandWaver.FourthDimension;
 
 namespace IMRE.HandWaver.Networking { 
+	/// <summary>
+	/// The game manager manages the networked instances of players and objects for the hyperball scene.
+	/// The name of this scene should be updated to reflect it's relationship to the hyperball scene.
+	/// </summary>
 	public class HandWaver_GameManager : MonoBehaviourPunCallbacks
 	{
 		/// <summary>

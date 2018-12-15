@@ -14,11 +14,9 @@ namespace IMRE.Chess3D
 {
     [RequireComponent(typeof(InteractionBehaviour))]
 
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// An abstracted version of the chess piece.
+/// </summary>
 	public abstract class AbstractPiece : MonoBehaviour
     {
         private chessBoard board;

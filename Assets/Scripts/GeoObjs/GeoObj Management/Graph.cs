@@ -13,11 +13,11 @@ using System;
 
 namespace IMRE.HandWaver
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+    /// <summary>
+    /// Graphe theory support for old geometery kernel.
+    /// Will be depreciated in new geometery kernel
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
 	public class Graph<T>
     {
         private NodeList<T> nodeSet;

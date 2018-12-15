@@ -14,9 +14,7 @@ using System;
 namespace IMRE.HandWaver
 {
 	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
+	/// Sets MixCast to display on primary or secondary monitor.
 	/// </summary>
 	public class HWMixcastIO : MonoBehaviour
 	{

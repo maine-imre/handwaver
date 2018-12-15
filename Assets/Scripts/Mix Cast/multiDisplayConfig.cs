@@ -12,11 +12,9 @@ using BlueprintReality.MixCast;
 
 namespace IMRE.HandWaver
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// Sets up multiple displays to have one display on mixcast and the other for first person.
+/// </summary>
 	public class multiDisplayConfig : MonoBehaviour
     {
         Canvas can;

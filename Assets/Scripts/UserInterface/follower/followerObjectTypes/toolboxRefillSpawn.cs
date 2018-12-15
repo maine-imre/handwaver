@@ -14,6 +14,9 @@ using System;
 
 namespace IMRE.HandWaver {
 	[RequireComponent(typeof(InteractionBehaviour), typeof(AnchorableBehaviour))]
+	/// <summary>
+	/// Refillable spanwer for disposable tools on the toolbox.
+	/// </summary>
 	public class toolboxRefillSpawn : MonoBehaviour
 	{
 		InteractionBehaviour thisIbehave;
