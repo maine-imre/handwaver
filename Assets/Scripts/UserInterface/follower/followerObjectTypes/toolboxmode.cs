@@ -14,6 +14,9 @@ using Leap.Unity.Interaction;
 namespace IMRE.HandWaver
 {
     [RequireComponent(typeof(Light))]
+    /// <summary>
+    /// Determines how the toolbox approaches and follows the user.
+    /// </summary>
     public class toolboxmode : MonoBehaviour
     {
         //public leapControls[] hands;
