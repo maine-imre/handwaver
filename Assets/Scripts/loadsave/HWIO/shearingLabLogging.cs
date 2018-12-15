@@ -27,7 +27,9 @@ namespace IMRE.HandWaver.HWIO
 		private void Awake()
 		{
 			ins = this;
+			#if StandaloneWindows64
 			commandLineArgumentParse.logStateChange.AddListener(checkLog);
+			#endif
 
 			checkLog();
 		}

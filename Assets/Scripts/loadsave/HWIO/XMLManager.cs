@@ -40,7 +40,9 @@ namespace IMRE.HandWaver.HWIO
 			StartCoroutine(autoSaving());
 #endif
 			checkLog();
+			#if StandaloneWindows64
 			commandLineArgumentParse.logStateChange.AddListener(checkLog);
+			#endif
 		}
 
 		private void checkLog()

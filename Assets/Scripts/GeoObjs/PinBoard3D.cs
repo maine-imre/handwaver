@@ -89,12 +89,6 @@ namespace IMRE.HandWaver.Lattice
 			{
 				waitTime++;
 			}
-			if (waitTime == 20)
-			{
-				IMRE.Wrappers.Achievements.ins.setAchievement("OpenedLatticeLand", true);
-				IMRE.Wrappers.Achievements.ins.incrementStat("OpenLatticeLandCount");
-				Debug.Log("VIVEPORT STATS :" + IMRE.Wrappers.Achievements.ins.getAchievement("OpenedLatticeLand") + IMRE.Wrappers.Achievements.ins.getStat("OpenLatticeLandCount"));
-			}
 		}
 
 		public void constructLatticeLand()
