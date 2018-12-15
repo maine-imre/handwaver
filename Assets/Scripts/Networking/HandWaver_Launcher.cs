@@ -7,7 +7,10 @@ using UnityEngine;
 
 namespace IMRE.HandWaver.Networking
 {
-
+/// <summary>
+/// This launcher manages connection to PUN, loading of scenes and divion into rooms.
+/// A UI will be added to integrate with this script and expand it's functionality.
+/// </summary>
 	public class HandWaver_Launcher : MonoBehaviourPunCallbacks
 	{
 		#region Private Serializable Fields
