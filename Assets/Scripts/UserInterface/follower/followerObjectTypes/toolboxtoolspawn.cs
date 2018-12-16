@@ -14,6 +14,10 @@ using System;
 
 namespace IMRE.HandWaver
 {
+	/// <summary>
+	/// Script to spawn the toolbox into the scene.
+	/// Some of the tools cannot be instantiated on start, so this run on late start.
+	/// </summary>
     public class toolboxtoolspawn : MonoBehaviour 
     {
 		#pragma warning disable 0649, 0414, 0169

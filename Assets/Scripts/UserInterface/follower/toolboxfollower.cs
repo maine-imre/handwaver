@@ -13,6 +13,10 @@ using UnityEngine;
 
 namespace IMRE.HandWaver
 {
+    /// <summary>
+    /// Needs a name update.
+    /// Toolbox carries tools for use  within the sandbox.
+    /// </summary>
     public class toolboxfollower : MonoBehaviour
     {
         public Transform player;

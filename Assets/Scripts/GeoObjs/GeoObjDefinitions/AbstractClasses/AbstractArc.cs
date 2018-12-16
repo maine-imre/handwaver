@@ -11,9 +11,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// This script does ___.
-/// The main contributor(s) to this script is __
-/// Status: ???
+/// Arc. not fully implemented, generally used as circle.!--
+/// Will be refactored in new geometery kernel.
 /// </summary>
 namespace IMRE.HandWaver
 {

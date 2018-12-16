@@ -19,11 +19,11 @@ namespace IMRE.HandWaver
 {
 	[RequireComponent(typeof(InteractionBehaviour), typeof(AnchorableBehaviour), typeof(TextMeshPro))]
 
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// Labeling system for MasterGeoObjs.
+/// Needs UX overhaul.
+/// Currently not used.
+/// </summary>
 	internal class alphabetLabel : MonoBehaviour {
 
 

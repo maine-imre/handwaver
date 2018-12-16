@@ -12,11 +12,10 @@ using System;
 
 namespace IMRE.HandWaver
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// An attempt at a color selction tool.
+/// Not currently funcitonal.
+/// </summary>
 	public class colorPickerbehave : MonoBehaviour
     {
 

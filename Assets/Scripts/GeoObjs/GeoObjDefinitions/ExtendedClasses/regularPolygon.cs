@@ -15,9 +15,8 @@ using IMRE.HandWaver.Solver;
 namespace IMRE.HandWaver
 {
 	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
+///  Polygon that is forced to be regular.  Shouldn't be skew.
+ ///will be depreciated with new geometery kernel.  probably will be handled by congruance features.
 	/// </summary>
 	class regularPolygon : InteractablePolygon
     {

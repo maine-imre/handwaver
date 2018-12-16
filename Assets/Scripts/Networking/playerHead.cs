@@ -8,7 +8,11 @@ using UnityEngine.XR;
 
 namespace IMRE.HandWaver.Networking
 {
-
+/// <summary>
+/// Syncs visual represntations of the player's head on PUN
+/// Will be expanded to include a representation of the player's body.
+/// Eventually additional trackers could be used to have a logical leg position.
+/// </summary>
 	public class playerHead : MonoBehaviourPunCallbacks
 	{
 

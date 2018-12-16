@@ -7,11 +7,10 @@ namespace IMRE.HandWaver.HigherDimensions
     [RequireComponent(typeof(MeshFilter))]
     [RequireComponent(typeof(MeshRenderer))]
 
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// Higher dimensional solids and their projections automated.
+/// Now uses sliers for scale and dimension study, via a dictionary.
+/// </summary>
 	public abstract class AbstractHigherDimSolid : MonoBehaviour
     {
         internal bool firstDraw = true;

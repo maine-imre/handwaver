@@ -11,11 +11,12 @@ using UnityEngine;
 
 namespace IMRE.HandWaver
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// An interface for things that don't change and aren't dynamic.
+/// Suprise, not much going on here.
+/// We thought it would be good to have the strucutre but it hasn't served us well.
+/// Depreciated with new geometery kernel.
+/// </summary>
 	public interface StaticFigure
     {
 

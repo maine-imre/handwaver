@@ -13,11 +13,9 @@ using UnityEngine;
 
 namespace IMRE.HandWaver
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// MasterGeoObj for planes.
+/// </summary>
 	class flatfaceBehave : MasterGeoObj
 	{
         public Vector3 normalDir

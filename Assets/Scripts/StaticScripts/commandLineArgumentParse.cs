@@ -15,11 +15,10 @@ using UnityEngine.Events;
 namespace IMRE.HandWaver
 {
 	public enum mixCastTargetMode { primaryMonitor, secondaryMonitor, primaryAlt};
-
+	
 	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
+	/// Parses command line arguments that control the scene loaded and mixcast state.
+	/// Depreciated.
 	/// </summary>
 	public static class commandLineArgumentParse 
 	{

@@ -9,7 +9,10 @@ using System.Linq;
 
 namespace IMRE.HandWaver.Networking
 {
-
+/// <summary>
+/// Syncs visual representations of players' hands.
+/// Will be expanded to handle InterationHands and Interaction Controllers.
+/// </summary>
 	public class playerHand : MonoBehaviourPunCallbacks
 	{
 		public Chirality whichHand;

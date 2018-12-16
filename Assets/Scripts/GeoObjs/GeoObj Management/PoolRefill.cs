@@ -11,8 +11,6 @@ using UnityEngine;
 
 namespace IMRE.HandWaver
 {
-
-
     [System.Serializable]
 	public struct ManagedPool
 	{
@@ -30,11 +28,10 @@ namespace IMRE.HandWaver
 
 	}
 
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// Pool Refill script to extend poolmanager.
+/// Will be depreciated as we move to more open source assets.
+/// </summary>
 	public class PoolRefill : MonoBehaviour
 	{
 

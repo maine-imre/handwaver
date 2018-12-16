@@ -11,11 +11,10 @@ using UnityEngine;
 
 namespace IMRE.HandWaver
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// An interface for figures that support ReactMotion.
+/// Will be depreciated with a new geometery kernel.
+/// </summary>
 	public interface UpdatableFigure
     {
         /// <summary>

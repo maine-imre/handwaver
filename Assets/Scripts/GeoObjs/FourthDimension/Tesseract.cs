@@ -12,11 +12,9 @@ using System;
 
 namespace IMRE.HandWaver.HigherDimensions
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// Implementation of a tesseract, projected into 3D
+/// </summary>
 	public class Tesseract : AbstractHigherDimSolid
     {
         void Awake()

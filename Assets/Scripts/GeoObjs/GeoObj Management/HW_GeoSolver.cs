@@ -14,11 +14,13 @@ using System;
 
 namespace IMRE.HandWaver.Solver
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// The heart of Greg's geometery kernel.
+/// Holds an node record of every geo obj
+/// Uses basic graph theory to find a path to update all nececssary objects.
+/// Will be depreciated with new geometery kernel.
+/// Depending on constraints either doesn't iterate enough to have a reliable image (current) or doesn't terminate and figures drift into space.
+/// </summary>
 	public class HW_GeoSolver : MonoBehaviour
     {
         #region PositionTransformations

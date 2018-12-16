@@ -8,7 +8,9 @@ namespace IMRE.HandWaver.Interface
 {
 	[RequireComponent(typeof(Leap.Unity.Interaction.InteractionBehaviour))]
 	/// <summary>
-	/// Add to an object in a content layer to enable scaling.
+	/// Add to an object in a content layer to enable scaling, where the scalling effect is turned off when placed back on the anchor.
+	/// Event-based system for objects to find the gesture control and scale themselves.
+	/// in the future this will be integrated into the geosolver kernel.
 	/// </summary>
 	public class ScaleMeDynamic : Leap.Unity.Interaction.AnchorableBehaviour
 	{

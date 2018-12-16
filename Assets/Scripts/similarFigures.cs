@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace IMRE.HandWaver.ScaleStudy
 {
+    /// <summary>
+    /// Constructor for similar figures for Scale and Dimension Study.
+    /// </summary>
     public class similarFigures : MonoBehaviour
     {
 

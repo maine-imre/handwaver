@@ -5,11 +5,9 @@ using System.Linq;
 
 namespace IMRE.HandWaver.HigherDimensions
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// Net of five cell for scale and dimension study.
+/// </summary>
 	public class fiveCellNet : AbstractHigherDimSolid
     {
 

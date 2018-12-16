@@ -15,11 +15,10 @@ using Leap.Unity.Interaction;
 
 namespace IMRE.HandWaver
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+    /// <summary>
+///     Constructs a pair of parallel lines, and initializes them so they will stay parallel on update
+/// This will be depreciated with an updated geometery kernel.
+    /// </summary>
 	public class parallelLinesMaker : MonoBehaviour
     {
         // Use this for initialization

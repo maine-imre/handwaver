@@ -13,11 +13,11 @@ using System.Linq;
 
 namespace IMRE.HandWaver.Solver
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// An attempt at a congruance property manager.
+/// This isn't functional
+/// Will be deprecaited, but funcitonality will be added for new kernel.
+/// </summary>
 	class congruencyManager : MonoBehaviour
 	{
 		private HW_GeoSolver.InteractionMode toSet;

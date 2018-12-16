@@ -12,11 +12,9 @@ using UnityEngine;
 namespace IMRE.Chess3D.AI
 {
 	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
+	/// An attempt at an AI for spatial chess.
 	/// </summary>
-	//public static class shallowBlue
+	///public static class shallowBlue
 	//{
 	//    public class AIBoard
 	//    {

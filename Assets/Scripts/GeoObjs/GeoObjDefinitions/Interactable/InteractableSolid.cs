@@ -12,11 +12,10 @@ using System.Collections.Generic;
 
 namespace IMRE.HandWaver
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// Unfinished attempt at interactable solids.
+/// Since they can't be rendered fully, it's hard to imagine the interaction.
+/// </summary>
 	class InteractableSolid : AbstractSolid, InteractiveFigure
     {
         internal override float volume

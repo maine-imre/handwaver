@@ -11,11 +11,9 @@ using UnityEngine;
 using Leap.Unity.Interaction;
 namespace IMRE.HandWaver
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+    /// <summary>
+    /// An exntension of straightedgebehave that makes two lines (straightedges) paralle and stay parallel on update based on isGrasped state.
+    /// </summary>
 	class parallelLines : straightEdgeBehave
     {
         public straightEdgeBehave otherLine;

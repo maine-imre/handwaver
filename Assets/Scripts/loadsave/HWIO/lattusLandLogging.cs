@@ -8,11 +8,9 @@ using UnityEngine;
 
 namespace IMRE.HandWaver.HWIO
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// Logging features for lattice land.  Need to eliminate extraneous data.
+/// </summary>
 	public class lattusLandLogging : MonoBehaviour
 	{
 		public static lattusLandLogging ins;

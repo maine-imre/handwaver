@@ -14,11 +14,9 @@ namespace IMRE.HandWaver.HigherDimensions
             zw,
         }
 
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// Maths for 4D to 3D projection.
+/// </summary>
 	public static class HigherDimensionsMaths
     {
         /// <summary>

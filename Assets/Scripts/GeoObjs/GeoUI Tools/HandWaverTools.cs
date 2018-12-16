@@ -12,11 +12,11 @@ using Leap.Unity.Interaction;
 
 namespace IMRE.HandWaver
 {
-	/// <summary>
-	/// This script is used to see all tools.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// An abstract class for handwaver tools.
+/// This was created to give the eraser functionality.
+/// Will be depreciated with UX overhaul.
+/// </summary>
 	public class HandWaverTools : MonoBehaviour
 	{
         public enum ToolType {arctus,bluePin,redPin,greenPin,crossSection,dogBone,eraser,extrude,flashlight,flatface,hoistWheel,revolveWheel,rotationWheel,straightedge,unitVector,none};
