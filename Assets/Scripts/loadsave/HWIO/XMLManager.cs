@@ -14,7 +14,7 @@ using System.IO;
 using System.Linq;
 using System;
 using Leap.Unity.Interaction;
-using PathologicalGames;
+
 using IMRE.HandWaver.Solver;
 
 namespace IMRE.HandWaver.HWIO

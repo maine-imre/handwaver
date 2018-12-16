@@ -6,7 +6,6 @@ www.imrelab.org
 **/
 
 ﻿using Leap.Unity.Interaction;
-using PathologicalGames;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

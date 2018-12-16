@@ -9,7 +9,7 @@ www.imrelab.org
 using System.Collections.Generic;
 using UnityEngine;
 using Leap.Unity.Interaction;
-using PathologicalGames;
+
 using IMRE.HandWaver.Solver;
 
 namespace IMRE.HandWaver

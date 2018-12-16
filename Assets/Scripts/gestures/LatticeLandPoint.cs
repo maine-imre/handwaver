@@ -9,7 +9,7 @@ using Leap.Unity.Interaction;
 using Leap.Unity;
 using UnityEngine.SceneManagement;
 using UnityEngine.Events;
-using PathologicalGames;
+
 using IMRE.HandWaver.Solver;
 
 namespace IMRE.HandWaver.Interface

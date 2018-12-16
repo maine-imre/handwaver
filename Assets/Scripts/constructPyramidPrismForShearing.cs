@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Leap.Unity.Interaction;
-using PathologicalGames;
+
 
 namespace IMRE.HandWaver.Shearing {
     /// <summary>

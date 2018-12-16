@@ -14,7 +14,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Leap.Unity;
 using UnityEngine.Events;
-using PathologicalGames;
+
 using IMRE.HandWaver.Solver;
 
 namespace IMRE.HandWaver.Lattice

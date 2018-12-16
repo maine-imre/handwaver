@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Leap;
-using PathologicalGames;
+
 using Leap.Unity.Interaction;
 using System;
 

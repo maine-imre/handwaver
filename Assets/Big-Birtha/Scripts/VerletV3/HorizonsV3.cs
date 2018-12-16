@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Xml;
-using PathologicalGames;
+using IMRE.HandWaver;
 
 public class HorizonsV3 : MonoBehaviour {
 	//public GameObject defaultBody;		//The default version of a massive object

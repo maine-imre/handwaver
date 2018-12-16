@@ -1,7 +1,7 @@
 ﻿using Leap.Unity;
 using Leap.Unity.Interaction;
 using Leap.Unity.LeapPaint_v3;
-using PathologicalGames;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
