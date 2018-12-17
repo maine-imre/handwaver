@@ -54,7 +54,7 @@ Free Asset. Will be used for telemetrics. (Non-essential to function)
 [Path-o-logical Games](http://u3d.as/1Z4)
 
 Paid Asset. Object pooling for GeoObjects and GeoUI. (Essential to function)
-We have used this in the past for instancing objects, but arem working to be independent of it.
+We have used this in the past for instancing objects, but are working to be independent of it.
 PoolManager may offer some performance gains, and can be dropped into the application by simply reomving the PoolManager.cs script in the Assets/Scripts folder.
 
 ### SteamVR
