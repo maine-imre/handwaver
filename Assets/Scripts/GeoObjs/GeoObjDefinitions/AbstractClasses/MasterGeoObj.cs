@@ -414,6 +414,7 @@ namespace IMRE.HandWaver
 			//}
 			cUpdateRMan = UpdateRMan();
 			waitForStretch = WaitForStretch();
+			OnSpawned();
 		}
 
         void LateUpdate()
