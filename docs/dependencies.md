@@ -27,7 +27,7 @@ Paid Asset. Used to add multiplayer support. (Essential to function)
 
 
 # Optional Add-Ons whose integration has been teseted.
-Please restrict use of these closed-source assets to (1) a fork of the repository or (2) a local copy of the repository.  No code dependant on these solutions should be included in the main repository.
+The use of these closed-source assets is restricted to (1) a fork of the repository or (2) a local copy of the repository.  No code dependant on these solutions should be included in the main repository.
 
 
 ### BlueprintReality - MixCast SDK
