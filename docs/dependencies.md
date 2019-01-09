@@ -26,6 +26,8 @@ Free Asset. Used as a main control interface. (Essential to function).  This ass
 
 *The package download is from a fork of LeapMotion's origional repository, that we have modified to ensure compatability with our repository.
 
+***The package is temporarily a derivative of [LeapPaint](https://github.com/maine-imre/Paint/releases)***
+
 ### Photon PUN2 by [Exit Games](https://www.photonengine.com/en/pun)
 
 [Package Download](https://assetstore.unity.com/packages/tools/network/pun-2-free-119922)
