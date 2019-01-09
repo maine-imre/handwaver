@@ -22,7 +22,7 @@ Free, Open-Source asset.  LeapMotion controller functionality dependent on close
 ### LeapMotion App Modules
 [LeapMotion](https://github.com/leapmotion/AppExperiments)
 
-[PackageDownload] (https://github.com/maine-imre/LM-AppExperiments/releases)  *
+[PackageDownload](https://github.com/maine-imre/LM-AppExperiments/releases)  *
 
 Free Asset. Used as a main control interface. (Essential to function).  This asset requires some modification in order for it to compile.  We hope to document this process (or include a copy of  the source) in the future.
 
