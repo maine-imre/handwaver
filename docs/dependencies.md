@@ -20,7 +20,7 @@ Free, Open-Source asset.  LeapMotion controller functionality dependent on close
 [LeapMotion](https://github.com/leapmotion/AppExperiments)
 Free Asset. Used as a main control interface. (Essential to function).  This asset requires some modification in order for it to compile.  We hope to document this process (or include a copy of  the source) in the future.
 
-### Photon PUN+
+### Photon PUN2+
 [Exit Games](https://assetstore.unity.com/packages/tools/network/photon-pun-classic-12080)
 
 Paid Asset. Used to add multiplayer support. (Essential to function)
