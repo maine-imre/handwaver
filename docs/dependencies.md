@@ -5,7 +5,9 @@
 
 ### LeapMotion Orion
 [LeapMotion](https://github.com/leapmotion/UnityModules)
+
 [PackageDownload](https://github.com/leapmotion/UnityModules/releases)
+
 Used as an input system, interaction system and gesture system for LeapMotion and OSVR controls.  (Essential to Function)
 
 Free, Open-Source asset.  LeapMotion controller functionality dependent on closed source drivers currently only available on Windows.  OSVR functionality works without the closed source driver.
@@ -19,6 +21,7 @@ Free, Open-Source asset.  LeapMotion controller functionality dependent on close
 
 ### LeapMotion App Modules
 [LeapMotion](https://github.com/leapmotion/AppExperiments)
+
 [PackageDownload] (https://github.com/maine-imre/LM-AppExperiments/releases)*
 
 Free Asset. Used as a main control interface. (Essential to function).  This asset requires some modification in order for it to compile.  We hope to document this process (or include a copy of  the source) in the future.
