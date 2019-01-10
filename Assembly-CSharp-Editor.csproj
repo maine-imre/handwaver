@@ -65,21 +65,82 @@
   <ItemGroup>
     <Compile Include="Assets\Editor\IMRE_StartUPCheck.cs" />
     <Compile Include="Assets\Editor\sceneChangerMenuItem.cs" />
+    <Compile Include="Assets\LeapMotion\Core\Editor\CorePreferences.cs" />
+    <Compile Include="Assets\LeapMotion\Core\Editor\CustomEditorBase.cs" />
+    <Compile Include="Assets\LeapMotion\Core\Editor\CustomPropertyDrawerBase.cs" />
+    <Compile Include="Assets\LeapMotion\Core\Editor\EmptyFolderUtility.cs" />
+    <Compile Include="Assets\LeapMotion\Core\Editor\LeapImageRetrieverEditor.cs" />
+    <Compile Include="Assets\LeapMotion\Core\Editor\LeapServiceProviderEditor.cs" />
+    <Compile Include="Assets\LeapMotion\Core\Editor\LeapXRServiceProviderEditor.cs" />
+    <Compile Include="Assets\LeapMotion\Core\Editor\Tests\FrameValidator.cs" />
+    <Compile Include="Assets\LeapMotion\Core\Editor\Tests\FromThenTests.cs" />
+    <Compile Include="Assets\LeapMotion\Core\Editor\Tests\HandFactoryTest.cs" />
+    <Compile Include="Assets\LeapMotion\Core\Editor\Tests\TransformCopyTest.cs" />
+    <Compile Include="Assets\LeapMotion\Core\Plugins\LeapCSharp\Editor\Tests\CircularObjectBufferTests.cs" />
+    <Compile Include="Assets\LeapMotion\Core\Plugins\LeapCSharp\Editor\Tests\DeviceTests.cs" />
+    <Compile Include="Assets\LeapMotion\Core\Plugins\LeapCSharp\Editor\Tests\LeapCStressTests.cs" />
+    <Compile Include="Assets\LeapMotion\Core\Plugins\LeapCSharp\Editor\Tests\LeapCTests.cs" />
+    <Compile Include="Assets\LeapMotion\Core\Plugins\LeapCSharp\Editor\Tests\ObjectEquality.cs" />
+    <Compile Include="Assets\LeapMotion\Core\Plugins\LeapCSharp\Editor\Tests\StructMarshalTests.cs" />
+    <Compile Include="Assets\LeapMotion\Core\Plugins\LeapCSharp\Editor\Tests\VectorTests.cs" />
+    <Compile Include="Assets\LeapMotion\Core\Scripts\Algorithms\Editor\Tests\SlidingMaxTest.cs" />
+    <Compile Include="Assets\LeapMotion\Core\Scripts\Animation\Editor\TransformTweenBehaviourEditor.cs" />
+    <Compile Include="Assets\LeapMotion\Core\Scripts\Animation\Tween\Editor\Tests\TweenTests.cs" />
+    <Compile Include="Assets\LeapMotion\Core\Scripts\Attachments\Editor\AttachmentHandsEditor.cs" />
+    <Compile Include="Assets\LeapMotion\Core\Scripts\Attributes\Editor\CombinablePropertyDrawer.cs" />
+    <Compile Include="Assets\LeapMotion\Core\Scripts\DataStructures\Editor\AssetFolderPropertyDrawer.cs" />
+    <Compile Include="Assets\LeapMotion\Core\Scripts\DataStructures\Editor\SerializableDictionaryEditor.cs" />
+    <Compile Include="Assets\LeapMotion\Core\Scripts\DataStructures\Editor\SerializableHashSetEditor.cs" />
+    <Compile Include="Assets\LeapMotion\Core\Scripts\DataStructures\Editor\StreamingAssetPropertyDrawer.cs" />
+    <Compile Include="Assets\LeapMotion\Core\Scripts\DataStructures\Editor\StreamingFolderPropertyDrawer.cs" />
+    <Compile Include="Assets\LeapMotion\Core\Scripts\DataStructures\Editor\Tests\DequeTests.cs" />
+    <Compile Include="Assets\LeapMotion\Core\Scripts\DataStructures\Editor\Tests\MinHeapTest.cs" />
+    <Compile Include="Assets\LeapMotion\Core\Scripts\DataStructures\Editor\Tests\MultiTypedListTests.cs" />
+    <Compile Include="Assets\LeapMotion\Core\Scripts\DataStructures\Editor\Tests\MultiTypedReferenceTests.cs" />
+    <Compile Include="Assets\LeapMotion\Core\Scripts\DataStructures\Editor\Tests\ProduceConsumeBufferTest.cs" />
+    <Compile Include="Assets\LeapMotion\Core\Scripts\EditorTools\Editor\LeapRigUpgrader.cs" />
+    <Compile Include="Assets\LeapMotion\Core\Scripts\EditorTools\Editor\LeapUnityWindow.cs" />
+    <Compile Include="Assets\LeapMotion\Core\Scripts\Encoding\Editor\VectorHandTests.cs" />
+    <Compile Include="Assets\LeapMotion\Core\Scripts\Query\Editor\QueryTests.cs" />
+    <Compile Include="Assets\LeapMotion\Core\Scripts\Utils\Editor\BitConverterNonAllocTests.cs" />
+    <Compile Include="Assets\LeapMotion\Core\Scripts\Utils\Editor\CommentEditor.cs" />
+    <Compile Include="Assets\LeapMotion\Core\Scripts\Utils\Editor\EditorUtils.cs" />
+    <Compile Include="Assets\LeapMotion\Core\Scripts\Utils\Editor\EnumEventTableEditor.cs" />
+    <Compile Include="Assets\LeapMotion\Core\Scripts\Utils\Editor\Hotkeys.cs" />
+    <Compile Include="Assets\LeapMotion\Core\Scripts\Utils\Editor\ListAndArrayExtensionTests.cs" />
+    <Compile Include="Assets\LeapMotion\Core\Scripts\Utils\Editor\PostProcessProviderEditor.cs" />
+    <Compile Include="Assets\LeapMotion\Core\Scripts\Utils\Editor\SingleLayerEditor.cs" />
+    <Compile Include="Assets\LeapMotion\Core\Scripts\Utils\Editor\TransformUtilTests.cs" />
+    <Compile Include="Assets\LeapMotion\Core\Scripts\Utils\Editor\UtilsTests.cs" />
+    <Compile Include="Assets\LeapMotion\Core\Scripts\XR\Editor\LeapEyeDislocatorEditor.cs" />
+    <Compile Include="Assets\LeapMotion\Core\Scripts\XR\Editor\XRHeightOffsetEditor.cs" />
+    <Compile Include="Assets\LeapMotion\Modules\Hands\Scripts\Editor\LeapHandsAutoRigEditor.cs" />
+    <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Examples\3. Interaction Callbacks\Scripts\Editor\TransformHandleEditor.cs" />
+    <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Examples\6. Dynamic UI\Scripts\Editor\WorkstationBehaviourEditor.cs" />
+    <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Scripts\Editor\ContactBoneParentEditor.cs" />
+    <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Scripts\Editor\InteractionBehaviourEditor.cs" />
+    <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Scripts\Editor\InteractionControllerEditor.cs" />
+    <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Scripts\Editor\InteractionHandEditor.cs" />
+    <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Scripts\Editor\InteractionManagerEditor.cs" />
+    <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Scripts\Editor\InteractionVRControllerEditor.cs" />
+    <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Scripts\Internal\Editor\InteractionChecks.cs" />
+    <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Scripts\UI\Anchors\Editor\AnchorableBehaviourEditor.cs" />
+    <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Scripts\UI\Anchors\Editor\AnchorEditor.cs" />
+    <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Scripts\UI\Editor\InteractionButtonEditor.cs" />
+    <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Scripts\UI\Editor\InteractionSliderEditor.cs" />
+    <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Scripts\Utility\Editor\IgnoreColliderForInteractionEditor.cs" />
     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\DemoHub\Editor\PunStartup.cs" />
     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\DemoSlotRacer\Scripts\BezierCurve\Editor\BezierCurveInspector.cs" />
     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\DemoSlotRacer\Scripts\BezierCurve\Editor\BezierSplineInspector.cs" />
     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\DemoSlotRacer\Scripts\BezierCurve\Editor\LineInspector.cs" />
+    <Reference Include="Unity.Timeline.Editor">
+      <HintPath>C:/Users/imred/Documents/Repositories/HandWaver/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/imred/Documents/Repositories/HandWaver/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.PackageManagerUI.Editor">
       <HintPath>C:/Users/imred/Documents/Repositories/HandWaver/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.TextMeshPro">
-      <HintPath>C:/Users/imred/Documents/Repositories/HandWaver/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Timeline.Editor">
-      <HintPath>C:/Users/imred/Documents/Repositories/HandWaver/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline">
       <HintPath>C:/Users/imred/Documents/Repositories/HandWaver/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
@@ -92,6 +153,9 @@
     </Reference>
     <Reference Include="UnityEngine.SpatialTracking">
       <HintPath>C:/Users/imred/Documents/Repositories/HandWaver/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.TextMeshPro">
+      <HintPath>C:/Users/imred/Documents/Repositories/HandWaver/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.DataPrivacy">
       <HintPath>C:/Users/imred/Documents/Repositories/HandWaver/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
@@ -297,8 +361,17 @@
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/15.0/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Advertisements">
-      <HintPath>C:/Users/imred/Documents/Repositories/HandWaver/Library/PackageCache/com.unity.ads@2.0.8/UnityEngine.Advertisements.dll</HintPath>
+    <Reference Include="InteractionEngineUtility">
+      <HintPath>C:/Users/imred/Documents/Repositories/HandWaver/Assets/LeapMotion/Modules/InteractionEngine/Plugins/InteractionEngineUtility.dll</HintPath>
+    </Reference>
+    <Reference Include="Photon3Unity3D">
+      <HintPath>C:/Users/imred/Documents/Repositories/HandWaver/Assets/Photon/PhotonLibs/Photon3Unity3D.dll</HintPath>
+    </Reference>
+    <Reference Include="websocket-sharp">
+      <HintPath>C:/Users/imred/Documents/Repositories/HandWaver/Assets/Photon/PhotonLibs/WebSocket/websocket-sharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>C:/Users/imred/Documents/Repositories/HandWaver/Assets/Photon/PhotonUnityNetworking/Code/Editor/Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.Advertisements">
       <HintPath>C:/Users/imred/Documents/Repositories/HandWaver/Library/PackageCache/com.unity.ads@2.0.8/Editor/UnityEditor.Advertisements.dll</HintPath>
@@ -312,20 +385,8 @@
     <Reference Include="Unity.Analytics.Tracker">
       <HintPath>C:/Users/imred/Documents/Repositories/HandWaver/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Purchasing">
-      <HintPath>C:/Users/imred/Documents/Repositories/HandWaver/Library/PackageCache/com.unity.purchasing@2.0.3/UnityEngine.Purchasing.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor.Purchasing">
       <HintPath>C:/Users/imred/Documents/Repositories/HandWaver/Library/PackageCache/com.unity.purchasing@2.0.3/Editor/UnityEditor.Purchasing.dll</HintPath>
-    </Reference>
-    <Reference Include="Photon3Unity3D">
-      <HintPath>C:/Users/imred/Documents/Repositories/HandWaver/Assets/Photon/PhotonLibs/Photon3Unity3D.dll</HintPath>
-    </Reference>
-    <Reference Include="websocket-sharp">
-      <HintPath>C:/Users/imred/Documents/Repositories/HandWaver/Assets/Photon/PhotonLibs/WebSocket/websocket-sharp.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>C:/Users/imred/Documents/Repositories/HandWaver/Assets/Photon/PhotonUnityNetworking/Code/Editor/Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.1.0a13/Editor/Data/MonoBleedingEdge/lib/mono/2.0-api/mscorlib.dll</HintPath>
