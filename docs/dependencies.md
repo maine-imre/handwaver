@@ -22,7 +22,7 @@ Free, Open-Source asset.  LeapMotion controller functionality dependent on close
 
 [Package Download](https://github.com/maine-imre/LM-AppExperiments/releases)  *
 
-Free Asset. Used as a main control interface. (Essential to function).  This asset requires some modification in order for it to compile.  We hope to document this process (or include a copy of  the source) in the future.
+Free and Open-Source. Used as a main control interface. (Essential to function).  This asset requires some modification in order for it to compile.  We hope to document this process (or include a copy of  the source) in the future.
 
 *The package download is from a fork of LeapMotion's origional repository, that we have modified to ensure compatability with our repository.
 
@@ -33,6 +33,12 @@ Free Asset. Used as a main control interface. (Essential to function).  This ass
 [Package Download](https://assetstore.unity.com/packages/tools/network/pun-2-free-119922)
 
 Paid Asset. Used to add multiplayer support. (Essential to function)
+
+### Discord Rich Presence by [Discord](https://discordapp.com/developers/docs/rich-presence/how-to)
+
+[Package Download](https://github.com/maine-imre/discord-rpc/releases)
+
+Free and Open-Source.  Used to configure PUN networking.
 
 
 # Optional Add-Ons whose integration has been teseted.
