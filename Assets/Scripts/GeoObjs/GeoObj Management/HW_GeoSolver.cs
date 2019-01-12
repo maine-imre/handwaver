@@ -304,7 +304,7 @@ namespace IMRE.HandWaver.Solver
 						rManList.Remove(meNode);
 					}
 					geomanager.Remove(meNAME);
-					PoolManager.Pools["GeoObj"].Despawn(geoComp.transform);
+					geoComp.gameObject.Destroy();
 				}
 
 			}
@@ -315,7 +315,7 @@ namespace IMRE.HandWaver.Solver
             if (blockDelete == false)
             {
                 geomanager.Remove(geoCompS);
-                PoolManager.Pools["GeoObj"].Despawn(GameObject.Find(geoCompS).transform);
+                GameObject.Find(geoCompS).Destroy();
             }
         }
 

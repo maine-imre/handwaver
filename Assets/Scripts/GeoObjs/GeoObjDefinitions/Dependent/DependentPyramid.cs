@@ -19,7 +19,7 @@ namespace IMRE.HandWaver
 	class DependentPyramid : AbstractSolid
     {
 		#region Constructors
-            public static DependentPyramid dependentPyramidConstructor()
+            public static DependentPyramid Constructor()
             {
                 GameObject go = new GameObject();
 				go.AddComponent<MeshFilter>();

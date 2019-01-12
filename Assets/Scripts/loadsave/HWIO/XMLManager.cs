@@ -385,7 +385,7 @@ namespace IMRE.HandWaver.HWIO
 					case GeoObjType.torus:
 						break;
 					case GeoObjType.flatface:
-						Transform flatface = PoolManager.Pools["Tools"].Spawn("Flatface").transform;
+						Transform flatface = flatfaceBehave.Constructor().transform;
 						flatface.transform.position = geo.position;
 						flatface.transform.rotation = geo.rotation;
 						if (!String.IsNullOrEmpty(geo.label))
@@ -393,7 +393,7 @@ namespace IMRE.HandWaver.HWIO
 						spawnedObjects.Add(geo.figName, flatface.GetComponent<MasterGeoObj>());
 						break;
 					case GeoObjType.straightedge:
-						Transform straightEdge = PoolManager.Pools["Tools"].Spawn("Straightedge").transform;
+						Transform straightEdge = straightEdgeBehave.Constructor().transform;
 						straightEdge.transform.position = geo.position;
 						straightEdge.transform.rotation = geo.rotation;
 						if (!String.IsNullOrEmpty(geo.label))

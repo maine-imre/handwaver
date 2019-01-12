@@ -17,7 +17,7 @@ namespace IMRE.HandWaver
 	class StaticPoint : AbstractPoint, StaticFigure
     {
         #region Constructors
-            public static StaticPoint staticPointConstructor()
+            public static StaticPoint Constructor()
             {
                 GameObject go = new GameObject();
 				go.AddComponent<MeshFilter>();

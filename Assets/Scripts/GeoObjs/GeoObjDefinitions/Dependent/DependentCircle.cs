@@ -19,7 +19,7 @@ namespace IMRE.HandWaver
 	class DependentCircle : AbstractCircle, DependentFigure
     {
 		#region Constructors
-		public static DependentCircle dependentCircleConstructor(){
+		public static DependentCircle Constructor(){
 			GameObject go = new GameObject();
 			go.AddComponent<Rigidbody>();
 			go.AddComponent<SphereCollider>();

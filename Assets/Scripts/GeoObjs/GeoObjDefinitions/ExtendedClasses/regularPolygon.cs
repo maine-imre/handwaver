@@ -21,7 +21,7 @@ namespace IMRE.HandWaver
 	class regularPolygon : InteractablePolygon
     {
         #region Constructors
-            public static regularPolygon regularPolygonConstructor()
+            public static regularPolygon Constructor()
             {
                 GameObject go = new GameObject();
 				go.AddComponent<MeshFilter>();

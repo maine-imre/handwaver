@@ -127,8 +127,8 @@ namespace IMRE.HandWaver.Shearing
 
 			//construct parallel planes
 
-			flatface1 = PoolManager.Pools["Tools"].Spawn("flatlandSurface", Vector3.ProjectOnPlane(this.transform.position, Vector3.up) + Vector3.up * height1, Quaternion.identity, this.transform).GetComponent<flatlandSurface>();
-			flatface2 = PoolManager.Pools["Tools"].Spawn("flatlandSurface", Vector3.ProjectOnPlane(this.transform.position, Vector3.up) + Vector3.up * height2, Quaternion.identity, this.transform).GetComponent<flatlandSurface>();
+			flatface1 = flatlandSurface.Constructor();
+			flatface2 = flatlandSurface.Constructor();
 
 			flatface1.otherFlatlandSurface = flatface2;
 			flatface2.otherFlatlandSurface = flatface1;

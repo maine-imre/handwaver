@@ -20,8 +20,8 @@ namespace IMRE.HandWaver
 /// </summary>
 	class InteractableLineSegment : AbstractLineSegment, InteractiveFigure
     {
-				#region Constructors
-            public static InteractableLineSegment interactableLineSegmentConstructor()
+		#region Constructors
+            public static InteractableLineSegment Constructor()
             {
                 GameObject go = new GameObject();
 				go.AddComponent<LineRenderer>();

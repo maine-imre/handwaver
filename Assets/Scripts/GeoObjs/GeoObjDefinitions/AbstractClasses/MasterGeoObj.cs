@@ -471,8 +471,7 @@ namespace IMRE.HandWaver
         {
 			if (allowDelete)
 			{
-				//HW_GeoSolver.ins.removeComponent(this);
-				PoolManager.Pools["GeoObj"].Despawn(this.transform);
+				gameObject.destroy();
 			}
         }
 

@@ -23,7 +23,7 @@ namespace IMRE.HandWaver
 	class InteractablePrism : AbstractSolid, InteractiveFigure
 	{
 		#region Constructors
-            public static InteractablePrism interactablePrismConstructor()
+            public static InteractablePrism Constructor()
             {
                 GameObject go = new GameObject();
 				go.AddComponent<SphereCollider>();

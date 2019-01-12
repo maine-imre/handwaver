@@ -16,12 +16,22 @@ namespace IMRE.HandWaver
     /// </summary>
 	class parallelLines : straightEdgeBehave
     {
-        #region Constructors
-		public static parallelLines parallelLinesConstructor(){
-			GameObject go = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/GeoObj/Flatface"));
-			return go.GetComponent<parallelLines>();
-		}
-		#endregion
+				#region Constructors
+            public static parallelLines Constructor()
+            {
+                GameObject go = new GameObject();
+				go.AddComponent<LineRenderer>();
+				//check if sphere mesh is added.
+				go.AddComponent<CapsuleCollider>();
+				go.AddComponent<Rigidbody>();
+				go.GetComponent<Rigidbody>().useGravity = false;
+				go.GetComponent<Rigidbody>().isKinematic = false;
+				go.AddComponent<InteractionBehaviour>();
+                go.GetComponent<InteractionBehaviour>().ignoreContact = true;
+                go.GetComponent<InteractionBehaviour>().ignoreGrasping = true;
+				return go.AddComponent<parallelLines>();
+            }
+        #endregion
 
         public straightEdgeBehave otherLine;
 

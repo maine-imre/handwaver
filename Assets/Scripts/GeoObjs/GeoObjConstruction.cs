@@ -22,14 +22,6 @@ namespace IMRE.HandWaver {
 	/// </summary>
 	class GeoObjConstruction
 	{
-		//internal static IntersectionPolygon intersectPoly(AbstractSolid solid, CrossSectionBehave csPlane)
-		//{
-		//    IntersectionPolygon iPoly = PoolManager.Pools["GeoObj"].Spawn("IntersectionPolygon").GetComponent<IntersectionPolygon>();
-		//    iPoly.parentSolid = solid;
-		//    iPoly.crossSectionPlane = csPlane;
-		//    return iPoly;
-		//}
-
 		/// <summary>
 		/// This script Spawns a Regular Polygon
 		/// The main contributor(s) to this script is __
@@ -41,7 +33,7 @@ namespace IMRE.HandWaver {
 		/// <returns></returns>
 		public static regularPolygon rPoly(int nSides, float apothem, Vector3 position, Vector3 normDir)
 		{
-			regularPolygon poly = PoolManager.Pools["GeoObj"].Spawn("RegPolyPreFab").GetComponent<regularPolygon>();
+			regularPolygon poly = regularPolygon.Constructor();
 
 			poly.Position3 = position;
 			poly.InitRegPoly(nSides, apothem, normDir);
@@ -51,7 +43,7 @@ namespace IMRE.HandWaver {
 
 		internal static SnappablePoint snapPoint(MasterGeoObj activeMGO, Vector3 position)
 		{
-			SnappablePoint snap = PoolManager.Pools["GeoObj"].Spawn("SnappablePointPreFab").GetComponent<SnappablePoint>();
+			SnappablePoint snap = SnappablePoint.Constructor();
 			snap.Position3 = position;
 			snap.attachedObject = activeMGO;
 			return snap;
@@ -66,7 +58,7 @@ namespace IMRE.HandWaver {
 		/// <returns></returns>
 		public static regularPolygon rPoly(int nSides, float apothem, Vector3 position)
 		{
-			regularPolygon poly = PoolManager.Pools["GeoObj"].Spawn("RegPolyPreFab").GetComponent<regularPolygon>();
+			regularPolygon poly = regularPolygon.Constructor();
 			poly.Position3 = position;
 			poly.InitRegPoly(nSides, apothem, Vector3.zero);
 
@@ -75,9 +67,7 @@ namespace IMRE.HandWaver {
 
 		public static DependentSphere dSphere(AbstractPoint center, AbstractPoint edge)
 		{
-			Transform thisSphereT = PoolManager.Pools["GeoObj"].Spawn("SpherePreFab").transform;
-
-			DependentSphere thisSphere = thisSphereT.GetComponent<DependentSphere>();
+			DependentSphere thisSphere = DependentSphere.Constructor();
 			thisSphere.center = center;
 			thisSphere.centerPosition = center.Position3;
 			thisSphere.edge = edge;
@@ -93,8 +83,7 @@ namespace IMRE.HandWaver {
 
 		public static DependentCircle dCircle(AbstractPoint center, AbstractPoint edge, Vector3 normDir)
 		{
-			Transform dcTrans = PoolManager.Pools["GeoObj"].Spawn("ArcPreFab");
-			DependentCircle dc = dcTrans.GetComponent<DependentCircle>();
+			DependentCircle dc = DependentCircle.Constructor();
 
 			dc.transform.parent = center.transform.parent;
 
@@ -114,8 +103,7 @@ namespace IMRE.HandWaver {
 
 		public static DependentRevolvedSurface dRevSurface(AbstractPoint center, AbstractLineSegment attachedLineSegment, Vector3 normDir)
 		{
-			Transform drsTrans = PoolManager.Pools["GeoObj"].Spawn("CircPreFab");
-			DependentRevolvedSurface drs = drsTrans.GetComponent<DependentRevolvedSurface>();
+			DependentRevolvedSurface drs = DependentRevolvedSurface.Constructor();
 
 			drs.transform.parent = attachedLineSegment.transform.parent;
 
@@ -138,27 +126,28 @@ namespace IMRE.HandWaver {
 
 		public static InteractablePoint iPoint(Vector3 position)
 		{
-			InteractablePoint point = PoolManager.Pools["GeoObj"].Spawn("PointPreFab").GetComponent<InteractablePoint>();
+			InteractablePoint point = InteractablePoint.Constructor();
 			point.Position3 = position;
 			return point;
 		}
 
 		public static DependentPoint dPoint(Vector3 position)
 		{
-			DependentPoint point = PoolManager.Pools["GeoObj"].Spawn("DependentPointPreFab",position,Quaternion.identity).GetComponent<DependentPoint>();
+			DependentPoint point = DependentPoint.Constructor();
+			point.Position3 = position;
 			return point;
 		}
 
         public static StaticPoint sPoint(Vector3 position)
         {
-            StaticPoint point = PoolManager.Pools["GeoObj"].Spawn("StaticPointPreFab").GetComponent<StaticPoint>();
+            StaticPoint point = StaticPoint.Constructor();
             point.Position3 = position;
             return point;
         }
 
         public static InteractableLineSegment iLineSegment(AbstractPoint point1, AbstractPoint point2)
 		{
-			InteractableLineSegment line = PoolManager.Pools["GeoObj"].Spawn("LinePreFab").GetComponent<InteractableLineSegment>();
+			InteractableLineSegment line = InteractableLineSegment.Constructor();
 
 			line.point1 = point1;
 			line.point2 = point2;
@@ -174,7 +163,7 @@ namespace IMRE.HandWaver {
 
 		public static DependentLineSegment dLineSegment(AbstractPoint point1, AbstractPoint point2)
 		{
-			DependentLineSegment line = PoolManager.Pools["GeoObj"].Spawn("DLinePreFab").GetComponent<DependentLineSegment>();
+			DependentLineSegment line = DependentLineSegment.Constructor();
 
 			line.transform.GetComponent<DependentLineSegment>().point1 = point1.transform.GetComponent<AbstractPoint>();
 			line.transform.GetComponent<DependentLineSegment>().point2 = point2.transform.GetComponent<AbstractPoint>();
@@ -190,7 +179,7 @@ namespace IMRE.HandWaver {
 
 		public static InteractablePolygon iPolygon(List<AbstractLineSegment> lineList, List<AbstractPoint> pointList)
 		{
-			InteractablePolygon plane = PoolManager.Pools["GeoObj"].Spawn("PlanePreFab").GetComponent<InteractablePolygon>();
+			InteractablePolygon plane = InteractablePolygon.Constructor();
 			plane.transform.GetComponent<InteractablePolygon>().lineList = lineList;
 			plane.transform.GetComponent<InteractablePolygon>().pointList = pointList;
 			plane.transform.GetComponent<InteractablePolygon>().initializefigure();
@@ -231,7 +220,7 @@ namespace IMRE.HandWaver {
 
 		public static DependentPolygon dPolygon(List<AbstractLineSegment> lineList, List<AbstractPoint> pointList)
 		{
-			DependentPolygon plane = PoolManager.Pools["GeoObj"].Spawn("DependentPolygonPrefab").GetComponent<DependentPolygon>();
+			DependentPolygon plane = DependentPolygon.Constructor();
 
 			plane.transform.GetComponent<DependentPolygon>().lineList = lineList;
 			plane.transform.GetComponent<DependentPolygon>().pointList = pointList;
@@ -257,7 +246,7 @@ namespace IMRE.HandWaver {
 
         internal static InteractablePrism iPrism(List<AbstractPolygon> bases, List<AbstractPolygon> sides)
 		{
-			InteractablePrism prism = PoolManager.Pools["GeoObj"].Spawn("PrismPreFab").GetComponent<InteractablePrism>();
+			InteractablePrism prism = InteractablePrism.Constructor();
 			prism.bases = bases;
 			prism.sides = sides;
 			List<AbstractLineSegment> lines = new List<AbstractLineSegment>();
@@ -274,7 +263,7 @@ namespace IMRE.HandWaver {
 
 		internal static InteractablePrism iPrism(List<AbstractLineSegment> edges)
 		{
-			InteractablePrism prism = PoolManager.Pools["GeoObj"].Spawn("PrismPreFab").GetComponent<InteractablePrism>();
+			InteractablePrism prism = InteractablePrism.Constructor();
 			prism.bases = new List<AbstractPolygon>();
 			prism.sides = new List<AbstractPolygon>();
 			prism.lineSegments = edges;
@@ -377,7 +366,7 @@ namespace IMRE.HandWaver {
                 sideList.Add(makePlaneWall(lineIndex, lineList0, lineList1));
             }
 
-            InteractablePrism prism = PoolManager.Pools["GeoObj"].Spawn("PrismPreFab").GetComponent<InteractablePrism>();
+            InteractablePrism prism = InteractablePrism.Constructor();
 			List<AbstractPolygon> baseList = new List<AbstractPolygon>
 			{
 				polygon,
@@ -465,7 +454,7 @@ namespace IMRE.HandWaver {
 				sideList.Add(makePlaneWall(lineIndex, lineList0, lineList1));
 			}
 
-			InteractablePrism prism = PoolManager.Pools["GeoObj"].Spawn("PrismPreFab").GetComponent<InteractablePrism>();
+			InteractablePrism prism = InteractablePrism.Constructor();
 			List<AbstractPolygon> baseList = new List<AbstractPolygon>
 			{
 				polygon,
@@ -548,7 +537,7 @@ namespace IMRE.HandWaver {
 				sideList.Add(makePlaneWall(lineIndex, lineList0, lineList1));
 			}
 
-			InteractablePrism prism = PoolManager.Pools["GeoObj"].Spawn("PrismPreFab").GetComponent<InteractablePrism>();
+			InteractablePrism prism = InteractablePrism.Constructor();
 			List<AbstractPolygon> baseList = new List<AbstractPolygon>();
 			baseList.Add(polygon);
 			baseList.Add(plane1);
@@ -609,7 +598,6 @@ namespace IMRE.HandWaver {
 			line2.transform.GetComponent<AbstractLineSegment>().initializefigure();
 			line3.transform.GetComponent<AbstractLineSegment>().initializefigure();
 
-			//Transform newPlane = PoolManager.Pools["GeoObj"].Spawn("PlanePreFab");
 			List<AbstractLineSegment> lineList = new List<AbstractLineSegment>();
 			lineList.Add(line0);
 			lineList.Add(line1);
@@ -622,28 +610,12 @@ namespace IMRE.HandWaver {
 			pointList.Add(point12);
 			pointList.Add(point11);
 
-
-			//newPlane.GetComponent<AbstractPolygon>().lineList = lineList;
-			//newPlane.GetComponent<AbstractPolygon>().pointList = pointList;
-
-			//foreach (AbstractLineSegment line in lineList)
-			//{
-			//	HW_GeoSolver.ins.addDependence(newPlane.transform, line.transform);
-			//}
-			//foreach (AbstractPoint point in pointList)
-			//{
-			//	HW_GeoSolver.ins.addDependence(newPlane.transform, point.transform);
-			//}
-
-			//newPlane.transform.GetComponent<AbstractPolygon>().initializefigure();
-
             return iPolygon(lineList,pointList);
-
 		}
 
         public static DependentPyramid dPyramid(AbstractPolygon basePoly, AbstractPoint apex)
 		{
-            DependentPyramid pyramid = PoolManager.Pools["GeoObj"].Spawn("DependentPyramidPrefab").GetComponent<DependentPyramid>();
+            DependentPyramid pyramid = DependentPyramid.Constructor();
             pyramid.basePolygon = basePoly;
             pyramid.apex = apex;
 
@@ -698,7 +670,7 @@ namespace IMRE.HandWaver {
 
 		public static alphabetLabel label(MasterGeoObj obj, string labelText)
 		{
-			alphabetLabel label = PoolManager.Pools["Tools"].Spawn("alphabetLabel").GetComponent<alphabetLabel>();
+			alphabetLabel label = alphabetLabel.Constructor();
 			label.spawnOnMGO(obj, labelText);
 			return label;
 		}

@@ -17,7 +17,7 @@ namespace IMRE.HandWaver
 	class DependentPoint : AbstractPoint, DependentFigure
     {
 		#region Constructors
-		public static DependentPoint dependentPointConstructor(){
+		public static DependentPoint Constructor(){
 				GameObject go = new GameObject();
 				go.AddComponent<MeshFilter>();
 				go.AddComponent<MeshRenderer>();

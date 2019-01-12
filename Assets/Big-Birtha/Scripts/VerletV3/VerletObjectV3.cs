@@ -3,6 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class VerletObjectV3 : MonoBehaviour {
+
+#region Constructors
+	public static VerletObjectV3 Constructor(){
+		GameObject go = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Space/VerletObjectV3"));
+		return go.GetComponent<VerletObjectV3>();
+	}
+#endregion
+
 	public Vector3 inputPosition;
 	public Vector3d position;				//The position vector of the body
 	public Vector3d previousPosition;		//The previous position of the body

@@ -458,7 +458,6 @@
      <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\Shared Assets\Scripts\DocLinks.cs" />
      <Compile Include="Assets\Scripts\AnchorEarthWatch.cs" />
      <Compile Include="Assets\Scripts\AzmuthalProjectionScript.cs" />
-     <Compile Include="Assets\Scripts\checkPackageDependencies.cs" />
      <Compile Include="Assets\Scripts\Chess\Abstract\AbstractPiece.cs" />
      <Compile Include="Assets\Scripts\Chess\Abstract\allValidMoves.cs" />
      <Compile Include="Assets\Scripts\Chess\boardCreator.cs" />
@@ -581,7 +580,6 @@
      <Compile Include="Assets\Scripts\Networking\playerHand.cs" />
      <Compile Include="Assets\Scripts\Networking\playerHead.cs" />
      <Compile Include="Assets\Scripts\pointingGesture.cs" />
-     <Compile Include="Assets\Scripts\PoolManagerPool.cs" />
      <Compile Include="Assets\Scripts\RSDES_GestureArcs.cs" />
      <Compile Include="Assets\Scripts\ScaleAndDimensionExperimentControl.cs" />
      <Compile Include="Assets\Scripts\ScaleMeDynamic.cs" />
@@ -645,7 +643,6 @@
      <Compile Include="Assets\Scripts\UserInterface\SaveCSV.cs" />
      <Compile Include="Assets\Scripts\UserInterface\selectionMenu.cs" />
      <Compile Include="Assets\Scripts\UserInterface\Watson\VoiceSpawner.cs" />
-     <Compile Include="Assets\Scripts\UserInterface\Watson\WatsonGameManager.cs" />
      <Compile Include="Assets\Scripts\UserInterface\WebBrowser\moveCursor.cs" />
      <Compile Include="Assets\Scripts\worldScaleModifier.cs" />
      <None Include="Assets\Big-Birtha\PlanetaryData\orbitData\Mars.txt" />

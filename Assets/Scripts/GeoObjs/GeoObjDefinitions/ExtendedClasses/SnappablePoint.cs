@@ -22,7 +22,7 @@ namespace IMRE.HandWaver
 	{
 
 		#region Constructors
-            public static SnappablePoint snappablePointConstructor()
+            public static SnappablePoint Constructor()
             {
                 GameObject go = new GameObject();
 				go.AddComponent<MeshFilter>();

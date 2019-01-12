@@ -117,8 +117,8 @@ namespace IMRE.HandWaver.Shearing
 			crossSectionModel.GetComponent<LineRenderer>().materials[0].color = mgoColor;
 
 
-			line1 = PoolManager.Pools["Tools"].Spawn("ParallelLines").GetComponent<parallelLines>();
-            parallelLines line2 = PoolManager.Pools["Tools"].Spawn("ParallelLines").GetComponent<parallelLines>();
+			line1 = parallelLines.Constructor();
+            parallelLines line2 = parallelLines.Constructor();
 
             line1.Position3 = Vector3.ProjectOnPlane(this.transform.position, Vector3.up) + Vector3.up * height2;
             line2.Position3 = Vector3.ProjectOnPlane(this.transform.position, Vector3.up) + Vector3.up * height1;

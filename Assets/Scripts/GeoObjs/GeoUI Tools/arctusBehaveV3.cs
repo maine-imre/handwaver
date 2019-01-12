@@ -38,8 +38,8 @@ namespace IMRE.HandWaver
 		private AnchorableBehaviour thisABehave;
 		public float angleDeltaThreshold;
 
-        #region consturctors
-        public static arctusBehaveV3 arctusConstructor(){
+        #region Constructors
+        public static arctusBehaveV3 Constructor(){
 			GameObject go = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Tools/ArctusV3"));
 			return go.GetComponent<arctusBehaveV3>();
 		}
@@ -193,8 +193,7 @@ namespace IMRE.HandWaver
         {
             if (centerSet && edgeSet)
             {
-				Transform thisSphereT = PoolManager.Pools["GeoObj"].Spawn("SpherePreFab").transform;
-				thisSphere = thisSphereT.GetComponent<DependentSphere>();
+				thisSphere = DependentSphere.Constructor();
 				thisSphere.center = Center;
 				thisSphere.centerPosition = Center.transform.position;
 				thisSphere.edge = Edge;

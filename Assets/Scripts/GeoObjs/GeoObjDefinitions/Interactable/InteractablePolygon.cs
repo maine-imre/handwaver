@@ -22,7 +22,7 @@ namespace IMRE.HandWaver
 	class InteractablePolygon : AbstractPolygon, InteractiveFigure
     {
         #region Constructors
-            public static InteractablePolygon interactablePolygonConstructor()
+            public static InteractablePolygon Constructor()
             {
                 GameObject go = new GameObject();
 				go.AddComponent<MeshFilter>();

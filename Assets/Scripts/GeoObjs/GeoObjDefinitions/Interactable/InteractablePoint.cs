@@ -21,7 +21,7 @@ namespace IMRE.HandWaver
 	class InteractablePoint : AbstractPoint, InteractiveFigure
     {
         #region Constructors
-            public static InteractablePoint interactablePointConstructor()
+            public static InteractablePoint Constructor()
             {
                 GameObject go = new GameObject();
 				go.AddComponent<MeshFilter>();

@@ -19,7 +19,7 @@ namespace IMRE.HandWaver
     {
 
         #region Constructors
-        public static DependentRevolvedSurface revolvedSurfaceConstructor()
+        public static DependentRevolvedSurface Constructor()
         {
             GameObject go = new GameObject();
             go.AddComponent<MeshFilter>();

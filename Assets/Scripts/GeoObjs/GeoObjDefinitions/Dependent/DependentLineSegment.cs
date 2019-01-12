@@ -17,7 +17,7 @@ namespace IMRE.HandWaver
 	class DependentLineSegment : AbstractLineSegment, DependentFigure
     {
 				#region Constructors
-            public static DependentLineSegment dependentLineSegmentConstructor()
+            public static DependentLineSegment Constructor()
             {
                 GameObject go = new GameObject();
 				go.AddComponent<LineRenderer>();

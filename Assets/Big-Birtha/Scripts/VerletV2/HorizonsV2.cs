@@ -110,7 +110,7 @@ public class HorizonsV2 : MonoBehaviour {
 			}
 			if(!flag) {                                                             //Flag prevents bad input
 																					//defaultBody.name = bodyName;										//This code sets the default body values to the given data and instantiates it
-				VerletObjectV2 df = PoolManager.Pools["MassiveBody"].Spawn("VerletV2Sphere").GetComponent<VerletObjectV2>();
+				VerletObjectV2 df = VerletObjectV2.Constructor();
 				//VerletObjectV2 df = defaultBody.GetComponent<VerletObjectV2>();
 				df.gameObject.name = bodyName;
 				df.mass = mass;

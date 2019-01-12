@@ -21,7 +21,7 @@ namespace IMRE.HandWaver
 	class DependentPolygon : AbstractPolygon, DependentFigure
     {
 		#region Constructors
-			public static  DependentPolygon dependentPolygonConstructor()
+			public static  DependentPolygon Constructor()
 			{
 				GameObject go = new GameObject();
 				go.AddComponent<MeshFilter>();
