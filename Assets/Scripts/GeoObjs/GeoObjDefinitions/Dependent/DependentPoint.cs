@@ -16,6 +16,21 @@ namespace IMRE.HandWaver
 /// </summary>
 	class DependentPoint : AbstractPoint, DependentFigure
     {
+		#region Constructors
+		public static DependentPoint dependentPointConstructor(){
+				GameObject go = new GameObject();
+				go.AddComponent<MeshFilter>();
+				go.AddComponent<MeshRenderer>();
+				//check if sphere mesh is added.
+				go.AddComponent<SphereCollider>();
+				go.GetComponent<SphereCollider>().radius = 0.5f;
+				go.AddComponent<Rigidbody>();
+				go.GetComponent<Rigidbody>().useGravity = false;
+				go.GetComponent<Rigidbody>().isKinematic = false;
+				go.AddComponent<InteractionBehaviour>();
+				return go.AddComponent<DependentPoint>();
+		}
+		#endregion
 		private Vector3 oldPos;
 
 		public override void initializefigure()

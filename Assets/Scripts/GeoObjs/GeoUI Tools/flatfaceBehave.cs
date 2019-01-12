@@ -18,6 +18,13 @@ namespace IMRE.HandWaver
 /// </summary>
 	class flatfaceBehave : MasterGeoObj
 	{
+
+		#region Constructors
+		public static flatfaceBehave flatfaceConstructor(){
+			GameObject go = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/GeoObj/Flatface"));
+			return go.GetComponent<flatfaceBehave>();
+		}
+		#endregion
         public Vector3 normalDir
         {
             get

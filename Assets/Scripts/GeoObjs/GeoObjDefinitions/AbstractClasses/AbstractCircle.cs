@@ -18,7 +18,6 @@ namespace IMRE.HandWaver
 /// </summary>
 	abstract class AbstractCircle : MasterGeoObj
     {
-
         public Vector3 centerPos;
         public Vector3 normalDir;
         public Vector3 edgePos;

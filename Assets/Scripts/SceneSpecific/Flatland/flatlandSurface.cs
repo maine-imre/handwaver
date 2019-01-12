@@ -19,6 +19,13 @@ namespace IMRE.HandWaver
 	/// </summary>
 	class flatlandSurface : flatfaceBehave
     {
+		#region Constructors
+		public static flatlandSurface flatlandSurfaceConstructor(){
+			GameObject go = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/GeoObj/flatlandSurface"));
+			return go.GetComponent<flatlandSurface>();
+		}
+		#endregion
+
         public flatlandSurface otherFlatlandSurface;
 
         public List<MasterGeoObj> attachedObjs;

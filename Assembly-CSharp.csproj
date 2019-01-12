@@ -2,7 +2,7 @@
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <LangVersion>latest</LangVersion>
-    <CscToolPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Tools/RoslynScripts</CscToolPath>
+    <CscToolPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Tools/RoslynScripts</CscToolPath>
     <CscToolExe>unity_csc.sh</CscToolExe>
   </PropertyGroup>
   <PropertyGroup>
@@ -24,7 +24,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>Temp\bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;UNITY_2019_1_0;UNITY_2019_1;UNITY_2019;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2019_1_OR_NEWER;PLATFORM_ARCH_64;UNITY_64;UNITY_INCLUDE_TESTS;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_SPRITES;ENABLE_GRID;ENABLE_TILEMAP;ENABLE_TERRAIN;ENABLE_TEXTURE_STREAMING;ENABLE_DIRECTOR;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_COLLAB_SOFTLOCKS;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_TIMELINE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;ENABLE_MANAGED_AUDIO_JOBS;INCLUDE_DYNAMIC_GI;INCLUDE_GI;ENABLE_MONO_BDWGC;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;INCLUDE_PUBNUB;ENABLE_VIDEO;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_LOCALIZATION;PLATFORM_STANDALONE_LINUX;PLATFORM_STANDALONE;UNITY_STANDALONE_LINUX;UNITY_STANDALONE;UNITY_STANDALONE_LINUX_API;PLAYERPREFS_SERIALIZE_TO_XML;ENABLE_SUBSTANCE;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_SCRIPTING_GC_WBARRIERS;ENABLE_CLUSTER_SYNC;ENABLE_CLUSTERINPUT;ENABLE_VR;ENABLE_SPATIALTRACKING;ENABLE_MODULAR_UNITYENGINE_ASSEMBLIES;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;NET_STANDARD_2_0;ENABLE_PROFILER;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_LINUX;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;UNITY_PRO_LICENSE;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER</DefineConstants>
+    <DefineConstants>DEBUG;TRACE;UNITY_2019_1_0;UNITY_2019_1;UNITY_2019;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2019_1_OR_NEWER;PLATFORM_ARCH_64;UNITY_64;UNITY_INCLUDE_TESTS;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_SPRITES;ENABLE_GRID;ENABLE_TILEMAP;ENABLE_TERRAIN;ENABLE_TEXTURE_STREAMING;ENABLE_DIRECTOR;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_COLLAB_SOFTLOCKS;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_TIMELINE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;ENABLE_MANAGED_AUDIO_JOBS;INCLUDE_DYNAMIC_GI;INCLUDE_GI;ENABLE_MONO_BDWGC;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;INCLUDE_PUBNUB;ENABLE_VIDEO;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_LOCALIZATION;PLATFORM_STANDALONE_LINUX;PLATFORM_STANDALONE;UNITY_STANDALONE_LINUX;UNITY_STANDALONE;UNITY_STANDALONE_LINUX_API;PLAYERPREFS_SERIALIZE_TO_XML;ENABLE_SUBSTANCE;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_SCRIPTING_GC_WBARRIERS;ENABLE_CLUSTER_SYNC;ENABLE_CLUSTERINPUT;ENABLE_VR;ENABLE_SPATIALTRACKING;ENABLE_MODULAR_UNITYENGINE_ASSEMBLIES;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;NET_STANDARD_2_0;ENABLE_PROFILER;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_LINUX;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;UNITY_PRO_LICENSE;PHOTON_UNITY_NETWORKING;PUN_2_0_OR_NEWER;PUN_2_OR_NEWER;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169</NoWarn>
@@ -48,10 +48,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
-      <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
+      <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor">
-      <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEditor.dll</HintPath>
+      <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEditor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -83,6 +83,379 @@
      <Compile Include="Assets\Big-Birtha\Scripts\VerletV3\VerletObjectV3.cs" />
      <Compile Include="Assets\Big-Birtha\Scripts\VerletV3\VerletV3.cs" />
      <Compile Include="Assets\Big-Birtha\Scripts\VerletV3\VerletV3ControlThread.cs" />
+     <Compile Include="Assets\Discord\DiscordControllerTemplate.cs" />
+     <Compile Include="Assets\Discord\DiscordRpc.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Examples\Example Assets\InertiaPostProcessProvider.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Examples\Example Assets\ProjectionPostProcessProvider.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Plugins\LeapCSharp\Arm.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Plugins\LeapCSharp\Bone.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Plugins\LeapCSharp\CircularObjectBuffer.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Plugins\LeapCSharp\Config.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Plugins\LeapCSharp\Connection.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Plugins\LeapCSharp\Controller.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Plugins\LeapCSharp\CopyFromLeapCExtensions.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Plugins\LeapCSharp\CopyFromOtherExtensions.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Plugins\LeapCSharp\CSharpExtensions.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Plugins\LeapCSharp\Device.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Plugins\LeapCSharp\DeviceList.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Plugins\LeapCSharp\DistortionData.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Plugins\LeapCSharp\Events.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Plugins\LeapCSharp\FailedDevice.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Plugins\LeapCSharp\FailedDeviceList.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Plugins\LeapCSharp\Finger.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Plugins\LeapCSharp\Frame.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Plugins\LeapCSharp\Hand.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Plugins\LeapCSharp\IController.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Plugins\LeapCSharp\Image.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Plugins\LeapCSharp\ImageData.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Plugins\LeapCSharp\LeapC.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Plugins\LeapCSharp\LeapQuaternion.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Plugins\LeapCSharp\LeapTransform.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Plugins\LeapCSharp\Logger.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Plugins\LeapCSharp\Matrix.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Plugins\LeapCSharp\MemoryManager.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Plugins\LeapCSharp\MessageSeverity.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Plugins\LeapCSharp\PointMapping.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Plugins\LeapCSharp\StructMarshal.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Plugins\LeapCSharp\TransformExtensions.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Plugins\LeapCSharp\Vector.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Algorithms\SlidingMax.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Algorithms\SmoothedFloat.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Algorithms\SmoothedQuaternion.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Algorithms\SmoothedVector3.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Animation\CubicHermiteSpline\HermiteSpline.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Animation\CubicHermiteSpline\HermiteSpline2.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Animation\CubicHermiteSpline\HermiteSpline3.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Animation\Ease.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Animation\IValueProxy.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Animation\TransformTweenBehaviour.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Animation\Tween\Enums.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Animation\Tween\IInterpolator.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Animation\Tween\Internal\Interpolators\InterpolatorBases.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Animation\Tween\Internal\Interpolators\MaterialInterpolators.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Animation\Tween\Internal\Interpolators\TransformInterpolators.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Animation\Tween\Internal\Interpolators\ValueInterpolators.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Animation\Tween\Internal\TweenInstance.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Animation\Tween\Internal\TweenRunner.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Animation\Tween\Tween.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Attachments\AttachmentHand.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Attachments\AttachmentHandEnableDisable.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Attachments\AttachmentHands.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Attachments\AttachmentPointBehaviour.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Attachments\AttachmentPointFlags.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Attributes\AutoFind.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Attributes\CombinablePropertyAttribute.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Attributes\CurveBounds.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Attributes\Disable.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Attributes\DisableIf.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Attributes\EditTimeOnly.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Attributes\EnumFlags.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Attributes\ImplementsInterface.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Attributes\ImplementsTypeNameDropdown.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Attributes\Incrementable.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Attributes\InspectorName.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Attributes\MaxValue.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Attributes\MinMax.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Attributes\MinValue.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Attributes\OnEditorChange.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Attributes\QuickButton.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Attributes\RunTimeOnly.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Attributes\Units.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\DataStructures\AssetFolder.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\DataStructures\DelayBuffer.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\DataStructures\DeltaBuffer.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\DataStructures\Deque.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\DataStructures\Either.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\DataStructures\Hash.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\DataStructures\IIndexable.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\DataStructures\IIndexableStruct.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\DataStructures\Maybe.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\DataStructures\MinHeap.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\DataStructures\MultiTypedList.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\DataStructures\MultiTypedReference.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\DataStructures\Pool.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\DataStructures\Pose.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\DataStructures\ProduceConsumeBuffer.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\DataStructures\ReadonlyHashSet.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\DataStructures\ReadonlyList.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\DataStructures\ReadonlySlice.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\DataStructures\RingBuffer.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\DataStructures\SerializableDictionary.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\DataStructures\SerializableHashSet.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\DataStructures\SerializableType.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\DataStructures\Slice.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\DataStructures\StreamingAsset.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\DataStructures\StreamingFolder.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\DataStructures\Type.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\DetectionUtilities\AbstractHoldDetector.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\DetectionUtilities\Detector.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\DetectionUtilities\DetectorLogicGate.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\DetectionUtilities\ExtendedFingerDetector.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\DetectionUtilities\FingerDirectionDetector.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\DetectionUtilities\PalmDirectionDetector.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\DetectionUtilities\PinchDetector.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\DetectionUtilities\ProximityDetector.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\EditorTools\LeapPreferences.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\EditorTools\LeapProjectChecks.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Encoding\VectorHand.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\HandModelManager.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\HandRepresentation.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Hands\CapsuleHand.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Hands\DebugHand.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Hands\FingerModel.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Hands\HandDrop.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Hands\HandEnableDisable.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Hands\HandModel.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Hands\HandModelBase.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Hands\HandTransitionBehavior.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Hands\RiggedFinger.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Hands\RiggedHand.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Hands\RigidFinger.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Hands\RigidHand.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Hands\SkeletalFinger.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Hands\SkeletalHand.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Hands\TestHandFactory.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\LeapImageRetriever.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\LeapProfiling.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\LeapProvider.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\LeapServiceProvider.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\LeapTestProvider.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\LeapXRServiceProvider.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Query\Query.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Query\QueryCollapseExtensions.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Query\QueryOperatorExtensions.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Query\QueryValueGenerators.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Space\Definitions\LeapCylindricalSpace.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Space\Definitions\LeapRadialSpace.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Space\Definitions\LeapSphericalSpace.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Space\ISpaceComponent.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Space\ITransformer.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Space\LeapSpace.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Space\LeapSpaceAnchor.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Testing\LeapTestBase.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Testing\StationaryTestLeapProvider.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Utils\AnimationCurveUtil.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Utils\ArrayPool.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Utils\AssertHelper.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Utils\BitConverterNonAlloc.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Utils\Comment.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Utils\ConnectionMonitor.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Utils\DisconnectionNotice.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Utils\EditorResources.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Utils\EnableDepthBuffer.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Utils\Enum.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Utils\EnumEventTable.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Utils\ExecutionOrder.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Utils\FpsLabel.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Utils\FrameRateControls.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Utils\GuiRectUtil.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Utils\HandUtils.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Utils\Infix.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Utils\InternalUtility.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Utils\KeyEnableBehaviors.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Utils\KeyEnableGameObjects.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Utils\LeapColor.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Utils\LeapUnityExtensions.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Utils\ListAndArrayExtensions.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Utils\PostProcessProvider.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Utils\ProfilerSample.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Utils\ProgressBar.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Utils\RuntimeColliderGizmos.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Utils\RuntimeGizmoManager.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Utils\RuntimeGizmoToggle.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Utils\SingleLayer.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Utils\Swizzle.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Utils\TransformHistory.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Utils\TransformUtil.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Utils\Utils.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\Utils\XRSupportUtil.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\XR\LeapEyeDislocator.cs" />
+     <Compile Include="Assets\LeapMotion\Core\Scripts\XR\XRHeightOffset.cs" />
+     <Compile Include="Assets\LeapMotion\LeapPaint\AudioSourceCache.cs" />
+     <Compile Include="Assets\LeapMotion\LeapPaint\GameObjectExtensions.cs" />
+     <Compile Include="Assets\LeapMotion\LeapPaint\Gesture.cs" />
+     <Compile Include="Assets\LeapMotion\LeapPaint\IGesture.cs" />
+     <Compile Include="Assets\LeapMotion\LeapPaint\OneHandedGesture.cs" />
+     <Compile Include="Assets\LeapMotion\LeapPaint\PressableButtonFeedback.cs" />
+     <Compile Include="Assets\LeapMotion\LeapPaint\PressableSlider.cs" />
+     <Compile Include="Assets\LeapMotion\LeapPaint\PressableUI.cs" />
+     <Compile Include="Assets\LeapMotion\LeapPaint\PressableUIManager.cs" />
+     <Compile Include="Assets\LeapMotion\LeapPaint\Pulsator.cs" />
+     <Compile Include="Assets\LeapMotion\LeapPaint\SoundEffect.cs" />
+     <Compile Include="Assets\LeapMotion\LeapPaint\TwoHandedGesture.cs" />
+     <Compile Include="Assets\LeapMotion\LeapPaint\UIActivator.cs" />
+     <Compile Include="Assets\LeapMotion\Modules\Hands\Examples\Scripts\CenterTransformOnCam.cs" />
+     <Compile Include="Assets\LeapMotion\Modules\Hands\Examples\Scripts\CycleHandPairs.cs" />
+     <Compile Include="Assets\LeapMotion\Modules\Hands\Scripts\LeapHandsAutoRig.cs" />
+     <Compile Include="Assets\LeapMotion\Modules\Hands\Scripts\MinimalHand.cs" />
+     <Compile Include="Assets\LeapMotion\Modules\Hands\Scripts\PolyFinger.cs" />
+     <Compile Include="Assets\LeapMotion\Modules\Hands\Scripts\PolyHand.cs" />
+     <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Examples\2. Basic UI\MovePoseExample.cs" />
+     <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Examples\3. Interaction Callbacks\Scripts\TransformHandle.cs" />
+     <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Examples\3. Interaction Callbacks\Scripts\TransformRotationHandle.cs" />
+     <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Examples\3. Interaction Callbacks\Scripts\TransformTool.cs" />
+     <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Examples\3. Interaction Callbacks\Scripts\TransformTranslationHandle.cs" />
+     <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Examples\5. Anchors\SimpleAnchorFeedback.cs" />
+     <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Examples\6. Dynamic UI\Scripts\SimpleMatchAnchorScaleAndState.cs" />
+     <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Examples\6. Dynamic UI\Scripts\WorkstationBehaviourExample.cs" />
+     <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Examples\6. Dynamic UI\Tests\Scripts\RenderWireSphere.cs" />
+     <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Examples\6. Dynamic UI\Tests\Scripts\WorkstationPoseTest.cs" />
+     <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Examples\7. Moving Reference Frames\Scripts\AngularSpeedTextBehaviour.cs" />
+     <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Examples\7. Moving Reference Frames\Scripts\AutopilotSystem.cs" />
+     <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Examples\7. Moving Reference Frames\Scripts\LinearReferenceSpawner.cs" />
+     <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Examples\7. Moving Reference Frames\Scripts\LinearSpeedTextBehaviour.cs" />
+     <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Examples\7. Moving Reference Frames\Scripts\Spaceship.cs" />
+     <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Examples\8. Swap Grasp\Scripts\SwapGraspExample.cs" />
+     <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Examples\Common Example Assets\Scripts\SimpleFacingCameraCallbacks.cs" />
+     <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Examples\Common Example Assets\Scripts\SimpleInteractionEmission.cs" />
+     <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Examples\Common Example Assets\Scripts\SimpleInteractionGlow.cs" />
+     <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Examples\Common Example Assets\Scripts\SimpleRendererUtil.cs" />
+     <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Examples\Common Example Assets\Scripts\SimpleScaleUtil.cs" />
+     <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Examples\Common Example Assets\Scripts\SimpleTransformUtil.cs" />
+     <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Scripts\InteractionBehaviour.cs" />
+     <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Scripts\InteractionController.cs" />
+     <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Scripts\InteractionHand.cs" />
+     <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Scripts\InteractionManager.cs" />
+     <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Scripts\InteractionXRController.cs" />
+     <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Scripts\Internal\ContactBone.cs" />
+     <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Scripts\Internal\ContactBoneParent.cs" />
+     <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Scripts\Internal\DefaultXRNodeTrackingProvider.cs" />
+     <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Scripts\Internal\HeuristicGrabClassifier.cs" />
+     <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Scripts\Internal\Interface\IGraspedMovementHandler.cs" />
+     <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Scripts\Internal\Interface\IGraspedPoseHandler.cs" />
+     <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Scripts\Internal\Interface\IInteractionBehaviour.cs" />
+     <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Scripts\Internal\Interface\IInternalInteractionController.cs" />
+     <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Scripts\Internal\Interface\IInternalInteractionManager.cs" />
+     <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Scripts\Internal\Interface\IThrowHandler.cs" />
+     <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Scripts\Internal\IXRControllerTrackingProvider.cs" />
+     <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Scripts\Internal\KabschGraspedPose.cs" />
+     <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Scripts\Internal\KinematicGraspedMovement.cs" />
+     <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Scripts\Internal\NonKinematicGraspedMovement.cs" />
+     <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Scripts\Internal\SlidingWindowThrow.cs" />
+     <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Scripts\UI\Anchors\Anchor.cs" />
+     <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Scripts\UI\Anchors\AnchorableBehaviour.cs" />
+     <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Scripts\UI\Anchors\AnchorGroup.cs" />
+     <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Scripts\UI\Anchors\Tests\AnchorScoreTest.cs" />
+     <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Scripts\UI\InteractionButton.cs" />
+     <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Scripts\UI\InteractionSlider.cs" />
+     <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Scripts\UI\InteractionToggle.cs" />
+     <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Scripts\Utility\ActivityManager.cs" />
+     <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Scripts\Utility\Extensions.cs" />
+     <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Scripts\Utility\GraspedMovementEvent.cs" />
+     <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Scripts\Utility\HideInteractionHandWhenControllerMoving.cs" />
+     <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Scripts\Utility\IgnoreColliderForInteraction.cs" />
+     <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Scripts\Utility\IgnoreCollisionsInChildren.cs" />
+     <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Scripts\Utility\KabschSolver.cs" />
+     <Compile Include="Assets\LeapMotion\Modules\InteractionEngine\Scripts\Utility\PhysicsCallbacks.cs" />
+     <Compile Include="Assets\Photon\PhotonChat\Demos\Common\EventSystemSpawner.cs" />
+     <Compile Include="Assets\Photon\PhotonChat\Demos\Common\OnStartDelete.cs" />
+     <Compile Include="Assets\Photon\PhotonChat\Demos\Common\TextButtonTransition.cs" />
+     <Compile Include="Assets\Photon\PhotonChat\Demos\Common\TextToggleIsOnTransition.cs" />
+     <Compile Include="Assets\Photon\PhotonChat\Demos\DemoChat\ChannelSelector.cs" />
+     <Compile Include="Assets\Photon\PhotonChat\Demos\DemoChat\ChatAppIdCheckerUI.cs" />
+     <Compile Include="Assets\Photon\PhotonChat\Demos\DemoChat\ChatGui.cs" />
+     <Compile Include="Assets\Photon\PhotonChat\Demos\DemoChat\FriendItem.cs" />
+     <Compile Include="Assets\Photon\PhotonChat\Demos\DemoChat\IgnoreUiRaycastWhenInactive.cs" />
+     <Compile Include="Assets\Photon\PhotonChat\Demos\DemoChat\NamePickGui.cs" />
+     <Compile Include="Assets\Photon\PhotonRealtime\Demos\DemoLoadBalancing\ConnectAndJoinRandomLb.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\DemoAsteroids\Scripts\AsteroidsGame.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\DemoAsteroids\Scripts\Game\Asteroid.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\DemoAsteroids\Scripts\Game\AsteroidsGameManager.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\DemoAsteroids\Scripts\Game\Bullet.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\DemoAsteroids\Scripts\Game\PlayerOverviewPanel.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\DemoAsteroids\Scripts\Game\Spaceship.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\DemoAsteroids\Scripts\Lobby\LobbyMainPanel.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\DemoAsteroids\Scripts\Lobby\LobbyTopPanel.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\DemoAsteroids\Scripts\Lobby\PlayerListEntry.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\DemoAsteroids\Scripts\Lobby\RoomListEntry.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\DemoHub\Scripts\DemoHubManager.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\DemoHub\Scripts\ToDemoHubButton.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\DemoProcedural\Scripts\Block.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\DemoProcedural\Scripts\Cluster.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\DemoProcedural\Scripts\IngameControlPanel.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\DemoProcedural\Scripts\Noise.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\DemoProcedural\Scripts\ProceduralController.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\DemoProcedural\Scripts\WorldGenerator.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\DemoSlotRacer\Scripts\BezierCurve\Bezier.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\DemoSlotRacer\Scripts\BezierCurve\BezierControlPointMode.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\DemoSlotRacer\Scripts\BezierCurve\BezierCurve.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\DemoSlotRacer\Scripts\BezierCurve\BezierSpline.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\DemoSlotRacer\Scripts\BezierCurve\Line.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\DemoSlotRacer\Scripts\BezierCurve\SplinePosition.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\DemoSlotRacer\Scripts\BezierCurve\SplineWalker.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\DemoSlotRacer\Scripts\PlayerControl.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\DemoSlotRacer\Scripts\SlotLanes.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\DemoSlotRacer\Scripts\SlotRacerSplashScreen.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunBasics-Tutorial\Scripts\CameraWork.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunBasics-Tutorial\Scripts\GameManager.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunBasics-Tutorial\Scripts\Launcher.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunBasics-Tutorial\Scripts\LoaderAnime.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunBasics-Tutorial\Scripts\PlayerAnimatorManager.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunBasics-Tutorial\Scripts\PlayerManager.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunBasics-Tutorial\Scripts\PlayerNameInputField.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunBasics-Tutorial\Scripts\PlayerUI.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunCockpit\Forms\ConnectToRegionUIForm.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunCockpit\Forms\CreateRoomUiForm.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunCockpit\Forms\LoadLevelUIForm.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunCockpit\Forms\SetRoomCustomPropertyUIForm.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunCockpit\Forms\UserIdUiForm.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunCockpit\PunCockpit.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunCockpit\Scripts\Autonomous UI\AutoSyncSceneToggle.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunCockpit\Scripts\Autonomous UI\BackgroundTimeOutField.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunCockpit\Scripts\Autonomous UI\CrcCheckToggle.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunCockpit\Scripts\Autonomous UI\DocLinkButton.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunCockpit\Scripts\Autonomous UI\GameVersionField.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunCockpit\Scripts\Autonomous UI\Generic\BoolInputField.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunCockpit\Scripts\Autonomous UI\Generic\IntInputField.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunCockpit\Scripts\Autonomous UI\Generic\StringInputField.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunCockpit\Scripts\Autonomous UI\Generic\ToggleExpand.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunCockpit\Scripts\Autonomous UI\LayoutElementMatchSize.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunCockpit\Scripts\Autonomous UI\NickNameField.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunCockpit\Scripts\Autonomous UI\OnlineDocButton.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunCockpit\Scripts\Autonomous UI\SendRateField.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunCockpit\Scripts\Autonomous UI\SendRateOnSerializeField.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunCockpit\Scripts\Controllers\PlayerDetailsController.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunCockpit\Scripts\InfosPanelPlaceholder.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunCockpit\Scripts\Lists\FriendListCell.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunCockpit\Scripts\Lists\FriendListView.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunCockpit\Scripts\Lists\PlayerListCell.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunCockpit\Scripts\Lists\PlayerListView.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunCockpit\Scripts\Lists\PropertyCell.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunCockpit\Scripts\Lists\RegionListCell.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunCockpit\Scripts\Lists\RegionListView.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunCockpit\Scripts\Lists\RoomListCell.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunCockpit\Scripts\Lists\RoomListView.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunCockpit\Scripts\PropertyFields\UserIdField.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunCockpit\Scripts\ReadOnlyProperties\AppVersionProperty.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunCockpit\Scripts\ReadOnlyProperties\BestRegionInPrefsProperty.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunCockpit\Scripts\ReadOnlyProperties\CloudRegionProperty.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunCockpit\Scripts\ReadOnlyProperties\CountOfPlayersInRoomProperty.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunCockpit\Scripts\ReadOnlyProperties\CountOfPlayersOnMasterProperty.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunCockpit\Scripts\ReadOnlyProperties\CountOfPlayersProperty.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunCockpit\Scripts\ReadOnlyProperties\CountOfRoomsProperty.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunCockpit\Scripts\ReadOnlyProperties\CurrentRoomAutoCleanupProperty.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunCockpit\Scripts\ReadOnlyProperties\CurrentRoomEmptyRoomTtlProperty.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunCockpit\Scripts\ReadOnlyProperties\CurrentRoomExpectedUsersProperty.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunCockpit\Scripts\ReadOnlyProperties\CurrentRoomIsOfflineProperty.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunCockpit\Scripts\ReadOnlyProperties\CurrentRoomIsOpenProperty.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunCockpit\Scripts\ReadOnlyProperties\CurrentRoomIsVisibleProperty.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunCockpit\Scripts\ReadOnlyProperties\CurrentRoomMasterClientIdProperty.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunCockpit\Scripts\ReadOnlyProperties\CurrentRoomMaxPlayersProperty.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunCockpit\Scripts\ReadOnlyProperties\CurrentRoomNameProperty.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunCockpit\Scripts\ReadOnlyProperties\CurrentRoomPlayerCountProperty.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunCockpit\Scripts\ReadOnlyProperties\CurrentRoomPlayerTtlProperty.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunCockpit\Scripts\ReadOnlyProperties\CurrentRoomPropertiesListedInLobbyProperty.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunCockpit\Scripts\ReadOnlyProperties\GameVersionProperty.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunCockpit\Scripts\ReadOnlyProperties\IsConnectedAndReadyProperty.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunCockpit\Scripts\ReadOnlyProperties\IsConnectedProperty.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunCockpit\Scripts\ReadOnlyProperties\OfflineModeProperty.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunCockpit\Scripts\ReadOnlyProperties\PingProperty.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunCockpit\Scripts\ReadOnlyProperties\PropertyListenerBase.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunCockpit\Scripts\ReadOnlyProperties\ServerAddressProperty.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunCockpit\Scripts\ReadOnlyProperties\ServerProperty.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunCockpit\Scripts\ScoreHelper.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\PunCockpit\Scripts\ThirdParty\PunCockpitEmbed.cs" />
+     <Compile Include="Assets\Photon\PhotonUnityNetworking\Demos\Shared Assets\Scripts\DocLinks.cs" />
      <Compile Include="Assets\Scripts\AnchorEarthWatch.cs" />
      <Compile Include="Assets\Scripts\AzmuthalProjectionScript.cs" />
      <Compile Include="Assets\Scripts\checkPackageDependencies.cs" />
@@ -228,6 +601,9 @@
      <Compile Include="Assets\Scripts\SceneSpecific\space\RSDESManager.cs" />
      <Compile Include="Assets\Scripts\SceneSpecific\space\RSDESPin.cs" />
      <Compile Include="Assets\Scripts\SceneSpecific\space\StellarData.cs" />
+     <Compile Include="Assets\Scripts\SceneSpecific\TutorialScene\tutorialManager.cs" />
+     <Compile Include="Assets\Scripts\SceneSpecific\TutorialScene\tutorialStepCheck.cs" />
+     <Compile Include="Assets\Scripts\SceneSpecific\TutorialScene\volumeCylinderBehave_Desk.cs" />
      <Compile Include="Assets\Scripts\shearingLabManager.cs" />
      <Compile Include="Assets\Scripts\similarFigures.cs" />
      <Compile Include="Assets\Scripts\StaticScripts\commandLineArgumentParse.cs" />
@@ -243,6 +619,7 @@
      <Compile Include="Assets\Scripts\UserInterface\follower\followerObjectTypes\toolboxMenuCreator.cs" />
      <Compile Include="Assets\Scripts\UserInterface\follower\followerObjectTypes\toolboxmode.cs" />
      <Compile Include="Assets\Scripts\UserInterface\follower\followerObjectTypes\toolboxRefillSpawn.cs" />
+     <Compile Include="Assets\Scripts\UserInterface\follower\followerObjectTypes\toolBoxRTS.cs" />
      <Compile Include="Assets\Scripts\UserInterface\follower\followerObjectTypes\toolboxtoolspawn.cs" />
      <Compile Include="Assets\Scripts\UserInterface\follower\toolboxfollower.cs" />
      <Compile Include="Assets\Scripts\UserInterface\follower\unitvectorScript.cs" />
@@ -255,613 +632,684 @@
      <Compile Include="Assets\Scripts\UserInterface\LeapPinchPickup.cs" />
      <Compile Include="Assets\Scripts\UserInterface\LookAtPlayer.cs" />
      <Compile Include="Assets\Scripts\UserInterface\MenuManager.cs" />
+     <Compile Include="Assets\Scripts\UserInterface\MixedReality\enableCameraSplitScreen.cs" />
+     <Compile Include="Assets\Scripts\UserInterface\MixedReality\FPS_Warning.cs" />
      <Compile Include="Assets\Scripts\UserInterface\PalmMoveRestrict.cs" />
      <Compile Include="Assets\Scripts\UserInterface\pyramidMakerTool.cs" />
      <Compile Include="Assets\Scripts\UserInterface\pyramidSceneConstruction.cs" />
      <Compile Include="Assets\Scripts\UserInterface\RSDESAnchorSpawn.cs" />
+     <Compile Include="Assets\Scripts\UserInterface\RTS\lockXYZ.cs" />
+     <Compile Include="Assets\Scripts\UserInterface\RTS\renderScaleChanger.cs" />
+     <Compile Include="Assets\Scripts\UserInterface\RTS\restrictLocalRotation.cs" />
+     <Compile Include="Assets\Scripts\UserInterface\RTS\scaleObject.cs" />
      <Compile Include="Assets\Scripts\UserInterface\SaveCSV.cs" />
      <Compile Include="Assets\Scripts\UserInterface\selectionMenu.cs" />
+     <Compile Include="Assets\Scripts\UserInterface\Watson\VoiceSpawner.cs" />
+     <Compile Include="Assets\Scripts\UserInterface\Watson\WatsonGameManager.cs" />
+     <Compile Include="Assets\Scripts\UserInterface\WebBrowser\moveCursor.cs" />
      <Compile Include="Assets\Scripts\worldScaleModifier.cs" />
      <None Include="Assets\Big-Birtha\PlanetaryData\orbitData\Mars.txt" />
      <None Include="Assets\Big-Birtha\StellarData\filename.xml" />
      <None Include="Assets\Big-Birtha\PlanetaryData\orbitData\Saturn.txt" />
      <None Include="Assets\Big-Birtha\PlanetaryData\orbitData\Jupiter.txt" />
      <None Include="Assets\Big-Birtha\PlanetaryData\orbitData.xml" />
+     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
+     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
+     <None Include="Assets\LeapMotion\Core\Resources\LeapCG.cginc" />
+     <None Include="Assets\LeapMotion\Core\README_BEFORE_UPDATING.txt" />
+     <None Include="Assets\Photon\PhotonUnityNetworking\link.xml" />
      <None Include="Assets\Big-Birtha\PlanetaryData\planetData\MarsDATA.txt" />
      <None Include="Assets\Big-Birtha\PlanetaryData\planetData\NeptuneDATA.txt" />
+     <None Include="Assets\Photon\PhotonUnityNetworking\Demos\DemoSlotRacer\Kenney Assets\Copyrights.txt" />
      <None Include="Assets\Resources\Materials\Space\Planets_SOLARSYSTEMSCOPECOM\citation.txt" />
+     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />
      <None Include="Assets\Shaders\GeoObjShaderBackOnly.shader" />
+     <None Include="Assets\LeapMotion\Core\readme.txt" />
      <None Include="Assets\Shaders\AlphaSelfIllum.shader" />
      <None Include="Assets\Resources\Space\orbitData.xml" />
      <None Include="Assets\Big-Birtha\PlanetaryData\filename.xml" />
+     <None Include="Assets\Photon\PhotonLibs\Photon3Unity3D.xml" />
+     <None Include="Assets\LeapMotion\Core\Shaders\RuntimeGizmos.shader" />
+     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
+     <None Include="Assets\Photon\PhotonLibs\release_history.txt" />
      <None Include="Assets\Big-Birtha\PlanetaryData\planetData\SaturnDATA.txt" />
      <None Include="Assets\Big-Birtha\PlanetaryData\planetData\EarthDATA.txt" />
      <None Include="Assets\Big-Birtha\PlanetaryData\planetData\VenusDATA.txt" />
+     <None Include="Assets\LeapMotion\Core\Dependencies.txt" />
      <None Include="Assets\Shaders\grasstest PMA.shader" />
+     <None Include="Assets\LeapMotion\Core\Shaders\ThresholdOverlay.shader" />
      <None Include="Assets\Shaders\EarthShaderBackOnly.shader" />
+     <None Include="Assets\LeapMotion\Core\Shaders\PassthroughForeground.shader" />
      <None Include="Assets\Shaders\grasstest.shader" />
+     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
      <None Include="Assets\Shaders\NewShader2.shader" />
+     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
      <None Include="Assets\Shaders\GeoObjShaderFrontOnly.shader" />
+     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Masking.shader" />
      <None Include="Assets\Big-Birtha\PlanetaryData\planetData\JupiterDATA.txt" />
+     <None Include="Assets\Photon\PhotonUnityNetworking\Demos\Shared Assets\Skin\eurof_tt.txt" />
+     <None Include="Assets\LeapMotion\Core\Shaders\PassthroughBackground.shader" />
      <None Include="Assets\Shaders\NewShader.shader" />
+     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Mobile.shader" />
      <None Include="Assets\Shaders\Equirectangular.shader" />
+     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF Overlay.shader" />
      <None Include="Assets\Big-Birtha\PlanetaryData\orbitData\Uranus.txt" />
+     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Surface.cginc" />
+     <None Include="Assets\Photon\PhotonUnityNetworking\Demos\Shared Assets\Skin\3dText.shader" />
      <None Include="Assets\Big-Birtha\PlanetaryData\planetData\UranusDATA.txt" />
+     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\Big-Birtha\PlanetaryData\orbitData\Neptune.txt" />
      <None Include="Assets\Shaders\RimShader.shader" />
+     <None Include="Assets\Photon\PhotonUnityNetworking\readme.txt" />
+     <None Include="Assets\LeapMotion\Core\Version.txt" />
      <None Include="Assets\Shaders\NewShader PMA.shader" />
+     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />
+     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
+     <None Include="Assets\LeapMotion\Core\Shaders\VertexOffsetShader.shader" />
      <None Include="Assets\Shaders\GeoObjShader.shader" />
      <None Include="Assets\Big-Birtha\PlanetaryData\orbitData\Mercury.txt" />
+     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF.shader" />
      <None Include="Assets\Shaders\EarthShaderDoubleSided.shader" />
      <None Include="Assets\Big-Birtha\StellarData\orbitData.xml" />
+     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile.shader" />
      <None Include="Assets\Big-Birtha\PlanetaryData\orbitData\Earth.txt" />
      <None Include="Assets\Big-Birtha\PlanetaryData\planetData\MercuryDATA.txt" />
+     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Sprite.shader" />
      <None Include="Assets\Shaders\EarthShaderFrontOnly.shader" />
+     <None Include="Assets\Photon\PhotonUnityNetworking\changelog.txt" />
+     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface.shader" />
      <None Include="Assets\Big-Birtha\PlanetaryData\orbitData\Venus.txt" />
  <Reference Include="Unity.Timeline.Editor">
- <HintPath>/home/ngazey/Documents/Repositories/handwaver/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+ <HintPath>/home/camden/Documents/Repositories/handwaver/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro.Editor">
- <HintPath>/home/ngazey/Documents/Repositories/handwaver/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+ <HintPath>/home/camden/Documents/Repositories/handwaver/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.PackageManagerUI.Editor">
- <HintPath>/home/ngazey/Documents/Repositories/handwaver/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+ <HintPath>/home/camden/Documents/Repositories/handwaver/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Timeline">
- <HintPath>/home/ngazey/Documents/Repositories/handwaver/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+ <HintPath>/home/camden/Documents/Repositories/handwaver/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
  </Reference>
  <Reference Include="Unity.CollabProxy.Editor">
- <HintPath>/home/ngazey/Documents/Repositories/handwaver/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+ <HintPath>/home/camden/Documents/Repositories/handwaver/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.SpatialTracking">
- <HintPath>/home/ngazey/Documents/Repositories/handwaver/Library/ScriptAssemblies/UnityEditor.SpatialTracking.dll</HintPath>
+ <HintPath>/home/camden/Documents/Repositories/handwaver/Library/ScriptAssemblies/UnityEditor.SpatialTracking.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.SpatialTracking">
- <HintPath>/home/ngazey/Documents/Repositories/handwaver/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
+ <HintPath>/home/camden/Documents/Repositories/handwaver/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro">
- <HintPath>/home/ngazey/Documents/Repositories/handwaver/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+ <HintPath>/home/camden/Documents/Repositories/handwaver/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.DataPrivacy">
- <HintPath>/home/ngazey/Documents/Repositories/handwaver/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
+ <HintPath>/home/camden/Documents/Repositories/handwaver/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.AIModule">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.ARModule">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.ARModule.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.ARModule.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.AccessibilityModule">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.AccessibilityModule.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.AccessibilityModule.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.AnimationModule">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.AnimationModule.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.AnimationModule.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.AssetBundleModule">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.AssetBundleModule.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.AssetBundleModule.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.AudioModule">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.AudioModule.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.AudioModule.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.ClothModule">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.ClothModule.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.ClothModule.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.ClusterInputModule">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.ClusterInputModule.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.ClusterInputModule.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.ClusterRendererModule">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.ClusterRendererModule.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.ClusterRendererModule.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.CoreModule">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.CoreModule.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.CoreModule.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.CrashReportingModule">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.CrashReportingModule.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.CrashReportingModule.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.DirectorModule">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.DirectorModule.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.DirectorModule.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.FileSystemHttpModule">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.FileSystemHttpModule.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.FileSystemHttpModule.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.GameCenterModule">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.GameCenterModule.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.GameCenterModule.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.GridModule">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.GridModule.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.GridModule.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.HotReloadModule">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.HotReloadModule.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.HotReloadModule.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.IMGUIModule">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.IMGUIModule.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.IMGUIModule.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.ImageConversionModule">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.ImageConversionModule.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.ImageConversionModule.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.InputModule">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.InputModule.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.InputModule.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.JSONSerializeModule">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.JSONSerializeModule.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.JSONSerializeModule.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.LocalizationModule">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.LocalizationModule.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.LocalizationModule.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.ParticleSystemModule">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.ParticleSystemModule.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.ParticleSystemModule.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.PerformanceReportingModule">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.PerformanceReportingModule.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.PerformanceReportingModule.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.PhysicsModule">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.PhysicsModule.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.PhysicsModule.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Physics2DModule">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.Physics2DModule.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.Physics2DModule.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.ProfilerModule">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.ProfilerModule.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.ProfilerModule.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.ScreenCaptureModule">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.ScreenCaptureModule.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.ScreenCaptureModule.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.SharedInternalsModule">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.SharedInternalsModule.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.SharedInternalsModule.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.SpriteMaskModule">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.SpriteMaskModule.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.SpriteMaskModule.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.SpriteShapeModule">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.SpriteShapeModule.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.SpriteShapeModule.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.StreamingModule">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.StreamingModule.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.StreamingModule.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.StyleSheetsModule">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.StyleSheetsModule.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.StyleSheetsModule.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.SubstanceModule">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.SubstanceModule.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.SubstanceModule.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.TLSModule">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.TLSModule.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.TLSModule.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.TerrainModule">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.TerrainModule.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.TerrainModule.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.TerrainPhysicsModule">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.TerrainPhysicsModule.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.TerrainPhysicsModule.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.TextCoreModule">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.TextCoreModule.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.TextCoreModule.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.TextRenderingModule">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.TextRenderingModule.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.TextRenderingModule.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.TilemapModule">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.TilemapModule.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.TilemapModule.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.UIModule">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.UIModule.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.UIModule.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.UIElementsModule">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.UIElementsModule.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.UIElementsModule.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.UNETModule">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.UNETModule.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.UNETModule.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.UmbraModule">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.UmbraModule.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.UmbraModule.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.UnityAnalyticsModule">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.UnityAnalyticsModule.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.UnityAnalyticsModule.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.UnityConnectModule">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.UnityConnectModule.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.UnityConnectModule.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.UnityTestProtocolModule">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.UnityTestProtocolModule.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.UnityTestProtocolModule.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.UnityWebRequestModule">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.UnityWebRequestModule.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.UnityWebRequestModule.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.UnityWebRequestAssetBundleModule">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.UnityWebRequestAssetBundleModule.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.UnityWebRequestAssetBundleModule.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.UnityWebRequestAudioModule">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.UnityWebRequestAudioModule.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.UnityWebRequestAudioModule.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.UnityWebRequestTextureModule">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.UnityWebRequestTextureModule.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.UnityWebRequestTextureModule.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.UnityWebRequestWWWModule">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.UnityWebRequestWWWModule.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.VFXModule">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.VFXModule.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.VFXModule.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.VRModule">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.VRModule.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.VRModule.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.VehiclesModule">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.VehiclesModule.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.VehiclesModule.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.VideoModule">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.VideoModule.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.VideoModule.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.WindModule">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.WindModule.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.WindModule.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.XRModule">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.XRModule.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/UnityEngine/UnityEngine.XRModule.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Locator">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/Unity.Locator.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/Managed/Unity.Locator.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.UI">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.TestRunner">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/UnityExtensions/Unity/TestRunner/UnityEngine.TestRunner.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/UnityExtensions/Unity/TestRunner/UnityEngine.TestRunner.dll</HintPath>
  </Reference>
  <Reference Include="nunit.framework">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/UnityExtensions/Unity/TestRunner/net35/unity-custom/nunit.framework.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/UnityExtensions/Unity/TestRunner/net35/unity-custom/nunit.framework.dll</HintPath>
  </Reference>
- <Reference Include="Unity.Analytics.Tracker">
- <HintPath>/home/ngazey/Documents/Repositories/handwaver/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
+ <Reference Include="Photon3Unity3D">
+ <HintPath>/home/camden/Documents/Repositories/handwaver/Assets/Photon/PhotonLibs/Photon3Unity3D.dll</HintPath>
+ </Reference>
+ <Reference Include="websocket-sharp">
+ <HintPath>/home/camden/Documents/Repositories/handwaver/Assets/Photon/PhotonLibs/WebSocket/websocket-sharp.dll</HintPath>
+ </Reference>
+ <Reference Include="InteractionEngineUtility">
+ <HintPath>/home/camden/Documents/Repositories/handwaver/Assets/LeapMotion/Modules/InteractionEngine/Plugins/InteractionEngineUtility.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.Editor">
- <HintPath>/home/ngazey/Documents/Repositories/handwaver/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
+ <HintPath>/home/camden/Documents/Repositories/handwaver/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.Analytics.Tracker">
+ <HintPath>/home/camden/Documents/Repositories/handwaver/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.StandardEvents">
- <HintPath>/home/ngazey/Documents/Repositories/handwaver/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.StandardEvents.dll</HintPath>
+ <HintPath>/home/camden/Documents/Repositories/handwaver/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.StandardEvents.dll</HintPath>
  </Reference>
  <Reference Include="netstandard">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>
  </Reference>
  <Reference Include="Microsoft.Win32.Primitives">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/Microsoft.Win32.Primitives.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/Microsoft.Win32.Primitives.dll</HintPath>
  </Reference>
  <Reference Include="System.AppContext">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.AppContext.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.AppContext.dll</HintPath>
  </Reference>
  <Reference Include="System.Collections.Concurrent">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Collections.Concurrent.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Collections.Concurrent.dll</HintPath>
  </Reference>
  <Reference Include="System.Collections.NonGeneric">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Collections.NonGeneric.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Collections.NonGeneric.dll</HintPath>
  </Reference>
  <Reference Include="System.Collections.Specialized">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Collections.Specialized.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Collections.Specialized.dll</HintPath>
  </Reference>
  <Reference Include="System.Collections">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Collections.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Collections.dll</HintPath>
  </Reference>
  <Reference Include="System.ComponentModel.EventBasedAsync">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.ComponentModel.EventBasedAsync.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.ComponentModel.EventBasedAsync.dll</HintPath>
  </Reference>
  <Reference Include="System.ComponentModel.Primitives">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.ComponentModel.Primitives.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.ComponentModel.Primitives.dll</HintPath>
  </Reference>
  <Reference Include="System.ComponentModel.TypeConverter">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.ComponentModel.TypeConverter.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.ComponentModel.TypeConverter.dll</HintPath>
  </Reference>
  <Reference Include="System.ComponentModel">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.ComponentModel.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.ComponentModel.dll</HintPath>
  </Reference>
  <Reference Include="System.Console">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Console.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Console.dll</HintPath>
  </Reference>
  <Reference Include="System.Data.Common">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Data.Common.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Data.Common.dll</HintPath>
  </Reference>
  <Reference Include="System.Diagnostics.Contracts">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Diagnostics.Contracts.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Diagnostics.Contracts.dll</HintPath>
  </Reference>
  <Reference Include="System.Diagnostics.Debug">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Diagnostics.Debug.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Diagnostics.Debug.dll</HintPath>
  </Reference>
  <Reference Include="System.Diagnostics.FileVersionInfo">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Diagnostics.FileVersionInfo.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Diagnostics.FileVersionInfo.dll</HintPath>
  </Reference>
  <Reference Include="System.Diagnostics.Process">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Diagnostics.Process.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Diagnostics.Process.dll</HintPath>
  </Reference>
  <Reference Include="System.Diagnostics.StackTrace">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Diagnostics.StackTrace.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Diagnostics.StackTrace.dll</HintPath>
  </Reference>
  <Reference Include="System.Diagnostics.TextWriterTraceListener">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Diagnostics.TextWriterTraceListener.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Diagnostics.TextWriterTraceListener.dll</HintPath>
  </Reference>
  <Reference Include="System.Diagnostics.Tools">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Diagnostics.Tools.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Diagnostics.Tools.dll</HintPath>
  </Reference>
  <Reference Include="System.Diagnostics.TraceSource">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Diagnostics.TraceSource.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Diagnostics.TraceSource.dll</HintPath>
  </Reference>
  <Reference Include="System.Diagnostics.Tracing">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Diagnostics.Tracing.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Diagnostics.Tracing.dll</HintPath>
  </Reference>
  <Reference Include="System.Drawing.Primitives">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Drawing.Primitives.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Drawing.Primitives.dll</HintPath>
  </Reference>
  <Reference Include="System.Dynamic.Runtime">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Dynamic.Runtime.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Dynamic.Runtime.dll</HintPath>
  </Reference>
  <Reference Include="System.Globalization.Calendars">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Globalization.Calendars.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Globalization.Calendars.dll</HintPath>
  </Reference>
  <Reference Include="System.Globalization.Extensions">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Globalization.Extensions.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Globalization.Extensions.dll</HintPath>
  </Reference>
  <Reference Include="System.Globalization">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Globalization.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Globalization.dll</HintPath>
  </Reference>
  <Reference Include="System.IO.Compression.ZipFile">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.IO.Compression.ZipFile.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.IO.Compression.ZipFile.dll</HintPath>
  </Reference>
  <Reference Include="System.IO.Compression">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.IO.Compression.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.IO.Compression.dll</HintPath>
  </Reference>
  <Reference Include="System.IO.FileSystem.DriveInfo">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.IO.FileSystem.DriveInfo.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.IO.FileSystem.DriveInfo.dll</HintPath>
  </Reference>
  <Reference Include="System.IO.FileSystem.Primitives">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.IO.FileSystem.Primitives.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.IO.FileSystem.Primitives.dll</HintPath>
  </Reference>
  <Reference Include="System.IO.FileSystem.Watcher">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.IO.FileSystem.Watcher.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.IO.FileSystem.Watcher.dll</HintPath>
  </Reference>
  <Reference Include="System.IO.FileSystem">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.IO.FileSystem.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.IO.FileSystem.dll</HintPath>
  </Reference>
  <Reference Include="System.IO.IsolatedStorage">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.IO.IsolatedStorage.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.IO.IsolatedStorage.dll</HintPath>
  </Reference>
  <Reference Include="System.IO.MemoryMappedFiles">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.IO.MemoryMappedFiles.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.IO.MemoryMappedFiles.dll</HintPath>
  </Reference>
  <Reference Include="System.IO.Pipes">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.IO.Pipes.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.IO.Pipes.dll</HintPath>
  </Reference>
  <Reference Include="System.IO.UnmanagedMemoryStream">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.IO.UnmanagedMemoryStream.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.IO.UnmanagedMemoryStream.dll</HintPath>
  </Reference>
  <Reference Include="System.IO">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.IO.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.IO.dll</HintPath>
  </Reference>
  <Reference Include="System.Linq.Expressions">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Linq.Expressions.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Linq.Expressions.dll</HintPath>
  </Reference>
  <Reference Include="System.Linq.Parallel">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Linq.Parallel.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Linq.Parallel.dll</HintPath>
  </Reference>
  <Reference Include="System.Linq.Queryable">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Linq.Queryable.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Linq.Queryable.dll</HintPath>
  </Reference>
  <Reference Include="System.Linq">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Linq.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Linq.dll</HintPath>
  </Reference>
  <Reference Include="System.Net.Http">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Net.Http.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Net.Http.dll</HintPath>
  </Reference>
  <Reference Include="System.Net.NameResolution">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Net.NameResolution.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Net.NameResolution.dll</HintPath>
  </Reference>
  <Reference Include="System.Net.NetworkInformation">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Net.NetworkInformation.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Net.NetworkInformation.dll</HintPath>
  </Reference>
  <Reference Include="System.Net.Ping">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Net.Ping.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Net.Ping.dll</HintPath>
  </Reference>
  <Reference Include="System.Net.Primitives">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Net.Primitives.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Net.Primitives.dll</HintPath>
  </Reference>
  <Reference Include="System.Net.Requests">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Net.Requests.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Net.Requests.dll</HintPath>
  </Reference>
  <Reference Include="System.Net.Security">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Net.Security.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Net.Security.dll</HintPath>
  </Reference>
  <Reference Include="System.Net.Sockets">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Net.Sockets.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Net.Sockets.dll</HintPath>
  </Reference>
  <Reference Include="System.Net.WebHeaderCollection">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Net.WebHeaderCollection.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Net.WebHeaderCollection.dll</HintPath>
  </Reference>
  <Reference Include="System.Net.WebSockets.Client">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Net.WebSockets.Client.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Net.WebSockets.Client.dll</HintPath>
  </Reference>
  <Reference Include="System.Net.WebSockets">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Net.WebSockets.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Net.WebSockets.dll</HintPath>
  </Reference>
  <Reference Include="System.ObjectModel">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.ObjectModel.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.ObjectModel.dll</HintPath>
  </Reference>
  <Reference Include="System.Reflection.Extensions">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Reflection.Extensions.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Reflection.Extensions.dll</HintPath>
  </Reference>
  <Reference Include="System.Reflection.Primitives">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Reflection.Primitives.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Reflection.Primitives.dll</HintPath>
  </Reference>
  <Reference Include="System.Reflection">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Reflection.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Reflection.dll</HintPath>
  </Reference>
  <Reference Include="System.Resources.Reader">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Resources.Reader.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Resources.Reader.dll</HintPath>
  </Reference>
  <Reference Include="System.Resources.ResourceManager">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Resources.ResourceManager.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Resources.ResourceManager.dll</HintPath>
  </Reference>
  <Reference Include="System.Resources.Writer">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Resources.Writer.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Resources.Writer.dll</HintPath>
  </Reference>
  <Reference Include="System.Runtime.CompilerServices.VisualC">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Runtime.CompilerServices.VisualC.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Runtime.CompilerServices.VisualC.dll</HintPath>
  </Reference>
  <Reference Include="System.Runtime.Extensions">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Runtime.Extensions.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Runtime.Extensions.dll</HintPath>
  </Reference>
  <Reference Include="System.Runtime.Handles">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Runtime.Handles.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Runtime.Handles.dll</HintPath>
  </Reference>
  <Reference Include="System.Runtime.InteropServices.RuntimeInformation">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
  </Reference>
  <Reference Include="System.Runtime.InteropServices">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Runtime.InteropServices.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Runtime.InteropServices.dll</HintPath>
  </Reference>
  <Reference Include="System.Runtime.Numerics">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Runtime.Numerics.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Runtime.Numerics.dll</HintPath>
  </Reference>
  <Reference Include="System.Runtime.Serialization.Formatters">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Runtime.Serialization.Formatters.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Runtime.Serialization.Formatters.dll</HintPath>
  </Reference>
  <Reference Include="System.Runtime.Serialization.Json">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Runtime.Serialization.Json.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Runtime.Serialization.Json.dll</HintPath>
  </Reference>
  <Reference Include="System.Runtime.Serialization.Primitives">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Runtime.Serialization.Primitives.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Runtime.Serialization.Primitives.dll</HintPath>
  </Reference>
  <Reference Include="System.Runtime.Serialization.Xml">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Runtime.Serialization.Xml.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Runtime.Serialization.Xml.dll</HintPath>
  </Reference>
  <Reference Include="System.Runtime">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Runtime.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Runtime.dll</HintPath>
  </Reference>
  <Reference Include="System.Security.Claims">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Security.Claims.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Security.Claims.dll</HintPath>
  </Reference>
  <Reference Include="System.Security.Cryptography.Algorithms">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Security.Cryptography.Algorithms.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Security.Cryptography.Algorithms.dll</HintPath>
  </Reference>
  <Reference Include="System.Security.Cryptography.Csp">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Security.Cryptography.Csp.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Security.Cryptography.Csp.dll</HintPath>
  </Reference>
  <Reference Include="System.Security.Cryptography.Encoding">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Security.Cryptography.Encoding.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Security.Cryptography.Encoding.dll</HintPath>
  </Reference>
  <Reference Include="System.Security.Cryptography.Primitives">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Security.Cryptography.Primitives.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Security.Cryptography.Primitives.dll</HintPath>
  </Reference>
  <Reference Include="System.Security.Cryptography.X509Certificates">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Security.Cryptography.X509Certificates.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Security.Cryptography.X509Certificates.dll</HintPath>
  </Reference>
  <Reference Include="System.Security.Principal">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Security.Principal.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Security.Principal.dll</HintPath>
  </Reference>
  <Reference Include="System.Security.SecureString">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Security.SecureString.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Security.SecureString.dll</HintPath>
  </Reference>
  <Reference Include="System.Text.Encoding.Extensions">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Text.Encoding.Extensions.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Text.Encoding.Extensions.dll</HintPath>
  </Reference>
  <Reference Include="System.Text.Encoding">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Text.Encoding.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Text.Encoding.dll</HintPath>
  </Reference>
  <Reference Include="System.Text.RegularExpressions">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Text.RegularExpressions.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Text.RegularExpressions.dll</HintPath>
  </Reference>
  <Reference Include="System.Threading.Overlapped">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Threading.Overlapped.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Threading.Overlapped.dll</HintPath>
  </Reference>
  <Reference Include="System.Threading.Tasks.Parallel">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Threading.Tasks.Parallel.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Threading.Tasks.Parallel.dll</HintPath>
  </Reference>
  <Reference Include="System.Threading.Tasks">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Threading.Tasks.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Threading.Tasks.dll</HintPath>
  </Reference>
  <Reference Include="System.Threading.Thread">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Threading.Thread.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Threading.Thread.dll</HintPath>
  </Reference>
  <Reference Include="System.Threading.ThreadPool">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Threading.ThreadPool.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Threading.ThreadPool.dll</HintPath>
  </Reference>
  <Reference Include="System.Threading.Timer">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Threading.Timer.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Threading.Timer.dll</HintPath>
  </Reference>
  <Reference Include="System.Threading">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Threading.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Threading.dll</HintPath>
  </Reference>
  <Reference Include="System.ValueTuple">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.ValueTuple.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.ValueTuple.dll</HintPath>
  </Reference>
  <Reference Include="System.Xml.ReaderWriter">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Xml.ReaderWriter.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Xml.ReaderWriter.dll</HintPath>
  </Reference>
  <Reference Include="System.Xml.XDocument">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Xml.XDocument.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Xml.XDocument.dll</HintPath>
  </Reference>
  <Reference Include="System.Xml.XPath.XDocument">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Xml.XPath.XDocument.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Xml.XPath.XDocument.dll</HintPath>
  </Reference>
  <Reference Include="System.Xml.XPath">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Xml.XPath.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Xml.XPath.dll</HintPath>
  </Reference>
  <Reference Include="System.Xml.XmlDocument">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Xml.XmlDocument.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Xml.XmlDocument.dll</HintPath>
  </Reference>
  <Reference Include="System.Xml.XmlSerializer">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Xml.XmlSerializer.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netstandard/System.Xml.XmlSerializer.dll</HintPath>
  </Reference>
  <Reference Include="System.Numerics.Vectors">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/Extensions/2.0.0/System.Numerics.Vectors.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/Extensions/2.0.0/System.Numerics.Vectors.dll</HintPath>
  </Reference>
  <Reference Include="System.Runtime.InteropServices.WindowsRuntime">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/Extensions/2.0.0/System.Runtime.InteropServices.WindowsRuntime.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/Extensions/2.0.0/System.Runtime.InteropServices.WindowsRuntime.dll</HintPath>
  </Reference>
  <Reference Include="System.ComponentModel.Composition">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.ComponentModel.Composition.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.ComponentModel.Composition.dll</HintPath>
  </Reference>
  <Reference Include="System.Core">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Core.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Core.dll</HintPath>
  </Reference>
  <Reference Include="System.Data">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Data.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Data.dll</HintPath>
  </Reference>
  <Reference Include="System.Drawing">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Drawing.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Drawing.dll</HintPath>
  </Reference>
  <Reference Include="System.IO.Compression.FileSystem">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.IO.Compression.FileSystem.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.IO.Compression.FileSystem.dll</HintPath>
  </Reference>
  <Reference Include="System.Net">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Net.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Net.dll</HintPath>
  </Reference>
  <Reference Include="System.Numerics">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Numerics.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Numerics.dll</HintPath>
  </Reference>
  <Reference Include="System.Runtime.Serialization">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Runtime.Serialization.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Runtime.Serialization.dll</HintPath>
  </Reference>
  <Reference Include="System.ServiceModel.Web">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.ServiceModel.Web.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.ServiceModel.Web.dll</HintPath>
  </Reference>
  <Reference Include="System.Transactions">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Transactions.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Transactions.dll</HintPath>
  </Reference>
  <Reference Include="System.Web">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Web.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Web.dll</HintPath>
  </Reference>
  <Reference Include="System.Windows">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Windows.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Windows.dll</HintPath>
  </Reference>
  <Reference Include="System.Xml.Linq">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Xml.Linq.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Xml.Linq.dll</HintPath>
  </Reference>
  <Reference Include="System.Xml.Serialization">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Xml.Serialization.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Xml.Serialization.dll</HintPath>
  </Reference>
  <Reference Include="System.Xml">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Xml.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Xml.dll</HintPath>
  </Reference>
  <Reference Include="System">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.dll</HintPath>
  </Reference>
  <Reference Include="mscorlib">
- <HintPath>/home/ngazey/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/mscorlib.dll</HintPath>
+ <HintPath>/home/camden/Unity/Hub/Editor/2019.1.0a13/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/mscorlib.dll</HintPath>
  </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="PhotonUnityNetworking.Utilities.PhotonPlayer.Editor.csproj">
+      <Project>{2702B1A2-17FF-0B68-B68B-9A46B9F2D1E6}</Project>      <Name>PhotonUnityNetworking.Utilities.PhotonPlayer.Editor</Name>    </ProjectReference>
+    <ProjectReference Include="PhotonUnityNetworking.Utilities.csproj">
+      <Project>{34A34D6F-4078-7D56-7ECC-E71F97DB64F7}</Project>      <Name>PhotonUnityNetworking.Utilities</Name>    </ProjectReference>
+    <ProjectReference Include="PhotonWebSocket.csproj">
+      <Project>{0C1E6F6A-7B26-24C3-9A28-2B69768DCBA2}</Project>      <Name>PhotonWebSocket</Name>    </ProjectReference>
+    <ProjectReference Include="PhotonRealtime.csproj">
+      <Project>{F4BB390E-D303-BEE9-BBE6-FAD7D059CC8C}</Project>      <Name>PhotonRealtime</Name>    </ProjectReference>
+    <ProjectReference Include="PhotonUnityNetworking.csproj">
+      <Project>{CDDB57A4-6A5C-15C4-98CE-39D57F58783E}</Project>      <Name>PhotonUnityNetworking</Name>    </ProjectReference>
+    <ProjectReference Include="PhotonChat.csproj">
+      <Project>{3495C565-BA89-2D24-D9B6-15372430D95F}</Project>      <Name>PhotonChat</Name>    </ProjectReference>
+    <ProjectReference Include="PhotonUnityNetworking.Utilities.Culling.Editor.csproj">
+      <Project>{E70A7DF1-F7C8-CCDD-24EF-AD05FB952D4E}</Project>      <Name>PhotonUnityNetworking.Utilities.Culling.Editor</Name>    </ProjectReference>
+    <ProjectReference Include="PhotonUnityNetworking.Editor.csproj">
+      <Project>{77D45518-5722-A320-D5F4-46191CE46899}</Project>      <Name>PhotonUnityNetworking.Editor</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

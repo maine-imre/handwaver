@@ -20,6 +20,29 @@ namespace IMRE.HandWaver
 /// </summary>
 	class SnappablePoint : DependentPoint
 	{
+
+		#region Constructors
+            public static SnappablePoint snappablePointConstructor()
+            {
+                GameObject go = new GameObject();
+				go.AddComponent<MeshFilter>();
+				go.AddComponent<MeshRenderer>();
+				//check if sphere mesh is added.
+				go.AddComponent<SphereCollider>();
+				go.GetComponent<SphereCollider>().radius = 0.5f;
+				go.AddComponent<Rigidbody>();
+				go.GetComponent<Rigidbody>().useGravity = false;
+				go.GetComponent<Rigidbody>().isKinematic = false;
+				go.AddComponent<InteractionBehaviour>();
+                go.AddComponent<AnchorableBehaviour>();
+                go.GetComponent<AnchorableBehaviour>().maxAnchorRange = 0.3f;
+                go.GetComponent<AnchorableBehaviour>().useTrajectory = true;
+                go.GetComponent<AnchorableBehaviour>().lockWhenAttached = true;
+                go.GetComponent<AnchorableBehaviour>().matchAnchorMotionWhileAttaching = true;
+                go.GetComponent<AnchorableBehaviour>().tryAnchorNearestOnGraspEnd = true;
+				return go.AddComponent<SnappablePoint>();
+            }
+        #endregion
 		private List<MasterGeoObj> relativeObjects;
         private List<float> relativeWeights;
 

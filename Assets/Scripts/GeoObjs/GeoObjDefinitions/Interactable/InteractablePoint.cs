@@ -20,6 +20,29 @@ namespace IMRE.HandWaver
 /// </summary>
 	class InteractablePoint : AbstractPoint, InteractiveFigure
     {
+        #region Constructors
+            public static InteractablePoint interactablePointConstructor()
+            {
+                GameObject go = new GameObject();
+				go.AddComponent<MeshFilter>();
+				go.AddComponent<MeshRenderer>();
+				//check if sphere mesh is added.
+				go.AddComponent<SphereCollider>();
+				go.GetComponent<SphereCollider>().radius = 0.5f;
+				go.AddComponent<Rigidbody>();
+				go.GetComponent<Rigidbody>().useGravity = false;
+				go.GetComponent<Rigidbody>().isKinematic = false;
+				go.AddComponent<InteractionBehaviour>();
+                go.AddComponent<AnchorableBehaviour>();
+                go.GetComponent<AnchorableBehaviour>().maxAnchorRange = 0.3f;
+                go.GetComponent<AnchorableBehaviour>().useTrajectory = true;
+                go.GetComponent<AnchorableBehaviour>().lockWhenAttached = true;
+                go.GetComponent<AnchorableBehaviour>().matchAnchorMotionWhileAttaching = true;
+                go.GetComponent<AnchorableBehaviour>().tryAnchorNearestOnGraspEnd = true;
+				return go.AddComponent<InteractablePoint>();
+            }
+        #endregion
+
         public bool controllCollide = false;
         public bool glueBool = false;
 

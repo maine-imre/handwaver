@@ -21,7 +21,12 @@ namespace IMRE.HandWaver
 /// </summary>
 	class straightEdgeBehave : MasterGeoObj
 	{
-
+        #region consturctors
+        public static straightEdgeBehave straightEdgeBehaveConstructor(){
+			GameObject go = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Tools/Straightedge"));
+			return go.GetComponent<straightEdgeBehave>();
+		}
+        #endregion
 		public shipWheelOffStraightedge.wheelType wheelType;
 
 

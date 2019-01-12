@@ -21,7 +21,6 @@ namespace IMRE.HandWaver
 /// </summary>
 	class arctusBehaveV3 : HandWaverTools
 	{
-#pragma warning disable 0649
 		public DependentSphere thisSphere;
 		public bool centerSet = false;
 		public bool edgeSet = false;
@@ -38,9 +37,15 @@ namespace IMRE.HandWaver
 		public LineRenderer thisCircle;
 		private AnchorableBehaviour thisABehave;
 		public float angleDeltaThreshold;
-#pragma warning restore 0649
 
-		private void Start()
+        #region consturctors
+        public static arctusBehaveV3 arctusConstructor(){
+			GameObject go = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Tools/ArctusV3"));
+			return go.GetComponent<arctusBehaveV3>();
+		}
+        #endregion
+
+        private void Start()
 		{
 			thisCircle.positionCount = 300;
 			thisCircle.useWorldSpace = true;

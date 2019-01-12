@@ -7,6 +7,7 @@ www.imrelab.org
 
 ﻿using Leap.Unity.Interaction;
 using System;
+using UnityEngine;
 
 namespace IMRE.HandWaver
 {
@@ -15,6 +16,30 @@ namespace IMRE.HandWaver
 /// </summary>
 	class StaticPoint : AbstractPoint, StaticFigure
     {
+        #region Constructors
+            public static StaticPoint staticPointConstructor()
+            {
+                GameObject go = new GameObject();
+				go.AddComponent<MeshFilter>();
+				go.AddComponent<MeshRenderer>();
+				//check if sphere mesh is added.
+				go.AddComponent<SphereCollider>();
+				go.GetComponent<SphereCollider>().radius = 0.5f;
+				go.AddComponent<Rigidbody>();
+				go.GetComponent<Rigidbody>().useGravity = false;
+				go.GetComponent<Rigidbody>().isKinematic = false;
+				go.AddComponent<InteractionBehaviour>();
+				go.GetComponent<InteractionBehaviour>().enabled = false;
+                go.AddComponent<AnchorableBehaviour>();
+                go.GetComponent<AnchorableBehaviour>().maxAnchorRange = 0.3f;
+                go.GetComponent<AnchorableBehaviour>().useTrajectory = true;
+                go.GetComponent<AnchorableBehaviour>().lockWhenAttached = true;
+                go.GetComponent<AnchorableBehaviour>().matchAnchorMotionWhileAttaching = true;
+                go.GetComponent<AnchorableBehaviour>().tryAnchorNearestOnGraspEnd = true;
+				return go.AddComponent<StaticPoint>();
+            }
+        #endregion
+
         public override void initializefigure()
         {
 			//do nothing.

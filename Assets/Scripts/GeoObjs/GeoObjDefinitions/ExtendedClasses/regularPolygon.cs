@@ -20,6 +20,21 @@ namespace IMRE.HandWaver
 	/// </summary>
 	class regularPolygon : InteractablePolygon
     {
+        #region Constructors
+            public static regularPolygon regularPolygonConstructor()
+            {
+                GameObject go = new GameObject();
+				go.AddComponent<MeshFilter>();
+				go.AddComponent<MeshRenderer>();
+				//check if sphere mesh is added.
+				go.AddComponent<MeshCollider>();
+				go.AddComponent<Rigidbody>();
+				go.GetComponent<Rigidbody>().useGravity = false;
+				go.GetComponent<Rigidbody>().isKinematic = false;
+				go.AddComponent<InteractionBehaviour>();
+				return go.AddComponent<regularPolygon>();
+            }
+        #endregion
         public int n = 0;
         public Vector3 basis1 = Vector3.right;
         public Vector3 basis2 = Vector3.forward;

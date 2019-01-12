@@ -22,6 +22,14 @@ namespace IMRE.HandWaver.Solver
 
     class IntersectionPolygon : MonoBehaviour
     {
+        #region Constructors
+		public static IntersectionPolygon intersectionPolygonConstructor(){
+			GameObject go = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/GeoObj/IntersectionPolygon"));
+			return go.GetComponent<IntersectionPolygon>();
+		}
+		#endregion
+
+        
 		public AbstractSolid parentSolid = null;
         //public CrossSectionBehave crossSectionPlane = null;
         public MeshFilter mf;

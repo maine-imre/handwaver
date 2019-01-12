@@ -8,6 +8,7 @@ www.imrelab.org
 ﻿using Leap.Unity.Interaction;
 using System;
 using IMRE.HandWaver.Solver;
+using UnityEngine;
 
 namespace IMRE.HandWaver
 {
@@ -16,6 +17,25 @@ namespace IMRE.HandWaver
 /// </summary>
 	class DependentSphere : AbstractSphere, DependentFigure
     {
+        #region Constructors
+            public static InteractablePoint interactablePointConstructor()
+            {
+                GameObject go = new GameObject();
+				go.AddComponent<MeshFilter>();
+				go.AddComponent<MeshRenderer>();
+				//check if sphere mesh is added.
+				go.AddComponent<SphereCollider>();
+				go.GetComponent<SphereCollider>().radius = 0.5f;
+				go.AddComponent<Rigidbody>();
+				go.GetComponent<Rigidbody>().useGravity = false;
+				go.GetComponent<Rigidbody>().isKinematic = false;
+				go.AddComponent<InteractionBehaviour>();
+                go.GetComponent<InteractionBehaviour>().ignoreContact =true;
+                go.GetComponent<InteractionBehaviour>().ignoreGrasping = true;
+				return go.AddComponent<InteractablePoint>();
+            }
+        #endregion
+
         public AbstractPoint center;
         public AbstractPoint edge;
 
