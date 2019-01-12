@@ -26,10 +26,8 @@ namespace IMRE.HandWaver
 		public float anchorScale;
 
 		public GameObject item;
-
-		public bool itemPooled;
-		public string poolName;
-		public string objName;
+		public enum ConstructableObjType{none,interactablePoint};
+		public ConstructableObjType ConstructableObject = ConstructableObjType.none; 
 
 		public GameObject prevItem;
 
@@ -61,32 +59,21 @@ namespace IMRE.HandWaver
 			spawnItem(this.transform);
 		}
 
-		public void respawn()
-		{
-			if(item == null)
-			{
-				detached();
-			}
-		}
-
-		public void despawn()
-		{
-			if (item != null)
-			{
-				PoolManager.Pools[poolName].Despawn(item.transform);
-				item = null;
-			}
-		}
-
 		internal virtual void spawnItem(Transform spawnPoint)
 		{
 			if(prevItem != null)
 			{
 				prevItem.transform.localScale /= anchorScale;
 			}
-			Transform newObj;
-			if (!itemPooled)
-			{
+
+			switch(ConstructableObject){
+				//this is a template, please complete the details.
+				case ConstructableObjType.interactablePoint:
+					interactablePoint.Constructor();
+					break;
+				default:
+				Transform newObj;
+
 				if (item != null)
 				{
 					newObj = Instantiate(item, spawnPoint.transform.position, spawnPoint.rotation).transform;
@@ -98,21 +85,7 @@ namespace IMRE.HandWaver
 				{
 					Debug.Log("item is not set. please set item or fix pool. Object: "+gameObject.name);
 				}
-
-			}
-			else
-			{
-				newObj = PoolManager.Pools[poolName].Spawn(objName).transform;
-
-				newObj.transform.position = gameObject.transform.position;
-				newObj.transform.localScale *= anchorScale;
-
-				newObj.GetComponent<AnchorableBehaviour>().useTrajectory = false;
-				newObj.GetComponent<AnchorableBehaviour>().TryAttachToNearestAnchor();
-				newObj.GetComponent<AnchorableBehaviour>().useTrajectory = true;
-
-				prevItem = newObj.gameObject;
-				//Debug.Log(newObj.name + " properly spawned with prevItem set to " + prevItem.name + " with a poolmanager!");
+				break;
 
 			}
 

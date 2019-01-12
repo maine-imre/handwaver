@@ -23,9 +23,8 @@ namespace IMRE.HandWaver {
 		AnchorableBehaviour thisABehave;
 		Vector3 initPos;
 
+		public GameObject item;
 
-		public string poolName;
-		public string objName;
 		void Start()
 		{
 			thisIbehave = GetComponent<InteractionBehaviour>();
@@ -39,7 +38,19 @@ namespace IMRE.HandWaver {
 			Debug.Log(1);
 			thisIbehave.graspingController.ReleaseGrasp();
 
-			Transform newObj = PoolManager.Pools[poolName].Spawn(objName);
+			Transform newObj;
+
+				if (item != null)
+				{
+					newObj = Instantiate(item, spawnPoint.transform.position, spawnPoint.rotation).transform;
+					newObj.transform.localScale *= anchorScale;
+					newObj.GetComponent<AnchorableBehaviour>().TryAttachToNearestAnchor();
+					prevItem = newObj.gameObject;
+				}
+				else
+				{
+					Debug.Log("item is not set. please set item or fix pool. Object: "+gameObject.name);
+				}
 			thisIbehave.graspingController.ReleaseGrasp();
 			newObj.transform.position = thisIbehave.graspingController.transform.position;
 			wait();

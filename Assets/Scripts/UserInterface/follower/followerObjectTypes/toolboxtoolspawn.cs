@@ -111,8 +111,7 @@ namespace IMRE.HandWaver
 		private void spawnItem(Transform spawnPoint)
         {
 				Transform newObj;
-				if (!itemPooled)
-				{
+
 					if (item != null)
 					{
 						newObj = Instantiate(item, spawnPoint.transform.position, spawnPoint.rotation).transform;
@@ -121,13 +120,7 @@ namespace IMRE.HandWaver
 					{
 						Debug.Log("item is not set. please set item or fix pool.");
 					}
-				}
-				else
-				{
-					newObj = PoolManager.Pools[poolName].Spawn(objName).transform;
-
-					newObj.transform.position = gameObject.transform.position;
-				}
+				
 				returnToInit(thisInteract.graspingController);
 		}
 
