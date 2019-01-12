@@ -1,0 +1,1 @@
+Earth Radius 6371.01 Mass 5.97219E+24
