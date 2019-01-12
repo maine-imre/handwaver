@@ -712,7 +712,7 @@ namespace IMRE.HandWaver.Space
 			}
 		}
 
-		private LineRender RSDESGeneratedLine(){
+		private LineRenderer RSDESGeneratedLine(){
 			return GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/RSDES/RSDESGeneratedLine")).GetComponent<LineRenderer>();
 		}
 

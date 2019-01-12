@@ -238,9 +238,10 @@ namespace IMRE.HandWaver.Space
 		private readonly float starRayGridSpacing = 2000000f;
         private int equalAltitudeCount = 50;
 
-		private LineRender spawnStarRay(){
+		private LineRenderer spawnStarRay(){
 			LineRenderer tmp = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/RSDES/StarRay")).GetComponent<LineRenderer>();
 			tmp.trasform.parent = this.transform;
+			return tmp;
 		}
 
 
