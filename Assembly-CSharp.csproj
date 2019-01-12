@@ -55,7 +55,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Big-Birtha\addTexture.cs" />
      <Compile Include="Assets\Discord\DiscordControllerTemplate.cs" />
      <Compile Include="Assets\Discord\DiscordRpc.cs" />
      <Compile Include="Assets\LeapMotion\Core\Examples\Example Assets\InertiaPostProcessProvider.cs" />
@@ -572,6 +571,7 @@
      <Compile Include="Assets\Scripts\SceneSpecific\space\RSDESManager.cs" />
      <Compile Include="Assets\Scripts\SceneSpecific\space\RSDESPin.cs" />
      <Compile Include="Assets\Scripts\SceneSpecific\space\StellarData.cs" />
+     <Compile Include="Assets\Scripts\SceneSpecific\space\Verlet\addTexture.cs" />
      <Compile Include="Assets\Scripts\SceneSpecific\space\Verlet\bodyCollaboration.cs" />
      <Compile Include="Assets\Scripts\SceneSpecific\space\Verlet\GravationalObject.cs" />
      <Compile Include="Assets\Scripts\SceneSpecific\space\Verlet\GravationalObjectV2.cs" />
