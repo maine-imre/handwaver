@@ -663,7 +663,7 @@
      <None Include="Assets\Shaders\GeoObjShaderBackOnly.shader" />
      <None Include="Assets\LeapMotion\Core\readme.txt" />
      <None Include="Assets\Shaders\AlphaSelfIllum.shader" />
-     <None Include="Assets\Resources\Space\orbitData.xml" />
+     <None Include="Assets\Resources\Databases\orbitData.xml" />
      <None Include="Assets\Resources\Databases\PlanetaryData\filename.xml" />
      <None Include="Assets\Photon\PhotonLibs\Photon3Unity3D.xml" />
      <None Include="Assets\LeapMotion\Core\Shaders\RuntimeGizmos.shader" />
