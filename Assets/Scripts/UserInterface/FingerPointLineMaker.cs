@@ -187,7 +187,7 @@ namespace IMRE.HandWaver.Lattice
 			{
 				eraser.follow(false);
 				eraser.transform.position = Vector3.down;
-				eraser.gameObject.Destroy();
+				Destroy(eraser.gameObject);
 				eraser = null;
 			}
 		}

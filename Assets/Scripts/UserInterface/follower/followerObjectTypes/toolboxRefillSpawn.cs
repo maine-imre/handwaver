@@ -42,17 +42,16 @@ namespace IMRE.HandWaver {
 
 				if (item != null)
 				{
-					newObj = Instantiate(item, spawnPoint.transform.position, spawnPoint.rotation).transform;
-					newObj.transform.localScale *= anchorScale;
+					newObj = Instantiate(item,initPos, Quaternion.identity).transform;
 					newObj.GetComponent<AnchorableBehaviour>().TryAttachToNearestAnchor();
-					prevItem = newObj.gameObject;
+								thisIbehave.graspingController.ReleaseGrasp();
+			newObj.transform.position = thisIbehave.graspingController.transform.position;
 				}
 				else
 				{
 					Debug.Log("item is not set. please set item or fix pool. Object: "+gameObject.name);
 				}
-			thisIbehave.graspingController.ReleaseGrasp();
-			newObj.transform.position = thisIbehave.graspingController.transform.position;
+
 			wait();
 		}
 		/// <summary>

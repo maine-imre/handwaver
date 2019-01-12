@@ -240,7 +240,7 @@ namespace IMRE.HandWaver.Space
 
 		private LineRenderer spawnStarRay(){
 			LineRenderer tmp = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/RSDES/StarRay")).GetComponent<LineRenderer>();
-			tmp.trasform.parent = this.transform;
+			tmp.transform.parent = this.transform;
 			return tmp;
 		}
 
@@ -621,7 +621,7 @@ namespace IMRE.HandWaver.Space
 			throw new NotImplementedException();
 		}
 
-		private LineRender RSDESGeneratedLine(){
+		private LineRenderer RSDESGeneratedLine(){
 			return GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/RSDES/RSDESGeneratedLine")).GetComponent<LineRenderer>();
 		}
 

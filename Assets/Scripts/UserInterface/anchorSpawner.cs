@@ -69,7 +69,7 @@ namespace IMRE.HandWaver
 			switch(ConstructableObject){
 				//this is a template, please complete the details.
 				case ConstructableObjType.interactablePoint:
-					interactablePoint.Constructor();
+					InteractablePoint.Constructor();
 					break;
 				default:
 				Transform newObj;

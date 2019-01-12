@@ -27,7 +27,7 @@ namespace IMRE.HandWaver
 	internal class alphabetLabel : MonoBehaviour {
 #region Constructors
 public static alphabetLabel Constructor(){
-	GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Tools/AlphabetLabel")).GetComponent<alphabetLabel>();
+	return GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Tools/AlphabetLabel")).GetComponent<alphabetLabel>();
 }
 
 #endregion

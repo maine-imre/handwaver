@@ -188,10 +188,10 @@ namespace IMRE.HandWaver
 			sphere.AddToRManager();
 
 
-			sphereMesh.gameObject.tag = "Sphere";
-			sphereMesh.GetComponent<MasterGeoObj>().figType = GeoObjType.sphere;
-			HW_GeoSolver.ins.addComponent(sphereMesh.GetComponent<MasterGeoObj>());
-			HW_GeoSolver.ins.addDependence(sphereMesh.transform, attachedArc.transform);
+			sphere.gameObject.tag = "Sphere";
+			sphere.GetComponent<MasterGeoObj>().figType = GeoObjType.sphere;
+			HW_GeoSolver.ins.addComponent(sphere.GetComponent<MasterGeoObj>());
+			HW_GeoSolver.ins.addDependence(sphere.transform, attachedArc.transform);
 			#endregion
 		}
 

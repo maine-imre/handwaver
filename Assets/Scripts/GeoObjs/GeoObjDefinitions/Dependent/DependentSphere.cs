@@ -18,7 +18,7 @@ namespace IMRE.HandWaver
 	class DependentSphere : AbstractSphere, DependentFigure
     {
         #region Constructors
-            public static InteractablePoint Constructor()
+            public static DependentSphere Constructor()
             {
                 GameObject go = new GameObject();
 				go.AddComponent<MeshFilter>();
@@ -32,7 +32,7 @@ namespace IMRE.HandWaver
 				go.AddComponent<InteractionBehaviour>();
                 go.GetComponent<InteractionBehaviour>().ignoreContact =true;
                 go.GetComponent<InteractionBehaviour>().ignoreGrasping = true;
-				return go.AddComponent<InteractablePoint>();
+				return go.AddComponent<DependentSphere>();
             }
         #endregion
 

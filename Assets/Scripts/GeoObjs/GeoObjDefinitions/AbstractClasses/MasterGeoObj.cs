@@ -471,7 +471,7 @@ namespace IMRE.HandWaver
         {
 			if (allowDelete)
 			{
-				gameObject.destroy();
+				Destroy(gameObject);
 			}
         }
 
