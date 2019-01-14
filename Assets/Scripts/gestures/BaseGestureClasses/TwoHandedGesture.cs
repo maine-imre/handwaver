@@ -27,8 +27,7 @@ public class TwoHandedGesture : Leap.Unity.TwoHandedGesture
      return  InputDevices.GetDeviceAtXRNode(XRNode.RightHand);
   }
   
-  //Feedback System
-  
+ //Feedback System - these functions are implemented at the Gesture Definition Level  
   abstract void visualFeedbackActivated();
   abstract void tactileFeedbackActivated();
   //we need to require an audioPlayer component.
@@ -90,6 +89,7 @@ public class TwoHandedGesture : Leap.Unity.TwoHandedGesture
     }
     
     //Note that one could assign deactivation conditions to be !activationConditions.
+     //These functions are implemented at the Gesture Defintion Level
     public abstract bool ActivationConditionsHand(Hand leftHand, Hand rightHand);
     public abstract bool ActivationConditionsOSVR(InputDevice leftOSVRController, InputDevice rightOSVRController);
     public abstract bool DeactivationConditionsHand(Hand leftHand, Hand rightHand);
@@ -97,6 +97,7 @@ public class TwoHandedGesture : Leap.Unity.TwoHandedGesture
     public abstract bool DeactivationConditionsActionComplete();
     
     //this does the action of the gesture.
+     //These functions are implemented for each use case.
     public abstract bool WhileGestureActive(Hand leftHand, Hand rightHand,InputDevice leftOSVRController, InputDevice rightOSVRController);
 }
 }
