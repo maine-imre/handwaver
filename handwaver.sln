@@ -1,13 +1,13 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{EA59006D-E369-408D-0993-CDF3376F6303}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhotonUnityNetworking", "PhotonUnityNetworking.csproj", "{CDDB57A4-6A5C-15C4-98CE-39D57F58783E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhotonUnityNetworking.Utilities", "PhotonUnityNetworking.Utilities.csproj", "{34A34D6F-4078-7D56-7ECC-E71F97DB64F7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhotonChat", "PhotonChat.csproj", "{3495C565-BA89-2D24-D9B6-15372430D95F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhotonUnityNetworking", "PhotonUnityNetworking.csproj", "{CDDB57A4-6A5C-15C4-98CE-39D57F58783E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhotonRealtime", "PhotonRealtime.csproj", "{F4BB390E-D303-BEE9-BBE6-FAD7D059CC8C}"
 EndProject
@@ -31,6 +31,10 @@ Global
 		{EA59006D-E369-408D-0993-CDF3376F6303}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA59006D-E369-408D-0993-CDF3376F6303}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA59006D-E369-408D-0993-CDF3376F6303}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDDB57A4-6A5C-15C4-98CE-39D57F58783E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDDB57A4-6A5C-15C4-98CE-39D57F58783E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDDB57A4-6A5C-15C4-98CE-39D57F58783E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDDB57A4-6A5C-15C4-98CE-39D57F58783E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{34A34D6F-4078-7D56-7ECC-E71F97DB64F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{34A34D6F-4078-7D56-7ECC-E71F97DB64F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{34A34D6F-4078-7D56-7ECC-E71F97DB64F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -39,10 +43,6 @@ Global
 		{3495C565-BA89-2D24-D9B6-15372430D95F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3495C565-BA89-2D24-D9B6-15372430D95F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3495C565-BA89-2D24-D9B6-15372430D95F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CDDB57A4-6A5C-15C4-98CE-39D57F58783E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CDDB57A4-6A5C-15C4-98CE-39D57F58783E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CDDB57A4-6A5C-15C4-98CE-39D57F58783E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CDDB57A4-6A5C-15C4-98CE-39D57F58783E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F4BB390E-D303-BEE9-BBE6-FAD7D059CC8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F4BB390E-D303-BEE9-BBE6-FAD7D059CC8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F4BB390E-D303-BEE9-BBE6-FAD7D059CC8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -70,8 +70,5 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = Assembly-CSharp.csproj
 	EndGlobalSection
 EndGlobal
