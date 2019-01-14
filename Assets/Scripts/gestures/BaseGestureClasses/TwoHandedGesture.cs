@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.XR;
 
@@ -31,11 +32,11 @@ namespace IMRE.Gestures
     //Leap Motion Hands Module Connection
   
   internal Leap.Unity.HandModel leftHandModel{
-      return //needs to be implemented.
+      return GameObject.FindObjectsOfType<Leap.Unity.HandModel>().Where(h => h.whichHand = Chirality.Left).First();
   }
   
     internal Leap.Unity.HandModel rightHandModel{
-      return //needs to be implemented.
+      return GameObject.FindObjectsOfType<Leap.Unity.HandModel>().Where(h => h.whichHand = Chirality.Right).First();
   }
   
  //Feedback System - these functions are implemented at the Gesture Definition Level  
