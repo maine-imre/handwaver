@@ -19,11 +19,9 @@ namespace IMRE.HandWaver
 
     [System.Serializable]
 
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// public struct to assign hand variables to player
+/// </summary>
 	public struct leapHands
     {
         //these are public so that we can set them in the editor.
@@ -143,6 +141,9 @@ namespace IMRE.HandWaver
 	}
 
     [System.Serializable]
+    /// <summary>
+    /// public struct to access exportable format for data (maybe we can use this in networking hands?)
+    /// </summary>
     public struct leapHandsData
     {
 
@@ -171,6 +172,10 @@ namespace IMRE.HandWaver
         public Quaternion headRot;
     }
 
+/// <summary>
+/// Data logger script.  Also used to find references for LeapHands and OSVR controls.
+/// Might be integrated for networking.
+/// </summary>
     public class leapHandDataLogger : MonoBehaviour
     {
 
@@ -246,8 +251,9 @@ namespace IMRE.HandWaver
 
 
 			checkLog();
-
+#if StandaloneWindows64
 			commandLineArgumentParse.logStateChange.AddListener(checkLog);
+            #endif
 			
         }
 

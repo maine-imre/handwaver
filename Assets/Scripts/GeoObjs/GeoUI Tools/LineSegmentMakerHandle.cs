@@ -12,11 +12,12 @@ using UnityEngine;
 
 namespace IMRE.HandWaver
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// Draws lines segements bewteen points.
+/// Developed for lattice land.
+/// Moved to Sandbox.
+/// Currently Depreciated.
+/// </summary>
 	public class LineSegmentMakerHandle : MonoBehaviour
     {
         private LineSegmentMaker lineSegmentMaker;

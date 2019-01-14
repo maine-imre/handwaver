@@ -11,11 +11,10 @@ using UnityEngine;
 
 namespace IMRE.HandWaver
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+    /// <summary>
+    /// An interactable revolved surface geometric object.
+    /// Will be depreciated with new Geometery kernel
+    /// </summary>
 	class InteractableRevolvedSurface : AbstractRevolvedSurface, InteractiveFigure
     {
         internal override bool RMotion(NodeList<string> inputNodeList)

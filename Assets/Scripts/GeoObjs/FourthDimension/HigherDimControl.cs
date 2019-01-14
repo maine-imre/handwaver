@@ -8,11 +8,11 @@ using System.Linq;
 
 namespace IMRE.HandWaver.HigherDimensions
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// Slider controls for higher dimensions
+/// used in scale and dimension study
+/// used with sliders to support VR and desktop implementations.
+/// </summary>
 	public class HigherDimControl : MonoBehaviour
     {
         internal static float xy = 0f;

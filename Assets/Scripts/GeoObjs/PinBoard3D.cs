@@ -13,11 +13,11 @@ using Leap.Unity.Interaction;
 
 namespace IMRE.HandWaver.Lattice
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+
+/// <summary>
+/// Spawns the array for  the LatticeLand scene.
+/// May depreciate with movement towards an anchor-based system.
+/// </summary>
 	public class PinBoard3D : MonoBehaviour
     {
         /// <summary>
@@ -88,12 +88,6 @@ namespace IMRE.HandWaver.Lattice
 			while(waitTime < 30)
 			{
 				waitTime++;
-			}
-			if (waitTime == 20)
-			{
-				IMRE.Wrappers.Achievements.ins.setAchievement("OpenedLatticeLand", true);
-				IMRE.Wrappers.Achievements.ins.incrementStat("OpenLatticeLandCount");
-				Debug.Log("VIVEPORT STATS :" + IMRE.Wrappers.Achievements.ins.getAchievement("OpenedLatticeLand") + IMRE.Wrappers.Achievements.ins.getStat("OpenLatticeLandCount"));
 			}
 		}
 

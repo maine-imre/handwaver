@@ -4,7 +4,7 @@ HandWaver, developed at the Maine IMRE Lab at the University of Maine's College 
 See license info in readme.md.
 www.imrelab.org
 **/
-
+#if StandaloneWindows64
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,11 +12,9 @@ using BlueprintReality.MixCast;
 
 namespace IMRE.HandWaver
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// Sets up multiple displays to have one display on mixcast and the other for first person.
+/// </summary>
 	public class multiDisplayConfig : MonoBehaviour
     {
         Canvas can;
@@ -42,3 +40,4 @@ namespace IMRE.HandWaver
 
     }
 }
+#endif

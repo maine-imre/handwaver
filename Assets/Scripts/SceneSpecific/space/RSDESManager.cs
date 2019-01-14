@@ -1,6 +1,6 @@
 ﻿using IMRE.HandWaver.Interface;
 using Leap.Unity.Interaction;
-using PathologicalGames;
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -41,7 +41,9 @@ namespace IMRE.HandWaver.Space
 	#endregion Structs
 
 	/// <summary>
-	/// This script is the main managing script for the RSDES scene.
+	/// Handles interactions between pins and the Room-scale dynamic earth.
+	/// Handles instation of  arcs and circles
+	/// needs to be integrated into the kernel.
 	/// The main contributor(s) to this script is NG
 	/// Status: WORKING
 	/// </summary>
@@ -237,8 +239,7 @@ namespace IMRE.HandWaver.Space
 			else
 			{
 				Debug.LogWarning("Sun, " + Sun + " ,or Sunpin, " + sunPin + " ,are not set.");
-				Transform tmp = PoolManager.Pools["GeoPlanet"].Spawn("RSDESpushPinPreFab");
-				tmp.GetComponent<RSDESPin>().setupSun();
+				RSDESPin.Constructor().GetComponent<RSDESPin>().setupSun();
 			}
 			if (Moon != null && moonPin != null && Horizons.planetsHaveValues)
 			{
@@ -247,8 +248,7 @@ namespace IMRE.HandWaver.Space
 			else
 			{
 				Debug.LogWarning("moon, " + Moon + " ,or moonpin, " + moonPin + " ,are not set.");
-				Transform tmp = PoolManager.Pools["GeoPlanet"].Spawn("RSDESpushPinPreFab");
-				tmp.GetComponent<RSDESPin>().setupMoon();
+				RSDESPin.Constructor().GetComponent<RSDESPin>().setupMoon();
 			}
 		}
 
@@ -335,20 +335,20 @@ namespace IMRE.HandWaver.Space
 
 			if (sunPin == null)
 			{
-				PoolManager.Pools["GeoPlanet"].Spawn("RSDESpushPinPreFab").GetComponent<RSDESPin>().setupSun();
+				RSDESPin.Constructor().setupSun();
 			}
 			if (moonPin == null)
 			{
-				PoolManager.Pools["GeoPlanet"].Spawn("RSDESpushPinPreFab").GetComponent<RSDESPin>().setupMoon();
+				RSDESPin.Constructor().setupMoon();
 			}
 
 			if (northPolePin == null)
 			{
-				PoolManager.Pools["GeoPlanet"].Spawn("RSDESpushPinPreFab").GetComponent<RSDESPin>().setupNorthPole();
+				RSDESPin.Constructor().setupNorthPole();
 			}
 			if (southPolePin == null)
 			{
-				PoolManager.Pools["GeoPlanet"].Spawn("RSDESpushPinPreFab").GetComponent<RSDESPin>().setupSouthPole();
+				RSDESPin.Constructor().setupSouthPole();
 			}
 
 			onEarthTilt += updateLatLongLines;
@@ -413,7 +413,7 @@ namespace IMRE.HandWaver.Space
 				{
 					Vector3 Pos = ((new Vector3(cStar.position.x * 4841427, cStar.position.y * 4841427, cStar.position.z * 4841427).normalized).ScaleMultiplier(radiusOfLargerSphere)).Translate(earthPos);
 
-					RSDESStar = PoolManager.Pools["GeoPlanet"].Spawn("RSDESStar_CS",Pos,Quaternion.identity,starParent).transform;
+					RSDESStar = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/RSDES/RSDESStar_CS"),Pos,Quaternion.identity,starParent).transform;
 
 					starDataMap.Add(RSDESStar, cStar);
 				}
@@ -494,7 +494,7 @@ namespace IMRE.HandWaver.Space
 				latRenderer = new LineRenderer[nLatDivisions + specialLatitudeCount];
 				for (int i = 0; i < nLatDivisions + specialLatitudeCount; i++)
 				{
-					latRenderer[i] = PoolManager.Pools["GeoPlanet"].Spawn("RSDESGeneratedLine").GetComponent<LineRenderer>();
+					latRenderer[i] = RSDESGeneratedLine();
 					latRenderer[i].positionCount = RSDESManager.LR_Resolution;
 					if (i % 2 == 0 && i < nLatDivisions)
 					{
@@ -514,7 +514,7 @@ namespace IMRE.HandWaver.Space
 				decRenderer = new LineRenderer[nLatDivisions + specialLatitudeCount];
 				for (int i = 0; i < nLatDivisions + specialLatitudeCount; i++)
 				{
-					decRenderer[i] = PoolManager.Pools["GeoPlanet"].Spawn("RSDESGeneratedLine").GetComponent<LineRenderer>();
+					decRenderer[i] = RSDESGeneratedLine();
 					decRenderer[i].positionCount = RSDESManager.LR_Resolution;
 					if (i % 2 == 0 && i < nLatDivisions)
 					{
@@ -536,7 +536,7 @@ namespace IMRE.HandWaver.Space
 				for (int i = 0; i < nLongDivisions; i++)
 				{
 					{
-						longRenderer[i] = PoolManager.Pools["GeoPlanet"].Spawn("RSDESGeneratedLine").GetComponent<LineRenderer>();
+						longRenderer[i] = RSDESGeneratedLine();
 					}
 					longRenderer[i].positionCount = RSDESManager.LR_Resolution;
 					if (i % 2 == 0)
@@ -557,7 +557,7 @@ namespace IMRE.HandWaver.Space
 				ghaRenderer = new LineRenderer[nLongDivisions];
 				for (int i = 0; i < nLongDivisions; i++)
 				{
-					ghaRenderer[i] = PoolManager.Pools["GeoPlanet"].Spawn("RSDESGeneratedLine").GetComponent<LineRenderer>();
+					ghaRenderer[i] = RSDESGeneratedLine();
 					ghaRenderer[i].positionCount = RSDESManager.LR_Resolution;
 					if (i % 2 == 0)
 					{
@@ -642,7 +642,7 @@ namespace IMRE.HandWaver.Space
 		{
 			if (poleRenderer == null)
 			{
-				poleRenderer = PoolManager.Pools["GeoPlanet"].Spawn("RSDESGeneratedLine").GetComponent<LineRenderer>();
+				poleRenderer = RSDESGeneratedLine();
 			}
 			else
 			{ 
@@ -650,7 +650,7 @@ namespace IMRE.HandWaver.Space
 				positions[0] = northPolePin.pinTip.transform.position;
 				positions[1] = southPolePin.pinTip.transform.position;
 				//polesExist.Add(northPolePin.gameObject.name + southPolePin.gameObject.name);
-				//LineRenderer poleRenderer = PoolManager.Pools["GeoPlanet"].Spawn("RSDESGeneratedLine").GetComponent<LineRenderer>();
+				//LineRenderer poleRenderer = RSDESGeneratedLine();
 				//poleRenderer.positionCount = positions.Length;
 				poleRenderer.SetPositions(positions);
 				//poleRenderer.SetPositions(test[northPolePin.pinTip.transform.position, southPolePin.pinTip.transform.position]);
@@ -678,7 +678,7 @@ namespace IMRE.HandWaver.Space
 			if (!circlesExist.Contains(pinA.pin.name + pinB.pin.name))
 			{
 				circlesExist.Add(pinA.pin.name + pinB.pin.name);
-				LineRenderer newLR = PoolManager.Pools["GeoPlanet"].Spawn("RSDESGeneratedLine").GetComponent<LineRenderer>();
+				LineRenderer newLR = RSDESGeneratedLine();
 				newLR.GetComponent<RSDESLineData>().associatedPins = new List<pinData> { pinA, pinB };
 				newLR.GetComponent<RSDESLineData>().LineType = lineType.circle;
 				newLR.startWidth = LR_width;
@@ -712,12 +712,16 @@ namespace IMRE.HandWaver.Space
 			}
 		}
 
+		private LineRenderer RSDESGeneratedLine(){
+			return GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/RSDES/RSDESGeneratedLine")).GetComponent<LineRenderer>();
+		}
+
 		public void instantiateGreatArc(pinData pinA, pinData pinB)
 		{
 			if (!greatArcsExist.Contains(pinA.pin.name + pinB.pin.name))
 			{
 				greatArcsExist.Add(pinA.pin.name + pinB.pin.name);
-				LineRenderer newLR = PoolManager.Pools["GeoPlanet"].Spawn("RSDESGeneratedLine").GetComponent<LineRenderer>();
+				LineRenderer newLR = RSDESGeneratedLine();
 				newLR.GetComponent<RSDESLineData>().associatedPins = new List<pinData>() { pinA, pinB };
 				newLR.GetComponent<RSDESLineData>().LineType = lineType.arc;
 				greatArcsLRs.Add(new List<pinData> { pinA, pinB }, newLR);

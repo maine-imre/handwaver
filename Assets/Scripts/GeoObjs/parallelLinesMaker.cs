@@ -8,29 +8,33 @@ www.imrelab.org
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using PathologicalGames;
+
 using System;
 using System.Linq;
 using Leap.Unity.Interaction;
 
 namespace IMRE.HandWaver
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+    /// <summary>
+///     Constructs a pair of parallel lines, and initializes them so they will stay parallel on update
+/// This will be depreciated with an updated geometery kernel.
+    /// </summary>
 	public class parallelLinesMaker : MonoBehaviour
     {
         // Use this for initialization
-
+        #region Constructors
+		public static parallelLinesMaker Constructor(){
+			GameObject go = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/GeoObj/ParallelLines"));
+			return go.GetComponent<parallelLinesMaker>();
+		}
+		#endregion
         internal parallelLines line1;
         internal parallelLines line2;
 
         void Start()
         {
-            line1 = PoolManager.Pools["Tools"].Spawn("ParallelLines").GetComponent<parallelLines>();
-            parallelLines line2 = PoolManager.Pools["Tools"].Spawn("ParallelLines").GetComponent<parallelLines>();
+            line1 = parallelLines.Constructor();
+            line2 = parallelLines.Constructor();
 
             line1.Position3 = this.transform.position.x * Vector3.right + this.transform.position.z * Vector3.forward + 1.4f * Vector3.up;
             line2.Position3 = this.transform.position.x * Vector3.right + this.transform.position.z * Vector3.forward + 1.8f * Vector3.up;

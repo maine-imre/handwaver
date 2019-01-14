@@ -9,18 +9,32 @@ www.imrelab.org
 using System.Collections.Generic;
 using UnityEngine;
 using Leap.Unity.Interaction;
-using PathologicalGames;
+
 using IMRE.HandWaver.Solver;
 
 namespace IMRE.HandWaver
 {
 	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
+///  Polygon that is forced to be regular.  Shouldn't be skew.
+ ///will be depreciated with new geometery kernel.  probably will be handled by congruance features.
 	/// </summary>
 	class regularPolygon : InteractablePolygon
     {
+        #region Constructors
+            public static regularPolygon Constructor()
+            {
+                GameObject go = new GameObject();
+				go.AddComponent<MeshFilter>();
+				go.AddComponent<MeshRenderer>();
+				//check if sphere mesh is added.
+				go.AddComponent<MeshCollider>();
+				go.AddComponent<Rigidbody>();
+				go.GetComponent<Rigidbody>().useGravity = false;
+				go.GetComponent<Rigidbody>().isKinematic = false;
+				go.AddComponent<InteractionBehaviour>();
+				return go.AddComponent<regularPolygon>();
+            }
+        #endregion
         public int n = 0;
         public Vector3 basis1 = Vector3.right;
         public Vector3 basis2 = Vector3.forward;

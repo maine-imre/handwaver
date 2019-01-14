@@ -13,13 +13,30 @@ using IMRE.HandWaver.Solver;
 
 namespace IMRE.HandWaver
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// Interactable line segments, using two abstract points.
+/// Note that your line segment can be interactable while the endpoints are dependent.
+/// Will be depreciated with new Geometery kernel
+/// </summary>
 	class InteractableLineSegment : AbstractLineSegment, InteractiveFigure
     {
+		#region Constructors
+            public static InteractableLineSegment Constructor()
+            {
+                GameObject go = new GameObject();
+				go.AddComponent<LineRenderer>();
+				//check if sphere mesh is added.
+				go.AddComponent<CapsuleCollider>();
+				go.AddComponent<Rigidbody>();
+				go.GetComponent<Rigidbody>().useGravity = false;
+				go.GetComponent<Rigidbody>().isKinematic = false;
+				go.AddComponent<InteractionBehaviour>();
+                go.GetComponent<InteractionBehaviour>().ignoreContact = true;
+                go.GetComponent<InteractionBehaviour>().ignoreGrasping = true;
+				return go.AddComponent<InteractableLineSegment>();
+            }
+        #endregion
+
         public AbstractPoint point1;
         public AbstractPoint point2;
 

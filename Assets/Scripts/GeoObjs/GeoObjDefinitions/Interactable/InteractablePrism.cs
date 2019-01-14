@@ -14,13 +14,28 @@ using System.Linq;
 
 namespace IMRE.HandWaver
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// An interactable solid for prisms.
+/// Mostly useful for spawning objects.
+/// Allows prisms to be moved by their center points.
+/// Will be depreciated with new Geometery kernel
+/// </summary>
 	class InteractablePrism : AbstractSolid, InteractiveFigure
 	{
+		#region Constructors
+            public static InteractablePrism Constructor()
+            {
+                GameObject go = new GameObject();
+				go.AddComponent<SphereCollider>();
+				go.GetComponent<SphereCollider>().radius = 0.02f;
+				go.AddComponent<Rigidbody>();
+				go.GetComponent<Rigidbody>().useGravity = false;
+				go.GetComponent<Rigidbody>().isKinematic = false;
+				go.AddComponent<InteractionBehaviour>();
+				return go.AddComponent<InteractablePrism>();
+            }
+        #endregion
+
 		private List<AbstractPoint> _vertexPoints = new List<AbstractPoint>();
 		private List<AbstractLineSegment> _lineSegments = new List<AbstractLineSegment>();
 

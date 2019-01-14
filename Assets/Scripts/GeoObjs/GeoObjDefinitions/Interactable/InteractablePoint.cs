@@ -14,13 +14,35 @@ using IMRE.HandWaver.Solver;
 
 namespace IMRE.HandWaver
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// An interactable point, the basis for the sandbox.
+/// Will be depreciated with new Geometery kernel
+/// </summary>
 	class InteractablePoint : AbstractPoint, InteractiveFigure
     {
+        #region Constructors
+            public static InteractablePoint Constructor()
+            {
+                GameObject go = new GameObject();
+				go.AddComponent<MeshFilter>();
+				go.AddComponent<MeshRenderer>();
+				//check if sphere mesh is added.
+				go.AddComponent<SphereCollider>();
+				go.GetComponent<SphereCollider>().radius = 0.5f;
+				go.AddComponent<Rigidbody>();
+				go.GetComponent<Rigidbody>().useGravity = false;
+				go.GetComponent<Rigidbody>().isKinematic = false;
+				go.AddComponent<InteractionBehaviour>();
+                go.AddComponent<AnchorableBehaviour>();
+                go.GetComponent<AnchorableBehaviour>().maxAnchorRange = 0.3f;
+                go.GetComponent<AnchorableBehaviour>().useTrajectory = true;
+                go.GetComponent<AnchorableBehaviour>().lockWhenAttached = true;
+                go.GetComponent<AnchorableBehaviour>().matchAnchorMotionWhileAttaching = true;
+                go.GetComponent<AnchorableBehaviour>().tryAnchorNearestOnGraspEnd = true;
+				return go.AddComponent<InteractablePoint>();
+            }
+        #endregion
+
         public bool controllCollide = false;
         public bool glueBool = false;
 

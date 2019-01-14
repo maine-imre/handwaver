@@ -13,11 +13,10 @@ using UnityEngine;
 
 namespace IMRE.HandWaver
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// Sets that color of objects based on a property: volume equality.
+/// will be depreciated with new geometery kernel.
+/// </summary>
 	public class VolumeEqualityCheck : MonoBehaviour
     {
 

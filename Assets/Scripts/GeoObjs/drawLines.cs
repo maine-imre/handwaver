@@ -12,11 +12,11 @@ using UnityEngine;
 
 namespace IMRE.HandWaver
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+
+/// <summary>
+/// draws a dependent line segment between all abstract points that are selected in the scene.
+/// will be depreciated in new geometery kernel.
+/// </summary>
 	public class drawLines : MonoBehaviour
 	{
 		public void drawAllLines() {

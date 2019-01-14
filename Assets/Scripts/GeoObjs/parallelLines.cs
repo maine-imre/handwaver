@@ -11,13 +11,28 @@ using UnityEngine;
 using Leap.Unity.Interaction;
 namespace IMRE.HandWaver
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+    /// <summary>
+    /// An exntension of straightedgebehave that makes two lines (straightedges) paralle and stay parallel on update based on isGrasped state.
+    /// </summary>
 	class parallelLines : straightEdgeBehave
     {
+				#region Constructors
+            public static parallelLines Constructor()
+            {
+                GameObject go = new GameObject();
+				go.AddComponent<LineRenderer>();
+				//check if sphere mesh is added.
+				go.AddComponent<CapsuleCollider>();
+				go.AddComponent<Rigidbody>();
+				go.GetComponent<Rigidbody>().useGravity = false;
+				go.GetComponent<Rigidbody>().isKinematic = false;
+				go.AddComponent<InteractionBehaviour>();
+                go.GetComponent<InteractionBehaviour>().ignoreContact = true;
+                go.GetComponent<InteractionBehaviour>().ignoreGrasping = true;
+				return go.AddComponent<parallelLines>();
+            }
+        #endregion
+
         public straightEdgeBehave otherLine;
 
         public List<MasterGeoObj> attachedObjs;

@@ -5,11 +5,12 @@ using UnityEngine;
 
 namespace IMRE.HandWaver.Space
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// Includes all nececssary calculations for the Geometer's Planetarium scene.
+/// Needs to be integrated into the kernel.
+/// Functions include moving to and from local coordinate system.
+/// Functions include moving between spherical and cartesian cordinate systems
+/// </summary>
 	public static class GeoPlanetMaths
     {
         #region Find Latitude and Longitude

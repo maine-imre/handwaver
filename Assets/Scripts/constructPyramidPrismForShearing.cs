@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Leap.Unity.Interaction;
-using PathologicalGames;
+
 
 namespace IMRE.HandWaver.Shearing {
+    /// <summary>
+    /// Constructs a pyramid in "cube jail" for Bock's Thesis.
+    /// </summary>
     class constructPyramidPrismForShearing : MonoBehaviour {
 
         public List<Color> mgoColor = new List<Color>();
@@ -73,7 +76,7 @@ namespace IMRE.HandWaver.Shearing {
             myApex = GeoObjConstruction.iPoint(Vector3.ProjectOnPlane(this.transform.position, Vector3.up) + Vector3.up * height2);
 
             //restrict the movement of myApex.
-            flatface1 = PoolManager.Pools["Tools"].Spawn("flatlandSurface", Vector3.ProjectOnPlane(this.transform.position, Vector3.up) + Vector3.up * height2, Quaternion.identity, this.transform).GetComponent<flatlandSurface>();
+            flatface1 = flatlandSurface.Constructor();
             flatface1.GetComponent<MeshRenderer>().materials[0].color = Color.clear;
             flatface1.attachedObjs.Add(myApex);
 

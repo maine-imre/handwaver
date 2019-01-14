@@ -8,16 +8,35 @@ www.imrelab.org
 ﻿using Leap.Unity.Interaction;
 using System;
 using IMRE.HandWaver.Solver;
+using UnityEngine;
 
 namespace IMRE.HandWaver
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// will be depreciated with new geometery kernel.
+/// </summary>
 	class DependentRevolvedSurface : AbstractRevolvedSurface, DependentFigure
     {
+
+        #region Constructors
+        public static DependentRevolvedSurface Constructor()
+        {
+            GameObject go = new GameObject();
+            go.AddComponent<MeshFilter>();
+            go.AddComponent<MeshRenderer>();
+            //make sure material gets set on MeshRenderer
+            go.AddComponent<DependentRevolvedSurface>();
+            go.AddComponent<MeshCollider>();
+            go.AddComponent<Rigidbody>();
+            go.GetComponent<Rigidbody>().useGravity = false;
+            go.GetComponent<Rigidbody>().isKinematic = true;
+            go.AddComponent<InteractionBehaviour>();
+            go.GetComponent<InteractionBehaviour>().ignoreGrasping = true;
+            go.GetComponent<InteractionBehaviour>().ignoreContact = true;
+            return go.GetComponent<DependentRevolvedSurface>();
+        }
+        #endregion
+
         public AbstractLineSegment attachedLine;
         public AbstractPoint center;
 

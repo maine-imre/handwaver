@@ -11,11 +11,9 @@ using System;
 
 namespace IMRE.HandWaver
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// Line segments that aren't dynamic.
+/// </summary>
 	class StaticLineSegment : AbstractLineSegment, StaticFigure
     {
         public override void initializefigure()

@@ -15,13 +15,28 @@ using System.Linq;
 
 namespace IMRE.HandWaver
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// An interactable polygon.  Allows for skew polygons
+/// Will be depreciated with new Geometery kernel
+/// </summary>
 	class InteractablePolygon : AbstractPolygon, InteractiveFigure
     {
+        #region Constructors
+            public static InteractablePolygon Constructor()
+            {
+                GameObject go = new GameObject();
+				go.AddComponent<MeshFilter>();
+				go.AddComponent<MeshRenderer>();
+				//check if sphere mesh is added.
+				go.AddComponent<MeshCollider>();
+				go.AddComponent<Rigidbody>();
+				go.GetComponent<Rigidbody>().useGravity = false;
+				go.GetComponent<Rigidbody>().isKinematic = false;
+				go.AddComponent<InteractionBehaviour>();
+				return go.AddComponent<InteractablePolygon>();
+            }
+        #endregion
+
 		internal override bool RMotion(NodeList<string> inputNodeList)
         {
             bool tempValue = false;

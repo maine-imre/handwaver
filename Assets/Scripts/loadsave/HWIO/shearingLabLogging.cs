@@ -7,11 +7,10 @@ using UnityEngine;
 
 namespace IMRE.HandWaver.HWIO
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// Logging features for sheairng lab in Bock's MST Thesis.
+/// Depreciated
+/// </summary>
 	public class shearingLabLogging : MonoBehaviour
 	{
 		public static shearingLabLogging ins;
@@ -28,7 +27,9 @@ namespace IMRE.HandWaver.HWIO
 		private void Awake()
 		{
 			ins = this;
+			#if StandaloneWindows64
 			commandLineArgumentParse.logStateChange.AddListener(checkLog);
+			#endif
 
 			checkLog();
 		}

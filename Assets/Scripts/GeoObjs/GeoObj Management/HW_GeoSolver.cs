@@ -1,5 +1,5 @@
 using Leap.Unity.Interaction;
-using PathologicalGames;
+
 using System.Linq;
 using System.Collections.Generic;
 /**
@@ -14,11 +14,13 @@ using System;
 
 namespace IMRE.HandWaver.Solver
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// The heart of Greg's geometery kernel.
+/// Holds an node record of every geo obj
+/// Uses basic graph theory to find a path to update all nececssary objects.
+/// Will be depreciated with new geometery kernel.
+/// Depending on constraints either doesn't iterate enough to have a reliable image (current) or doesn't terminate and figures drift into space.
+/// </summary>
 	public class HW_GeoSolver : MonoBehaviour
     {
         #region PositionTransformations
@@ -290,7 +292,7 @@ namespace IMRE.HandWaver.Solver
 						rManList.Remove(meNode);
 					}
 					geomanager.Remove(meNode.Value);
-					Destroy(geoComp);
+					Destroy(geoComp.gameObject);
 				}
 				else
 				{
@@ -302,7 +304,7 @@ namespace IMRE.HandWaver.Solver
 						rManList.Remove(meNode);
 					}
 					geomanager.Remove(meNAME);
-					PoolManager.Pools["GeoObj"].Despawn(geoComp.transform);
+					Destroy(geoComp.gameObject);
 				}
 
 			}
@@ -313,7 +315,7 @@ namespace IMRE.HandWaver.Solver
             if (blockDelete == false)
             {
                 geomanager.Remove(geoCompS);
-                PoolManager.Pools["GeoObj"].Despawn(GameObject.Find(geoCompS).transform);
+                Destroy(GameObject.Find(geoCompS));
             }
         }
 

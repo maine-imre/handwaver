@@ -4,9 +4,9 @@ using UnityEngine;
 using System;
 
 /// <summary>
-/// This script does ___.
-/// The main contributor(s) to this script is __
-/// Status: ???
+/// A net of a triangle that folds into a triangle.
+/// Used in study of scale and dimension
+/// not integrated with kernel.
 /// </summary>
 public class triangleNet : MonoBehaviour
 {

@@ -6,6 +6,9 @@ using UnityEngine;
 
 namespace IMRE.HandWaver.Shearing
 {
+	/// <summary>
+	/// This constructs the cutout rectangular Prism for  Carlson's box problem.
+	/// </summary>
 	public class constructCutoutRectangularPrism : MonoBehaviour
 	{
 		private AbstractPoint controllPoint;

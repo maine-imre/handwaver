@@ -5,9 +5,9 @@ using System;
 using System.Linq;
 
 /// <summary>
-/// This script does ___.
-/// The main contributor(s) to this script is __
-/// Status: ???
+/// A net of a tetrahedron that folds into a tetrahedron.
+/// used in study of scale and dimension
+/// not integrated with kernel.
 /// </summary>
 public class tetrahedronNet : MonoBehaviour
 {

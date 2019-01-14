@@ -8,12 +8,16 @@ www.imrelab.org
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using PathologicalGames;
+
 using Leap.Unity.Interaction;
 using System;
 
 namespace IMRE.HandWaver
 {
+	/// <summary>
+	/// Script to spawn the toolbox into the scene.
+	/// Some of the tools cannot be instantiated on start, so this run on late start.
+	/// </summary>
     public class toolboxtoolspawn : MonoBehaviour 
     {
 		#pragma warning disable 0649, 0414, 0169
@@ -107,8 +111,7 @@ namespace IMRE.HandWaver
 		private void spawnItem(Transform spawnPoint)
         {
 				Transform newObj;
-				if (!itemPooled)
-				{
+
 					if (item != null)
 					{
 						newObj = Instantiate(item, spawnPoint.transform.position, spawnPoint.rotation).transform;
@@ -117,13 +120,7 @@ namespace IMRE.HandWaver
 					{
 						Debug.Log("item is not set. please set item or fix pool.");
 					}
-				}
-				else
-				{
-					newObj = PoolManager.Pools[poolName].Spawn(objName).transform;
-
-					newObj.transform.position = gameObject.transform.position;
-				}
+				
 				returnToInit(thisInteract.graspingController);
 		}
 

@@ -9,20 +9,22 @@ www.imrelab.org
 using System.Collections.Generic;
 using UnityEngine;
 using Leap.Unity.Interaction;
-using PathologicalGames;
+
 using System;
 
 namespace IMRE.HandWaver {
 	[RequireComponent(typeof(InteractionBehaviour), typeof(AnchorableBehaviour))]
+	/// <summary>
+	/// Refillable spanwer for disposable tools on the toolbox.
+	/// </summary>
 	public class toolboxRefillSpawn : MonoBehaviour
 	{
 		InteractionBehaviour thisIbehave;
 		AnchorableBehaviour thisABehave;
 		Vector3 initPos;
 
+		public GameObject item;
 
-		public string poolName;
-		public string objName;
 		void Start()
 		{
 			thisIbehave = GetComponent<InteractionBehaviour>();
@@ -36,9 +38,20 @@ namespace IMRE.HandWaver {
 			Debug.Log(1);
 			thisIbehave.graspingController.ReleaseGrasp();
 
-			Transform newObj = PoolManager.Pools[poolName].Spawn(objName);
-			thisIbehave.graspingController.ReleaseGrasp();
+			Transform newObj;
+
+				if (item != null)
+				{
+					newObj = Instantiate(item,initPos, Quaternion.identity).transform;
+					newObj.GetComponent<AnchorableBehaviour>().TryAttachToNearestAnchor();
+								thisIbehave.graspingController.ReleaseGrasp();
 			newObj.transform.position = thisIbehave.graspingController.transform.position;
+				}
+				else
+				{
+					Debug.Log("item is not set. please set item or fix pool. Object: "+gameObject.name);
+				}
+
 			wait();
 		}
 		/// <summary>

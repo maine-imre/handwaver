@@ -8,16 +8,34 @@ www.imrelab.org
 ﻿using Leap.Unity.Interaction;
 using System;
 using IMRE.HandWaver.Solver;
+using UnityEngine;
 
 namespace IMRE.HandWaver
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// will be depreciated with new geometery kernel.
+/// </summary>
 	class DependentSphere : AbstractSphere, DependentFigure
     {
+        #region Constructors
+            public static DependentSphere Constructor()
+            {
+                GameObject go = new GameObject();
+				go.AddComponent<MeshFilter>();
+				go.AddComponent<MeshRenderer>();
+				//check if sphere mesh is added.
+				go.AddComponent<SphereCollider>();
+				go.GetComponent<SphereCollider>().radius = 0.5f;
+				go.AddComponent<Rigidbody>();
+				go.GetComponent<Rigidbody>().useGravity = false;
+				go.GetComponent<Rigidbody>().isKinematic = false;
+				go.AddComponent<InteractionBehaviour>();
+                go.GetComponent<InteractionBehaviour>().ignoreContact =true;
+                go.GetComponent<InteractionBehaviour>().ignoreGrasping = true;
+				return go.AddComponent<DependentSphere>();
+            }
+        #endregion
+
         public AbstractPoint center;
         public AbstractPoint edge;
 

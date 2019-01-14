@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Leap.Unity.Interaction;
-using PathologicalGames;
+
 using System;
 using System.Linq;
 using IMRE.HandWaver.Solver;
@@ -17,6 +17,10 @@ namespace IMRE.HandWaver.FourthDimension {
 	[RequireComponent(typeof(PhotonView))]
 	[RequireComponent(typeof(PhotonTransformView))]
 	[RequireComponent(typeof(PhotonRigidbodyView))]
+	/// <summary>
+	/// A networked object that whose bounds are connected to the graphics in hyperballboundaries.
+	/// Build as an initial test of networking capacity.
+	/// </summary>
 	public class HyperBall : MonoBehaviourPunCallbacks {
 
 		public static float scaleOfBox = 2f;

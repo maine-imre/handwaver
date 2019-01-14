@@ -19,13 +19,18 @@ namespace IMRE.HandWaver
 {
 	[RequireComponent(typeof(InteractionBehaviour), typeof(AnchorableBehaviour), typeof(TextMeshPro))]
 
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// Labeling system for MasterGeoObjs.
+/// Needs UX overhaul.
+/// Currently not used.
+/// </summary>
 	internal class alphabetLabel : MonoBehaviour {
+#region Constructors
+public static alphabetLabel Constructor(){
+	return GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Tools/AlphabetLabel")).GetComponent<alphabetLabel>();
+}
 
+#endregion
 
 		internal static int totalCount = 0;
 		public static Dictionary<string, string> labelDict = new Dictionary<string, string>();

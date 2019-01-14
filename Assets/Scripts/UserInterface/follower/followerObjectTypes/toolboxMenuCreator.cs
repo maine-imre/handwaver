@@ -8,13 +8,15 @@ www.imrelab.org
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using PathologicalGames;
 using Leap.Unity.Interaction;
 
 
 
 namespace IMRE.HandWaver
 {
+    /// <summary>
+    /// Spawns menus that can be docked on the toolbox.
+    /// </summary>
     public class toolboxMenuCreator : MonoBehaviour
     {
         public GameObject menuPanel;

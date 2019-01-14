@@ -11,26 +11,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using Leap.Unity.Interaction;
 using IMRE.HandWaver.Solver;
-using PathologicalGames;
+
 
 
 namespace IMRE.HandWaver
 {
 	/// <summary>
-	/// 
+	/// enumerator to help select child type
 	/// </summary>
 	public enum GeoObjType { point, line, polygon, prism, pyramid, circle, sphere, revolvedsurface, torus, flatface, straightedge, none };
 
-	/// <summary>
-	/// 
-	/// </summary>
+/// <summary>
+/// enumerator to help select child type
+/// </summary>
 	public enum GeoObjDef { Abstract, Dependent, Interactable, Static, none};
 
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// The most abstract class for all geo objs.
+/// Basic features that llow geo objs to interact wil controls
+/// Will be refactored in new geometery kernel.
+/// </summary>
 	internal abstract class MasterGeoObj : MonoBehaviour, UpdatableFigure
 	{
 
@@ -386,11 +386,6 @@ namespace IMRE.HandWaver
 			}
 		}
 
-        public void OnSpawned()
-		{
-			HW_GeoSolver.ins.addComponent(this);
-		}
-
 		public void Start()
 		{
 			//if (this.GetComponent<Renderer>() != null)
@@ -414,6 +409,7 @@ namespace IMRE.HandWaver
 			//}
 			cUpdateRMan = UpdateRMan();
 			waitForStretch = WaitForStretch();
+			HW_GeoSolver.ins.addComponent(this);
 		}
 
         void LateUpdate()
@@ -470,8 +466,7 @@ namespace IMRE.HandWaver
         {
 			if (allowDelete)
 			{
-				//HW_GeoSolver.ins.removeComponent(this);
-				PoolManager.Pools["GeoObj"].Despawn(this.transform);
+				Destroy(gameObject);
 			}
         }
 

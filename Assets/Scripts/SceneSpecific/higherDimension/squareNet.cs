@@ -4,9 +4,9 @@ using UnityEngine;
 using System;
 
 /// <summary>
-/// This script does ___.
-/// The main contributor(s) to this script is __
-/// Status: ???
+/// A net of a square that folds from a sequence of parallel line segments.
+/// Not integrated with kernel.
+/// used in study of scale and dimension
 /// </summary>
 public class squareNet : MonoBehaviour
 {

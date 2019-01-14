@@ -12,11 +12,9 @@ using UnityEngine;
 
 namespace IMRE.Chess3D
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// The behaviour controls for the king piece in spatial chess.
+/// </summary>
 	public class kingPiece : AbstractPiece
     {
         private void Start()

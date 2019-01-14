@@ -13,13 +13,18 @@ using UnityEngine;
 
 namespace IMRE.HandWaver
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// MasterGeoObj for planes.
+/// </summary>
 	class flatfaceBehave : MasterGeoObj
 	{
+
+		#region Constructors
+		public static flatfaceBehave Constructor(){
+			GameObject go = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/GeoObj/Flatface"));
+			return go.GetComponent<flatfaceBehave>();
+		}
+		#endregion
         public Vector3 normalDir
         {
             get

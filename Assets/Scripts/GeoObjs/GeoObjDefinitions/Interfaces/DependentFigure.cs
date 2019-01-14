@@ -11,11 +11,10 @@ using UnityEngine;
 
 namespace IMRE.HandWaver
 {
-	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is __
-	/// Status: ???
-	/// </summary>
+/// <summary>
+/// Apparently none of these interfacees are necessary.
+/// Deprecaited with new geometery kernel.
+/// </summary>
 	public interface DependentFigure
     {
 

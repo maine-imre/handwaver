@@ -5,6 +5,10 @@ using System.Linq;
 
 namespace IMRE.HandWaver.ScaleStudy
 {
+    /// <summary>
+    /// A script to control the scale and dimension study.
+    /// See Dimmel's proposal.
+    /// </summary>
     public class ScaleAndDimensionExperimentControl : MonoBehaviour
     {
 

@@ -10,7 +10,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Leap.Unity.Interaction;
 using UnityEngine;
-using PathologicalGames;
+
 
 
 namespace IMRE.HandWaver.Solver
@@ -22,6 +22,14 @@ namespace IMRE.HandWaver.Solver
 
     class IntersectionPolygon : MonoBehaviour
     {
+        #region Constructors
+		public static IntersectionPolygon Constructor(){
+			GameObject go = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/GeoObj/IntersectionPolygon"));
+			return go.GetComponent<IntersectionPolygon>();
+		}
+		#endregion
+
+        
 		public AbstractSolid parentSolid = null;
         //public CrossSectionBehave crossSectionPlane = null;
         public MeshFilter mf;
