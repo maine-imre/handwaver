@@ -93,7 +93,7 @@ public class TwoHandedGesture : Leap.Unity.TwoHandedGesture
   
     }
     
-    void WhenGestureActivated(Hand leftHand, Hand rightHand)
+    void WhileGestureActive(Hand leftHand, Hand rightHand)
     {
       WhileGestureActive(leftHand, rightHand, leftOSVRController, rightOSVRController);
     }
