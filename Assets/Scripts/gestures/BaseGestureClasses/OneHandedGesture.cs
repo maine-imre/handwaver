@@ -27,6 +27,17 @@ public class OneHandedGesture : Leap.Unity.OneHandedGesture
     }
   }
   
+  //Leap Motion Hands Module Connection
+  
+  internal Leap.Unity.HandModel handModel{
+      switch(Chirality)
+      case left:
+      //needs to be implemented.
+      default: //right
+      //needs to be implemented.
+    }
+  }
+  
   //Feedback System - these functions are implemented at the Gesture Definition Level
   
   abstract void visualFeedbackActivated();
