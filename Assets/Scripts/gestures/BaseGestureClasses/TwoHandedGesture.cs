@@ -17,12 +17,12 @@ public class TwoHandedGesture : Leap.Unity.TwoHandedGesture
       
   //OSVR
   //setting this input device allows us to use the inputs described by Unity as overrides:  https://docs.unity3d.com/Manual/xr_input.html
-  interal InputDevice osvrDevice_left{
+  interal InputDevice leftOSVRDevice{
   get{
      return  InputDevices.GetDeviceAtXRNode(XRNode.LeftHand);
   }
   
-    interal InputDevice osvrDevice_right{
+    interal InputDevice rightOSVRDevice{
   get{
      return  InputDevices.GetDeviceAtXRNode(XRNode.RightHand);
   }
@@ -34,10 +34,10 @@ public class TwoHandedGesture : Leap.Unity.TwoHandedGesture
   //we need to require an audioPlayer component.
   abstract void audioFeedbackActivated();
   
-    abstract void visualFeedbackDeactivated();
-  abstract void tactileFeedbackDeactivated();
+    abstract void visualFeedbackDeactivated(DeactivationReason reason);
+  abstract void tactileFeedbackDeactivated(DeactivationReason reason);
   //we need to require an audioPlayer component.
-  abstract void audioFeedbackDeactivated();
+  abstract void audioFeedbackDeactivated(DeactivationReason reason);
   
   //PUN
   //leave this for later.
@@ -47,36 +47,33 @@ public class TwoHandedGesture : Leap.Unity.TwoHandedGesture
     /// Called when the gesture has just been activated. The hand is guaranteed to
     /// be non-null.
     /// </summary>
-    void WhenGestureActivated(Hand hand) 
+    internal void WhenGestureActivated(Hand leftHand, Hand rightHand) 
     {
       visualFeedbackActivated();
       tactileFeedbackActivated();
       audioFeedbackActivated();
     }
 
-    /// <summary>
-    /// Called when the gesture has just been deactivated. The hand might be null; this
-    /// will be true if the hand loses tracking while the gesture is active.
-    /// </summary>
-    void WhenGestureDeactivated(Hand maybeNullHand, DeactivationReason reason) 
+
+    internal void WhenGestureDeactivated(Hand maybeNullLeftHand, Hand MaybeNullRightHand, DeactivationReason reason) 
     {
-      visualFeedbackDeactivated();
-      tactileFeedbackDeactivated();
-      audioFeedbackDeactivated();
+      visualFeedbackDeactivated(reason);
+      tactileFeedbackDeactivated(reason);
+      audioFeedbackDeactivated(reason);
     }
     
-    internal bool ShouldGestureActivate(Hand hand)
+    internal bool ShouldGestureActivate(Hand leftHand, Hand rightHand)
     {
-        return ActivationConditionsHand(hand) && ActivationConditionsOSVR(osvrDevice);
+        return ActivationConditionsHand(leftHand,rightHand) && ActivationConditionsOSVR(leftOSVRDevice,rightOSVRDevice);
     }
     
-    internal bool ShouldGestureDeactivateShouldGestureDeactivate(Hand hand, out DeactivationReason? deactivationReason);
+    internal bool ShouldGestureDeactivateShouldGestureDeactivate(Hand leftHand, Hand rightHand, out DeactivationReason? deactivationReason);
     {
         if (DeactivationConditionsActionComplete()){
           deactivationReason = DeactivationReason.Complete;
           return true;
         }
-        else if (DeactivationConditionsHand(hand) || DeactivationConditionsOSVR(osvrDevice)
+        else if (DeactivationConditionsHand(leftHand, rightHand) || DeactivationConditionsOSVR(leftOSVRController, rightOSVRController)
         {
           deactivationReason = DeactivationReason.Canceled;
           return true;
@@ -87,13 +84,19 @@ public class TwoHandedGesture : Leap.Unity.TwoHandedGesture
   
     }
     
+    void WhenGestureActivated(Hand leftHand, Hand rightHand)
+    {
+      WhileGestureActive(leftHand, rightHand, leftOSVRController, rightOSVRController);
+    }
+    
     //Note that one could assign deactivation conditions to be !activationConditions.
-    public abstract bool ActivationConditionsHand(Hand hand);
-    public abstract bool ActivationConditionsOSVR(InputDevice osvrController);
-    public abstract bool DeactivationConditionsHand(Hand hand);
-    public abstract bool DeactivationConditionsOSVR(InputDevice osvrController);
+    public abstract bool ActivationConditionsHand(Hand leftHand, Hand rightHand);
+    public abstract bool ActivationConditionsOSVR(InputDevice leftOSVRController, InputDevice rightOSVRController);
+    public abstract bool DeactivationConditionsHand(Hand leftHand, Hand rightHand);
+    public abstract bool DeactivationConditionsOSVR(InputDevice leftOSVRController, InputDevice rightOSVRController);
     public abstract bool DeactivationConditionsActionComplete();
-
-
+    
+    //this does the action of the gesture.
+    public abstract bool WhileGestureActive(Hand leftHand, Hand rightHand,InputDevice leftOSVRController, InputDevice rightOSVRController);
 }
 }
