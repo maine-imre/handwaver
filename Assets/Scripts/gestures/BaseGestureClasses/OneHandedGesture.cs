@@ -78,7 +78,7 @@ public class OneHandedGesture : Leap.Unity.OneHandedGesture
     
     internal bool ShouldGestureActivate(Hand hand)
     {
-        return ActivationConditionsHand(hand) && ActivationConditionsOSVR(osvrDevice);
+        return ActivationConditionsHand(hand) || ActivationConditionsOSVR(osvrDevice);
     }
     
     void WhileGestureActive(Hand hand)
@@ -92,7 +92,7 @@ public class OneHandedGesture : Leap.Unity.OneHandedGesture
           deactivationReason = DeactivationReason.Complete;
           return true;
         }
-        else if (DeactivationConditionsHand(hand) || DeactivationConditionsOSVR(osvrDevice)
+        else if (DeactivationConditionsHand(hand) && DeactivationConditionsOSVR(osvrDevice)
         {
           deactivationReason = DeactivationReason.Canceled;
           return true;
