@@ -22,6 +22,20 @@ namespace IMRE.HandWaver
 /// </summary>
 	class InteractablePrism : AbstractSolid, InteractiveFigure
 	{
+		#region Constructors
+            public static InteractablePrism Constructor()
+            {
+                GameObject go = new GameObject();
+				go.AddComponent<SphereCollider>();
+				go.GetComponent<SphereCollider>().radius = 0.02f;
+				go.AddComponent<Rigidbody>();
+				go.GetComponent<Rigidbody>().useGravity = false;
+				go.GetComponent<Rigidbody>().isKinematic = false;
+				go.AddComponent<InteractionBehaviour>();
+				return go.AddComponent<InteractablePrism>();
+            }
+        #endregion
+
 		private List<AbstractPoint> _vertexPoints = new List<AbstractPoint>();
 		private List<AbstractLineSegment> _lineSegments = new List<AbstractLineSegment>();
 

@@ -30,7 +30,9 @@ namespace IMRE.HandWaver.HWIO
 			ins = this;
 
 			checkLog();
+			#if StandaloneWindows64
 			commandLineArgumentParse.logStateChange.AddListener(checkLog);
+			#endif
 		}
 
 

@@ -10,7 +10,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Leap.Unity.Interaction;
-using PathologicalGames;
+
 using System;
 using System.Linq;
 using IMRE.HandWaver.Solver;
@@ -162,8 +162,8 @@ namespace IMRE.HandWaver
 		public void makeRevolvedSurface(Transform attachedLine, Vector3 revPoint, Vector3 normDir)
 		{
 			#region intialize a cylinder, cone or conic /etc.
-			Transform newPoint = PoolManager.Pools["GeoObj"].Spawn("PointPreFab");
-			newPoint.transform.position = revPoint;//nullreference on this line from shipswheel
+			InteractablePoint newPoint = InteractablePoint.Constructor();
+			newPoint.Position3 = revPoint;//nullreference on this line from shipswheel
 
 			DependentRevolvedSurface drs = GeoObjConstruction.dRevSurface(newPoint.GetComponent<AbstractPoint>(), attachedLine.GetComponent<AbstractLineSegment>(), normDir);
 			HW_GeoSolver.ins.addDependence(drs.transform, newPoint.transform);
@@ -177,9 +177,8 @@ namespace IMRE.HandWaver
 
 			DependentCircle circle = attachedArc.GetComponent<DependentCircle>();
 			//Transform sphereMesh = new GameObject("Sphere").transform;
-			Transform sphereMesh = PoolManager.Pools["GeoObj"].Spawn("SpherePreFab").transform;
 
-			DependentSphere sphere = sphereMesh.GetComponent<DependentSphere>();
+			DependentSphere sphere = DependentSphere.Constructor();
 			sphere.edge = circle.edge;
 			sphere.center = circle.center;
 			sphere.edgePosition = circle.edgePos;
@@ -189,10 +188,10 @@ namespace IMRE.HandWaver
 			sphere.AddToRManager();
 
 
-			sphereMesh.gameObject.tag = "Sphere";
-			sphereMesh.GetComponent<MasterGeoObj>().figType = GeoObjType.sphere;
-			HW_GeoSolver.ins.addComponent(sphereMesh.GetComponent<MasterGeoObj>());
-			HW_GeoSolver.ins.addDependence(sphereMesh.transform, attachedArc.transform);
+			sphere.gameObject.tag = "Sphere";
+			sphere.GetComponent<MasterGeoObj>().figType = GeoObjType.sphere;
+			HW_GeoSolver.ins.addComponent(sphere.GetComponent<MasterGeoObj>());
+			HW_GeoSolver.ins.addDependence(sphere.transform, attachedArc.transform);
 			#endregion
 		}
 

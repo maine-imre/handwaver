@@ -14,7 +14,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Leap.Unity;
 using UnityEngine.Events;
-using PathologicalGames;
+
 using IMRE.HandWaver.Solver;
 
 namespace IMRE.HandWaver.Lattice
@@ -187,14 +187,14 @@ namespace IMRE.HandWaver.Lattice
 			{
 				eraser.follow(false);
 				eraser.transform.position = Vector3.down;
-				PoolManager.Pools["Tools"].Despawn(eraser.transform);
+				Destroy(eraser.gameObject);
 				eraser = null;
 			}
 		}
 
 		internal void eraserAttach()
 		{
-			eraser = PoolManager.Pools["Tools"].Spawn("eraser2Prefab").GetComponent<eraserBehave>();
+			eraser = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Tools/Eraser2Prefab")).GetComponent<eraserBehave>();
 			eraser.transform.position = palmAttachment.position;
 			eraser.transform.localPosition = new Vector3(0, 1, 0);
 			eraser.transform.parent = palmAttachment;

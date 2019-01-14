@@ -18,6 +18,24 @@ namespace IMRE.HandWaver
 /// </summary>
 	class DependentPyramid : AbstractSolid
     {
+		#region Constructors
+            public static DependentPyramid Constructor()
+            {
+                GameObject go = new GameObject();
+				go.AddComponent<MeshFilter>();
+				go.AddComponent<MeshRenderer>();
+				//check if sphere mesh is added.
+				go.AddComponent<MeshCollider>();
+				go.AddComponent<Rigidbody>();
+				go.GetComponent<Rigidbody>().useGravity = false;
+				go.GetComponent<Rigidbody>().isKinematic = false;
+				go.AddComponent<InteractionBehaviour>();
+                go.GetComponent<InteractionBehaviour>().ignoreContact = true;
+                go.GetComponent<InteractionBehaviour>().ignoreGrasping = true;
+				return go.AddComponent<DependentPyramid>();
+            }
+        #endregion
+
         public AbstractPoint apex;
         /// <summary>
         /// The bases that can be moved on the figure (they have a handle and interaction behaviour)

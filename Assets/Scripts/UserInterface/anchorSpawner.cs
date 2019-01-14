@@ -10,7 +10,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Leap.Unity.Interaction;
-using PathologicalGames;
+
 
 namespace IMRE.HandWaver
 {
@@ -26,10 +26,8 @@ namespace IMRE.HandWaver
 		public float anchorScale;
 
 		public GameObject item;
-
-		public bool itemPooled;
-		public string poolName;
-		public string objName;
+		public enum ConstructableObjType{none,interactablePoint};
+		public ConstructableObjType ConstructableObject = ConstructableObjType.none; 
 
 		public GameObject prevItem;
 
@@ -61,60 +59,40 @@ namespace IMRE.HandWaver
 			spawnItem(this.transform);
 		}
 
-		public void respawn()
-		{
-			if(item == null)
-			{
-				detached();
-			}
-		}
-
-		public void despawn()
-		{
-			if (item != null)
-			{
-				PoolManager.Pools[poolName].Despawn(item.transform);
-				item = null;
-			}
-		}
-
 		internal virtual void spawnItem(Transform spawnPoint)
 		{
 			if(prevItem != null)
 			{
 				prevItem.transform.localScale /= anchorScale;
 			}
-			Transform newObj;
-			if (!itemPooled)
-			{
+			Transform newObj = null;
+
+			switch (ConstructableObject){
+				//this is a template, please complete the details.
+				case ConstructableObjType.interactablePoint:
+					newObj = InteractablePoint.Constructor().transform;
+					break;
+				default:
+
 				if (item != null)
 				{
 					newObj = Instantiate(item, spawnPoint.transform.position, spawnPoint.rotation).transform;
-					newObj.transform.localScale *= anchorScale;
-					newObj.GetComponent<AnchorableBehaviour>().TryAttachToNearestAnchor();
-					prevItem = newObj.gameObject;
 				}
 				else
 				{
 					Debug.Log("item is not set. please set item or fix pool. Object: "+gameObject.name);
 				}
+				break;
 
 			}
-			else
+			if(newObj == null)
 			{
-				newObj = PoolManager.Pools[poolName].Spawn(objName).transform;
-
-				newObj.transform.position = gameObject.transform.position;
-				newObj.transform.localScale *= anchorScale;
-
-				newObj.GetComponent<AnchorableBehaviour>().useTrajectory = false;
-				newObj.GetComponent<AnchorableBehaviour>().TryAttachToNearestAnchor();
-				newObj.GetComponent<AnchorableBehaviour>().useTrajectory = true;
-
-				prevItem = newObj.gameObject;
-				//Debug.Log(newObj.name + " properly spawned with prevItem set to " + prevItem.name + " with a poolmanager!");
-
+				Debug.LogError("No object spawning.");
+				return;
 			}
+			newObj.transform.localScale *= anchorScale;
+			newObj.GetComponent<AnchorableBehaviour>().TryAttachToNearestAnchor();
+			prevItem = newObj.gameObject;
 
 		}
 	}

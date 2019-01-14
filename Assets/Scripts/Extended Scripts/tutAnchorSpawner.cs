@@ -6,7 +6,6 @@ www.imrelab.org
 **/
 
 ﻿using Leap.Unity.Interaction;
-using PathologicalGames;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,8 +27,7 @@ namespace IMRE.HandWaver
 				prevItem.transform.localScale /= anchorScale;
 			}
 			Transform newObj;
-			if (!itemPooled)
-			{
+
 				if (item != null)
 				{
 					newObj = Instantiate(item, spawnPoint.transform.position, spawnPoint.rotation).transform;
@@ -42,18 +40,7 @@ namespace IMRE.HandWaver
 					Debug.Log("item is not set. please set item or fix pool. Object: " + gameObject.name);
 				}
 
-			}
-			else
-			{
-				newObj = PoolManager.Pools[poolName].Spawn(objName).transform;
-
-				newObj.transform.position = gameObject.transform.position;
-				newObj.transform.localScale *= anchorScale;
-				newObj.GetComponent<AnchorableBehaviour>().TryAttachToNearestAnchor();
-				prevItem = newObj.gameObject;
-				//Debug.Log(newObj.name + " properly spawned with prevItem set to " + prevItem.name + " with a poolmanager!");
-
-			}
+			
 		}
 	}
 }

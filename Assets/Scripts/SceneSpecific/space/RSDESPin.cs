@@ -1,7 +1,7 @@
 ﻿using Leap.Unity;
 using Leap.Unity.Interaction;
 using Leap.Unity.LeapPaint_v3;
-using PathologicalGames;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +18,12 @@ namespace IMRE.HandWaver.Space
 	/// </summary>
 	public class RSDESPin : MonoBehaviour
 	{
+#region Constructors
+	public static RSDESPin Constructor() {
+		return GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/RSDES/RSDESoushPinPrefab")).GetComponent<RSDESPin>();
+	}
+#endregion
+
 		#region Variables
 
 		private static int count = 0;
@@ -132,7 +138,7 @@ namespace IMRE.HandWaver.Space
 						latlong = value;
 						if (star == null)
 						{
-							star = PoolManager.Pools["GeoPlanet"].Spawn("RSDESStar_CS").transform;
+							star = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/RSDES/RSDESStar_CS")).transform;
 							star.GetComponent<MeshRenderer>().material.color = defaultColor;
 						}
 						star.transform.position = GeoPlanetMaths.directionFromLatLong(latlong).ScaleMultiplier(RSDESManager.radiusOfLargerSphere).Translate(RSDESManager.earthPos);
@@ -232,6 +238,12 @@ namespace IMRE.HandWaver.Space
 		private readonly float starRayGridSpacing = 2000000f;
         private int equalAltitudeCount = 50;
 
+		private LineRenderer spawnStarRay(){
+			LineRenderer tmp = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/RSDES/StarRay")).GetComponent<LineRenderer>();
+			tmp.transform.parent = this.transform;
+			return tmp;
+		}
+
 
         public starFieldSelect StarMode
 		{
@@ -280,8 +292,7 @@ namespace IMRE.HandWaver.Space
 						if (initialize)
 						{
 							starRays = new LineRenderer[1];
-							Transform tmp = PoolManager.Pools["GeoPlanet"].Spawn("StarRay", this.transform);
-							starRays[0] = tmp.GetComponent<LineRenderer>();
+							starRays[0] = spawnStarRay();
 						}
 						starRays[0].SetPositions(GeoPlanetMaths.starRayRendererCoordiantes(dbPinData));
 
@@ -317,7 +328,7 @@ namespace IMRE.HandWaver.Space
 						{
 							if (initialize)
 							{
-								starRays[i] = PoolManager.Pools["GeoPlanet"].Spawn("StarRay", this.transform).GetComponent<LineRenderer>();
+								starRays[i] = spawnStarRay();
 								List<LineRenderer> l = starRays.ToList();
 								l.RemoveAll(p => p == null);
 								l.ForEach(p => p.GetComponent<LineRenderer>().startColor = defaultColor);
@@ -354,7 +365,7 @@ namespace IMRE.HandWaver.Space
 								{
 									if (initialize)
 									{
-										starRays[equalAltitudeCount * i + j] = PoolManager.Pools["GeoPlanet"].Spawn("StarRay", this.transform).GetComponent<LineRenderer>();
+										starRays[equalAltitudeCount * i + j] = spawnStarRay();
 										starRays[equalAltitudeCount * i + j].startColor = pinBcolor;
 										starRays[equalAltitudeCount * i + j].endColor = pinBcolor;
 									}
@@ -381,7 +392,7 @@ namespace IMRE.HandWaver.Space
 						{
 							if (initialize)
 							{
-								starRays[i] = PoolManager.Pools["GeoPlanet"].Spawn("StarRay", this.transform).GetComponent<LineRenderer>();
+								starRays[i] = spawnStarRay();
 							}
 							starRays[i].startWidth = RSDESManager.LR_width;
 							starRays[i].endWidth = RSDESManager.LR_width;
@@ -402,7 +413,7 @@ namespace IMRE.HandWaver.Space
 						{
 							if (initialize)
 							{
-								starRays[i] = PoolManager.Pools["GeoPlanet"].Spawn("StarRay", this.transform).GetComponent<LineRenderer>();
+								starRays[i] = spawnStarRay();
 							}
 							starRays[i].startWidth = RSDESManager.LR_width;
 							starRays[i].endWidth = RSDESManager.LR_width;
@@ -610,13 +621,17 @@ namespace IMRE.HandWaver.Space
 			throw new NotImplementedException();
 		}
 
+		private LineRenderer RSDESGeneratedLine(){
+			return GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/RSDES/RSDESGeneratedLine")).GetComponent<LineRenderer>();
+		}
+
 		public void toggleAltitude()
 		{
 			if (!onSurface && !iBehave.isGrasped)
 				return;
 
 			if (altitudeRenderer == null)
-				altitudeRenderer = PoolManager.Pools["GeoPlanet"].Spawn("RSDESGeneratedLine").GetComponent<LineRenderer>();
+				altitudeRenderer = RSDESGeneratedLine();
 			altitudeRenderer.positionCount = 3;
 			altitudeRenderer.startWidth = RSDESManager.LR_width;
 			altitudeRenderer.endWidth = RSDESManager.LR_width;
@@ -636,7 +651,7 @@ namespace IMRE.HandWaver.Space
 				return;
 
 			if (azimuthRenderer == null)
-				azimuthRenderer = PoolManager.Pools["GeoPlanet"].Spawn("RSDESGeneratedLine").GetComponent<LineRenderer>();
+				azimuthRenderer = RSDESGeneratedLine();
 			azimuthRenderer.positionCount = 3;
 			azimuthRenderer.startWidth = RSDESManager.LR_width;
 			azimuthRenderer.endWidth = RSDESManager.LR_width;
@@ -656,7 +671,7 @@ namespace IMRE.HandWaver.Space
 				return;
 
 			if (latRenderer == null)
-				latRenderer = PoolManager.Pools["GeoPlanet"].Spawn("RSDESGeneratedLine").GetComponent<LineRenderer>();
+				latRenderer = RSDESGeneratedLine();
 			latRenderer.positionCount = RSDESManager.LR_Resolution;
 			latRenderer.startWidth = RSDESManager.LR_width;
 			latRenderer.endWidth = RSDESManager.LR_width;
@@ -676,7 +691,7 @@ namespace IMRE.HandWaver.Space
 				return;
 
 			if (longRenderer == null)
-				longRenderer = PoolManager.Pools["GeoPlanet"].Spawn("RSDESGeneratedLine").GetComponent<LineRenderer>();
+				longRenderer = RSDESGeneratedLine();
 
 			longRenderer.positionCount = RSDESManager.LR_Resolution;
 			longRenderer.startWidth = RSDESManager.LR_width;
@@ -701,7 +716,7 @@ namespace IMRE.HandWaver.Space
 			if (!onSurface && !iBehave.isGrasped)
 				return;
 			if (terminatorRenderer == null)
-				terminatorRenderer = PoolManager.Pools["GeoPlanet"].Spawn("RSDESGeneratedLine").GetComponent<LineRenderer>();
+				terminatorRenderer = RSDESGeneratedLine();
 			else
 				terminatorRenderer.enabled = !terminatorRenderer.enabled;
 
