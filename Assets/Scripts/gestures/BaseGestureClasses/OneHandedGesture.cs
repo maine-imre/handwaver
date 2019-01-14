@@ -81,7 +81,7 @@ public class OneHandedGesture : Leap.Unity.OneHandedGesture
         return ActivationConditionsHand(hand) && ActivationConditionsOSVR(osvrDevice);
     }
     
-    void WhenGestureActivated(Hand hand)
+    void WhileGestureActive(Hand hand)
     {
       WhileGestureActive(hand, osvrDevice);
     }
