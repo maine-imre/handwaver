@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
+using System.Linq;
 
 namespace IMRE.Gestures {
     public abstract class OneHandedGesture : Leap.Unity.Gestures.OneHandedGesture
@@ -37,10 +38,11 @@ namespace IMRE.Gestures {
         { 
     switch(whichHand){
       case Leap.Unity.Chirality.Left:
-      return ;//needs to be implemented.
+      return GameObject.FindObjectsOfType<Leap.Unity.HandModel>().Where(h => h.whichHand = Chirality.Left).First();
       default: //right
-      return ;//needs to be implemented.
-    } }
+      return GameObject.FindObjectsOfType<Leap.Unity.HandModel>().Where(h => h.whichHand = Chirality.Right).First();
+    } 
+    }
   }
 
   //Feedback System - these functions are implemented at the Gesture Definition Level
