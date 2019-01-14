@@ -73,7 +73,7 @@ public class TwoHandedGesture : Leap.Unity.TwoHandedGesture
     
     internal bool ShouldGestureActivate(Hand leftHand, Hand rightHand)
     {
-        return ActivationConditionsHand(leftHand,rightHand) && ActivationConditionsOSVR(leftOSVRDevice,rightOSVRDevice);
+        return ActivationConditionsHand(leftHand,rightHand) || ActivationConditionsOSVR(leftOSVRDevice,rightOSVRDevice);
     }
     
     internal bool ShouldGestureDeactivateShouldGestureDeactivate(Hand leftHand, Hand rightHand, out DeactivationReason? deactivationReason);
@@ -82,7 +82,7 @@ public class TwoHandedGesture : Leap.Unity.TwoHandedGesture
           deactivationReason = DeactivationReason.Complete;
           return true;
         }
-        else if (DeactivationConditionsHand(leftHand, rightHand) || DeactivationConditionsOSVR(leftOSVRController, rightOSVRController)
+        else if (DeactivationConditionsHand(leftHand, rightHand) && DeactivationConditionsOSVR(leftOSVRController, rightOSVRController)
         {
           deactivationReason = DeactivationReason.Canceled;
           return true;
