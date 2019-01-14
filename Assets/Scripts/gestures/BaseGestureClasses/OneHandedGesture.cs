@@ -27,7 +27,7 @@ public class OneHandedGesture : Leap.Unity.OneHandedGesture
     }
   }
   
-  //Feedback System
+  //Feedback System - these functions are implemented at the Gesture Definition Level
   
   abstract void visualFeedbackActivated();
   abstract void tactileFeedbackActivated();
@@ -70,6 +70,11 @@ public class OneHandedGesture : Leap.Unity.OneHandedGesture
         return ActivationConditionsHand(hand) && ActivationConditionsOSVR(osvrDevice);
     }
     
+    void WhenGestureActivated(Hand hand)
+    {
+      WhileGestureActive(hand, osvrDevice);
+    }
+    
     internal bool ShouldGestureDeactivateShouldGestureDeactivate(Hand hand, out DeactivationReason? deactivationReason);
     {
         if (DeactivationConditionsActionComplete()){
@@ -86,14 +91,18 @@ public class OneHandedGesture : Leap.Unity.OneHandedGesture
         }
   
     }
-    
-    //Note that one could assign deactivation conditions to be !activationConditions.
+ 
+     //Note that one could assign deactivation conditions to be !activationConditions.
+     //These functions are implemented at the Gesture Defintion Level
     public abstract bool ActivationConditionsHand(Hand hand);
     public abstract bool ActivationConditionsOSVR(InputDevice osvrController);
     public abstract bool DeactivationConditionsHand(Hand hand);
     public abstract bool DeactivationConditionsOSVR(InputDevice osvrController);
+    
+    //These functions are implemented for each use case.
     public abstract bool DeactivationConditionsActionComplete();
-  
+    
+    public abstract bool WhileGestureActive(Hand hand,InputDevice osvrController);
   
 }
 }
