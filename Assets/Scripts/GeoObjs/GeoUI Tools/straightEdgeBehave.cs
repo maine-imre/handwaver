@@ -52,6 +52,35 @@ namespace IMRE.HandWaver
 			thisAbehave = GetComponent<AnchorableBehaviour>();
 			thisAbehave.OnDetachedFromAnchor += detach;
 			thisAbehave.OnAttachedToAnchor += attach;
+
+			capsule = GetComponent<CapsuleCollider>();
+			this.GetComponent<LineRenderer>().positionCount = 4;
+
+			Vector3[] positions = new Vector3[4];
+			positions[1] = seHandle1.transform.position;
+			positions[2] = seHandle2.transform.position;
+
+			positions[0] = positions[2] - 1000 * (positions[2] - positions[1]);
+			positions[3] = positions[2] + 1000 * (positions[2] - positions[1]);
+
+			this.GetComponent<LineRenderer>().SetPositions(positions);
+
+
+			//capsule.isTrigger = false;
+			capsule.radius = this.GetComponent<LineRenderer>().startWidth * 2.0f;
+			capsule.height = 100f;
+			capsule.direction = 2;
+
+			thisIbehave = gameObject.GetComponent<InteractionBehaviour>();
+			//initLayer = gameObject.layer;
+
+			shipsWheel_rotate.gameObject.SetActive(false);
+			shipsWheel_revolve.gameObject.SetActive(false);
+			shipsWheel_hoist.gameObject.SetActive(false);
+
+			gameObject.GetComponent<CapsuleCollider>().enabled = true;
+
+			//thisIbehave.OnGraspEndEvent += onGraspEnd;
 		}
 
 		private void detach()
@@ -85,41 +114,6 @@ namespace IMRE.HandWaver
 		}
 
 		//private int initLayer;
-
-		// Use this for initialization
-		internal new void OnSpawned()
-        {
-			base.OnSpawned();
-
-			capsule = GetComponent<CapsuleCollider>();
-            this.GetComponent<LineRenderer>().positionCount = 4;
-
-            Vector3[] positions = new Vector3[4];
-            positions[1] = seHandle1.transform.position;
-            positions[2] = seHandle2.transform.position;
-
-            positions[0] = positions[2] - 1000 * (positions[2] - positions[1]);
-            positions[3] = positions[2] + 1000 * (positions[2] - positions[1]);
-
-            this.GetComponent<LineRenderer>().SetPositions(positions);
-
-
-            //capsule.isTrigger = false;
-            capsule.radius = this.GetComponent<LineRenderer>().startWidth * 2.0f;
-            capsule.height = 100f;
-            capsule.direction = 2;
-
-			thisIbehave = gameObject.GetComponent<InteractionBehaviour>();
-			//initLayer = gameObject.layer;
-
-			shipsWheel_rotate.gameObject.SetActive(false);
-			shipsWheel_revolve.gameObject.SetActive(false);
-			shipsWheel_hoist.gameObject.SetActive(false);
-
-			gameObject.GetComponent<CapsuleCollider>().enabled = true;
-
-			//thisIbehave.OnGraspEndEvent += onGraspEnd;
-		}
 
 		// Update is called once per frame
 		void Update()

@@ -65,21 +65,18 @@ namespace IMRE.HandWaver
 			{
 				prevItem.transform.localScale /= anchorScale;
 			}
+			Transform newObj = null;
 
-			switch(ConstructableObject){
+			switch (ConstructableObject){
 				//this is a template, please complete the details.
 				case ConstructableObjType.interactablePoint:
-					InteractablePoint.Constructor();
+					newObj = InteractablePoint.Constructor().transform;
 					break;
 				default:
-				Transform newObj;
 
 				if (item != null)
 				{
 					newObj = Instantiate(item, spawnPoint.transform.position, spawnPoint.rotation).transform;
-					newObj.transform.localScale *= anchorScale;
-					newObj.GetComponent<AnchorableBehaviour>().TryAttachToNearestAnchor();
-					prevItem = newObj.gameObject;
 				}
 				else
 				{
@@ -88,6 +85,14 @@ namespace IMRE.HandWaver
 				break;
 
 			}
+			if(newObj == null)
+			{
+				Debug.LogError("No object spawning.");
+				return;
+			}
+			newObj.transform.localScale *= anchorScale;
+			newObj.GetComponent<AnchorableBehaviour>().TryAttachToNearestAnchor();
+			prevItem = newObj.gameObject;
 
 		}
 	}

@@ -386,11 +386,6 @@ namespace IMRE.HandWaver
 			}
 		}
 
-        public void OnSpawned()
-		{
-			HW_GeoSolver.ins.addComponent(this);
-		}
-
 		public void Start()
 		{
 			//if (this.GetComponent<Renderer>() != null)
@@ -414,7 +409,7 @@ namespace IMRE.HandWaver
 			//}
 			cUpdateRMan = UpdateRMan();
 			waitForStretch = WaitForStretch();
-			OnSpawned();
+			HW_GeoSolver.ins.addComponent(this);
 		}
 
         void LateUpdate()
