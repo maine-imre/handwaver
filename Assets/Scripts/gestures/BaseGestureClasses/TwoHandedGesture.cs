@@ -27,6 +27,16 @@ public class TwoHandedGesture : Leap.Unity.TwoHandedGesture
      return  InputDevices.GetDeviceAtXRNode(XRNode.RightHand);
   }
   
+    //Leap Motion Hands Module Connection
+  
+  internal Leap.Unity.HandModel leftHandModel{
+      return //needs to be implemented.
+  }
+  
+    internal Leap.Unity.HandModel rightHandModel{
+      return //needs to be implemented.
+  }
+  
  //Feedback System - these functions are implemented at the Gesture Definition Level  
   abstract void visualFeedbackActivated();
   abstract void tactileFeedbackActivated();
