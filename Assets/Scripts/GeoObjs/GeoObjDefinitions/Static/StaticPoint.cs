@@ -24,19 +24,20 @@ namespace IMRE.HandWaver
 				go.AddComponent<MeshRenderer>();
 				//check if sphere mesh is added.
 				go.AddComponent<SphereCollider>();
-				go.GetComponent<SphereCollider>().radius = 0.5f;
 				go.AddComponent<Rigidbody>();
-				go.GetComponent<Rigidbody>().useGravity = false;
-				go.GetComponent<Rigidbody>().isKinematic = false;
 				go.AddComponent<InteractionBehaviour>();
+				go.AddComponent<AnchorableBehaviour>();
+				go.AddComponent<StaticPoint>();
+				go.GetComponent<SphereCollider>().radius = 0.5f;
+				go.GetComponent<Rigidbody>().useGravity = false;
+				go.GetComponent<Rigidbody>().isKinematic = true;
 				go.GetComponent<InteractionBehaviour>().enabled = false;
-                go.AddComponent<AnchorableBehaviour>();
                 go.GetComponent<AnchorableBehaviour>().maxAnchorRange = 0.3f;
                 go.GetComponent<AnchorableBehaviour>().useTrajectory = true;
                 go.GetComponent<AnchorableBehaviour>().lockWhenAttached = true;
                 go.GetComponent<AnchorableBehaviour>().matchAnchorMotionWhileAttaching = true;
                 go.GetComponent<AnchorableBehaviour>().tryAnchorNearestOnGraspEnd = true;
-				return go.AddComponent<StaticPoint>();
+				return go.GetComponent<StaticPoint>();
             }
         #endregion
 
