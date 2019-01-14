@@ -21,7 +21,7 @@ public class OneHandedGesture : Leap.Unity.OneHandedGesture
   get{
     switch(Chirality)
       case left:
-        return  InputDevices.GetDeviceAtXRNode(XRNode.RightHand);
+        return  InputDevices.GetDeviceAtXRNode(XRNode.LeftHand);
       default: //right
         return InputDevices.GetDeviceAtXRNode(XRNode.RightHand);
     }
