@@ -34,10 +34,10 @@ public class OneHandedGesture : Leap.Unity.OneHandedGesture
   //we need to require an audioPlayer component.
   abstract void audioFeedbackActivated();
   
-    abstract void visualFeedbackDeactivated();
-  abstract void tactileFeedbackDeactivated();
+    abstract void visualFeedbackDeactivated(DeactivationReason reason);
+  abstract void tactileFeedbackDeactivated(DeactivationReason reason);
   //we need to require an audioPlayer component.
-  abstract void audioFeedbackDeactivated();
+  abstract void audioFeedbackDeactivated(DeactivationReason reason);
   
   //PUN
   //leave this for later.
@@ -60,9 +60,9 @@ public class OneHandedGesture : Leap.Unity.OneHandedGesture
     /// </summary>
     void WhenGestureDeactivated(Hand maybeNullHand, DeactivationReason reason) 
     {
-      visualFeedbackDeactivated();
-      tactileFeedbackDeactivated();
-      audioFeedbackDeactivated();
+      visualFeedbackDeactivated(reason);
+      tactileFeedbackDeactivated(reason);
+      audioFeedbackDeactivated(reason);
     }
     
     internal bool ShouldGestureActivate(Hand hand)
