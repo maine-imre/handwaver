@@ -11,7 +11,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Leap.Unity.Interaction;
 using IMRE.HandWaver.Solver;
-using PathologicalGames;
+
 
 
 namespace IMRE.HandWaver
@@ -386,11 +386,6 @@ namespace IMRE.HandWaver
 			}
 		}
 
-        public void OnSpawned()
-		{
-			HW_GeoSolver.ins.addComponent(this);
-		}
-
 		public void Start()
 		{
 			//if (this.GetComponent<Renderer>() != null)
@@ -414,6 +409,7 @@ namespace IMRE.HandWaver
 			//}
 			cUpdateRMan = UpdateRMan();
 			waitForStretch = WaitForStretch();
+			HW_GeoSolver.ins.addComponent(this);
 		}
 
         void LateUpdate()
@@ -470,8 +466,7 @@ namespace IMRE.HandWaver
         {
 			if (allowDelete)
 			{
-				//HW_GeoSolver.ins.removeComponent(this);
-				PoolManager.Pools["GeoObj"].Despawn(this.transform);
+				Destroy(gameObject);
 			}
         }
 

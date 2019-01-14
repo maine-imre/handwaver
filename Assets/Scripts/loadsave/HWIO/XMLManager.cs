@@ -14,7 +14,7 @@ using System.IO;
 using System.Linq;
 using System;
 using Leap.Unity.Interaction;
-using PathologicalGames;
+
 using IMRE.HandWaver.Solver;
 
 namespace IMRE.HandWaver.HWIO
@@ -40,7 +40,9 @@ namespace IMRE.HandWaver.HWIO
 			StartCoroutine(autoSaving());
 #endif
 			checkLog();
+			#if StandaloneWindows64
 			commandLineArgumentParse.logStateChange.AddListener(checkLog);
+			#endif
 		}
 
 		private void checkLog()
@@ -383,7 +385,7 @@ namespace IMRE.HandWaver.HWIO
 					case GeoObjType.torus:
 						break;
 					case GeoObjType.flatface:
-						Transform flatface = PoolManager.Pools["Tools"].Spawn("Flatface").transform;
+						Transform flatface = flatfaceBehave.Constructor().transform;
 						flatface.transform.position = geo.position;
 						flatface.transform.rotation = geo.rotation;
 						if (!String.IsNullOrEmpty(geo.label))
@@ -391,7 +393,7 @@ namespace IMRE.HandWaver.HWIO
 						spawnedObjects.Add(geo.figName, flatface.GetComponent<MasterGeoObj>());
 						break;
 					case GeoObjType.straightedge:
-						Transform straightEdge = PoolManager.Pools["Tools"].Spawn("Straightedge").transform;
+						Transform straightEdge = straightEdgeBehave.Constructor().transform;
 						straightEdge.transform.position = geo.position;
 						straightEdge.transform.rotation = geo.rotation;
 						if (!String.IsNullOrEmpty(geo.label))
@@ -402,299 +404,6 @@ namespace IMRE.HandWaver.HWIO
 						break;
 				}
 			}
-#region oldordering
-			//foreach (GeoObj p in GeoObjDB.list.Where(p => p.type == GeoObjType.point))
-			/////spawn points first so that they can be used later
-			/////Should also add to a map with Key being figName and value being the GeoObj object
-			/////Do not remove from list as we can just use more Where() statements for defered execution
-			//{
-			//	MasterGeoOBj spawnedPoint = null;//initialzed as null so that cases that do not spawn still have it initialized but still fails a null check.
-			//	switch (p.definition)
-			//	{
-			//		case GeoObjDef.Abstract:
-			//			Debug.Log(p.figName + " was attempted to spawn but is not supported yet within XMLManager script! Add construction function in place of this log.");
-			//			break;
-			//		case GeoObjDef.Dependent:
-			//			spawnedPoint = GeoObjConstruction.dPoint(p.position);
-			//			break;
-			//		case GeoObjDef.Interactable:
-			//			spawnedPoint = GeoObjConstruction.iPoint(p.position);
-			//			break;
-			//		case GeoObjDef.Static:
-			//			Debug.Log(p.figName + " was attempted to spawn but is not supported yet within XMLManager script! Add construction function in place of this log.");
-			//			break;
-			//		case GeoObjDef.none:
-			//			Debug.Log(p.figName + " was attempted to spawn but is not supported yet within XMLManager script! Add construction function in place of this log.");
-			//			break;
-			//		default:
-			//			break;
-			//	}
-			//	if (spawnedPoint != null)
-			//	{
-			//		spawnedObjects.Add(p.figName, spawnedPoint);
-			//	}
-			//}
-			//foreach (GeoObj l in GeoObjDB.list.Where(l => l.type == GeoObjType.line))
-			//{
-			//	MasterGeoOBj spawnedLine = null;//initialzed as null so that cases that do not spawn still have it initialized but still fails a null check.
-			//	switch (l.definition)
-			//	{
-			//		case GeoObjDef.Abstract:
-			//			Debug.Log(l.figName + " was attempted to spawn but is not supported yet within XMLManager script! Add construction function in place of this log.");
-			//			break;
-			//		case GeoObjDef.Dependent:
-			//			spawnedLine = GeoObjConstruction.dLineSegment(spawnedObjects[l.dependencies[0]] as AbstractPoint, spawnedObjects[l.dependencies[1]] as AbstractPoint);
-			//			break;
-			//		case GeoObjDef.Interactable:
-			//			spawnedLine = GeoObjConstruction.iLineSegment(spawnedObjects[l.dependencies[0]] as AbstractPoint, spawnedObjects[l.dependencies[1]] as AbstractPoint);
-			//			break;
-			//		case GeoObjDef.Static:
-			//			Debug.Log(l.figName + " was attempted to spawn but is not supported yet within XMLManager script! Add construction function in place of this log.");
-			//			break;
-			//		case GeoObjDef.none:
-			//			Debug.Log(l.figName + " was attempted to spawn but is not supported yet within XMLManager script! Add construction function in place of this log.");
-			//			break;
-			//		default:
-			//			break;
-			//	}
-			//	if (spawnedLine != null)
-			//	{
-			//		spawnedObjects.Add(l.figName, spawnedLine);
-			//	}
-			//}
-
-			//foreach (GeoObj poly in GeoObjDB.list.Where(poly => poly.type == GeoObjType.polygon))
-			//{
-
-			//	MasterGeoOBj spawnedPoly = null;//initialzed as null so that cases that do not spawn still have it initialized but still fails a null check.
-			//	List<AbstractLineSegment> lineList;
-			//	List<AbstractPoint> pointList;
-			//	switch (poly.definition)
-			//	{
-			//		case GeoObjDef.Abstract:
-			//			Debug.Log(poly.figName + " was attempted to spawn but is not supported yet within XMLManager script! Add construction function in place of this log.");
-			//			break;
-			//		case GeoObjDef.Dependent:
-			//			lineList = new List<AbstractLineSegment>();
-			//			poly.dependencies.Where(d => spawnedObjects[d].figType == GeoObjType.line).ToList().ForEach(l => lineList.Add(spawnedObjects[l] as AbstractLineSegment));
-			//			pointList = new List<AbstractPoint>();
-			//			poly.dependencies.Where(d => spawnedObjects[d].figType == GeoObjType.point).ToList().ForEach(p => pointList.Add(spawnedObjects[p] as AbstractPoint));
-			//			spawnedPoly = GeoObjConstruction.dPolygon(lineList, pointList);
-			//			break;
-			//		case GeoObjDef.Interactable:
-			//			lineList = new List<AbstractLineSegment>();
-			//			poly.dependencies.Where(d => spawnedObjects[d].figType == GeoObjType.line).ToList().ForEach(l => lineList.Add(spawnedObjects[l] as AbstractLineSegment));
-			//			pointList = new List<AbstractPoint>();
-			//			poly.dependencies.Where(d => spawnedObjects[d].figType == GeoObjType.point).ToList().ForEach(p => pointList.Add(spawnedObjects[p] as AbstractPoint));
-			//			spawnedPoly = GeoObjConstruction.iPolygon(lineList, pointList);
-			//			break;
-			//		case GeoObjDef.Static:
-			//			Debug.Log(poly.figName + " was attempted to spawn but is not supported yet within XMLManager script! Add construction function in place of this log.");
-			//			break;
-			//		case GeoObjDef.none:
-			//			Debug.Log(poly.figName + " was attempted to spawn but is not supported yet within XMLManager script! Add construction function in place of this log.");
-			//			break;
-			//		default:
-			//			break;
-			//	}
-			//	if (spawnedPoly != null)
-			//	{
-			//		spawnedObjects.Add(poly.figName, spawnedPoly);
-			//	}
-			//}
-
-			//foreach (GeoObj c in GeoObjDB.list.Where(c => c.type == GeoObjType.circle))
-			////TODO: Doesn't work properly
-			//{
-			//	MasterGeoOBj spawnedCircle = null;//initialzed as null so that cases that do not spawn still have it initialized but still fails a null check.
-			//	switch (c.definition)
-			//	{
-			//		case GeoObjDef.Abstract:
-			//			Debug.Log(c.figName + " was attempted to spawn but is not supported yet within XMLManager script! Add construction function in place of this log.");
-			//			break;
-			//		case GeoObjDef.Dependent:
-			//			spawnedCircle = GeoObjConstruction.dCircle(spawnedObjects[c.dependencies[0]] as AbstractPoint, spawnedObjects[c.dependencies[1]] as AbstractPoint, c.circleData.normDir);
-			//			break;
-			//		case GeoObjDef.Interactable:
-			//			Debug.Log(c.figName + " was attempted to spawn but is not supported yet within XMLManager script! Add construction function in place of this log.");
-			//			break;
-			//		case GeoObjDef.Static:
-			//			Debug.Log(c.figName + " was attempted to spawn but is not supported yet within XMLManager script! Add construction function in place of this log.");
-			//			break;
-			//		case GeoObjDef.none:
-			//			Debug.Log(c.figName + " was attempted to spawn but is not supported yet within XMLManager script! Add construction function in place of this log.");
-			//			break;
-			//		default:
-			//			break;
-			//	}
-			//	if (spawnedCircle != null)
-			//	{
-			//		spawnedObjects.Add(c.figName, spawnedCircle);
-			//	}
-
-			//}
-			//foreach (GeoObj s in GeoObjDB.list.Where(s => s.type == GeoObjType.sphere))
-			/////Spheres require that dependencies be in order of the following
-			///// Index of 0 should be center
-			///// Index of 1 should be edge
-			///// This is the standard as of right now, within the GeoObjConstruction function
-			/////Should also add to a map with Key being figName and value being the GeoObj object
-			/////Do not remove from list as we can just use more Where() statements for defered execution
-			//{
-			//	MasterGeoOBj spawnedSphere = null;//initialzed as null so that cases that do not spawn still have it initialized but still fails a null check.
-			//	switch (s.definition)
-			//	{
-			//		case GeoObjDef.Abstract:
-			//			Debug.Log(s.figName + " was attempted to spawn but is not supported yet within XMLManager script! Add construction function in place of this log.");
-			//			break;
-			//		case GeoObjDef.Dependent:
-			//			spawnedSphere = GeoObjConstruction.dSphere(spawnedObjects[s.dependencies[0]] as AbstractPoint, spawnedObjects[s.dependencies[1]] as AbstractPoint);
-			//			break;
-			//		case GeoObjDef.Interactable:
-			//			Debug.Log(s.figName + " was attempted to spawn but is not supported yet within XMLManager script! Add construction function in place of this log.");
-			//			break;
-			//		case GeoObjDef.Static:
-			//			Debug.Log(s.figName + " was attempted to spawn but is not supported yet within XMLManager script! Add construction function in place of this log.");
-			//			break;
-			//		case GeoObjDef.none:
-			//			Debug.Log(s.figName + " was attempted to spawn but is not supported yet within XMLManager script! Add construction function in place of this log.");
-			//			break;
-			//		default:
-			//			break;
-			//	}
-			//	if (spawnedSphere != null)
-			//	{
-			//		spawnedObjects.Add(s.figName, spawnedSphere);
-			//	}
-			//}
-
-			//foreach (GeoObj prism in GeoObjDB.list.Where(s => s.type == GeoObjType.prism))
-			/////Spheres require that dependencies be in order of the following
-			///// Index of 0 should be center
-			///// Index of 1 should be edge
-			///// This is the standard as of right now, within the GeoObjConstruction function
-			/////Should also add to a map with Key being figName and value being the GeoObj object
-			/////Do not remove from list as we can just use more Where() statements for defered execution
-			//{
-			//	MasterGeoOBj spawnedPrism = null;//initialzed as null so that cases that do not spawn still have it initialized but still fails a null check.
-			//	switch (prism.definition)
-			//	{
-			//		case GeoObjDef.Abstract:
-			//			Debug.Log(prism.figName + " was attempted to spawn but is not supported yet within XMLManager script! Add construction function in place of this log.");
-			//			break;
-			//		case GeoObjDef.Dependent:
-			//			Debug.Log(prism.figName + " was attempted to spawn but is not supported yet within XMLManager script! Add construction function in place of this log.");
-			//			break;
-			//		case GeoObjDef.Interactable:
-			//			if (prism.prismData.bases.Count != 0 || prism.prismData.sides.Count != 0)
-			//			{
-			//				List<AbstractPolygon> bases = new List<AbstractPolygon>();
-			//				List<AbstractPolygon> sides = new List<AbstractPolygon>();
-			//				prism.prismData.bases.ForEach(b => bases.Add(spawnedObjects[b] as AbstractPolygon));
-			//				prism.prismData.sides.ForEach(s => bases.Add(spawnedObjects[s] as AbstractPolygon));
-			//				spawnedPrism = GeoObjConstruction.iPrism(bases, sides);
-			//			}
-			//			else
-			//			{
-			//				List<AbstractLineSegment> edges = new List<AbstractLineSegment>();
-			//				prism.prismData.edges.ForEach(e => edges.Add(spawnedObjects[e] as AbstractLineSegment));
-			//				spawnedPrism = GeoObjConstruction.iPrism(edges);
-			//			}
-			//			break;
-			//		case GeoObjDef.Static:
-			//			Debug.Log(prism.figName + " was attempted to spawn but is not supported yet within XMLManager script! Add construction function in place of this log.");
-			//			break;
-			//		case GeoObjDef.none:
-			//			Debug.Log(prism.figName + " was attempted to spawn but is not supported yet within XMLManager script! Add construction function in place of this log.");
-			//			break;
-			//		default:
-			//			break;
-			//	}
-			//	if (spawnedPrism != null)
-			//	{
-			//		spawnedObjects.Add(prism.figName, spawnedPrism);
-			//	}
-			//}
-			//foreach (GeoObj revSurf in GeoObjDB.list.Where(revSurf => revSurf.type == GeoObjType.revolvedsurface))
-			//{
-			//	MasterGeoOBj spawnedrevSurf = null;//initialzed as null so that cases that do not spawn still have it initialized but still fails a null check.
-			//	switch (revSurf.definition)
-			//	{
-			//		case GeoObjDef.Abstract:
-			//			Debug.Log(revSurf.figName + " was attempted to spawn but is not supported yet within XMLManager script! Add construction function in place of this log.");
-			//			break;
-			//		case GeoObjDef.Dependent:
-			//			spawnedrevSurf = GeoObjConstruction.dRevSurface(spawnedObjects[revSurf.dependencies[0]] as AbstractPoint, spawnedObjects[revSurf.dependencies[1]] as AbstractLineSegment, revSurf.revSurfData.normDir);
-			//			spawnedrevSurf.transform.position = revSurf.position;
-			//			spawnedrevSurf.transform.rotation = revSurf.rotation;
-			//			break;
-			//		case GeoObjDef.Interactable:
-			//			Debug.Log(revSurf.figName + " was attempted to spawn but is not supported yet within XMLManager script! Add construction function in place of this log.");
-			//			break;
-			//		case GeoObjDef.Static:
-			//			Debug.Log(revSurf.figName + " was attempted to spawn but is not supported yet within XMLManager script! Add construction function in place of this log.");
-			//			break;
-			//		case GeoObjDef.none:
-			//			Debug.Log(revSurf.figName + " was attempted to spawn but is not supported yet within XMLManager script! Add construction function in place of this log.");
-			//			break;
-			//		default:
-			//			break;
-			//	}
-			//	if (spawnedrevSurf != null)
-			//	{
-			//		spawnedObjects.Add(revSurf.figName, spawnedrevSurf);
-			//	}
-
-			//}
-
-			//foreach (GeoObj se in GeoObjDB.list.Where(se => se.type == GeoObjType.straightedge))
-			//{
-			//	Transform newObj = PoolManager.Pools["Tools"].Spawn("Straightedge").transform;
-			//	newObj.transform.position = se.position;
-			//	newObj.transform.rotation = se.rotation;
-			//	spawnedObjects.Add(se.figName, newObj.GetComponent<MasterGeoOBj>());
-			//}
-
-			//foreach (GeoObj ff in GeoObjDB.list.Where(ff => ff.type == GeoObjType.flatface))
-			//{
-			//	Transform newObj = PoolManager.Pools["Tools"].Spawn("Flatface").transform;
-			//	newObj.transform.position = ff.position;
-			//	newObj.transform.rotation = ff.rotation;
-			//	spawnedObjects.Add(ff.figName, newObj.GetComponent<MasterGeoOBj>());
-			//}
-
-			//foreach (GeoObj pyramid in GeoObjDB.list.Where(pyramid => pyramid.type == GeoObjType.pyramid))
-			/// pyramids require that dependencies be in order of the following
-			/// Index of 0 should be basePoly
-			//{
-			//	MasterGeoOBj spawnedPyramid = null;//initialzed as null so that cases that do not spawn still have it initialized but still fails a null check.
-
-			//	switch (pyramid.definition)
-			//	{
-			//		case GeoObjDef.Abstract:
-			//			Debug.Log(pyramid.figName + " was attempted to spawn but is not supported yet within XMLManager script! Add construction function in place of this log.");
-			//			break;
-			//		case GeoObjDef.Dependent:
-			//			spawnedPyramid = GeoObjConstruction.dPyramid(spawnedObjects[pyramid.dependencies[0]] as AbstractPolygon, spawnedObjects[pyramid.pyramidData.apexName] as AbstractPoint);
-			//			break;
-			//		case GeoObjDef.Interactable:
-			//			Debug.Log(pyramid.figName + " was attempted to spawn but is not supported yet within XMLManager script! Add construction function in place of this log.");
-			//			break;
-			//		case GeoObjDef.Static:
-			//			Debug.Log(pyramid.figName + " was attempted to spawn but is not supported yet within XMLManager script! Add construction function in place of this log.");
-			//			break;
-			//		case GeoObjDef.none:
-			//			Debug.Log(pyramid.figName + " was attempted to spawn but is not supported yet within XMLManager script! Add construction function in place of this log.");
-			//			break;
-			//		default:
-			//			break;
-			//	}
-			//	if (spawnedPyramid != null)
-			//	{
-			//		spawnedObjects.Add(pyramid.figName, spawnedPyramid);
-			//	}
-			//}
-#endregion
 		}
 
 		public void LogGeoObjs(string path)

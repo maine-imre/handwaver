@@ -20,6 +20,23 @@ namespace IMRE.HandWaver
 /// </summary>
 	class InteractableLineSegment : AbstractLineSegment, InteractiveFigure
     {
+		#region Constructors
+            public static InteractableLineSegment Constructor()
+            {
+                GameObject go = new GameObject();
+				go.AddComponent<LineRenderer>();
+				//check if sphere mesh is added.
+				go.AddComponent<CapsuleCollider>();
+				go.AddComponent<Rigidbody>();
+				go.GetComponent<Rigidbody>().useGravity = false;
+				go.GetComponent<Rigidbody>().isKinematic = false;
+				go.AddComponent<InteractionBehaviour>();
+                go.GetComponent<InteractionBehaviour>().ignoreContact = true;
+                go.GetComponent<InteractionBehaviour>().ignoreGrasping = true;
+				return go.AddComponent<InteractableLineSegment>();
+            }
+        #endregion
+
         public AbstractPoint point1;
         public AbstractPoint point2;
 

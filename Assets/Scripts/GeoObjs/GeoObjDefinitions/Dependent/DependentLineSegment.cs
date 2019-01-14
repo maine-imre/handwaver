@@ -16,6 +16,23 @@ namespace IMRE.HandWaver
 /// </summary>
 	class DependentLineSegment : AbstractLineSegment, DependentFigure
     {
+				#region Constructors
+            public static DependentLineSegment Constructor()
+            {
+                GameObject go = new GameObject();
+				go.AddComponent<LineRenderer>();
+				//check if sphere mesh is added.
+				go.AddComponent<CapsuleCollider>();
+				go.AddComponent<Rigidbody>();
+				go.GetComponent<Rigidbody>().useGravity = false;
+				go.GetComponent<Rigidbody>().isKinematic = false;
+				go.AddComponent<InteractionBehaviour>();
+                go.GetComponent<InteractionBehaviour>().ignoreContact = true;
+                go.GetComponent<InteractionBehaviour>().ignoreGrasping = true;
+				return go.AddComponent<DependentLineSegment>();
+            }
+        #endregion
+
         //can these be used this way???
         public AbstractPoint point1;
         public AbstractPoint point2;

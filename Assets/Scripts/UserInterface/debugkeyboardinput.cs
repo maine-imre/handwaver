@@ -43,7 +43,9 @@ namespace IMRE.HandWaver
 		void Start()
 		{
 
+#if StandaloneWindows64
 			commandLineArgumentParse.logOverride |= interalBuild;   //or equal the internal build bool so that if its internal it automatically starts logging
+			#endif
 
 			if (loadBackground)
 				loadSceneAsyncByName(backgroundName, false);
@@ -191,7 +193,9 @@ namespace IMRE.HandWaver
 
         private void toggleMixCastCamera()
         {
+			#if StandaloneWindows64
             mixCastCameraToggle.toggleCameraz();
+			#endif
         }
 
 		IEnumerator enablePlaintains()

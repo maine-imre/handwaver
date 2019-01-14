@@ -9,7 +9,7 @@ www.imrelab.org
 using System.Collections.Generic;
 using UnityEngine;
 using Leap.Unity.Interaction;
-using PathologicalGames;
+
 using System;
 using IMRE.HandWaver.Solver;
 
@@ -21,7 +21,6 @@ namespace IMRE.HandWaver
 /// </summary>
 	class arctusBehaveV3 : HandWaverTools
 	{
-#pragma warning disable 0649
 		public DependentSphere thisSphere;
 		public bool centerSet = false;
 		public bool edgeSet = false;
@@ -38,9 +37,15 @@ namespace IMRE.HandWaver
 		public LineRenderer thisCircle;
 		private AnchorableBehaviour thisABehave;
 		public float angleDeltaThreshold;
-#pragma warning restore 0649
 
-		private void Start()
+        #region Constructors
+        public static arctusBehaveV3 Constructor(){
+			GameObject go = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Tools/ArctusV3"));
+			return go.GetComponent<arctusBehaveV3>();
+		}
+        #endregion
+
+        private void Start()
 		{
 			thisCircle.positionCount = 300;
 			thisCircle.useWorldSpace = true;
@@ -188,8 +193,7 @@ namespace IMRE.HandWaver
         {
             if (centerSet && edgeSet)
             {
-				Transform thisSphereT = PoolManager.Pools["GeoObj"].Spawn("SpherePreFab").transform;
-				thisSphere = thisSphereT.GetComponent<DependentSphere>();
+				thisSphere = DependentSphere.Constructor();
 				thisSphere.center = Center;
 				thisSphere.centerPosition = Center.transform.position;
 				thisSphere.edge = Edge;

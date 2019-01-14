@@ -1,5 +1,5 @@
 using Leap.Unity.Interaction;
-using PathologicalGames;
+
 using System.Linq;
 using System.Collections.Generic;
 /**
@@ -292,7 +292,7 @@ namespace IMRE.HandWaver.Solver
 						rManList.Remove(meNode);
 					}
 					geomanager.Remove(meNode.Value);
-					Destroy(geoComp);
+					Destroy(geoComp.gameObject);
 				}
 				else
 				{
@@ -304,7 +304,7 @@ namespace IMRE.HandWaver.Solver
 						rManList.Remove(meNode);
 					}
 					geomanager.Remove(meNAME);
-					PoolManager.Pools["GeoObj"].Despawn(geoComp.transform);
+					Destroy(geoComp.gameObject);
 				}
 
 			}
@@ -315,7 +315,7 @@ namespace IMRE.HandWaver.Solver
             if (blockDelete == false)
             {
                 geomanager.Remove(geoCompS);
-                PoolManager.Pools["GeoObj"].Despawn(GameObject.Find(geoCompS).transform);
+                Destroy(GameObject.Find(geoCompS));
             }
         }
 

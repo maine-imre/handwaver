@@ -20,6 +20,21 @@ namespace IMRE.HandWaver
 /// </summary>
 	class DependentPolygon : AbstractPolygon, DependentFigure
     {
+		#region Constructors
+			public static  DependentPolygon Constructor()
+			{
+				GameObject go = new GameObject();
+				go.AddComponent<MeshFilter>();
+				go.AddComponent<MeshRenderer>();
+				go.AddComponent<MeshCollider>();
+				go.AddComponent<Rigidbody>();
+				go.GetComponent<Rigidbody>().useGravity = false;
+				go.GetComponent<Rigidbody>().isKinematic = false;
+				go.AddComponent<InteractionBehaviour>();
+				return go.AddComponent<DependentPolygon>();
+			}
+		#endregion
+
 		public override void initializefigure()
         {
 			base.initializefigure();

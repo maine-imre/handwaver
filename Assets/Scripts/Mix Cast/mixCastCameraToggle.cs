@@ -4,7 +4,7 @@ HandWaver, developed at the Maine IMRE Lab at the University of Maine's College 
 See license info in readme.md.
 www.imrelab.org
 **/
-
+#if StandaloneWindows64
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -38,3 +38,4 @@ namespace IMRE.HandWaver
 
     }
 }
+#endif

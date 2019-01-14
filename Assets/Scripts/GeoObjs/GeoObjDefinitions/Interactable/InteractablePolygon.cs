@@ -21,6 +21,22 @@ namespace IMRE.HandWaver
 /// </summary>
 	class InteractablePolygon : AbstractPolygon, InteractiveFigure
     {
+        #region Constructors
+            public static InteractablePolygon Constructor()
+            {
+                GameObject go = new GameObject();
+				go.AddComponent<MeshFilter>();
+				go.AddComponent<MeshRenderer>();
+				//check if sphere mesh is added.
+				go.AddComponent<MeshCollider>();
+				go.AddComponent<Rigidbody>();
+				go.GetComponent<Rigidbody>().useGravity = false;
+				go.GetComponent<Rigidbody>().isKinematic = false;
+				go.AddComponent<InteractionBehaviour>();
+				return go.AddComponent<InteractablePolygon>();
+            }
+        #endregion
+
 		internal override bool RMotion(NodeList<string> inputNodeList)
         {
             bool tempValue = false;
