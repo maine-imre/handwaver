@@ -6,7 +6,13 @@ using UnityEngine.XR;
 
 namespace IMRE.Gestures
 {
-public class PushEarthGesture : OpenPalmGesture {
+  public class PushEarthGesture : OpenPalmGesture {
+    public bool DeactivationConditionsActionComplete(){
+      return false;
+    }
 
-}
+    public bool WhileGestureActive(Hand hand,InputDevice osvrController){
+      return false;
+    }
+  }
 }
