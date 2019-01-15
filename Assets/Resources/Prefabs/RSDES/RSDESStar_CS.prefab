@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-version https://git-lfs.github.com/spec/v1
-oid sha256:571253ea331f54a579084ed6466cf4c83c1fc05b0279da0a2aea9a033077b587
-size 2702
-=======
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
 --- !u!1001 &100100000
@@ -100,4 +95,3 @@ Halo:
     serializedVersion: 2
     rgba: 4286611584
   m_Size: 0.01
->>>>>>> develop

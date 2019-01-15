@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-version https://git-lfs.github.com/spec/v1
-oid sha256:9404c0c090450ed6c309a218933ea65c6ee1e41beeb3a45e3e8182d92b23f562
-size 6189
-=======
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
 --- !u!1001 &100100000
@@ -215,4 +210,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ddc8fee190b96c4d8a41b8d1843190c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
->>>>>>> develop

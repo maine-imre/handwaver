@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-version https://git-lfs.github.com/spec/v1
-oid sha256:d20fb82a5300f1390f4d29e047fdbdb1c87fa5a55237ce071ece986296eb5a8b
-size 5603
-=======
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
 --- !u!1001 &100100000
@@ -205,4 +200,3 @@ MonoBehaviour:
   figName: 
   figIndex: 0
   stretchEnabled: 0
->>>>>>> develop

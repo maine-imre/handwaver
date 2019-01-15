@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-version https://git-lfs.github.com/spec/v1
-oid sha256:f618eafaad2e2ec0452dd2e16c495871c73b777a3d1f291e01f661775d826e6e
-size 9927
-=======
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
 --- !u!1001 &100100000
@@ -336,4 +331,3 @@ MonoBehaviour:
     _pitchCenter: 1
   _distancePerTick: 0.14
   tickCooldown: 6
->>>>>>> develop

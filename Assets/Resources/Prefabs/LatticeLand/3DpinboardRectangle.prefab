@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-version https://git-lfs.github.com/spec/v1
-oid sha256:eb38772d94ddcbf94bc3edd28e44851d7b621538b21d3bdcf0dc633518c3376e
-size 1588
-=======
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
 --- !u!1001 &100100000
@@ -61,4 +56,3 @@ MonoBehaviour:
   thisBasisType: 0
   translation: {x: 0, y: 1, z: 0}
   showobject: {fileID: 0}
->>>>>>> develop
