@@ -6,7 +6,7 @@ using UnityEngine.XR
 
 namespace IMRE.Gestures
 {
-public class PointAtGesture : OneHandedGesture {
+public abstract class PointAtGesture : OneHandedGesture {
 
     internal void visualFeedbackActivated(){
     }
