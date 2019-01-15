@@ -5,7 +5,8 @@ using UnityEngine;
 using UnityEngine.XR;
 using System.Linq;
 
-namespace IMRE.Gestures {
+namespace IMRE.Gestures
+{
     public abstract class OneHandedGesture : Leap.Unity.Gestures.OneHandedGesture
     {
         //Everything from LeapMotion's One Handed Gesture Passes Through.
@@ -35,15 +36,17 @@ namespace IMRE.Gestures {
         //Leap Motion Hands Module Connection
 
         internal Leap.Unity.HandModel handModel
-        { 
+        {
+          get{
     switch(whichHand){
       case Leap.Unity.Chirality.Left:
       return GameObject.FindObjectsOfType<Leap.Unity.HandModel>().Where(h => h.whichHand = Chirality.Left).First();
       default: //right
       return GameObject.FindObjectsOfType<Leap.Unity.HandModel>().Where(h => h.whichHand = Chirality.Right).First();
-    } 
     }
   }
+  }
+
 
   //Feedback System - these functions are implemented at the Gesture Definition Level
 
@@ -122,5 +125,5 @@ namespace IMRE.Gestures {
 
     public abstract bool WhileGestureActive(Hand hand,InputDevice osvrController);
 
-}
+  }
 }
