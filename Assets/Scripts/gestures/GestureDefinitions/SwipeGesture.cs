@@ -6,7 +6,7 @@ using UnityEngine.XR
 
 namespace IMRE.Gestures
 {
-public class SwipeGesture : OneHandedGesture {
+public abstract class SwipeGesture : OneHandedGesture {
 
     internal void visualFeedbackActivated(){
     }
