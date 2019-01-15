@@ -24,19 +24,19 @@ public abstract class DoublePinchNoGraspGesture : OneHandedGesture {
     internal void audioFeedbackDeactivated(DeactivationReason reason){
     }
 
-    public  bool ActivationConditionsHand(Hand hand);
+    public  bool ActivationConditionsHand(Hand leftHand, Hand rightHand);
     {
       return false;
     }
-    public  bool ActivationConditionsOSVR(InputDevice osvrController);
+    public  bool ActivationConditionsOSVR(InputDevice leftOSVRController, InputDevice rightOSVRController);
     {
       return false;
     }
-    public  bool DeactivationConditionsHand(Hand hand);
+    public  bool DeactivationConditionsHand(Hand leftHand, Hand rightHand);
     {
       return false;
     }
-    public  bool DeactivationConditionsOSVR(InputDevice osvrController);
+    public  bool DeactivationConditionsOSVR(InputDevice leftOSVRController, InputDevice rightOSVRController);
     {
       return false;
     }
