@@ -179,7 +179,7 @@ namespace IMRE.HandWaver
                 switch (figType)
                 {
                     case GeoObjType.point:
-                        GetComponentInChild<MeshRenderer>().materials[0].color = value;
+                        GetComponentInChildren<MeshRenderer>().materials[0].color = value;
                         break;
                     case GeoObjType.line:
                         GetComponent<LineRenderer>().materials[0].color = value;
