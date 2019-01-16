@@ -29,7 +29,7 @@ namespace IMRE.HandWaver
         public bool loadBackground = true;
         public string backgroundName = "darkPrototype";
 		public static bool autoLoadPlaintains = false;
-		public Transform Plaintains;
+		public Transform toolsObject;
 
 		/// <summary>
 		/// Set this in the editor to load a set of scenes on start.
@@ -201,7 +201,7 @@ namespace IMRE.HandWaver
 		IEnumerator enablePlaintains()
 		{
 			yield return new WaitForSeconds(2f);
-			Plaintains.gameObject.SetActive(true);
+			toolsObject.gameObject.SetActive(true);
 		}
 	}
 }
