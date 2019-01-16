@@ -27,5 +27,10 @@ namespace IMRE.HandWaver
 		{
 			return this.Position3;
 		}
+
+		private void Start()
+		{
+			base.initializefigure();
+		}
 	}
 }

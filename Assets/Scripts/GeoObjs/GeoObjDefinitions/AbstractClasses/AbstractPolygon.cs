@@ -221,6 +221,7 @@ namespace IMRE.HandWaver
 		public override void initializefigure()
 		{
 			this.figType = GeoObjType.polygon;
+			base.initializefigure();
 
 			MeshFilter mf = GetComponent<MeshFilter>();
 			Mesh mesh = mf.mesh;

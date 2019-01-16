@@ -41,7 +41,8 @@ namespace IMRE.HandWaver
 
 		public override void initializefigure()
         {
-            rend = gameObject.GetComponent<Renderer>();
+			base.initializefigure();
+            rend = gameObject.GetComponentInChildren<Renderer>();
             mat = rend.material;
             mat.color = colorGenerator.randomColorSolid(mat);
 
@@ -155,7 +156,7 @@ namespace IMRE.HandWaver
                         GraphNode<string> otherGraphNode = HW_GeoSolver.ins.geomanager.findGraphNode(toObj.figName);
                         if (newNeighborList.Contains(otherGraphNode) == false)
                         {
-                            HW_GeoSolver.ins.addDependence(GameObject.Find(node.Value).transform, toObj.transform);
+                            HW_GeoSolver.ins.AddDependence(GameObject.Find(node.Value).GetComponent<MasterGeoObj>(), toObj);
                             HW_GeoSolver.ins.replaceDepentVar(GameObject.Find(node.Value).transform, this.transform, toObj.transform);
 
                         }

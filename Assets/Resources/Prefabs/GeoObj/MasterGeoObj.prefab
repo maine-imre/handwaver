@@ -68,7 +68,7 @@ MonoBehaviour:
   _ignoreContact: 0
   _ignoreGrasping: 0
   _contactForceMode: 0
-  _allowMultiGrasp: 0
+  _allowMultiGrasp: 1
   _moveObjectWhenGrasped: 1
   graspedMovementType: 0
   _overrideInteractionLayer: 0

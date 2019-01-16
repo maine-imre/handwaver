@@ -230,27 +230,35 @@ namespace IMRE.HandWaver.Solver
             geomanager.SetTransformRef(geomanager.findGraphNode(newmyNAME), geoComp.transform);
         }
 
-        /// <summary>
-        /// Adds a dependence in the lifemanager and updatemanager and reactionmanager system
-        /// </summary>
-        /// <param name="fromGeoComp">from the new object</param>
-        /// <param name="toGeoComp">to the object that the new object depends on</param>
-        public void addDependence(Transform fromGeoComp, Transform toGeoComp)
-        {
-            //Debug.Log("adding directed edge from " + fromGeoComp.transform.GetComponent<MasterGeoObj>().figName + " to " + toGeoComp.transform.GetComponent<MasterGeoObj>().figName);
-            geomanager.AddDirectedEdge(fromGeoComp.transform.GetComponent<MasterGeoObj>().figName, toGeoComp.transform.GetComponent<MasterGeoObj>().figName, 1);
-        }
+        ///// <summary>
+        ///// Adds a dependence in the lifemanager and updatemanager and reactionmanager system
+        ///// </summary>
+        ///// <param name="fromGeoComp">from the new object</param>
+        ///// <param name="toGeoComp">to the object that the new object depends on</param>
+        //public void AddDependence(Transform fromGeoComp, Transform toGeoComp)
+        //{
+        //    //Debug.Log("adding directed edge from " + fromGeoComp.transform.GetComponent<MasterGeoObj>().figName + " to " + toGeoComp.transform.GetComponent<MasterGeoObj>().figName);
+        //    geomanager.AddDirectedEdge(fromGeoComp.transform.GetComponent<MasterGeoObj>().figName, toGeoComp.transform.GetComponent<MasterGeoObj>().figName, 1);
+        //}
 
-		void AddDependenceMGO(MasterGeoObj fromMGO, MasterGeoObj toMGO)
+		internal void AddDependence(MasterGeoObj fromMGO, MasterGeoObj toMGO)
 		{
-			//Debug.Log("adding directed edge from " + fromGeoComp.transform.GetComponent<MasterGeoObj>().figName + " to " + toGeoComp.transform.GetComponent<MasterGeoObj>().figName);
+			//Debug.Log("adding directed edge from " + fromMGO.GetComponent<MasterGeoObj>().figName + " to " + toMGO.GetComponent<MasterGeoObj>().figName);
+			if(fromMGO.figName == null)
+			{
+				fromMGO.initializefigure();
+			}
+			if (toMGO.figName == null)
+			{
+				toMGO.initializefigure();
+			}
 			geomanager.AddDirectedEdge(fromMGO.figName, toMGO.figName, 1);
 		}
 
-		public void addDependenceTS(Transform fromGeoComp, string toGeoComp)
-        {
-            geomanager.AddDirectedEdge(fromGeoComp.transform.GetComponent<MasterGeoObj>().figName, toGeoComp, 1);
-        }
+		//public void AddDependence(Transform fromGeoComp, string toGeoComp)
+  //      {
+  //          geomanager.AddDirectedEdge(fromGeoComp.transform.GetComponent<MasterGeoObj>().figName, toGeoComp, 1);
+  //      }
 
 		/// <summary>
 		/// Removes a dependence in the lifemanager and updatemanager and reactionmanager system. Does not delete the object

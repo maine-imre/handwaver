@@ -53,13 +53,14 @@ namespace IMRE.HandWaver
 		public override void initializefigure()
         {
             this.figType = GeoObjType.line;
-            this.Position3 = (vertex0 + vertex1) / 2f;
+			base.initializefigure();
+
+			this.Position3 = (vertex0 + vertex1) / 2f;
 
             vertices[0] = vertex0;
             vertices[1] = vertex1;
 
             LineRenderer lineRenderer = this.GetComponent<LineRenderer>();
-            lineRenderer.material = new Material(Shader.Find("Particles/Additive"));
             lineRenderer.startColor = startColor;
             lineRenderer.endColor = endColor;
             lineRenderer.numCapVertices = 2;

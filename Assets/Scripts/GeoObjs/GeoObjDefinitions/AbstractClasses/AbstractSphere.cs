@@ -39,12 +39,13 @@ namespace IMRE.HandWaver
 		}
 
 		public override void initializefigure()
-        {
-            thisCollider = this.GetComponent<SphereCollider>();
+		{
+			thisCollider = this.GetComponent<SphereCollider>();
 
             this.figType = GeoObjType.sphere;
+			base.initializefigure();
 
-            Renderer rend = gameObject.GetComponent<Renderer>();
+			Renderer rend = gameObject.GetComponent<Renderer>();
 			Material mat = rend.material;
 			mat.color = colorGenerator.randomColorTransparent(mat);
 

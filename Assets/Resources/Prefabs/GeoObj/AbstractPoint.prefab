@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 2891729145716785805}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.21618, y: 0.21618, z: 0.21618}
   m_Children: []
   m_Father: {fileID: 7526191592314722285}
   m_RootOrder: 0
@@ -90,6 +90,27 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &770584282538229872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6728925179912878263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_GeneratorAsset: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: b8a2910e6ce353f468cc86659f5468b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allowDelete: 1
+  figType: 0
+  intersectionFigure: 0
+  figName: 
+  figIndex: 0
+  stretchEnabled: 1
+  initialScale: {x: 0, y: 0, z: 0}
+  changedNeighborNum: 0
 --- !u!114 &1005504541676400360
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112,7 +133,7 @@ MonoBehaviour:
   _maxMotionlessRange: 0.120000005
   _maxAttachmentAngle: 60
   _alwaysAttachDistance: 0
-  lockToAnchor: 0
+  lockToAnchor: 1
   lockWhenAttached: 1
   matchAnchorMotionWhileAttaching: 1
   anchorLerpCoeffPerSec: 20
@@ -131,27 +152,6 @@ MonoBehaviour:
     m_RotationOrder: 4
   _eventTable:
     _entries: []
---- !u!114 &770584282538229872
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6728925179912878263}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_GeneratorAsset: {fileID: 0}
-  m_Script: {fileID: 11500000, guid: b8a2910e6ce353f468cc86659f5468b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  allowDelete: 1
-  figType: 0
-  intersectionFigure: 0
-  figName: 
-  figIndex: 0
-  stretchEnabled: 1
-  initialScale: {x: 0, y: 0, z: 0}
-  changedNeighborNum: 0
 --- !u!1001 &3120530959985627035
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -218,6 +218,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4844814641143879798, guid: ccfc2f9ea9bb78be4ad2dc62bfc60601,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.12404279
+      objectReference: {fileID: 0}
+    - target: {fileID: 4844814641143879798, guid: ccfc2f9ea9bb78be4ad2dc62bfc60601,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.12404279
+      objectReference: {fileID: 0}
+    - target: {fileID: 4844814641143879798, guid: ccfc2f9ea9bb78be4ad2dc62bfc60601,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.12404279
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ccfc2f9ea9bb78be4ad2dc62bfc60601, type: 3}

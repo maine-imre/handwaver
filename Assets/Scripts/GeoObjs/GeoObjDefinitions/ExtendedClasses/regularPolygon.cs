@@ -77,12 +77,12 @@ namespace IMRE.HandWaver
 
 			foreach (AbstractLineSegment line in lineList)
 			{
-				HW_GeoSolver.ins.addDependence(this.transform, line.transform);
+				HW_GeoSolver.ins.AddDependence(this, line);
 			}
 
 			foreach (AbstractPoint point in pointList)
 			{
-				HW_GeoSolver.ins.addDependence(this.transform, point.transform);
+				HW_GeoSolver.ins.AddDependence(this, point);
 			}
 
 			this.initializefigure();

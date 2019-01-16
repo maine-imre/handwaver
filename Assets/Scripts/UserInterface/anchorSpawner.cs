@@ -26,8 +26,7 @@ namespace IMRE.HandWaver
 		public float anchorScale;
 
 		public GameObject item;
-		public enum ConstructableObjType{none,interactablePoint};
-		public ConstructableObjType ConstructableObject = ConstructableObjType.none; 
+
 
 		public GameObject prevItem;
 
@@ -65,26 +64,8 @@ namespace IMRE.HandWaver
 			{
 				prevItem.transform.localScale /= anchorScale;
 			}
-			Transform newObj = null;
+			Transform newObj = Instantiate(item, transform.position, Quaternion.identity).transform;
 
-			switch (ConstructableObject){
-				//this is a template, please complete the details.
-				case ConstructableObjType.interactablePoint:
-					newObj = InteractablePoint.Constructor().transform;
-					break;
-				default:
-
-				if (item != null)
-				{
-					newObj = Instantiate(item, spawnPoint.transform.position, spawnPoint.rotation).transform;
-				}
-				else
-				{
-					Debug.Log("item is not set. please set item or fix pool. Object: "+gameObject.name);
-				}
-				break;
-
-			}
 			if(newObj == null)
 			{
 				Debug.LogError("No object spawning.");

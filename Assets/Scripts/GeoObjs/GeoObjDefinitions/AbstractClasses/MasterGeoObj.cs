@@ -218,7 +218,7 @@ namespace IMRE.HandWaver
 		/// Used to save/load and keep geoObj definition type
 		/// </summary>
 		///
-		public enum SelectionStatus { selected, active, canidate, none }
+		public enum SelectionStatus { none, selected, active, canidate }
 		internal SelectionStatus thisSelectStatus
 		{
 			get
@@ -386,27 +386,13 @@ namespace IMRE.HandWaver
 			}
 		}
 
-		public void Start()
+		public virtual void initializefigure()
 		{
-			//if (this.GetComponent<Renderer>() != null)
-			//{
-			//	_standardMaterial = GetComponent<Renderer>().material;
-			//}
-			thisSelectStatus = MasterGeoObj.SelectionStatus.none;
 
-			if (this.GetComponent("Halo")!= null)
-			{
-				halo = this.GetComponent("Halo");
-			}
+			thisIBehave.OnGraspBegin += StartInteraction;
+			thisIBehave.OnPerControllerGraspBegin += Stretch;
+			thisIBehave.OnGraspEnd += EndInteraction;
 
-
-			//if (this.GetComponent<InteractionBehaviour>() != null)
-			//{
-				//this.thisIBehave = this.GetComponent<InteractionBehaviour>();
-				thisIBehave.OnGraspBegin += StartInteraction;
-				thisIBehave.OnPerControllerGraspBegin += Stretch;
-				thisIBehave.OnGraspEnd += EndInteraction;
-			//}
 			cUpdateRMan = UpdateRMan();
 			waitForStretch = WaitForStretch();
 			HW_GeoSolver.ins.addComponent(this);
@@ -508,8 +494,6 @@ namespace IMRE.HandWaver
         internal abstract void SnapToFigure(MasterGeoObj toObj);
         internal abstract void GlueToFigure(MasterGeoObj toObj);
 
-		[ContextMenu("Initialize Figure")]
-		public abstract void initializefigure();
         public bool reactMotion(NodeList<string> inputNodeList)
         {
             if (intersectionFigure)

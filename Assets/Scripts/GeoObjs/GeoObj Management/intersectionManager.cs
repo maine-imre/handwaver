@@ -452,8 +452,8 @@ namespace IMRE.HandWaver.Solver
 				{
 					hashIntersectionProducts.Add(obj.name);
 					pastIntersections.Add(obj, inputList);
-					this.GetComponent<HW_GeoSolver>().addDependence(obj.transform, obj1.transform);
-					this.GetComponent<HW_GeoSolver>().addDependence(obj.transform, obj2.transform);
+					this.GetComponent<HW_GeoSolver>().AddDependence(obj, obj1);
+					this.GetComponent<HW_GeoSolver>().AddDependence(obj, obj2);
 				}
 
 			}

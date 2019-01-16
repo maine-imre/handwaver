@@ -200,8 +200,8 @@ namespace IMRE.HandWaver
 				thisSphere.edgePosition = Edge.transform.position;
 				thisSphere.transform.position = Center.transform.position;
                 
-                HW_GeoSolver.ins.addDependence(thisSphere.transform, Center.transform);
-                HW_GeoSolver.ins.addDependence(thisSphere.transform, Edge.transform);
+                HW_GeoSolver.ins.AddDependence(thisSphere, Center);
+                HW_GeoSolver.ins.AddDependence(thisSphere, Edge);
 
                 thisSphere.initializefigure();
 

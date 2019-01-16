@@ -42,10 +42,11 @@ namespace IMRE.HandWaver
 		}
 
 		public override void initializefigure()
-        {
-            this.figType = GeoObjType.circle;
+		{
+			this.figType = GeoObjType.circle;
+			base.initializefigure();
 
-            this.Position3 = centerPos;
+			this.Position3 = centerPos;
 
             Vector3 norm1 = Vector3.up;
             Vector3 norm2 = Vector3.right;

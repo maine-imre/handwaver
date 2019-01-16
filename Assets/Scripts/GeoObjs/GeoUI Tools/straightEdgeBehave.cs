@@ -48,7 +48,7 @@ namespace IMRE.HandWaver
 
 		new void Start()
 		{
-			base.Start();
+			base.initializefigure();
 			thisAbehave = GetComponent<AnchorableBehaviour>();
 			thisAbehave.OnDetachedFromAnchor += detach;
 			thisAbehave.OnAttachedToAnchor += attach;
