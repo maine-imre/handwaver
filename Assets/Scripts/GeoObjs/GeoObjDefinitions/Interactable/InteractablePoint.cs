@@ -22,25 +22,9 @@ namespace IMRE.HandWaver
     {
         #region Constructors
             public static InteractablePoint Constructor()
-            {
-                GameObject go = new GameObject();
-				go.AddComponent<MeshFilter>();
-				go.AddComponent<MeshRenderer>();
-				//check if sphere mesh is added.
-				go.AddComponent<SphereCollider>();
-				go.GetComponent<SphereCollider>().radius = 0.5f;
-				go.AddComponent<Rigidbody>();
-				go.GetComponent<Rigidbody>().useGravity = false;
-				go.GetComponent<Rigidbody>().isKinematic = false;
-				go.AddComponent<InteractionBehaviour>();
-                go.AddComponent<AnchorableBehaviour>();
-                go.GetComponent<AnchorableBehaviour>().maxAnchorRange = 0.3f;
-                go.GetComponent<AnchorableBehaviour>().useTrajectory = true;
-                go.GetComponent<AnchorableBehaviour>().lockWhenAttached = true;
-                go.GetComponent<AnchorableBehaviour>().matchAnchorMotionWhileAttaching = true;
-                go.GetComponent<AnchorableBehaviour>().tryAnchorNearestOnGraspEnd = true;
-				return go.AddComponent<InteractablePoint>();
-            }
+						{
+							return GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/GeoObj/InteractablePoint")).GetComponent<InteractablePoint>();
+						}
         #endregion
 
         public bool controllCollide = false;
@@ -192,7 +176,7 @@ namespace IMRE.HandWaver
 
                     Debug.Log("NEED TO MAKE A POLYGON");
                 }
-                
+
             }
         }
 	}

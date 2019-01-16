@@ -22,19 +22,9 @@ namespace IMRE.HandWaver
     {
 		#region Constructors
             public static InteractableLineSegment Constructor()
-            {
-                GameObject go = new GameObject();
-				go.AddComponent<LineRenderer>();
-				//check if sphere mesh is added.
-				go.AddComponent<CapsuleCollider>();
-				go.AddComponent<Rigidbody>();
-				go.GetComponent<Rigidbody>().useGravity = false;
-				go.GetComponent<Rigidbody>().isKinematic = false;
-				go.AddComponent<InteractionBehaviour>();
-                go.GetComponent<InteractionBehaviour>().ignoreContact = true;
-                go.GetComponent<InteractionBehaviour>().ignoreGrasping = true;
-				return go.AddComponent<InteractableLineSegment>();
-            }
+						{
+							return GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/GeoObj/InteractableLineSegment")).GetComponent<InteractableLineSegment>();
+						}
         #endregion
 
         public AbstractPoint point1;
