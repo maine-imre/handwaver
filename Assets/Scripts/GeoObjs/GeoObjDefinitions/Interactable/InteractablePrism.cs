@@ -24,16 +24,9 @@ namespace IMRE.HandWaver
 	{
 		#region Constructors
             public static InteractablePrism Constructor()
-            {
-                GameObject go = new GameObject();
-				go.AddComponent<SphereCollider>();
-				go.GetComponent<SphereCollider>().radius = 0.02f;
-				go.AddComponent<Rigidbody>();
-				go.GetComponent<Rigidbody>().useGravity = false;
-				go.GetComponent<Rigidbody>().isKinematic = false;
-				go.AddComponent<InteractionBehaviour>();
-				return go.AddComponent<InteractablePrism>();
-            }
+						{
+							return GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/GeoObj/InteractablePrism")).GetComponent<InteractablePrism>();
+						}
         #endregion
 
 		private List<AbstractPoint> _vertexPoints = new List<AbstractPoint>();
@@ -207,7 +200,7 @@ namespace IMRE.HandWaver
 				_vertexPoints.ForEach(p => p.Position3 += this.Position3 - tempCenter);
 			}
 			else if(checkForPointsInNodeList(inputNodeList))
-			{ 
+			{
 				this.Position3 = center;
 			}
 			return true;
