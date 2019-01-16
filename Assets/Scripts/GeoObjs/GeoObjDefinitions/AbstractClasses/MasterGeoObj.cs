@@ -78,7 +78,7 @@ namespace IMRE.HandWaver
 		}
 
 		/// <summary>
-		/// 
+		///
 		/// </summary>
 		/// <param name="localPos"></param>
 		/// <returns></returns>
@@ -99,14 +99,14 @@ namespace IMRE.HandWaver
 		}
 
 		/// <summary>
-		/// 
+		///
 		/// </summary>
 		/// <param name="abstractPosition"></param>
 		/// <returns></returns>
 		internal abstract Vector3 ClosestSystemPosition(Vector3 abstractPosition);
 
 		/// <summary>
-		/// 
+		///
 		/// </summary>
 		/// <param name="localPos"></param>
 		/// <param name="localDir"></param>
@@ -118,7 +118,7 @@ namespace IMRE.HandWaver
 		}
 
 		/// <summary>
-		/// 
+		///
 		/// </summary>
 		/// <param name="localPos"></param>
 		/// <returns></returns>
@@ -129,7 +129,7 @@ namespace IMRE.HandWaver
 		}
 
 		/// <summary>
-		/// 
+		///
 		/// </summary>
 		/// <param name="sysPos"></param>
 		/// <returns></returns>
@@ -144,22 +144,22 @@ namespace IMRE.HandWaver
 			{
 				//if an object doesn't have a closest point say that it is infinitely far away.
 				return Mathf.Infinity;
-			}	
+			}
 		}
         #endregion
 
 		/// <summary>
-		/// 
+		///
 		/// </summary>
         public bool allowDelete = true;
 
 		/// <summary>
-		/// 
+		///
 		/// </summary>
 		public GeoObjType figType;
 
 		/// <summary>
-		/// 
+		///
 		/// </summary>
         internal int intersectionMultipleIDX;
 
@@ -179,7 +179,7 @@ namespace IMRE.HandWaver
                 switch (figType)
                 {
                     case GeoObjType.point:
-                        GetComponent<MeshRenderer>().materials[0].color = value;
+                        GetComponentInChild<MeshRenderer>().materials[0].color = value;
                         break;
                     case GeoObjType.line:
                         GetComponent<LineRenderer>().materials[0].color = value;
@@ -217,7 +217,7 @@ namespace IMRE.HandWaver
 		/// <summary>
 		/// Used to save/load and keep geoObj definition type
 		/// </summary>
-		/// 
+		///
 		public enum SelectionStatus { selected, active, canidate, none }
 		internal SelectionStatus thisSelectStatus
 		{
@@ -493,7 +493,7 @@ namespace IMRE.HandWaver
                 //        {
                 //            snapToFigure(other.GetComponent<MasterGeoOBj>());
                 //        }
-                //        break;                    
+                //        break;
 				//		case ObjManHelper.IntersectionMode.intersect:
                 //         geoManager.GetComponent<intersectionManager>().checkIntersection(this, other.GetComponent<MasterGeoOBj>());
                 //         break;
