@@ -8,7 +8,7 @@ public class PrefabManager : MonoBehaviour
 	public static PrefabManager ins;
 
 	public List<GameObject> prefabList;
-	private static Dictionary<string, GameObject> prefabDictionary;
+	private static Dictionary<string, GameObject> prefabDictionary = new Dictionary<string, GameObject>();
 
 	private void Start()
 	{
