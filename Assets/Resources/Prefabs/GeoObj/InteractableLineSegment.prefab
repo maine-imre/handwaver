@@ -18,7 +18,7 @@ MonoBehaviour:
   intersectionFigure: 0
   figName: 
   figIndex: 0
-  stretchEnabled: 1
+  stretchEnabled: 0
   vertex0: {x: 0, y: 0, z: 0}
   vertex1: {x: 0, y: 0, z: 0}
   startColor: {r: 0, g: 0, b: 1, a: 1}
@@ -38,21 +38,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: InteractableLineSegment
       objectReference: {fileID: 0}
-    - target: {fileID: 2233211661407833065, guid: be564418f6986da12b1bee65330672fd,
-        type: 3}
-      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].time
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2233211661407833065, guid: be564418f6986da12b1bee65330672fd,
-        type: 3}
-      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
-      value: 0.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 2233211661407833065, guid: be564418f6986da12b1bee65330672fd,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 503bf40d9aef9f34183e43d499a4fc59, type: 2}
     - target: {fileID: 8001111638809955100, guid: be564418f6986da12b1bee65330672fd,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -108,6 +93,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2233211661407833065, guid: be564418f6986da12b1bee65330672fd,
+        type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].time
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2233211661407833065, guid: be564418f6986da12b1bee65330672fd,
+        type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 2233211661407833065, guid: be564418f6986da12b1bee65330672fd,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 503bf40d9aef9f34183e43d499a4fc59, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be564418f6986da12b1bee65330672fd, type: 3}
 --- !u!1 &6222286144429608915 stripped

@@ -71,10 +71,14 @@ namespace IMRE.HandWaver
             collider.height = .9f * Vector3.Magnitude(LocalPosition(vertex0) - LocalPosition(vertex1));
             collider.radius = Mathf.Min(.025f, collider.height);
 			updateFigure();
-        }
+			if (myAbility == updateCapability.interactable)
+			{
+				StartCoroutine(waitForStretch);
+			}
+		}
 
 
-        public override void updateFigure()
+		public override void updateFigure()
         {
             Vector3[] vertices = new Vector3[2];
             vertices[0] = LocalPosition(vertex0);

@@ -96,13 +96,15 @@ namespace IMRE.HandWaver
 
 		public override void Stretch(InteractionController iControll)
 		{
-
 			if (stretchEnabled && thisIBehave.graspingControllers.Count > 1)
 			{
+				iControll.ReleaseGrasp();
 				AbstractPoint newPoint1 = GeoObjConstruction.iPoint(point1.Position3);
 				AbstractPoint newPoint2 = GeoObjConstruction.iPoint(point2.Position3);
 
-				GeoObjConstruction.iPolygon(new List<AbstractLineSegment>() { this, GeoObjConstruction.iLineSegment(point1, newPoint1), GeoObjConstruction.iLineSegment(newPoint1, newPoint2), GeoObjConstruction.iLineSegment(newPoint2, point2) },new List<AbstractPoint>() { point1, newPoint1, newPoint2, point2 });
+				GeoObjConstruction.iPolygon(new List<AbstractLineSegment>() { this, GeoObjConstruction.iLineSegment(point1, newPoint1),
+					GeoObjConstruction.iLineSegment(newPoint1, newPoint2), GeoObjConstruction.iLineSegment(newPoint2, point2) },
+					new List<AbstractPoint>() { point1, newPoint1, newPoint2, point2 });
 
 				StartCoroutine(waitForStretch);
 

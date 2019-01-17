@@ -202,7 +202,7 @@ namespace IMRE.HandWaver {
 					plane.GetComponent<InteractionBehaviour>().moveObjectWhenGrasped = false;
 				}
 			}
-			plane.updateFigure();
+			plane.AddToRManager();
 			return plane;
 			#endregion
 		}
