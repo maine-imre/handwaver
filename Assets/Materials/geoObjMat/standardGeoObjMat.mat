@@ -5,8 +5,9 @@ Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: geoObjMaterial
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: standardGeoObjMat
   m_Shader: {fileID: 4800000, guid: 85f33d1e62f951440945ddbdb8232eb9, type: 3}
   m_ShaderKeywords: _ALPHAPREMULTIPLY_ON _EMISSION
   m_LightmapFlags: 1
@@ -74,6 +75,6 @@ Material:
     - _UVSec: 0
     - _ZWrite: 0
     m_Colors:
-    - _Color: {r: 0, g: 0.85294116, b: 0.025086528, a: 0.8862745}
+    - _Color: {r: 0, g: 0.08727317, b: 0.85490197, a: 0.8862745}
     - _EmissionColor: {r: 0.06666667, g: 0.06666667, b: 0.06666667, a: 1}
     - _SpecColor: {r: 0.5, g: 0.5, b: 0.5, a: 0}

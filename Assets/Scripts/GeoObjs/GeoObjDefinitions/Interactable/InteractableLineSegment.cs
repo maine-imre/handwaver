@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using IMRE.HandWaver.Solver;
+using System.Linq;
 
 namespace IMRE.HandWaver
 {
@@ -96,38 +97,12 @@ namespace IMRE.HandWaver
 		public override void Stretch(InteractionController iControll)
 		{
 
-            if (stretchEnabled && thisIBehave.graspingControllers.Count > 1)
-            {
-                iControll.ReleaseGrasp();
+			if (stretchEnabled && thisIBehave.graspingControllers.Count > 1)
+			{
+				AbstractPoint newPoint1 = GeoObjConstruction.iPoint(point1.Position3);
+				AbstractPoint newPoint2 = GeoObjConstruction.iPoint(point2.Position3);
 
-                AbstractPoint newPoint1 = GeoObjConstruction.iPoint(point1.Position3);
-                AbstractPoint newPoint2 = GeoObjConstruction.iPoint(point2.Position3);
-
-                AbstractLineSegment newLine1 = GeoObjConstruction.iLineSegment(point1, newPoint1);
-                AbstractLineSegment newLine2 = GeoObjConstruction.iLineSegment(newPoint1, newPoint2);
-                AbstractLineSegment newLine3 = GeoObjConstruction.iLineSegment(newPoint2, point2);
-
-                List<AbstractPoint> pointList = new List<AbstractPoint>();
-                pointList.Add(point1);
-                pointList.Add(newPoint1);
-                pointList.Add(newPoint2);
-                pointList.Add(point2);
-
-                List<AbstractLineSegment> lineList = new List<AbstractLineSegment>();
-                lineList.Add(this);
-                lineList.Add(newLine1);
-                lineList.Add(newLine2);
-                lineList.Add(newLine3);
-				lineList.ForEach(l => l.updateFigure());
-				Debug.Log(1);
-                GeoObjConstruction.iPolygon(lineList, pointList);
-				Debug.Log(11);
-
-				if (HW_GeoSolver.ins.thisInteractionMode == HW_GeoSolver.InteractionMode.rigid)
-				{
-					lineList.ForEach(l=> l.LeapInteraction = false);
-					pointList.ForEach(p => p.LeapInteraction = false);
-				}
+				GeoObjConstruction.iPolygon(new List<AbstractLineSegment>() { this, GeoObjConstruction.iLineSegment(point1, newPoint1), GeoObjConstruction.iLineSegment(newPoint1, newPoint2), GeoObjConstruction.iLineSegment(newPoint2, point2) },new List<AbstractPoint>() { point1, newPoint1, newPoint2, point2 });
 
 				StartCoroutine(waitForStretch);
 
