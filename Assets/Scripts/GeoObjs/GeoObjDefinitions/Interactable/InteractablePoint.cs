@@ -42,6 +42,7 @@ namespace IMRE.HandWaver
 		public override void InitializeFigure()
         {
 			base.InitializeFigure();
+			this.figType = GeoObjType.point;
 			rend = gameObject.GetComponentInChildren<Renderer>();
             mat = rend.material;
             mat.color = colorGenerator.randomColorSolid(mat);

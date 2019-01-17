@@ -19,7 +19,7 @@ namespace IMRE.HandWaver
 	/// <summary>
 	/// enumerator to help select child type
 	/// </summary>
-	public enum GeoObjType { point, line, polygon, prism, pyramid, circle, sphere, revolvedsurface, torus, flatface, straightedge, none };
+	public enum GeoObjType {none, point, line, polygon, prism, pyramid, circle, sphere, revolvedsurface, torus, flatface, straightedge};
 
 /// <summary>
 /// enumerator to help select child type
@@ -255,13 +255,41 @@ namespace IMRE.HandWaver
 						}
 						break;
 				}
-				if (GetComponent<MeshRenderer>() != null)
+				switch (figType)
 				{
-					GetComponent<MeshRenderer>().material = mat;
-				}
-				if (GetComponent<LineRenderer>() != null)
-				{
-					GetComponent<LineRenderer>().material = mat;
+					case GeoObjType.point:
+						GetComponentInChildren<MeshRenderer>().materials[0] = mat;
+						break;
+					case GeoObjType.line:
+						GetComponent<LineRenderer>().materials[0] = mat;
+						break;
+					case GeoObjType.polygon:
+						GetComponent<MeshRenderer>().materials[0] = mat;
+						break;
+					case GeoObjType.prism:
+						break;
+					case GeoObjType.pyramid:
+						break;
+					case GeoObjType.circle:
+						GetComponent<LineRenderer>().materials[0] = mat;
+						break;
+					case GeoObjType.sphere:
+						GetComponent<MeshRenderer>().materials[0] = mat;
+						break;
+					case GeoObjType.revolvedsurface:
+						GetComponent<MeshRenderer>().materials[0] = mat;
+						break;
+					case GeoObjType.torus:
+						GetComponent<MeshRenderer>().materials[0] = mat;
+						break;
+					case GeoObjType.flatface:
+						GetComponent<MeshRenderer>().materials[0] = mat;
+						break;
+					case GeoObjType.straightedge:
+						GetComponent<LineRenderer>().materials[0] = mat;
+						break;
+					case GeoObjType.none:
+						break;
 				}
 				_thisSelectStatus = value;
 			}
@@ -388,6 +416,8 @@ namespace IMRE.HandWaver
 
 		public virtual void InitializeFigure()
 		{
+			StandardMaterial = HW_GeoSolver.ins.standardMaterial;
+
 			thisIBehave.OnGraspBegin += StartInteraction;
 			thisIBehave.OnPerControllerGraspBegin += Stretch;
 			thisIBehave.OnGraspEnd += EndInteraction;
