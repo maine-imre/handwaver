@@ -39,10 +39,10 @@ namespace IMRE.HandWaver
 		private bool snapBool = false;
 #pragma warning restore 0414
 
-		public override void initializefigure()
+		public override void InitializeFigure()
         {
-			base.initializefigure();
-            rend = gameObject.GetComponentInChildren<Renderer>();
+			base.InitializeFigure();
+			rend = gameObject.GetComponentInChildren<Renderer>();
             mat = rend.material;
             mat.color = colorGenerator.randomColorSolid(mat);
 

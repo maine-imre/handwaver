@@ -96,11 +96,6 @@ namespace IMRE.HandWaver
             }
         }
 
-        public override void initializefigure()
-        {
-            //not applicable
-        }
-
         internal override bool RMotion(NodeList<string> inputNodeList)
         {
             if (inputNodeList.Contains(apex.FindGraphNode()))

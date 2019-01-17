@@ -184,7 +184,7 @@ namespace IMRE.HandWaver
 			sphere.edgePosition = circle.edgePos;
 			sphere.centerPosition = circle.centerPos;
 
-			sphere.initializefigure();
+			sphere.InitializeFigure();
 			sphere.AddToRManager();
 
 

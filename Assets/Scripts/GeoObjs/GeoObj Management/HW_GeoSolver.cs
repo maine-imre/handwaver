@@ -241,11 +241,11 @@ namespace IMRE.HandWaver.Solver
 			//Debug.Log("adding directed edge from " + fromMGO.GetComponent<MasterGeoObj>().figName + " to " + toMGO.GetComponent<MasterGeoObj>().figName);
 			if(string.IsNullOrEmpty(fromMGO.figName))
 			{
-				fromMGO.initializefigure();
+				fromMGO.InitializeFigure();
 			}
 			if (string.IsNullOrEmpty(toMGO.figName))
 			{
-				toMGO.initializefigure();
+				toMGO.InitializeFigure();
 			}
 			geomanager.AddDirectedEdge(fromMGO.figName, toMGO.figName, 1);
 		}

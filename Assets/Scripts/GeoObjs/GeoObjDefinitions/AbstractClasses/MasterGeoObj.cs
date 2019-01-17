@@ -386,9 +386,8 @@ namespace IMRE.HandWaver
 			}
 		}
 
-		public virtual void initializefigure()
+		public virtual void InitializeFigure()
 		{
-
 			thisIBehave.OnGraspBegin += StartInteraction;
 			thisIBehave.OnPerControllerGraspBegin += Stretch;
 			thisIBehave.OnGraspEnd += EndInteraction;

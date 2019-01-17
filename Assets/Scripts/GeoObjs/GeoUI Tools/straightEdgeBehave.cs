@@ -48,7 +48,6 @@ namespace IMRE.HandWaver
 
 		new void Start()
 		{
-			base.initializefigure();
 			thisAbehave = GetComponent<AnchorableBehaviour>();
 			thisAbehave.OnDetachedFromAnchor += detach;
 			thisAbehave.OnAttachedToAnchor += attach;
@@ -210,11 +209,6 @@ namespace IMRE.HandWaver
 		internal override void GlueToFigure(MasterGeoObj toObj)
 		{
 			throw new NotImplementedException();
-		}
-
-		public override void initializefigure()
-		{
-			//do nothing
 		}
 
 		internal override bool RMotion(NodeList<string> inputNodeList)

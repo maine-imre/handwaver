@@ -50,10 +50,10 @@ namespace IMRE.HandWaver
 			return result;
 		}
 
-		public override void initializefigure()
+		public override void InitializeFigure()
         {
-            this.figType = GeoObjType.line;
-			base.initializefigure();
+			base.InitializeFigure();
+			this.figType = GeoObjType.line;
 
 			this.Position3 = (vertex0 + vertex1) / 2f;
 

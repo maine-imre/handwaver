@@ -85,7 +85,7 @@ namespace IMRE.HandWaver
 				HW_GeoSolver.ins.AddDependence(this, point);
 			}
 
-			this.initializefigure();
+			this.InitializeFigure();
 
             this.AddToRManager();
         }

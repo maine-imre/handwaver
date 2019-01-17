@@ -23,11 +23,6 @@ namespace IMRE.HandWaver
 						}
         #endregion
 
-        public override void initializefigure()
-        {
-			//do nothing.
-		}
-
 		internal override bool RMotion(NodeList<string> inputNodeList)
         {
 			return false;

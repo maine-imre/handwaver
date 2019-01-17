@@ -35,10 +35,10 @@ namespace IMRE.HandWaver
 			throw new NotImplementedException();
 		}
 
-		public override void initializefigure()
+		public override void InitializeFigure()
 		{
+			base.InitializeFigure();
 			this.figType = GeoObjType.revolvedsurface;
-			base.initializefigure();
 
 			this.Position3 = centerPoint;
 

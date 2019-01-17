@@ -24,11 +24,6 @@ namespace IMRE.HandWaver
 		#endregion
 		private Vector3 oldPos;
 
-		public override void initializefigure()
-        {
-			//   do nothing
-		}
-
         internal override bool RMotion(NodeList<string> inputNodeList)
         {
 			return hasMoved();

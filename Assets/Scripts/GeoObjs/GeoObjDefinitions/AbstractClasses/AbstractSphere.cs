@@ -38,12 +38,12 @@ namespace IMRE.HandWaver
 			throw new NotImplementedException();
 		}
 
-		public override void initializefigure()
+		public override void InitializeFigure()
 		{
+			base.InitializeFigure();
 			thisCollider = this.GetComponent<SphereCollider>();
 
             this.figType = GeoObjType.sphere;
-			base.initializefigure();
 
 			Renderer rend = gameObject.GetComponent<Renderer>();
 			Material mat = rend.material;

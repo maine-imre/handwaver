@@ -27,11 +27,6 @@ namespace IMRE.HandWaver
 			}
 		#endregion
 
-		public override void initializefigure()
-        {
-			base.initializefigure();
-		}
-
 		internal override bool RMotion(NodeList<string> inputNodeList)
         {
             if (inputNodeList.checkForMGOmatch(pointListMGO))

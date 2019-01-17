@@ -16,11 +16,6 @@ namespace IMRE.HandWaver
 /// </summary>
 	class StaticLineSegment : AbstractLineSegment, StaticFigure
     {
-        public override void initializefigure()
-        {
-            throw new NotImplementedException();
-        }
-
         internal override bool RMotion(NodeList<string> inputNodeList)
         {
             throw new NotImplementedException();

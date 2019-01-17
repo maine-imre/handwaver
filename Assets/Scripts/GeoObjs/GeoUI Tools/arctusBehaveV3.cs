@@ -203,7 +203,7 @@ namespace IMRE.HandWaver
                 HW_GeoSolver.ins.AddDependence(thisSphere, Center);
                 HW_GeoSolver.ins.AddDependence(thisSphere, Edge);
 
-                thisSphere.initializefigure();
+                thisSphere.InitializeFigure();
 
 				Destroy(edgeHandle.gameObject);
                 Destroy(gameObject);

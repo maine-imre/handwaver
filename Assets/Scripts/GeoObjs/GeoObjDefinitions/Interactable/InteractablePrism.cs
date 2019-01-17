@@ -163,8 +163,9 @@ namespace IMRE.HandWaver
 			}
 		}
 
-		public override void initializefigure()
+		public override void InitializeFigure()
 		{
+			base.InitializeFigure();
 			if (bases.Count == 2)
 			{
 				this.Position3 = center;
