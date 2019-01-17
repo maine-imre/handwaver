@@ -315,7 +315,16 @@ namespace IMRE.HandWaver
 		{
 			get
 			{
-				return Vector3.Cross(pointList[0].Position3 - pointList[1].Position3, pointList[1].Position3 - pointList[2].Position3).normalized;
+				try
+				{
+					return Vector3.Cross(pointList[0].Position3 - pointList[1].Position3, pointList[1].Position3 - pointList[2].Position3).normalized;
+
+				}
+				catch
+				{
+					Debug.LogError("Normal Calculatoin failed on: " + figName);
+					return Vector3.zero;
+				}
 			}
 			set
 			{
