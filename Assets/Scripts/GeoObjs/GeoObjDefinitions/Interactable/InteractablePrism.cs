@@ -263,7 +263,28 @@ namespace IMRE.HandWaver
 
 		public override void updateFigure()
 		{
-			//do nothing, there are no graphical changes.
+			List<MeshFilters> meshFilters = new List<MeshFilters>();
+			foreach(AbstractPolygon poly in sides){
+				meshFilters.add(poly.GetComponent<MeshFilter>());
+			}
+			foreach(AbstractPolygon poly in bases){
+				meshFilters.add(poly.GetComponent<MeshFilter>());
+			}
+
+			CombineInstance[] combine = new CombineInstance[meshFilters.ToArray().Length];
+
+			for(i = 0; i < meshFilters.Count(); i++)
+			{
+				combine[i].mesh = meshFilters[i].sharedMesh;
+				combine[i].transform = meshFilters[i].transform.localToWorldMatrix;
+			}
+
+			transform.GetComponent<MeshCollider>().mesh = new Mesh();
+			transform.GetComponent<MeshCollider>().mesh.CombineMeshes(combine);
+
+			//This lets us use a meshrenderer for debugging.
+			transform.GetComponent<MeshFilter>().mesh = new Mesh();
+			transform.GetComponent<MeshFilter>().mesh.CombineMeshes(combine);
 		}
 
 		internal override void GlueToFigure(MasterGeoObj toObj)
