@@ -22,9 +22,9 @@ namespace IMRE.HandWaver
     {
         #region Constructors
             public static InteractablePoint Constructor()
-						{
-							return GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/GeoObj/InteractablePoint")).GetComponent<InteractablePoint>();
-						}
+			{
+				return GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/GeoObj/InteractablePoint")).GetComponent<InteractablePoint>();
+			}
         #endregion
 
         public bool controllCollide = false;

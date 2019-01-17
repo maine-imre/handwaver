@@ -48,7 +48,7 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.025640488
+        value: 0.01
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -107,7 +107,7 @@ CapsuleCollider:
   m_Enabled: 1
   m_Radius: 1
   m_Height: 1
-  m_Direction: 1
+  m_Direction: 0
   m_Center: {x: 0, y: 0, z: 0.5}
 --- !u!1001 &3185616806676845418
 PrefabInstance:

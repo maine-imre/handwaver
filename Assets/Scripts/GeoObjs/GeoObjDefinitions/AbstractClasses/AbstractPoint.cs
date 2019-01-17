@@ -30,7 +30,7 @@ namespace IMRE.HandWaver
 
 		private void Start()
 		{
-			base.initializefigure();
+			//base.initializefigure();
 		}
 	}
 }

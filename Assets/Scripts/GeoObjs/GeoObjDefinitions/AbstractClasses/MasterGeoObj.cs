@@ -396,6 +396,7 @@ namespace IMRE.HandWaver
 			cUpdateRMan = UpdateRMan();
 			waitForStretch = WaitForStretch();
 			HW_GeoSolver.ins.addComponent(this);
+			transform.SetParent(masterParentObj);
 		}
 
         void LateUpdate()
@@ -457,6 +458,7 @@ namespace IMRE.HandWaver
         }
 
 		private Node<string> myGraphNode;
+		internal static Transform masterParentObj;
 
 		public Node<string> FindGraphNode()
 		{

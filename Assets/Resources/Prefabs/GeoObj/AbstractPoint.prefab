@@ -90,27 +90,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &770584282538229872
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6728925179912878263}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_GeneratorAsset: {fileID: 0}
-  m_Script: {fileID: 11500000, guid: b8a2910e6ce353f468cc86659f5468b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  allowDelete: 1
-  figType: 0
-  intersectionFigure: 0
-  figName: 
-  figIndex: 0
-  stretchEnabled: 1
-  initialScale: {x: 0, y: 0, z: 0}
-  changedNeighborNum: 0
 --- !u!114 &1005504541676400360
 MonoBehaviour:
   m_ObjectHideFlags: 0
