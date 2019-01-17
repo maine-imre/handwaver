@@ -24,7 +24,7 @@ namespace IMRE.HandWaver
         #region Constructors
             public static InteractablePolygon Constructor()
 						{
-							return GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/GeoObj/InteractablePolygon")).GetComponent<InteractablePolygon>();
+							return GameObject.Instantiate(PrefabManager.Spawn("InteractablePolygon")).GetComponent<InteractablePolygon>();
 						}
         #endregion
 

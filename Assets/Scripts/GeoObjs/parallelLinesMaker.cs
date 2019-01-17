@@ -24,7 +24,7 @@ namespace IMRE.HandWaver
         // Use this for initialization
         #region Constructors
 		public static parallelLinesMaker Constructor(){
-			GameObject go = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/GeoObj/ParallelLines"));
+			GameObject go = GameObject.Instantiate(PrefabManager.Spawn("ParallelLines"));
 			return go.GetComponent<parallelLinesMaker>();
 		}
 		#endregion

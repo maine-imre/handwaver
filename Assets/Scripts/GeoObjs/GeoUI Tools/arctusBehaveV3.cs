@@ -40,7 +40,7 @@ namespace IMRE.HandWaver
 
         #region Constructors
         public static arctusBehaveV3 Constructor(){
-			GameObject go = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Tools/ArctusV3"));
+			GameObject go = GameObject.Instantiate(PrefabManager.Spawn("ArctusV3"));
 			return go.GetComponent<arctusBehaveV3>();
 		}
         #endregion

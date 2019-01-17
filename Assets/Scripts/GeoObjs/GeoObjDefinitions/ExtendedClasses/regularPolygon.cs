@@ -23,7 +23,7 @@ namespace IMRE.HandWaver
         #region Constructors
             public static regularPolygon Constructor()
 						{
-							return GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/GeoObj/RegularPolygon")).GetComponent<regularPolygon>();
+							return GameObject.Instantiate(PrefabManager.Spawn("RegularPolygon")).GetComponent<regularPolygon>();
 						}
         #endregion
         public int n = 0;

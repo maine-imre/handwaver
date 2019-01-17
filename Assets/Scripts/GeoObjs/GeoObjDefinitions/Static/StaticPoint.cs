@@ -19,7 +19,7 @@ namespace IMRE.HandWaver
         #region Constructors
             public static StaticPoint Constructor()
 						{
-							return GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/GeoObj/StaticPoint")).GetComponent<StaticPoint>();
+							return GameObject.Instantiate(PrefabManager.Spawn("StaticPoint")).GetComponent<StaticPoint>();
 						}
         #endregion
 

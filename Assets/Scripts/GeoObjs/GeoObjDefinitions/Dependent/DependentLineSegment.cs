@@ -19,7 +19,7 @@ namespace IMRE.HandWaver
 				#region Constructors
             public static DependentLineSegment Constructor()
 						{
-							return GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/GeoObj/DependentLineSegment")).GetComponent<DependentLineSegment>();
+							return Instantiate(PrefabManager.Spawn("DependentLineSegment")).GetComponent<DependentLineSegment>();
 						}
         #endregion
 

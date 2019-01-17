@@ -25,7 +25,7 @@ namespace IMRE.HandWaver
 		#region Constructors
             public static InteractablePrism Constructor()
 						{
-							return GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/GeoObj/InteractablePrism")).GetComponent<InteractablePrism>();
+							return GameObject.Instantiate(PrefabManager.Spawn("InteractablePrism")).GetComponent<InteractablePrism>();
 						}
         #endregion
 

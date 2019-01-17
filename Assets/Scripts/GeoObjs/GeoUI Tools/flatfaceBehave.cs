@@ -21,7 +21,7 @@ namespace IMRE.HandWaver
 
 		#region Constructors
 		public static flatfaceBehave Constructor(){
-			GameObject go = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/GeoObj/Flatface"));
+			GameObject go = GameObject.Instantiate(PrefabManager.Spawn("Flatface"));
 			return go.GetComponent<flatfaceBehave>();
 		}
 		#endregion

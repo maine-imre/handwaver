@@ -23,7 +23,7 @@ namespace IMRE.HandWaver
 		#region Constructors
             public static InteractableLineSegment Constructor()
 						{
-							return GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/GeoObj/InteractableLineSegment")).GetComponent<InteractableLineSegment>();
+							return Instantiate(PrefabManager.Spawn("InteractableLineSegment")).GetComponent<InteractableLineSegment>();
 						}
         #endregion
 
@@ -119,8 +119,9 @@ namespace IMRE.HandWaver
                 lineList.Add(newLine2);
                 lineList.Add(newLine3);
 				lineList.ForEach(l => l.updateFigure());
-
+				Debug.Log(1);
                 GeoObjConstruction.iPolygon(lineList, pointList);
+				Debug.Log(11);
 
 				if (HW_GeoSolver.ins.thisInteractionMode == HW_GeoSolver.InteractionMode.rigid)
 				{

@@ -292,7 +292,7 @@ namespace IMRE.HandWaver
 
 			mesh.RecalculateNormals();
 			mesh.vertices = vertices;
-			//thisIBehave.NotifyTeleported();
+			GetComponent<MeshCollider>().sharedMesh = mesh;
 
 
 			//if a polygon is a skew polygon, turn it grey.

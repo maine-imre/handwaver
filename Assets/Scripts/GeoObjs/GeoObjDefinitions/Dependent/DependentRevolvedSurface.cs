@@ -21,7 +21,7 @@ namespace IMRE.HandWaver
         #region Constructors
         public static DependentRevolvedSurface Constructor()
 				{
-					return Instantiate(Resources.Load<GameObject>("Prefabs/GeoObj/DependentRevolvedSurface")).GetComponent<DependentRevolvedSurface>();
+					return Instantiate(PrefabManager.Spawn("DependentRevolvedSurface")).GetComponent<DependentRevolvedSurface>();
 				}
         #endregion
 

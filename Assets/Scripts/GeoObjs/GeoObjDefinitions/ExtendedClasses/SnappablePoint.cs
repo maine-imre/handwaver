@@ -24,7 +24,7 @@ namespace IMRE.HandWaver
 		#region Constructors
             public static SnappablePoint Constructor()
 						{
-							return GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/GeoObj/SnappablePoint")).GetComponent<SnappablePoint>();
+							return GameObject.Instantiate(PrefabManager.Spawn("SnappablePoint")).GetComponent<SnappablePoint>();
 						}
         #endregion
 		private List<MasterGeoObj> relativeObjects;
