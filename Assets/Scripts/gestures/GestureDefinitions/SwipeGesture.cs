@@ -8,37 +8,55 @@ namespace IMRE.Gestures
 {
 public abstract class SwipeGesture : OneHandedGesture {
 
-    internal void visualFeedbackActivated(){
-    }
-    internal void tactileFeedbackActivated(){
-    }
-    //we need to require an audioPlayer component.
-    internal void audioFeedbackActivated(){
-    }
+		protected override void visualFeedbackActivated()
+		{
+			throw new NotImplementedException();
 
-    internal void visualFeedbackDeactivated(DeactivationReason reason){
-    }
-    internal void tactileFeedbackDeactivated(DeactivationReason reason){
-    }
-      //we need to require an audioPlayer component.
-    internal void audioFeedbackDeactivated(DeactivationReason reason){
-    }
+		}
+		protected override void tactileFeedbackActivated()
+		{
+			throw new NotImplementedException();
 
-    public  bool ActivationConditionsHand(Hand hand);
-    {
-      return false;
-    }
-    public  bool ActivationConditionsOSVR(InputDevice osvrController);
-    {
-      return false;
-    }
-    public  bool DeactivationConditionsHand(Hand hand);
-    {
-      return false;
-    }
-    public  bool DeactivationConditionsOSVR(InputDevice osvrController);
-    {
-      return false;
-    }
-}
+		}
+		//we need to require an audioPlayer component.
+		protected override void audioFeedbackActivated()
+		{
+			throw new NotImplementedException();
+
+		}
+
+		protected override void visualFeedbackDeactivated(DeactivationReason reason)
+		{
+			throw new NotImplementedException();
+
+		}
+		protected override void tactileFeedbackDeactivated(DeactivationReason reason)
+		{
+			throw new NotImplementedException();
+
+		}
+		//we need to require an audioPlayer component.
+		protected override void audioFeedbackDeactivated(DeactivationReason reason)
+		{
+			throw new NotImplementedException();
+
+		}
+
+		protected override bool ActivationConditionsHand(Leap.Hand hand)
+		{
+			throw new NotImplementedException();
+		}
+		protected override bool ActivationConditionsOSVR(InputDevice inputDevice)
+		{
+			throw new NotImplementedException();
+		}
+		protected override bool DeactivationConditionsHand(Leap.Hand hand)
+		{
+			throw new NotImplementedException();
+		}
+		protected override bool DeactivationConditionsOSVR(InputDevice inputDevice)
+		{
+			throw new NotImplementedException();
+		}
+	}
 }

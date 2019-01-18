@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +6,7 @@ using UnityEngine.XR;
 
 namespace IMRE.Gestures
 {
-	public abstract class DoublePinchNoGraspGesture : TwoHandedGesture
+	public abstract class TwoHandedGestureTemplate : TwoHandedGesture
 	{
 
 		protected override void visualFeedbackActivated()
@@ -51,7 +51,7 @@ namespace IMRE.Gestures
 		{
 			throw new NotImplementedException();
 		}
-		protected override  bool DeactivationConditionsHand(Leap.Hand leftHand, Leap.Hand rightHand)
+		protected override bool DeactivationConditionsHand(Leap.Hand leftHand, Leap.Hand rightHand)
 		{
 			throw new NotImplementedException();
 		}

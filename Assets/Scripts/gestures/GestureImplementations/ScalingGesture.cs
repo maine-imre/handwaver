@@ -1,20 +1,23 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Leap;
+using Leap.Unity.Gestures;
 using UnityEngine;
 using UnityEngine.XR;
 
 namespace IMRE.Gestures
 {
-  public class ScalingGesture : DoublePinchNoGraspGesture {
-    public bool DeactivationConditionsActionComplete(){
-      return false;
-    }
+	public class ScalingGesture : DoublePinchNoGraspGesture
+	{
+		protected override bool DeactivationConditionsActionComplete()
+		{
+			throw new NotImplementedException();
+		}
 
-        //this does the action of the gesture.
-         //These functions are implemented for each use case.
-    public bool WhileGestureActive(Hand leftHand, Hand rightHand,InputDevice leftOSVRController, InputDevice rightOSVRController){[
-      return false;
-    }
-  }
+		protected override bool WhileGestureActive(Leap.Hand leftHand, Leap.Hand rightHand, InputDevice leftOSVRController, InputDevice rightOSVRController)
+		{
+			throw new NotImplementedException();
+		}
+	}
 }
