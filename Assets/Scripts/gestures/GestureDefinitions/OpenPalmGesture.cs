@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.XR;
 
@@ -39,7 +40,7 @@ namespace IMRE.Gestures
 
 		protected override bool ActivationConditionsHand(Leap.Hand hand)
 		{
-			return false;
+			return (hand.Fingers.Where(finger => finger.IsExtended).Count() == 5);
 		}
 		protected override bool ActivationConditionsOSVR(InputDevice inputDevice)
 		{

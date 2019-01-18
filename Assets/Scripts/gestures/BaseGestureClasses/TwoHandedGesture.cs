@@ -9,6 +9,9 @@ namespace IMRE.Gestures
 {
 	public abstract class TwoHandedGesture : Leap.Unity.Gestures.TwoHandedGesture
 	{
+		public bool GestureEnabled = true;
+
+
 		//Everything from LeapMotion's One Handed Gesture Passes Through.
 		// We add support for:
 		//OSVR Overrides
@@ -80,7 +83,7 @@ namespace IMRE.Gestures
 		}
 
 
-		protected void WhenGestureDeactivated(Leap.Hand maybeNullLeftHand, Leap.Hand
+		protected override void WhenGestureDeactivated(Leap.Hand maybeNullLeftHand, Leap.Hand
 		 MaybeNullRightHand, DeactivationReason reason)
 		{
 			visualFeedbackDeactivated(reason);
@@ -90,7 +93,7 @@ namespace IMRE.Gestures
 
 		protected override bool ShouldGestureActivate(Leap.Hand leftHand, Leap.Hand rightHand)
 		{
-			return ActivationConditionsHand(leftHand, rightHand) || ActivationConditionsOSVR(leftOSVRDevice, rightOSVRDevice);
+			return GestureEnabled && (ActivationConditionsHand(leftHand, rightHand) || ActivationConditionsOSVR(leftOSVRDevice, rightOSVRDevice));
 		}
 
 		protected override bool ShouldGestureDeactivate(Leap.Hand leftHand,
@@ -101,8 +104,8 @@ namespace IMRE.Gestures
 				deactivationReason = DeactivationReason.FinishedGesture;
 				return true;
 			}
-			else if (DeactivationConditionsHand(leftHand, rightHand) &&
-			 DeactivationConditionsOSVR(leftOSVRDevice, rightOSVRDevice))
+			else if (!GestureEnabled || (DeactivationConditionsHand(leftHand, rightHand) &&
+			 DeactivationConditionsOSVR(leftOSVRDevice, rightOSVRDevice)))
 			{
 				deactivationReason = DeactivationReason.CancelledGesture;
 				return true;

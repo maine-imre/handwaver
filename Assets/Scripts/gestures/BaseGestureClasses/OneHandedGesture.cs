@@ -7,8 +7,14 @@ using System.Linq;
 
 namespace IMRE.Gestures
 {
+	/// <summary>
+	/// Base class for leap motion and OSVR gesture controls
+	/// </summary>
+	[RequireComponent(typeof(AudioSource))]
 	public abstract class OneHandedGesture : Leap.Unity.Gestures.OneHandedGesture
 	{
+		public bool GestureEnabled = true;
+
 		//Everything from LeapMotion's One Handed Gesture Passes Through.
 		// We add support for:
 		//OSVR Overrides
@@ -70,7 +76,7 @@ namespace IMRE.Gestures
 		/// Called when the gesture has just been activated. The hand is guaranteed to
 		/// be non-null.
 		/// </summary>
-		void WhenGestureActivated(Leap.Hand hand)
+		protected override void WhenGestureActivated(Leap.Hand hand)
 		{
 			visualFeedbackActivated();
 			tactileFeedbackActivated();
@@ -90,7 +96,7 @@ namespace IMRE.Gestures
 
 		protected override bool ShouldGestureActivate(Leap.Hand hand)
 		{
-			return ActivationConditionsHand(hand) || ActivationConditionsOSVR(osvrDevice);
+			return GestureEnabled && (ActivationConditionsHand(hand) || ActivationConditionsOSVR(osvrDevice));
 		}
 
 		protected override void WhileGestureActive(Leap.Hand hand)
@@ -105,7 +111,7 @@ namespace IMRE.Gestures
 				deactivationReason = DeactivationReason.FinishedGesture;
 				return true;
 			}
-			else if (DeactivationConditionsHand(hand) && DeactivationConditionsOSVR(osvrDevice))
+			else if ((DeactivationConditionsHand(hand) && DeactivationConditionsOSVR(osvrDevice)) || !GestureEnabled)
 			{
 				deactivationReason = DeactivationReason.CancelledGesture;
 				return true;
@@ -127,7 +133,7 @@ namespace IMRE.Gestures
 		//These functions are implemented for each use case.
 		protected abstract bool DeactivationConditionsActionComplete();
 
-		protected abstract bool WhileGestureActive(Leap.Hand hand, InputDevice osvrController);
+		protected abstract void WhileGestureActive(Leap.Hand hand, InputDevice osvrController);
 
 
 	}
