@@ -7,7 +7,7 @@ using UnityEngine.XR;
 
 namespace IMRE.Gestures
 {
-	public class RevolveGesture : SwipeGesture
+	public class RevolveGesture : SwipeInPlaneGesture
 	{
 		protected override bool DeactivationConditionsActionComplete()
 		{
