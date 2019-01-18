@@ -18,19 +18,9 @@ namespace IMRE.HandWaver
     {
 				#region Constructors
             public static DependentLineSegment Constructor()
-            {
-                GameObject go = new GameObject();
-				go.AddComponent<LineRenderer>();
-				//check if sphere mesh is added.
-				go.AddComponent<CapsuleCollider>();
-				go.AddComponent<Rigidbody>();
-				go.GetComponent<Rigidbody>().useGravity = false;
-				go.GetComponent<Rigidbody>().isKinematic = false;
-				go.AddComponent<InteractionBehaviour>();
-                go.GetComponent<InteractionBehaviour>().ignoreContact = true;
-                go.GetComponent<InteractionBehaviour>().ignoreGrasping = true;
-				return go.AddComponent<DependentLineSegment>();
-            }
+						{
+							return Instantiate(PrefabManager.Spawn("DependentLineSegment")).GetComponent<DependentLineSegment>();
+						}
         #endregion
 
         //can these be used this way???

@@ -218,8 +218,9 @@ namespace IMRE.HandWaver
 			}
 		}
 
-		public override void initializefigure()
+		public override void InitializeFigure()
 		{
+			base.InitializeFigure();
 			this.figType = GeoObjType.polygon;
 
 			MeshFilter mf = GetComponent<MeshFilter>();
@@ -291,7 +292,7 @@ namespace IMRE.HandWaver
 
 			mesh.RecalculateNormals();
 			mesh.vertices = vertices;
-			//thisIBehave.NotifyTeleported();
+			GetComponent<MeshCollider>().sharedMesh = mesh;
 
 
 			//if a polygon is a skew polygon, turn it grey.
@@ -314,7 +315,16 @@ namespace IMRE.HandWaver
 		{
 			get
 			{
-				return Vector3.Cross(pointList[0].Position3 - pointList[1].Position3, pointList[1].Position3 - pointList[2].Position3).normalized;
+				try
+				{
+					return Vector3.Cross(pointList[0].Position3 - pointList[1].Position3, pointList[1].Position3 - pointList[2].Position3).normalized;
+
+				}
+				catch
+				{
+					Debug.LogError("Normal Calculatoin failed on: " + figName);
+					return Vector3.zero;
+				}
 			}
 			set
 			{

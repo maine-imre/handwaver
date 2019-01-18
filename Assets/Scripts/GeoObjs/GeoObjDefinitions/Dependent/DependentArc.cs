@@ -18,10 +18,6 @@ namespace IMRE.HandWaver
 /// </summary>
 	class DependentArc : AbstractArc, DependentFigure
     {
-        public override void initializefigure()
-        {
-            throw new NotImplementedException();
-        }
 
         internal override bool RMotion(NodeList<string> inputNodeList)
         {

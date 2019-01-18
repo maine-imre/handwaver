@@ -22,25 +22,9 @@ namespace IMRE.HandWaver
     {
         #region Constructors
             public static InteractablePoint Constructor()
-            {
-                GameObject go = new GameObject();
-				go.AddComponent<MeshFilter>();
-				go.AddComponent<MeshRenderer>();
-				//check if sphere mesh is added.
-				go.AddComponent<SphereCollider>();
-				go.GetComponent<SphereCollider>().radius = 0.5f;
-				go.AddComponent<Rigidbody>();
-				go.GetComponent<Rigidbody>().useGravity = false;
-				go.GetComponent<Rigidbody>().isKinematic = false;
-				go.AddComponent<InteractionBehaviour>();
-                go.AddComponent<AnchorableBehaviour>();
-                go.GetComponent<AnchorableBehaviour>().maxAnchorRange = 0.3f;
-                go.GetComponent<AnchorableBehaviour>().useTrajectory = true;
-                go.GetComponent<AnchorableBehaviour>().lockWhenAttached = true;
-                go.GetComponent<AnchorableBehaviour>().matchAnchorMotionWhileAttaching = true;
-                go.GetComponent<AnchorableBehaviour>().tryAnchorNearestOnGraspEnd = true;
-				return go.AddComponent<InteractablePoint>();
-            }
+			{
+				return GameObject.Instantiate(PrefabManager.Spawn("InteractablePoint")).GetComponent<InteractablePoint>();
+			}
         #endregion
 
         public bool controllCollide = false;
@@ -55,9 +39,11 @@ namespace IMRE.HandWaver
 		private bool snapBool = false;
 #pragma warning restore 0414
 
-		public override void initializefigure()
+		public override void InitializeFigure()
         {
-            rend = gameObject.GetComponent<Renderer>();
+			base.InitializeFigure();
+			this.figType = GeoObjType.point;
+			rend = gameObject.GetComponentInChildren<Renderer>();
             mat = rend.material;
             mat.color = colorGenerator.randomColorSolid(mat);
 
@@ -171,7 +157,7 @@ namespace IMRE.HandWaver
                         GraphNode<string> otherGraphNode = HW_GeoSolver.ins.geomanager.findGraphNode(toObj.figName);
                         if (newNeighborList.Contains(otherGraphNode) == false)
                         {
-                            HW_GeoSolver.ins.addDependence(GameObject.Find(node.Value).transform, toObj.transform);
+                            HW_GeoSolver.ins.AddDependence(GameObject.Find(node.Value).GetComponent<MasterGeoObj>(), toObj);
                             HW_GeoSolver.ins.replaceDepentVar(GameObject.Find(node.Value).transform, this.transform, toObj.transform);
 
                         }
@@ -192,7 +178,7 @@ namespace IMRE.HandWaver
 
                     Debug.Log("NEED TO MAKE A POLYGON");
                 }
-                
+
             }
         }
 	}

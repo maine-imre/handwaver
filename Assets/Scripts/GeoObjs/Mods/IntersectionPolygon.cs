@@ -24,7 +24,7 @@ namespace IMRE.HandWaver.Solver
     {
         #region Constructors
 		public static IntersectionPolygon Constructor(){
-			GameObject go = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/GeoObj/IntersectionPolygon"));
+			GameObject go = GameObject.Instantiate(PrefabManager.Spawn("IntersectionPolygon"));
 			return go.GetComponent<IntersectionPolygon>();
 		}
 		#endregion

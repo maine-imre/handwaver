@@ -23,22 +23,9 @@ namespace IMRE.HandWaver
 		#region Constructors
 			public static  DependentPolygon Constructor()
 			{
-				GameObject go = new GameObject();
-				go.AddComponent<MeshFilter>();
-				go.AddComponent<MeshRenderer>();
-				go.AddComponent<MeshCollider>();
-				go.AddComponent<Rigidbody>();
-				go.GetComponent<Rigidbody>().useGravity = false;
-				go.GetComponent<Rigidbody>().isKinematic = false;
-				go.AddComponent<InteractionBehaviour>();
-				return go.AddComponent<DependentPolygon>();
+				return GameObject.Instantiate(PrefabManager.Spawn("DepenDependentPolygon")).GetComponent<DependentPolygon>();
 			}
 		#endregion
-
-		public override void initializefigure()
-        {
-			base.initializefigure();
-		}
 
 		internal override bool RMotion(NodeList<string> inputNodeList)
         {

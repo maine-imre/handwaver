@@ -19,21 +19,9 @@ namespace IMRE.HandWaver
     {
         #region Constructors
             public static DependentSphere Constructor()
-            {
-                GameObject go = new GameObject();
-				go.AddComponent<MeshFilter>();
-				go.AddComponent<MeshRenderer>();
-				//check if sphere mesh is added.
-				go.AddComponent<SphereCollider>();
-				go.GetComponent<SphereCollider>().radius = 0.5f;
-				go.AddComponent<Rigidbody>();
-				go.GetComponent<Rigidbody>().useGravity = false;
-				go.GetComponent<Rigidbody>().isKinematic = false;
-				go.AddComponent<InteractionBehaviour>();
-                go.GetComponent<InteractionBehaviour>().ignoreContact =true;
-                go.GetComponent<InteractionBehaviour>().ignoreGrasping = true;
-				return go.AddComponent<DependentSphere>();
-            }
+						{
+							return GameObject.Instantiate(PrefabManager.Spawn("DependentSphere")).GetComponent<DependentSphere>();
+						}
         #endregion
 
         public AbstractPoint center;

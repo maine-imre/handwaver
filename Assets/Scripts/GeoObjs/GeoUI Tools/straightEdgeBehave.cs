@@ -23,7 +23,7 @@ namespace IMRE.HandWaver
 	{
         #region Constructors
         public static straightEdgeBehave Constructor(){
-			GameObject go = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Tools/Straightedge"));
+			GameObject go = GameObject.Instantiate(PrefabManager.Spawn("Straightedge"));
 			return go.GetComponent<straightEdgeBehave>();
 		}
         #endregion
@@ -48,7 +48,6 @@ namespace IMRE.HandWaver
 
 		new void Start()
 		{
-			base.Start();
 			thisAbehave = GetComponent<AnchorableBehaviour>();
 			thisAbehave.OnDetachedFromAnchor += detach;
 			thisAbehave.OnAttachedToAnchor += attach;
@@ -210,11 +209,6 @@ namespace IMRE.HandWaver
 		internal override void GlueToFigure(MasterGeoObj toObj)
 		{
 			throw new NotImplementedException();
-		}
-
-		public override void initializefigure()
-		{
-			//do nothing
 		}
 
 		internal override bool RMotion(NodeList<string> inputNodeList)

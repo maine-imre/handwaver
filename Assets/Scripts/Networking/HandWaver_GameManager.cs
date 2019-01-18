@@ -22,7 +22,7 @@ namespace IMRE.HandWaver.Networking {
 		public string lobbyScene;
 
 		[Tooltip("The prefab to use for representing the player")]
-		public GameObject playerPrefab;
+		public string playerPrefabPath;
 
 		public List<GameObject> localPlayers;
 		public List<MeshRenderer> walls;
@@ -41,7 +41,7 @@ namespace IMRE.HandWaver.Networking {
 
 		private void Start()
 		{
-			if (playerPrefab == null)
+			if (playerPrefabPath == null)
 			{
 				Debug.LogError("Missing playerPrefab Reference. Please set it up in Game Manager");
 			}
@@ -49,7 +49,7 @@ namespace IMRE.HandWaver.Networking {
 			{
 				Debug.LogFormat("We are Instantiating localPlayer");
 				// we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
-				GameObject newPlayer = PhotonNetwork.Instantiate(this.playerPrefab.name, new Vector3(0f, 0f, 0f), Quaternion.identity, 0);
+				GameObject newPlayer = PhotonNetwork.Instantiate(playerPrefabPath, new Vector3(0f, 0f, 0f), Quaternion.identity, 0);
 				localPlayers.Add(newPlayer);
 				newPlayer.GetComponent<playerHead>().setupPlayer(PhotonNetwork.NickName, localPlayers.IndexOf(newPlayer), UnityEngine.Random.Range(0f,1f));
 			}

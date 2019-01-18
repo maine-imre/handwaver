@@ -20,21 +20,9 @@ namespace IMRE.HandWaver
 
         #region Constructors
         public static DependentRevolvedSurface Constructor()
-        {
-            GameObject go = new GameObject();
-            go.AddComponent<MeshFilter>();
-            go.AddComponent<MeshRenderer>();
-            //make sure material gets set on MeshRenderer
-            go.AddComponent<DependentRevolvedSurface>();
-            go.AddComponent<MeshCollider>();
-            go.AddComponent<Rigidbody>();
-            go.GetComponent<Rigidbody>().useGravity = false;
-            go.GetComponent<Rigidbody>().isKinematic = true;
-            go.AddComponent<InteractionBehaviour>();
-            go.GetComponent<InteractionBehaviour>().ignoreGrasping = true;
-            go.GetComponent<InteractionBehaviour>().ignoreContact = true;
-            return go.GetComponent<DependentRevolvedSurface>();
-        }
+				{
+					return Instantiate(PrefabManager.Spawn("DependentRevolvedSurface")).GetComponent<DependentRevolvedSurface>();
+				}
         #endregion
 
         public AbstractLineSegment attachedLine;

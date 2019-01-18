@@ -40,7 +40,7 @@ namespace IMRE.HandWaver
 
         #region Constructors
         public static arctusBehaveV3 Constructor(){
-			GameObject go = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Tools/ArctusV3"));
+			GameObject go = GameObject.Instantiate(PrefabManager.Spawn("ArctusV3"));
 			return go.GetComponent<arctusBehaveV3>();
 		}
         #endregion
@@ -200,10 +200,10 @@ namespace IMRE.HandWaver
 				thisSphere.edgePosition = Edge.transform.position;
 				thisSphere.transform.position = Center.transform.position;
                 
-                HW_GeoSolver.ins.addDependence(thisSphere.transform, Center.transform);
-                HW_GeoSolver.ins.addDependence(thisSphere.transform, Edge.transform);
+                HW_GeoSolver.ins.AddDependence(thisSphere, Center);
+                HW_GeoSolver.ins.AddDependence(thisSphere, Edge);
 
-                thisSphere.initializefigure();
+                thisSphere.InitializeFigure();
 
 				Destroy(edgeHandle.gameObject);
                 Destroy(gameObject);

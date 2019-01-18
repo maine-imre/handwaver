@@ -20,20 +20,9 @@ namespace IMRE.HandWaver
     {
 		#region Constructors
             public static DependentPyramid Constructor()
-            {
-                GameObject go = new GameObject();
-				go.AddComponent<MeshFilter>();
-				go.AddComponent<MeshRenderer>();
-				//check if sphere mesh is added.
-				go.AddComponent<MeshCollider>();
-				go.AddComponent<Rigidbody>();
-				go.GetComponent<Rigidbody>().useGravity = false;
-				go.GetComponent<Rigidbody>().isKinematic = false;
-				go.AddComponent<InteractionBehaviour>();
-                go.GetComponent<InteractionBehaviour>().ignoreContact = true;
-                go.GetComponent<InteractionBehaviour>().ignoreGrasping = true;
-				return go.AddComponent<DependentPyramid>();
-            }
+						{
+							return GameObject.Instantiate(PrefabManager.Spawn("DependentPyramid")).GetComponent<DependentPyramid>();
+						}
         #endregion
 
         public AbstractPoint apex;
@@ -105,11 +94,6 @@ namespace IMRE.HandWaver
             {
                 return basePolygon;
             }
-        }
-
-        public override void initializefigure()
-        {
-            //not applicable
         }
 
         internal override bool RMotion(NodeList<string> inputNodeList)

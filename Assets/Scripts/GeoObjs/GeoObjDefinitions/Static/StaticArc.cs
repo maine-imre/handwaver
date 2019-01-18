@@ -15,10 +15,6 @@ namespace IMRE.HandWaver
 /// </summary>
 	class StaticArc : AbstractArc, StaticFigure
     {
-        public override void initializefigure()
-        {
-            throw new NotImplementedException();
-        }
 
         internal override bool RMotion(NodeList<string> inputNodeList)
         {

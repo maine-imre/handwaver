@@ -23,18 +23,9 @@ namespace IMRE.HandWaver
     {
         #region Constructors
             public static InteractablePolygon Constructor()
-            {
-                GameObject go = new GameObject();
-				go.AddComponent<MeshFilter>();
-				go.AddComponent<MeshRenderer>();
-				//check if sphere mesh is added.
-				go.AddComponent<MeshCollider>();
-				go.AddComponent<Rigidbody>();
-				go.GetComponent<Rigidbody>().useGravity = false;
-				go.GetComponent<Rigidbody>().isKinematic = false;
-				go.AddComponent<InteractionBehaviour>();
-				return go.AddComponent<InteractablePolygon>();
-            }
+						{
+							return GameObject.Instantiate(PrefabManager.Spawn("InteractablePolygon")).GetComponent<InteractablePolygon>();
+						}
         #endregion
 
 		internal override bool RMotion(NodeList<string> inputNodeList)
@@ -141,7 +132,7 @@ namespace IMRE.HandWaver
                 InteractablePrism prism = GeoObjConstruction.iPrism(this);
 
 				if (HW_GeoSolver.ins.thisInteractionMode == HW_GeoSolver.InteractionMode.rigid)
-				{ 
+				{
 					prism.lineSegments.ForEach(p => p.LeapInteraction = false);
 					prism.vertexPoints.ForEach(p => p.LeapInteraction = false);
 				}

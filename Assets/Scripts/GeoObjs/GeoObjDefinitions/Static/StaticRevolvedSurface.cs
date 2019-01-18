@@ -16,10 +16,6 @@ namespace IMRE.HandWaver
 /// </summary>
 	class StaticRevolvedSurface : AbstractRevolvedSurface, StaticFigure
     {
-        public override void initializefigure()
-        {
-            throw new NotImplementedException();
-        }
 
         internal override bool RMotion(NodeList<string> inputNodeList)
         {

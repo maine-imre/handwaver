@@ -41,11 +41,12 @@ namespace IMRE.HandWaver
 			throw new NotImplementedException();
 		}
 
-		public override void initializefigure()
-        {
-            this.figType = GeoObjType.circle;
+		public override void InitializeFigure()
+		{
+			base.InitializeFigure();
+			this.figType = GeoObjType.circle;
 
-            this.Position3 = centerPos;
+			this.Position3 = centerPos;
 
             Vector3 norm1 = Vector3.up;
             Vector3 norm2 = Vector3.right;

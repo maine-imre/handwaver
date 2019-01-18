@@ -19,7 +19,7 @@ namespace IMRE.HandWaver
 	/// <summary>
 	/// enumerator to help select child type
 	/// </summary>
-	public enum GeoObjType { point, line, polygon, prism, pyramid, circle, sphere, revolvedsurface, torus, flatface, straightedge, none };
+	public enum GeoObjType {none, point, line, polygon, prism, pyramid, circle, sphere, revolvedsurface, torus, flatface, straightedge};
 
 /// <summary>
 /// enumerator to help select child type
@@ -78,7 +78,7 @@ namespace IMRE.HandWaver
 		}
 
 		/// <summary>
-		/// 
+		///
 		/// </summary>
 		/// <param name="localPos"></param>
 		/// <returns></returns>
@@ -99,14 +99,14 @@ namespace IMRE.HandWaver
 		}
 
 		/// <summary>
-		/// 
+		///
 		/// </summary>
 		/// <param name="abstractPosition"></param>
 		/// <returns></returns>
 		internal abstract Vector3 ClosestSystemPosition(Vector3 abstractPosition);
 
 		/// <summary>
-		/// 
+		///
 		/// </summary>
 		/// <param name="localPos"></param>
 		/// <param name="localDir"></param>
@@ -118,7 +118,7 @@ namespace IMRE.HandWaver
 		}
 
 		/// <summary>
-		/// 
+		///
 		/// </summary>
 		/// <param name="localPos"></param>
 		/// <returns></returns>
@@ -129,7 +129,7 @@ namespace IMRE.HandWaver
 		}
 
 		/// <summary>
-		/// 
+		///
 		/// </summary>
 		/// <param name="sysPos"></param>
 		/// <returns></returns>
@@ -144,22 +144,22 @@ namespace IMRE.HandWaver
 			{
 				//if an object doesn't have a closest point say that it is infinitely far away.
 				return Mathf.Infinity;
-			}	
+			}
 		}
         #endregion
 
 		/// <summary>
-		/// 
+		///
 		/// </summary>
         public bool allowDelete = true;
 
 		/// <summary>
-		/// 
+		///
 		/// </summary>
 		public GeoObjType figType;
 
 		/// <summary>
-		/// 
+		///
 		/// </summary>
         internal int intersectionMultipleIDX;
 
@@ -179,7 +179,7 @@ namespace IMRE.HandWaver
                 switch (figType)
                 {
                     case GeoObjType.point:
-                        GetComponent<MeshRenderer>().materials[0].color = value;
+                        GetComponentInChildren<MeshRenderer>().materials[0].color = value;
                         break;
                     case GeoObjType.line:
                         GetComponent<LineRenderer>().materials[0].color = value;
@@ -217,8 +217,8 @@ namespace IMRE.HandWaver
 		/// <summary>
 		/// Used to save/load and keep geoObj definition type
 		/// </summary>
-		/// 
-		public enum SelectionStatus { selected, active, canidate, none }
+		///
+		public enum SelectionStatus { none, selected, active, canidate }
 		internal SelectionStatus thisSelectStatus
 		{
 			get
@@ -255,13 +255,41 @@ namespace IMRE.HandWaver
 						}
 						break;
 				}
-				if (GetComponent<MeshRenderer>() != null)
+				switch (figType)
 				{
-					GetComponent<MeshRenderer>().material = mat;
-				}
-				if (GetComponent<LineRenderer>() != null)
-				{
-					GetComponent<LineRenderer>().material = mat;
+					case GeoObjType.point:
+						GetComponentInChildren<MeshRenderer>().materials[0] = mat;
+						break;
+					case GeoObjType.line:
+						GetComponent<LineRenderer>().materials[0] = mat;
+						break;
+					case GeoObjType.polygon:
+						GetComponent<MeshRenderer>().materials[0] = mat;
+						break;
+					case GeoObjType.prism:
+						break;
+					case GeoObjType.pyramid:
+						break;
+					case GeoObjType.circle:
+						GetComponent<LineRenderer>().materials[0] = mat;
+						break;
+					case GeoObjType.sphere:
+						GetComponent<MeshRenderer>().materials[0] = mat;
+						break;
+					case GeoObjType.revolvedsurface:
+						GetComponent<MeshRenderer>().materials[0] = mat;
+						break;
+					case GeoObjType.torus:
+						GetComponent<MeshRenderer>().materials[0] = mat;
+						break;
+					case GeoObjType.flatface:
+						GetComponent<MeshRenderer>().materials[0] = mat;
+						break;
+					case GeoObjType.straightedge:
+						GetComponent<LineRenderer>().materials[0] = mat;
+						break;
+					case GeoObjType.none:
+						break;
 				}
 				_thisSelectStatus = value;
 			}
@@ -386,30 +414,18 @@ namespace IMRE.HandWaver
 			}
 		}
 
-		public void Start()
+		public virtual void InitializeFigure()
 		{
-			//if (this.GetComponent<Renderer>() != null)
-			//{
-			//	_standardMaterial = GetComponent<Renderer>().material;
-			//}
-			thisSelectStatus = MasterGeoObj.SelectionStatus.none;
+			StandardMaterial = HW_GeoSolver.ins.standardMaterial;
 
-			if (this.GetComponent("Halo")!= null)
-			{
-				halo = this.GetComponent("Halo");
-			}
+			thisIBehave.OnGraspBegin += StartInteraction;
+			thisIBehave.OnPerControllerGraspBegin += Stretch;
+			thisIBehave.OnGraspEnd += EndInteraction;
 
-
-			//if (this.GetComponent<InteractionBehaviour>() != null)
-			//{
-				//this.thisIBehave = this.GetComponent<InteractionBehaviour>();
-				thisIBehave.OnGraspBegin += StartInteraction;
-				thisIBehave.OnPerControllerGraspBegin += Stretch;
-				thisIBehave.OnGraspEnd += EndInteraction;
-			//}
 			cUpdateRMan = UpdateRMan();
 			waitForStretch = WaitForStretch();
 			HW_GeoSolver.ins.addComponent(this);
+			transform.SetParent(masterParentObj);
 		}
 
         void LateUpdate()
@@ -471,6 +487,7 @@ namespace IMRE.HandWaver
         }
 
 		private Node<string> myGraphNode;
+		internal static Transform masterParentObj;
 
 		public Node<string> FindGraphNode()
 		{
@@ -493,7 +510,7 @@ namespace IMRE.HandWaver
                 //        {
                 //            snapToFigure(other.GetComponent<MasterGeoOBj>());
                 //        }
-                //        break;                    
+                //        break;
 				//		case ObjManHelper.IntersectionMode.intersect:
                 //         geoManager.GetComponent<intersectionManager>().checkIntersection(this, other.GetComponent<MasterGeoOBj>());
                 //         break;
@@ -508,8 +525,6 @@ namespace IMRE.HandWaver
         internal abstract void SnapToFigure(MasterGeoObj toObj);
         internal abstract void GlueToFigure(MasterGeoObj toObj);
 
-		[ContextMenu("Initialize Figure")]
-		public abstract void initializefigure();
         public bool reactMotion(NodeList<string> inputNodeList)
         {
             if (intersectionFigure)

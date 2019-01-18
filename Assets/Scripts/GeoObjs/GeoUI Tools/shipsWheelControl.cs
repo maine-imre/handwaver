@@ -166,8 +166,8 @@ namespace IMRE.HandWaver
 			newPoint.Position3 = revPoint;//nullreference on this line from shipswheel
 
 			DependentRevolvedSurface drs = GeoObjConstruction.dRevSurface(newPoint.GetComponent<AbstractPoint>(), attachedLine.GetComponent<AbstractLineSegment>(), normDir);
-			HW_GeoSolver.ins.addDependence(drs.transform, newPoint.transform);
-            HW_GeoSolver.ins.addDependence(drs.transform, attachedLine.transform);
+			HW_GeoSolver.ins.AddDependence(drs, newPoint);
+            HW_GeoSolver.ins.AddDependence(drs, attachedLine.GetComponent<MasterGeoObj>());
 			#endregion
 		}
 
@@ -184,14 +184,14 @@ namespace IMRE.HandWaver
 			sphere.edgePosition = circle.edgePos;
 			sphere.centerPosition = circle.centerPos;
 
-			sphere.initializefigure();
+			sphere.InitializeFigure();
 			sphere.AddToRManager();
 
 
 			sphere.gameObject.tag = "Sphere";
 			sphere.GetComponent<MasterGeoObj>().figType = GeoObjType.sphere;
 			HW_GeoSolver.ins.addComponent(sphere.GetComponent<MasterGeoObj>());
-			HW_GeoSolver.ins.addDependence(sphere.transform, attachedArc.transform);
+			HW_GeoSolver.ins.AddDependence(sphere, attachedArc.GetComponent<MasterGeoObj>());
 			#endregion
 		}
 
@@ -211,7 +211,7 @@ namespace IMRE.HandWaver
 			//TorusMesh.gameObject.AddComponent<LifeManager>().type = "Torus";
 			//TorusMesh.GetComponent<LifeManager>().ObjectManager = ObjectManager.transform;
 			//TorusMesh.GetComponent<LifeManager>().OnSpawned();
-			//TorusMesh.GetComponent<LifeManager>().ObjectManager.GetComponent<ObjManHelper>().addDependence(TorusMesh.transform, attachedArc.transform.transform);
+			//TorusMesh.GetComponent<LifeManager>().ObjectManager.GetComponent<ObjManHelper>().AddDependence(TorusMesh.transform, attachedArc.transform.transform);
 			#endregion
 		}
 		#endregion
