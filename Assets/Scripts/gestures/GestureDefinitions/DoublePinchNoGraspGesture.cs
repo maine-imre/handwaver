@@ -45,7 +45,9 @@ namespace IMRE.Gestures
 
 		protected override bool ActivationConditionsHand(Leap.Hand leftHand, Leap.Hand rightHand)
 		{
-			throw new NotImplementedException();
+            //if both the left hand and right hand are detected to be pinching,
+            //return true.
+			return leftHand.IsPinching() && rightHand.IsPinching();
 		}
 		protected override bool ActivationConditionsOSVR(InputDevice leftOSVRController, InputDevice rightOSVRController)
 		{
@@ -53,7 +55,7 @@ namespace IMRE.Gestures
 		}
 		protected override  bool DeactivationConditionsHand(Leap.Hand leftHand, Leap.Hand rightHand)
 		{
-			throw new NotImplementedException();
+			return !this.ActivationConditionsHand;
 		}
 		protected override bool DeactivationConditionsOSVR(InputDevice leftOSVRController, InputDevice rightOSVRController)
 		{
