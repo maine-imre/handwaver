@@ -56,8 +56,41 @@ namespace IMRE.Gestures
 			}
 		}
 
-		//Feedback System - these functions are implemented at the Gesture Definition Level
-		protected abstract void visualFeedbackActivated();
+        internal Leap.Unity.Interaction.InteractionHand leftInteractionHand
+        {
+            get
+            {
+                return GameObject.FindObjectsOfType<Leap.Unity.Interaction.InteractionHand>().Where(h => h.isLeft).First();
+            }
+        }
+
+        internal Leap.Unity.Interaction.InteractionHand rightInteractionHand
+        {
+            get
+            {
+                return GameObject.FindObjectsOfType<Leap.Unity.Interaction.InteractionHand>().Where(h => !h.isLeft).First();
+            }
+        }
+
+        internal Leap.Unity.Interaction.InteractionController rightInteractionController
+        {
+            get
+            {
+                return GameObject.FindObjectsOfType<Leap.Unity.Interaction.InteractionController>().Where(h => !h.isLeft).First();
+            }
+        }
+
+        internal Leap.Unity.Interaction.InteractionController leftInteractionController
+        {
+            get
+            {
+                return GameObject.FindObjectsOfType<Leap.Unity.Interaction.InteractionController>().Where(h => !h.isLeft).First();
+            }
+        }
+
+
+        //Feedback System - these functions are implemented at the Gesture Definition Level
+        protected abstract void visualFeedbackActivated();
 		protected abstract void tactileFeedbackActivated();
 		//we need to require an audioPlayer component.
 		protected abstract void audioFeedbackActivated();
