@@ -57,10 +57,11 @@ namespace IMRE.Gestures
 			{
 				case Leap.Unity.Chirality.Left:
 					//Button ID 8 is Left controller trackpad being pressed
-					return Input.GetButtonDown("8");
+                    //check downward facing?
+					return Input.GetButtonDown("8") && Input.GetAxis("2") < 0 && Quaternion.Angle(interactionController.rotation,Quaternion.identity) < angleTolerance;
 				case Leap.Unity.Chirality.Right:
 					//Button id 9 is right controller trackpad being pressed
-					return Input.GetButtonDown("9");
+					return Input.GetButtonDown("9") && Input.GetAxis("5") < 0 && Quaternion.Angle(interactionController.rotation, Quaternion.identity) < angleTolerance;
 				default:
 					return false;
 			}
@@ -75,10 +76,10 @@ namespace IMRE.Gestures
 			{
 				case Leap.Unity.Chirality.Left:
 					//Button ID 8 is Left controller trackpad being pressed
-					return Input.GetButtonUp("8");
+					return Input.GetButtonUp("8") || Input.GetAxis("2") > 0 || Quaternion.Angle(interactionController.rotation, Quaternion.identity) > angleTolerance;
 				case Leap.Unity.Chirality.Right:
 					//Button id 9 is right controller trackpad being pressed
-					return Input.GetButtonUp("9");
+					return Input.GetButtonUp("9") || Input.GetAxis("5") > 0 || Quaternion.Angle(interactionController.rotation, Quaternion.identity) > angleTolerance;
 				default:
 					return false;
 			}

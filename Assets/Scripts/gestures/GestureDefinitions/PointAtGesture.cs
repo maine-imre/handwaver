@@ -43,34 +43,56 @@ public abstract class PointAtGesture : OneHandedGesture {
 
 		protected override bool ActivationConditionsHand(Leap.Hand hand)
 		{
-            /* Fingers are indexed from thumb to pinky. The thumb is 0, index is 1
-             * middle 2, ring 3, pinky 4. Below, we return true if the pinky,
-             * ring finger, and middle finger are not extended while the index
-             * finger is extended. There is also an additional portion to this 
-             * where the hand should not be pointing if there is a pinch happening.
-             * This prevents false pointing while trying to pinch something
-             * 
-             * The thumb is ignored in whether this gesture will activate or not
-             */
+             //Fingers are indexed from thumb to pinky. The thumb is 0, index is 1
+             //middle 2, ring 3, pinky 4. Below, we return true if the pinky,
+             //ring finger, and middle finger are not extended while the index
+             //finger is extended. There is also an additional portion to this 
+             //where the hand should not be pointing if there is a pinch happening.
+             //This prevents false pointing while trying to pinch something
+              
+             //The thumb is ignored in whether this gesture will activate or not
+             
 			return (
                  (hand.Fingers[1].IsExtended) &&
                 !(hand.Fingers[2].IsExtended) &&
                 !(hand.Fingers[3].IsExtended) &&
                 !(hand.Fingers[4].IsExtended) &&
-                !hand.IsPinching()
-			    );
+                !(interactionHand.isGraspingObject)
+                );
         }
 		protected override bool ActivationConditionsOSVR(InputDevice inputDevice)
 		{
-			throw new NotImplementedException();
-		}
+            switch (whichHand)
+            {
+                case Leap.Unity.Chirality.Left:
+                    //Button ID 8 is Left controller trackpad being pressed
+                    //check downward facing?
+                    return Input.GetButtonDown("8") && Input.GetAxis("2") > 0;
+                case Leap.Unity.Chirality.Right:
+                    //Button id 9 is right controller trackpad being pressed
+                    return Input.GetButtonDown("9") && Input.GetAxis("5") > 0;
+                default:
+                    return false;
+            }
+        }
 		protected override bool DeactivationConditionsHand(Leap.Hand hand)
 		{
-			return !this.ActivationConditionsHand();
+			return !ActivationConditionsHand(hand);
 		}
 		protected override bool DeactivationConditionsOSVR(InputDevice inputDevice)
 		{
-			throw new NotImplementedException();
-		}
+            switch (whichHand)
+            {
+                case Leap.Unity.Chirality.Left:
+                    //Button ID 8 is Left controller trackpad being pressed
+                    //check downward facing?
+                    return Input.GetButtonUp("8") || Input.GetAxis("2") < 0;
+                case Leap.Unity.Chirality.Right:
+                    //Button id 9 is right controller trackpad being pressed
+                    return Input.GetButtonUp("9") || Input.GetAxis("5") < 0;
+                default:
+                    return false;
+            }
+        }
 	}
 }

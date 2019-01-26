@@ -55,10 +55,32 @@ namespace IMRE.Gestures
 			}
 		}
 
+        /// <summary>
+        /// determines which interaction hand matches the handedness of a gesture
+        /// </summary>
+        internal Leap.Unity.Interaction.InteractionHand interactionHand
+        {
+            get
+            {
+                return GameObject.FindObjectsOfType<Leap.Unity.Interaction.InteractionHand>().Where(h => h.isLeft == (whichHand == Leap.Unity.Chirality.Left)).First();
+            }
+        }
 
-		//Feedback System - these functions are implemented at the Gesture Definition Level
+        /// <summary>
+        /// determines which interaction controller matches the handedness of a gesture
+        /// </summary>
+        internal Leap.Unity.Interaction.InteractionController interactionController
+        {
+            get
+            {
+                return GameObject.FindObjectsOfType<Leap.Unity.Interaction.InteractionController>().Where(h => h.isLeft == (whichHand == Leap.Unity.Chirality.Left)).First();
+            }
+        }
 
-		protected abstract void visualFeedbackActivated();
+
+        //Feedback System - these functions are implemented at the Gesture Definition Level
+
+        protected abstract void visualFeedbackActivated();
 		protected abstract void tactileFeedbackActivated();
 		//we need to require an audioPlayer component.
 		protected abstract void audioFeedbackActivated();

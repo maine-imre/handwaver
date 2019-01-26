@@ -9,7 +9,7 @@ namespace IMRE.Gestures
 {
 	public abstract class DoublePinchNoGraspGesture : TwoHandedGesture
 	{
-        private float pinchTol;
+        private float pinchTol = .8f;
 
         protected override void visualFeedbackActivated()
 		{

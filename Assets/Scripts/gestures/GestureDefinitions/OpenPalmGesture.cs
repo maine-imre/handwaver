@@ -44,15 +44,35 @@ namespace IMRE.Gestures
 		}
 		protected override bool ActivationConditionsOSVR(InputDevice inputDevice)
 		{
-			return false;
-		}
+            switch (whichHand)
+            {
+                case Leap.Unity.Chirality.Left:
+                    //Button ID 8 is Left controller trackpad being pressed
+                    return Input.GetButtonDown("8") && Input.GetAxis("2") < 0;
+                case Leap.Unity.Chirality.Right:
+                    //Button id 9 is right controller trackpad being pressed
+                    return Input.GetButtonDown("9") && Input.GetAxis("5") < 0;
+                default:
+                    return false;
+            }
+        }
 		protected override bool DeactivationConditionsHand(Leap.Hand hand)
 		{
-			return false;
+			return !ActivationConditionsHand(hand);
 		}
 		protected override bool DeactivationConditionsOSVR(InputDevice inputDevice)
 		{
-			return false;
-		}
+            switch (whichHand)
+            {
+                case Leap.Unity.Chirality.Left:
+                    //Button ID 8 is Left controller trackpad being pressed
+                    return Input.GetButtonUp("8") || Input.GetAxis("2") > 0;
+                case Leap.Unity.Chirality.Right:
+                    //Button id 9 is right controller trackpad being pressed
+                    return Input.GetButtonUp("9") || Input.GetAxis("5") > 0;
+                default:
+                    return false;
+            }
+        }
 	}
 }
