@@ -126,7 +126,8 @@ namespace IMRE.Gestures
 
 		protected override bool ShouldGestureActivate(Leap.Hand leftHand, Leap.Hand rightHand)
 		{
-			return GestureEnabled && (ActivationConditionsHand(leftHand, rightHand) || ActivationConditionsOSVR(leftOSVRDevice, rightOSVRDevice));
+			return GestureEnabled && (ActivationConditionsHand(leftHand, rightHand) ||
+			                          ActivationConditionsOSVR(leftOSVRDevice, rightOSVRDevice));
 		}
 
 		protected override bool ShouldGestureDeactivate(Leap.Hand leftHand,
@@ -167,6 +168,6 @@ namespace IMRE.Gestures
 
 		//this does the action of the gesture.
 		//These functions are implemented for each use case.
-		protected abstract bool WhileGestureActive(Leap.Hand leftHand, Leap.Hand rightHand, InputDevice leftOSVRController, InputDevice rightOSVRController);
+		protected abstract void WhileGestureActive(Leap.Hand leftHand, Leap.Hand rightHand, InputDevice leftOSVRController, InputDevice rightOSVRController);
 	}
 }

@@ -65,11 +65,11 @@ public abstract class PointAtGesture : OneHandedGesture {
             switch (whichHand)
             {
                 case Leap.Unity.Chirality.Left:
-                    //Button ID 8 is Left controller trackpad being pressed
+                    //Button ID 8 is Left controller track-pad being pressed
                     //check downward facing?
                     return Input.GetButtonDown("8") && Input.GetAxis("2") > 0;
                 case Leap.Unity.Chirality.Right:
-                    //Button id 9 is right controller trackpad being pressed
+                    //Button id 9 is right controller track-pad being pressed
                     return Input.GetButtonDown("9") && Input.GetAxis("5") > 0;
                 default:
                     return false;
@@ -84,11 +84,11 @@ public abstract class PointAtGesture : OneHandedGesture {
             switch (whichHand)
             {
                 case Leap.Unity.Chirality.Left:
-                    //Button ID 8 is Left controller trackpad being pressed
+                    //Button ID 8 is Left controller track-pad being pressed
                     //check downward facing?
                     return Input.GetButtonUp("8") || Input.GetAxis("2") < 0;
                 case Leap.Unity.Chirality.Right:
-                    //Button id 9 is right controller trackpad being pressed
+                    //Button id 9 is right controller track-pad being pressed
                     return Input.GetButtonUp("9") || Input.GetAxis("5") < 0;
                 default:
                     return false;

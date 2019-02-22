@@ -8,7 +8,7 @@ using Leap.Unity;
 
 namespace IMRE.Gestures
 {
-    public abstract class SwipeGesture : OneHandedGesture
+    public abstract class OpenPalmPush : OneHandedGesture
     {
         public float speedTol = .5f;
         public float angleTol = 30f;
@@ -49,14 +49,13 @@ namespace IMRE.Gestures
         protected override bool ActivationConditionsHand(Leap.Hand hand)
         {
             //want movement in plane of palm within tolerance.
-            //consider using running average of hand movement
             Vector3 move = hand.PalmVelocity.ToVector3();
             Vector3 plane = hand.PalmNormal.ToVector3();
 
             //we want velocity to be nonzero.
             float speed = move.magnitude;
             //we want to have close to zero angle between movement and palm.
-            float angle = 90 - Mathf.Abs(Vector3.Angle(move, plane));
+            float angle = Mathf.Abs(Vector3.Angle(move, plane));
 
             return (hand.Fingers.Where(finger => finger.IsExtended).Count() == 5) && speed > speedTol && angle < angleTol;
         }
@@ -68,7 +67,7 @@ namespace IMRE.Gestures
             //we want velocity to be nonzero.
             float speed = move.magnitude;
             //we want to have close to zero angle between movement
-            float angle = 90- Mathf.Abs(Vector3.Angle(move, plane));
+            float angle = Mathf.Abs(Vector3.Angle(move, plane));
 
             //open palm plus motion
             switch (whichHand)
@@ -95,7 +94,7 @@ namespace IMRE.Gestures
             //we want velocity to be nonzero.
             float speed = move.magnitude;
             //we want to have close to zero angle between movement
-            float angle = 90- Mathf.Abs(Vector3.Angle(move, plane));
+            float angle = Mathf.Abs(Vector3.Angle(move, plane));
 
             switch (whichHand)
             {

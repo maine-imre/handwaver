@@ -9,7 +9,7 @@ namespace IMRE.Gestures
 {
 	public abstract class DoublePinchNoGraspGesture : TwoHandedGesture
 	{
-        private float pinchTol = .8f;
+        public float pinchTol = .8f;
 
         protected override void visualFeedbackActivated()
 		{
@@ -49,8 +49,8 @@ namespace IMRE.Gestures
 		{
             //if both the left hand and right hand are detected to be pinching,
             //return true.
-			return leftHand.PinchStrength > pinchTol && rightHand.PinchStrength > pinchTol 
-                && !(leftInteractionHand.isGraspingObject || rightInteractionHand.isGraspingObject);
+			return (leftHand.PinchStrength > pinchTol && rightHand.PinchStrength > pinchTol 
+                && !(leftInteractionHand.isGraspingObject || rightInteractionHand.isGraspingObject));
 		}
 		protected override bool ActivationConditionsOSVR(InputDevice leftOSVRController, InputDevice rightOSVRController)
 		{

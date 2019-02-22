@@ -15,7 +15,7 @@ namespace IMRE.Gestures
 			throw new NotImplementedException();
 		}
 
-		protected override bool WhileGestureActive(Leap.Hand leftHand, Leap.Hand rightHand, InputDevice leftOSVRController, InputDevice rightOSVRController)
+		protected override void WhileGestureActive(Leap.Hand leftHand, Leap.Hand rightHand, InputDevice leftOSVRController, InputDevice rightOSVRController)
 		{
 			throw new NotImplementedException();
 		}

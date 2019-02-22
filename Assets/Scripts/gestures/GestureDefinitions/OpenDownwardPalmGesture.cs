@@ -16,7 +16,7 @@ namespace IMRE.Gestures
 	public abstract class OpenDownwardPalmGesture : OneHandedGesture
 	{
 
-		public float angleTolerance = 15f;
+		public float angleTolerance = 20f;
 
 
 		protected override void visualFeedbackActivated()

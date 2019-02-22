@@ -74,7 +74,7 @@ public abstract class SwipeInPlaneGesture : OneHandedGesture {
             //we want velocity to be nonzero.
             float speed = move.magnitude;
             //we want to have close to zero angle between movement and palm.
-            float angle = Mathf.Abs(Vector3.Angle(move, plane));
+            float angle = 90-Mathf.Abs(Vector3.Angle(move, plane));
 
             float planeAngle = Mathf.Abs(Vector3.Angle(plane, planeNormal));
             float distToPlane = Vector3.Project(hand.PalmPosition.ToVector3() - pointOnPlane, planeNormal).magnitude;
@@ -89,7 +89,7 @@ public abstract class SwipeInPlaneGesture : OneHandedGesture {
             //we want velocity to be nonzero.
             float speed = move.magnitude;
             //we want to have close to zero angle between movement
-            float angle = Mathf.Abs(Vector3.Angle(move, plane));
+            float angle = 90-Mathf.Abs(Vector3.Angle(move, plane));
             float planeAngle = Mathf.Abs(Vector3.Angle(plane, planeNormal));
             float distToPlane = Vector3.Project(interactionController.position - pointOnPlane, planeNormal).magnitude;
 
@@ -119,7 +119,7 @@ public abstract class SwipeInPlaneGesture : OneHandedGesture {
             //we want velocity to be nonzero.
             float speed = move.magnitude;
             //we want to have close to zero angle between movement
-            float angle = Mathf.Abs(Vector3.Angle(move, plane));
+            float angle = 90-Mathf.Abs(Vector3.Angle(move, plane));
 
             switch (whichHand)
             {
