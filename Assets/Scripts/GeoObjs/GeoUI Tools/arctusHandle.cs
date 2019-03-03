@@ -61,12 +61,18 @@ namespace IMRE.HandWaver
 				{
 					thisArctus.Center = other.gameObject.GetComponent<AbstractPoint>();
 					if (thisArctus.edgeHandle == null)
+					{
 						edge = thisArctus.spawnEdge(other.transform.position);
+					}
 				}
 				else
 				{
 					if (thisArctus != null)
+					{
 						thisArctus.Edge = other.gameObject.GetComponent<AbstractPoint>();
+						GetComponent<InteractionBehaviour>().enabled = false;
+						this.transform.parent = thisArctus.Edge.transform;
+					}
 					else
 						Debug.Log("This handle wants a reference to the arctus behave. " + name);
 				}

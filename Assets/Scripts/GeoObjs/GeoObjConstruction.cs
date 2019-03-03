@@ -5,7 +5,7 @@ See license info in readme.md.
 www.imrelab.org
 **/
 
-﻿using System.Collections;
+ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
