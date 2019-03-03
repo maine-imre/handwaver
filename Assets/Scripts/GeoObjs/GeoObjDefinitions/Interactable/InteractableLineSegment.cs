@@ -5,7 +5,7 @@ See license info in readme.md.
 www.imrelab.org
 **/
 
-﻿using Leap.Unity.Interaction;
+ using Leap.Unity.Interaction;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,7 +24,7 @@ namespace IMRE.HandWaver
 		#region Constructors
             public static InteractableLineSegment Constructor()
 						{
-							return Instantiate(PrefabManager.Spawn("InteractableLineSegment")).GetComponent<InteractableLineSegment>();
+							return Instantiate(PrefabManager.GetPrefab("InteractableLineSegment")).GetComponent<InteractableLineSegment>();
 						}
         #endregion
 

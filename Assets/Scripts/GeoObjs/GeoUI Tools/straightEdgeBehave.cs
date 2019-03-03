@@ -23,7 +23,7 @@ namespace IMRE.HandWaver
 	{
         #region Constructors
         public static straightEdgeBehave Constructor(){
-			GameObject go = GameObject.Instantiate(PrefabManager.Spawn("Straightedge"));
+			GameObject go = GameObject.Instantiate(PrefabManager.GetPrefab("Straightedge"));
 			return go.GetComponent<straightEdgeBehave>();
 		}
         #endregion

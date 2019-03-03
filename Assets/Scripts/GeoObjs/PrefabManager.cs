@@ -16,16 +16,23 @@ public class PrefabManager : MonoBehaviour
 		prefabList.ForEach(p => prefabDictionary.Add(p.name, p));
 	}
 
-	internal static GameObject Spawn(string prefabName)
+	/// <summary>
+	/// Finds a prefab from predetermined Resources folders
+	/// To be uesd with a GameObject.Instantiate call.
+	/// </summary>
+	/// <param name="prefabName"></param>
+	/// <returns></returns>
+	internal static GameObject GetPrefab(string prefabName)
 	{
+		//note that the prefab manager is not a spawner.
 		if (prefabDictionary.ContainsKey(prefabName))
 		{
-			return Instantiate(prefabDictionary[prefabName]);
+			return prefabDictionary[prefabName];
 		}
 		else
 		{
 			Debug.LogError("There is no prefab with the name : " + prefabName + " in the prefab dictionary.");
-			return new GameObject();
+			return null;
 		}
 	}
 

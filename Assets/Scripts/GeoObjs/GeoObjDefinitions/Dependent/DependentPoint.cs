@@ -5,7 +5,7 @@ See license info in readme.md.
 www.imrelab.org
 **/
 
-﻿using Leap.Unity.Interaction;
+ using Leap.Unity.Interaction;
 using System;
 using UnityEngine;
 
@@ -19,7 +19,7 @@ namespace IMRE.HandWaver
 		#region Constructors
 		public static DependentPoint Constructor()
 		{
-									return GameObject.Instantiate(PrefabManager.Spawn("DependentPoint")).GetComponent<DependentPoint>();
+									return GameObject.Instantiate(PrefabManager.GetPrefab("DependentPoint")).GetComponent<DependentPoint>();
 		}
 		#endregion
 		private Vector3 oldPos;

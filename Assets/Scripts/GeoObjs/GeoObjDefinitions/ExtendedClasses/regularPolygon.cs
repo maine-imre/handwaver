@@ -5,7 +5,7 @@ See license info in readme.md.
 www.imrelab.org
 **/
 
-﻿using System.Collections;
+ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Leap.Unity.Interaction;
@@ -23,7 +23,7 @@ namespace IMRE.HandWaver
         #region Constructors
             public static regularPolygon Constructor()
 						{
-							return GameObject.Instantiate(PrefabManager.Spawn("RegularPolygon")).GetComponent<regularPolygon>();
+							return GameObject.Instantiate(PrefabManager.GetPrefab("RegularPolygon")).GetComponent<regularPolygon>();
 						}
         #endregion
         public int n = 0;

@@ -5,7 +5,7 @@ See license info in readme.md.
 www.imrelab.org
 **/
 
-﻿using Leap.Unity.Interaction;
+ using Leap.Unity.Interaction;
 using UnityEngine;
 using System;
 using IMRE.HandWaver.Solver;
@@ -23,7 +23,7 @@ namespace IMRE.HandWaver
 		#region Constructors
 			public static  DependentPolygon Constructor()
 			{
-				return GameObject.Instantiate(PrefabManager.Spawn("DepenDependentPolygon")).GetComponent<DependentPolygon>();
+				return GameObject.Instantiate(PrefabManager.GetPrefab("DepenDependentPolygon")).GetComponent<DependentPolygon>();
 			}
 		#endregion
 

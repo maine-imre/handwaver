@@ -5,7 +5,7 @@ See license info in readme.md.
 www.imrelab.org
 **/
 
-﻿using System;
+ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,7 +23,7 @@ namespace IMRE.HandWaver
         #region Constructors
             public static InteractablePoint Constructor()
 			{
-				return GameObject.Instantiate(PrefabManager.Spawn("InteractablePoint")).GetComponent<InteractablePoint>();
+				return GameObject.Instantiate(PrefabManager.GetPrefab("InteractablePoint")).GetComponent<InteractablePoint>();
 			}
         #endregion
 
