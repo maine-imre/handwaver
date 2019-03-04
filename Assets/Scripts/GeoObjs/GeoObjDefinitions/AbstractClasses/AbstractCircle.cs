@@ -69,11 +69,11 @@ namespace IMRE.HandWaver
             }
 
             LineRenderer lineRenderer = GetComponent<LineRenderer>();
-            lineRenderer.material = new Material(Shader.Find("Particles/Additive"));
+            //lineRenderer.material = new Material(Shader.Find("Particles/Additive"));
             lineRenderer.startColor = Color.blue;
             lineRenderer.endColor = Color.blue;
-            //lineRenderer.startWidth = apothem;
-            //lineRenderer.endWidth = apothem;
+            lineRenderer.startWidth = .005f;
+            lineRenderer.endWidth = .005f;
             lineRenderer.positionCount = numvertices;
             lineRenderer.SetPositions(vertices);
         }
