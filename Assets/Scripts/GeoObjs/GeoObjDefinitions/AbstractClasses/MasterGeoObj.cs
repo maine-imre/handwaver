@@ -414,13 +414,16 @@ namespace IMRE.HandWaver
 			}
 		}
 
-		public virtual void InitializeFigure()
+		public virtual void inializeFigure()
 		{
 			StandardMaterial = HW_GeoSolver.ins.standardMaterial;
 
 			thisIBehave.OnGraspBegin += StartInteraction;
 			thisIBehave.OnPerControllerGraspBegin += Stretch;
 			thisIBehave.OnGraspEnd += EndInteraction;
+			
+			//attempt to fix colors.
+			SelectionStatus = SelectionStatus;
 
 			cUpdateRMan = UpdateRMan();
 			waitForStretch = WaitForStretch();
