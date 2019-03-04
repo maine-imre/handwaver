@@ -348,3 +348,9 @@ __pycache__/
 
 *.csproj
 *.sln
+
+Assets/BlueprintReality\.meta
+
+Assets/MixCast\.meta
+
+Assets/StreamingAssets\.meta
