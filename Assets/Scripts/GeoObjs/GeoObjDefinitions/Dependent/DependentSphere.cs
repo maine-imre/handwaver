@@ -20,7 +20,7 @@ namespace IMRE.HandWaver
         #region Constructors
             public static DependentSphere Constructor()
 						{
-							return GameObject.Instantiate(PrefabManager.GetPrefab("DependentSphere")).GetComponent<DependentSphere>();
+							return PrefabManager.Spawn("DependentSphere").GetComponent<DependentSphere>();
 						}
         #endregion
 

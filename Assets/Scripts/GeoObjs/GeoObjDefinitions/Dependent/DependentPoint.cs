@@ -19,7 +19,7 @@ namespace IMRE.HandWaver
 		#region Constructors
 		public static DependentPoint Constructor()
 		{
-									return GameObject.Instantiate(PrefabManager.GetPrefab("DependentPoint")).GetComponent<DependentPoint>();
+									return PrefabManager.Spawn("DependentPoint").GetComponent<DependentPoint>();
 		}
 		#endregion
 		private Vector3 oldPos;

@@ -20,7 +20,7 @@ namespace IMRE.HandWaver
     {
 		#region Constructors
 		public static DependentCircle Constructor(){
-			return Instantiate(PrefabManager.GetPrefab("DependentCircle")).GetComponent<DependentCircle>();
+			return PrefabManager.Spawn("DependentCircle").GetComponent<DependentCircle>();
 		}
 		#endregion
 

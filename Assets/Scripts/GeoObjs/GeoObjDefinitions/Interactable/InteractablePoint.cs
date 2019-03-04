@@ -23,7 +23,7 @@ namespace IMRE.HandWaver
         #region Constructors
             public static InteractablePoint Constructor()
 			{
-				return GameObject.Instantiate(PrefabManager.GetPrefab("InteractablePoint")).GetComponent<InteractablePoint>();
+				return PrefabManager.Spawn("InteractablePoint").GetComponent<InteractablePoint>();
 			}
         #endregion
 

@@ -36,6 +36,12 @@ public class PrefabManager : MonoBehaviour
 		}
 	}
 
+	internal static GameObject Spawn(string prefabName)
+	{
+		return Instantiate(GetPrefab(prefabName));
+	}
+
+
 	[ContextMenu("get prefab data")]
 	public void gatherPrefabData()
 	{

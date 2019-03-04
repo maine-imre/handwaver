@@ -21,7 +21,7 @@ namespace IMRE.HandWaver
 		#region Constructors
             public static DependentPyramid Constructor()
 						{
-							return GameObject.Instantiate(PrefabManager.GetPrefab("DependentPyramid")).GetComponent<DependentPyramid>();
+							return PrefabManager.Spawn("DependentPyramid").GetComponent<DependentPyramid>();
 						}
         #endregion
 
