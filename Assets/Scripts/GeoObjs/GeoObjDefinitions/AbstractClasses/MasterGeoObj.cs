@@ -414,7 +414,7 @@ namespace IMRE.HandWaver
 			}
 		}
 
-		public virtual void initalizeFigure()
+		public virtual void InitializeFigure()
 		{
 			StandardMaterial = HW_GeoSolver.ins.standardMaterial;
 

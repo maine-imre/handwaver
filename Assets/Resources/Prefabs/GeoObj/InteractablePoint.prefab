@@ -9,12 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 3717550434676577754}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_GeneratorAsset: {fileID: 0}
   m_Script: {fileID: 11500000, guid: 0e76f0415d895454ab6f6f3295c9c07f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   allowDelete: 1
-  figType: 0
+  figType: 1
   intersectionFigure: 0
   figName: 
   figIndex: 0
@@ -112,7 +111,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 3717550434676577754}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_GeneratorAsset: {fileID: 0}
   m_Script: {fileID: 11500000, guid: 2f10fa40360571247a7ca806d6859557, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
