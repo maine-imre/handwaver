@@ -176,42 +176,7 @@ namespace IMRE.HandWaver
         {
             set
             {
-                switch (figType)
-                {
-                    case GeoObjType.point:
-                        GetComponentInChildren<MeshRenderer>().materials[0].color = value;
-                        break;
-                    case GeoObjType.line:
-                        GetComponent<LineRenderer>().materials[0].color = value;
-                        break;
-                    case GeoObjType.polygon:
-                        GetComponent<MeshRenderer>().materials[0].color = value;
-                        break;
-                    case GeoObjType.prism:
-                        break;
-                    case GeoObjType.pyramid:
-                        break;
-                    case GeoObjType.circle:
-                        GetComponent<LineRenderer>().materials[0].color = value;
-                        break;
-                    case GeoObjType.sphere:
-                        GetComponent<MeshRenderer>().materials[0].color = value;
-                        break;
-                    case GeoObjType.revolvedsurface:
-                        GetComponent<MeshRenderer>().materials[0].color = value;
-                        break;
-                    case GeoObjType.torus:
-                        GetComponent<MeshRenderer>().materials[0].color = value;
-                        break;
-                    case GeoObjType.flatface:
-                        GetComponent<MeshRenderer>().materials[0].color = value;
-                        break;
-                    case GeoObjType.straightedge:
-                        GetComponent<LineRenderer>().materials[0].color = value;
-                        break;
-                    case GeoObjType.none:
-                        break;
-                }
+//depreciated
             }
         }
 		/// <summary>
@@ -228,67 +193,86 @@ namespace IMRE.HandWaver
 
 			set
 			{
-				Material mat = null;
 				switch (value)
 				{
 					case SelectionStatus.selected:
-						mat = HW_GeoSolver.ins.selectedMaterial;
-						break;
-					case SelectionStatus.active:
-						mat = HW_GeoSolver.ins.activeMaterial;
-						break;
-					case SelectionStatus.canidate:
-						mat = HW_GeoSolver.ins.canidateMaterial;
-						break;
-					case SelectionStatus.none:
-						mat = HW_GeoSolver.ins.standardMaterial;
-						switch (myAbility)
+						foreach (MeshRenderer meshRenderer in GetComponentsInChildren<MeshRenderer>())
 						{
-							case updateCapability.interactable:
-								break;
-							case updateCapability.dependent:
-								mat.color = Color.grey;
-								break;
-							case updateCapability.geoStatic:
-								mat.color = Color.gray;
-								break;
+							meshRenderer.material.SetColor("_Color",HW_GeoSolver.ins.selectedColor);
+							Debug.Log("Set Material to Selected");
+						}
+						foreach (LineRenderer lineRenderer in GetComponentsInChildren<LineRenderer>())
+						{
+							lineRenderer.material.SetColor("_Color",HW_GeoSolver.ins.selectedColor);
+							Debug.Log("Set Material to Selected");
 						}
 						break;
-				}
-				switch (figType)
-				{
-					case GeoObjType.point:
-						GetComponentInChildren<MeshRenderer>().materials[0] = mat;
+					case SelectionStatus.active:
+						foreach (MeshRenderer meshRenderer in GetComponentsInChildren<MeshRenderer>())
+						{
+							meshRenderer.material.SetColor("_Color",HW_GeoSolver.ins.activeColor);
+						}
+						foreach (LineRenderer lineRenderer in GetComponentsInChildren<LineRenderer>())
+						{
+							lineRenderer.material.SetColor("_Color",HW_GeoSolver.ins.activeColor);
+
+						}
 						break;
-					case GeoObjType.line:
-						GetComponent<LineRenderer>().materials[0] = mat;
+					case SelectionStatus.canidate:
+						foreach (MeshRenderer meshRenderer in GetComponentsInChildren<MeshRenderer>())
+						{
+							meshRenderer.material.SetColor("_Color",HW_GeoSolver.ins.canidateColor);
+						}
+						foreach (LineRenderer lineRenderer in GetComponentsInChildren<LineRenderer>())
+						{
+							lineRenderer.material.SetColor("_Color",HW_GeoSolver.ins.canidateColor);
+
+						}
 						break;
-					case GeoObjType.polygon:
-						GetComponent<MeshRenderer>().materials[0] = mat;
-						break;
-					case GeoObjType.prism:
-						break;
-					case GeoObjType.pyramid:
-						break;
-					case GeoObjType.circle:
-						GetComponent<LineRenderer>().materials[0] = mat;
-						break;
-					case GeoObjType.sphere:
-						GetComponent<MeshRenderer>().materials[0] = mat;
-						break;
-					case GeoObjType.revolvedsurface:
-						GetComponent<MeshRenderer>().materials[0] = mat;
-						break;
-					case GeoObjType.torus:
-						GetComponent<MeshRenderer>().materials[0] = mat;
-						break;
-					case GeoObjType.flatface:
-						GetComponent<MeshRenderer>().materials[0] = mat;
-						break;
-					case GeoObjType.straightedge:
-						GetComponent<LineRenderer>().materials[0] = mat;
-						break;
-					case GeoObjType.none:
+					case SelectionStatus.none:
+						switch (myAbility)
+						{
+							case updateCapability.dependent:
+								foreach (MeshRenderer meshRenderer in GetComponentsInChildren<MeshRenderer>())
+								{
+									meshRenderer.material.SetColor("_Color",HW_GeoSolver.ins.dependentColor);
+									Debug.Log("Set Material to Default");
+								}
+								foreach (LineRenderer lineRenderer in GetComponentsInChildren<LineRenderer>())
+								{
+									lineRenderer.material.SetColor("_Color",HW_GeoSolver.ins.dependentColor);
+
+									Debug.Log("Set Material to Default");
+								}
+								break;
+							case updateCapability.interactable:
+								foreach (MeshRenderer meshRenderer in GetComponentsInChildren<MeshRenderer>())
+								{
+									meshRenderer.material.SetColor("_Color",HW_GeoSolver.ins.defaultColor);
+									Debug.Log("Set Material to Default");
+								}
+								foreach (LineRenderer lineRenderer in GetComponentsInChildren<LineRenderer>())
+								{
+									lineRenderer.material.SetColor("_Color",HW_GeoSolver.ins.defaultColor);
+
+									Debug.Log("Set Material to Default");
+								}
+								break;
+							case updateCapability.geoStatic:
+								foreach (MeshRenderer meshRenderer in GetComponentsInChildren<MeshRenderer>())
+								{
+									meshRenderer.material.SetColor("_Color",HW_GeoSolver.ins.staticColor);
+									Debug.Log("Set Material to Default");
+								}
+								foreach (LineRenderer lineRenderer in GetComponentsInChildren<LineRenderer>())
+								{
+									lineRenderer.material.SetColor("_Color",HW_GeoSolver.ins.staticColor);
+
+									Debug.Log("Set Material to Default");
+								}
+								break;
+						}
+
 						break;
 				}
 				_thisSelectStatus = value;
@@ -336,23 +320,10 @@ namespace IMRE.HandWaver
 		private Component halo;
 
 		internal bool interesectionFigure;
-		private Material _standardMaterial;
 		private string _label;
 #pragma warning disable 0169
 
-		internal Material StandardMaterial
-		{
-			get
-			{
-				return _standardMaterial;
-			}
 
-			set
-			{
-				_standardMaterial = value;
-				thisSelectStatus = thisSelectStatus;
-			}
-		}
 
 		[ContextMenu("Display Selection Status")]
 		public void displaySelectionStatus()
@@ -416,8 +387,6 @@ namespace IMRE.HandWaver
 
 		public virtual void InitializeFigure()
 		{
-			StandardMaterial = HW_GeoSolver.ins.standardMaterial;
-
 			thisIBehave.OnGraspBegin += StartInteraction;
 			thisIBehave.OnPerControllerGraspBegin += Stretch;
 			thisIBehave.OnGraspEnd += EndInteraction;

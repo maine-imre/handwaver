@@ -226,11 +226,7 @@ namespace IMRE.HandWaver
 			MeshFilter mf = GetComponent<MeshFilter>();
 			Mesh mesh = mf.mesh;
 
-			//Init ();
-			Renderer rend = gameObject.GetComponent<Renderer>();
-			Material mat = rend.material;
-			mat.color = new Color(133 / 255f, 130 / 255f, 225 / 255f, 0.43137254902f); //colorGenerator.randomColorTransparent(mat);
-
+			thisSelectStatus = thisSelectStatus;
 			int pointNum = pointList.Count;
 
 			if (pointNum > 2)

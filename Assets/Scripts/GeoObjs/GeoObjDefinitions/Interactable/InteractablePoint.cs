@@ -30,8 +30,6 @@ namespace IMRE.HandWaver
         public bool controllCollide = false;
         public bool glueBool = false;
 
-        private Renderer rend;
-        private Material mat;
         private List<Transform> neighbors;
 
         private Vector3 oldPos;
@@ -43,14 +41,12 @@ namespace IMRE.HandWaver
         {
 			base.InitializeFigure();
 			this.figType = GeoObjType.point;
-			rend = gameObject.GetComponentInChildren<Renderer>();
-            mat = rend.material;
-            mat.color = colorGenerator.randomColorSolid(mat);
-
+            
             initialScale = this.transform.localScale;
 
             this.neighbors = new List<Transform>();
             this.updateNeighbors();
+            thisSelectStatus = thisSelectStatus;
 
             //moveRestrict();
             StartCoroutine(disallowSnap());

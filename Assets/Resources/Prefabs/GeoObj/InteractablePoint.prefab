@@ -94,6 +94,11 @@ PrefabInstance:
       propertyPath: interactionBehaviour
       value: 
       objectReference: {fileID: 1344052268064074334}
+    - target: {fileID: 1435853415707611703, guid: 89a6f56a265f22ae2b810fd356725597,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e95c7ad7f41781b47b753b2d13a63e3e, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89a6f56a265f22ae2b810fd356725597, type: 3}
 --- !u!1 &3717550434676577754 stripped

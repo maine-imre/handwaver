@@ -141,6 +141,7 @@ namespace IMRE.HandWaver
 			{
 				case shipWheelOffStraightedge.wheelType.revolve:
 					shipsWheel = shipsWheel_revolve;
+					GetComponent<Leap.Unity.Interaction.InteractionBehaviour>().ignoreGrasping = true;
 					break;
 				//the hoist case should be depreciated.
 				case shipWheelOffStraightedge.wheelType.hoist:
