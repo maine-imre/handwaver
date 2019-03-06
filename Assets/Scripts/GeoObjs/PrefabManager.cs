@@ -51,7 +51,9 @@ public class PrefabManager : MonoBehaviour
 		return Instantiate(GetPrefab(prefabName));
 	}
 
-
+	/// <summary>
+	/// Uses predetermined paths to populate the list of prefab references in the editor.
+	/// </summary>
 	[ContextMenu("get prefab data")]
 	public void gatherPrefabData()
 	{
