@@ -131,21 +131,16 @@ namespace IMRE.HandWaver
 		{
 			int n = 0;
 			n = (int)(System.Math.Truncate(rotationVal));
-			//Debug.Log("The value of rotationVal is " + rotationVal);
-			//Debug.Log("The value of nTurns is " + n);
 			return n;
 		}
 
 		public bool newTurn()
 		{
 			bool isNew = (turnCount - nTurns() >= 3);
-			//Debug.Log("The value of turnCount is " + turnCount);
-
 			if (isNew)
 			{
 				turnCount = nTurns();
 			}
-			//Debug.Log(isNew + " is value for isNew boolean");
 			return isNew;
 		}
 		#endregion
@@ -220,10 +215,6 @@ namespace IMRE.HandWaver
 
 		internal void revolve(bool v)
 		{
-             		
-				Debug.Log("Revolve");
-			
-
 			Vector3 spindleCenter = parentSE.GetComponent<straightEdgeBehave>().center;
 			Vector3 normal = parentSE.GetComponent<straightEdgeBehave>().normalDir;
 
@@ -363,7 +354,6 @@ namespace IMRE.HandWaver
 
 		public void hoist()
 		{
-			Debug.Log("attempting hoist");
 			#region Hoist
 			MasterGeoObj[] selObj = FindObjectsOfType<MasterGeoObj>().Where(o => ((o.figType != GeoObjType.point) && o.IsSelected)).ToArray();
 			foreach (MasterGeoObj currObj in selObj)
