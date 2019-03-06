@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
+namespace IMRE.HandWaver{
+///<Summary>
+/// A way to instantiate prefabs without poolmanaging, while providing static references to other scripts.
+///</Summary>
 public class PrefabManager : MonoBehaviour
 {
 	public static PrefabManager ins;
@@ -20,8 +24,8 @@ public class PrefabManager : MonoBehaviour
 	/// Finds a prefab from predetermined Resources folders
 	/// To be uesd with a GameObject.Instantiate call.
 	/// </summary>
-	/// <param name="prefabName"></param>
-	/// <returns></returns>
+	/// <param name="prefabName">Prefab to be found</param>
+	/// <returns>Instance of Prefab</returns>
 	internal static GameObject GetPrefab(string prefabName)
 	{
 		//note that the prefab manager is not a spawner.
@@ -36,6 +40,12 @@ public class PrefabManager : MonoBehaviour
 		}
 	}
 
+	/// <summary>
+	/// Finds a prefab from predetermined Resources folders
+	/// Instantiates that prefab
+	/// </summary>
+	/// <param name="prefabName">PrefabToSpawn</param>
+	/// <returns>SpawnedPrefab</returns>
 	internal static GameObject Spawn(string prefabName)
 	{
 		return Instantiate(GetPrefab(prefabName));
@@ -50,4 +60,5 @@ public class PrefabManager : MonoBehaviour
 		prefabList.AddRange(Resources.LoadAll<GameObject>("Prefabs/Tools/"));
 	}
 
+}
 }
