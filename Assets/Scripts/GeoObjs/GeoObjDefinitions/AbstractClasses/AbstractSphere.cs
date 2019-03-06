@@ -45,10 +45,6 @@ namespace IMRE.HandWaver
 
             this.figType = GeoObjType.sphere;
 
-			Renderer rend = gameObject.GetComponent<Renderer>();
-			Material mat = rend.material;
-			mat.color = colorGenerator.randomColorTransparent(mat);
-
 			radius = Vector3.Magnitude(centerPosition - edgePosition);
             MeshFilter filter = this.GetComponent<MeshFilter>();
             Mesh mesh = filter.mesh;
