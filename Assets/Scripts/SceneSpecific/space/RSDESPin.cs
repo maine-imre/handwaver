@@ -534,28 +534,28 @@ namespace IMRE.HandWaver.Space
 			}
 		}
 
-		private void OnTriggerStay(Collider collider)
-		{
-			//if (myPintype == pintype.Star)
-			{
-				if ((iBehave != null && iBehave.isGrasped) && collider.GetComponentInParent<RSDESManager>() != null && this.GetComponent<InteractionBehaviour>().isGrasped == true)
-				{
-					snapToSurface();
-				}
-			}
-		}
+		//private void OnTriggerStay(Collider collider)
+		//{
+		//	//if (myPintype == pintype.Star)
+		//	{
+		//		if ((iBehave != null && iBehave.isGrasped) && collider.GetComponentInParent<RSDESManager>() != null && this.GetComponent<InteractionBehaviour>().isGrasped == true)
+		//		{
+		//			snapToSurface();
+		//		}
+		//	}
+		//}
 
-		private void OnTriggerExit(Collider collider)
-		{
-			if (collider.GetComponentInParent<RSDESManager>() != null)
-			{
-				iBehave.ReleaseFromGrasp();
-				snapToSurface();
-			}
-
-			if (onPinMove != null && onPinMove.Method != null)
-				onPinMove.Invoke();
-		}
+		//private void OnTriggerExit(Collider collider)
+		//{
+		//	if (collider.GetComponentInParent<RSDESManager>() != null)
+		//	{
+		//		iBehave.ReleaseFromGrasp();
+		//		snapToSurface();
+		//	}
+//
+//			if (onPinMove != null && onPinMove.Method != null)
+//				onPinMove.Invoke();
+//		}
 
 		private void OnDisable()
 		{

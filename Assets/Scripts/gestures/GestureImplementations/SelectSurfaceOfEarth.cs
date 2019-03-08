@@ -7,7 +7,7 @@ using UnityEngine.XR;
 
 namespace IMRE.Gestures
 {
-	public class SelectPinsGesture : PointAtGesture
+	public class SelectSurfaceOfEarth : PointAtGesture
 	{
 		protected override bool DeactivationConditionsActionComplete()
 		{
