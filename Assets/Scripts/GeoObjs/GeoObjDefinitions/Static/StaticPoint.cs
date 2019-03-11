@@ -5,7 +5,7 @@ See license info in readme.md.
 www.imrelab.org
 **/
 
-﻿using Leap.Unity.Interaction;
+ using Leap.Unity.Interaction;
 using System;
 using UnityEngine;
 
@@ -19,7 +19,7 @@ namespace IMRE.HandWaver
         #region Constructors
             public static StaticPoint Constructor()
 						{
-							return GameObject.Instantiate(PrefabManager.Spawn("StaticPoint")).GetComponent<StaticPoint>();
+							return PrefabManager.Spawn("StaticPoint").GetComponent<StaticPoint>();
 						}
         #endregion
 

@@ -5,7 +5,7 @@ See license info in readme.md.
 www.imrelab.org
 **/
 
-﻿using System;
+ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -44,10 +44,6 @@ namespace IMRE.HandWaver
 			thisCollider = this.GetComponent<SphereCollider>();
 
             this.figType = GeoObjType.sphere;
-
-			Renderer rend = gameObject.GetComponent<Renderer>();
-			Material mat = rend.material;
-			mat.color = colorGenerator.randomColorTransparent(mat);
 
 			radius = Vector3.Magnitude(centerPosition - edgePosition);
             MeshFilter filter = this.GetComponent<MeshFilter>();

@@ -5,7 +5,7 @@ See license info in readme.md.
 www.imrelab.org
 **/
 
-﻿using System.Collections;
+ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Leap.Unity.Interaction;
@@ -24,7 +24,7 @@ namespace IMRE.HandWaver
 		#region Constructors
             public static SnappablePoint Constructor()
 						{
-							return GameObject.Instantiate(PrefabManager.Spawn("SnappablePoint")).GetComponent<SnappablePoint>();
+							return GameObject.Instantiate(PrefabManager.GetPrefab("SnappablePoint")).GetComponent<SnappablePoint>();
 						}
         #endregion
 		private List<MasterGeoObj> relativeObjects;

@@ -81,10 +81,6 @@ namespace IMRE.HandWaver
 			}
 			newObj.transform.localScale *= anchorScale;
 			newObj.GetComponent<AnchorableBehaviour>().anchor = thisAnchor;
-			if (!newObj.GetComponent<AnchorableBehaviour>().TryAttach(true))
-			{
-				Debug.Log("Didnt attach to anchor. Whyyy");
-			}
 			prevItem = newObj.gameObject;
 
 		}

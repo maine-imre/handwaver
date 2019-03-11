@@ -97,8 +97,8 @@ namespace IMRE.HandWaver
             mesh.vertices = vertices;
             mesh.triangles = triangles;
             mesh.RecalculateNormals();
-			Material mat = GetComponent<Renderer>().material;
-			mat.color = colorGenerator.randomColorTransparent(mat);
+
+            thisSelectStatus = thisSelectStatus;
         }
 
         public override void updateFigure()

@@ -5,7 +5,7 @@ See license info in readme.md.
 www.imrelab.org
 **/
 
-﻿using System.Collections;
+ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Leap.Unity.Interaction;
@@ -24,6 +24,7 @@ namespace IMRE.HandWaver
 		public DependentSphere thisSphere;
 		public bool centerSet = false;
 		public bool edgeSet = false;
+		private bool done = false;
 		private AbstractPoint center;
 		private AbstractPoint edge;
 
@@ -40,7 +41,7 @@ namespace IMRE.HandWaver
 
         #region Constructors
         public static arctusBehaveV3 Constructor(){
-			GameObject go = GameObject.Instantiate(PrefabManager.Spawn("ArctusV3"));
+			GameObject go = GameObject.Instantiate(PrefabManager.GetPrefab("ArctusV3"));
 			return go.GetComponent<arctusBehaveV3>();
 		}
         #endregion
@@ -95,8 +96,9 @@ namespace IMRE.HandWaver
 				}
 				thisCircle.SetPositions(positions);
 			}
-			if (wheelSpinCollider.GetComponent<Rigidbody>().angularVelocity.magnitude > angleDeltaThreshold)
+			if (wheelSpinCollider.GetComponent<Rigidbody>().angularVelocity.magnitude > angleDeltaThreshold && !done)
 			{
+				done = true;
 				StartCoroutine(waitForSphere());
 			}
 		}
@@ -193,18 +195,8 @@ namespace IMRE.HandWaver
         {
             if (centerSet && edgeSet)
             {
-				thisSphere = DependentSphere.Constructor();
-				thisSphere.center = Center;
-				thisSphere.centerPosition = Center.transform.position;
-				thisSphere.edge = Edge;
-				thisSphere.edgePosition = Edge.transform.position;
-				thisSphere.transform.position = Center.transform.position;
-                
-                HW_GeoSolver.ins.AddDependence(thisSphere, Center);
-                HW_GeoSolver.ins.AddDependence(thisSphere, Edge);
-
-                thisSphere.InitializeFigure();
-
+	            GeoObjConstruction.dSphere(Center, Edge);
+				
 				Destroy(edgeHandle.gameObject);
                 Destroy(gameObject);
             }

@@ -49,14 +49,14 @@ namespace IMRE.HandWaver
 
 			if (loadBackground)
 				loadSceneAsyncByName(backgroundName, false);
-#if !UNITY_EDITOR
-			if (interalBuild)
-			{
-				Display.displays[0].Activate();
-				Display.displays[1].Activate();
-				FindObjectOfType<HWMixcastIO>().currMode = mixCastTargetMode.primaryAlt;
-			}
-#endif
+//#if !UNITY_EDITOR
+//			if (interalBuild)
+//			{
+//				Display.displays[0].Activate();
+//				Display.displays[1].Activate();
+//				FindObjectOfType<HWMixcastIO>().currMode = mixCastTargetMode.primaryAlt;
+//			}
+//#endif
 			autoLoadPlaintains = (loadScenesOnStart.Count == 0 && !(SceneManager.GetSceneAt(0).name == "ThreeTorus"));
 			PointToSelectEnabled = !loadScenesOnStart.Contains("LatticeLand");
 			Debug.Log("TOOLS: " + autoLoadPlaintains);

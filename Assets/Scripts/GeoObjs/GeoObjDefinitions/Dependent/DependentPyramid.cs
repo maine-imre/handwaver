@@ -5,7 +5,7 @@ See license info in readme.md.
 www.imrelab.org
 **/
 
-﻿using System;
+ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Leap.Unity.Interaction;
@@ -21,7 +21,7 @@ namespace IMRE.HandWaver
 		#region Constructors
             public static DependentPyramid Constructor()
 						{
-							return GameObject.Instantiate(PrefabManager.Spawn("DependentPyramid")).GetComponent<DependentPyramid>();
+							return PrefabManager.Spawn("DependentPyramid").GetComponent<DependentPyramid>();
 						}
         #endregion
 

@@ -5,7 +5,7 @@ See license info in readme.md.
 www.imrelab.org
 **/
 
-﻿using System;
+ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,7 +24,7 @@ namespace IMRE.HandWaver
         #region Constructors
             public static InteractablePolygon Constructor()
 						{
-							return GameObject.Instantiate(PrefabManager.Spawn("InteractablePolygon")).GetComponent<InteractablePolygon>();
+							return PrefabManager.Spawn("InteractablePolygon").GetComponent<InteractablePolygon>();
 						}
         #endregion
 
