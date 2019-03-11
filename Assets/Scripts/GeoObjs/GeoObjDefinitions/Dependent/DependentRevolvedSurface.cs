@@ -5,7 +5,7 @@ See license info in readme.md.
 www.imrelab.org
 **/
 
-﻿using Leap.Unity.Interaction;
+ using Leap.Unity.Interaction;
 using System;
 using IMRE.HandWaver.Solver;
 using UnityEngine;
@@ -21,7 +21,7 @@ namespace IMRE.HandWaver
         #region Constructors
         public static DependentRevolvedSurface Constructor()
 				{
-					return Instantiate(PrefabManager.Spawn("DependentRevolvedSurface")).GetComponent<DependentRevolvedSurface>();
+					return PrefabManager.Spawn("DependentRevolvedSurface").GetComponent<DependentRevolvedSurface>();
 				}
         #endregion
 

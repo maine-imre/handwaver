@@ -5,7 +5,7 @@ See license info in readme.md.
 www.imrelab.org
 **/
 
-﻿using System;
+ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,15 +23,13 @@ namespace IMRE.HandWaver
         #region Constructors
             public static InteractablePoint Constructor()
 			{
-				return GameObject.Instantiate(PrefabManager.Spawn("InteractablePoint")).GetComponent<InteractablePoint>();
+				return PrefabManager.Spawn("InteractablePoint").GetComponent<InteractablePoint>();
 			}
         #endregion
 
         public bool controllCollide = false;
         public bool glueBool = false;
 
-        private Renderer rend;
-        private Material mat;
         private List<Transform> neighbors;
 
         private Vector3 oldPos;
@@ -43,14 +41,12 @@ namespace IMRE.HandWaver
         {
 			base.InitializeFigure();
 			this.figType = GeoObjType.point;
-			rend = gameObject.GetComponentInChildren<Renderer>();
-            mat = rend.material;
-            mat.color = colorGenerator.randomColorSolid(mat);
-
+            
             initialScale = this.transform.localScale;
 
             this.neighbors = new List<Transform>();
             this.updateNeighbors();
+            thisSelectStatus = thisSelectStatus;
 
             //moveRestrict();
             StartCoroutine(disallowSnap());

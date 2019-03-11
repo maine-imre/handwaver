@@ -5,7 +5,7 @@ See license info in readme.md.
 www.imrelab.org
 **/
 
-﻿using Leap.Unity.Interaction;
+ using Leap.Unity.Interaction;
 using System;
 using IMRE.HandWaver.Solver;
 using UnityEngine;
@@ -20,7 +20,7 @@ namespace IMRE.HandWaver
         #region Constructors
             public static DependentSphere Constructor()
 						{
-							return GameObject.Instantiate(PrefabManager.Spawn("DependentSphere")).GetComponent<DependentSphere>();
+							return PrefabManager.Spawn("DependentSphere").GetComponent<DependentSphere>();
 						}
         #endregion
 

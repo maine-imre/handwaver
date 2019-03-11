@@ -66,10 +66,14 @@ namespace IMRE.HandWaver.Solver
 
 
         public bool blockDelete = false;
-		public Material selectedMaterial;
-		public Material activeMaterial;
-		public Material canidateMaterial;
 		public Material standardMaterial;
+		public Color defaultColor;
+		public Color selectedColor;
+		public Color activeColor;
+		public Color canidateColor;
+		public Color staticColor;
+		public Color dependentColor;
+			
 
 		public static HW_GeoSolver ins;
 

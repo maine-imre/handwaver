@@ -194,7 +194,7 @@ namespace IMRE.HandWaver.Lattice
 
 		internal void eraserAttach()
 		{
-			eraser = GameObject.Instantiate(PrefabManager.Spawn("Eraser2Prefab")).GetComponent<eraserBehave>();
+			eraser = GameObject.Instantiate(PrefabManager.GetPrefab("Eraser2Prefab")).GetComponent<eraserBehave>();
 			eraser.transform.position = palmAttachment.position;
 			eraser.transform.localPosition = new Vector3(0, 1, 0);
 			eraser.transform.parent = palmAttachment;

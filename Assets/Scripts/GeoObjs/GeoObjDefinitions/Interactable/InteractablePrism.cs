@@ -5,7 +5,7 @@ See license info in readme.md.
 www.imrelab.org
 **/
 
-﻿using System;
+ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Leap.Unity.Interaction;
@@ -25,7 +25,7 @@ namespace IMRE.HandWaver
 		#region Constructors
             public static InteractablePrism Constructor()
 						{
-							return GameObject.Instantiate(PrefabManager.Spawn("InteractablePrism")).GetComponent<InteractablePrism>();
+							return GameObject.Instantiate(PrefabManager.GetPrefab("InteractablePrism")).GetComponent<InteractablePrism>();
 						}
         #endregion
 

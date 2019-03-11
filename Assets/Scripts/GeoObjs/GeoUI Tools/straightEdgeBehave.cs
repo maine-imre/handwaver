@@ -23,7 +23,7 @@ namespace IMRE.HandWaver
 	{
         #region Constructors
         public static straightEdgeBehave Constructor(){
-			GameObject go = GameObject.Instantiate(PrefabManager.Spawn("Straightedge"));
+			GameObject go = GameObject.Instantiate(PrefabManager.GetPrefab("Straightedge"));
 			return go.GetComponent<straightEdgeBehave>();
 		}
         #endregion
@@ -53,14 +53,15 @@ namespace IMRE.HandWaver
 			thisAbehave.OnAttachedToAnchor += attach;
 
 			capsule = GetComponent<CapsuleCollider>();
-			this.GetComponent<LineRenderer>().positionCount = 4;
+			this.GetComponent<LineRenderer>().positionCount = 2;
+			
 
-			Vector3[] positions = new Vector3[4];
-			positions[1] = seHandle1.transform.position;
-			positions[2] = seHandle2.transform.position;
+			Vector3[] positions = new Vector3[2];
+			positions[0] = 100f * normalDir.normalized;
+			positions[1] = -100f * normalDir.normalized;
 
-			positions[0] = positions[2] - 1000 * (positions[2] - positions[1]);
-			positions[3] = positions[2] + 1000 * (positions[2] - positions[1]);
+			//positions[0] = positions[2] - 1000 * (positions[2] - positions[1]);
+			//positions[3] = positions[2] + 1000 * (positions[2] - positions[1]);
 
 			this.GetComponent<LineRenderer>().SetPositions(positions);
 
@@ -140,6 +141,7 @@ namespace IMRE.HandWaver
 			{
 				case shipWheelOffStraightedge.wheelType.revolve:
 					shipsWheel = shipsWheel_revolve;
+					GetComponent<Leap.Unity.Interaction.InteractionBehaviour>().ignoreGrasping = true;
 					break;
 				//the hoist case should be depreciated.
 				case shipWheelOffStraightedge.wheelType.hoist:
