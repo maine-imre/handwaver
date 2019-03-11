@@ -316,7 +316,7 @@ namespace IMRE.HandWaver
 					return Vector3.Cross(pointList[0].Position3 - pointList[1].Position3, pointList[1].Position3 - pointList[2].Position3).normalized;
 
 				}
-				catch
+				catch		//TODO: specify which error to catch if seen again
 				{
 					Debug.LogError("Normal Calculatoin failed on: " + figName);
 					return Vector3.zero;
