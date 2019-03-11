@@ -5,7 +5,7 @@ See license info in readme.md.
 www.imrelab.org
 **/
 
-﻿using System.Collections;
+ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Leap.Unity.Interaction;
@@ -22,18 +22,9 @@ namespace IMRE.HandWaver
     {
         #region Constructors
             public static regularPolygon Constructor()
-            {
-                GameObject go = new GameObject();
-				go.AddComponent<MeshFilter>();
-				go.AddComponent<MeshRenderer>();
-				//check if sphere mesh is added.
-				go.AddComponent<MeshCollider>();
-				go.AddComponent<Rigidbody>();
-				go.GetComponent<Rigidbody>().useGravity = false;
-				go.GetComponent<Rigidbody>().isKinematic = false;
-				go.AddComponent<InteractionBehaviour>();
-				return go.AddComponent<regularPolygon>();
-            }
+						{
+							return GameObject.Instantiate(PrefabManager.GetPrefab("RegularPolygon")).GetComponent<regularPolygon>();
+						}
         #endregion
         public int n = 0;
         public Vector3 basis1 = Vector3.right;
@@ -86,15 +77,15 @@ namespace IMRE.HandWaver
 
 			foreach (AbstractLineSegment line in lineList)
 			{
-				HW_GeoSolver.ins.addDependence(this.transform, line.transform);
+				HW_GeoSolver.ins.AddDependence(this, line);
 			}
 
 			foreach (AbstractPoint point in pointList)
 			{
-				HW_GeoSolver.ins.addDependence(this.transform, point.transform);
+				HW_GeoSolver.ins.AddDependence(this, point);
 			}
 
-			this.initializefigure();
+			this.InitializeFigure();
 
             this.AddToRManager();
         }

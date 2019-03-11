@@ -10,7 +10,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Leap.Unity.Interaction;
-
+using IMRE.HandWaver.Solver;
 
 namespace IMRE.HandWaver
 {
@@ -24,10 +24,10 @@ namespace IMRE.HandWaver
 		[Range(0f, 1f)]
 
 		public float anchorScale;
+		public bool pointSpawner;
 
 		public GameObject item;
-		public enum ConstructableObjType{none,interactablePoint};
-		public ConstructableObjType ConstructableObject = ConstructableObjType.none; 
+
 
 		public GameObject prevItem;
 
@@ -65,25 +65,14 @@ namespace IMRE.HandWaver
 			{
 				prevItem.transform.localScale /= anchorScale;
 			}
-			Transform newObj = null;
-
-			switch (ConstructableObject){
-				//this is a template, please complete the details.
-				case ConstructableObjType.interactablePoint:
-					newObj = InteractablePoint.Constructor().transform;
-					break;
-				default:
-
-				if (item != null)
-				{
-					newObj = Instantiate(item, spawnPoint.transform.position, spawnPoint.rotation).transform;
-				}
-				else
-				{
-					Debug.Log("item is not set. please set item or fix pool. Object: "+gameObject.name);
-				}
-				break;
-
+			Transform newObj;
+			if (!pointSpawner)
+			{
+				newObj = Instantiate(item, transform.position, Quaternion.identity).transform;
+			}
+			else
+			{
+				newObj = GeoObjConstruction.iPoint(HW_GeoSolver.ins.systemPosition(transform.position)).transform;
 			}
 			if(newObj == null)
 			{
@@ -91,7 +80,7 @@ namespace IMRE.HandWaver
 				return;
 			}
 			newObj.transform.localScale *= anchorScale;
-			newObj.GetComponent<AnchorableBehaviour>().TryAttachToNearestAnchor();
+			newObj.GetComponent<AnchorableBehaviour>().anchor = thisAnchor;
 			prevItem = newObj.gameObject;
 
 		}

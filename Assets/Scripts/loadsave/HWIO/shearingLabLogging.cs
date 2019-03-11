@@ -36,17 +36,17 @@ namespace IMRE.HandWaver.HWIO
 
 		private void checkLog()
 		{
-#if !UNITY_EDITOR
-			if (!Directory.Exists(Application.dataPath + @"/../dataCollection/"))
-			{
-				Directory.CreateDirectory(Application.dataPath + @" /../dataCollection/");
-			}
+//#if !UNITY_EDITOR
+//			if (!Directory.Exists(Application.dataPath + @"/../dataCollection/"))
+//			{
+//				Directory.CreateDirectory(Application.dataPath + @" /../dataCollection/");
+//			}
 
-			if (commandLineArgumentParse.logCheck())
-			{
-				StartCoroutine(LogShearingData());
-			}
-#endif
+//			if (commandLineArgumentParse.logCheck())
+//			{
+//				StartCoroutine(LogShearingData());
+//			}
+//#endif
 		}
 
 		private IEnumerator LogShearingData()

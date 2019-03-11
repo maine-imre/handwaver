@@ -258,12 +258,12 @@ namespace IMRE.HandWaver
         }
 
 		private void checkLog() {
-#if !UNITY_EDITOR
-			if (commandLineArgumentParse.logCheck())
-			{
-				StartCoroutine(logHandData());
-			}
-#endif
+//#if !UNITY_EDITOR
+//			if (commandLineArgumentParse.logCheck())
+//			{
+//				StartCoroutine(logHandData());
+//			}
+//#endif
 
 		}
 

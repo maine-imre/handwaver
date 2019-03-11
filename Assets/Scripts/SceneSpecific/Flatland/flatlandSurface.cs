@@ -21,7 +21,7 @@ namespace IMRE.HandWaver
     {
 		#region Constructors
 		public static flatlandSurface Constructor(){
-			GameObject go = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/GeoObj/flatlandSurface"));
+			GameObject go = GameObject.Instantiate(PrefabManager.GetPrefab("flatlandSurface"));
 			return go.GetComponent<flatlandSurface>();
 		}
 		#endregion

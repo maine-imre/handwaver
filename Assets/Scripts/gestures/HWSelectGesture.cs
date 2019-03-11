@@ -73,7 +73,6 @@ namespace IMRE.HandWaver {
 			}
 		}
 
-
 		/// <summary>
 		/// Returns true if hand has a pointing gesture
 		/// </summary>
@@ -83,10 +82,10 @@ namespace IMRE.HandWaver {
 		{
 			bool tmp =
 			(debugkeyboardinput.PointToSelectEnabled &&
-			(fingerExtentionState.pointerFingerExtended && hand.Fingers[1].IsExtended) &&
-			!(fingerExtentionState.middleFingerExtended && hand.Fingers[2].IsExtended) &&
-			!(fingerExtentionState.ringFingerExtended && hand.Fingers[3].IsExtended) &&
-			!(fingerExtentionState.pinkyFingerExtended && hand.Fingers[4].IsExtended) &&
+			(fingerExtentionState.pointerFingerExtended == hand.Fingers[1].IsExtended) &&
+			!(fingerExtentionState.middleFingerExtended == hand.Fingers[2].IsExtended) &&
+			!(fingerExtentionState.ringFingerExtended == hand.Fingers[3].IsExtended) &&
+			!(fingerExtentionState.pinkyFingerExtended == hand.Fingers[4].IsExtended) &&
 			!completeBool &&
 			!hand.IsPinching()
 			);

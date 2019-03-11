@@ -87,7 +87,7 @@ namespace IMRE.HandWaver
 				iPrism.bases.ForEach(p => p.pointList.ForEach(q => q.LeapInteraction = false));
 				iPrism.bases.ForEach(p => p.pointList.ForEach(q => q.GetComponent<MeshRenderer>().enabled = false));
 
-                HW_GeoSolver.ins.addDependence(basePoly2.transform, apex.transform);
+                HW_GeoSolver.ins.AddDependence(basePoly2, apex);
 
                 apex.GetComponent<InteractionBehaviour>().OnGraspedMovement += updateFigure;
             }

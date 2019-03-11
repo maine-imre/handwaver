@@ -5,7 +5,7 @@ See license info in readme.md.
 www.imrelab.org
 **/
 
-﻿using Leap.Unity.Interaction;
+ using Leap.Unity.Interaction;
 using UnityEngine;
 using System;
 using IMRE.HandWaver.Solver;
@@ -23,22 +23,9 @@ namespace IMRE.HandWaver
 		#region Constructors
 			public static  DependentPolygon Constructor()
 			{
-				GameObject go = new GameObject();
-				go.AddComponent<MeshFilter>();
-				go.AddComponent<MeshRenderer>();
-				go.AddComponent<MeshCollider>();
-				go.AddComponent<Rigidbody>();
-				go.GetComponent<Rigidbody>().useGravity = false;
-				go.GetComponent<Rigidbody>().isKinematic = false;
-				go.AddComponent<InteractionBehaviour>();
-				return go.AddComponent<DependentPolygon>();
+				return PrefabManager.Spawn("DepenDependentPolygon").GetComponent<DependentPolygon>();
 			}
 		#endregion
-
-		public override void initializefigure()
-        {
-			base.initializefigure();
-		}
 
 		internal override bool RMotion(NodeList<string> inputNodeList)
         {
