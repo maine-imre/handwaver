@@ -167,60 +167,60 @@ namespace IMRE.HandWaver {
 		protected override void WhileGestureActive(Hand hand)
 		{
 			//sethandtomodeSelect
-			float shortestDist = Mathf.Infinity;
-			closestObj = null;
-
-			foreach (MasterGeoObj mgo in FindObjectsOfType<MasterGeoObj>().Where(g => (g.GetComponent<AnchorableBehaviour>() == null || (g.GetComponent<AnchorableBehaviour>() != null && !g.GetComponent<AnchorableBehaviour>().isAttached))))
-			{
-				float distance = mgo.LocalDistanceToClosestPoint(hand.Fingers[1].TipPosition.ToVector3());
-				float angle = mgo.PointingAngleDiff(hand.Fingers[1].TipPosition.ToVector3(), hand.Fingers[1].Direction.ToVector3());
-
-				if (Mathf.Abs(distance) < shortestDist)
-				{
-					if (distance < shortestDist && angle < angleTolerance)
-					{
-						closestObj = mgo;
-						shortestDist = distance;
-					}
-				}
-				else
-				{
-					//check to see if any higher priority objectes lie within epsilon
-					bool v = (Mathf.Abs(distance) - shortestDist <= maximumRangeToSelect) && (
-					  ((closestObj.figType == GeoObjType.line || closestObj.figType == GeoObjType.polygon) && mgo.figType == GeoObjType.point)
-					  || (closestObj.figType == GeoObjType.polygon && mgo.figType == GeoObjType.point)
-					  );
-					if (v)
-					{
-						closestObj = mgo;
-						shortestDist = distance;
-					}
-				}
-			}
-
-
-			handColourManager.setHandColorMode(whichHand, handColourManager.handModes.select);
-
-			if (closestObj != null && shortestDist <= maximumRangeToSelect)
-			{
-				if (debugSelect)
-					Debug.Log(closestObj + " is the object toggling selection state.");
-
-
-
-				//switch on mode:
-				//				Select
-				//				Colour
-				if (closestObj.IsSelected)
-					closestObj.thisSelectStatus = MasterGeoObj.SelectionStatus.none;
-				else
-					closestObj.thisSelectStatus = MasterGeoObj.SelectionStatus.selected;
-
-
-				playSuccessSound();
-
-				//This determines if you have to cancel the gesture to select another object
-				completeBool = true;
+                                    			float shortestDist = Mathf.Infinity;
+                                    			closestObj = null;
+                                    
+                                    			foreach (MasterGeoObj mgo in FindObjectsOfType<MasterGeoObj>().Where(g => (g.GetComponent<AnchorableBehaviour>() == null || (g.GetComponent<AnchorableBehaviour>() != null && !g.GetComponent<AnchorableBehaviour>().isAttached))))
+                                    			{
+                                    				float distance = mgo.LocalDistanceToClosestPoint(hand.Fingers[1].TipPosition.ToVector3());
+                                    				float angle = mgo.PointingAngleDiff(hand.Fingers[1].TipPosition.ToVector3(), hand.Fingers[1].Direction.ToVector3());
+                                    
+                                    				if (Mathf.Abs(distance) < shortestDist)
+                                    				{
+                                    					if (distance < shortestDist && angle < angleTolerance)
+                                    					{
+                                    						closestObj = mgo;
+                                    						shortestDist = distance;
+                                    					}
+                                    				}
+                                    				else
+                                    				{
+                                    					//check to see if any higher priority objectes lie within epsilon
+                                    					bool v = (Mathf.Abs(distance) - shortestDist <= maximumRangeToSelect) && (
+                                    					  ((closestObj.figType == GeoObjType.line || closestObj.figType == GeoObjType.polygon) && mgo.figType == GeoObjType.point)
+                                    					  || (closestObj.figType == GeoObjType.polygon && mgo.figType == GeoObjType.point)
+                                    					  );
+                                    					if (v)
+                                    					{
+                                    						closestObj = mgo;
+                                    						shortestDist = distance;
+                                    					}
+                                    				}
+                                    			}
+                                    
+                                    
+                                    			handColourManager.setHandColorMode(whichHand, handColourManager.handModes.select);
+                                    
+                                    			if (closestObj != null && shortestDist <= maximumRangeToSelect)
+                                    			{
+                                    				if (debugSelect)
+                                    					Debug.Log(closestObj + " is the object toggling selection state.");
+                                    
+                                    
+                                    
+                                    				//switch on mode:
+                                    				//				Select
+                                    				//				Colour
+                                    				if (closestObj.IsSelected)
+                                    					closestObj.thisSelectStatus = MasterGeoObj.SelectionStatus.none;
+                                    				else
+                                    					closestObj.thisSelectStatus = MasterGeoObj.SelectionStatus.selected;
+                                    
+                                    
+                                    				playSuccessSound();
+                                    
+                                    				//This determines if you have to cancel the gesture to select another object
+                                    				completeBool = true;
 			}
 
 		}
