@@ -1,10 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Leap;
-using Leap.Unity.Gestures;
 using UnityEngine;
-using UnityEngine.XR;
 
 namespace IMRE.Gestures
 {
@@ -15,7 +12,7 @@ namespace IMRE.Gestures
 			throw new NotImplementedException();
 		}
 
-		protected override void WhileGestureActive(Leap.Hand leftHand, Leap.Hand rightHand, InputDevice leftOSVRController, InputDevice rightOSVRController)
+		protected override void WhileGestureActive(BodyInput bodyInput)
 		{
 			throw new NotImplementedException();
 		}

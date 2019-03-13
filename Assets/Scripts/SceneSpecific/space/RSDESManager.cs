@@ -1,6 +1,4 @@
 ﻿using IMRE.HandWaver.Interface;
-using Leap.Unity.Interaction;
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -252,18 +250,18 @@ namespace IMRE.HandWaver.Space
 			}
 		}
 
-		public leapButtonToggleExtension allowTiltButton;
+		//public leapButtonToggleExtension allowTiltButton;
 		public CapsuleCollider axisCollider;
 		public MeshRenderer axisRenderer;
 
-		public leapButtonToggleExtension showLatitude;
-		public leapButtonToggleExtension showLongitude;
-		public leapButtonToggleExtension showGHA;
-		public leapButtonToggleExtension showDeclination;
-		public leapButtonToggleExtension showGreatArc;
-		public leapButtonToggleExtension showEarth;
-		public leapButtonToggleExtension showLights;
-		public Leap.Unity.LeapPaint_v3.PressableSlider timeScaleSlider;
+		//public leapButtonToggleExtension showLatitude;
+		//public leapButtonToggleExtension showLongitude;
+		//public leapButtonToggleExtension showGHA;
+		//public leapButtonToggleExtension showDeclination;
+		//public leapButtonToggleExtension showGreatArc;
+		//public leapButtonToggleExtension showEarth;
+		//public leapButtonToggleExtension showLights;
+		//public Leap.Unity.LeapPaint_v3.PressableSlider timeScaleSlider;
 		public TMPro.TextMeshPro timeScaleDisplay;
 
 		private LineRenderer[] latRenderer;
@@ -288,11 +286,11 @@ namespace IMRE.HandWaver.Space
 			}
 		}
 
-		public leapButtonToggleExtension drawCircle;
+		//public leapButtonToggleExtension drawCircle;
 
 		private Dictionary<List<pinData>, LineRenderer> greatArcsLRs = new Dictionary<List<pinData>, LineRenderer>();
 
-		public leapButtonToggleExtension findDistance;
+		//public leapButtonToggleExtension findDistance;
 
 		private List<RSDESLineData> arcLineData = new List<RSDESLineData>();
 

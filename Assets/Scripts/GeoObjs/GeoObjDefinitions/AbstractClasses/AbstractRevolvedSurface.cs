@@ -30,7 +30,7 @@ namespace IMRE.HandWaver
         private float radius2;
         public float phaseshiftAdjust = 0f;
 
-		internal override Vector3 ClosestSystemPosition(Vector3 abstractPosition)
+		public override Vector3 ClosestSystemPosition(Vector3 abstractPosition)
 		{
 			throw new NotImplementedException();
 		}

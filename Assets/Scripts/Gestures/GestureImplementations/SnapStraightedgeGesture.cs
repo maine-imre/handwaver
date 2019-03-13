@@ -2,11 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using IMRE.HandWaver;
-using Leap;
-using Leap.Unity;
-using Leap.Unity.Interaction;
 using UnityEngine;
-using UnityEngine.XR;
 
 namespace IMRE.Gestures
 {
@@ -25,10 +21,10 @@ namespace IMRE.Gestures
 			return false;
 		}
 
-		protected override void WhileGestureActive(Leap.Hand hand, InputDevice osvrController)
+		protected override void WhileGestureActive(BodyInput bodyInput, Chirality chirality)
 		{
 			InteractionHand iHand;
-			switch (whichHand)
+			switch (chirality)
 			{
 				case Chirality.Left:
 					iHand = leapHandDataLogger.ins.currHands.lIhand;

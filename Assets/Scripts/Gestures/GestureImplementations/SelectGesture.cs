@@ -1,17 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using IMRE.HandWaver.Space;
-using Leap;
 using UnityEngine;
-using UnityEngine.XR;
-using IMRE.HandWaver.Space;
-using Leap.Unity;
 using IMRE.HandWaver;
 using System.Linq;
-using IMRE.HandWaver;
-using Leap.Unity.Interaction;
 
 namespace IMRE.Gestures
 {
@@ -27,7 +20,7 @@ namespace IMRE.Gestures
             return isComplete;
         }
 
-        protected override void WhileGestureActive(Leap.Hand hand, InputDevice osvrController)
+        protected override void WhileGestureActive(BodyInput bodyInput, Chirality chirality)
         {
             //sethandtomodeSelect
             float shortestDist = Mathf.Infinity;
@@ -37,9 +30,9 @@ namespace IMRE.Gestures
                 (g.GetComponent<AnchorableBehaviour>() == null ||
                  (g.GetComponent<AnchorableBehaviour>() != null && !g.GetComponent<AnchorableBehaviour>().isAttached))))
             {
-                float distance = mgo.LocalDistanceToClosestPoint(hand.Fingers[1].TipPosition.ToVector3());
-                float angle = mgo.PointingAngleDiff(hand.Fingers[1].TipPosition.ToVector3(),
-                    hand.Fingers[1].Direction.ToVector3());
+                float distance = mgo.LocalDistanceToClosestPoint(bodyInput.Hand.Fingers[1].position);
+                float angle = mgo.PointingAngleDiff(bodyInput.Hand.Fingers[1].position - mgo.ClosestSystemPosition(bodyInput.Hand.Fingers[1].position),
+                    bodyInput.Hand.Fingers[3].direction); //considering implementing some sort of a pointing direction function.
 
                 if (Mathf.Abs(distance) < shortestDist)
                 {

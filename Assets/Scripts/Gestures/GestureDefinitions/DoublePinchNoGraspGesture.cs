@@ -45,30 +45,18 @@ namespace IMRE.Gestures
 
 		}
 
-		protected override bool ActivationConditionsHand(Leap.Hand leftHand, Leap.Hand rightHand)
+		protected override bool ActivationConditions(BodyInput bodyInput)		
 		{
             //if both the left hand and right hand are detected to be pinching,
             //return true.
-			return (leftHand.PinchStrength > pinchTol && rightHand.PinchStrength > pinchTol 
-                && !(leftInteractionHand.isGraspingObject || rightInteractionHand.isGraspingObject));
+            
+            //we need to move grasp to this gesture system to have an idea of no grasp. 
+            return (bodyInput.LeftHand.PinchStrength > pinchTol && bodyInput.RightHand.PinchStrength > pinchTol);
 		}
-		protected override bool ActivationConditionsOSVR(InputDevice leftOSVRController, InputDevice rightOSVRController)
+		protected override  bool DeactivationConditions(BodyInput bodyInput)
 		{
-            //button id 14 is the Left trigger button for HTC controller 15 is the right
-            //when the trigger buttons are pressed
-            return Input.GetButtonDown("14") && Input.GetButtonDown("15") 
-                && !(leftInteractionController.isGraspingObject || rightInteractionController.isGraspingObject);
+			return !ActivationConditionsHand(bodyInput);
 		}
-		protected override  bool DeactivationConditionsHand(Leap.Hand leftHand, Leap.Hand rightHand)
-		{
-			return !ActivationConditionsHand(leftHand, rightHand);
-		}
-		protected override bool DeactivationConditionsOSVR(InputDevice leftOSVRController, InputDevice rightOSVRController)
-		{
-            //button id 14 is the Left trigger button for HTC controller 15 is the right
-			return Input.GetButtonUp("14") && Input.GetButtonUp("15") 
-                && !(leftInteractionController.isGraspingObject || rightInteractionController.isGraspingObject);
-        }
 	}
 }
 

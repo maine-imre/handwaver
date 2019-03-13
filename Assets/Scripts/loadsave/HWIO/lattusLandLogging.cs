@@ -104,16 +104,16 @@ namespace IMRE.HandWaver.HWIO
 	public class latticeLandData
 	{
 
-		public FingerPointLineMaker.pinType currentPinType = FingerPointLineMaker.pinType.none;
+		//public FingerPointLineMaker.pinType currentPinType = FingerPointLineMaker.pinType.none;
 
 		public latticeLandData()
 		{
 
 		}
 
-		public latticeLandData(FingerPointLineMaker source) : this()
-		{
-			this.currentPinType = source.thisPinType;
-		}
+		//public latticeLandData(FingerPointLineMaker source) : this()
+		//{
+		//	this.currentPinType = source.thisPinType;
+		//}
 	}
 }

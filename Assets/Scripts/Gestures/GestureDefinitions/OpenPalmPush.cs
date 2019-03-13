@@ -3,8 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.XR;
-using Leap.Unity;
 
 namespace IMRE.Gestures
 {
@@ -46,7 +44,7 @@ namespace IMRE.Gestures
 
         }
 
-        protected override bool ActivationConditionsHand(Leap.Hand hand)
+        protected override bool ActivationConditionsHand(BodyInput bodyInput, Chirality chirality)
         {
             //want movement in plane of palm within tolerance.
             Vector3 move = hand.PalmVelocity.ToVector3();
@@ -59,54 +57,11 @@ namespace IMRE.Gestures
 
             return (hand.Fingers.Where(finger => finger.IsExtended).Count() == 5) && speed > speedTol && angle < angleTol;
         }
-        protected override bool ActivationConditionsOSVR(InputDevice inputDevice)
+
+        protected override bool DeactivationConditionsHand(BodyInput bodyInput, Chirality chirality)
         {
-            Vector3 move = interactionController.velocity;
-            Vector3 plane = interactionController.rotation * Vector3.down;
-
-            //we want velocity to be nonzero.
-            float speed = move.magnitude;
-            //we want to have close to zero angle between movement
-            float angle = Mathf.Abs(Vector3.Angle(move, plane));
-
-            //open palm plus motion
-            switch (whichHand)
-            {
-                case Leap.Unity.Chirality.Left:
-                    //Button ID 8 is Left controller trackpad being pressed
-                    return Input.GetButtonDown("8") && Input.GetAxis("2") < 0 && speed > speedTol && angle < angleTol; ;
-                case Leap.Unity.Chirality.Right:
-                    //Button id 9 is right controller trackpad being pressed
-                    return Input.GetButtonDown("9") && Input.GetAxis("5") < 0 && speed > speedTol && angle < angleTol; ;
-                default:
-                    return false;
-            }
+            return !ActivationConditionsHand(bodyInput, chirality);
         }
-        protected override bool DeactivationConditionsHand(Leap.Hand hand)
-        {
-            return !ActivationConditionsHand(hand);
-        }
-        protected override bool DeactivationConditionsOSVR(InputDevice inputDevice)
-        {
-            Vector3 move = interactionController.velocity;
-            Vector3 plane = interactionController.rotation * Vector3.down;
 
-            //we want velocity to be nonzero.
-            float speed = move.magnitude;
-            //we want to have close to zero angle between movement
-            float angle = Mathf.Abs(Vector3.Angle(move, plane));
-
-            switch (whichHand)
-            {
-                case Leap.Unity.Chirality.Left:
-                    //Button ID 8 is Left controller trackpad being pressed
-                    return Input.GetButtonUp("8") || Input.GetAxis("2") > 0 || speed < speedTol || angle > angleTol;
-                case Leap.Unity.Chirality.Right:
-                    //Button id 9 is right controller trackpad being pressed
-                    return Input.GetButtonUp("9") || Input.GetAxis("5") > 0 || speed < speedTol || angle > angleTol;
-                default:
-                    return false;
-            }
-        }
     }
 }

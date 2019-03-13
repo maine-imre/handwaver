@@ -103,7 +103,7 @@ namespace IMRE.HandWaver
 		/// </summary>
 		/// <param name="abstractPosition"></param>
 		/// <returns></returns>
-		internal abstract Vector3 ClosestSystemPosition(Vector3 abstractPosition);
+		public abstract Vector3 ClosestSystemPosition(Vector3 abstractPosition);
 
 		/// <summary>
 		///
