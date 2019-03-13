@@ -22,17 +22,18 @@ namespace IMRE.Gestures
 
         protected override void WhileGestureActive(BodyInput bodyInput, Chirality chirality)
         {
+            Hand hand = getHand(bodyInput, chirality);
             //sethandtomodeSelect
             float shortestDist = Mathf.Infinity;
             closestObj = null;
 
             foreach (MasterGeoObj mgo in FindObjectsOfType<MasterGeoObj>().Where(g =>
-                (g.GetComponent<AnchorableBehaviour>() == null ||
-                 (g.GetComponent<AnchorableBehaviour>() != null && !g.GetComponent<AnchorableBehaviour>().isAttached))))
+                (g.GetComponent<Leap.Unity.Interaction.AnchorableBehaviour>() == null ||
+                 (g.GetComponent<Leap.Unity.Interaction.AnchorableBehaviour>() != null && !g.GetComponent<Leap.Unity.Interaction.AnchorableBehaviour>().isAttached))))
             {
-                float distance = mgo.LocalDistanceToClosestPoint(bodyInput.Hand.Fingers[1].position);
-                float angle = mgo.PointingAngleDiff(bodyInput.Hand.Fingers[1].position - mgo.ClosestSystemPosition(bodyInput.Hand.Fingers[1].position),
-                    bodyInput.Hand.Fingers[3].direction); //considering implementing some sort of a pointing direction function.
+                float distance = mgo.LocalDistanceToClosestPoint(hand.Fingers[1].Joints[3].Position);
+                float angle = mgo.PointingAngleDiff(hand.Fingers[1].Joints[3].Position - mgo.ClosestSystemPosition(hand.Fingers[1].Joints[3].Position),
+                    hand.Fingers[1].Direction); //considering implementing some sort of a pointing direction function.
 
                 if (Mathf.Abs(distance) < shortestDist)
                 {
@@ -65,8 +66,6 @@ namespace IMRE.Gestures
                     closestObj.thisSelectStatus = MasterGeoObj.SelectionStatus.none;
                 else
                     closestObj.thisSelectStatus = MasterGeoObj.SelectionStatus.selected;
-
-
                 //This determines if you have to cancel the gesture to select another object
                 isComplete = true;
             }

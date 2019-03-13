@@ -48,11 +48,13 @@ namespace IMRE.Gestures
 
 		protected override bool ActivationConditions(BodyInput bodyInput, Chirality chirality)
 		{
-			return ((hand.Fingers.Where(finger => finger.IsExtended).Count() == 5) && Vector3.Angle(hand.PalmNormal.ToVector3(), Vector3.down) < angleTolerance);
+			Hand hand = getHand(bodyInput, chirality);
+
+			return ((hand.Fingers.Where(finger => finger.IsExtended).Count() == 5) && Vector3.Angle(hand.Palm.Direction, Vector3.down) < angleTolerance);
 		}
 		protected override bool DeactivationConditions(BodyInput bodyInput, Chirality chirality)
 		{
-			return !ActivationConditionsHand(bodyInput, chirality);
+			return !ActivationConditions(bodyInput, chirality);
 		}
 	}
 }

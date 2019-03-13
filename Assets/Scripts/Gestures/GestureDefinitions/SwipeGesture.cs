@@ -46,10 +46,11 @@ namespace IMRE.Gestures
 
         protected override bool ActivationConditions(BodyInput bodyInput, Chirality chirality)
         {
+            Hand hand = getHand(bodyInput, chirality);
             //want movement in plane of palm within tolerance.
             //consider using running average of hand movement
-            Vector3 move = hand.PalmVelocity.ToVector3();
-            Vector3 plane = hand.PalmNormal.ToVector3();
+            Vector3 move = hand.Palm.Velocity;
+            Vector3 plane = hand.Palm.Direction;
 
             //we want velocity to be nonzero.
             float speed = move.magnitude;
@@ -60,7 +61,7 @@ namespace IMRE.Gestures
         }
         protected override bool DeactivationConditions(BodyInput bodyInput, Chirality chirality)
         {
-            return !ActivationConditionsHand(bodyInput, chirality);
+            return !ActivationConditions(bodyInput, chirality);
         }
 
     }

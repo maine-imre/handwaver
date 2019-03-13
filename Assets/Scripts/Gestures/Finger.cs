@@ -10,7 +10,7 @@ namespace IMRE.Gestures
     public struct Finger
     {
         /// <summary>
-        /// A list of joints for each figner.
+        /// A list of joints for each figner. (four joints per finger, indexed 0 through 3)
         /// </summary>
         public BodyComponent[] Joints;
 

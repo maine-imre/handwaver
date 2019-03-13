@@ -20,5 +20,10 @@ namespace IMRE.Gestures
         /// of the previous connecting bone
         /// </summary>
         public Vector3 Direction;
+
+        /// <summary>
+        /// The average velocity of the component over the last 10 frames.
+        /// </summary>
+        public Vector3 Velocity;
     }
 }

@@ -55,7 +55,7 @@ namespace IMRE.Gestures
 		}
 		protected override  bool DeactivationConditions(BodyInput bodyInput)
 		{
-			return !ActivationConditionsHand(bodyInput);
+			return !ActivationConditions(bodyInput);
 		}
 	}
 }

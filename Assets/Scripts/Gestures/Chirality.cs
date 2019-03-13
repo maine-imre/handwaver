@@ -6,7 +6,7 @@ namespace IMRE.Gestures
 {
     public enum Chirality
     {
-        left,
-        right
+        Left,
+        Right
     }
 }

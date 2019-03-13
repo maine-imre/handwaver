@@ -19,7 +19,7 @@ namespace IMRE.Gestures
 		public bool requireBodyTracking;
 		
 		public Chirality chirality;
-		
+
 		/// <summary>
 		/// Whether this gesture is currently active.
 		/// </summary>
@@ -136,6 +136,8 @@ namespace IMRE.Gestures
 		protected abstract bool DeactivationConditionsActionComplete();
 
 		protected abstract void WhileGestureActive(BodyInput bodyInput, Chirality chirality);
+		//protected abstract void WhileGestureInactive(BodyInput bodyInput, Chirality chirality);
+
 
  #region Base Implementation (Unity Callbacks)
 
@@ -155,7 +157,7 @@ namespace IMRE.Gestures
 
     protected virtual void OnDisable() {
       if (_isActive) {
-        WhenGestureDeactivated(GestureInput.bodyInput, DeactivationReason.CancelledGesture);
+        WhenGestureDeactivated(GestureInput.bodyInput, chirality, DeactivationReason.CancelledGesture);
         _isActive = false;
       }
     }
@@ -174,7 +176,7 @@ namespace IMRE.Gestures
       }
       else {
         if (!_isActive) {
-          if (ShouldGestureActivate(GestureInput.bodyInput)) {
+          if (ShouldGestureActivate(GestureInput.bodyInput, chirality)) {
             shouldGestureBeActive = true;
           }
           else {
@@ -182,7 +184,7 @@ namespace IMRE.Gestures
           }
         }
         else {
-          if (ShouldGestureDeactivate(GestureInput.bodyInput, out deactivationReason)) {
+          if (ShouldGestureDeactivate(GestureInput.bodyInput, chirality, out deactivationReason)) {
             shouldGestureBeActive = false;
           }
           else {
@@ -202,9 +204,7 @@ namespace IMRE.Gestures
           _wasActivated = true;
           _isActive = true;
 
-          WhenGestureActivated(GestureInput.bodyInput, Chirality);
-          OnGestureActivated();
-          OnOneHandedGestureActivated(GestureInput.bodyInput);
+          WhenGestureActivated(GestureInput.bodyInput, chirality);
         }
         else {
           _wasDeactivated = true;
@@ -216,18 +216,16 @@ namespace IMRE.Gestures
           }
           _isActive = false;
 
-          WhenGestureDeactivated(GestureInput.bodyInput, deactivationReason.GetValueOrDefault());
-          OnGestureDeactivated();
-          OnOneHandedGestureDeactivated(GestureInput.bodyInput);
+          WhenGestureDeactivated(GestureInput.bodyInput, chirality, deactivationReason.GetValueOrDefault());
         }
       }
 
       // Fire per-update events.
       if (_isActive) {
-        WhileGestureActive(GestureInput.bodyInput);
+        WhileGestureActive(GestureInput.bodyInput, chirality);
       }
       else {
-        WhileGestureInactive(GestureInput.bodyInput);
+        //WhileGestureInactive(GestureInput.bodyInput);
       }
     }
 

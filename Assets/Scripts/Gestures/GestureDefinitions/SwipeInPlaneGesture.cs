@@ -65,9 +65,11 @@ public abstract class SwipeInPlaneGesture : OneHandedGesture {
 
         protected override bool ActivationConditions(BodyInput bodyInput, Chirality chirality)
         {
+	        Hand hand = getHand(bodyInput, chirality);
+
             //want movement in plane of palm within tolerance.
-            Vector3 move = hand.PalmVelocity.ToVector3();
-            Vector3 plane = hand.PalmNormal.ToVector3();
+            Vector3 move = hand.Palm.Velocity;
+            Vector3 plane = hand.Palm.Direction;
 
             //we want velocity to be nonzero.
             float speed = move.magnitude;
@@ -75,9 +77,10 @@ public abstract class SwipeInPlaneGesture : OneHandedGesture {
             float angle = 90-Mathf.Abs(Vector3.Angle(move, plane));
 
             float planeAngle = Mathf.Abs(Vector3.Angle(plane, planeNormal));
-            float distToPlane = Vector3.Project(hand.PalmPosition.ToVector3() - pointOnPlane, planeNormal).magnitude;
+            float distToPlane = Vector3.Project(hand.Palm.Position - pointOnPlane, planeNormal).magnitude;
 
-            return (hand.Fingers.Where(finger => finger.IsExtended).Count() == 5) && speed > speedTol && angle < angleTolerance && planeAngle < angleTolerance && distToPlane < distanceTolerance;
+            return (hand.Fingers.Where(finger => finger.IsExtended).Count() == 5) && speed > speedTol && 
+                   angle < angleTolerance && planeAngle < angleTolerance && distToPlane < distanceTolerance;
         }
         protected override bool DeactivationConditions(BodyInput bodyInput, Chirality chirality)
         {

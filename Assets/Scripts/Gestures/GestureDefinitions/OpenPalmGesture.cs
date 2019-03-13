@@ -39,12 +39,13 @@ namespace IMRE.Gestures
 
 		protected override bool ActivationConditions(BodyInput bodyInput, Chirality chirality)
 		{
+            Hand hand = getHand(bodyInput,chirality);
 			return (hand.Fingers.Where(finger => finger.IsExtended).Count() == 5);
 		}
 
-		protected override bool DeactivationConditionsHand(BodyInput bodyInput, Chirality chirality)
+		protected override bool DeactivationConditions(BodyInput bodyInput, Chirality chirality)
 		{
-			return !ActivationConditionsHand(hand);
+			return !ActivationConditions(bodyInput,chirality);
 		}
 
 	}

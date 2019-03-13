@@ -32,6 +32,22 @@ namespace IMRE.Gestures {
             CancelledGesture,
         }
 
+        internal Hand getHand(BodyInput bodyInput, Chirality chirality)
+        {
+            Hand hand = new Hand();
+            switch (chirality)
+            {
+                case Chirality.Left:
+                    hand = bodyInput.LeftHand;
+                    break;
+                case Chirality.Right:
+                    hand = bodyInput.RightHand;
+                    break;
+            }
+
+            return hand;
+        }
+
     }
 
 }

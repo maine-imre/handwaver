@@ -61,6 +61,7 @@ namespace IMRE.Gestures
 		//Pun RPC Calls for gesture start/stop
 		//Pun RPC Calls for feedback
 
+		#region Implementer's API
 
         //Feedback System - these functions are implemented at the Gesture Definition Level
 
@@ -74,10 +75,29 @@ namespace IMRE.Gestures
 		//we need to require an audioPlayer component.
 		protected abstract void audioFeedbackDeactivated(DeactivationReason reason);
 
-		//PUN
-		//leave this for later.
+    #region Gesture State
 
 
+
+    /// <summary>
+    /// Called when the gesture has just been deactivated. Hands might be null; this
+    /// will be true if a hand loses tracking while the gesture is active.
+    /// </summary>
+    protected virtual void WhenGestureDeactivated(Hand maybeNullLeftHand, Hand maybeNullRightHand, DeactivationReason reason) { }
+
+    /// <summary>
+    /// Called every Update frame while the gesture is active. Hands are guaranteed to
+    /// be non-null.
+    /// </summary>
+    protected virtual void WhileGestureActive(Hand leftHand, Hand rightHand) { }
+
+    /// <summary>
+    /// Called every Update frame while the gesture is inactive. The hands might be null;
+    /// this will be the case if a hand loses tracking while the gesture is active.
+    /// </summary>
+    protected virtual void WhileGestureInactive(Hand maybeNullLeftHand, Hand maybeNullRightHand) { }
+
+#endregion
 		/// <summary>
 		/// Called when the gesture has just been activated. The hand is guaranteed to
 		/// be non-null.
@@ -133,6 +153,8 @@ namespace IMRE.Gestures
 		protected abstract bool DeactivationConditionsActionComplete();
 
 		protected abstract void WhileGestureActive(BodyInput bodyInput);
+		//protected abstract void WhileGestureInactive(BodyInput bodyInput);
+		#endregion
 
  #region Base Implementation (Unity Callbacks)
 
@@ -200,8 +222,6 @@ namespace IMRE.Gestures
           _isActive = true;
 
           WhenGestureActivated(GestureInput.bodyInput);
-          OnGestureActivated();
-          OnTwoHandedGestureActivated(GestureInput.bodyInput);
         }
         else {
           _wasDeactivated = true;
@@ -214,8 +234,6 @@ namespace IMRE.Gestures
           _isActive = false;
 
           WhenGestureDeactivated(GestureInput.bodyInput, deactivationReason.GetValueOrDefault());
-          OnGestureDeactivated();
-          OnTwoHandedGestureDeactivated(GestureInput.bodyInput);
         }
       }
 
@@ -224,7 +242,7 @@ namespace IMRE.Gestures
         WhileGestureActive(GestureInput.bodyInput);
       }
       else {
-        WhileGestureInactive(GestureInput.bodyInput);
+        //WhileGestureInactive(GestureInput.bodyInput);
       }
     }
 

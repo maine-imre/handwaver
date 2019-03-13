@@ -326,7 +326,7 @@ namespace IMRE.HandWaver.Space
 			//initialize system scales to agree.
 			SimulationTime = DateTime.UtcNow;
 			simulationScale = earthRadius / earthTrueRadius;
-			worldScaleModifier.ins.AbsoluteScale = simulationScale;
+//			worldScaleModifier.ins.AbsoluteScale = simulationScale;
 
 			earthPos = this.transform.position;
 			//Debug.Log(earthRot.eulerAngles);
@@ -434,12 +434,12 @@ namespace IMRE.HandWaver.Space
 
 		public void toggleLights()
 		{
-			globalLight.gameObject.SetActive(showLights.ToggleState);
+			//globalLight.gameObject.SetActive(showLights.ToggleState);
 		}
 
 		public void toggleEarth()
 		{
-			GetComponent<MeshRenderer>().enabled = showEarth.ToggleState;
+			//GetComponent<MeshRenderer>().enabled = showEarth.ToggleState;
 		}
 
 		public void resetEarthTilt()
@@ -572,8 +572,8 @@ namespace IMRE.HandWaver.Space
 			}
 			bool lat = (myLatMode == latitudeMode.both || myLatMode == latitudeMode.incremental);
             bool specialLat = (myLatMode == latitudeMode.both || myLatMode == latitudeMode.special);
-            bool dec = showDeclination.ToggleState && !(myLatMode == latitudeMode.special);
-            bool specialDec = showDeclination.ToggleState && specialLat;
+            bool dec = !(myLatMode == latitudeMode.special); //showDeclination.ToggleState &&;
+            bool specialDec = specialLat; //showDeclination.ToggleState &&;
 			for (int i = 0; i < nLatDivisions + specialLatitudeCount; i++)
 			{
 				if (lat || dec || specialLat)
@@ -618,8 +618,8 @@ namespace IMRE.HandWaver.Space
 			}
 
 
-			bool sLong = showLongitude.ToggleState;
-			bool sGHA = showGHA.ToggleState;
+			bool sLong = true; //showLongitude.ToggleState;
+			bool sGHA = true; //showGHA.ToggleState;
 			for (int i = 0; i < nLongDivisions; i++)
 			{
 				if (sLong || sGHA)
@@ -739,8 +739,8 @@ namespace IMRE.HandWaver.Space
 			//	Debug.Log("no arc line data found.");
 			//arcLineData.ForEach(a => a.isDistTextEnabled = findDistance.ToggleState);
 
-			GameObject.FindObjectsOfType<RSDESLineData>().ToList().ForEach(a => a.isDistTextEnabled = findDistance.ToggleState);
-			GameObject.FindObjectsOfType<RSDESPin>().ToList().ForEach(a => a.latlongLabel.gameObject.SetActive(findDistance.ToggleState));
+			//GameObject.FindObjectsOfType<RSDESLineData>().ToList().ForEach(a => a.isDistTextEnabled = findDistance.ToggleState);
+			//GameObject.FindObjectsOfType<RSDESPin>().ToList().ForEach(a => a.latlongLabel.gameObject.SetActive(findDistance.ToggleState));
 
 		}
 

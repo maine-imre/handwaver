@@ -51,17 +51,19 @@ public abstract class PointAtGesture : OneHandedGesture {
               
              //The thumb is ignored in whether this gesture will activate or not
              
+             //note that we need a new concept for grasping object.
+             Hand hand = getHand(bodyInput, chirality);
 			return (
                  (hand.Fingers[1].IsExtended) &&
                 !(hand.Fingers[2].IsExtended) &&
                 !(hand.Fingers[3].IsExtended) &&
-                !(hand.Fingers[4].IsExtended) &&
-                !(interactionHand.isGraspingObject)
+                !(hand.Fingers[4].IsExtended) //&&
+                //!(interactionHand.isGraspingObject)
                 );
         }
-		protected override bool DeactivationConditionsHand(BodyInput bodyInput, Chirality chirality)
+		protected override bool DeactivationConditions(BodyInput bodyInput, Chirality chirality)
 		{
-			return !ActivationConditionsHand(hand);
+			return !ActivationConditions(bodyInput,chirality);
 		}
 	}
 }

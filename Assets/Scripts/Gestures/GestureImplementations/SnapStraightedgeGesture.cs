@@ -23,25 +23,20 @@ namespace IMRE.Gestures
 
 		protected override void WhileGestureActive(BodyInput bodyInput, Chirality chirality)
 		{
-			InteractionHand iHand;
-			switch (chirality)
-			{
-				case Chirality.Left:
-					iHand = leapHandDataLogger.ins.currHands.lIhand;
-					break;
-				case Chirality.Right:
-					iHand = leapHandDataLogger.ins.currHands.rIhand;
-					break;
-				default:
-					Debug.LogError("Hand Chirality Undefined");
-					return;
-			}
+			//we should have a more efficient method here.
+			
 
-			if (iHand.isGraspingObject && iHand.graspedObject.gameObject.GetComponent<straightEdgeBehave>() != null
-				&& iHand.graspedObject.gameObject.GetComponent<straightEdgeBehave>() == this.GetComponent<straightEdgeBehave>())
-			{
-				this.GetComponent<straightEdgeBehave>().snapToFloor();
-			}
+			//want to snap to floor if the other hand is holding a line (straightedge),
+			// first we need to have a grasping method out of our gesture system.
+			// consider having an "is eligible override" for this method, that turns on when it the straightedge is being
+			// held but only for the opposite hand.
+						
+			
+			//if (iHand.isGraspingObject && iHand.graspedObject.gameObject.GetComponent<straightEdgeBehave>() != null
+			//	&& iHand.graspedObject.gameObject.GetComponent<straightEdgeBehave>() == this.GetComponent<straightEdgeBehave>())
+			//{
+			//	this.GetComponent<straightEdgeBehave>().snapToFloor();
+			//}
 		}
 	}
 }
