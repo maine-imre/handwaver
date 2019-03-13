@@ -38,7 +38,7 @@ namespace IMRE.HandWaver
             }
         }
 
-		internal override Vector3 ClosestSystemPosition(Vector3 abstractPosition)
+		public override Vector3 ClosestSystemPosition(Vector3 abstractPosition)
 		{
 			Debug.LogWarning("This FIG TYPE DOESN'T SUPPORT CLOSEST SYS POS : " + figType);
 

@@ -58,7 +58,7 @@ namespace IMRE.HandWaver
 			// do nothing
 		}
 
-		internal override Vector3 ClosestSystemPosition(Vector3 abstractPosition)
+		public override Vector3 ClosestSystemPosition(Vector3 abstractPosition)
 		{
 			return Vector3.Project(abstractPosition - Position3, normalDir) + Position3;
 		}

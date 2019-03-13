@@ -34,7 +34,7 @@ namespace IMRE.HandWaver
 		public int[] triangles;
 		private Color defaultColor = new Color(133 / 255f, 130 / 255f, 225 / 255f, 0.43137254902f);
 
-		internal override Vector3 ClosestSystemPosition(Vector3 abstractPosition)
+		public override Vector3 ClosestSystemPosition(Vector3 abstractPosition)
 		{
 			Vector3 result = Vector3.ProjectOnPlane(abstractPosition - Position3, normDir) + Position3;
 

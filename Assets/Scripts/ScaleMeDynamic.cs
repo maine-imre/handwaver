@@ -50,7 +50,7 @@ namespace IMRE.HandWaver.Interface
 		{
 			if (scaleControlled)
 			{
-				this.transform.localScale = Vector3.one * worldScaleModifier.ins.AbsoluteScale;
+				//this.transform.localScale = Vector3.one * worldScaleModifier.ins.AbsoluteScale;
 			}
 		}
 
