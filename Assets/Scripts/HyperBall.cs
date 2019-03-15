@@ -40,6 +40,8 @@ namespace IMRE.HandWaver.FourthDimension {
 			myRB = GetComponent<Rigidbody>();
 			GetComponent<InteractionBehaviour>().OnContactBegin += startTakeOver;
 			GetComponent<InteractionBehaviour>().OnContactEnd += endTakeOver;
+			GetComponent<InteractionBehaviour>().OnGraspBegin += startTakeOver;
+			GetComponent<InteractionBehaviour>().OnGraspEnd += endTakeOver;
 		}
 
 		/// <summary>
@@ -50,8 +52,7 @@ namespace IMRE.HandWaver.FourthDimension {
 		void SetColorOnBall(float hue)
 		{
 			this.GetComponent<MeshRenderer>().materials[0].color = Color.HSVToRGB(hue, 1, 1);
-			this.GetComponent<TrailRenderer>().startColor= Color.HSVToRGB(hue, 1, 1);
-			this.GetComponent<TrailRenderer>().endColor = Color.HSVToRGB(hue, 1, 1);
+			this.GetComponent<TrailRenderer>().material.color = Color.HSVToRGB(hue, 1, 1);
 			this.GetComponent<TrailRenderer>().enabled = true;
 		}
 
