@@ -23,7 +23,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/ContentLayers/PlatonicSolids.unity
     guid: 7de70915bc37f9b4c934000a476d2fae
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/ContentLayers/ThreeTorus.unity
     guid: 636c41b23556dcf45b158ccb87c93c67
   - enabled: 0
