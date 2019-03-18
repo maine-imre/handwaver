@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Leap.Unity;
 using UnityEngine;
+
 
 namespace IMRE.Gestures
 {
@@ -48,11 +50,19 @@ namespace IMRE.Gestures
         //public event HandTrackingLost ;
         //public event BodyTrackingLost ;
 
+#if  LeapMotion   
+        public static Leap.Unity.LeapXRServiceProvider LeapService;
+#endif
+        
         /// <summary>
         /// Setup the BodyInput for each source.
         /// </summary>
         public void Awake()
         {
+#if  LeapMotion   
+            LeapService = FindObjectOfType<Leap.Unity.LeapXRServiceProvider>();
+#endif
+            
             switch (_inputSource)
             {
                 case InputSource.OSVR:
@@ -91,6 +101,8 @@ namespace IMRE.Gestures
 
             setupAvatar();
         }
+        
+
 
         /// <summary>
         /// Every 1/90th of a second, update the Body Input
@@ -125,19 +137,57 @@ namespace IMRE.Gestures
             }
 
             updateAvatar();
+            
 
         }
 
-        private void setPositionsOSVR()
+            private void setPositionsOSVR()
             {
+                //bodyInput.Head =
+                
+                //bodyInput.LeftHand.Palm.Position =
+                //bodyInput.LeftHand.Palm.Direction =
+                //bodyInput.RightHand.Palm.Position = 
+                //bodyInput.RightHand.Palm.Direction =
             }
             private void setPositionsValve()
             {
             }
             
             private void setPositionsLeapMotion()
-            {
+            {            
+                //#if LeapMotion
+                bodyInput.LeftHand = leapHandConversion(bodyInput.LeftHand,LeapService.MakeTestHand(true));
+                bodyInput.RightHand = leapHandConversion(bodyInput.RightHand,LeapService.MakeTestHand(false));
+                //#endif
             }
+#if LeapMotion
+
+        private Hand leapHandConversion(Hand myHand, Leap.Hand lmHand)
+        {
+            myHand.Palm.Position = lmHand.PalmPosition.ToVector3();
+            myHand.Palm.Direction = lmHand.PalmNormal.ToVector3();
+            myHand.Wrist.Position = lmHand.WristPosition.ToVector3();
+            myHand.Wrist.Direction = lmHand.Fingers[2].bones[0].Center.ToVector3() - lmHand.WristPosition.ToVector3();
+            myHand.PinchStrength = lmHand.PinchStrength;
+            myHand.IsPinching = lmHand.IsPinching();
+            
+            //count through five fingers
+            for (int fIDX = 0; fIDX < 4; fIDX++)
+            {
+                //count through 4 joints
+                for (int jIDX = 0; jIDX < 3; jIDX++)
+                {
+                    myHand.Fingers[fIDX].Direction = lmHand.Fingers[fIDX].Direction.ToVector3();
+                    myHand.Fingers[fIDX].IsExtended = lmHand.Fingers[fIDX].IsExtended;
+                    myHand.Fingers[fIDX].Joints[jIDX].Position = lmHand.Fingers[fIDX].bones[jIDX].Center.ToVector3();
+                    myHand.Fingers[fIDX].Joints[jIDX].Direction = lmHand.Fingers[fIDX].bones[jIDX].Direction.ToVector3();
+                }
+            }
+
+            return myHand;
+        }
+#endif
             
             private void setPositionsRealSense()
             {
