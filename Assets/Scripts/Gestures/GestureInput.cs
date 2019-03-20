@@ -11,8 +11,7 @@ using UnityEngine;
 #endif
 
 #if ValveSkeletal
-using Valve.VR;
-
+    using Valve.VR;
 #endif
 
 
