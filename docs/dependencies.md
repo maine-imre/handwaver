@@ -27,7 +27,7 @@ Paid Asset. Used to add multiplayer support. (Essential to function)
 
 **Note Photon is not open source, so we are moving to remove them from our dependencies.
 
-
+<!---
 # Optional Add-Ons whose integration has been teseted.
 The use of these closed-source assets is restricted to (1) a fork of the repository or (2) a local copy of the repository.  No code dependant on these solutions should be included in the main repository.
 
@@ -43,3 +43,4 @@ Free and Open-Source.  Used to configure PUN networking.
 [BluePrintReality](https://mixcast.me/mixcast-download/)
 
 Free Asset. Used to record mixed reality footage. (Non-essential to function)
+-->
