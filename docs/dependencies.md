@@ -18,6 +18,11 @@ Free, Open-Source asset.  LeapMotion controller functionality dependent on close
 - [x] Hands
 
 **Note LeapMotion is not open source, so we are moving to remove them from our dependencies.
+We are hoping to preserve LeapMotion Core as a sensor input that we support, but are working to make our source
+compile without having LM as a dependency.
+
+**We are also considering adding support for ViveSense, Intel RealSense and Valve's SteamVR Skeletal tracking as
+alternative data sources. 
 
 ### Photon PUN2 by [Exit Games](https://www.photonengine.com/en/pun)
 
