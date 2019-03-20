@@ -5,11 +5,12 @@ See license info in readme.md.
 www.imrelab.org
 **/
 
-﻿using Leap.Unity.Interaction;
+ using Leap.Unity.Interaction;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 using IMRE.HandWaver.Solver;
+using System.Linq;
 
 namespace IMRE.HandWaver
 {
@@ -22,19 +23,9 @@ namespace IMRE.HandWaver
     {
 		#region Constructors
             public static InteractableLineSegment Constructor()
-            {
-                GameObject go = new GameObject();
-				go.AddComponent<LineRenderer>();
-				//check if sphere mesh is added.
-				go.AddComponent<CapsuleCollider>();
-				go.AddComponent<Rigidbody>();
-				go.GetComponent<Rigidbody>().useGravity = false;
-				go.GetComponent<Rigidbody>().isKinematic = false;
-				go.AddComponent<InteractionBehaviour>();
-                go.GetComponent<InteractionBehaviour>().ignoreContact = true;
-                go.GetComponent<InteractionBehaviour>().ignoreGrasping = true;
-				return go.AddComponent<InteractableLineSegment>();
-            }
+						{
+							return Instantiate(PrefabManager.GetPrefab("InteractableLineSegment")).GetComponent<InteractableLineSegment>();
+						}
         #endregion
 
         public AbstractPoint point1;
@@ -105,38 +96,15 @@ namespace IMRE.HandWaver
 
 		public override void Stretch(InteractionController iControll)
 		{
+			if (stretchEnabled && thisIBehave.graspingControllers.Count > 1)
+			{
+				iControll.ReleaseGrasp();
+				AbstractPoint newPoint1 = GeoObjConstruction.iPoint(point1.Position3);
+				AbstractPoint newPoint2 = GeoObjConstruction.iPoint(point2.Position3);
 
-            if (stretchEnabled && thisIBehave.graspingControllers.Count > 1)
-            {
-                iControll.ReleaseGrasp();
-
-                AbstractPoint newPoint1 = GeoObjConstruction.iPoint(point1.Position3);
-                AbstractPoint newPoint2 = GeoObjConstruction.iPoint(point2.Position3);
-
-                AbstractLineSegment newLine1 = GeoObjConstruction.iLineSegment(point1, newPoint1);
-                AbstractLineSegment newLine2 = GeoObjConstruction.iLineSegment(newPoint1, newPoint2);
-                AbstractLineSegment newLine3 = GeoObjConstruction.iLineSegment(newPoint2, point2);
-
-                List<AbstractPoint> pointList = new List<AbstractPoint>();
-                pointList.Add(point1);
-                pointList.Add(newPoint1);
-                pointList.Add(newPoint2);
-                pointList.Add(point2);
-
-                List<AbstractLineSegment> lineList = new List<AbstractLineSegment>();
-                lineList.Add(this);
-                lineList.Add(newLine1);
-                lineList.Add(newLine2);
-                lineList.Add(newLine3);
-				lineList.ForEach(l => l.updateFigure());
-
-                GeoObjConstruction.iPolygon(lineList, pointList);
-
-				if (HW_GeoSolver.ins.thisInteractionMode == HW_GeoSolver.InteractionMode.rigid)
-				{
-					lineList.ForEach(l=> l.LeapInteraction = false);
-					pointList.ForEach(p => p.LeapInteraction = false);
-				}
+				GeoObjConstruction.iPolygon(new List<AbstractLineSegment>() { this, GeoObjConstruction.iLineSegment(point1, newPoint1),
+					GeoObjConstruction.iLineSegment(newPoint1, newPoint2), GeoObjConstruction.iLineSegment(newPoint2, point2) },
+					new List<AbstractPoint>() { point1, newPoint1, newPoint2, point2 });
 
 				StartCoroutine(waitForStretch);
 

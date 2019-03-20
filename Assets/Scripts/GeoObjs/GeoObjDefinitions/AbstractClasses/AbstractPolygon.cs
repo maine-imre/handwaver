@@ -218,18 +218,15 @@ namespace IMRE.HandWaver
 			}
 		}
 
-		public override void initializefigure()
+		public override void InitializeFigure()
 		{
+			base.InitializeFigure();
 			this.figType = GeoObjType.polygon;
 
 			MeshFilter mf = GetComponent<MeshFilter>();
 			Mesh mesh = mf.mesh;
 
-			//Init ();
-			Renderer rend = gameObject.GetComponent<Renderer>();
-			Material mat = rend.material;
-			mat.color = new Color(133 / 255f, 130 / 255f, 225 / 255f, 0.43137254902f); //colorGenerator.randomColorTransparent(mat);
-
+			thisSelectStatus = thisSelectStatus;
 			int pointNum = pointList.Count;
 
 			if (pointNum > 2)
@@ -291,7 +288,7 @@ namespace IMRE.HandWaver
 
 			mesh.RecalculateNormals();
 			mesh.vertices = vertices;
-			//thisIBehave.NotifyTeleported();
+			GetComponent<MeshCollider>().sharedMesh = mesh;
 
 
 			//if a polygon is a skew polygon, turn it grey.
@@ -314,7 +311,16 @@ namespace IMRE.HandWaver
 		{
 			get
 			{
-				return Vector3.Cross(pointList[0].Position3 - pointList[1].Position3, pointList[1].Position3 - pointList[2].Position3).normalized;
+				try
+				{
+					return Vector3.Cross(pointList[0].Position3 - pointList[1].Position3, pointList[1].Position3 - pointList[2].Position3).normalized;
+
+				}
+				catch		//TODO: specify which error to catch if seen again
+				{
+					Debug.LogError("Normal Calculatoin failed on: " + figName);
+					return Vector3.zero;
+				}
 			}
 			set
 			{

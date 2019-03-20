@@ -5,7 +5,7 @@ See license info in readme.md.
 www.imrelab.org
 **/
 
-﻿using System.Collections;
+ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -74,10 +74,10 @@ namespace IMRE.HandWaver {
 			thisSphere.edgePosition = edge.Position3;
 			thisSphere.Position3 = center.Position3;
 
-			HW_GeoSolver.ins.addDependence(thisSphere.transform, center.transform);
-			HW_GeoSolver.ins.addDependence(thisSphere.transform, edge.transform);
+			HW_GeoSolver.ins.AddDependence(thisSphere, center);
+			HW_GeoSolver.ins.AddDependence(thisSphere, edge);
 
-			thisSphere.initializefigure();
+			thisSphere.InitializeFigure();
 			return thisSphere;
 		}
 
@@ -93,10 +93,10 @@ namespace IMRE.HandWaver {
 			dc.edgePos = edge.Position3;
 			dc.normalDir = normDir;
 
-			HW_GeoSolver.ins.addDependence(dc.transform, center.transform);
-			HW_GeoSolver.ins.addDependence(dc.transform, edge.transform);
+			HW_GeoSolver.ins.AddDependence(dc, center);
+			HW_GeoSolver.ins.AddDependence(dc, edge);
 
-			dc.initializefigure();
+			dc.InitializeFigure();
 
 			return dc;
 		}
@@ -114,10 +114,10 @@ namespace IMRE.HandWaver {
 			drs.centerPoint = center.Position3;
 			drs.center = center;
 
-			HW_GeoSolver.ins.addDependence(drs.transform, center.transform);
-			HW_GeoSolver.ins.addDependence(drs.transform, attachedLineSegment.transform);
+			HW_GeoSolver.ins.AddDependence(drs, center);
+			HW_GeoSolver.ins.AddDependence(drs, attachedLineSegment);
 
-			drs.initializefigure();
+			drs.InitializeFigure();
 
 			return drs;
 		}
@@ -128,6 +128,7 @@ namespace IMRE.HandWaver {
 		{
 			InteractablePoint point = InteractablePoint.Constructor();
 			point.Position3 = position;
+			point.InitializeFigure();
 			return point;
 		}
 
@@ -135,6 +136,7 @@ namespace IMRE.HandWaver {
 		{
 			DependentPoint point = DependentPoint.Constructor();
 			point.Position3 = position;
+			point.InitializeFigure();
 			return point;
 		}
 
@@ -142,21 +144,23 @@ namespace IMRE.HandWaver {
         {
             StaticPoint point = StaticPoint.Constructor();
             point.Position3 = position;
-            return point;
+			point.InitializeFigure();
+			return point;
         }
 
         public static InteractableLineSegment iLineSegment(AbstractPoint point1, AbstractPoint point2)
 		{
 			InteractableLineSegment line = InteractableLineSegment.Constructor();
-
+			
 			line.point1 = point1;
 			line.point2 = point2;
 			line.vertex0 = point1.Position3;
 			line.vertex1 = point2.Position3;
-			line.transform.GetComponent<InteractableLineSegment>().initializefigure();
+			line.transform.GetComponent<InteractableLineSegment>().InitializeFigure();
 
-			HW_GeoSolver.ins.addDependence(line.transform, point1.transform);
-			HW_GeoSolver.ins.addDependence(line.transform, point2.transform);
+			HW_GeoSolver.ins.addComponent(line);
+			HW_GeoSolver.ins.AddDependence(line, point1);
+			HW_GeoSolver.ins.AddDependence(line, point2);
 
 			return line;
 		}
@@ -169,10 +173,10 @@ namespace IMRE.HandWaver {
 			line.transform.GetComponent<DependentLineSegment>().point2 = point2.transform.GetComponent<AbstractPoint>();
 			line.vertex0 = point1.Position3;
 			line.vertex1 = point2.Position3;
-			line.transform.GetComponent<DependentLineSegment>().initializefigure();
+			line.transform.GetComponent<DependentLineSegment>().InitializeFigure();
 
-			HW_GeoSolver.ins.addDependence(line.transform, point1.transform);
-			HW_GeoSolver.ins.addDependence(line.transform, point2.transform);
+			HW_GeoSolver.ins.AddDependence(line, point1);
+			HW_GeoSolver.ins.AddDependence(line, point2);
 
 			return line;
 		}
@@ -182,23 +186,23 @@ namespace IMRE.HandWaver {
 			InteractablePolygon plane = InteractablePolygon.Constructor();
 			plane.transform.GetComponent<InteractablePolygon>().lineList = lineList;
 			plane.transform.GetComponent<InteractablePolygon>().pointList = pointList;
-			plane.transform.GetComponent<InteractablePolygon>().initializefigure();
+			plane.transform.GetComponent<InteractablePolygon>().InitializeFigure();
 
 			//for some reason this makes a shortcut in the network.
 			//foreach (AbstractLineSegment line in lineList)
 			//{
-			//	HW_GeoSolver.ins.addDependence(plane.transform, line.transform);
+			//	HW_GeoSolver.ins.AddDependence(plane.transform, line.transform);
 			//}
 
 			foreach (AbstractPoint point in pointList)
 			{
-				HW_GeoSolver.ins.addDependence(plane.transform, point.transform);
+				HW_GeoSolver.ins.AddDependence(plane, point);
 				if (point.GetComponent<StaticPoint>() != null)
 				{
 					plane.GetComponent<InteractionBehaviour>().moveObjectWhenGrasped = false;
 				}
 			}
-			plane.updateFigure();
+			plane.AddToRManager();
 			return plane;
 			#endregion
 		}
@@ -224,16 +228,16 @@ namespace IMRE.HandWaver {
 
 			plane.transform.GetComponent<DependentPolygon>().lineList = lineList;
 			plane.transform.GetComponent<DependentPolygon>().pointList = pointList;
-			plane.transform.GetComponent<DependentPolygon>().initializefigure();
+			plane.transform.GetComponent<DependentPolygon>().InitializeFigure();
 
 			foreach (AbstractLineSegment line in lineList)
 			{
-				HW_GeoSolver.ins.addDependence(plane.transform, line.transform);
+				HW_GeoSolver.ins.AddDependence(plane, line);
 			}
 
 			foreach (AbstractPoint point in pointList)
 			{
-				HW_GeoSolver.ins.addDependence(plane.transform, point.transform);
+				HW_GeoSolver.ins.AddDependence(plane, point);
 				if (point.GetComponent<StaticPoint>() != null)
 				{
 					plane.GetComponent<InteractionBehaviour>().moveObjectWhenGrasped = false;
@@ -253,11 +257,11 @@ namespace IMRE.HandWaver {
 			bases.ForEach(b => lines.Union(b.lineList));
 			sides.ForEach(s => lines.Union(s.lineList));
 
-			bases.ForEach(b => HW_GeoSolver.ins.addDependence(prism.transform, b.transform));
-			sides.ForEach(s => HW_GeoSolver.ins.addDependence(prism.transform, s.transform));
-			lines.ForEach(l => HW_GeoSolver.ins.addDependence(prism.transform, l.transform));
-			prism.vertexPoints.ForEach(p => HW_GeoSolver.ins.addDependence(prism.transform, p.transform));
-			prism.initializefigure();
+			bases.ForEach(b => HW_GeoSolver.ins.AddDependence(prism, b));
+			sides.ForEach(s => HW_GeoSolver.ins.AddDependence(prism, s));
+			lines.ForEach(l => HW_GeoSolver.ins.AddDependence(prism, l));
+			prism.vertexPoints.ForEach(p => HW_GeoSolver.ins.AddDependence(prism, p));
+			prism.InitializeFigure();
 			return prism;
 		}
 
@@ -290,9 +294,9 @@ namespace IMRE.HandWaver {
 				}
 			}
 
-			prism.lineSegments.ForEach(l => HW_GeoSolver.ins.addDependence(prism.transform, l.transform));
-			prism.vertexPoints.ForEach(p => HW_GeoSolver.ins.addDependence(prism.transform, p.transform));
-			prism.initializefigure();
+			prism.lineSegments.ForEach(l => HW_GeoSolver.ins.AddDependence(prism, l));
+			prism.vertexPoints.ForEach(p => HW_GeoSolver.ins.AddDependence(prism, p));
+			prism.InitializeFigure();
 
 			return prism;
 		}
@@ -328,8 +332,8 @@ namespace IMRE.HandWaver {
                     AbstractLineSegment newLine = iLineSegment(pointList1[point1Index].GetComponent<AbstractPoint>(), pointList1[point2Index].GetComponent<AbstractPoint>());
                     lineList1.Add(newLine);
 
-                    HW_GeoSolver.ins.addDependence(newLine.transform, pointList1[point1Index].transform);
-                    HW_GeoSolver.ins.addDependence(newLine.transform, pointList1[point2Index].transform);
+                    HW_GeoSolver.ins.AddDependence(newLine, pointList1[point1Index]);
+                    HW_GeoSolver.ins.AddDependence(newLine, pointList1[point2Index]);
                 }
                 else if (line.GetComponent<DependentLineSegment>() != null)
                 {
@@ -339,8 +343,8 @@ namespace IMRE.HandWaver {
                     AbstractLineSegment newLine = iLineSegment(pointList1[point1Index].GetComponent<AbstractPoint>(), pointList1[point2Index].GetComponent<AbstractPoint>());
                     lineList1.Add(newLine);
 
-                    HW_GeoSolver.ins.addDependence(newLine.transform, pointList1[point1Index].transform);
-                    HW_GeoSolver.ins.addDependence(newLine.transform, pointList1[point2Index].transform);
+                    HW_GeoSolver.ins.AddDependence(newLine, pointList1[point1Index]);
+                    HW_GeoSolver.ins.AddDependence(newLine, pointList1[point2Index]);
                 }
             }
 
@@ -349,10 +353,10 @@ namespace IMRE.HandWaver {
 
             foreach (AbstractLineSegment line in lineList1)
             {
-                HW_GeoSolver.ins.addDependence(plane1.transform, line.transform);
+                HW_GeoSolver.ins.AddDependence(plane1, line);
             }
 
-            plane1.transform.GetComponent<AbstractPolygon>().initializefigure();
+            plane1.transform.GetComponent<AbstractPolygon>().InitializeFigure();
             List<AbstractPolygon> sideList = new List<AbstractPolygon>();
 
             foreach (AbstractLineSegment line0 in lineList0)
@@ -376,11 +380,11 @@ namespace IMRE.HandWaver {
 			prism.bases = baseList;
             prism.sides = sideList;
 
-			prism.bases.ForEach(p => HW_GeoSolver.ins.addDependence(prism.transform, p.transform));
-			prism.sides.ForEach(p => HW_GeoSolver.ins.addDependence(prism.transform, p.transform));
-			prism.vertexPoints.ForEach(p => HW_GeoSolver.ins.addDependence(prism.transform, p.transform));
+			prism.bases.ForEach(p => HW_GeoSolver.ins.AddDependence(prism, p));
+			prism.sides.ForEach(p => HW_GeoSolver.ins.AddDependence(prism, p));
+			prism.vertexPoints.ForEach(p => HW_GeoSolver.ins.AddDependence(prism, p));
 
-            prism.initializefigure();
+            prism.InitializeFigure();
 
             return prism;
         }
@@ -416,8 +420,8 @@ namespace IMRE.HandWaver {
 					AbstractLineSegment newLine = iLineSegment(pointList1[point1Index].GetComponent<AbstractPoint>(), pointList1[point2Index].GetComponent<AbstractPoint>());
 					lineList1.Add(newLine);
 
-					HW_GeoSolver.ins.addDependence(newLine.transform, pointList1[point1Index].transform);
-					HW_GeoSolver.ins.addDependence(newLine.transform, pointList1[point2Index].transform);
+					HW_GeoSolver.ins.AddDependence(newLine, pointList1[point1Index]);
+					HW_GeoSolver.ins.AddDependence(newLine, pointList1[point2Index]);
 				}
 				else if (line.GetComponent<DependentLineSegment>() != null)
 				{
@@ -427,8 +431,8 @@ namespace IMRE.HandWaver {
 					AbstractLineSegment newLine = iLineSegment(pointList1[point1Index].GetComponent<AbstractPoint>(), pointList1[point2Index].GetComponent<AbstractPoint>());
 					lineList1.Add(newLine);
 
-					HW_GeoSolver.ins.addDependence(newLine.transform, pointList1[point1Index].transform);
-					HW_GeoSolver.ins.addDependence(newLine.transform, pointList1[point2Index].transform);
+					HW_GeoSolver.ins.AddDependence(newLine, pointList1[point1Index]);
+					HW_GeoSolver.ins.AddDependence(newLine, pointList1[point2Index]);
 				}
 			}
 
@@ -437,10 +441,10 @@ namespace IMRE.HandWaver {
 
 			foreach (AbstractLineSegment line in lineList1)
 			{
-				HW_GeoSolver.ins.addDependence(plane1.transform, line.transform);
+				HW_GeoSolver.ins.AddDependence(plane1, line);
 			}
 
-			plane1.transform.GetComponent<AbstractPolygon>().initializefigure();
+			plane1.transform.GetComponent<AbstractPolygon>().InitializeFigure();
 			List<AbstractPolygon> sideList = new List<AbstractPolygon>();
 
 			foreach (AbstractLineSegment line0 in lineList0)
@@ -466,16 +470,16 @@ namespace IMRE.HandWaver {
 
 			foreach (AbstractPolygon poly in baseList)
 			{
-				HW_GeoSolver.ins.addDependence(prism.transform, poly.transform);
+				HW_GeoSolver.ins.AddDependence(prism, poly);
 			}
 			foreach (AbstractPolygon poly in sideList)
 			{
-				HW_GeoSolver.ins.addDependence(prism.transform, poly.transform);
+				HW_GeoSolver.ins.AddDependence(prism, poly);
 			}
 
-			prism.vertexPoints.ForEach(p => HW_GeoSolver.ins.addDependence(prism.transform, p.transform));
+			prism.vertexPoints.ForEach(p => HW_GeoSolver.ins.AddDependence(prism, p));
 
-			prism.initializefigure();
+			prism.InitializeFigure();
 
 			return prism;
 		}
@@ -507,8 +511,8 @@ namespace IMRE.HandWaver {
 
 					AbstractLineSegment newLine = iLineSegment(pointList1[point1Index], pointList1[point2Index]);
 					lineList1.Add(newLine);
-					HW_GeoSolver.ins.addDependence(newLine.transform, pointList1[point1Index].transform);
-					HW_GeoSolver.ins.addDependence(newLine.transform, pointList1[point2Index].transform);
+					HW_GeoSolver.ins.AddDependence(newLine, pointList1[point1Index]);
+					HW_GeoSolver.ins.AddDependence(newLine, pointList1[point2Index]);
 				}
 				else if (line.GetComponent<DependentLineSegment>() != null)
 				{
@@ -518,15 +522,15 @@ namespace IMRE.HandWaver {
 					AbstractLineSegment newLine = iLineSegment(pointList1[point1Index], pointList1[point2Index]);
 					lineList1.Add(newLine);
 
-					HW_GeoSolver.ins.addDependence(newLine.transform, pointList1[point1Index].transform);
-					HW_GeoSolver.ins.addDependence(newLine.transform, pointList1[point2Index].transform);
+					HW_GeoSolver.ins.AddDependence(newLine, pointList1[point1Index]);
+					HW_GeoSolver.ins.AddDependence(newLine, pointList1[point2Index]);
 				}
 			}
 
 			AbstractPolygon plane1 = iPolygon(lineList1, pointList1);
 
 
-			plane1.initializefigure();
+			plane1.InitializeFigure();
 			List<AbstractPolygon> sideList = new List<AbstractPolygon>();
 			
 			foreach (AbstractLineSegment l in lineList0)
@@ -545,11 +549,11 @@ namespace IMRE.HandWaver {
 			prism.bases = baseList;
 			prism.sides = sideList;
 
-			prism.vertexPoints.ForEach(p => HW_GeoSolver.ins.addDependence(prism.transform, p.transform));
-			prism.lineSegments.ForEach(l => HW_GeoSolver.ins.addDependence(prism.transform, l.transform));
-			prism.bases.ForEach(b => HW_GeoSolver.ins.addDependence(prism.transform, b.transform));
-			prism.sides.ForEach(b => HW_GeoSolver.ins.addDependence(prism.transform, b.transform));
-			prism.initializefigure();
+			prism.vertexPoints.ForEach(p => HW_GeoSolver.ins.AddDependence(prism, p));
+			prism.lineSegments.ForEach(l => HW_GeoSolver.ins.AddDependence(prism, l));
+			prism.bases.ForEach(b => HW_GeoSolver.ins.AddDependence(prism, b));
+			prism.sides.ForEach(b => HW_GeoSolver.ins.AddDependence(prism, b));
+			prism.InitializeFigure();
 
 			return prism;
 		}
@@ -590,13 +594,13 @@ namespace IMRE.HandWaver {
 			AbstractLineSegment line2 = iLineSegment(point01, point11);
 			AbstractLineSegment line3 = iLineSegment(point02, point12);
 
-			HW_GeoSolver.ins.addDependence(line2.transform, point01.transform);
-			HW_GeoSolver.ins.addDependence(line2.transform, point11.transform);
-			HW_GeoSolver.ins.addDependence(line3.transform, point02.transform);
-			HW_GeoSolver.ins.addDependence(line3.transform, point12.transform);
+			HW_GeoSolver.ins.AddDependence(line2, point01);
+			HW_GeoSolver.ins.AddDependence(line2, point11);
+			HW_GeoSolver.ins.AddDependence(line3, point02);
+			HW_GeoSolver.ins.AddDependence(line3, point12);
 
-			line2.transform.GetComponent<AbstractLineSegment>().initializefigure();
-			line3.transform.GetComponent<AbstractLineSegment>().initializefigure();
+			line2.transform.GetComponent<AbstractLineSegment>().InitializeFigure();
+			line3.transform.GetComponent<AbstractLineSegment>().InitializeFigure();
 
 			List<AbstractLineSegment> lineList = new List<AbstractLineSegment>();
 			lineList.Add(line0);
@@ -658,11 +662,11 @@ namespace IMRE.HandWaver {
 
             pyramid.sides = sideList;
 
-            HW_GeoSolver.ins.addDependence(pyramid.transform, basePoly.transform);//This dependency must be first on the list for XMLManager Loading to operate correctly
+            HW_GeoSolver.ins.AddDependence(pyramid, basePoly);//This dependency must be first on the list for XMLManager Loading to operate correctly
 
             foreach (AbstractPolygon poly in sideList)
             {
-				HW_GeoSolver.ins.addDependence(pyramid.transform, poly.transform);
+				HW_GeoSolver.ins.AddDependence(pyramid, poly);
             }
 
             return pyramid;

@@ -35,11 +35,12 @@ namespace IMRE.HandWaver
 			throw new NotImplementedException();
 		}
 
-		public override void initializefigure()
-        {
-            this.figType = GeoObjType.revolvedsurface;
+		public override void InitializeFigure()
+		{
+			base.InitializeFigure();
+			this.figType = GeoObjType.revolvedsurface;
 
-            this.Position3 = centerPoint;
+			this.Position3 = centerPoint;
 
             Vector3 norm1 = Vector3.right;
             Vector3 norm2 = Vector3.forward;
@@ -96,8 +97,8 @@ namespace IMRE.HandWaver
             mesh.vertices = vertices;
             mesh.triangles = triangles;
             mesh.RecalculateNormals();
-			Material mat = GetComponent<Renderer>().material;
-			mat.color = colorGenerator.randomColorTransparent(mat);
+
+            thisSelectStatus = thisSelectStatus;
         }
 
         public override void updateFigure()

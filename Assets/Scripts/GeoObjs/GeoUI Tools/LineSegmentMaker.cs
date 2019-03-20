@@ -215,8 +215,8 @@ namespace IMRE.HandWaver
 										.Where(d => HW_GeoSolver.ins.geomanager.findGraphNode(d.Value).mytransform.GetComponent<InteractablePrism>() != null).ToList().ForEach(prism => currPrismList.Add(prism.mytransform.GetComponent<InteractablePrism>()));
 									foreach (InteractablePrism cPrism in currPrismList)
 									{
-										HW_GeoSolver.ins.addDependence(newPoly1.transform, cPrism.transform);
-										HW_GeoSolver.ins.addDependence(newPoly2.transform, cPrism.transform);
+										HW_GeoSolver.ins.AddDependence(newPoly1, cPrism);
+										HW_GeoSolver.ins.AddDependence(newPoly2, cPrism);
 									}
 									HW_GeoSolver.ins.removeComponent(p);
 								}

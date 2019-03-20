@@ -131,43 +131,38 @@ namespace IMRE.HandWaver
 		{
 			int n = 0;
 			n = (int)(System.Math.Truncate(rotationVal));
-			//Debug.Log("The value of rotationVal is " + rotationVal);
-			//Debug.Log("The value of nTurns is " + n);
 			return n;
 		}
 
 		public bool newTurn()
 		{
 			bool isNew = (turnCount - nTurns() >= 3);
-			//Debug.Log("The value of turnCount is " + turnCount);
-
 			if (isNew)
 			{
 				turnCount = nTurns();
 			}
-			//Debug.Log(isNew + " is value for isNew boolean");
 			return isNew;
 		}
 		#endregion
 
 
 		#region Spawn GeoObjs From Script
-		public void makeCircle(Vector3 revPoint, Transform attachedPoint, Vector3 normDir)
+		public void makeCircle(Vector3 revPoint, AbstractPoint attachedPoint, Vector3 normDir)
 		{
 			#region intialize an arc or circle
-			/*DependentCircle dc = */GeoObjConstruction.dCircle(GeoObjConstruction.dPoint(revPoint), attachedPoint.GetComponent<AbstractPoint>(), normDir);
+			/*DependentCircle dc = */GeoObjConstruction.dCircle(GeoObjConstruction.dPoint(revPoint), attachedPoint, normDir);
 			#endregion
 		}
 
-		public void makeRevolvedSurface(Transform attachedLine, Vector3 revPoint, Vector3 normDir)
+		public void makeRevolvedSurface(AbstractLineSegment attachedLine, Vector3 revPoint, Vector3 normDir)
 		{
 			#region intialize a cylinder, cone or conic /etc.
 			InteractablePoint newPoint = InteractablePoint.Constructor();
 			newPoint.Position3 = revPoint;//nullreference on this line from shipswheel
 
-			DependentRevolvedSurface drs = GeoObjConstruction.dRevSurface(newPoint.GetComponent<AbstractPoint>(), attachedLine.GetComponent<AbstractLineSegment>(), normDir);
-			HW_GeoSolver.ins.addDependence(drs.transform, newPoint.transform);
-            HW_GeoSolver.ins.addDependence(drs.transform, attachedLine.transform);
+			DependentRevolvedSurface drs = GeoObjConstruction.dRevSurface(newPoint.GetComponent<AbstractPoint>(), attachedLine, normDir);
+			HW_GeoSolver.ins.AddDependence(drs, newPoint);
+            HW_GeoSolver.ins.AddDependence(drs, attachedLine.GetComponent<MasterGeoObj>());
 			#endregion
 		}
 
@@ -184,14 +179,14 @@ namespace IMRE.HandWaver
 			sphere.edgePosition = circle.edgePos;
 			sphere.centerPosition = circle.centerPos;
 
-			sphere.initializefigure();
+			sphere.InitializeFigure();
 			sphere.AddToRManager();
 
 
 			sphere.gameObject.tag = "Sphere";
 			sphere.GetComponent<MasterGeoObj>().figType = GeoObjType.sphere;
 			HW_GeoSolver.ins.addComponent(sphere.GetComponent<MasterGeoObj>());
-			HW_GeoSolver.ins.addDependence(sphere.transform, attachedArc.transform);
+			HW_GeoSolver.ins.AddDependence(sphere, attachedArc.GetComponent<MasterGeoObj>());
 			#endregion
 		}
 
@@ -211,7 +206,7 @@ namespace IMRE.HandWaver
 			//TorusMesh.gameObject.AddComponent<LifeManager>().type = "Torus";
 			//TorusMesh.GetComponent<LifeManager>().ObjectManager = ObjectManager.transform;
 			//TorusMesh.GetComponent<LifeManager>().OnSpawned();
-			//TorusMesh.GetComponent<LifeManager>().ObjectManager.GetComponent<ObjManHelper>().addDependence(TorusMesh.transform, attachedArc.transform.transform);
+			//TorusMesh.GetComponent<LifeManager>().ObjectManager.GetComponent<ObjManHelper>().AddDependence(TorusMesh.transform, attachedArc.transform.transform);
 			#endregion
 		}
 		#endregion
@@ -229,13 +224,13 @@ namespace IMRE.HandWaver
 				{
 					case GeoObjType.point:
 						Vector3 center = Vector3.Project(geoObj.gameObject.transform.position - spindleCenter, parentSE.normalDir) + spindleCenter;
-						makeCircle(center, geoObj.transform, normal);
+						makeCircle(center, geoObj.GetComponent<AbstractPoint>(), normal);
 						//geoObj.IsSelected = false;
 						break;
 					case GeoObjType.line:
 						Vector3 center2 = Vector3.Project(geoObj.gameObject.transform.position - spindleCenter, parentSE.normalDir) + spindleCenter;
 
-						makeRevolvedSurface(geoObj.gameObject.transform, center2, normal);
+						makeRevolvedSurface(geoObj.GetComponent<AbstractLineSegment>(), center2, normal);
 
 						AbstractLineSegment lineALS = geoObj.GetComponent<AbstractLineSegment>();
 
@@ -244,15 +239,15 @@ namespace IMRE.HandWaver
 
 						if (geoObj.GetComponent<InteractableLineSegment>() != null)
 						{
-							makeCircle(center2 + diff1, geoObj.GetComponent<InteractableLineSegment>().point1.transform, normal);
+							makeCircle(center2 + diff1, geoObj.GetComponent<InteractableLineSegment>().point1, normal);
 
-							makeCircle(center2 + diff2, geoObj.GetComponent<InteractableLineSegment>().point2.transform, normal);
+							makeCircle(center2 + diff2, geoObj.GetComponent<InteractableLineSegment>().point2, normal);
 						}
 						else if (geoObj.GetComponent<DependentLineSegment>() != null)
 						{
-							makeCircle(center2 + diff1, geoObj.GetComponent<DependentLineSegment>().point1.transform, normal);
+							makeCircle(center2 + diff1, geoObj.GetComponent<DependentLineSegment>().point1, normal);
 
-							makeCircle(center2 + diff2, geoObj.GetComponent<DependentLineSegment>().point2.transform, normal);
+							makeCircle(center2 + diff2, geoObj.GetComponent<DependentLineSegment>().point2, normal);
 						}
 						else
 						{
@@ -265,7 +260,7 @@ namespace IMRE.HandWaver
 						{
 							Vector3 center3 = Vector3.Project(lineObj.gameObject.transform.position - spindleCenter, parentSE.normalDir) + spindleCenter;
 
-							makeRevolvedSurface(lineObj.gameObject.transform, center3, normal);
+							makeRevolvedSurface(lineObj, center3, normal);
 
 							if (lineObj.GetComponent<InteractableLineSegment>() != null)
 							{
@@ -273,16 +268,16 @@ namespace IMRE.HandWaver
 								Vector3 diff12 = Vector3.Project(lineObj.GetComponent<InteractableLineSegment>().point1.transform.position - lineObj.transform.position, normal);
 								Vector3 diff22 = Vector3.Project(lineObj.GetComponent<InteractableLineSegment>().point2.transform.position - lineObj.transform.position, normal);
 
-								makeCircle(center3 + diff12, lineObj.GetComponent<InteractableLineSegment>().point1.transform, normal);
-								makeCircle(center3 + diff22, lineObj.GetComponent<InteractableLineSegment>().point2.transform, normal);
+								makeCircle(center3 + diff12, lineObj.GetComponent<InteractableLineSegment>().point1, normal);
+								makeCircle(center3 + diff22, lineObj.GetComponent<InteractableLineSegment>().point2, normal);
 							}
 							else if (lineObj.GetComponent<DependentLineSegment>() != null)
 							{
 								Vector3 diff12 = Vector3.Project(lineObj.GetComponent<DependentLineSegment>().point1.transform.position - lineObj.transform.position, normal);
 								Vector3 diff22 = Vector3.Project(lineObj.GetComponent<DependentLineSegment>().point2.transform.position - lineObj.transform.position, normal);
 
-								makeCircle(center3 + diff12, lineObj.GetComponent<DependentLineSegment>().point1.transform, normal);
-								makeCircle(center3 + diff22, lineObj.GetComponent<DependentLineSegment>().point2.transform, normal);
+								makeCircle(center3 + diff12, lineObj.GetComponent<DependentLineSegment>().point1, normal);
+								makeCircle(center3 + diff22, lineObj.GetComponent<DependentLineSegment>().point2, normal);
 							}
 							else
 							{
@@ -320,7 +315,7 @@ namespace IMRE.HandWaver
 						{
 							Vector3 center3 = Vector3.Project(geoObj.gameObject.transform.position - spindleCenter, parentSE.normalDir) + spindleCenter;
 
-							makeRevolvedSurface(geoObj.gameObject.transform, center3, normal);
+							makeRevolvedSurface(geoObj.GetComponent<AbstractLineSegment>(), center3, normal);
 
 							AbstractLineSegment lineALS2 = geoObj.GetComponent<AbstractLineSegment>();
 
@@ -329,15 +324,15 @@ namespace IMRE.HandWaver
 
 							if (geoObj.GetComponent<InteractableLineSegment>() != null)
 							{
-								makeCircle(center3 + diff1b, geoObj.GetComponent<InteractableLineSegment>().point1.transform, normal);
+								makeCircle(center3 + diff1b, geoObj.GetComponent<InteractableLineSegment>().point1, normal);
 
-								makeCircle(center3 + diff2b, geoObj.GetComponent<InteractableLineSegment>().point2.transform, normal);
+								makeCircle(center3 + diff2b, geoObj.GetComponent<InteractableLineSegment>().point2, normal);
 							}
 							else if (geoObj.GetComponent<DependentLineSegment>() != null)
 							{
-								makeCircle(center3 + diff1b, geoObj.GetComponent<DependentLineSegment>().point1.transform, normal);
+								makeCircle(center3 + diff1b, geoObj.GetComponent<DependentLineSegment>().point1, normal);
 
-								makeCircle(center3 + diff2b, geoObj.GetComponent<DependentLineSegment>().point2.transform, normal);
+								makeCircle(center3 + diff2b, geoObj.GetComponent<DependentLineSegment>().point2, normal);
 							}
 							else
 							{
@@ -359,7 +354,6 @@ namespace IMRE.HandWaver
 
 		public void hoist()
 		{
-			Debug.Log("attempting hoist");
 			#region Hoist
 			MasterGeoObj[] selObj = FindObjectsOfType<MasterGeoObj>().Where(o => ((o.figType != GeoObjType.point) && o.IsSelected)).ToArray();
 			foreach (MasterGeoObj currObj in selObj)

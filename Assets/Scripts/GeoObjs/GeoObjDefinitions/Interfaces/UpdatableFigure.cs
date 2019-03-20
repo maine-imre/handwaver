@@ -35,11 +35,5 @@ namespace IMRE.HandWaver
         /// Called on lateupdate by updateManager on GeoObjMan
         /// </summary>
         void updateFigure();
-
-        /// <summary>
-        /// Creates first instance of mesh or line for renderer.
-        /// Nromall run OnSpawned or at Start
-        /// </summary>
-        void initializefigure();
     }
 }

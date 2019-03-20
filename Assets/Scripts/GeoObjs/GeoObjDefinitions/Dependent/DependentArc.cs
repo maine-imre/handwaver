@@ -5,7 +5,7 @@ See license info in readme.md.
 www.imrelab.org
 **/
 
-﻿using Leap.Unity.Interaction;
+ using Leap.Unity.Interaction;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -18,10 +18,6 @@ namespace IMRE.HandWaver
 /// </summary>
 	class DependentArc : AbstractArc, DependentFigure
     {
-        public override void initializefigure()
-        {
-            throw new NotImplementedException();
-        }
 
         internal override bool RMotion(NodeList<string> inputNodeList)
         {

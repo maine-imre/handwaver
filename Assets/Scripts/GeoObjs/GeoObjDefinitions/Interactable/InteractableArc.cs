@@ -23,11 +23,6 @@ namespace IMRE.HandWaver
             throw new NotImplementedException();
         }
 
-        public override void initializefigure()
-        {
-            throw new NotImplementedException();
-        }
-
         public bool isGraspedLeap()
         {
             throw new NotImplementedException();
