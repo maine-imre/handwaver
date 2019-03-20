@@ -37,6 +37,6 @@ namespace IMRE.Gestures
         /// <summary>
         /// How close the thumb and pointer finger are as a measure form 0 to 1 where 1 is fully "pinched"
         /// </summary>
-public float PinchStrength;
+        public float PinchStrength;
     }
 }
