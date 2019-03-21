@@ -1,6 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
+#if LeapMotion
+    using Leap.Unity;
+#endif
+
+#if ViveSense
+    using Aristo;
+#endif
+
+#if ValveSkeletal
+    using Valve.VR;
+#endif
+
 
 namespace IMRE.Gestures
 {
@@ -10,24 +23,12 @@ namespace IMRE.Gestures
     /// </summary>
     public class GestureInput : MonoBehaviour
     {
+        public bool enableLeapMotion = true;
+        public bool enableViveSense = true;
+        public bool enableOSVR = false;
+        public bool enableRealSense = false;
+        public bool enableValveSkeletal = false;
         
-        //consdier switching this to a build flag system.
-        /// <summary>
-        /// The hardware that is bieng used to track the body/hands
-        /// </summary>
-        public enum InputSource
-        {
-            OSVR,
-            ValveSkeletal,
-            LeapMotion,
-            RealSense
-        };
-
-        /// <summary>
-        /// The hardware being used to track the body/hands
-        /// </summary>
-        public InputSource _inputSource;
-
         /// <summary>
         /// The struct that stores tracking data in a generic form.
         /// This struct could be synced over the network in order to have avatars in a multiplayer context.
@@ -48,74 +49,125 @@ namespace IMRE.Gestures
         //public event HandTrackingLost ;
         //public event BodyTrackingLost ;
 
+#if  LeapMotion   
+        private static Leap.Unity.LeapXRServiceProvider LeapService;
+#endif
+       
         /// <summary>
         /// Setup the BodyInput for each source.
         /// </summary>
         public void Awake()
         {
-            switch (_inputSource)
-            {
-                case InputSource.OSVR:
-                    //fill with OSVR tracking of head and hands
-                    bodyInput.FullBodyTracking = false;
-                    bodyInput.HandTracking = false;
-                    bodyInput.SimulatedHandTracking = false;
-                    bodyInput.HeadTracking = true;
-                    bodyInput.SimulatedHeadTracking = false;
-                    break;
-                case InputSource.ValveSkeletal:
-                    ///fill with OSVR tracking of head and skeletal tracking of hands.
-                    bodyInput.FullBodyTracking = true;
-                    bodyInput.HandTracking = true;
-                    bodyInput.SimulatedHandTracking = true;
-                    bodyInput.HeadTracking = true;
-                    bodyInput.SimulatedHeadTracking = false;
-                    break;
-                case InputSource.LeapMotion:
-                    //fill with OSVR tracking of head and skeletal tracking of hands.
-                    bodyInput.FullBodyTracking = false;
-                    bodyInput.HandTracking = true;
-                    bodyInput.SimulatedHandTracking = true;
-                    bodyInput.HeadTracking = true;
-                    bodyInput.SimulatedHeadTracking = false;
-                    break;
-                case InputSource.RealSense:
-                    // fill with RealSense tracking of head and skeletal tracking of hands. 
-                    bodyInput.FullBodyTracking = false;
-                    bodyInput.HandTracking = true;
-                    bodyInput.SimulatedHandTracking = false;
-                    bodyInput.HeadTracking = true;
-                    bodyInput.SimulatedHeadTracking = false;
-                    break;
-            }
+            bodyInput.FullBodyTracking = false;
+            bodyInput.HandTracking = false;
+            bodyInput.SimulatedHandTracking = false;
+            bodyInput.HeadTracking = false;
+            bodyInput.SimulatedHeadTracking = false;
 
+            if (enableOSVR)
+            {
+                bodyInput.HeadTracking = true;
+            }
+            
+#if ViveSense
+            if (enableViveSense)
+            {
+                bodyInput.FullBodyTracking = true;
+                bodyInput.HandTracking = true;
+                bodyInput.SimulatedHandTracking = true;
+                bodyInput.HeadTracking = true;            
+            }
+#endif
+            
+#if ValveSkeletal            
+            if (enableValveSkeletal)
+            {
+                bodyInput.FullBodyTracking = true;
+                bodyInput.HandTracking = true;
+                bodyInput.SimulatedHandTracking = true;
+                bodyInput.HeadTracking = true;            
+            }
+#endif
+            
+#if RealSense
+            if (enableRealSense)
+            {
+                bodyInput.FullBodyTracking = true;
+                bodyInput.HandTracking = true;
+                bodyInput.SimulatedHandTracking = true;
+                bodyInput.HeadTracking = true;            
+            }
+#endif
+
+#if  LeapMotion   
+            LeapService = FindObjectOfType<Leap.Unity.LeapXRServiceProvider>();
+            if (enableLeapMotion)
+            {
+                bodyInput.HandTracking = true;
+                bodyInput.SimulatedHandTracking = true;
+                bodyInput.HeadTracking = true;
+                bodyInput.SimulatedHeadTracking = false;
+            }
+#endif
+
+#if RealSense
+            if (enableRealSense)
+            {
+                bodyInput.HandTracking = true;
+                bodyInput.HeadTracking = true;
+            }
+#endif
             setupAvatar();
         }
+        
+
 
         /// <summary>
         /// Every 1/90th of a second, update the Body Input
         /// </summary>
         public void FixedUpdate()
         {
-            switch (_inputSource)
+#if ValveSkeletal
+            if (enableOSVR)
             {
-                case InputSource.OSVR:
-                    //fill with OSVR tracking of head and hands
-                    setPositionsOSVR();
-                    break;
-                case InputSource.ValveSkeletal:
-                    ///fill with OSVR tracking of head and skeletal tracking of hands.
-                    setPositionsValve();
-                    break;
-                case InputSource.LeapMotion:
-                    //fill with OSVR tracking of head and skeletal tracking of hands.
-                    setPositionsLeapMotion();
-                    break;
-                case InputSource.RealSense:
-                    // fill with RealSense tracking of head and skeletal tracking of hands.
-                    setPositionsRealSense();
-                    break;
+                setPositionsOSVR();
             }
+#endif
+            
+#if ViveSense
+            if (enableViveSense)
+            {
+                setPositionsViveSense();          
+            }
+#endif
+            
+#if RealSense
+            if (enableRealSense)
+            {
+                    setPositionsRealSense();         
+            }
+#endif
+
+#if  LeapMotion   
+            if (enableLeapMotion)
+            {
+                setPositionsLeapMotion();
+            }
+#endif
+
+#if RealSense
+            if (enableRealSense)
+            {
+                setPositionsRealSense();
+            }
+#endif
+            
+#if ValveSkeletal
+            if (enableValveSkeletal)
+                {  
+                  setPositionsValve();
+                }
+#endif
 
             bodyInputQue.Enqueue(bodyInput);
             if (bodyInputQue.Count > 10)
@@ -125,20 +177,125 @@ namespace IMRE.Gestures
             }
 
             updateAvatar();
+            
+            //TODO pass body input to other players
+        }
+        
+#if ValveSkeletal
+            private void setPositionsOSVR()
+            {
+                //bodyInput.Head = SteamVR_Input_Sources.Head
+                
+                //bodyInput.LeftHand.Palm.Position =
+                //bodyInput.LeftHand.Palm.Direction =
+                //bodyInput.RightHand.Palm.Position = 
+                //bodyInput.RightHand.Palm.Direction =
+            }
+            
+            private void setPositionsValve()
+            {
+                //SteamVR_Input_Sources.LeftHand
+            }
+#endif
+            
+      
+#if LeapMotion
+        private void setPositionsLeapMotion()
+        {            
+            bodyInput.LeftHand = leapHandConversion(bodyInput.LeftHand, LeapService.MakeTestHand(true));
+            bodyInput.RightHand = leapHandConversion(bodyInput.RightHand, LeapService.MakeTestHand(false));
+        }
+
+        private Hand leapHandConversion(Hand myHand, Leap.Hand lmHand)
+        {
+            myHand.Palm.Position = lmHand.PalmPosition.ToVector3();
+            myHand.Palm.Direction = lmHand.PalmNormal.ToVector3();
+            myHand.Wrist.Position = lmHand.WristPosition.ToVector3();
+            myHand.Wrist.Direction = lmHand.Fingers[2].bones[0].Center.ToVector3() - lmHand.WristPosition.ToVector3();
+            myHand.PinchStrength = lmHand.PinchStrength;
+            myHand.IsPinching = lmHand.IsPinching();
+            
+            //count through five fingers
+            for (int fIDX = 0; fIDX < 5; fIDX++)
+            {
+                myHand.Fingers[fIDX].Direction = lmHand.Fingers[fIDX].Direction.ToVector3();
+                myHand.Fingers[fIDX].IsExtended = lmHand.Fingers[fIDX].IsExtended;
+                
+                //count through 4 joints
+                for (int jIDX = 0; jIDX < 4; jIDX++)
+                {
+                    myHand.Fingers[fIDX].Joints[jIDX].Position = lmHand.Fingers[fIDX].bones[jIDX].Center.ToVector3();
+                    myHand.Fingers[fIDX].Joints[jIDX].Direction = lmHand.Fingers[fIDX].bones[jIDX].Direction.ToVector3();
+                }
+            }
+
+            return myHand;
+        }
+#endif
+        
+#if ViveSense
+        private void setPositionsViveSense()
+        {
+            bodyInput.LeftHand = viveHandConversion(bodyInput.LeftHand, GestureProvider.LeftHand);
+            bodyInput.RightHand = viveHandConversion(bodyInput.RightHand,GestureProvider.RightHand);
 
         }
 
-        private void setPositionsOSVR()
-            {
-            }
-            private void setPositionsValve()
-            {
-            }
+        private Hand viveHandConversion(Hand myHand, Aristo.GestureResult viveHand)
+        {
+            myHand.Palm.Position = viveHand.position;
+            myHand.Palm.Direction = Vector3.Cross(viveHand.points[0] - viveHand.points[5],
+                viveHand.points[0] - viveHand.points[17]).normalized;
+            myHand.Wrist.Position = viveHand.points[0];
+            myHand.Wrist.Direction = (viveHand.points[9] - viveHand.points[1]);
             
-            private void setPositionsLeapMotion()
+            //binary pinch strength by default
+            if (viveHand.gesture == GestureType.OK)
             {
+                myHand.PinchStrength = 1f;
             }
+            else
+            {
+                myHand.PinchStrength = 0f;
+            }
+
+            myHand.IsPinching = viveHand.gesture == GestureType.OK;
             
+            //count through five fingers
+            for (int fIDX = 0; fIDX < 5; fIDX++)
+            {
+                //average dir across last two joints
+                myHand.Fingers[fIDX].Direction = viveHand.points[4 * fIDX + 4] - viveHand.points[4 * fIDX + 2];
+
+                //count through 4 joints
+                for (int jIDX = 0; jIDX < 4; jIDX++)
+                {
+                    myHand.Fingers[fIDX].Joints[jIDX].Position = viveHand.points[4 * fIDX + jIDX + 1];
+                    if (jIDX == 0)
+                    {
+                        myHand.Fingers[fIDX].Joints[jIDX].Direction =
+                            viveHand.points[4 * fIDX + jIDX + 1] - viveHand.points[0];
+                    }
+                    else
+                    {
+                        myHand.Fingers[fIDX].Joints[jIDX].Direction =
+                            viveHand.points[4 * fIDX + jIDX + 1] - viveHand.points[4 * fIDX + jIDX];
+                    }
+                }
+
+                myHand.Fingers[fIDX].IsExtended = isFingerExtended(myHand, fIDX);
+
+            }
+
+            return myHand;
+        }
+#endif
+        
+        private bool isFingerExtended(Hand myHand, int fIDX)
+        {
+            //is finger in plane of palm?
+            return Vector3.Dot(myHand.Fingers[fIDX].Direction, myHand.Palm.Direction) < .1f;
+        }
             private void setPositionsRealSense()
             {
             }

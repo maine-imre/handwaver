@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/BaseScenes/networkingBase.unity
+    guid: 6821c7a9f6e1c304ca79321aedb7646e
+  - enabled: 0
     path: Assets/Scenes/BaseScenes/HandWaverBase.unity
     guid: 27967793b29ceac48856dd6e75479d1f
   - enabled: 1
@@ -15,15 +18,12 @@ EditorBuildSettings:
     path: Assets/Scenes/BaseScenes/GeometersPlanetariumBase.unity
     guid: 84a93c9ef7681214ea120ea53d790e88
   - enabled: 0
-    path: Assets/Scenes/BaseScenes/networkingBase.unity
-    guid: 6821c7a9f6e1c304ca79321aedb7646e
-  - enabled: 0
     path: Assets/Scenes/ContentLayers/LatticeLand.unity
     guid: ab0a990c63207794d81e29ef881a739a
   - enabled: 0
     path: Assets/Scenes/ContentLayers/PlatonicSolids.unity
     guid: 7de70915bc37f9b4c934000a476d2fae
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/ContentLayers/ThreeTorus.unity
     guid: 636c41b23556dcf45b158ccb87c93c67
   - enabled: 0
