@@ -28,7 +28,7 @@ namespace IMRE.Gestures
             isComplete = closestObj != null;
             if (isComplete)
             {
-                closestObj.Position3 = hand.Fingersp[1].Joints[3].Position;
+                closestObj.Position3 = hand.Fingers[1].Joints[3].Position;
             }
         }
 
@@ -40,6 +40,7 @@ namespace IMRE.Gestures
             closestObj2 = null;
 
             List<MasterGeoObj> eligibleMGO = FindObjectsOfType<MasterGeoObj>().Where(mgo => checkEligible(mgo, outerRadius));
+
             foreach (MasterGeoObj mgo in eligibleMGO)
             {
                 float distance = mgo.LocalDistanceToClosestPoint(hand.Fingers[1].Joints[3].Position);
