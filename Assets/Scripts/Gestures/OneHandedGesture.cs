@@ -112,16 +112,20 @@ namespace IMRE.Gestures
 		{
 			if (DeactivationConditionsActionComplete())
 			{
+                //the gesture has completed its function
 				deactivationReason = DeactivationReason.FinishedGesture;
 				return true;
 			}
 			else if (DeactivationConditions(bodyInput,chirality) || !GestureEnabled)
 			{
+                //the gesture was interrupted by the user or not allowed to be active
 				deactivationReason = DeactivationReason.CancelledGesture;
 				return true;
 			}
 			else
 			{
+                //the gesture should remain active because it hasn't completed its function
+                //and the user is still making the gesture
 				deactivationReason = DeactivationReason.CancelledGesture;
 				return false;
 			}
