@@ -40,6 +40,40 @@ namespace IMRE.HandWaver
         private Quaternion _rotation3;
         private float _scale;
 
+        public int Dimension
+        {
+	        get
+	        {
+		        switch (figType)
+		        {
+			        case GeoObjType.point:
+				        return 0;
+			        case GeoObjType.line:
+				        return 1;
+			        case GeoObjType.polygon:
+				        return 2;
+			        case GeoObjType.prism:
+				        return 3;
+			        case GeoObjType.pyramid:
+				        return 4;
+			        case GeoObjType.circle:
+				        return 1;
+			        case GeoObjType.sphere:
+				        return 2;
+			        case GeoObjType.revolvedsurface:
+				        return 2;
+			        case GeoObjType.torus:
+				        return 3;
+			        case GeoObjType.flatface:
+				        return 2;
+			        case straightedge:
+				        return 1;
+			        case none:
+				        return 0;
+		        }
+	        }
+        }
+
         internal static Vector3 LocalPosition(Vector3 systemPosition)
         {
             return HW_GeoSolver.ins.localPosition(systemPosition);

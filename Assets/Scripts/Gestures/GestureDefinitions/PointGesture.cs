@@ -5,10 +5,8 @@ using UnityEngine;
 
 namespace IMRE.Gestures
 {
-public abstract class PointAtGesture : OneHandedGesture
+public abstract class PointGesture : OneHandedGesture
 {
-		public Transform target;
-		public float tolerance = 10f;
 		protected override void visualFeedbackActivated()
 		{
 			throw new NotImplementedException();
@@ -62,7 +60,6 @@ public abstract class PointAtGesture : OneHandedGesture
                 !(hand.Fingers[3].IsExtended) &&
                 !(hand.Fingers[4].IsExtended) //&&
                 //!(interactionHand.isGraspingObject)
-                 && Vector3.Angle(hand.Fingers[1].Direction,hand.Fingers[1].Joints[3].Position - target.position) < tolerance
                 );
         }
 		protected override bool DeactivationConditions(BodyInput bodyInput, Chirality chirality)
