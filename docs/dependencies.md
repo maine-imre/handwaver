@@ -32,47 +32,5 @@ Free and Open-Source. Used as a main control interface. (Essential to function).
 
 [Package Download](https://assetstore.unity.com/packages/tools/network/pun-2-free-119922)
 
-Paid Asset. Used to add multiplayer support. (Essential to function)
+Paid Asset. Used to add multiplayer support. (Essential to function)  This is only used in the dodgeball scene, but the repository will not compile without this.  Buildflags will be used in the future to avoid this.
 
-### Discord Rich Presence by [Discord](https://discordapp.com/developers/docs/rich-presence/how-to)
-
-[Package Download](https://github.com/maine-imre/discord-rpc/releases)
-
-Free and Open-Source.  Used to configure PUN networking.
-
-
-# Optional Add-Ons whose integration has been teseted.
-The use of these closed-source assets is restricted to (1) a fork of the repository or (2) a local copy of the repository.  No code dependant on these solutions should be included in the main repository.
-
-
-### BlueprintReality - MixCast SDK
-[BluePrintReality](https://mixcast.me/mixcast-download/)
-
-Free Asset. Used to record mixed reality footage. (Non-essential to function)
-
-### TiltBrush Toolkit
-[Google](https://github.com/googlevr/tilt-brush-toolkit/releases)
-
-Free Asset. Used to import TiltBrush drawings into the project. (Non-essential to function)
-
-### HTC Unity Plugin
-[HTC Github](https://github.com/ViveSoftware/ViveInputUtility-Unity/releases)
-
-Free Asset. Will be used for spacial audio and locomotion. (Non-essential to function)
-
-### Viveport
-[HTC Vive](https://developer.viveport.com/documents/sdk/en/download.html)
-
-Free Asset. Will be used for telemetrics. (Non-essential to function)
-
-### Pool Manager
-[Path-o-logical Games](http://u3d.as/1Z4)
-
-Paid Asset. Object pooling for GeoObjects and GeoUI. (Essential to function)
-We have used this in the past for instancing objects, but are working to be independent of it.
-PoolManager may offer some performance gains, and can be dropped into the application by simply reomving the PoolManager.cs script in the Assets/Scripts folder.
-
-### SteamVR
-[Valve](http://u3d.as/cjo)
-
-Free Asset. 
