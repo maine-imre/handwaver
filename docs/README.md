@@ -2,4 +2,4 @@ HandWaver is a gesture-based virtual mathematical making environment where learn
 
 HandWaver allows learners to make, modify, measure, and explore mathematical objects in a virtual three dimensional space.  We developed HandWaver to increase access to meaningful mathematical experiences for all learners. HandWaver is developed by the IMRE Lab at the University of Maine under the superivision of Principal Investigator Justin Dimmel and Lead Developer Camden Bock.
 
-To get started, clone the repository and download any dependencies from [Dependencies](../dependencies).  Note that we use GitFlow for our branching, so Master will be slow to update but much more stable than other branches.
+To get started, clone the repository and download any dependencies from [Dependencies](../docs/dependencies.md).  Note that we use GitFlow for our branching, so Master will be slow to update but much more stable than other branches.
