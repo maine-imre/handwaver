@@ -43,7 +43,18 @@ namespace IMRE.Chess3D
         /// <returns>true if the move requested is valid</returns>
         public abstract bool IsValid(Vector3 attemptedMove);
 
-        public abstract List<Vector3> validMoves();
+        public List<Vector3> validMoves
+        {
+            get
+            {
+                return allValidMoves.validMoves(this);
+            }
+        }
+
+        public bool IsValid(Vector3 newLocation)
+        {
+            return validMoves.Contains(newLocation);
+        }
 
 
 
@@ -63,11 +74,12 @@ namespace IMRE.Chess3D
             if (IsValid(attemptedMove))
             {
                 AbstractPiece pieceInSpot = board.TestLocation(attemptedMove);
-                if (pieceInSpot != null)
+                if (pieceInSpot != null && pieceInSpot.Team != team)
                 {
                     pieceInSpot.capture();
                 }
-                this.Location.Set(attemptedMove.x, attemptedMove.y, attemptedMove.z);
+
+                this.Location = attemptedMove;
                 board.Check(this, attemptedMove);
             }
 

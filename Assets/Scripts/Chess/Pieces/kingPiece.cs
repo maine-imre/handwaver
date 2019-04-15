@@ -27,40 +27,5 @@ namespace IMRE.Chess3D
         {
             Debug.Log("Game Ends! "+Team+" lost the game.");
         }
-
-        public override bool IsValid(Vector3 moveToTest)
-        {
-            Vector3 tmp = moveToTest - Location;
-            if (tmp == Vector3.zero)
-            {
-                return false;
-            }else if(Board.TestLocation(moveToTest) != null){
-                if (Board.TestLocation(moveToTest).Team == this.Team)
-                {return false;}
-            }
-
-            if (Mathf.Abs(Vector3.Dot(tmp,Vector3.right)) > 1)
-            {
-                return false;
-            } else if (Mathf.Abs(Vector3.Dot(tmp, Vector3.up))>1)
-            {
-                return false;
-            }else if (Mathf.Abs(Vector3.Dot(tmp, Vector3.forward))> 1){
-                return false;
-            }
-            else {
-                if(Board.placeSelfInCheck(this, moveToTest))
-                {
-                    return false;
-                }
-                return true;
-            }
-            //check if in check
-        }
-
-        public override List<Vector3> validMoves()
-        {
-            return allValidMoves.kingMoves(Location, Board.myTeam(Team));
-        }
     }
 }

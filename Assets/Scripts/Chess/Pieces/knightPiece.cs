@@ -17,36 +17,15 @@ namespace IMRE.Chess3D
 /// </summary>
 	public class knightPiece : AbstractPiece
     {
+        private void Start()
+        {
+            Board = GameObject.Find("chessBoard").GetComponent<chessBoard>();
+            PieceType = (chessBoard.PieceType.knight);
+        }
+
         public override void capture()
         {
-            throw new NotImplementedException();
-        }
-
-        public override bool IsValid(Vector3 attemptedMove)
-        {
-            Vector3 tmp = this.Location - attemptedMove;
-            if (tmp == Vector3.zero)
-            {
-                //piece did not move
-                return false;
-            }
-            else
-            {
-                List<Vector3> possible = validMoves();
-                if (possible.Contains(this.Location))
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-        }
-
-        public override List<Vector3> validMoves()
-        {
-            return allValidMoves.kingMoves(Location, Board.myTeam(Team));
+            Board.pieceCaptured(this);
         }
     }
 }

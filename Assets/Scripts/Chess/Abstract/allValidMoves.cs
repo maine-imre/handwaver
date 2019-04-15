@@ -8,387 +8,372 @@ www.imrelab.org
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 namespace IMRE.Chess3D {
     /// <summary>
-    /// A list of all of  the valid moves for each piece type in spatial chess.
-    /// This needs to be checked, only works in one direction.
-    /// Maybe we can express these in terms of a basis system?
+    /// A static script for determining all of the valid moves for a given piece.
     /// </summary>
 	public static class allValidMoves {
 
-        public static List<Vector3> kingMoves(Vector3 position, List<AbstractPiece> friendlyPieces)
+        /// <summary>
+        /// A static function for determining the valid moves for a given piece.
+        /// </summary>
+        /// <param name="piece"></param>
+        /// <returns></returns>
+        public static List<Vector3> validMoves(AbstractPiece piece)
         {
-            List<Vector3> posList = new List<Vector3>();
-            posList.Add(position + Vector3.up);
-            posList.Add(position + Vector3.down);
-            posList.Add(position + Vector3.forward);
-            posList.Add(position + Vector3.back);
-            posList.Add(position + Vector3.right);
-            posList.Add(position + Vector3.left);
-
-            posList.Add(position + Vector3.up + Vector3.left);
-            posList.Add(position + Vector3.up + Vector3.right);
-            posList.Add(position + Vector3.up + Vector3.back);
-            posList.Add(position + Vector3.up + Vector3.forward);
-
-            posList.Add(position + Vector3.down + Vector3.left);
-            posList.Add(position + Vector3.down + Vector3.right);
-            posList.Add(position + Vector3.down + Vector3.back);
-            posList.Add(position + Vector3.down + Vector3.forward);
-
-            posList.Add(position + Vector3.left + Vector3.back);
-            posList.Add(position + Vector3.left + Vector3.forward);
-
-            posList.Add(position + Vector3.right + Vector3.back);
-            posList.Add(position + Vector3.right + Vector3.forward);
-
-            posList.Add(position + Vector3.up + Vector3.left + Vector3.forward);
-            posList.Add(position + Vector3.up + Vector3.left + Vector3.back);
-            posList.Add(position + Vector3.up + Vector3.right + Vector3.forward);
-            posList.Add(position + Vector3.up + Vector3.right + Vector3.back);
-
-            posList.Add(position + Vector3.down + Vector3.left + Vector3.forward);
-            posList.Add(position + Vector3.down + Vector3.left + Vector3.back);
-            posList.Add(position + Vector3.down + Vector3.right + Vector3.forward);
-            posList.Add(position + Vector3.down + Vector3.right + Vector3.back);
-
-
-            List<Vector3> posListClone = posList;
-
-            foreach (Vector3 pos in posListClone) {
-                foreach (AbstractPiece piece in friendlyPieces)
-                {
-                    if (piece.Location == pos)
-                    {
-                        posList.Remove(pos);
-                    }
-                }
-            }
-
-            return posList;
-
-        }
-        public static List<Vector3> queenMoves(Vector3 position, List<AbstractPiece> enemyPieces, List<AbstractPiece> friendlyPieces)
-        {
-            List<Vector3> posList = new List<Vector3>();
-            pathMoves(Vector3.up, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.down, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.forward, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.back, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.right, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.left, position, enemyPieces, friendlyPieces, posList);
-
-            pathMoves(Vector3.up + Vector3.left, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.up + Vector3.right, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.up + Vector3.back, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.up + Vector3.forward, position, enemyPieces, friendlyPieces, posList);
-
-            pathMoves(Vector3.down + Vector3.left, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.down + Vector3.right, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.down + Vector3.back, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.down + Vector3.forward, position, enemyPieces, friendlyPieces, posList);
-
-            pathMoves(Vector3.left + Vector3.back, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.left + Vector3.forward, position, enemyPieces, friendlyPieces, posList);
-
-            pathMoves(Vector3.right + Vector3.back, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.right + Vector3.forward, position, enemyPieces, friendlyPieces, posList);
-
-            pathMoves(Vector3.up + Vector3.left + Vector3.forward, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.up + Vector3.left + Vector3.back, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.up + Vector3.right + Vector3.forward, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.up + Vector3.right + Vector3.back, position, enemyPieces, friendlyPieces, posList);
-
-            pathMoves(Vector3.down + Vector3.left + Vector3.forward, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.down + Vector3.left + Vector3.back, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.down + Vector3.right + Vector3.forward, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.down + Vector3.right + Vector3.back, position, enemyPieces, friendlyPieces, posList);
-
-            List<Vector3> posListClone = posList;
-
-            foreach (Vector3 pos in posListClone)
+            Vector3 orientation = Vector3.forward;
+            if (piece.Team == currentTeam.black)
             {
-                foreach (AbstractPiece piece in friendlyPieces)
-                {
-                    if (piece.Location == pos)
-                    {
-                        posList.Remove(pos);
-                    }
-                }
+                orientation = Vector3.back;
             }
 
-            return posList;
-
-        }
-
-        private static void pathMoves(Vector3 direction, Vector3 position, List<AbstractPiece> enemyPieces, List<AbstractPiece> friendlyPieces, List<Vector3> posList)
-        {
-            Vector3 newPos = Vector3.zero;
-            for (int i = 0; i < 9; i++)
-            {
-                newPos = position + i*direction;
-                if (!(newPos.x > 9 || newPos.y > 9 || newPos.z > 9 || newPos.x < 0 || newPos.y < 0 || newPos.z < 0))
-                {
-                    bool result = false;
-                    foreach (AbstractPiece enemy in enemyPieces)
-                    {
-                        if (enemy.Location == newPos)
-                        {
-                            result = true;
-                        }
-                    }
-                    if (result)
-                    {
-                        posList.Add(newPos);
-                        break;
-                    }
-                    else
-                    {
-                        foreach (AbstractPiece friendly in friendlyPieces)
-                        {
-                            if (friendly.Location == newPos)
-                            {
-                                result = true;
-                            }
-                        }
-                        if (result)
-                        {
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-
-        public static List<Vector3> knightMoves(Vector3 position, List<AbstractPiece> friendlyPieces)
-        {
-            List<Vector3> posList = new List<Vector3>();
-            posList.Add(position + 2 * Vector3.right + Vector3.up);
-            posList.Add(position + 2 * Vector3.right + Vector3.down);
-            posList.Add(position + 2 * Vector3.right + Vector3.forward);
-            posList.Add(position + 2 * Vector3.right + Vector3.back);
-            posList.Add(position + 2 * Vector3.left + Vector3.up);
-            posList.Add(position + 2 * Vector3.left + Vector3.down);
-            posList.Add(position + 2 * Vector3.left + Vector3.forward);
-            posList.Add(position + 2 * Vector3.left + Vector3.back);
-
-            posList.Add(position + 2 * Vector3.up + Vector3.right);
-            posList.Add(position + 2 * Vector3.up + Vector3.left);
-            posList.Add(position + 2 * Vector3.up + Vector3.forward);
-            posList.Add(position + 2 * Vector3.up + Vector3.back);
-            posList.Add(position + 2 * Vector3.down + Vector3.right);
-            posList.Add(position + 2 * Vector3.down + Vector3.left);
-            posList.Add(position + 2 * Vector3.down + Vector3.forward);
-            posList.Add(position + 2 * Vector3.down + Vector3.back);
-
-            posList.Add(position + 2 * Vector3.forward + Vector3.up);
-            posList.Add(position + 2 * Vector3.forward + Vector3.down);
-            posList.Add(position + 2 * Vector3.forward + Vector3.left);
-            posList.Add(position + 2 * Vector3.forward + Vector3.right);
-            posList.Add(position + 2 * Vector3.back + Vector3.up);
-            posList.Add(position + 2 * Vector3.back + Vector3.down);
-            posList.Add(position + 2 * Vector3.back + Vector3.left);
-            posList.Add(position + 2 * Vector3.back + Vector3.right);
-
-
-            List<Vector3> posListClone = posList;
-
-            foreach (Vector3 pos in posListClone) {
-                foreach (AbstractPiece piece in friendlyPieces)
-                {
-                    if (piece.Location == pos)
-                    {
-                        posList.Remove(pos);
-                    }
-                }
-            }
-
-            return posList;
-        }
-
-        public static List<Vector3> pawnMoves(Vector3 position, List<AbstractPiece> enemyPieces, List<AbstractPiece> friendlyPieces, chessBoard.currentTeam team)
-        {
-            if (team == chessBoard.currentTeam.white)
-            {
-
-                List<Vector3> posList = new List<Vector3>();
-
-                bool blocked = false;
-
-                foreach (AbstractPiece piece in enemyPieces)
-                {
-                    if (piece.Location == position + Vector3.forward)
-                        blocked = true;
-                }
-
-                foreach (AbstractPiece piece in friendlyPieces)
-                {
-                    if (piece.Location == position + Vector3.forward)
-                        blocked = true;
-                }
-
-                if (!blocked)
-                {
-                    posList.Add(Vector3.forward + position);
-
-
-                    if (position.z == 1 || position.z == 8)
-                    {
-                        posList.Add(2 * Vector3.forward + position);
-                    }
-                }
-                else
-                {
-                    foreach (AbstractPiece piece in enemyPieces)
-                    {
-                        if (piece.Location == Vector3.forward + Vector3.up + position)
-                        {
-                            posList.Add(Vector3.forward + Vector3.up + position);
-                        }
-                        else if (piece.Location == Vector3.forward + Vector3.down + position)
-                        {
-                            posList.Add(Vector3.forward + Vector3.down + position);
-                        }
-                        else if (piece.Location == Vector3.forward + Vector3.right + position)
-                        {
-                            posList.Add(Vector3.forward + Vector3.right + position);
-                        }
-                        else if (piece.Location == Vector3.forward + Vector3.left + position)
-                        {
-                            posList.Add(Vector3.forward + Vector3.left + position);
-                        }
-                    }
-                }
-
-                return posList;
-            }
-
-            if (team == chessBoard.currentTeam.black)
-            {
-                List<Vector3> posList = new List<Vector3>();
-
-                bool blocked = false;
-
-                foreach (AbstractPiece piece in enemyPieces)
-                {
-                    if (piece.Location == position + Vector3.back)
-                        blocked = true;
-                }
-
-                foreach (AbstractPiece piece in friendlyPieces)
-                {
-                    if (piece.Location == position + Vector3.back)
-                        blocked = true;
-                }
-
-                if (!blocked)
-                {
-                    posList.Add(Vector3.back + position);
-
-
-                    if (position.z == 1 || position.z == 8)
-                    {
-                        posList.Add(2 * Vector3.back + position);
-                    }
-                }
-                else
-                {
-                    foreach (AbstractPiece piece in enemyPieces)
-                    {
-                        if (piece.Location == Vector3.back + Vector3.up + position)
-                        {
-                            posList.Add(Vector3.back + Vector3.up + position);
-                        }
-                        else if (piece.Location == Vector3.back + Vector3.down + position)
-                        {
-                            posList.Add(Vector3.back + Vector3.down + position);
-                        }
-                        else if (piece.Location == Vector3.back + Vector3.right + position)
-                        {
-                            posList.Add(Vector3.back + Vector3.right + position);
-                        }
-                        else if (piece.Location == Vector3.back + Vector3.left + position)
-                        {
-                            posList.Add(Vector3.back + Vector3.left + position);
-                        }
-                    }
-                }
-
-                return posList;
-            }
-            return null;
+            List<Vector3> friendly = new List<Vector3>();
+            piece.myTeam().ForEach(p => friendly.Add(p.Location));
             
+            List<Vector3> enemy = new List<Vector3>(); 
+            piece.otherTeam().ForEach(p => enemy.Add(p.Location));
+            
+            return validMoves(piece.PieceType, orientation, piece.Location, friendly,enemy,orientation);
         }
-        public static List<Vector3> bishopMoves(Vector3 position, List<AbstractPiece> enemyPieces, List<AbstractPiece> friendlyPieces)
+
+       #region CalculateMoves
+        private static List<Vector3> validMoves(chessBoard.PieceType piece, Vector3 currentPosition, List<Vector3> friendlyPieces, List<Vector3> enemyPieces, Vector3 orientation)
         {
-            List<Vector3> posList = new List<Vector3>();
-  
-            pathMoves(Vector3.up + Vector3.left, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.up + Vector3.right, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.up + Vector3.back, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.up + Vector3.forward, position, enemyPieces, friendlyPieces, posList);
-
-            pathMoves(Vector3.down + Vector3.left, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.down + Vector3.right, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.down + Vector3.back, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.down + Vector3.forward, position, enemyPieces, friendlyPieces, posList);
-
-            pathMoves(Vector3.left + Vector3.back, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.left + Vector3.forward, position, enemyPieces, friendlyPieces, posList);
-
-            pathMoves(Vector3.right + Vector3.back, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.right + Vector3.forward, position, enemyPieces, friendlyPieces, posList);
-
-            pathMoves(Vector3.up + Vector3.left + Vector3.forward, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.up + Vector3.left + Vector3.back, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.up + Vector3.right + Vector3.forward, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.up + Vector3.right + Vector3.back, position, enemyPieces, friendlyPieces, posList);
-
-            pathMoves(Vector3.down + Vector3.left + Vector3.forward, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.down + Vector3.left + Vector3.back, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.down + Vector3.right + Vector3.forward, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.down + Vector3.right + Vector3.back, position, enemyPieces, friendlyPieces, posList);
-
-            List<Vector3> posListClone = posList;
-
-            foreach (Vector3 pos in posListClone)
+            //list all possible positions
+            List<Vector3> caniditePositions = new List<Vector3>();
+            switch (piece)
             {
-                foreach (AbstractPiece piece in friendlyPieces)
-                {
-                    if (piece.Location == pos)
+                case chessBoard.PieceType.king:
+                    //kings can move one unit through a face or an edge
+                    
+                    //moving through faces
+                    caniditePositions.Add(currentPosition.moveForward(orientation));
+                    caniditePositions.Add(currentPosition.moveBack(orientation));
+                    caniditePositions.Add(currentPosition.moveLeft(orientation));
+                    caniditePositions.Add(currentPosition.moveRight(orientation));
+                    caniditePositions.Add(currentPosition.moveUp(orientation));
+                    caniditePositions.Add(currentPosition.moveDown(orientation));
+
+                    //movign through edges 
+                    //TODO remove redundancies (e.g. back + forward  == forward + back)
+                    caniditePositions.Add(currentPosition.moveForward(orientation).moveLeft(orientation));
+                    caniditePositions.Add(currentPosition.moveForward(orientation).moveRight(orientation));
+                    caniditePositions.Add(currentPosition.moveForward(orientation).moveDown(orientation));
+                    caniditePositions.Add(currentPosition.moveForward(orientation).moveUp(orientation));
+
+                    caniditePositions.Add(currentPosition.moveBack(orientation).moveLeft(orientation));
+                    caniditePositions.Add(currentPosition.moveBack(orientation).moveRight(orientation));
+                    caniditePositions.Add(currentPosition.moveBack(orientation).moveDown(orientation));
+                    caniditePositions.Add(currentPosition.moveBack(orientation).moveUp(orientation));
+
+                    caniditePositions.Add(currentPosition.moveLeft(orientation).moveForward(orientation));
+                    caniditePositions.Add(currentPosition.moveLeft(orientation).moveBack(orientation));
+                    caniditePositions.Add(currentPosition.moveLeft(orientation).moveDown(orientation));
+                    caniditePositions.Add(currentPosition.moveLeft(orientation).moveUp(orientation));
+
+                    caniditePositions.Add(currentPosition.moveRight(orientation).moveForward(orientation));
+                    caniditePositions.Add(currentPosition.moveRight(orientation).moveBack(orientation));
+                    caniditePositions.Add(currentPosition.moveRight(orientation).moveDown(orientation));
+                    caniditePositions.Add(currentPosition.moveRight(orientation).moveUp(orientation));
+
+                    caniditePositions.Add(currentPosition.moveUp(orientation).moveLeft(orientation));
+                    caniditePositions.Add(currentPosition.moveUp(orientation).moveRight(orientation));
+                    caniditePositions.Add(currentPosition.moveUp(orientation).moveForward(orientation));
+                    caniditePositions.Add(currentPosition.moveUp(orientation).moveBack(orientation));
+
+                    caniditePositions.Add(currentPosition.moveDown(orientation).moveLeft(orientation));
+                    caniditePositions.Add(currentPosition.moveDown(orientation).moveRight(orientation));
+                    caniditePositions.Add(currentPosition.moveDown(orientation).moveForward(orientation));
+                    caniditePositions.Add(currentPosition.moveDown(orientation).moveBack(orientation));
+
+                    break;
+                case chessBoard.PieceType.queen:
+                    
+                    //queens can move n units through a face or an edge
+
+                    for (int i = 1; i < 8; i++)
                     {
-                        posList.Remove(pos);
+                        //movign through faces
+                        caniditePositions.Add(currentPosition.moveForward(orientation, i));
+                        caniditePositions.Add(currentPosition.moveBack(orientation, i));
+                        caniditePositions.Add(currentPosition.moveLeft(orientation, i));
+                        caniditePositions.Add(currentPosition.moveRight(orientation, i));
+                        caniditePositions.Add(currentPosition.moveUp(orientation, i));
+                        caniditePositions.Add(currentPosition.moveDown(orientation, i));
+
+                        //moving through edges 
+                        //TODO remove redundancies (e.g. back + forward  == forward + back)
+                        caniditePositions.Add(currentPosition.moveForward(orientation, i).moveLeft(orientation, i));
+                        caniditePositions.Add(currentPosition.moveForward(orientation, i).moveRight(orientation, i));
+                        caniditePositions.Add(currentPosition.moveForward(orientation, i).moveDown(orientation, i));
+                        caniditePositions.Add(currentPosition.moveForward(orientation, i).moveUp(orientation, i));
+
+                        caniditePositions.Add(currentPosition.moveBack(orientation, i).moveLeft(orientation, i));
+                        caniditePositions.Add(currentPosition.moveBack(orientation, i).moveRight(orientation, i));
+                        caniditePositions.Add(currentPosition.moveBack(orientation, i).moveDown(orientation, i));
+                        caniditePositions.Add(currentPosition.moveBack(orientation, i).moveUp(orientation, i));
+
+                        caniditePositions.Add(currentPosition.moveLeft(orientation, i).moveForward(orientation, i));
+                        caniditePositions.Add(currentPosition.moveLeft(orientation, i).moveBack(orientation, i));
+                        caniditePositions.Add(currentPosition.moveLeft(orientation, i).moveDown(orientation, i));
+                        caniditePositions.Add(currentPosition.moveLeft(orientation, i).moveUp(orientation, i));
+
+                        caniditePositions.Add(currentPosition.moveRight(orientation, i).moveForward(orientation, i));
+                        caniditePositions.Add(currentPosition.moveRight(orientation, i).moveBack(orientation, i));
+                        caniditePositions.Add(currentPosition.moveRight(orientation, i).moveDown(orientation, i));
+                        caniditePositions.Add(currentPosition.moveRight(orientation, i).moveUp(orientation, i));
+
+                        caniditePositions.Add(currentPosition.moveUp(orientation, i).moveLeft(orientation, i));
+                        caniditePositions.Add(currentPosition.moveUp(orientation, i).moveRight(orientation, i));
+                        caniditePositions.Add(currentPosition.moveUp(orientation, i).moveForward(orientation, i));
+                        caniditePositions.Add(currentPosition.moveUp(orientation, i).moveBack(orientation, i));
+
+                        caniditePositions.Add(currentPosition.moveDown(orientation, i).moveLeft(orientation, i));
+                        caniditePositions.Add(currentPosition.moveDown(orientation, i).moveRight(orientation, i));
+                        caniditePositions.Add(currentPosition.moveDown(orientation, i).moveForward(orientation, i));
+                        caniditePositions.Add(currentPosition.moveDown(orientation, i).moveBack(orientation, i));
                     }
-                }
+
+                    break;
+                case chessBoard.PieceType.rook:
+                    //rooks can move n units through a face
+                    
+                    for (int i = 1; i < 8; i++)
+                    {
+                        //striaght in each direction
+                        caniditePositions.Add(currentPosition.moveForward(orientation, i));
+                        caniditePositions.Add(currentPosition.moveBack(orientation, i));
+                        caniditePositions.Add(currentPosition.moveLeft(orientation, i));
+                        caniditePositions.Add(currentPosition.moveRight(orientation, i));
+                        caniditePositions.Add(currentPosition.moveUp(orientation, i));
+                        caniditePositions.Add(currentPosition.moveDown(orientation, i));
+                    }
+
+                    break;
+                case chessBoard.PieceType.bishop:
+                    //diagonal in any direction
+                    //TODO remove redundancies (e.g. back + forward  == forward + back)
+                    for (int i = 1; i < 8; i++)
+                    {
+                        //moving through edges 
+                        //TODO remove redundancies (e.g. back + forward  == forward + back)
+                        caniditePositions.Add(currentPosition.moveForward(orientation, i).moveLeft(orientation, i));
+                        caniditePositions.Add(currentPosition.moveForward(orientation, i).moveRight(orientation, i));
+                        caniditePositions.Add(currentPosition.moveForward(orientation, i).moveDown(orientation, i));
+                        caniditePositions.Add(currentPosition.moveForward(orientation, i).moveUp(orientation, i));
+
+                        caniditePositions.Add(currentPosition.moveBack(orientation, i).moveLeft(orientation, i));
+                        caniditePositions.Add(currentPosition.moveBack(orientation, i).moveRight(orientation, i));
+                        caniditePositions.Add(currentPosition.moveBack(orientation, i).moveDown(orientation, i));
+                        caniditePositions.Add(currentPosition.moveBack(orientation, i).moveUp(orientation, i));
+
+                        caniditePositions.Add(currentPosition.moveLeft(orientation, i).moveForward(orientation, i));
+                        caniditePositions.Add(currentPosition.moveLeft(orientation, i).moveBack(orientation, i));
+                        caniditePositions.Add(currentPosition.moveLeft(orientation, i).moveDown(orientation, i));
+                        caniditePositions.Add(currentPosition.moveLeft(orientation, i).moveUp(orientation, i));
+
+                        caniditePositions.Add(currentPosition.moveRight(orientation, i).moveForward(orientation, i));
+                        caniditePositions.Add(currentPosition.moveRight(orientation, i).moveBack(orientation, i));
+                        caniditePositions.Add(currentPosition.moveRight(orientation, i).moveDown(orientation, i));
+                        caniditePositions.Add(currentPosition.moveRight(orientation, i).moveUp(orientation, i));
+
+                        caniditePositions.Add(currentPosition.moveUp(orientation, i).moveLeft(orientation, i));
+                        caniditePositions.Add(currentPosition.moveUp(orientation, i).moveRight(orientation, i));
+                        caniditePositions.Add(currentPosition.moveUp(orientation, i).moveForward(orientation, i));
+                        caniditePositions.Add(currentPosition.moveUp(orientation, i).moveBack(orientation, i));
+
+                        caniditePositions.Add(currentPosition.moveDown(orientation, i).moveLeft(orientation, i));
+                        caniditePositions.Add(currentPosition.moveDown(orientation, i).moveRight(orientation, i));
+                        caniditePositions.Add(currentPosition.moveDown(orientation, i).moveForward(orientation, i));
+                        caniditePositions.Add(currentPosition.moveDown(orientation, i).moveBack(orientation, i));
+                    }
+
+                    break;
+                case chessBoard.PieceType.knight:
+                    //face then edge
+                    caniditePositions.Add(currentPosition.moveForward(orientation).moveForward(orientation)
+                        .moveLeft(orientation));
+                    caniditePositions.Add(currentPosition.moveForward(orientation).moveForward(orientation)
+                        .moveRight(orientation));
+                    caniditePositions.Add(currentPosition.moveForward(orientation).moveForward(orientation)
+                        .moveDown(orientation));
+                    caniditePositions.Add(currentPosition.moveForward(orientation).moveForward(orientation)
+                        .moveUp(orientation));
+
+                    caniditePositions.Add(currentPosition.moveBack(orientation).moveBack(orientation)
+                        .moveLeft(orientation));
+                    caniditePositions.Add(currentPosition.moveBack(orientation).moveBack(orientation)
+                        .moveRight(orientation));
+                    caniditePositions.Add(currentPosition.moveBack(orientation).moveBack(orientation)
+                        .moveDown(orientation));
+                    caniditePositions.Add(currentPosition.moveBack(orientation).moveBack(orientation)
+                        .moveUp(orientation));
+
+                    caniditePositions.Add(currentPosition.moveLeft(orientation).moveLeft(orientation)
+                        .moveForward(orientation));
+                    caniditePositions.Add(currentPosition.moveLeft(orientation).moveLeft(orientation)
+                        .moveBack(orientation));
+                    caniditePositions.Add(currentPosition.moveLeft(orientation).moveLeft(orientation)
+                        .moveDown(orientation));
+                    caniditePositions.Add(currentPosition.moveLeft(orientation).moveLeft(orientation)
+                        .moveUp(orientation));
+
+                    caniditePositions.Add(currentPosition.moveRight(orientation).moveRight(orientation)
+                        .moveForward(orientation));
+                    caniditePositions.Add(currentPosition.moveRight(orientation).moveRight(orientation)
+                        .moveBack(orientation));
+                    caniditePositions.Add(currentPosition.moveRight(orientation).moveRight(orientation)
+                        .moveDown(orientation));
+                    caniditePositions.Add(currentPosition.moveRight(orientation).moveRight(orientation)
+                        .moveUp(orientation));
+
+                    caniditePositions.Add(currentPosition.moveUp(orientation).moveUp(orientation)
+                        .moveLeft(orientation));
+                    caniditePositions.Add(
+                        currentPosition.moveUp(orientation).moveUp(orientation).moveRight(orientation));
+                    caniditePositions.Add(currentPosition.moveUp(orientation).moveUp(orientation)
+                        .moveForward(orientation));
+                    caniditePositions.Add(currentPosition.moveUp(orientation).moveUp(orientation)
+                        .moveBack(orientation));
+
+                    caniditePositions.Add(currentPosition.moveDown(orientation).moveDown(orientation)
+                        .moveLeft(orientation));
+                    caniditePositions.Add(currentPosition.moveDown(orientation).moveDown(orientation)
+                        .moveRight(orientation));
+                    caniditePositions.Add(currentPosition.moveDown(orientation).moveDown(orientation)
+                        .moveForward(orientation));
+                    caniditePositions.Add(currentPosition.moveDown(orientation).moveDown(orientation)
+                        .moveBack(orientation));
+
+                    break;
+                case chessBoard.PieceType.pawn:
+                    //move through forward face
+                    caniditePositions.Add(currentPosition.moveForward(orientation));
+                    
+                    //double move if in starting location.
+                    //distance from starting position in forward direction
+                    int dist = (int) Vector3.Project(currentPosition, orientation).magnitue;
+                    if (dist == 2 || dist == 1)
+                    {
+                        caniditePositions.Add(currentPosition.moveForward(orientation, 2));
+                    }
+
+                    //attack on foward edges.  the pawn can attack on the forward diagionals when they are not blocked by another piece directly in fron of them.
+                    if (!enemyPieces.contains(currentPosition.moveForward(orientation)))
+                    {
+                        List<Vector3> cPos = new List<Vector3>();
+                        cPos.Add(currentPosition.moveForward(orientation).moveLeft(orientation));
+                        cPos.Add(currentPosition.moveForward(orientation).moveRight(orientation));
+                        cPos.Add(currentPosition.moveForward(orientation).moveDown(orientation));
+                        cPos.Add(currentPosition.moveForward(orientation).moveUp(orientation));
+
+                        //the canidate position must have an enemy piece to be used for an attack
+                        //add those positions to the canidate positions.
+                        cPos.Where(p => enemyPieces.contains(p)).ForEach(p => caniditePositions.Add(p));
+                    }
+
+                    break;
             }
 
-            return posList;
-        }
-        public static List<Vector3> rookMoves(Vector3 position, List<AbstractPiece> enemyPieces, List<AbstractPiece> friendlyPieces)
-        {
-            List<Vector3> posList = new List<Vector3>();
-            pathMoves(Vector3.up, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.down, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.forward, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.back, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.right, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.left, position, enemyPieces, friendlyPieces, posList);
+            //check if off board
+            caniditePositions = caniditePositions.Where(p => p.onBoard())
+            
+            //check if occupied by friendly
+            caniditePositions = caniditePositions.Where(p => !friendlyPieces.Contains(p));
 
-            List<Vector3> posListClone = posList;
-
-            foreach (Vector3 pos in posListClone)
+            //queen, rook, bishop - check if passing through any piece
+            if (piece == chessBoard.PieceType.queen || piece == chessBoard.PieceType.rook ||
+                piece == chessBoard.PieceType.queen)
             {
-                foreach (AbstractPiece piece in friendlyPieces)
-                {
-                    if (piece.Location == pos)
-                    {
-                        posList.Remove(pos);
-                    }
-                }
+                caniditePositions =
+                    caniditePositions.Where(p => !piecesInPath(currentPosition, p, friendlyPieces, enemyPieces));
+            }
+        }
+
+        private static Vector3 moveDirection(Vector3 position, Vector3 orientation, Vector3 direction)
+        {
+            orientation = orientation.normalized;
+            return position + Quaternion.FromTo(Vector3.forward, direction)*orientation;
+        }
+        //single unit movement.
+
+        private static Vector3 moveForward(this Vector3 position, Vector3 orientation)
+        {
+            return moveDirection(position, orientation, Vector3.forward);
+        }
+        private static Vector3 moveBack(this Vector3 position, Vector3 orientation)
+        {
+            return moveDirection(position, orientation, Vector3.back);
+        }
+        private static Vector3 moveLeft(this Vector3 position, Vector3 orientation)
+        {
+            return moveDirection(position, orientation, Vector3.left);
+        }
+        private static Vector3 moveRight(this Vector3 position, Vector3 orientation)
+        {
+            return moveDirection(position, orientation, Vector3.right);
+        }
+        private static Vector3 MoveUp(this Vector3 position, Vector3 orientation)
+        {
+            return moveDirection(position, orientation, Vector3.up);
+        }
+        private static Vector3 MoveDown(this Vector3 position, Vector3 orientation)
+        {
+            return moveDirection(position, orientation, Vector3.down);
+        }
+        
+        //multiple unit movement
+        private static Vector3 moveForward(this Vector3 position, Vector3 orientation, int i)
+        {
+            return moveDirection(position, orientation, Vector3.forward);
+        }
+        private static Vector3 moveBack(this Vector3 position, Vector3 orientation, int i)
+        {
+            return moveDirection(position, orientation, Vector3.back);
+        }
+        private static Vector3 moveLeft(this Vector3 position, Vector3 orientation, int i)
+        {
+            return moveDirection(position, orientation, Vector3.left);
+        }
+        private static Vector3 moveRight(this Vector3 position, Vector3 orientation, int i)
+        {
+            return moveDirection(position, orientation, Vector3.right);
+        }
+        private static Vector3 MoveUp(this Vector3 position, Vector3 orientation, int i)
+        {
+            return moveDirection(position, orientation, Vector3.up);
+        }
+        private static Vector3 MoveDown(this Vector3 position, Vector3 orientation, int i)
+        {
+            return moveDirection(position, orientation, Vector3.down);
+        }
+
+        private static bool onBoard(this Vector3 position)
+        {
+            return p.x >= 0 && p.x <= 8 && p.y >= 0 && p.y <= 8 && p.z >= 0 && p.z <= 8;
+        }
+
+        private static bool PiecesInPath(Vector3 position, Vector3 destination, List<Vector3> friendly, List<Vector3 enemy)
+        {
+            bool testResult = false;
+            direction = destination - position;
+            length = (int) direction.magnitude;
+            if (length == 1)
+            {
+                //assume that friendlies have already been ruled out.
+                return false;
+            }
+            
+            for (i = 1; i < length; i++)
+            {
+                checkAtPos = position + direction.normalized * i;
+                testResult = testResult && friendly.Contains(checkAtPos) && enemy.Contains(checkAtPos);
             }
 
-            return posList;
+            return testResult;
         }
+        #endregion
     }
 }
