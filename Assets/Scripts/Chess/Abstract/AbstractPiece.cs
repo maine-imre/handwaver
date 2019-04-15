@@ -17,7 +17,7 @@ namespace IMRE.Chess3D
 /// <summary>
 /// An abstracted version of the chess piece.
 /// </summary>
-	public abstract class AbstractPiece : MonoBehaviour
+	public abstract class AbstractPiece
     {
         private chessBoard board;
 
