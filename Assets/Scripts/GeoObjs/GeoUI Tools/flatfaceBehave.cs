@@ -21,7 +21,7 @@ namespace IMRE.HandWaver
 
 		#region Constructors
 		public static flatfaceBehave Constructor(){
-			GameObject go = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/GeoObj/Flatface"));
+			GameObject go = GameObject.Instantiate(PrefabManager.GetPrefab("Flatface"));
 			return go.GetComponent<flatfaceBehave>();
 		}
 		#endregion
@@ -43,11 +43,6 @@ namespace IMRE.HandWaver
 			// do nothing
 		}
 
-		public override void initializefigure()
-		{
-			// do nothing
-		}
-
 		internal override bool RMotion(NodeList<string> inputNodeList)
 		{
 			return false;
@@ -63,7 +58,7 @@ namespace IMRE.HandWaver
 			// do nothing
 		}
 
-		internal override Vector3 ClosestSystemPosition(Vector3 abstractPosition)
+		public override Vector3 ClosestSystemPosition(Vector3 abstractPosition)
 		{
 			return Vector3.Project(abstractPosition - Position3, normalDir) + Position3;
 		}

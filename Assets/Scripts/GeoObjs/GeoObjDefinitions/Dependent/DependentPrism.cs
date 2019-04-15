@@ -116,11 +116,6 @@ namespace IMRE.HandWaver
             }
         }
 
-        public override void initializefigure()
-        {
-            //not applicable.
-        }
-
         internal override bool RMotion(NodeList<string> inputNodeList)
         {
             return true;

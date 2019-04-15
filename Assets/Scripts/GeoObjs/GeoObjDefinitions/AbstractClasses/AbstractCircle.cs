@@ -34,18 +34,19 @@ namespace IMRE.HandWaver
             }
         }
 
-		internal override Vector3 ClosestSystemPosition(Vector3 abstractPosition)
+		public override Vector3 ClosestSystemPosition(Vector3 abstractPosition)
 		{
 			Debug.LogWarning("This FIG TYPE DOESN'T SUPPORT CLOSEST SYS POS : " + figType);
 
 			throw new NotImplementedException();
 		}
 
-		public override void initializefigure()
-        {
-            this.figType = GeoObjType.circle;
+		public override void InitializeFigure()
+		{
+			base.InitializeFigure();
+			this.figType = GeoObjType.circle;
 
-            this.Position3 = centerPos;
+			this.Position3 = centerPos;
 
             Vector3 norm1 = Vector3.up;
             Vector3 norm2 = Vector3.right;
@@ -68,11 +69,11 @@ namespace IMRE.HandWaver
             }
 
             LineRenderer lineRenderer = GetComponent<LineRenderer>();
-            lineRenderer.material = new Material(Shader.Find("Particles/Additive"));
+            //lineRenderer.material = new Material(Shader.Find("Particles/Additive"));
             lineRenderer.startColor = Color.blue;
             lineRenderer.endColor = Color.blue;
-            //lineRenderer.startWidth = apothem;
-            //lineRenderer.endWidth = apothem;
+            lineRenderer.startWidth = .005f;
+            lineRenderer.endWidth = .005f;
             lineRenderer.positionCount = numvertices;
             lineRenderer.SetPositions(vertices);
         }

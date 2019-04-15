@@ -5,7 +5,7 @@ See license info in readme.md.
 www.imrelab.org
 **/
 
-﻿using Leap.Unity.Interaction;
+ using Leap.Unity.Interaction;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -20,13 +20,7 @@ namespace IMRE.HandWaver
     {
 		#region Constructors
 		public static DependentCircle Constructor(){
-			GameObject go = new GameObject();
-			go.AddComponent<Rigidbody>();
-			go.AddComponent<SphereCollider>();
-			go.GetComponent<SphereCollider>().radius = .05f;
-			go.AddComponent<LineRenderer>();
-			go.AddComponent<InteractionBehaviour>();
-			return go.AddComponent<DependentCircle>();
+			return PrefabManager.Spawn("DependentCircle").GetComponent<DependentCircle>();
 		}
 		#endregion
 

@@ -104,7 +104,7 @@ namespace IMRE.HandWaver.Space
 			}
 			if(RSDESManager.ins != null)
 			{
-				isDistTextEnabled = RSDESManager.ins.findDistance.ToggleState;
+				//isDistTextEnabled = RSDESManager.ins.findDistance.ToggleState;
 			}
 		}
 		#endregion

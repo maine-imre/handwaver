@@ -61,7 +61,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 1099018586592590}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_GeneratorAsset: {fileID: 0}
   m_Script: {fileID: 11500000, guid: 2f10fa40360571247a7ca806d6859557, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
@@ -196,6 +195,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -242,7 +242,7 @@ Transform:
   m_GameObject: {fileID: 1561108052063126}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.727, y: 1, z: 0}
-  m_LocalScale: {x: 0.04, y: 0.04, z: 0.04}
+  m_LocalScale: {x: 0.02, y: 0.02, z: 0.02}
   m_Children:
   - {fileID: 4105679574567576}
   m_Father: {fileID: 0}
@@ -286,7 +286,7 @@ MeshRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: b3c419a748532e141b3b04ebc7a24cbf, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -294,6 +294,7 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 1
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -331,7 +332,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 1561108052063126}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_GeneratorAsset: {fileID: 0}
   m_Script: {fileID: 11500000, guid: e09e587aeece3c84c808d9badeb5423d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
@@ -347,7 +347,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 1561108052063126}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_GeneratorAsset: {fileID: 0}
   m_Script: {fileID: 11500000, guid: 2f10fa40360571247a7ca806d6859557, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
@@ -378,7 +377,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 1561108052063126}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_GeneratorAsset: {fileID: 0}
   m_Script: {fileID: 11500000, guid: 1aceea2f5c70da64e893474302ff53e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
@@ -419,7 +417,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 1561108052063126}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_GeneratorAsset: {fileID: 0}
   m_Script: {fileID: 11500000, guid: e42e11a86c0f0f142a9f9ab711c21a2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
@@ -429,7 +426,7 @@ MonoBehaviour:
   edgeSet: 0
   centerHandle: {fileID: 114304444794256618}
   edgeHandle: {fileID: 0}
-  handlePrefab: {fileID: 1262393952954050, guid: 159f7ad840030184bb2c70e0d1114ec9,
+  handlePrefab: {fileID: 1324907073323151436, guid: 0e21a76d56d8486498257f59eb92768d,
     type: 3}
   shipsWheel: {fileID: 4105679574567576}
   wheelSpinCollider: {fileID: 135386965288856580}
@@ -587,6 +584,7 @@ LineRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0

@@ -1,7 +1,5 @@
 ﻿using Leap.Unity;
 using Leap.Unity.Interaction;
-using Leap.Unity.LeapPaint_v3;
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,7 +37,7 @@ namespace IMRE.HandWaver.Space
 		public Color selectColor = Color.yellow;
 		public Transform star;
 		public TMPro.TextMeshPro latlongLabel;
-		public PressableUI selectButton;
+//		public PressableUI selectButton;
 
 		internal Action onPinMove;
 		private InteractionBehaviour iBehave;
@@ -205,8 +203,8 @@ namespace IMRE.HandWaver.Space
 
 		internal Action onDelete;
 
-		public PressableUI showLatitude;
-		public PressableUI showLongitude;
+//		public PressableUI showLatitude;
+//		public PressableUI showLongitude;
 		//public PressableUI showAzimuth;  //do this with latitude
 		//public PressableUI showAltitude;  //do this with longitude
 
@@ -214,12 +212,12 @@ namespace IMRE.HandWaver.Space
 
 		private LineRenderer azimuthRenderer;
 
-		public PressableUI showTerminator;
+//		public PressableUI showTerminator;
 
 		[Range(0, 1)]
 		private static float colorPercent = 0.15f;
 
-		public PressableUI starFieldMode;
+//		public PressableUI starFieldMode;
 		private LineRenderer[] starRays;
 
         public enum starFieldSelect {single,allPins,allPinsEqualAltitude,withinEarth,LargeArray,off}
@@ -439,7 +437,7 @@ namespace IMRE.HandWaver.Space
 			}
 		}
 
-		public PressableUI horizonPlanes;
+//		public PressableUI horizonPlanes;
 		private LineRenderer latRenderer;
 		private LineRenderer longRenderer;
 		private LineRenderer terminatorRenderer;
@@ -534,28 +532,28 @@ namespace IMRE.HandWaver.Space
 			}
 		}
 
-		private void OnTriggerStay(Collider collider)
-		{
-			//if (myPintype == pintype.Star)
-			{
-				if ((iBehave != null && iBehave.isGrasped) && collider.GetComponentInParent<RSDESManager>() != null && this.GetComponent<InteractionBehaviour>().isGrasped == true)
-				{
-					snapToSurface();
-				}
-			}
-		}
+		//private void OnTriggerStay(Collider collider)
+		//{
+		//	//if (myPintype == pintype.Star)
+		//	{
+		//		if ((iBehave != null && iBehave.isGrasped) && collider.GetComponentInParent<RSDESManager>() != null && this.GetComponent<InteractionBehaviour>().isGrasped == true)
+		//		{
+		//			snapToSurface();
+		//		}
+		//	}
+		//}
 
-		private void OnTriggerExit(Collider collider)
-		{
-			if (collider.GetComponentInParent<RSDESManager>() != null)
-			{
-				iBehave.ReleaseFromGrasp();
-				snapToSurface();
-			}
-
-			if (onPinMove != null && onPinMove.Method != null)
-				onPinMove.Invoke();
-		}
+		//private void OnTriggerExit(Collider collider)
+		//{
+		//	if (collider.GetComponentInParent<RSDESManager>() != null)
+		//	{
+		//		iBehave.ReleaseFromGrasp();
+		//		snapToSurface();
+		//	}
+//
+//			if (onPinMove != null && onPinMove.Method != null)
+//				onPinMove.Invoke();
+//		}
 
 		private void OnDisable()
 		{

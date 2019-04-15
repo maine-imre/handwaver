@@ -5,7 +5,7 @@ See license info in readme.md.
 www.imrelab.org
 **/
 
-﻿using System.Collections;
+ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -27,7 +27,7 @@ namespace IMRE.HandWaver
 
 		public float apothem = .01f;
 
-		internal override Vector3 ClosestSystemPosition(Vector3 abstractPosition)
+		public override Vector3 ClosestSystemPosition(Vector3 abstractPosition)
 		{
 			Vector3 a = vertex0;
 			Vector3 b = vertex1;
@@ -50,16 +50,17 @@ namespace IMRE.HandWaver
 			return result;
 		}
 
-		public override void initializefigure()
+		public override void InitializeFigure()
         {
-            this.figType = GeoObjType.line;
-            this.Position3 = (vertex0 + vertex1) / 2f;
+			base.InitializeFigure();
+			this.figType = GeoObjType.line;
+
+			this.Position3 = (vertex0 + vertex1) / 2f;
 
             vertices[0] = vertex0;
             vertices[1] = vertex1;
 
             LineRenderer lineRenderer = this.GetComponent<LineRenderer>();
-            lineRenderer.material = new Material(Shader.Find("Particles/Additive"));
             lineRenderer.startColor = startColor;
             lineRenderer.endColor = endColor;
             lineRenderer.numCapVertices = 2;
@@ -70,10 +71,14 @@ namespace IMRE.HandWaver
             collider.height = .9f * Vector3.Magnitude(LocalPosition(vertex0) - LocalPosition(vertex1));
             collider.radius = Mathf.Min(.025f, collider.height);
 			updateFigure();
-        }
+			if (myAbility == updateCapability.interactable)
+			{
+				StartCoroutine(waitForStretch);
+			}
+		}
 
 
-        public override void updateFigure()
+		public override void updateFigure()
         {
             Vector3[] vertices = new Vector3[2];
             vertices[0] = LocalPosition(vertex0);

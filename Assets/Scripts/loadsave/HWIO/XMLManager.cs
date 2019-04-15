@@ -5,7 +5,7 @@ See license info in readme.md.
 www.imrelab.org
 **/
 
-﻿using System.Collections;
+ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Xml;
@@ -31,14 +31,14 @@ namespace IMRE.HandWaver.HWIO
 		{
 			ins = this;
 
-#if !UNITY_EDITOR
-			if (!Directory.Exists(Application.dataPath + @"/../autosaves/"))
-			{
-				Directory.CreateDirectory(Application.dataPath + @" /../autosaves/");
-			}
-			sessionID = System.DateTime.Now.ToString("yyyyMMddTHHmmss");
-			StartCoroutine(autoSaving());
-#endif
+//#if !UNITY_EDITOR
+//			if (!Directory.Exists(Application.dataPath + @"/../autosaves/"))
+//			{
+//				Directory.CreateDirectory(Application.dataPath + @" /../autosaves/");
+//			}
+//			sessionID = System.DateTime.Now.ToString("yyyyMMddTHHmmss");
+//			StartCoroutine(autoSaving());
+//#endif
 			checkLog();
 			#if StandaloneWindows64
 			commandLineArgumentParse.logStateChange.AddListener(checkLog);
@@ -47,21 +47,21 @@ namespace IMRE.HandWaver.HWIO
 
 		private void checkLog()
 		{
-#if !UNITY_EDITOR
+//#if !UNITY_EDITOR
 
 			
-			if (!Directory.Exists(Application.dataPath + @"/../dataCollection/"))
-			{
-				Directory.CreateDirectory(Application.dataPath + @" /../dataCollection/");
-			}
+//			if (!Directory.Exists(Application.dataPath + @"/../dataCollection/"))
+//			{
+//				Directory.CreateDirectory(Application.dataPath + @" /../dataCollection/");
+//			}
 
-
-			if (commandLineArgumentParse.logCheck())
-			{
-				StopCoroutine(autoSaving());
-				StartCoroutine(logGeoData());
-			}
-#endif
+//
+//			if (commandLineArgumentParse.logCheck())
+//			{
+//				StopCoroutine(autoSaving());
+//				StartCoroutine(logGeoData());
+//			}
+//#endif
 		}
 
 		private IEnumerator logGeoData()

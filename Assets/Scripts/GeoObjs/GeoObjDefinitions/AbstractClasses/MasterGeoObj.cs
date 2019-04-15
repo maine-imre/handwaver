@@ -5,7 +5,7 @@ See license info in readme.md.
 www.imrelab.org
 **/
 
-﻿using System;
+ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,7 +19,7 @@ namespace IMRE.HandWaver
 	/// <summary>
 	/// enumerator to help select child type
 	/// </summary>
-	public enum GeoObjType { point, line, polygon, prism, pyramid, circle, sphere, revolvedsurface, torus, flatface, straightedge, none };
+	public enum GeoObjType {none, point, line, polygon, prism, pyramid, circle, sphere, revolvedsurface, torus, flatface, straightedge};
 
 /// <summary>
 /// enumerator to help select child type
@@ -39,6 +39,40 @@ namespace IMRE.HandWaver
 		private Vector3 actualPos;
         private Quaternion _rotation3;
         private float _scale;
+
+        public int Dimension
+        {
+	        get
+	        {
+		        switch (figType)
+		        {
+			        case GeoObjType.point:
+				        return 0;
+			        case GeoObjType.line:
+				        return 1;
+			        case GeoObjType.polygon:
+				        return 2;
+			        case GeoObjType.prism:
+				        return 3;
+			        case GeoObjType.pyramid:
+				        return 4;
+			        case GeoObjType.circle:
+				        return 1;
+			        case GeoObjType.sphere:
+				        return 2;
+			        case GeoObjType.revolvedsurface:
+				        return 2;
+			        case GeoObjType.torus:
+				        return 3;
+			        case GeoObjType.flatface:
+				        return 2;
+			        case straightedge:
+				        return 1;
+			        case none:
+				        return 0;
+		        }
+	        }
+        }
 
         internal static Vector3 LocalPosition(Vector3 systemPosition)
         {
@@ -78,7 +112,7 @@ namespace IMRE.HandWaver
 		}
 
 		/// <summary>
-		/// 
+		///
 		/// </summary>
 		/// <param name="localPos"></param>
 		/// <returns></returns>
@@ -99,14 +133,14 @@ namespace IMRE.HandWaver
 		}
 
 		/// <summary>
-		/// 
+		///
 		/// </summary>
 		/// <param name="abstractPosition"></param>
 		/// <returns></returns>
-		internal abstract Vector3 ClosestSystemPosition(Vector3 abstractPosition);
+		public abstract Vector3 ClosestSystemPosition(Vector3 abstractPosition);
 
 		/// <summary>
-		/// 
+		///
 		/// </summary>
 		/// <param name="localPos"></param>
 		/// <param name="localDir"></param>
@@ -118,7 +152,7 @@ namespace IMRE.HandWaver
 		}
 
 		/// <summary>
-		/// 
+		///
 		/// </summary>
 		/// <param name="localPos"></param>
 		/// <returns></returns>
@@ -129,7 +163,7 @@ namespace IMRE.HandWaver
 		}
 
 		/// <summary>
-		/// 
+		///
 		/// </summary>
 		/// <param name="sysPos"></param>
 		/// <returns></returns>
@@ -144,22 +178,22 @@ namespace IMRE.HandWaver
 			{
 				//if an object doesn't have a closest point say that it is infinitely far away.
 				return Mathf.Infinity;
-			}	
+			}
 		}
         #endregion
 
 		/// <summary>
-		/// 
+		///
 		/// </summary>
         public bool allowDelete = true;
 
 		/// <summary>
-		/// 
+		///
 		/// </summary>
 		public GeoObjType figType;
 
 		/// <summary>
-		/// 
+		///
 		/// </summary>
         internal int intersectionMultipleIDX;
 
@@ -176,49 +210,14 @@ namespace IMRE.HandWaver
         {
             set
             {
-                switch (figType)
-                {
-                    case GeoObjType.point:
-                        GetComponent<MeshRenderer>().materials[0].color = value;
-                        break;
-                    case GeoObjType.line:
-                        GetComponent<LineRenderer>().materials[0].color = value;
-                        break;
-                    case GeoObjType.polygon:
-                        GetComponent<MeshRenderer>().materials[0].color = value;
-                        break;
-                    case GeoObjType.prism:
-                        break;
-                    case GeoObjType.pyramid:
-                        break;
-                    case GeoObjType.circle:
-                        GetComponent<LineRenderer>().materials[0].color = value;
-                        break;
-                    case GeoObjType.sphere:
-                        GetComponent<MeshRenderer>().materials[0].color = value;
-                        break;
-                    case GeoObjType.revolvedsurface:
-                        GetComponent<MeshRenderer>().materials[0].color = value;
-                        break;
-                    case GeoObjType.torus:
-                        GetComponent<MeshRenderer>().materials[0].color = value;
-                        break;
-                    case GeoObjType.flatface:
-                        GetComponent<MeshRenderer>().materials[0].color = value;
-                        break;
-                    case GeoObjType.straightedge:
-                        GetComponent<LineRenderer>().materials[0].color = value;
-                        break;
-                    case GeoObjType.none:
-                        break;
-                }
+//depreciated
             }
         }
 		/// <summary>
 		/// Used to save/load and keep geoObj definition type
 		/// </summary>
-		/// 
-		public enum SelectionStatus { selected, active, canidate, none }
+		///
+		public enum SelectionStatus { none, selected, active, canidate }
 		internal SelectionStatus thisSelectStatus
 		{
 			get
@@ -228,40 +227,87 @@ namespace IMRE.HandWaver
 
 			set
 			{
-				Material mat = null;
 				switch (value)
 				{
 					case SelectionStatus.selected:
-						mat = HW_GeoSolver.ins.selectedMaterial;
-						break;
-					case SelectionStatus.active:
-						mat = HW_GeoSolver.ins.activeMaterial;
-						break;
-					case SelectionStatus.canidate:
-						mat = HW_GeoSolver.ins.canidateMaterial;
-						break;
-					case SelectionStatus.none:
-						mat = HW_GeoSolver.ins.standardMaterial;
-						switch (myAbility)
+						foreach (MeshRenderer meshRenderer in GetComponentsInChildren<MeshRenderer>())
 						{
-							case updateCapability.interactable:
-								break;
-							case updateCapability.dependent:
-								mat.color = Color.grey;
-								break;
-							case updateCapability.geoStatic:
-								mat.color = Color.gray;
-								break;
+							meshRenderer.material.SetColor("_Color",HW_GeoSolver.ins.selectedColor);
+							Debug.Log("Set Material to Selected");
+						}
+						foreach (LineRenderer lineRenderer in GetComponentsInChildren<LineRenderer>())
+						{
+							lineRenderer.material.SetColor("_Color",HW_GeoSolver.ins.selectedColor);
+							Debug.Log("Set Material to Selected");
 						}
 						break;
-				}
-				if (GetComponent<MeshRenderer>() != null)
-				{
-					GetComponent<MeshRenderer>().material = mat;
-				}
-				if (GetComponent<LineRenderer>() != null)
-				{
-					GetComponent<LineRenderer>().material = mat;
+					case SelectionStatus.active:
+						foreach (MeshRenderer meshRenderer in GetComponentsInChildren<MeshRenderer>())
+						{
+							meshRenderer.material.SetColor("_Color",HW_GeoSolver.ins.activeColor);
+						}
+						foreach (LineRenderer lineRenderer in GetComponentsInChildren<LineRenderer>())
+						{
+							lineRenderer.material.SetColor("_Color",HW_GeoSolver.ins.activeColor);
+
+						}
+						break;
+					case SelectionStatus.canidate:
+						foreach (MeshRenderer meshRenderer in GetComponentsInChildren<MeshRenderer>())
+						{
+							meshRenderer.material.SetColor("_Color",HW_GeoSolver.ins.canidateColor);
+						}
+						foreach (LineRenderer lineRenderer in GetComponentsInChildren<LineRenderer>())
+						{
+							lineRenderer.material.SetColor("_Color",HW_GeoSolver.ins.canidateColor);
+
+						}
+						break;
+					case SelectionStatus.none:
+						switch (myAbility)
+						{
+							case updateCapability.dependent:
+								foreach (MeshRenderer meshRenderer in GetComponentsInChildren<MeshRenderer>())
+								{
+									meshRenderer.material.SetColor("_Color",HW_GeoSolver.ins.dependentColor);
+									Debug.Log("Set Material to Default");
+								}
+								foreach (LineRenderer lineRenderer in GetComponentsInChildren<LineRenderer>())
+								{
+									lineRenderer.material.SetColor("_Color",HW_GeoSolver.ins.dependentColor);
+
+									Debug.Log("Set Material to Default");
+								}
+								break;
+							case updateCapability.interactable:
+								foreach (MeshRenderer meshRenderer in GetComponentsInChildren<MeshRenderer>())
+								{
+									meshRenderer.material.SetColor("_Color",HW_GeoSolver.ins.defaultColor);
+									Debug.Log("Set Material to Default");
+								}
+								foreach (LineRenderer lineRenderer in GetComponentsInChildren<LineRenderer>())
+								{
+									lineRenderer.material.SetColor("_Color",HW_GeoSolver.ins.defaultColor);
+
+									Debug.Log("Set Material to Default");
+								}
+								break;
+							case updateCapability.geoStatic:
+								foreach (MeshRenderer meshRenderer in GetComponentsInChildren<MeshRenderer>())
+								{
+									meshRenderer.material.SetColor("_Color",HW_GeoSolver.ins.staticColor);
+									Debug.Log("Set Material to Default");
+								}
+								foreach (LineRenderer lineRenderer in GetComponentsInChildren<LineRenderer>())
+								{
+									lineRenderer.material.SetColor("_Color",HW_GeoSolver.ins.staticColor);
+
+									Debug.Log("Set Material to Default");
+								}
+								break;
+						}
+
+						break;
 				}
 				_thisSelectStatus = value;
 			}
@@ -308,23 +354,10 @@ namespace IMRE.HandWaver
 		private Component halo;
 
 		internal bool interesectionFigure;
-		private Material _standardMaterial;
 		private string _label;
 #pragma warning disable 0169
 
-		internal Material StandardMaterial
-		{
-			get
-			{
-				return _standardMaterial;
-			}
 
-			set
-			{
-				_standardMaterial = value;
-				thisSelectStatus = thisSelectStatus;
-			}
-		}
 
 		[ContextMenu("Display Selection Status")]
 		public void displaySelectionStatus()
@@ -386,30 +419,19 @@ namespace IMRE.HandWaver
 			}
 		}
 
-		public void Start()
+		public virtual void InitializeFigure()
 		{
-			//if (this.GetComponent<Renderer>() != null)
-			//{
-			//	_standardMaterial = GetComponent<Renderer>().material;
-			//}
-			thisSelectStatus = MasterGeoObj.SelectionStatus.none;
+			thisIBehave.OnGraspBegin += StartInteraction;
+			thisIBehave.OnPerControllerGraspBegin += Stretch;
+			thisIBehave.OnGraspEnd += EndInteraction;
+			
+			//attempt to fix colors.
+			thisSelectStatus = thisSelectStatus;
 
-			if (this.GetComponent("Halo")!= null)
-			{
-				halo = this.GetComponent("Halo");
-			}
-
-
-			//if (this.GetComponent<InteractionBehaviour>() != null)
-			//{
-				//this.thisIBehave = this.GetComponent<InteractionBehaviour>();
-				thisIBehave.OnGraspBegin += StartInteraction;
-				thisIBehave.OnPerControllerGraspBegin += Stretch;
-				thisIBehave.OnGraspEnd += EndInteraction;
-			//}
 			cUpdateRMan = UpdateRMan();
 			waitForStretch = WaitForStretch();
 			HW_GeoSolver.ins.addComponent(this);
+			transform.SetParent(masterParentObj);
 		}
 
         void LateUpdate()
@@ -471,6 +493,7 @@ namespace IMRE.HandWaver
         }
 
 		private Node<string> myGraphNode;
+		internal static Transform masterParentObj;
 
 		public Node<string> FindGraphNode()
 		{
@@ -493,7 +516,7 @@ namespace IMRE.HandWaver
                 //        {
                 //            snapToFigure(other.GetComponent<MasterGeoOBj>());
                 //        }
-                //        break;                    
+                //        break;
 				//		case ObjManHelper.IntersectionMode.intersect:
                 //         geoManager.GetComponent<intersectionManager>().checkIntersection(this, other.GetComponent<MasterGeoOBj>());
                 //         break;
@@ -508,8 +531,6 @@ namespace IMRE.HandWaver
         internal abstract void SnapToFigure(MasterGeoObj toObj);
         internal abstract void GlueToFigure(MasterGeoObj toObj);
 
-		[ContextMenu("Initialize Figure")]
-		public abstract void initializefigure();
         public bool reactMotion(NodeList<string> inputNodeList)
         {
             if (intersectionFigure)
