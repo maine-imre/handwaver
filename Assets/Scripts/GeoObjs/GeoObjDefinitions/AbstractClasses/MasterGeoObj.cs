@@ -391,7 +391,8 @@ namespace IMRE.HandWaver
 			thisIBehave.OnPerControllerGraspBegin += Stretch;
 			thisIBehave.OnGraspEnd += EndInteraction;
 			
-			//attempt to fix colors.
+			//attempt to fix colors. 
+			//TODO this color fix doesn't work.
 			thisSelectStatus = thisSelectStatus;
 
 			cUpdateRMan = UpdateRMan();
