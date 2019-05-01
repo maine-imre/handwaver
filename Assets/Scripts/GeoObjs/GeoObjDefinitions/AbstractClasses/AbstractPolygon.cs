@@ -32,7 +32,6 @@ namespace IMRE.HandWaver
 
 		public Vector3[] vertices;
 		public int[] triangles;
-		private Color defaultColor = new Color(133 / 255f, 130 / 255f, 225 / 255f, 0.43137254902f);
 
 		internal override Vector3 ClosestSystemPosition(Vector3 abstractPosition)
 		{
@@ -289,21 +288,6 @@ namespace IMRE.HandWaver
 			mesh.RecalculateNormals();
 			mesh.vertices = vertices;
 			GetComponent<MeshCollider>().sharedMesh = mesh;
-
-
-			//if a polygon is a skew polygon, turn it grey.
-			if (/*CheckSkewPolygon()*/ false)
-			{
-#pragma warning disable CS0162 // Unreachable code detected
-				defaultColor = GetComponent<MeshRenderer>().materials[0].color;
-				this.GetComponent<MeshRenderer>().materials[0].color = Color.grey;
-#pragma warning restore CS0162 // Unreachable code detected
-
-			}
-			else
-			{
-				this.GetComponent<MeshRenderer>().materials[0].color = defaultColor;
-			}
 
 		}
 

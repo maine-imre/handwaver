@@ -89,6 +89,7 @@ namespace IMRE.HandWaver.Solver
 		void Start()
         {
 			ins = this;
+			standardMaterial.color = defaultColor;
 			MasterGeoObj.masterParentObj = globalParentObj;
 			//we need to have an event here that tells us to log the scale change.
 			Interface.worldScaleModifier.ins.OnGestureDeactivated += logScaleChange;

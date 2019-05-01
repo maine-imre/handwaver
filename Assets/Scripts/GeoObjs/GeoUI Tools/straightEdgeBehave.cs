@@ -57,8 +57,8 @@ namespace IMRE.HandWaver
 			
 
 			Vector3[] positions = new Vector3[2];
-			positions[0] = 100f * normalDir.normalized;
-			positions[1] = -100f * normalDir.normalized;
+			positions[0] = 1000f * normalDir.normalized;
+			positions[1] = -1000f * normalDir.normalized;
 
 			//positions[0] = positions[2] - 1000 * (positions[2] - positions[1]);
 			//positions[3] = positions[2] + 1000 * (positions[2] - positions[1]);

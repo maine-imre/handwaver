@@ -60,6 +60,7 @@ namespace IMRE.HandWaver
 			edgeHandle = Instantiate(handlePrefab).GetComponent<arctusHandle>();
 			edgeHandle.thisArctus = this;
 			edgeHandle.transform.position = .2f * Vector3.up + this.transform.position;
+			thisCircle.enabled = true;
 
 			return edgeHandle;
 		}
@@ -76,10 +77,10 @@ namespace IMRE.HandWaver
 		private void Update()
 		{
 			//adjust the axis of the ships wheel.
-			if (shipsWheel.transform.position != centerPos || shipsWheel.transform.rotation != Quaternion.FromToRotation(Vector3.right, normalDir)) {
+			//if (shipsWheel.transform.position != centerPos || shipsWheel.transform.rotation != Quaternion.FromToRotation(Vector3.right, normalDir)) {
 				shipsWheel.transform.position = centerPos;
 				shipsWheel.transform.rotation = Quaternion.FromToRotation(Vector3.right, normalDir);
-			}
+			//}
 			if (thisCircle.enabled)
 			{
 				Vector3 basis1 = normalDir;
@@ -128,9 +129,9 @@ namespace IMRE.HandWaver
         {
             get
             {
-                if (Edge != null)
+                if (edgeHandle != null)
                 {
-                    return Edge.transform.position;
+                    return edgeHandle.transform.position;
                 }
                 else
                 {

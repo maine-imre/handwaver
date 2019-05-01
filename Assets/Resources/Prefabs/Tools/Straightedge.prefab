@@ -63,7 +63,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allowDelete: 1
-  figType: 10
+  figType: 11
   intersectionFigure: 0
   figName: 
   figIndex: 0
@@ -92,7 +92,7 @@ LineRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: e95c7ad7f41781b47b753b2d13a63e3e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
