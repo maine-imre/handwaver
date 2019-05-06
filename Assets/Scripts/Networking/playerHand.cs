@@ -18,6 +18,10 @@ namespace IMRE.HandWaver.Networking
 		public Chirality whichHand;
 
 		public InteractionHand iHand;
+		public InteractionController iController;
+
+		public Mesh handModel;
+		public Mesh controllerModel;
 
 		private void Start()
 		{
@@ -48,6 +52,15 @@ namespace IMRE.HandWaver.Networking
 				}
 				GetComponent<MeshRenderer>().enabled = false;
 			}
+
+			if (iHand != null)
+			{
+				handMode(true);
+			}
+			else if (iController !- null)
+			{
+				handMode(false);
+			}
 		}
 
 		[PunRPC]
@@ -56,6 +69,12 @@ namespace IMRE.HandWaver.Networking
 			GetComponent<MeshRenderer>().enabled = show;
 		}
 
+		[PunRPC]
+		private void handMode(bool isHand)
+		{
+			GetComponent<MeshRenderer>().mesh = isHand ? handModel : controllerModel;
+		}
+		
 		private void Update()
 		{
 			if (photonView.IsMine)
