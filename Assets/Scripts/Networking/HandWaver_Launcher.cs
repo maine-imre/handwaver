@@ -17,7 +17,7 @@ namespace IMRE.HandWaver.Networking
 		/// <summary>
 		/// The maximum number of players per room. When a room is full, it can't be joined by new players, and so new room will be created.
 		/// </summary>
-		private readonly RoomOptions options = new RoomOptions {MaxPlayers = 10};
+		private readonly RoomOptions options = new RoomOptions {MaxPlayers = 10, PublishUserId = true};
 		private readonly TypedLobby lobby = new TypedLobby("IMRE_Lobby", LobbyType.Default);
 		private readonly string[] expectedUsers = null;
 
