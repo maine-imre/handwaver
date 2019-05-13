@@ -20,7 +20,7 @@ namespace IMRE.HandWaver.Networking
 		public Mesh handModel;
 		public Mesh controllerModel;
 
-		public int LeapStatusCheckInterval = 1f;
+		public static int LeapStatusCheckInterval = 1;
 
 		internal bool isLeapMotionActive
 		{
@@ -28,12 +28,14 @@ namespace IMRE.HandWaver.Networking
 			get
 			{
 				//thankfully leap motion has a function for this.
-				current = FindObjectOfType<LeapServiceProvider>().IsConnected();
+				bool current = FindObjectOfType<LeapServiceProvider>().IsConnected();
 				//to double check, see if an XR controller exists.  This should always be true.
 				if (!FindObjectOfType<LeapXRServiceProvider>().IsConnected() && !current)
 				{
 					Debug.LogWarning("No HandTracking is Available!  Please attach a controller.");
 				}
+
+				return current;
 			}
 		}
 
@@ -46,7 +48,7 @@ namespace IMRE.HandWaver.Networking
 				if (_iHand == null)
 				{
 					//find the object in the scene with the appropriate chirality.
-					_iHand = FindObjectsOfType<InteractionHand>().Where(h => (h.handDataMode == HandDataMode.PlayerLeft) == (whichHand = Chirality.Left)).FirstOrDefault();
+					_iHand = FindObjectsOfType<InteractionHand>().FirstOrDefault(h => ((h.handDataMode == HandDataMode.PlayerLeft) == (whichHand == Chirality.Left)));
 				}
 
 				return _iHand;
@@ -56,15 +58,17 @@ namespace IMRE.HandWaver.Networking
 		private InteractionHand _iHand;
 
 
-		internal InteractionXRController iController
+		internal InteractionXRController iXR
 		{
 			get
 			{
 				if (_iXR == null)
 				{
 					//find the object in the scene with the appropriate chirality.
-					_iXR = FindObjectsOfType<InteractionXRController>().Where(h => (h.handDataMode == HandDataMode.PlayerLeft) == (whichHand = Chirality.Left)).FirstOrDefault();
+					_iXR = FindObjectsOfType<InteractionXRController>().FirstOrDefault(h => (h.isLeft) == (whichHand == Chirality.Left));
 				}
+
+				return _iXR;
 			}
 		}
 
@@ -75,11 +79,11 @@ namespace IMRE.HandWaver.Networking
 			get
 			{
 				//chose the object in the scene that is active.  Prefer LeapMotion.
-				return isLeapMotionActive ? iHand : iXR;
+				return  isLeapMotionActive ? (InteractionController) iHand : (InteractionController) iXR;
 			}
 		}
 		
-		private IEnumerator leapStatus = checkLeapStatus(LeapStatusCheckInterval);
+		private IEnumerator leapStatus;
 
 		private void Start()
 		{
@@ -106,6 +110,8 @@ namespace IMRE.HandWaver.Networking
 
 				//start a co-routine to allow LM to be plugged or unpluged at regular intervals.
 				//this will run the above commands as necessary.
+				leapStatus = checkLeapStatus(LeapStatusCheckInterval);
+
 				StartCoroutine(leapStatus);
 			}
 		}
@@ -129,7 +135,7 @@ namespace IMRE.HandWaver.Networking
 		[PunRPC]
 		private void handMode(bool isHand)
 		{
-			GetComponent<MeshRenderer>().mesh = isHand ? handModel : controllerModel;
+			GetComponent<MeshFilter>().mesh = isHand ? handModel : controllerModel;
 		}
 
 		private IEnumerator checkLeapStatus(int waitTime)
