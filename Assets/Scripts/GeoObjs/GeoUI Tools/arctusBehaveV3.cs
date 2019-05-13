@@ -60,7 +60,6 @@ namespace IMRE.HandWaver
 			edgeHandle = Instantiate(handlePrefab).GetComponent<arctusHandle>();
 			edgeHandle.thisArctus = this;
 			edgeHandle.transform.position = .2f * Vector3.up + this.transform.position;
-			thisCircle.enabled = true;
 
 			return edgeHandle;
 		}
@@ -164,15 +163,17 @@ namespace IMRE.HandWaver
         {
             get
             {
+	            if (centerSet && center == null)
+	            {
+		            Destroy(gameObject);
+	            }
                 return center;
             }
 
             set
             {
-				wheelSpinCollider.enabled = (value != null);
                 center = value;
                 centerSet = (value != null);
-				thisCircle.enabled = (value != null);
 				//checkCenterEdge();
             }
         }
@@ -188,6 +189,9 @@ namespace IMRE.HandWaver
             {
                 edge = value;
                 edgeSet = (value!=null);
+                thisCircle.enabled = (value != null);
+                wheelSpinCollider.enabled = (value != null);
+
                 //checkCenterEdge();
             }
         }
@@ -197,7 +201,7 @@ namespace IMRE.HandWaver
             if (centerSet && edgeSet)
             {
 	            GeoObjConstruction.dSphere(Center, Edge);
-				
+          
 				Destroy(edgeHandle.gameObject);
                 Destroy(gameObject);
             }

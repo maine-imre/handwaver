@@ -411,7 +411,7 @@ namespace IMRE.HandWaver.Solver
 
         internal int neighborTypeCount(NodeList<string> neighborList, GeoObjType value)
         {
-			return neighborList.Where(element => element.mytransform.GetComponent<MasterGeoObj>().figType == value).Count();
+			return neighborList.Count(element => element.mytransform.GetComponent<MasterGeoObj>().figType == value);
         }
 
         public void replaceDepentVar(Transform parent, Transform oldObj, Transform newObj)

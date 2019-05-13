@@ -267,7 +267,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &23733569184722156
 MeshRenderer:
@@ -420,7 +420,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e42e11a86c0f0f142a9f9ab711c21a2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toolType: 12
+  toolType: 0
   thisSphere: {fileID: 0}
   centerSet: 0
   edgeSet: 0
@@ -431,7 +431,7 @@ MonoBehaviour:
   shipsWheel: {fileID: 4105679574567576}
   wheelSpinCollider: {fileID: 135386965288856580}
   thisCircle: {fileID: 120502928321710612}
-  angleDeltaThreshold: 5
+  angleDeltaThreshold: 1
 --- !u!82 &82297125510218358
 AudioSource:
   m_ObjectHideFlags: 0
@@ -654,7 +654,7 @@ LineRenderer:
     shadowBias: 0
     generateLightingData: 0
   m_UseWorldSpace: 1
-  m_Loop: 0
+  m_Loop: 1
 --- !u!1 &1965079213528040
 GameObject:
   m_ObjectHideFlags: 0

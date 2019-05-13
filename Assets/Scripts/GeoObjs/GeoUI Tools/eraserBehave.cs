@@ -33,6 +33,7 @@ namespace IMRE.HandWaver
 			thisIBehave = GetComponent<InteractionBehaviour>();
 			thisABehave = GetComponent<AnchorableBehaviour>();
 			thisIBehave.OnGraspBegin += StartInteraction;
+			thisIBehave.OnGraspEnd += EndInteraction;
 
 			initialScale = this.transform.localScale;
 			this.transform.localScale = .25f * initialScale;
@@ -61,6 +62,13 @@ namespace IMRE.HandWaver
 		{
 			//called when it is grasped
 		}
+		
+		private void EndInteraction()
+		{
+			Destroy(gameObject);
+			//called when it is ungrasped
+		}
+
 
 		private void OnTriggerEnter(Collider other)
         {

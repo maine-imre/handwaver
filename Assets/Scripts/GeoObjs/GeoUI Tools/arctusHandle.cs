@@ -40,7 +40,7 @@ namespace IMRE.HandWaver
 			}
 			else
 			{
-				Debug.LogError("Snap to Point Sound is not set within "+name);
+				Debug.LogWarning("Snap to Point Sound is not set within "+name);
 			}
 
 
@@ -71,11 +71,13 @@ namespace IMRE.HandWaver
 					{
 						thisArctus.Edge = other.gameObject.GetComponent<AbstractPoint>();
 						GetComponent<InteractionBehaviour>().enabled = false;
-						this.transform.parent = thisArctus.Edge.transform;
+						transform.parent = thisArctus.Edge.transform;
 					}
 					else
 						Debug.Log("This handle wants a reference to the arctus behave. " + name);
 				}
+				GetComponent<SphereCollider>().enabled = false;
+				GetComponent<MeshRenderer>().enabled = false;
 			}
 		}
 

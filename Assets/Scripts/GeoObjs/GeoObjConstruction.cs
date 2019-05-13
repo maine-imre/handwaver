@@ -74,10 +74,11 @@ namespace IMRE.HandWaver {
 			thisSphere.edgePosition = edge.Position3;
 			thisSphere.Position3 = center.Position3;
 
+			thisSphere.InitializeFigure();
+			
 			HW_GeoSolver.ins.AddDependence(thisSphere, center);
 			HW_GeoSolver.ins.AddDependence(thisSphere, edge);
-
-			thisSphere.InitializeFigure();
+			
 			return thisSphere;
 		}
 
