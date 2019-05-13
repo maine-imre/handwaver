@@ -310,7 +310,7 @@ namespace IMRE.HandWaver
 		}
 		private IEnumerator cUpdateRMan;
 		public IEnumerator waitForStretch;
-		public bool stretchEnabled = true;
+		internal bool stretchEnabled = true;
 
 		private bool _leapInteraction;
 #pragma warning disable 0169
@@ -442,7 +442,8 @@ namespace IMRE.HandWaver
 		{
 			stretchEnabled = false;
 			yield return new WaitForSeconds(0.35f);
-			stretchEnabled = true;
+			if(!strechOverride)
+				stretchEnabled = true;
 		}
 
 		public void AddToRManager()
@@ -461,6 +462,10 @@ namespace IMRE.HandWaver
 
 		private Node<string> myGraphNode;
 		internal static Transform masterParentObj;
+		/// <summary>
+		/// Set true to disable streching for all objects of this type
+		/// </summary>
+		public bool strechOverride = false;
 
 		public Node<string> FindGraphNode()
 		{

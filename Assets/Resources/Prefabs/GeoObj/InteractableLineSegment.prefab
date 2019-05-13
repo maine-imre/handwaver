@@ -9,7 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 6222286144429608915}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_GeneratorAsset: {fileID: 0}
   m_Script: {fileID: 11500000, guid: 8b9fc134c09bf194899b73357fe72329, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
@@ -18,7 +17,7 @@ MonoBehaviour:
   intersectionFigure: 0
   figName: 
   figIndex: 0
-  stretchEnabled: 0
+  strechOverride: 1
   vertex0: {x: 0, y: 0, z: 0}
   vertex1: {x: 0, y: 0, z: 0}
   startColor: {r: 0, g: 0, b: 1, a: 1}
