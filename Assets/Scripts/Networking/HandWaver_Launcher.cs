@@ -17,9 +17,9 @@ namespace IMRE.HandWaver.Networking
 		/// <summary>
 		/// The maximum number of players per room. When a room is full, it can't be joined by new players, and so new room will be created.
 		/// </summary>
-		[Tooltip("The maximum number of players per room. When a room is full, it can't be joined by new players, and so new room will be created")]
-		[SerializeField]
-		private byte maxPlayersPerRoom = 4;
+		private readonly RoomOptions options = new RoomOptions {MaxPlayers = 10};
+		private readonly TypedLobby lobby = new TypedLobby("IMRE_Lobby", LobbyType.Default);
+		private readonly string[] expectedUsers = null;
 
 		#endregion
 
@@ -28,7 +28,9 @@ namespace IMRE.HandWaver.Networking
 		/// <summary>
 		/// The client's version number.
 		/// </summary>
-		string gameVersion = "PMENA";
+		string gameVersion = "abc";
+
+		public bool isIMRE = false;
 
 		#endregion
 
@@ -64,7 +66,14 @@ namespace IMRE.HandWaver.Networking
 		public override void OnConnectedToMaster()
 		{
 			Debug.Log("PUN Basics Tutorial/Launcher: OnConnectedToMaster() was called by PUN");
-			PhotonNetwork.JoinRandomRoom();
+			if (isIMRE)
+			{
+				PhotonNetwork.JoinOrCreateRoom("IMRE_LAB", options, lobby, expectedUsers);
+			}
+			else
+			{
+				PhotonNetwork.JoinRandomRoom();
+			}
 		}
 
 		public override void OnDisconnected(DisconnectCause cause)
@@ -77,7 +86,7 @@ namespace IMRE.HandWaver.Networking
 			Debug.Log("PUN Basics Tutorial/Launcher:OnJoinRandomFailed() was called by PUN. No random room available, so we create one.\nCalling: PhotonNetwork.CreateRoom");
 
 			// #Critical: we failed to join a random room, maybe none exists or they are all full. No worries, we create a new room.
-			PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = maxPlayersPerRoom });
+			PhotonNetwork.CreateRoom(null, options);
 		}
 
 		public override void OnJoinedRoom()
