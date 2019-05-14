@@ -12,40 +12,43 @@ using Photon.Pun;
 
 namespace IMRE.HandWaver.FourthDimension {
 
-
-	[RequireComponent(typeof(InteractionBehaviour))]
-	[RequireComponent(typeof(PhotonView))]
-	[RequireComponent(typeof(PhotonTransformView))]
-	[RequireComponent(typeof(PhotonRigidbodyView))]
 	/// <summary>
 	/// A networked object that whose bounds are connected to the graphics in hyperballboundaries.
 	/// Build as an initial test of networking capacity.
 	/// </summary>
+	[RequireComponent(typeof(InteractionBehaviour))]
+	[RequireComponent(typeof(PhotonView))]
+	[RequireComponent(typeof(PhotonTransformView))]
+	[RequireComponent(typeof(PhotonRigidbodyView))]
 	public class HyperBall : MonoBehaviourPunCallbacks {
 
 		public static float scaleOfBox = 2f;
-		private Rigidbody myRB;
 		internal static Vector3 origin = Vector3.up*scaleOfBox;
+		private PhotonView _photonView;
+		private Rigidbody _rigidbody;
+		private TrailRenderer _trailRenderer;
 
 		//public Transform wallPrefab;
 
 
 		private void Start()
 		{
+			_trailRenderer = GetComponent<TrailRenderer>();
+			_rigidbody = GetComponent<Rigidbody>();
+			_photonView = GetComponent<PhotonView>();
 			if (PhotonNetwork.IsMasterClient)
 			{
 				float tmp = UnityEngine.Random.Range(0f, 1f);
 				photonView.RPC("SetColorOnBall", RpcTarget.AllBuffered, tmp);
 			}
-			myRB = GetComponent<Rigidbody>();
 			GetComponent<InteractionBehaviour>().OnContactBegin += startTakeOver;
-			GetComponent<InteractionBehaviour>().OnContactEnd += endTakeOver;
+			GetComponent<InteractionBehaviour>().OnContactEnd += EndTakeOver;
 		}
 
 		/// <summary>
 		/// This should sync the colors between clients... IDK tho
 		/// </summary>
-		/// <param name="tmpColor">color to set for this ball</param>
+		/// <param name="hue">color to set for this ball</param>
 		[PunRPC]
 		void SetColorOnBall(float hue)
 		{
@@ -62,25 +65,25 @@ namespace IMRE.HandWaver.FourthDimension {
 		}
 
 		void Update() {
-			if (GetComponent<PhotonView>().IsMine)
+			if (_photonView.IsMine)
 			{
-				this.transform.position = positionMap();
+				this.transform.position = PositionMap();
 			}
 		}
 
 		private void startTakeOver()
 		{
-			//take ownserhip for me, to keep while I hit with my hands.
+			//take ownership for me, to keep while I hit with my hands.
 			GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.LocalPlayer);
 		}
 
-		private void endTakeOver()
+		private void EndTakeOver()
 		{
 			//return ownership to master.
 			GetComponent<PhotonView>().TransferOwnership(0);
 		}
 
-		private Vector3 positionMap()
+		private Vector3 PositionMap()
 		{
 			Vector3 pos = this.transform.position - origin;
 			switch (HyperBallBoundaries.myGeometery)
@@ -138,14 +141,14 @@ namespace IMRE.HandWaver.FourthDimension {
 					{
 						pos += 2 * scaleOfBox * Vector3.down;
 						pos = Quaternion.AngleAxis(180f, Vector3.up)*pos;
-						GetComponent<Rigidbody>().velocity = Quaternion.AngleAxis(180f, Vector3.up) * GetComponent<Rigidbody>().velocity;
+						_rigidbody.velocity = Quaternion.AngleAxis(180f, Vector3.up) * _rigidbody.velocity;
 					}
 
 					if (pos.y < -scaleOfBox)
 					{
 						pos += 2 * scaleOfBox * Vector3.up;
 						pos = Quaternion.AngleAxis(180f, Vector3.up)*pos;
-						GetComponent<Rigidbody>().velocity = Quaternion.AngleAxis(180f, Vector3.up) * GetComponent<Rigidbody>().velocity;
+						_rigidbody.velocity = Quaternion.AngleAxis(180f, Vector3.up) * _rigidbody.velocity;
 					}
 
 					if (pos.z > scaleOfBox)
@@ -163,41 +166,41 @@ namespace IMRE.HandWaver.FourthDimension {
 					{
 						pos += 2 * scaleOfBox * Vector3.left;
 						pos = Quaternion.AngleAxis(180f, Vector3.left) * pos;
-						GetComponent<Rigidbody>().velocity = Quaternion.AngleAxis(180f, Vector3.left) * GetComponent<Rigidbody>().velocity;
+						_rigidbody.velocity = Quaternion.AngleAxis(180f, Vector3.left) * _rigidbody.velocity;
 					}
 
 					if (pos.x < -scaleOfBox)
 					{
 						pos += 2 * scaleOfBox * Vector3.right;
 						pos = Quaternion.AngleAxis(180f, Vector3.right) * pos;
-						GetComponent<Rigidbody>().velocity = Quaternion.AngleAxis(180f, Vector3.right) * GetComponent<Rigidbody>().velocity;
+						_rigidbody.velocity = Quaternion.AngleAxis(180f, Vector3.right) * _rigidbody.velocity;
 					}
 
 					if (pos.y > scaleOfBox)
 					{
 						pos += 2 * scaleOfBox * Vector3.down;
 						pos = Quaternion.AngleAxis(180f, Vector3.down) * pos;
-						GetComponent<Rigidbody>().velocity = Quaternion.AngleAxis(180f, Vector3.down) * GetComponent<Rigidbody>().velocity;
+						_rigidbody.velocity = Quaternion.AngleAxis(180f, Vector3.down) * _rigidbody.velocity;
 					}
 
 					if (pos.y < -scaleOfBox)
 					{
 						pos += 2 * scaleOfBox * Vector3.up;
 						pos = Quaternion.AngleAxis(180f, Vector3.up) * pos;
-						GetComponent<Rigidbody>().velocity = Quaternion.AngleAxis(180f, Vector3.up) * GetComponent<Rigidbody>().velocity;
+						_rigidbody.velocity = Quaternion.AngleAxis(180f, Vector3.up) * _rigidbody.velocity;
 					}
 
 					if (pos.z > scaleOfBox)
 					{
 						pos += 2 * scaleOfBox * Vector3.back;
 						pos = Quaternion.AngleAxis(180f, Vector3.back) * pos;
-						GetComponent<Rigidbody>().velocity = Quaternion.AngleAxis(180f, Vector3.back) * GetComponent<Rigidbody>().velocity;
+						_rigidbody.velocity = Quaternion.AngleAxis(180f, Vector3.back) * _rigidbody.velocity;
 					}
 					if (pos.z < -scaleOfBox)
 					{
 						pos += 2 * scaleOfBox * Vector3.forward;
 						pos = Quaternion.AngleAxis(180f, Vector3.forward) * pos;
-						GetComponent<Rigidbody>().velocity = Quaternion.AngleAxis(180f, Vector3.forward) * GetComponent<Rigidbody>().velocity;
+						_rigidbody.velocity = Quaternion.AngleAxis(180f, Vector3.forward) * _rigidbody.velocity;
 					}
 					break;
 				default:
@@ -205,7 +208,7 @@ namespace IMRE.HandWaver.FourthDimension {
 			}
 
 			bool isNew = (pos != this.transform.position - origin);
-			GetComponent<TrailRenderer>().emitting = !isNew;
+			_trailRenderer.emitting = !isNew;
 			if (isNew)
 			{
 				photonView.RPC("ClearTrailRenderer", RpcTarget.All);
