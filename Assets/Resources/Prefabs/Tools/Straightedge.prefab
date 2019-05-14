@@ -21,6 +21,8 @@ GameObject:
   - component: {fileID: 114815096054916396}
   - component: {fileID: 114552890470223502}
   - component: {fileID: 82737892036635752}
+  - component: {fileID: 5488328922087978041}
+  - component: {fileID: 6918597694595524329}
   m_Layer: 0
   m_Name: Straightedge
   m_TagString: Straightedge
@@ -67,7 +69,7 @@ MonoBehaviour:
   intersectionFigure: 0
   figName: 
   figIndex: 0
-  stretchEnabled: 1
+  strechOverride: 0
   wheelType: 3
   seHandle1: {fileID: 4185321753546336}
   seHandle2: {fileID: 4896709459564412}
@@ -452,6 +454,32 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5488328922087978041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1010918412810072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff9921b4d2fa2ec499af8d6262b80294, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isLeft: 0
+--- !u!114 &6918597694595524329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1010918412810072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff9921b4d2fa2ec499af8d6262b80294, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isLeft: 1
 --- !u!1 &1028614016361876
 GameObject:
   m_ObjectHideFlags: 0

@@ -110,7 +110,6 @@ namespace IMRE.HandWaver
 		internal void snapToFloor()
 		{
 			normalDir = Vector3.up;
-			Debug.Log(normalDir);
 		}
 
 		//private int initLayer;
