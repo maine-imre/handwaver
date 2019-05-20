@@ -4,17 +4,17 @@ HandWaver, developed at the Maine IMRE Lab at the University of Maine's College 
 See license info in readme.md.
 www.imrelab.org
 **/
-//#if StandaloneWindows64
+#if StandaloneWindows64
 
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using BlueprintReality.MixCast;
+//using BlueprintReality.MixCast;
 using System.Linq;
- using IMRE.HandWaver.HWIO;
- using UnityEngine.Events;
- using WebSocketSharp;
+using IMRE.HandWaver.HWIO;
+using UnityEngine.Events;
+using WebSocketSharp;
 
 namespace IMRE.HandWaver
 {
@@ -156,7 +156,7 @@ namespace IMRE.HandWaver
 			return (commandLineArguments.Any(c => c.ToLower().Contains("-logging")) || logOverride);
 		}
 
-		public static mixCastTargetMode mixCastTarget()
+		/*public static mixCastTargetMode mixCastTarget()
 		{
 			mixCastTargetMode result = mixCastTargetMode.primaryMonitor;
 
@@ -172,7 +172,7 @@ namespace IMRE.HandWaver
 			}
 
 			return result;
-		}
+		}*/s
 
 	}
 }
