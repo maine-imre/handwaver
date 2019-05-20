@@ -7,6 +7,8 @@
 
 [Package Download](https://github.com/leapmotion/UnityModules/releases)
 
+The package download link leads to LeapMotion's UnityModules page. This page includes five different packages. Download all of the specific checked packages listed below.
+
 Used as an input system, interaction system and gesture system for LeapMotion and OSVR controls.  (Essential to Function)
 
 Free, Open-Source asset.  LeapMotion controller functionality dependent on closed source drivers currently only available on Windows.  OSVR functionality works without the closed source driver.
@@ -26,7 +28,7 @@ Free and Open-Source. Used as a main control interface. (Essential to function).
 
 *The package download is from a fork of LeapMotion's origional repository, that we have modified to ensure compatability with our repository.
 
-***The package is temporarily a derivative of [LeapPaint](https://github.com/maine-imre/Paint/releases)***
+***The package is temporarily a derivative of [LeapPaint](https://github.com/maine-imre/Paint/releases). The package is only availiable from this link at the moment.***
 
 ### Photon PUN2 by [Exit Games](https://www.photonengine.com/en/pun)
 
