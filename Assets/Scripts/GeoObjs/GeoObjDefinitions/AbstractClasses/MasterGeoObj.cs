@@ -199,12 +199,10 @@ namespace IMRE.HandWaver
 						foreach (MeshRenderer meshRenderer in GetComponentsInChildren<MeshRenderer>())
 						{
 							meshRenderer.material.SetColor("_Color",HW_GeoSolver.ins.selectedColor);
-							Debug.Log("Set Material to Selected");
 						}
 						foreach (LineRenderer lineRenderer in GetComponentsInChildren<LineRenderer>())
 						{
 							lineRenderer.material.SetColor("_Color",HW_GeoSolver.ins.selectedColor);
-							Debug.Log("Set Material to Selected");
 						}
 						break;
 					case SelectionStatus.active:
@@ -236,39 +234,33 @@ namespace IMRE.HandWaver
 								foreach (MeshRenderer meshRenderer in GetComponentsInChildren<MeshRenderer>())
 								{
 									meshRenderer.material.SetColor("_Color",HW_GeoSolver.ins.dependentColor);
-									Debug.Log("Set Material to Default");
 								}
 								foreach (LineRenderer lineRenderer in GetComponentsInChildren<LineRenderer>())
 								{
 									lineRenderer.material.SetColor("_Color",HW_GeoSolver.ins.dependentColor);
 
-									Debug.Log("Set Material to Default");
 								}
 								break;
 							case updateCapability.interactable:
 								foreach (MeshRenderer meshRenderer in GetComponentsInChildren<MeshRenderer>())
 								{
 									meshRenderer.material.SetColor("_Color",HW_GeoSolver.ins.defaultColor);
-									Debug.Log("Set Material to Default");
 								}
 								foreach (LineRenderer lineRenderer in GetComponentsInChildren<LineRenderer>())
 								{
 									lineRenderer.material.SetColor("_Color",HW_GeoSolver.ins.defaultColor);
 
-									Debug.Log("Set Material to Default");
 								}
 								break;
 							case updateCapability.geoStatic:
 								foreach (MeshRenderer meshRenderer in GetComponentsInChildren<MeshRenderer>())
 								{
 									meshRenderer.material.SetColor("_Color",HW_GeoSolver.ins.staticColor);
-									Debug.Log("Set Material to Default");
 								}
 								foreach (LineRenderer lineRenderer in GetComponentsInChildren<LineRenderer>())
 								{
 									lineRenderer.material.SetColor("_Color",HW_GeoSolver.ins.staticColor);
 
-									Debug.Log("Set Material to Default");
 								}
 								break;
 						}

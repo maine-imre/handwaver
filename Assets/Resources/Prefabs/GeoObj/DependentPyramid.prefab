@@ -9,16 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 2756464245442334496}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_GeneratorAsset: {fileID: 0}
   m_Script: {fileID: 11500000, guid: 14d167c704857324b9815d86f4961faa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   allowDelete: 1
-  figType: 0
+  figType: 5
   intersectionFigure: 0
   figName: 
   figIndex: 0
-  stretchEnabled: 1
+  strechOverride: 0
   apex: {fileID: 0}
   basePolygon: {fileID: 0}
   sides: []
