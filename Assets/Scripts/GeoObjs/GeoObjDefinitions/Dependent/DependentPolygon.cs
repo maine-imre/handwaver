@@ -23,7 +23,7 @@ namespace IMRE.HandWaver
 		#region Constructors
 			public static  DependentPolygon Constructor()
 			{
-				return PrefabManager.Spawn("DepenDependentPolygon").GetComponent<DependentPolygon>();
+				return PrefabManager.Spawn("DependentPolygon").GetComponent<DependentPolygon>();
 			}
 		#endregion
 
