@@ -4,13 +4,17 @@ HandWaver, developed at the Maine IMRE Lab at the University of Maine's College 
 See license info in readme.md.
 www.imrelab.org
 **/
-#if StandaloneWindows64
-﻿using System.Collections;
+//#if StandaloneWindows64
+
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using BlueprintReality.MixCast;
 using System.Linq;
-using UnityEngine.Events;
+ using IMRE.HandWaver.HWIO;
+ using UnityEngine.Events;
+ using WebSocketSharp;
 
 namespace IMRE.HandWaver
 {
@@ -62,8 +66,19 @@ namespace IMRE.HandWaver
 
 		internal static void sceneStart()
 		{
+			// Sentinel value to signify if we found anything
+			int loadHW = -1;
+			
 			foreach (string argument in commandLineArguments)
 			{
+				
+				if (argument.ToLower().Contains("-l"))
+				{
+					//index of the argument that is directly after "-l" unless it is the last argument in which case we just leave it at the flag value.
+					loadHW = Array.IndexOf(commandLineArguments, "-l") < commandLineArguments.Length ? Array.IndexOf(commandLineArguments, "-l")+1 : -1;		
+					
+				}
+				
                 if (argument.ToLower().Contains("-handwaver"))
                 {
                     playMode.demo = true;
@@ -112,6 +127,28 @@ namespace IMRE.HandWaver
                     debugkeyboardinput.loadSceneAsyncByName("LatticeLand", false);
                 }
             }
+
+			//If a -L flag was found
+			if (loadHW != -1)
+			{
+				// Find the path to a file provided
+				string path = commandLineArguments[loadHW];
+				if (path.IsNullOrEmpty())
+				{
+					//we somehow didnt find a path
+					Debug.LogError("No Path found! Be sure to provide a full path ending with .hw");
+					return;
+				}
+				try
+				{
+					XMLManager.ins.LoadGeoObjs(path);
+				}
+				catch
+				{
+					// File does not exist or doesnt load properly
+					Debug.LogError("Could not load save from file: "+path);					
+				}
+			}
 		}
 
 		public static bool logCheck()
@@ -139,4 +176,4 @@ namespace IMRE.HandWaver
 
 	}
 }
-#endif
+//#endif
