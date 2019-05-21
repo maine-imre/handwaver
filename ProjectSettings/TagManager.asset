@@ -19,12 +19,12 @@ TagManager:
   - UI
   - 
   - 
-  - orthoIgnore
   - 
   - 
   - 
   - 
-  - 
+  - ShapeLayer
+  - ignoreOrtho
   - 
   - 
   - 
