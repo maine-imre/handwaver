@@ -3,7 +3,7 @@ using UnityEngine;
 using Unity.Rendering;
 
 namespace IMRE.HandWaver.Kernel.Geos{
-  public abstract class GeoElement
+  public abstract interface GeoElement
   {
     public int ElementID;
     public abstract string ElementName;
