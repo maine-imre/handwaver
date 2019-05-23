@@ -7,7 +7,5 @@ namespace IMRE.HandWaver.Kernel.Geos{
   {
     public int ElementID;
     public abstract string ElementName;
-    public abstract Vector3 closestPoint(Vector3 position);
-    public abstract void RenderFigure();
   }
 }
