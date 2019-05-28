@@ -79,14 +79,14 @@ namespace IMRE.HandWaver.HigherDimensions
             if (foldOverride)
             {
                 degreeFolded = foldOverrideValue;
-		sldiderPoint.Position3 = (degreeFolded/360f)*(slider.PointB.Position3 - slider.PointA.Position3) + slider.PointA.Position3;
+		sldiderPoint.Position3 = (degreeFolded/360f)*(slider.point2.Position3 - slider.point1.Position3) + slider.point1.Position3;
 
             }
 	    else if (animateFold)
             {
                 degreeFolded++;
 		
-		sldiderPoint.Position3 = (degreeFolded/360f)*(slider.PointB.Position3 - slider.PointA.Position3) + slider.PointA.Position3;
+		sldiderPoint.Position3 = (degreeFolded/360f)*(slider.point2.Position3 - slider.point1.Position3) + slider.point1.Position3;
 
                 hypercube.Fold = degreeFolded;
                 fivecell.Fold = degreeFolded;
@@ -98,8 +98,8 @@ namespace IMRE.HandWaver.HigherDimensions
 	    
 	    else
 	    {
-	    	sliderPoint.Position3 = Vector3.Project(sliderPoint.Position3 - slider.PointA.Position3,slider.PointA.Position3 - slider.PointB.Position3) + slider.PointA.Position3;
-	    	degreeFolded =360*(sliderPoint.Position3 - slider.PointA.Position3).magnitude/(slider.PointA.Position3 - slider.PointB.Position3).magnitude;
+	    	sliderPoint.Position3 = Vector3.Project(sliderPoint.Position3 - slider.point1.Position3,slider.point1.Position3 - slider.point2.Position3) + slider.point1.Position3;
+	    	degreeFolded =360*(sliderPoint.Position3 - slider.point1.Position3).magnitude/(slider.point1.Position3 - slider.point2.Position3).magnitude;
 	    }
         }
     }
