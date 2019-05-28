@@ -22,7 +22,7 @@ public class cubeNet : MonoBehaviour {
         {
             return fold;
         }
-
+        //set positions for linerenderer and vertices for mesh
         set
         {
             fold = value;
@@ -33,10 +33,14 @@ public class cubeNet : MonoBehaviour {
 
     private void Start()
     {
+        //assign mesh
+        //
         m = GetComponent<MeshFilter>().mesh;
         m.vertices = meshVerts(0);
         m.triangles = meshTris();
 
+        //assign linerenderer
+        //
         lr = GetComponent<LineRenderer>();
         lr.positionCount = 22;
         lr.useWorldSpace = false;
@@ -47,15 +51,18 @@ public class cubeNet : MonoBehaviour {
         //startTime = DateTime.Now;
     }
 
+    
     private static Vector3[] meshVerts(float t)
     {
         Vector3[] result = new Vector3[14];
 
+        //2d square
         result[0] = .5f * (Vector3.forward + Vector3.right);
         result[1] = .5f * (Vector3.forward + Vector3.left);
         result[2] = .5f * (Vector3.back + Vector3.left);
         result[3] = .5f * (Vector3.back + Vector3.right);
 
+        //
         result[4] = squareVert(result[3], result[0], result[1], t);
         result[5] = squareVert(result[3], result[0], result[2], t);
 
@@ -77,9 +84,11 @@ public class cubeNet : MonoBehaviour {
 
     private static Vector3 squareVert(Vector3 nSegmentA, Vector3 nSegmentB, Vector3 oppositePoint, float t)
     {
+        //
         return Quaternion.AngleAxis(t, (nSegmentA - nSegmentB).normalized) * (oppositePoint - (nSegmentA + nSegmentB) / 2f) + (nSegmentA + nSegmentB) / 2f;
     }
 
+    //create matrix of ints with the 4 values the function is passed
     private static int[] meshQuad(int a, int b, int c, int d)
     {
         return new int[]{a,b,d,d,b,c};
