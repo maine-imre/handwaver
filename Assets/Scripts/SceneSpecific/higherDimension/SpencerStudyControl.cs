@@ -113,6 +113,7 @@ namespace IMRE.HandWaver.HigherDimensions
 	[PunRPC]
 	private void setDegreeFolded(float degree){
 		degreeFolded = degree;
+		
 		//update each of the figures to reflect the degree folded.
 	        hypercube.Fold = degreeFolded;
                 fivecell.Fold = degreeFolded;
@@ -120,6 +121,10 @@ namespace IMRE.HandWaver.HigherDimensions
                 pyramid.Fold = degreeFolded;
                 square.Fold = degreeFolded;
                 triangle.Fold = degreeFolded;
+		
+		//update slider point on all users.
+		sldiderPoint.Position3 = (deg/360f)*(slider.point2.Position3 - slider.point1.Position3) + slider.point1.Position3;
+
 	}
     }
 }
