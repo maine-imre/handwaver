@@ -12,63 +12,66 @@ namespace IMRE.HandWaver.HigherDimensions
     /// </summary>
 	public class SpencerStudyControl : MonoBehaviour
     {
-        public InteractionSlider foldSlider_lm;
-        public UnityEngine.UI.Slider foldSlider_onScreen;
-        internal static float degreeFolded = 0f;
+    /// <summary>
+    /// The number of degrees that each vertex is folded by.
+    /// Consider changing to percent;
+    /// </summary>        
+    internal static float degreeFolded = 0f;
+        /// <summary>
+    /// An override that automatically animates the slider and the folding process
+    /// </summary>
         public bool animateFold = false;
-        public InteractionSlider animateButton_lm;
-        public UnityEngine.UI.Button aniamteButton_onScreen;
 
+        /// <summary>
+    /// A reference to the hypercube net object in the scene (3D --> 4D)
+    /// </summary>
         public HypercubeNet hypercube;
+	        /// <summary>
+    /// A reference to the five cell net in the scene (3D --> 4D)
+    /// </summary>
         public fiveCellNet fivecell;
+	
+	        /// <summary>
+    /// A reference to the cube net in the scene (2D --> 3D)
+    /// </summary>
         public cubeNet cube;
+	
+	        /// <summary>
+    /// A reference to the tetrahedron net in the scene (2D --> 3D)
+    /// </summary>
         public tetrahedronNet pyramid;
+	        /// <summary>
+    /// A reference to the square net in the scene (1D-->2D)
+    /// </summary>
         public squareNet square;
+	        /// <summary>
+    /// A reference to the triangle net in the scene (1D --> 2D)
+    /// </summary>
         public triangleNet triangle;
+	
+	        /// <summary>
+    /// The point on the slider that determines the position of the slider.
+    /// </summary>
+	private InteractablePoint sliderPoint;
+	        /// <summary>
+    /// The bounds of the slider.
+    /// </summary>
+	private DependentLineSegment slider;
 
+        /// <summary>
+    /// A boolean for debugging that allows the fold to be manipulated in the editor at play
+    /// </summary>
         public bool foldOverride;
+	        /// <summary>
+    /// The override value with a slider in the editor.
+    /// </summary>
         [Range(0, 360)]
         public float foldOverrideValue = 0f;
 
-        private void Awake()
+        private void Start()
         {
-            foldSlider_onScreen.gameObject.SetActive(!UnityEngine.XR.XRDevice.isPresent);
-            foldSlider_lm.gameObject.SetActive(UnityEngine.XR.XRDevice.isPresent);
-
-            aniamteButton_onScreen.gameObject.SetActive(!UnityEngine.XR.XRDevice.isPresent);
-            animateButton_lm.gameObject.SetActive(UnityEngine.XR.XRDevice.isPresent);
-
-            if (UnityEngine.XR.XRDevice.isPresent)
-            {
-                foldSlider_lm.OnPress += updateLMSlider;
-                animateButton_lm.OnPress += updateAnimateLM;
-            }
-            else
-            {
-                foldSlider_onScreen.onValueChanged.AddListener(updateUSlider);
-                aniamteButton_onScreen.onClick.AddListener(updateUAniamteButton);
-            }
-        }
-
-        private void updateUAniamteButton()
-        {
-            //help!
-            //animateFold  = aniamteButton_onScreen.
-        }
-
-        private void updateAnimateLM()
-        {
-            animateFold = animateButton_lm.isPressed;
-        }
-
-        private void updateUSlider(float arg0)
-        {
-            degreeFolded = foldSlider_onScreen.normalizedValue * 360f;
-        }
-
-        private void updateLMSlider()
-        {
-            degreeFolded = foldSlider_lm.normalizedHorizontalValue * 360f;
+	    slider = GeoObjConstruct.dLineSegment(GeoObjConstruct.dPoint(Vector3.zero),GeoObjConstruct.dPoint(Vector3.right*.1f));
+	    sliderPoint = GeoObjConstruct.iPoint(Vector3.right*.05f);
         }
 
         void Update()
@@ -76,15 +79,14 @@ namespace IMRE.HandWaver.HigherDimensions
             if (foldOverride)
             {
                 degreeFolded = foldOverrideValue;
+		sldiderPoint.Position = (degreeFolded/360f)*(slider.PointB.Position - slider.PointA.Position) + slider.PointA.Position;
+
             }
-            if (animateFold)
+	    else if (animateFold)
             {
-                Debug.Log(degreeFolded);
                 degreeFolded++;
-                if(foldSlider_lm != null)
-                foldSlider_lm.HorizontalSliderValue = degreeFolded / 360f;
-                if(foldSlider_onScreen != null)
-                foldSlider_onScreen.normalizedValue = degreeFolded / 360f;
+		
+		sldiderPoint.Position = (degreeFolded/360f)*(slider.PointB.Position - slider.PointA.Position) + slider.PointA.Position;
 
                 hypercube.Fold = degreeFolded;
                 fivecell.Fold = degreeFolded;
@@ -93,6 +95,12 @@ namespace IMRE.HandWaver.HigherDimensions
                 square.Fold = degreeFolded;
                 triangle.Fold = degreeFolded;
             }
+	    
+	    else
+	    {
+	    	sliderPoint.Position = Vector3.Project(sliderPoint.Position - slider.PointA.Position,slider.PointA.Position - slider.PointB.Position) + slider.PointA.Position;
+	    	degreeFolded =360*(sliderPoint.Position - slider.PointA.Position).magnitude/(slider.PointA.Position - slider.PointB.Position).magnitude;
+	    }
         }
     }
 }
