@@ -33,6 +33,13 @@ public class sceneChangerMenuItem : MonoBehaviour
 		EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
 		EditorSceneManager.OpenScene("Assets/Scenes/BaseScenes/networkingBase.unity");
 	}
+	
+[MenuItem("Load Scene/Base Scene/Spencer Base")]
+	private static void OpenSpencerBase()
+	{
+		EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
+		EditorSceneManager.OpenScene("Assets/Scenes/BaseScenes/variedPerspectiveBase.unity");
+	}
 
 	[MenuItem("Load Scene/Content Layer/RSDES")]
 	private static void openRSDES()
