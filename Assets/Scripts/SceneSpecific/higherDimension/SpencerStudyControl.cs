@@ -79,10 +79,12 @@ namespace IMRE.HandWaver.HigherDimensions
 
         void Update()
         {
+	float deg = 0f;
 	//if the override bool is set, use in editor override value
+
             if (foldOverride)
             {
-                degreeFolded = foldOverrideValue;
+                deg = foldOverrideValue;
 		//update the slider's position to reflect the override value
 		sldiderPoint.Position3 = (degreeFolded/360f)*(slider.point2.Position3 - slider.point1.Position3) + slider.point1.Position3;
 
@@ -91,7 +93,7 @@ namespace IMRE.HandWaver.HigherDimensions
 	    else if (animateFold)
             {
 	    //increment the degree folded by one degree. 
-                degreeFolded++;
+                deg = degreeFolded + 1f;
 		//update the slider's position to reflect the override value
 		sldiderPoint.Position3 = (degreeFolded/360f)*(slider.point2.Position3 - slider.point1.Position3) + slider.point1.Position3;
             }
@@ -99,15 +101,25 @@ namespace IMRE.HandWaver.HigherDimensions
 	    else
 	    {
 	    	sliderPoint.Position3 = Vector3.Project(sliderPoint.Position3 - slider.point1.Position3,slider.point1.Position3 - slider.point2.Position3) + slider.point1.Position3;
-	    	degreeFolded =360*(sliderPoint.Position3 - slider.point1.Position3).magnitude/(slider.point1.Position3 - slider.point2.Position3).magnitude;
+	    	deg =360*(sliderPoint.Position3 - slider.point1.Position3).magnitude/(slider.point1.Position3 - slider.point2.Position3).magnitude;
 	    }
-	    //update each of the figures to reflect the degree folded.
+	    #if Photon
+	   	 photonView.RPC("setDegreeFolded", PhotonTargets.All, deg);
+	    #else
+	   	 setDegreeFolded(deg);
+	    #endif
+        }
+	
+	[PunRPC]
+	private void setDegreeFolded(float degree){
+		degreeFolded = degree;
+		//update each of the figures to reflect the degree folded.
 	        hypercube.Fold = degreeFolded;
                 fivecell.Fold = degreeFolded;
                 cube.Fold = degreeFolded;
                 pyramid.Fold = degreeFolded;
                 square.Fold = degreeFolded;
                 triangle.Fold = degreeFolded;
-        }
+	}
     }
 }
