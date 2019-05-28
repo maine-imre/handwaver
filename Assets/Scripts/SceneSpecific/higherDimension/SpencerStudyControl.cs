@@ -8,7 +8,7 @@ namespace IMRE.HandWaver.HigherDimensions
 {
     /// <summary>
     /// Central control for scale and dimension study.
-    /// needs to be renamed to reflect this.
+    /// also includes logic to make a slider out of MasterGeoObjs
     /// </summary>
 	public class SpencerStudyControl : MonoBehaviour
     {
