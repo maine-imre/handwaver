@@ -70,8 +70,8 @@ namespace IMRE.HandWaver.HigherDimensions
 
         private void Start()
         {
-	    slider = GeoObjConstruct.dLineSegment(GeoObjConstruct.dPoint(Vector3.zero),GeoObjConstruct.dPoint(Vector3.right*.1f));
-	    sliderPoint = GeoObjConstruct.iPoint(Vector3.right*.05f);
+	    slider = GeoObjConstruction.dLineSegment(GeoObjConstruction.dPoint(Vector3.zero),GeoObjConstruction.dPoint(Vector3.right*.1f));
+	    sliderPoint = GeoObjConstruction.iPoint(Vector3.right*.05f);
         }
 
         void Update()
