@@ -10,7 +10,7 @@ namespace IMRE.HandWaver.HigherDimensions
     /// Central control for scale and dimension study.
     /// needs to be renamed to reflect this.
     /// </summary>
-	public class HigherDimExperimentControl : MonoBehaviour
+	public class SpencerStudyControl : MonoBehaviour
     {
         public InteractionSlider foldSlider_lm;
         public UnityEngine.UI.Slider foldSlider_onScreen;
