@@ -70,37 +70,45 @@ namespace IMRE.HandWaver.HigherDimensions
 
         private void Start()
         {
-	    slider = GeoObjConstruction.dLineSegment(GeoObjConstruction.dPoint(Vector3.zero),GeoObjConstruction.dPoint(Vector3.right*.1f));
+	//construct a slider as a dependent linesegment, with points at Vector3.zero and Vector3.right.  
+	//Add Vector3.up for height
+	    slider = GeoObjConstruction.dLineSegment(GeoObjConstruction.dPoint(Vector3.zero+Vector3.up),GeoObjConstruction.dPoint(Vector3.right*.1f+Vector3.up));
+	    //construct a point on the slider (in the middle)
+	    //this point will be bound to the slider on update.
 	    sliderPoint = GeoObjConstruction.iPoint(Vector3.right*.05f);
         }
 
         void Update()
         {
+	//if the override bool is set, use in editor override value
             if (foldOverride)
             {
                 degreeFolded = foldOverrideValue;
+		//update the slider's position to reflect the override value
 		sldiderPoint.Position3 = (degreeFolded/360f)*(slider.point2.Position3 - slider.point1.Position3) + slider.point1.Position3;
 
             }
+	    //if the boolean is set to animate the figure
 	    else if (animateFold)
             {
+	    //increment the degree folded by one degree. 
                 degreeFolded++;
-		
+		//update the slider's position to reflect the override value
 		sldiderPoint.Position3 = (degreeFolded/360f)*(slider.point2.Position3 - slider.point1.Position3) + slider.point1.Position3;
-
-                hypercube.Fold = degreeFolded;
-                fivecell.Fold = degreeFolded;
-                cube.Fold = degreeFolded;
-                pyramid.Fold = degreeFolded;
-                square.Fold = degreeFolded;
-                triangle.Fold = degreeFolded;
             }
-	    
+	    // if the participant is directly manipulating the slider
 	    else
 	    {
 	    	sliderPoint.Position3 = Vector3.Project(sliderPoint.Position3 - slider.point1.Position3,slider.point1.Position3 - slider.point2.Position3) + slider.point1.Position3;
 	    	degreeFolded =360*(sliderPoint.Position3 - slider.point1.Position3).magnitude/(slider.point1.Position3 - slider.point2.Position3).magnitude;
 	    }
+	    //update each of the figures to reflect the degree folded.
+	        hypercube.Fold = degreeFolded;
+                fivecell.Fold = degreeFolded;
+                cube.Fold = degreeFolded;
+                pyramid.Fold = degreeFolded;
+                square.Fold = degreeFolded;
+                triangle.Fold = degreeFolded;
         }
     }
 }
