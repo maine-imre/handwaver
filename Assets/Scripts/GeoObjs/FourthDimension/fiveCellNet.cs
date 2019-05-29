@@ -10,7 +10,7 @@ namespace IMRE.HandWaver.HigherDimensions
 /// </summary>
 	public class fiveCellNet : AbstractHigherDimSolid
     {
-
+        //basic vector4 values
         private static Vector4 right = (new Vector4(0, 0, 1, 0) - new Vector4(Mathf.Sqrt(8f / 9f), 0, -1f / 3f, 0f)).normalized;
         private static Vector4 left = -right;
         private static Vector4 up = (new Vector4(0, 0, 1, 0) - new Vector4(-Mathf.Sqrt(2f / 9f), Mathf.Sqrt(2f / 3f), -1f / 3f, 0f)).normalized;
@@ -30,7 +30,7 @@ namespace IMRE.HandWaver.HigherDimensions
             Fold++;
         }
 
-        //readonly static float GoldenRatio = (1f + Mathf.Sqrt(5f)) / 2f;
+        //read only static float GoldenRatio = (1f + Mathf.Sqrt(5f)) / 2f;
         private float _fold;
         public float Fold
         {
@@ -45,7 +45,11 @@ namespace IMRE.HandWaver.HigherDimensions
             }
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="t"></param>
+        /// <returns></returns>
         private static Vector4[] vertices(float t)
         {
             Vector4[] result = new Vector4[8];

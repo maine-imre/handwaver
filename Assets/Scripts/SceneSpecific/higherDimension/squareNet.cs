@@ -22,6 +22,7 @@ public class squareNet : MonoBehaviour
 
         set
         {
+            //set vertices using vert function
             fold = value;
             GetComponent<LineRenderer>().SetPositions(verts(fold));
         }
@@ -29,11 +30,19 @@ public class squareNet : MonoBehaviour
 
     private void Start()
     {
+<<<<<<< Updated upstream
         //5 vertices on a line
+=======
+        //intial line segment with 5 points (2 vertices merge)
+>>>>>>> Stashed changes
 		GetComponent<LineRenderer>().positionCount = 5;
 		//
 		GetComponent<LineRenderer>().useWorldSpace = false;
+<<<<<<< Updated upstream
 		//width at start and end of line
+=======
+        //start and end width of line
+>>>>>>> Stashed changes
         GetComponent<LineRenderer>().startWidth = .01f;
         GetComponent<LineRenderer>().endWidth = .01f;
     }
@@ -41,15 +50,25 @@ public class squareNet : MonoBehaviour
     //generate vertices for square
     private Vector3[] verts(float t)
     {
+<<<<<<< Updated upstream
         //matrix for vertices
         Vector3[] result = new Vector3[5];
         //
         result[2] = Vector3.zero;
         result[1] = Vector3.right;
         //
+=======
+        //matrix of vertices
+        Vector3[] result = new Vector3[5];
+        //initial vertices that don't need to move/are pivot points
+        result[2] = Vector3.zero;
+        result[1] = Vector3.right;
+        //rotate vertice by t or -t around (0, 1, 0) 
+>>>>>>> Stashed changes
         result[0] = result[1] + Quaternion.AngleAxis(t, Vector3.up)*Vector3.right;
         result[3] = result[2] + Quaternion.AngleAxis(-t, Vector3.up)*Vector3.left;
-        result[4] = result[3] + Quaternion.AngleAxis(-2 * t, Vector3.up) * Vector3.left;
+        //rotate vertice by -2t around (0, 1, 0)
+        result[4] = result[3] + Quaternion.AngleAxis(-2 * t, Vector3.up)*Vector3.left;
         return result;
     }
 }

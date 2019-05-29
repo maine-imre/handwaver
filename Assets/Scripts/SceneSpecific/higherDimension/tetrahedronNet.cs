@@ -34,9 +34,11 @@ public class tetrahedronNet : MonoBehaviour
     private void Start()
     {
         m = GetComponent<MeshFilter>().mesh;
+        //unfolded shape(degree of fold = 0)
         m.vertices = meshVerts(0);
+        //triangles for unfolded shape
         m.triangles = meshTris();
-
+        //11 vertices on trace of unfolded shape 
         lr = GetComponent<LineRenderer>();
         lr.positionCount = 11;
         lr.useWorldSpace = false;
@@ -44,15 +46,22 @@ public class tetrahedronNet : MonoBehaviour
         lr.endWidth = .01f;
         lr.SetPositions(lineRendererVerts(0));
     }
-
+    /// <summary>
+    /// fold tetrahedron net up by angle t
+    /// </summary>
+    /// <param name="t"></param>
+    /// <returns></returns>
     private static Vector3[] meshVerts(float t)
     {
+        //6 vertices on tetrahedron
         Vector3[] result = new Vector3[6];
 
+        //inner 3 vertices
         result[0] = Vector3.right * (Mathf.Sqrt(3f) / 2f) + Vector3.forward * .5f;
         result[1] = Vector3.right * (Mathf.Sqrt(3f) / 2f) + Vector3.back * .5f;
         result[2] = Vector3.zero;
         //vertex between 0 and 1
+        //use trivert() to fold outer vertices up relative to inner vertices
         result[3] = triVert(result[0], result[1], result[2], t);
         //result[3] = result[1] + (result[2] - result[0]);
         //result[3] = result[0] + Quaternion.AngleAxis(t, result[0] - result[1])*(result[1]+result[2]);
@@ -67,12 +76,23 @@ public class tetrahedronNet : MonoBehaviour
 
         return result;
     }
-
+    /// <summary>
+    /// function to calculate outer vertices position relative to inner vertices
+    /// </summary>
+    /// <param name="nSegmentA"></param>
+    /// <param name="nSegmentB"></param>
+    /// <param name="oppositePoint"></param>
+    /// <param name="t"></param>
+    /// <returns></returns>
     private static Vector3 triVert(Vector3 nSegmentA, Vector3 nSegmentB, Vector3 oppositePoint, float t)
     {
         return Quaternion.AngleAxis(t, (nSegmentA - nSegmentB).normalized) * (oppositePoint - (nSegmentA+nSegmentB) / 2f) + (nSegmentA + nSegmentB) / 2f;
     }
 
+    /// <summary>
+    /// return array of vertices for the 4 triangles in the unfolded tetrahedron
+    /// </summary>
+    /// <returns></returns>
     private static int[] meshTris()
     {
         return new int[] {
@@ -83,12 +103,17 @@ public class tetrahedronNet : MonoBehaviour
         };
     }
 
+    /// <summary>
+    /// trace edges of mesh
+    /// </summary>
+    /// <param name="t"></param>
+    /// <returns></returns>
     private static Vector3[] lineRendererVerts(float t)
     {
         Vector3[] result = new Vector3[11];
 
         Vector3[] tmp = meshVerts(t);
-
+        //map vertices on line segment(s) to vertices on tetrahedron net
         result[0] = tmp[0];
         result[1] = tmp[3];
         result[2] = tmp[1];

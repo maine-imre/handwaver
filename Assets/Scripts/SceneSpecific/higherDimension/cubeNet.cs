@@ -5,7 +5,7 @@ using System;
 using System.Linq;
 
 /// <summary>
-/// This script does ___.
+/// A net of a cube that folds into a cube
 /// The main contributor(s) to this script is __
 /// Status: ???
 /// </summary>
@@ -25,8 +25,10 @@ public class cubeNet : MonoBehaviour {
         //set positions for linerenderer and vertices for mesh
         set
         {
+            //set vertices on line segment
             fold = value;
             lr.SetPositions(lineRendererVerts(fold));
+            //array of vertices converted to list
             m.SetVertices(meshVerts(fold).ToList());
         }
     }
@@ -38,9 +40,13 @@ public class cubeNet : MonoBehaviour {
         m = GetComponent<MeshFilter>().mesh;
         m.vertices = meshVerts(0);
         m.triangles = meshTris();
+<<<<<<< Updated upstream
 
         //assign linerenderer
         //
+=======
+        //22 vertices on trace of cube net
+>>>>>>> Stashed changes
         lr = GetComponent<LineRenderer>();
         lr.positionCount = 22;
         lr.useWorldSpace = false;
@@ -54,15 +60,24 @@ public class cubeNet : MonoBehaviour {
     
     private static Vector3[] meshVerts(float t)
     {
+        //14 points on cube net
         Vector3[] result = new Vector3[14];
 
+<<<<<<< Updated upstream
         //2d square
+=======
+        //4 vertices for base of cube
+>>>>>>> Stashed changes
         result[0] = .5f * (Vector3.forward + Vector3.right);
         result[1] = .5f * (Vector3.forward + Vector3.left);
         result[2] = .5f * (Vector3.back + Vector3.left);
         result[3] = .5f * (Vector3.back + Vector3.right);
 
+<<<<<<< Updated upstream
         //
+=======
+        //use squareVert() to fold outer squares up relative to base square 
+>>>>>>> Stashed changes
         result[4] = squareVert(result[3], result[0], result[1], t);
         result[5] = squareVert(result[3], result[0], result[2], t);
 
@@ -81,19 +96,40 @@ public class cubeNet : MonoBehaviour {
 
         return result;
     }
-
+    /// <summary>
+    /// function to calculate vertices on outer faces
+    /// </summary>
+    /// <param name="nSegmentA"></param>
+    /// <param name="nSegmentB"></param>
+    /// <param name="oppositePoint"></param>
+    /// <param name="t"></param>
+    /// <returns></returns>
     private static Vector3 squareVert(Vector3 nSegmentA, Vector3 nSegmentB, Vector3 oppositePoint, float t)
     {
         //
         return Quaternion.AngleAxis(t, (nSegmentA - nSegmentB).normalized) * (oppositePoint - (nSegmentA + nSegmentB) / 2f) + (nSegmentA + nSegmentB) / 2f;
     }
+<<<<<<< Updated upstream
 
     //create matrix of ints with the 4 values the function is passed
+=======
+    /// <summary>
+    /// create an array for each square that divides it into two triangles
+    /// </summary>
+    /// <param name="a"></param>
+    /// <param name="b"></param>
+    /// <param name="c"></param>
+    /// <param name="d"></param>
+    /// <returns></returns>
+>>>>>>> Stashed changes
     private static int[] meshQuad(int a, int b, int c, int d)
     {
         return new int[]{a,b,d,d,b,c};
     }
-
+    /// <summary>
+    /// divide each face of the cube net into two triangles and copy them into a new array of the triangles
+    /// </summary>
+    /// <returns></returns>
     private static int[] meshTris()
     {
         int[] result = new int[6 * 6];
@@ -105,11 +141,15 @@ public class cubeNet : MonoBehaviour {
         meshQuad(10, 11, 13, 12).CopyTo(result, 30);
         return result;
     }
-
+    /// <summary>
+    /// mapping of outline of unfold
+    /// </summary>
+    /// <param name="t"></param>
+    /// <returns></returns>
     private static Vector3[] lineRendererVerts(float t)
     {
         Vector3[] result = new Vector3[22];
-
+        //map vertices on line segment to vertices on unfolded cube
         Vector3[] tmp = meshVerts(t);
         result[0] = tmp[0];
         result[1] = tmp[4];
