@@ -9,16 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 4003294988604195463}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_GeneratorAsset: {fileID: 0}
   m_Script: {fileID: 11500000, guid: b8a2910e6ce353f468cc86659f5468b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   allowDelete: 1
-  figType: 0
+  figType: 1
   intersectionFigure: 0
   figName: 
   figIndex: 0
-  stretchEnabled: 1
+  strechOverride: 0
   initialScale: {x: 0, y: 0, z: 0}
   changedNeighborNum: 0
 --- !u!1001 &7705516405255944752
@@ -110,7 +109,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 4003294988604195463}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_GeneratorAsset: {fileID: 0}
   m_Script: {fileID: 11500000, guid: 2f10fa40360571247a7ca806d6859557, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

@@ -38,7 +38,7 @@ public class sceneChangerMenuItem : MonoBehaviour
 	private static void OpenSpencerBase()
 	{
 		EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
-		EditorSceneManager.OpenScene("Assets/Scenes/BaseScenes/variedPerspectiveBase.unity");
+		EditorSceneManager.OpenScene("Assets/Scenes/BaseScenes/ScaleDimension.unity");
 	}
 
 	[MenuItem("Load Scene/Content Layer/RSDES")]

@@ -96,7 +96,7 @@ namespace IMRE.HandWaver.HigherDimensions
             else if (animateFold)
             {
                 //increment the degree folded by one degree. 
-                deg = degreeFolded + 1f;
+                deg = degreeFolded + 1f % 360;
                 //update the slider's position to reflect the override value
                 sliderPoint.Position3 = (degreeFolded/360f)*(slider.point2.Position3 - slider.point1.Position3) + slider.point1.Position3;
             }
