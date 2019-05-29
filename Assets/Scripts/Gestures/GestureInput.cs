@@ -59,12 +59,12 @@ namespace IMRE.Gestures
         /// </summary>
         public void Awake()
         {
+            bodyInput = BodyInput.newInput();
             bodyInput.FullBodyTracking = false;
             bodyInput.HandTracking = false;
             bodyInput.SimulatedHandTracking = false;
             bodyInput.HeadTracking = false;
             bodyInput.SimulatedHeadTracking = false;
-            //TODO: Create a standard "empty" body input here.
             if (enableOSVR)
             {
                 bodyInput.HeadTracking = true;
@@ -214,7 +214,6 @@ namespace IMRE.Gestures
             myHand.Wrist.Position = lmHand.WristPosition.ToVector3();
             myHand.Wrist.Direction = lmHand.Fingers[2].bones[0].Center.ToVector3() - lmHand.WristPosition.ToVector3();
             myHand.PinchStrength = lmHand.PinchStrength;
-            myHand.IsPinching = lmHand.IsPinching();
             
             //count through five fingers
             for (int fIDX = 0; fIDX < 5; fIDX++)
@@ -244,7 +243,7 @@ namespace IMRE.Gestures
             
         }
 
-        private Hand viveHandConversion(Hand myHand, Aristo.GestureResult viveHand)
+        private Hand viveHandConversion(Hand myHand, GestureResult viveHand)
         {
             myHand.Palm.Position = viveHand.position;
             myHand.Palm.Direction = Vector3.Cross(viveHand.points[0] - viveHand.points[5],
@@ -261,8 +260,6 @@ namespace IMRE.Gestures
             {
                 myHand.PinchStrength = 0f;
             }
-
-            myHand.IsPinching = viveHand.gesture == GestureType.OK;
             
             //count through five fingers
             for (int fIDX = 0; fIDX < 5; fIDX++)
@@ -305,12 +302,12 @@ namespace IMRE.Gestures
 
             private void setupAvatar()
             {
-                throw new NotImplementedException();
+                //throw new NotImplementedException();
             }
 
             private void updateAvatar()
             {                
-                throw new NotImplementedException();
+                //throw new NotImplementedException();
             }
 
             private void calculateVelocities()

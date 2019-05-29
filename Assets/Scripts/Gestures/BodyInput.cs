@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace IMRE.Gestures
@@ -106,5 +107,63 @@ namespace IMRE.Gestures
 
         #endregion
 
+        /// <summary>
+        /// Generates an initialized value BodyInput.
+        /// This does not affect any settings booleans contained within the BI.
+        /// These must be set after use.
+        /// </summary>
+        /// <returns>A initialized BodyInput with all boolean settings false.</returns>
+        public static BodyInput newInput()=>new BodyInput
+        {
+            Head = newBodyComponent(),
+            Neck = newBodyComponent(),
+            Chest = newBodyComponent(),
+            Waist = newBodyComponent(),
+            RightLeg = new[] {newBodyComponent(), newBodyComponent(), newBodyComponent()},
+            LeftLeg = new[] {newBodyComponent(), newBodyComponent(), newBodyComponent()},
+            RightArm = new[] {newBodyComponent(), newBodyComponent(), newBodyComponent()},
+            LeftArm = new[] {newBodyComponent(), newBodyComponent(), newBodyComponent()},
+            LeftHand = newHand(),
+            RightHand = newHand()
+        };
+
+        /// <summary>
+        /// Sets up a new hand
+        /// </summary>
+        /// <returns>initialized hand</returns>
+        private static Hand newHand() =>
+            new Hand
+            {
+                WhichHand = Chirality.Left,
+                Fingers = new []{ newFinger(), newFinger(), newFinger(), newFinger(), newFinger()},
+                Palm = newBodyComponent(),
+                Wrist = newBodyComponent(),
+                PinchStrength = 0f
+                
+            };
+
+        /// <summary>
+        /// Sets up a new finger
+        /// </summary>
+        /// <returns>initialized finger</returns>
+        private static Finger newFinger() =>
+            new Finger
+            {
+                Joints = new []{ newBodyComponent(),newBodyComponent(),newBodyComponent(),newBodyComponent()},
+                Direction = Vector3.zero
+            };
+
+
+        /// <summary>
+        /// Generates an initialized body component
+        /// </summary>
+        /// <returns>initialized body component</returns>
+        private static BodyComponent newBodyComponent() =>
+            new BodyComponent
+            {
+                Direction = Vector3.zero, 
+                Position = Vector3.zero,
+                Velocity = Vector3.zero
+            };
     }
 }
