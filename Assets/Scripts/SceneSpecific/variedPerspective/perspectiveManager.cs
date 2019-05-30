@@ -34,7 +34,7 @@ namespace IMRE.HandWaver.VariedPerspective
         public Camera orthoCamera;
         /// <summary>
         /// This is just a public version of the perspective mode for debug view within the editor.
-        /// Editing this has no effect on the actual mode.
+        /// Editing this simply changes the default state on load
         /// </summary>
         public perspectiveMode _currentMode;
 
@@ -116,7 +116,9 @@ namespace IMRE.HandWaver.VariedPerspective
             {
                 Debug.LogError("Shape Layer not found!");
             }
-            //TODO: Add a defined default state by calling one of the associated functions.
+
+            // This initializes the current mode to match what the user wanted to set it to through unity editor.
+            currentMode = _currentMode;
         }
 
 
