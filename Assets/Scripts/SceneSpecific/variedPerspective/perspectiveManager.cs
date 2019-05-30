@@ -16,7 +16,8 @@ namespace IMRE.HandWaver.VariedPerspective
         {
             None,
             OnlyMain,
-            OnlyOrtho
+            OnlyOrtho,
+            Both
         }
 
         /// <summary>
@@ -67,6 +68,14 @@ namespace IMRE.HandWaver.VariedPerspective
                         
                         orthoCamera.cullingMask &= ~shapeLayer;
                         break;
+                    case perspectiveMode.Both:
+                        //Show shapes to all cameras
+                        
+                        
+                        mainCameras.ForEach(mc=> mc.cullingMask &= ~shapeLayer);
+                        orthoCamera.cullingMask &= ~shapeLayer;
+
+                        break;
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
@@ -79,6 +88,10 @@ namespace IMRE.HandWaver.VariedPerspective
         /// This means that no camera sees the shape layer.
         /// </summary>
         private void SetNone() => currentMode = perspectiveMode.None;
+        /// <summary>
+        /// Sets all cameras able to view shapes. This is for debugging as of right now.
+        /// </summary>
+        private void SetBoth() => currentMode = perspectiveMode.Both;
         /// <summary>
         ///  Set the perspective mode to only show shapes on main cameras.
         /// This disallows the view of projection and allows the view of the source objects.
@@ -103,12 +116,14 @@ namespace IMRE.HandWaver.VariedPerspective
             {
                 Debug.LogError("Shape Layer not found!");
             }
-            
+            //TODO: Add a defined default state by calling one of the associated functions.
         }
 
 
         private void Update()
         {
+            if(Input.GetKeyDown(KeyCode.F9))
+                SetBoth();
             if(Input.GetKeyDown(KeyCode.F10))
                 SetNone();
             if(Input.GetKeyDown(KeyCode.F11))
