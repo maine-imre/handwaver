@@ -65,15 +65,13 @@ namespace IMRE.HandWaver.VariedPerspective
                         // Hide the shape layer from the main cameras
                         
                         mainCameras.ForEach(mc=> mc.cullingMask |= shapeLayer);
-                        
                         orthoCamera.cullingMask &= ~shapeLayer;
                         break;
                     case perspectiveMode.Both:
                         //Show shapes to all cameras
                         
-                        
-                        mainCameras.ForEach(mc=> mc.cullingMask &= ~shapeLayer);
-                        orthoCamera.cullingMask &= ~shapeLayer;
+                        mainCameras.ForEach(mc=> mc.cullingMask |= shapeLayer);
+                        orthoCamera.cullingMask |= shapeLayer;
 
                         break;
                     default:
