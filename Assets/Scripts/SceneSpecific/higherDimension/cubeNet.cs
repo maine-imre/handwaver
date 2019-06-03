@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 
 /// <summary>
 /// A net of a cube that folds into a cube
@@ -32,11 +33,13 @@ public class cubeNet : MonoBehaviour {
             m.SetVertices(meshVerts(fold).ToList());
         }
     }
+    
 
     private void Start()
     {
+        
+        
         //assign mesh
-        //
         m = GetComponent<MeshFilter>().mesh;
         m.vertices = meshVerts(0);
         m.triangles = meshTris();
@@ -49,9 +52,11 @@ public class cubeNet : MonoBehaviour {
         lr.endWidth = .01f;
         lr.SetPositions(lineRendererVerts(0));
 
-        //startTime = DateTime.Now;
-    }
+        
+    //startTime = DateTime.Now;
 
+    GetComponent<meshCopyandScale>().copyMesh();
+    }
     
     private static Vector3[] meshVerts(float t)
     {
@@ -159,4 +164,6 @@ public class cubeNet : MonoBehaviour {
 
         return result;
     }
+
+
 }
