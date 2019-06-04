@@ -3,7 +3,9 @@ using System;
 using System.Linq;
 using UnityEngine;
 
-
+    /// <summary>
+    /// script for copying and scaling 
+    /// </summary>
     public class meshCopyandScale : MonoBehaviour
     {        
         private MeshFilter childmeshFilt;
@@ -23,6 +25,9 @@ using UnityEngine;
 
             childlineRend = copy.AddComponent<LineRenderer>();
             //childlineRend.SetPositions(GetComponent<LineRenderer>());
+            childlineRend.positionCount = copy.GetComponentInParent<LineRenderer>().positionCount;
+            childlineRend.startWidth = copy.GetComponentInParent<LineRenderer>().startWidth;
+            childlineRend.endWidth = copy.GetComponentInParent<LineRenderer>().endWidth;
 
             
             childmeshFilt = copy.AddComponent<MeshFilter>();
