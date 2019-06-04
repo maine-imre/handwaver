@@ -33,12 +33,12 @@ public class cubeNet : MonoBehaviour {
             m.SetVertices(meshVerts(fold).ToList());
         }
     }
-    
+
 
     private void Start()
     {
-        
-        
+
+
         //assign mesh
         m = GetComponent<MeshFilter>().mesh;
         m.vertices = meshVerts(0);
@@ -51,13 +51,15 @@ public class cubeNet : MonoBehaviour {
         lr.startWidth = .01f;
         lr.endWidth = .01f;
         lr.SetPositions(lineRendererVerts(0));
-
-        
-    //startTime = DateTime.Now;
-
-    GetComponent<meshCopyandScale>().copyMesh();
     }
-    
+
+    //startTime = DateTime.Now
+
+    /// <summary>
+    /// configure vertices of cube around base square
+    /// </summary>
+    /// <param name="t"></param>
+    /// <returns></returns>
     private static Vector3[] meshVerts(float t)
     {
         //14 points on cube net

@@ -12,7 +12,7 @@ namespace IMRE.HandWaver.HigherDimensions
 /// </summary>
 	public class HypercubeNet : AbstractHigherDimSolid
     {
-
+        //basic vector4 values
         private static Vector4 up = new Vector4(0, 1, 0, 0);
         private static Vector4 down = new Vector4(0, -1, 0, 0);
         private static Vector4 right = new Vector4(1, 0, 0, 0);
@@ -46,7 +46,11 @@ namespace IMRE.HandWaver.HigherDimensions
             }
         }
 
-
+        /// <summary>
+        /// configure vertices based around core cube
+        /// </summary>
+        /// <param name="t"></param>
+        /// <returns></returns>
         private static Vector4[] vertices(float t)
         {
             Vector4[] result = new Vector4[4 * 9];

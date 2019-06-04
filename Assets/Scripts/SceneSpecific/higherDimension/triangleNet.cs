@@ -37,7 +37,11 @@ public class triangleNet : MonoBehaviour
         GetComponent<LineRenderer>().endWidth = .01f;
     }
 
-    //fold line segment of 4 points by degree t
+    /// <summary>
+    /// fold line segment of 4 points by degree t
+    /// </summary>
+    /// <param name="t"></param>
+    /// <returns></returns>
     private Vector3[] verts(float t)
     {
         //matrix of vertices 

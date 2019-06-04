@@ -5,9 +5,9 @@ using System.Linq;
 
 namespace IMRE.HandWaver.HigherDimensions
 {
-/// <summary>
-/// Net of five cell for scale and dimension study.
-/// </summary>
+    /// <summary>
+    /// Net of five cell for scale and dimension study.
+    /// </summary>
 	public class fiveCellNet : AbstractHigherDimSolid
     {
         //basic vector4 values
@@ -20,6 +20,7 @@ namespace IMRE.HandWaver.HigherDimensions
         private static Vector4 wForward = new Vector4(0, 0, 0, 1);
         private static Vector4 wBack = -wForward;
 
+        //initialize fold
         private void Awake()
         {
             Fold = 0f;
@@ -46,7 +47,7 @@ namespace IMRE.HandWaver.HigherDimensions
         }
 
         /// <summary>
-        /// 
+        /// configure vertices of fivecell around core tetrahedron
         /// </summary>
         /// <param name="t"></param>
         /// <returns></returns>
@@ -59,7 +60,7 @@ namespace IMRE.HandWaver.HigherDimensions
             result[2] = up;
             result[3] = forward;
 
-            //apex of tetrahedron for each additional (from fases of first)
+            //apex of tetrahedron for each additional tetrahedron(from fases of first)
             result[4] = (result[0] + result[1] + result[2]) / 3f + forward.rotate(forward, wForward, t);
             result[5] = (result[0] + result[2] + result[3]) / 3f + right.rotate(right, wForward, t);
             result[6] = (result[0] + result[1] + result[3]) / 3f + up.rotate(up, wForward, t);
@@ -69,6 +70,9 @@ namespace IMRE.HandWaver.HigherDimensions
             return result;
         }
 
+        /// <summary>
+        /// matrix for vertices to make faces of tetrahedrons for shape
+        /// </summary>
         internal int[] faces = new int[]
         {
             //core tetrahedron
@@ -92,7 +96,9 @@ namespace IMRE.HandWaver.HigherDimensions
             2,0,6,
             1,2,6
         };
-
+        /// <summary>
+        /// 
+        /// </summary>
         internal override void drawFigure()
         {
             mesh.Clear();

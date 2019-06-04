@@ -39,7 +39,11 @@ public class squareNet : MonoBehaviour
         GetComponent<LineRenderer>().endWidth = .01f;
     }
 
-    //generate vertices for square
+    /// <summary>
+    /// generate vertices for square
+    /// </summary>
+    /// <param name="t"></param>
+    /// <returns></returns>
     private Vector3[] verts(float t)
     {
 
