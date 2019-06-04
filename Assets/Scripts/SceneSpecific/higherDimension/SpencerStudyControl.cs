@@ -69,6 +69,25 @@ namespace IMRE.HandWaver.HigherDimensions
         /// </summary>
         [Range(0, 360)]
         public float foldOverrideValue = 0f;
+	
+	//In editor controls for 4D Projection Perspective.  No rotation projects along the W axis.
+	[Range(0, 360)]
+	public float xy;
+	
+	[Range(0, 360)]
+	public float xz;
+	
+	[Range(0, 360)]
+	public float xw;
+	
+	[Range(0, 360)]
+	public float yz;
+	
+	[Range(0, 360)]
+	public float yw;
+	
+	[Range(0, 360)]
+	public float zw;
 
         private void Start()
         {
@@ -82,6 +101,11 @@ namespace IMRE.HandWaver.HigherDimensions
 
         void Update()
         {
+	//Update Rotation Values for Higher Dim Figures
+	
+		hypercube.SetRotation(xy,xz,xw,yz,yw,zw);
+		fivecell.SetRotation(xy,xz,xw,yz,yw,zw);
+	
             float deg = 0f;
             //if the override bool is set, use in editor override value
 
@@ -119,11 +143,17 @@ namespace IMRE.HandWaver.HigherDimensions
             degreeFolded = degree;
 		
             //update each of the figures to reflect the degree folded.
+	    if(hypercube != null)
             hypercube.Fold = degreeFolded;
+	    if(fivecell != null)
             fivecell.Fold = degreeFolded;
+	    if(cube != null)
             cube.Fold = degreeFolded;
+	   if(pyramid != null)
             pyramid.Fold = degreeFolded;
+	   if(square != null)
             square.Fold = degreeFolded;
+	    if(triangle != null)
             triangle.Fold = degreeFolded;
 		
             //update slider point on all users.

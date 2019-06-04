@@ -34,6 +34,17 @@ namespace IMRE.HandWaver.HigherDimensions
 
         internal List<Axis4D> rotationOrder;
         public Dictionary<Axis4D, float> rotation;
+	
+	/// This function can be run after start to change the rotation of the figure.
+	public void SetRotation(float xy, float xz, float xw, float yz, float yw, float zw)
+	{
+		rotation[Axis4D.xy] = xy;
+		rotation[Axis4D.xz] = xz;
+		rotation[Axis4D.xw] = xw;
+		rotation[Axis4D.yz] = yz;
+		rotation[Axis4D.yw] = yw;
+		rotation[Axis4D.zw] = zw;
+	}
 
         void Start()
         {
