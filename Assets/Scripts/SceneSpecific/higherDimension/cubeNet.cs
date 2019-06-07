@@ -12,45 +12,42 @@ using System.Security.Cryptography.X509Certificates;
 /// </summary>
 public class cubeNet : MonoBehaviour {
     //public DateTime startTime;
-    private Mesh m;
-    private LineRenderer lr;
+    public Mesh mesh => GetComponent<MeshFilter>().mesh;
 
-    private float fold = 0f;
+    public LineRenderer lineRenderer => GetComponent<LineRenderer>();
 
-    public float Fold
+    private float _percentFolded = 0f;
+
+    public float PercentFolded
     {
         get
         {
-            return fold;
+            return _percentFolded;
         }
         //set positions for linerenderer and vertices for mesh
         set
         {
             //set vertices on line segment
-            fold = value;
-            lr.SetPositions(lineRendererVerts(fold));
+            _percentFolded = value;
+            lineRenderer.SetPositions(lineRendererVerts(_percentFolded));
             //array of vertices converted to list
-            m.SetVertices(meshVerts(fold).ToList());
+            mesh.SetVertices(meshVerts(_percentFolded).ToList());
         }
     }
 
 
     private void Start()
     {
-
-
         //assign mesh
-        m = GetComponent<MeshFilter>().mesh;
-        m.vertices = meshVerts(0);
-        m.triangles = meshTris();
+        mesh.vertices = meshVerts(0);
+        mesh.triangles = meshTris();
 
         //22 vertices on trace of cube net
-        lr = GetComponent<LineRenderer>();
-        lr.positionCount = 22;
-        lr.useWorldSpace = false;
-        lr.startWidth = .01f;
-        lr.endWidth = .01f;
-        lr.SetPositions(lineRendererVerts(0));
+        lineRenderer.positionCount = 22;
+        lineRenderer.useWorldSpace = false;
+        lineRenderer.startWidth = .01f;
+        lineRenderer.endWidth = .01f;
+        lineRenderer.SetPositions(lineRendererVerts(0));
     }
 
     //startTime = DateTime.Now
@@ -58,10 +55,11 @@ public class cubeNet : MonoBehaviour {
     /// <summary>
     /// configure vertices of cube around base square
     /// </summary>
-    /// <param name="t"></param>
+    /// <param name="percentFolded"></param>
     /// <returns></returns>
-    private static Vector3[] meshVerts(float t)
+    private static Vector3[] meshVerts(float percentFolded)
     {
+        float degreeFolded = percentFolded * 90f + 180f;
         //14 points on cube net
         Vector3[] result = new Vector3[14];
 
@@ -72,21 +70,21 @@ public class cubeNet : MonoBehaviour {
         result[3] = .5f * (Vector3.back + Vector3.right);
 
         //use squareVert() to fold outer squares up relative to base square 
-        result[4] = squareVert(result[3], result[0], result[1], t);
-        result[5] = squareVert(result[3], result[0], result[2], t);
+        result[4] = squareVert(result[3], result[0], result[1], degreeFolded);
+        result[5] = squareVert(result[3], result[0], result[2], degreeFolded);
 
-        result[6] = squareVert(result[0], result[1], result[3], t);
-        result[7] = squareVert(result[0], result[1], result[2], t);
+        result[6] = squareVert(result[0], result[1], result[3], degreeFolded);
+        result[7] = squareVert(result[0], result[1], result[2], degreeFolded);
 
 
-        result[8] = squareVert(result[2], result[3], result[1], t);
-        result[9] = squareVert(result[2], result[3], result[0], t);
+        result[8] = squareVert(result[2], result[3], result[1], degreeFolded);
+        result[9] = squareVert(result[2], result[3], result[0], degreeFolded);
 
-        result[10] = squareVert(result[1], result[2], result[0], t);
-        result[11] = squareVert(result[1], result[2], result[3], t);
+        result[10] = squareVert(result[1], result[2], result[0], degreeFolded);
+        result[11] = squareVert(result[1], result[2], result[3], degreeFolded);
 
-        result[12] = squareVert(result[10], result[11], result[1], t);
-        result[13] = squareVert(result[10], result[11], result[2], t);
+        result[12] = squareVert(result[10], result[11], result[1], degreeFolded);
+        result[13] = squareVert(result[10], result[11], result[2], degreeFolded);
 
         return result;
     }
@@ -96,12 +94,12 @@ public class cubeNet : MonoBehaviour {
     /// <param name="nSegmentA"></param>
     /// <param name="nSegmentB"></param>
     /// <param name="oppositePoint"></param>
-    /// <param name="t"></param>
+    /// <param name="degreeFolded"></param>
     /// <returns></returns>
-    private static Vector3 squareVert(Vector3 nSegmentA, Vector3 nSegmentB, Vector3 oppositePoint, float t)
+    private static Vector3 squareVert(Vector3 nSegmentA, Vector3 nSegmentB, Vector3 oppositePoint, float degreeFolded)
     {
         //
-        return Quaternion.AngleAxis(t, (nSegmentA - nSegmentB).normalized) * (oppositePoint - (nSegmentA + nSegmentB) / 2f) + (nSegmentA + nSegmentB) / 2f;
+        return Quaternion.AngleAxis(degreeFolded, (nSegmentA - nSegmentB).normalized) * (oppositePoint - (nSegmentA + nSegmentB) / 2f) + (nSegmentA + nSegmentB) / 2f;
     }
 
     /// <summary>
@@ -134,13 +132,13 @@ public class cubeNet : MonoBehaviour {
     /// <summary>
     /// mapping of outline of unfold
     /// </summary>
-    /// <param name="t"></param>
+    /// <param name="percentFolded"></param>
     /// <returns></returns>
-    private static Vector3[] lineRendererVerts(float t)
+    private static Vector3[] lineRendererVerts(float percentFolded)
     {
         Vector3[] result = new Vector3[22];
         //map vertices on line segment to vertices on unfolded cube
-        Vector3[] tmp = meshVerts(t);
+        Vector3[] tmp = meshVerts(percentFolded);
         result[0] = tmp[0];
         result[1] = tmp[4];
         result[2] = tmp[5];

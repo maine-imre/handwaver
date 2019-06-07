@@ -11,48 +11,53 @@ using System.Linq;
 /// </summary>
 public class tetrahedronNet : MonoBehaviour
 {
-    private Mesh m;
-    private LineRenderer lr;
+    public Mesh mesh
+    {
+        get { return GetComponent<MeshFilter>().mesh; }
+    }
 
-    private float fold = 0f;
+    public LineRenderer lineRenderer {
+        get { return GetComponent<LineRenderer>(); }
+    }
 
-    public float Fold
+    private float _percentFolded = 0f;
+
+    public float PercentFolded
     {
         get
         {
-            return fold;
+            return _percentFolded;
         }
 
         set
         {
-            fold = value;
-            lr.SetPositions(lineRendererVerts(fold));
-            m.SetVertices(meshVerts(fold).ToList());
+            _percentFolded = value;
+            lineRenderer.SetPositions(lineRendererVerts(_percentFolded));
+            mesh.SetVertices(meshVerts(_percentFolded).ToList());
         }
     }
 
     private void Start()
     {
-        m = GetComponent<MeshFilter>().mesh;
         //unfolded shape(degree of fold = 0)
-        m.vertices = meshVerts(0);
+        mesh.vertices = meshVerts(0);
         //triangles for unfolded shape
-        m.triangles = meshTris();
+        mesh.triangles = meshTris();
         //11 vertices on trace of unfolded shape 
-        lr = GetComponent<LineRenderer>();
-        lr.positionCount = 11;
-        lr.useWorldSpace = false;
-        lr.startWidth = .01f;
-        lr.endWidth = .01f;
-        lr.SetPositions(lineRendererVerts(0));
+        lineRenderer.positionCount = 11;
+        lineRenderer.useWorldSpace = false;
+        lineRenderer.startWidth = .01f;
+        lineRenderer.endWidth = .01f;
+        lineRenderer.SetPositions(lineRendererVerts(0));
     }
     /// <summary>
     /// fold tetrahedron net up by angle t
     /// </summary>
-    /// <param name="t"></param>
+    /// <param name="percentfolded"></param>
     /// <returns></returns>
-    private static Vector3[] meshVerts(float t)
+    private static Vector3[] meshVerts(float percentfolded)
     {
+        float degreefolded = percentfolded * 120f + 180f;
         //6 vertices on tetrahedron
         Vector3[] result = new Vector3[6];
 
@@ -62,16 +67,16 @@ public class tetrahedronNet : MonoBehaviour
         result[2] = Vector3.zero;
         //vertex between 0 and 1
         //use trivert() to fold outer vertices up relative to inner vertices
-        result[3] = triVert(result[0], result[1], result[2], t);
+        result[3] = triVert(result[0], result[1], result[2], degreefolded);
         //result[3] = result[1] + (result[2] - result[0]);
         //result[3] = result[0] + Quaternion.AngleAxis(t, result[0] - result[1])*(result[1]+result[2]);
 
         //vertex between 1 and 2
-        result[4] = triVert(result[1], result[2], result[0], t);
+        result[4] = triVert(result[1], result[2], result[0], degreefolded);
         //result[4] = result[1] + Quaternion.AngleAxis(t, result[1] - result[2]) * (result[0] + result[2]);
 
         //vertex between 0 and 2
-        result[5] = triVert(result[2], result[0], result[1], t);
+        result[5] = triVert(result[2], result[0], result[1], degreefolded);
         //result[5] = result[2] + Quaternion.AngleAxis(t, result[2] - result[3]) * (result[0] + result[1]);
 
         return result;
@@ -82,11 +87,11 @@ public class tetrahedronNet : MonoBehaviour
     /// <param name="nSegmentA"></param>
     /// <param name="nSegmentB"></param>
     /// <param name="oppositePoint"></param>
-    /// <param name="t"></param>
+    /// <param name="degreeFolded"></param>
     /// <returns></returns>
-    private static Vector3 triVert(Vector3 nSegmentA, Vector3 nSegmentB, Vector3 oppositePoint, float t)
+    private static Vector3 triVert(Vector3 nSegmentA, Vector3 nSegmentB, Vector3 oppositePoint, float degreeFolded)
     {
-        return Quaternion.AngleAxis(t, (nSegmentA - nSegmentB).normalized) * (oppositePoint - (nSegmentA+nSegmentB) / 2f) + (nSegmentA + nSegmentB) / 2f;
+        return Quaternion.AngleAxis(degreeFolded, (nSegmentA - nSegmentB).normalized) * (oppositePoint - (nSegmentA+nSegmentB) / 2f) + (nSegmentA + nSegmentB) / 2f;
     }
 
     /// <summary>

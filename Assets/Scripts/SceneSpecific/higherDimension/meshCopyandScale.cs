@@ -14,54 +14,61 @@ using UnityEngine;
         private LineRenderer childlineRend;
         public Vector3 offset;
         public Material mat;
-        private bool meshCopied = false, lineCopied = false;
+        private bool meshCopied, lineCopied;
+        public float scaleFactor = 1f;
+
+        private GameObject childGameObject;
 
         
         /// <summary>
         /// copies components from parent object
         /// </summary>
-        public GameObject copyObject()
+        public void Start()
         {
-            GameObject copy = new GameObject();
+            childGameObject = new GameObject();
 
-            copy.transform.parent = this.transform;
-            copy.transform.localPosition = offset;
-            copy.transform.localScale = Vector3.one;
-            copy.transform.localRotation = Quaternion.identity;
+            childGameObject.transform.parent = this.transform;
+            childGameObject.transform.localPosition = offset;
+            childGameObject.transform.localScale = Vector3.one;
+            childGameObject.transform.localRotation = Quaternion.identity;
+            childlineRend = childGameObject.AddComponent<LineRenderer>();
+            childmeshFilt = childGameObject.AddComponent<MeshFilter>();
+            
+            copyLine();
+            copyMesh();
 
-            return copy;
         }
 
         public void copyLine()
         {
-            GameObject copy = copyObject().gameObject;
-            
-            Vector3[] lineVerts = new Vector3[GetComponent<LineRenderer>().positionCount];
+            if (GetComponent<LineRenderer>() != null)
+            {
+                Vector3[] lineVerts = new Vector3[GetComponent<LineRenderer>().positionCount];
 
-            childlineRend = copy.AddComponent<LineRenderer>();
-            GetComponent<LineRenderer>().GetPositions(lineVerts);
-            childlineRend.SetPositions(lineVerts);
-            childlineRend.positionCount = copy.GetComponent<LineRenderer>().positionCount;
-            childlineRend.startWidth = GetComponent<LineRenderer>().startWidth;
-            childlineRend.endWidth = copy.GetComponent<LineRenderer>().endWidth;
+                GetComponent<LineRenderer>().GetPositions(lineVerts);
+                childlineRend.SetPositions(lineVerts);
+                childlineRend.positionCount = childGameObject.GetComponent<LineRenderer>().positionCount;
+                childlineRend.startWidth = GetComponent<LineRenderer>().startWidth;
+                childlineRend.endWidth = childGameObject.GetComponent<LineRenderer>().endWidth;
+                childlineRend.material = mat;
+                lineCopied = true;
+            }
 
-            lineCopied = true;
         }
 
         public void copyMesh()
-        {
-            GameObject copy = copyObject().gameObject;
-            
-            childmeshFilt = copy.AddComponent<MeshFilter>();
-            childmeshFilt.mesh.SetVertices(GetComponent<MeshFilter>().mesh.vertices.ToList());
-            childmeshFilt.mesh.triangles = GetComponent<MeshFilter>().mesh.triangles;
-            
-            copy.GetComponentInParent<MeshFilter>().mesh.uv = GetComponent<MeshFilter>().mesh.uv;
-            
-            copy.AddComponent<MeshRenderer>();
-            copy.GetComponent<MeshRenderer>().material = mat;
+        {            
+            if (GetComponent<MeshFilter>() != null){
+                childmeshFilt.mesh.SetVertices(GetComponent<MeshFilter>().mesh.vertices.ToList());
+                childmeshFilt.mesh.triangles = GetComponent<MeshFilter>().mesh.triangles;
 
-            meshCopied = true;
+                childGameObject.GetComponentInParent<MeshFilter>().mesh.uv = GetComponent<MeshFilter>().mesh.uv;
+
+                childGameObject.AddComponent<MeshRenderer>();
+                childGameObject.GetComponent<MeshRenderer>().material = mat;
+
+                meshCopied = true;
+            }
         }
 
         /// <summary>
@@ -104,16 +111,16 @@ using UnityEngine;
         {
             if (meshCopied && lineCopied)
             {
-                scaleMesh(5, childmeshFilt);
-                scaleLine(5, childlineRend);
+                scaleMesh(scaleFactor, childmeshFilt);
+                scaleLine(scaleFactor, childlineRend);
             }
             else if (meshCopied && !lineCopied)
             {
-                scaleMesh(5, childmeshFilt);
+                scaleMesh(scaleFactor, childmeshFilt);
             }
             else if (!meshCopied && lineCopied)
             {
-                scaleLine(5, childlineRend);
+                scaleLine(scaleFactor, childlineRend);
             }
         }
         

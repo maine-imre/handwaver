@@ -11,20 +11,20 @@ using System;
 public class triangleNet : MonoBehaviour
 {
 
-    private float fold = 0f;
+    private float _percentFolded = 0f;
 
-    public float Fold
+    public float PercentFolded
     {
         get
         {
-            return fold;
+            return _percentFolded;
         }
 
         set
         {
             //set vertices using verts function
-            fold = value;
-            GetComponent<LineRenderer>().SetPositions(verts(fold));
+            _percentFolded = value;
+            GetComponent<LineRenderer>().SetPositions(verts(_percentFolded));
         }
     }
     private void Start()
@@ -42,8 +42,9 @@ public class triangleNet : MonoBehaviour
     /// </summary>
     /// <param name="t"></param>
     /// <returns></returns>
-    private Vector3[] verts(float t)
+    private Vector3[] verts(float percentFolded)
     {
+        float t = percentFolded * 120f;
         //matrix of vertices 
         Vector3[] result = new Vector3[4];
         //initial vertices

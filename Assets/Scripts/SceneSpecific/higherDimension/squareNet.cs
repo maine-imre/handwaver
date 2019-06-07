@@ -11,20 +11,20 @@ using System;
 public class squareNet : MonoBehaviour
 {
 
-    private float fold = 0f;
+    private float _percentFolded = 0f;
 
-    public float Fold
+    public float PercentFolded
     {
         get
         {
-            return fold;
+            return _percentFolded;
         }
 
         set
         {
             //set vertices using vert function
-            fold = value;
-            GetComponent<LineRenderer>().SetPositions(verts(fold));
+            _percentFolded = value;
+            GetComponent<LineRenderer>().SetPositions(verts(_percentFolded));
         }
     }
 
@@ -44,19 +44,19 @@ public class squareNet : MonoBehaviour
     /// </summary>
     /// <param name="t"></param>
     /// <returns></returns>
-    private Vector3[] verts(float t)
+    private Vector3[] verts(float percentFolded)
     {
-
+        float angle = percentFolded * 90f;
         //matrix of vertices
         Vector3[] result = new Vector3[5];
         //initial vertices that don't need to move/are pivot points
         result[2] = Vector3.zero;
         result[1] = Vector3.right;
         //rotate vertice by t or -t around (0, 1, 0) 
-        result[0] = result[1] + Quaternion.AngleAxis(t, Vector3.up)*Vector3.right;
-        result[3] = result[2] + Quaternion.AngleAxis(-t, Vector3.up)*Vector3.left;
+        result[0] = result[1] + Quaternion.AngleAxis(angle, Vector3.up)*Vector3.right;
+        result[3] = result[2] + Quaternion.AngleAxis(-angle, Vector3.up)*Vector3.left;
         //rotate vertice by -2t around (0, 1, 0)
-        result[4] = result[3] + Quaternion.AngleAxis(-2 * t, Vector3.up)*Vector3.left;
+        result[4] = result[3] + Quaternion.AngleAxis(-2 * angle, Vector3.up)*Vector3.left;
         return result;
     }
 }

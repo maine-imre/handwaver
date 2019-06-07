@@ -12,7 +12,7 @@ namespace IMRE.HandWaver.HigherDimensions
 /// </summary>
 	public class HypercubeNet : AbstractHigherDimSolid
     {
-        //basic vector4 values
+        //basic vector4 values for computations
         private static Vector4 up = new Vector4(0, 1, 0, 0);
         private static Vector4 down = new Vector4(0, -1, 0, 0);
         private static Vector4 right = new Vector4(1, 0, 0, 0);
@@ -24,39 +24,38 @@ namespace IMRE.HandWaver.HigherDimensions
 
         private void Awake()
         {
-            Fold = 0f;
+            FoldPercent = 0f;
         }
 
         private void FixedUpdate()
         {
-            Fold++;
+            FoldPercent++;
         }
 
-        private float _fold;
-        public float Fold
+        private float _foldPercent;
+        public float FoldPercent
         {
             get
             {
-                return _fold;
+                return _foldPercent;
             }
             set
             {
-                _fold = value;
-                originalVerts = vertices(value).ToList();
+                _foldPercent = value;
+                originalVerts = vertices(90f*value).ToList();
             }
         }
 
         /// <summary>
         /// configure vertices based around core cube
         /// </summary>
-        /// <param name="t"></param>
+        /// <param name="degreeFolded"></param>
         /// <returns></returns>
-        private static Vector4[] vertices(float t)
+        private static Vector4[] vertices(float degreeFolded)
         {
             Vector4[] result = new Vector4[4 * 9];
 
-            //core cube.  does not fold.
-
+            //core cube (does not fold)
             result[0] = (up + right + forward)/2f;
             result[1] = (up + left + forward)/2f;
             result[2] = (up + left + back)/2f;
@@ -68,57 +67,61 @@ namespace IMRE.HandWaver.HigherDimensions
             result[7] = (down + right + back) / 2f;
 
             //above up face.
-            result[8] = result[0] + up.rotate(up, wForward, t);
-            result[9] = result[1] + up.rotate(up, wForward, t);
-            result[10] = result[2] + up.rotate(up, wForward, t);
-            result[11] = result[3] + up.rotate(up, wForward, t);
+            result[8] = result[0] + up.rotate(up, wForward, degreeFolded);
+            result[9] = result[1] + up.rotate(up, wForward, degreeFolded);
+            result[10] = result[2] + up.rotate(up, wForward, degreeFolded);
+            result[11] = result[3] + up.rotate(up, wForward, degreeFolded);
 
             //below down face
-            result[12] = result[4] + down.rotate(down, wForward, t);
-            result[13] = result[5] + down.rotate(down, wForward, t);
-            result[14] = result[6] + down.rotate(down, wForward, t);
-            result[15] = result[7] + down.rotate(down, wForward, t);
+            result[12] = result[4] + down.rotate(down, wForward, degreeFolded);
+            result[13] = result[5] + down.rotate(down, wForward, degreeFolded);
+            result[14] = result[6] + down.rotate(down, wForward, degreeFolded);
+            result[15] = result[7] + down.rotate(down, wForward, degreeFolded);
 
             //right of right face;
-            result[16] = result[0] + right.rotate(right, wForward, t);
-            result[17] = result[3] + right.rotate(right, wForward, t);
-            result[18] = result[7] + right.rotate(right, wForward, t);
-            result[19] = result[4] + right.rotate(right, wForward, t);
+            result[16] = result[0] + right.rotate(right, wForward, degreeFolded);
+            result[17] = result[3] + right.rotate(right, wForward, degreeFolded);
+            result[18] = result[7] + right.rotate(right, wForward, degreeFolded);
+            result[19] = result[4] + right.rotate(right, wForward, degreeFolded);
 
             //left of left face
-            result[20] = result[1] + left.rotate(left, wForward, t);
-            result[21] = result[2] + left.rotate(left, wForward, t);
-            result[22] = result[6] + left.rotate(left, wForward, t);
-            result[23] = result[5] + left.rotate(left, wForward, t);
+            result[20] = result[1] + left.rotate(left, wForward, degreeFolded);
+            result[21] = result[2] + left.rotate(left, wForward, degreeFolded);
+            result[22] = result[6] + left.rotate(left, wForward, degreeFolded);
+            result[23] = result[5] + left.rotate(left, wForward, degreeFolded);
 
             //forward of forward face.
-            result[24] = result[0] + forward.rotate(forward, wForward, t);
-            result[25] = result[1] + forward.rotate(forward, wForward, t);
-            result[26] = result[5] + forward.rotate(forward, wForward, t);
-            result[27] = result[4] + forward.rotate(forward, wForward, t);
+            result[24] = result[0] + forward.rotate(forward, wForward, degreeFolded);
+            result[25] = result[1] + forward.rotate(forward, wForward, degreeFolded);
+            result[26] = result[5] + forward.rotate(forward, wForward, degreeFolded);
+            result[27] = result[4] + forward.rotate(forward, wForward, degreeFolded);
 
             //back of back face.
-            result[28] = result[2] + back.rotate(back, wForward, t);
-            result[29] = result[3] + back.rotate(back, wForward, t);
-            result[30] = result[7] + back.rotate(back, wForward, t);
-            result[31] = result[6] + back.rotate(back, wForward, t);
+            result[28] = result[2] + back.rotate(back, wForward, degreeFolded);
+            result[29] = result[3] + back.rotate(back, wForward, degreeFolded);
+            result[30] = result[7] + back.rotate(back, wForward, degreeFolded);
+            result[31] = result[6] + back.rotate(back, wForward, degreeFolded);
 
             //down of double down.
-            result[32] = result[12] + down.rotate(down, wForward, t);
-            result[33] = result[13] + down.rotate(down, wForward, t);
-            result[34] = result[14] + down.rotate(down, wForward, t);
-            result[35] = result[15] + down.rotate(down, wForward, t);
+            result[32] = result[12] + down.rotate(down, wForward, degreeFolded);
+            result[33] = result[13] + down.rotate(down, wForward, degreeFolded);
+            result[34] = result[14] + down.rotate(down, wForward, degreeFolded);
+            result[35] = result[15] + down.rotate(down, wForward, degreeFolded);
 
             return result;
         }
 
         private int[] _faces;
 
+        
         private int[] faces { get
             {
+                //8 cubes for hypercube
                 if (_faces == null) {
                     int[] result = new int[24+20*8];
+                    //main cube
                     cubeFaces(0, 1, 2, 3, 4, 5, 6, 7).CopyTo(result, 0);  //core
+                    //other cubes
                     cubeFacesNoTop(0, 1, 2, 3,8, 9, 10, 11).CopyTo(result, 24 + 20 * 1); //up
                     cubeFacesNoTop(8, 9, 10, 11, 32, 33, 34, 35).CopyTo(result, 24 + 20 * 2); //down
                     cubeFacesNoTop(4, 5, 6, 7, 12, 13, 14, 15).CopyTo(result, 24 + 20 * 3); //down of down

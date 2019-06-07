@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEditorInternal.Profiling.Memory.Experimental;
+
 #if Photon
 using Photon.Pun;
 #endif
@@ -18,7 +20,7 @@ namespace IMRE.HandWaver.HigherDimensions
         /// The number of degrees that each vertex is folded by.
         /// Consider changing to percent;
         /// </summary>        
-        internal static float degreeFolded = 0f;
+        internal static float percentFolded = 0f;
         /// <summary>
         /// An override that automatically animates the slider and the folding process
         /// </summary>
@@ -67,7 +69,7 @@ namespace IMRE.HandWaver.HigherDimensions
         /// <summary>
         /// The override value with a slider in the editor.
         /// </summary>
-        [Range(0, 360)]
+        [Range(0, 1)]
         public float foldOverrideValue = 0f;
 	
 	//In editor controls for 4D Projection Perspective.  No rotation projects along the W axis.
@@ -101,64 +103,127 @@ namespace IMRE.HandWaver.HigherDimensions
 
         void Update()
         {
+	        setActiveObjects();
+	        
 	//Update Rotation Values for Higher Dim Figures
 	
 		hypercube.SetRotation(xy,xz,xw,yz,yw,zw);
 		fivecell.SetRotation(xy,xz,xw,yz,yw,zw);
 	
-            float deg = 0f;
+            float percent = 0f;
             //if the override bool is set, use in editor override value
 
             if (foldOverride)
             {
-                deg = foldOverrideValue;
+                percent = foldOverrideValue;
                 //update the slider's position to reflect the override value
-                sliderPoint.Position3 = (degreeFolded/360f)*(slider.point2.Position3 - slider.point1.Position3) + slider.point1.Position3;
+                sliderPoint.Position3 = (percentFolded)*(slider.point2.Position3 - slider.point1.Position3) + slider.point1.Position3;
 
             }
             //if the boolean is set to animate the figure
             else if (animateFold)
             {
+	            if (percentFolded > 1)
+	            {
+		            percentFolded = Mathf.FloorToInt(percentFolded);
+	            }
                 //increment the degree folded by one degree. 
-                deg = degreeFolded + 1f % 360;
+                percent = (percentFolded + .01f);
+                if (percent == 1)
+                {
+	                percent = 1f; //round to whole
+	                animateFold = false;
+                }
+                
                 //update the slider's position to reflect the override value
-                sliderPoint.Position3 = (degreeFolded/360f)*(slider.point2.Position3 - slider.point1.Position3) + slider.point1.Position3;
+                sliderPoint.Position3 = (percentFolded)*(slider.point2.Position3 - slider.point1.Position3) + slider.point1.Position3;
             }
             // if the participant is directly manipulating the slider
             else
             {
                 sliderPoint.Position3 = Vector3.Project(sliderPoint.Position3 - slider.point1.Position3,slider.point1.Position3 - slider.point2.Position3) + slider.point1.Position3;
-                deg =360*(sliderPoint.Position3 - slider.point1.Position3).magnitude/(slider.point1.Position3 - slider.point2.Position3).magnitude;
+                percent =(sliderPoint.Position3 - slider.point1.Position3).magnitude/(slider.point1.Position3 - slider.point2.Position3).magnitude;
             }
 #if Photon
-	   		 photonView.RPC("setDegreeFolded", PhotonTargets.All, deg);
+	   		 photonView.RPC("setPercentFolded", PhotonTargets.All, percent);
 #else
-            setDegreeFolded(deg);
+            setPercentFolded(percent);
 #endif
         }
 #if Photon
         [PunRPC]
-#endif        
-        private void setDegreeFolded(float degree){
-            degreeFolded = degree;
-		
-            //update each of the figures to reflect the degree folded.
-	    if(hypercube != null)
-            hypercube.Fold = degreeFolded;
-	    if(fivecell != null)
-            fivecell.Fold = degreeFolded;
-	    if(cube != null)
-            cube.Fold = degreeFolded;
-	   if(pyramid != null)
-            pyramid.Fold = degreeFolded;
-	   if(square != null)
-            square.Fold = degreeFolded;
-	    if(triangle != null)
-            triangle.Fold = degreeFolded;
-		
-            //update slider point on all users.
-            sliderPoint.Position3 = (degreeFolded/360f)*(slider.point2.Position3 - slider.point1.Position3) + slider.point1.Position3;
+#endif
+	    private void setPercentFolded(float percent)
+	    {
+		    percentFolded = percent;
 
-        }
+		    //update each of the figures to reflect the degree folded.
+		    //if(hypercube != null)
+		    hypercube.FoldPercent = percentFolded;
+		    //if(fivecell != null)
+		    fivecell.PercentFolded = percentFolded;
+		    //if(cube != null)
+		    cube.PercentFolded = percentFolded;
+		    //if(pyramid != null)
+		    pyramid.PercentFolded = percentFolded;
+		    //if(square != null)
+		    square.PercentFolded = percentFolded;
+		    //if(triangle != null)
+		    triangle.PercentFolded = percentFolded;
+
+		    //update slider point on all users.
+		    sliderPoint.Position3 = (percentFolded / 360f) * (slider.point2.Position3 - slider.point1.Position3) +
+		                            slider.point1.Position3;
+
+	    }
+
+	    private List<GameObject> nets;
+	    private int itemId = 0;
+
+	    private void setActiveObjects()
+	    {
+		    if (nets == null)
+		    {
+			    nets = new List<GameObject>
+			    {
+				    triangle.gameObject, square.gameObject, pyramid.gameObject, cube.gameObject, fivecell.gameObject,
+				    hypercube.gameObject
+			    };
+		    }
+
+		    if (Input.GetKeyDown(KeyCode.F1))
+		    {
+			    nets.ForEach(net => net.SetActive(false));
+		    }
+
+		    if (Input.GetKeyDown(KeyCode.F2))
+		    {
+			    nets.ForEach(net => net.SetActive(false));
+			    itemId--;
+			    itemId = itemId % 6;
+			    nets[itemId].SetActive(true);
+		    }
+
+		    if (Input.GetKeyDown(KeyCode.F3))
+		    {
+			    nets.ForEach(net => net.SetActive(false));
+			    itemId++;
+			    itemId = itemId % 6;
+			    nets[itemId].SetActive(true);
+		    }
+
+		    if (Input.GetKeyDown(KeyCode.F4))
+		    {
+			    nets.ForEach(net => net.GetComponent<meshCopyandScale>().enabled = true);
+			    foldOverride = true;
+			    percentFolded = 1;
+		    }
+
+		    if (Input.GetKeyDown(KeyCode.F5))
+		    {
+			    animateFold = !animateFold;
+		    }
+
+    }
     }
 }

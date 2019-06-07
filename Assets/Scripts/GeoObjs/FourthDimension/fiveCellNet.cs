@@ -10,7 +10,7 @@ namespace IMRE.HandWaver.HigherDimensions
     /// </summary>
 	public class fiveCellNet : AbstractHigherDimSolid
     {
-        //basic vector4 values
+        //basic vector4 values for computations
         private static Vector4 right = (new Vector4(0, 0, 1, 0) - new Vector4(Mathf.Sqrt(8f / 9f), 0, -1f / 3f, 0f)).normalized;
         private static Vector4 left = -right;
         private static Vector4 up = (new Vector4(0, 0, 1, 0) - new Vector4(-Mathf.Sqrt(2f / 9f), Mathf.Sqrt(2f / 3f), -1f / 3f, 0f)).normalized;
@@ -21,57 +21,50 @@ namespace IMRE.HandWaver.HigherDimensions
         private static Vector4 wBack = -wForward;
 
         //initialize fold
-        private void Awake()
-        {
-            Fold = 0f;
-        }
-
-        private void FixedUpdate()
-        {
-            Fold++;
-        }
-
         //read only static float GoldenRatio = (1f + Mathf.Sqrt(5f)) / 2f;
-        private float _fold;
-        public float Fold
+        private float _percentFolded;
+        public float PercentFolded
         {
             get
             {
-                return _fold;
+                return _percentFolded;
             }
             set
             {
-                _fold = value;
-                originalVerts = vertices(value).ToList();
+                _percentFolded = value;
+                originalVerts = vertices(value*60f).ToList();
             }
         }
 
         /// <summary>
         /// configure vertices of fivecell around core tetrahedron
         /// </summary>
-        /// <param name="t"></param>
+        /// <param name="degreeFolded"></param>
         /// <returns></returns>
-        private static Vector4[] vertices(float t)
+        private static Vector4[] vertices(float degreeFolded)
         {
+            //8 points on unfolded fivecell
             Vector4[] result = new Vector4[8];
-            //core tetrahedron.
+           
+            //core tetrahedron (does not fold)
             result[0] = Vector4.zero;
             result[1] = right;
             result[2] = up;
             result[3] = forward;
 
-            //apex of tetrahedron for each additional tetrahedron(from fases of first)
-            result[4] = (result[0] + result[1] + result[2]) / 3f + forward.rotate(forward, wForward, t);
-            result[5] = (result[0] + result[2] + result[3]) / 3f + right.rotate(right, wForward, t);
-            result[6] = (result[0] + result[1] + result[3]) / 3f + up.rotate(up, wForward, t);
+            //apex of tetrahedron for each additional tetrahedron(from fases of first) foldling by degree t
+            result[4] = (result[0] + result[1] + result[2]) / 3f + forward.rotate(forward, wForward, degreeFolded);
+            result[5] = (result[0] + result[2] + result[3]) / 3f + right.rotate(right, wForward, degreeFolded);
+            result[6] = (result[0] + result[1] + result[3]) / 3f + up.rotate(up, wForward, degreeFolded);
 
             Vector4 centerOfFaceOpposite0 = (result[1] + result[2] + result[3]) / 3f;
-            result[7] = centerOfFaceOpposite0 + centerOfFaceOpposite0.rotate(centerOfFaceOpposite0, wForward, t);
+            //point that apexes of outer tetrahedrons converge to upon folding
+            result[7] = centerOfFaceOpposite0 + centerOfFaceOpposite0.rotate(centerOfFaceOpposite0, wForward, degreeFolded);
             return result;
         }
 
         /// <summary>
-        /// matrix for vertices to make faces of tetrahedrons for shape
+        /// matrix for vertices to make faces of tetrahedrons for fivecell
         /// </summary>
         internal int[] faces = new int[]
         {
@@ -97,15 +90,17 @@ namespace IMRE.HandWaver.HigherDimensions
             1,2,6
         };
         /// <summary>
-        /// 
+        /// override function from abstract class and create figure
         /// </summary>
         internal override void drawFigure()
         {
+            //clear mesh,verts, triangles, uvs
             mesh.Clear();
             verts = new List<Vector3>();
             tris = new List<int>();
             uvs = new List<Vector2>();
 
+            //create a triangular plane for each face of the fivecell
             for (int i = 0; i < 13; i++)
             {
                 CreatePlane(rotatedVerts[faces[i * 3]], rotatedVerts[faces[i * 3+1]], rotatedVerts[faces[i * 3+2]]);

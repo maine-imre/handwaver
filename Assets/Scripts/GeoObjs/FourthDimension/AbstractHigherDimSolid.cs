@@ -33,17 +33,37 @@ namespace IMRE.HandWaver.HigherDimensions
         internal List<Vector2> uvs;
 
         internal List<Axis4D> rotationOrder;
+
+        public Dictionary<Axis4D, float> Rotation
+        {
+            get
+            {
+                if (rotation == null)
+                {
+                    rotation = new Dictionary<Axis4D, float>();
+                    rotation.Add(Axis4D.xy, 0f);
+                    rotation.Add(Axis4D.xz, 0f);
+                    rotation.Add(Axis4D.xw, 0f);
+                    rotation.Add(Axis4D.yz, 0f);
+                    rotation.Add(Axis4D.yw, 0f);
+                    rotation.Add(Axis4D.zw, 0f);
+                }
+                return rotation;
+            }
+            set => rotation = value;
+        }
         public Dictionary<Axis4D, float> rotation;
 	
 	/// This function can be run after start to change the rotation of the figure.
 	public void SetRotation(float xy, float xz, float xw, float yz, float yw, float zw)
-	{
-		rotation[Axis4D.xy] = xy;
-		rotation[Axis4D.xz] = xz;
-		rotation[Axis4D.xw] = xw;
-		rotation[Axis4D.yz] = yz;
-		rotation[Axis4D.yw] = yw;
-		rotation[Axis4D.zw] = zw;
+    {
+        Rotation = new Dictionary<Axis4D, float>();
+        Rotation.Add(Axis4D.xy, xy);
+        Rotation.Add(Axis4D.xz, xz);
+        Rotation.Add(Axis4D.xw, xw);
+        Rotation.Add(Axis4D.yz, yz);
+        Rotation.Add(Axis4D.yw, yw);
+        Rotation.Add(Axis4D.zw, zw);
 	}
 
         void Start()
@@ -55,15 +75,6 @@ namespace IMRE.HandWaver.HigherDimensions
             rotationOrder.Add(Axis4D.zw);
             rotationOrder.Add(Axis4D.xy);
             rotationOrder.Add(Axis4D.xz);
-
-            rotation = new Dictionary<Axis4D, float>();
-            rotation.Add(Axis4D.xy, 0f);
-            rotation.Add(Axis4D.xz, 0f);
-            rotation.Add(Axis4D.xw, 0f);
-            rotation.Add(Axis4D.yz, 0f);
-            rotation.Add(Axis4D.yw, 0f);
-            rotation.Add(Axis4D.zw, 0f);
-
 
             meshFilter = GetComponent<MeshFilter>();
             mesh = meshFilter.sharedMesh;
@@ -101,34 +112,12 @@ namespace IMRE.HandWaver.HigherDimensions
 
         void Update()
         {
-            updateRotate();
+            ApplyRotationToVerts();
             drawFigure();
             //if (firstDraw)
             //{
             //    firstDraw = false;
             //}
-        }
-
-        void updateRotate()
-        {
-            if (GetComponent<Leap.Unity.Interaction.InteractionBehaviour>() != null)
-            {
-                rotation[Axis4D.xy] = this.transform.rotation.eulerAngles.z;
-                rotation[Axis4D.xz] = this.transform.rotation.eulerAngles.y;
-                rotation[Axis4D.yz] = this.transform.rotation.eulerAngles.x;
-            }
-            else
-            {
-                rotation[Axis4D.xy] = HigherDimControl.xy;
-                rotation[Axis4D.xz] = HigherDimControl.xz;
-                rotation[Axis4D.yz] = HigherDimControl.yz;
-            }
-
-            rotation[Axis4D.xw] = HigherDimControl.xw;
-            rotation[Axis4D.yw] = HigherDimControl.yw;
-            rotation[Axis4D.zw] = HigherDimControl.zw;
-
-            ApplyRotationToVerts();
         }
 
         internal void ResetVertices()
