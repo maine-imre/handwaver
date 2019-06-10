@@ -11,6 +11,11 @@ namespace IMRE.Gestures
     public struct Hand
     {
         /// <summary>
+        /// This controls how pinched a hand must be to qualify for the isPinching boolean
+        /// </summary>
+        private static float pinchTolerance = 0.8f;
+        
+        /// <summary>
         /// The handedness of the hand.
         /// </summary>
         public Chirality WhichHand;
@@ -43,6 +48,6 @@ namespace IMRE.Gestures
         /// <summary>
         /// Is the pinch strength sufficient to be pinching?
         /// </summary>
-        public bool IsPinching;
+        public bool IsPinching => PinchStrength >= pinchTolerance;
     }
 }

@@ -24,6 +24,7 @@ namespace IMRE.Gestures
 
         /// <summary>
         /// The average velocity of the component over the last 10 frames.
+        /// This is done on seperate calculation, and it is not needed to be updated outside of <see cref="GestureInput"/>
         /// </summary>
         public Vector3 Velocity;
     }
