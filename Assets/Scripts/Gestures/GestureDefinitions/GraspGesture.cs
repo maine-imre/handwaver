@@ -8,6 +8,8 @@ namespace IMRE.Gestures
 public abstract class GraspGesture : OneHandedGesture {
 		protected override void visualFeedbackActivated()
 		{
+			//handColourManager.setHandColorMode(whichHand, handColourManager.handModes.________)
+			//this seems too old to work now, especially with all the color fixes. Also this is funny due to the british and american spellings both being used
 			throw new NotImplementedException();
 
 		}
