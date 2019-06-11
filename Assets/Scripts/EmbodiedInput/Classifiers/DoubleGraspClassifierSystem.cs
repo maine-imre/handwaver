@@ -1,28 +1,22 @@
-﻿using Unity.Burst;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using Unity.Burst;
 using Unity.Collections;
+using UnityEngine;
 using Unity.Entities;
 using Unity.Jobs;
-using UnityEngine;
 
 namespace IMRE.EmbodiedUserInput
 {
     public class DoubleGraspClassifierSystem : JobComponentSystem
     {
-        // OnUpdate runs on the main thread.
-        protected override JobHandle OnUpdate(JobHandle inputDependencies)
-        {
-            var job = new EmbodiedUserInputClassifierJob();
-
-            return job.Schedule(this, inputDependencies);
-        }
-
         /// <summary>
-        ///     A generic example of a classifier.  This should be renamed in each use case.
+        /// A generic example of a classifier.  This should be renamed in each use case.
         /// </summary>
         public struct DoubleGraspClassifier : IEmbodiedClassifier<BodyInput>
         {
             public float distBetweenHands;
-
             public bool shouldActivate(BodyInput data)
             {
                 distBetweenHands = Vector3.Distance(data.LeftHand.Fingers[1].Joints[4].Position,
@@ -44,12 +38,13 @@ namespace IMRE.EmbodiedUserInput
         }
 
         /// <summary>
-        ///     A thin layer of general abstraction for one-handed and two-handed gestures.
-        ///     Inspired by LeapPaint https://github.com/leapmotion/Paint
+        /// A thin layer of general abstraction for one-handed and two-handed gestures.
+        /// Inspired by LeapPaint https://github.com/leapmotion/Paint
         /// </summary>
         [BurstCompile]
         public struct EmbodiedUserInputClassifierJob : IJobForEach<BodyInput, DoubleGraspClassifier>
         {
+
             public void Execute([ReadOnly] ref BodyInput cBodyInput, ref DoubleGraspClassifier classifier)
             {
                 if (!classifier.isEligible)
@@ -69,5 +64,19 @@ namespace IMRE.EmbodiedUserInput
                 }
             }
         }
+
+        // OnUpdate runs on the main thread.
+        protected override JobHandle OnUpdate(JobHandle inputDependencies)
+        {
+            var job = new EmbodiedUserInputClassifierJob
+            {
+                //cBodyInput = 
+                //clasifier struct = static
+            };
+
+            return job.Schedule(this, inputDependencies);
+        }
+
     }
 }
+    

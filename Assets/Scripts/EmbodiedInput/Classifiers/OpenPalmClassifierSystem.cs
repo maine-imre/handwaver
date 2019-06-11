@@ -1,24 +1,19 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using Unity.Burst;
 using Unity.Collections;
+using UnityEngine;
 using Unity.Entities;
 using Unity.Jobs;
-using UnityEngine;
 
 namespace IMRE.EmbodiedUserInput
 {
     public class OpenPalmClassifierSystem : JobComponentSystem
     {
-        // OnUpdate runs on the main thread.
-        protected override JobHandle OnUpdate(JobHandle inputDependencies)
-        {
-            var job = new EmbodiedUserInputClassifierJob();
-
-            return job.Schedule(this, inputDependencies);
-        }
-
         /// <summary>
-        ///     A generic example of a classifier.  This should be renamed in each use case.
+        /// A generic example of a classifier.  This should be renamed in each use case.
         /// </summary>
         public struct OpenPalmClassifier : IEmbodiedClassifier<BodyInput>
         {
@@ -28,10 +23,10 @@ namespace IMRE.EmbodiedUserInput
 
             public bool shouldActivate(BodyInput data)
             {
-                var hand = data.GetHand(chirality);
+                Hand hand = data.GetHand(chirality);
                 plane = hand.Palm.Direction;
                 origin = hand.Palm.Position;
-                return hand.Fingers.Where(finger => finger.IsExtended).Count() == 5;
+                return (hand.Fingers.Where(finger => finger.IsExtended).Count() == 5);
             }
 
             public bool shouldCancel(BodyInput data)
@@ -48,12 +43,13 @@ namespace IMRE.EmbodiedUserInput
         }
 
         /// <summary>
-        ///     A thin layer of general abstraction for one-handed and two-handed gestures.
-        ///     Inspired by LeapPaint https://github.com/leapmotion/Paint
+        /// A thin layer of general abstraction for one-handed and two-handed gestures.
+        /// Inspired by LeapPaint https://github.com/leapmotion/Paint
         /// </summary>
         [BurstCompile]
         public struct EmbodiedUserInputClassifierJob : IJobForEach<BodyInput, OpenPalmClassifier>
         {
+
             public void Execute([ReadOnly] ref BodyInput cBodyInput, ref OpenPalmClassifier classifier)
             {
                 if (!classifier.isEligible)
@@ -72,6 +68,18 @@ namespace IMRE.EmbodiedUserInput
                     classifier.shouldFinish = false;
                 }
             }
+        }
+
+        // OnUpdate runs on the main thread.
+        protected override JobHandle OnUpdate(JobHandle inputDependencies)
+        {
+            var job = new EmbodiedUserInputClassifierJob
+            {
+                //cBodyInput = 
+                //clasifier struct = static
+            };
+
+            return job.Schedule(this, inputDependencies);
         }
     }
 }

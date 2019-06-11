@@ -1,8 +1,10 @@
-using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace IMRE.EmbodiedUserInput
 {
-    [Serializable]
+    [System.Serializable]
     public enum Chirality
     {
         Left,

@@ -1,8 +1,7 @@
 namespace IMRE.EmbodiedUserInput
 {
-    public enum DeactivationReason
-    {
+    public enum DeactivationReason {
         FinishedGesture,
-        CancelledGesture
+        CancelledGesture,
     }
 }

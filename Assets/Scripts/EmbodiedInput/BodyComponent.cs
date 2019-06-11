@@ -1,30 +1,30 @@
-using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace IMRE.EmbodiedUserInput
 {
     /// <summary>
-    ///     The generic tracking data for a generic body component.
+    /// The generic tracking data for a generic body component. 
     /// </summary>
-    [Serializable]
+    [System.Serializable]
     public struct BodyComponent
     {
         /// <summary>
-        ///     The position of a given joint
+        /// The position of a given joint
         /// </summary>
         public Vector3 Position;
 
         /// <summary>
-        ///     The direction of a joint.
-        ///     Unless otherwise noted, this is a assumeed to be the radial direction
-        ///     of the previous connecting bone
+        /// The direction of a joint.
+        /// Unless otherwise noted, this is a assumeed to be the radial direction
+        /// of the previous connecting bone
         /// </summary>
         public Vector3 Direction;
 
         /// <summary>
-        ///     The average velocity of the component over the last 10 frames.
-        ///     This is done on seperate calculation, and it is not needed to be updated outside of
-        ///     <see cref="BodyInputDataSystem" />
+        /// The average velocity of the component over the last 10 frames.
+        /// This is done on seperate calculation, and it is not needed to be updated outside of <see cref="BodyInputDataSystem"/>
         /// </summary>
         public Vector3 Velocity;
     }

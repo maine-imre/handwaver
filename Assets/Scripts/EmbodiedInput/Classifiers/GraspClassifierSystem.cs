@@ -1,28 +1,24 @@
-﻿using Unity.Burst;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using Unity.Burst;
 using Unity.Collections;
+using UnityEngine;
 using Unity.Entities;
 using Unity.Jobs;
+using UnityEngine.Jobs;
 
 namespace IMRE.EmbodiedUserInput
 {
     public class GraspClassifierSystem : JobComponentSystem
     {
-        // OnUpdate runs on the main thread.
-        protected override JobHandle OnUpdate(JobHandle inputDependencies)
-        {
-            var job = new EmbodiedUserInputClassifierJob();
-
-            return job.Schedule(this, inputDependencies);
-        }
-
         public struct GraspClassifier : IEmbodiedClassifier<BodyInput>
         {
             public Chirality chirality;
-
             public bool shouldActivate(BodyInput data)
             {
-                var hand = data.GetHand(chirality);
-                return hand.IsPinching;
+                Hand hand = data.GetHand(chirality);
+                return (hand.IsPinching);
             }
 
             public bool shouldCancel(BodyInput data)
@@ -38,12 +34,13 @@ namespace IMRE.EmbodiedUserInput
         }
 
         /// <summary>
-        ///     A thin layer of general abstraction for one-handed and two-handed gestures.
-        ///     Inspired by LeapPaint https://github.com/leapmotion/Paint
+        /// A thin layer of general abstraction for one-handed and two-handed gestures.
+        /// Inspired by LeapPaint https://github.com/leapmotion/Paint
         /// </summary>
         [BurstCompile]
         public struct EmbodiedUserInputClassifierJob : IJobForEach<BodyInput, GraspClassifier>
         {
+
             public void Execute([ReadOnly] ref BodyInput cBodyInput, ref GraspClassifier classifier)
             {
                 if (!classifier.isEligible)
@@ -62,6 +59,18 @@ namespace IMRE.EmbodiedUserInput
                     classifier.shouldFinish = false;
                 }
             }
+        }
+
+        // OnUpdate runs on the main thread.
+        protected override JobHandle OnUpdate(JobHandle inputDependencies)
+        {
+            var job = new EmbodiedUserInputClassifierJob
+            {
+                //cBodyInput = 
+                //clasifier struct = static
+            };
+
+            return job.Schedule(this, inputDependencies);
         }
     }
 }

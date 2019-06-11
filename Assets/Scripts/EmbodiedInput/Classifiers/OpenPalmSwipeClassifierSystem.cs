@@ -1,24 +1,19 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using Unity.Burst;
 using Unity.Collections;
+using UnityEngine;
 using Unity.Entities;
 using Unity.Jobs;
-using UnityEngine;
 
 namespace IMRE.EmbodiedUserInput
 {
     public class OpenPalmSwipeClassifierSystem : JobComponentSystem
     {
-        // OnUpdate runs on the main thread.
-        protected override JobHandle OnUpdate(JobHandle inputDependencies)
-        {
-            var job = new EmbodiedUserInputClassifierJob();
-
-            return job.Schedule(this, inputDependencies);
-        }
-
         /// <summary>
-        ///     A generic example of a classifier.  This should be renamed in each use case.
+        /// A generic example of a classifier.  This should be renamed in each use case.
         /// </summary>
         public struct OpenPalmSwipeClassifier : IEmbodiedClassifier<BodyInput>
         {
@@ -30,21 +25,21 @@ namespace IMRE.EmbodiedUserInput
 
             public bool shouldActivate(BodyInput data)
             {
-                var hand = data.GetHand(chirality);
+                Hand hand = data.GetHand(chirality);
                 //want movement in plane of palm within tolerance.
-                var move = hand.Palm.Velocity;
+                Vector3 move = hand.Palm.Velocity;
                 plane = hand.Palm.Direction;
                 origin = hand.Palm.Position;
 
                 //we want velocity to be nonzero.
-                var speed = move.magnitude;
+                float speed = move.magnitude;
                 //we want to have close to zero angle between movement and palm.
-                var angle = 90 - Mathf.Abs(Vector3.Angle(move, plane));
+                float angle = 90 - Mathf.Abs(Vector3.Angle(move, plane));
 
-                return hand.Fingers.Where(finger => finger.IsExtended).Count() == 5 && speed > speedTol &&
-                       angle < AngleTol;
+                return (hand.Fingers.Where(finger => finger.IsExtended).Count() == 5) && speed > speedTol && angle < AngleTol;
+                
             }
-
+            
             public bool shouldCancel(BodyInput data)
             {
                 return !shouldActivate(data);
@@ -59,12 +54,13 @@ namespace IMRE.EmbodiedUserInput
         }
 
         /// <summary>
-        ///     A thin layer of general abstraction for one-handed and two-handed gestures.
-        ///     Inspired by LeapPaint https://github.com/leapmotion/Paint
+        /// A thin layer of general abstraction for one-handed and two-handed gestures.
+        /// Inspired by LeapPaint https://github.com/leapmotion/Paint
         /// </summary>
         [BurstCompile]
         public struct EmbodiedUserInputClassifierJob : IJobForEach<BodyInput, OpenPalmSwipeClassifier>
         {
+
             public void Execute([ReadOnly] ref BodyInput cBodyInput, ref OpenPalmSwipeClassifier classifier)
             {
                 if (!classifier.isEligible)
@@ -83,6 +79,18 @@ namespace IMRE.EmbodiedUserInput
                     classifier.shouldFinish = false;
                 }
             }
+        }
+
+        // OnUpdate runs on the main thread.
+        protected override JobHandle OnUpdate(JobHandle inputDependencies)
+        {
+            var job = new EmbodiedUserInputClassifierJob
+            {
+                //cBodyInput = 
+                //clasifier struct = static
+            };
+
+            return job.Schedule(this, inputDependencies);
         }
     }
 }
