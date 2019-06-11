@@ -1,10 +1,15 @@
 using System;
+using System.ComponentModel;
+using Unity.Entities;
 using UnityEngine;
 
 namespace IMRE.HandWaver.Kernel.Geos{
-  public interface GeoElement
+  
+  [Serializable]
+  public struct GeoElement : IComponentData
   {
-    int ElementID { get; set; }
-    string ElementName { get; set; }
+    private int elementID;
+    private string elementName;
+    private DateTime updated;
   }
 }
