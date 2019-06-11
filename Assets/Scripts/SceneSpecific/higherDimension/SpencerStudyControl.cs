@@ -105,38 +105,42 @@ namespace IMRE.HandWaver.HigherDimensions
         {
 	        setActiveObjects();
 	        
-	//Update Rotation Values for Higher Dim Figures
-	
+		//Update Rotation Values for Higher Dim Figures
 		hypercube.SetRotation(xy,xz,xw,yz,yw,zw);
 		fivecell.SetRotation(xy,xz,xw,yz,yw,zw);
 	
             float percent = 0f;
             //if the override bool is set, use in editor override value
 
-            if (foldOverride)
-            {
-                percent = foldOverrideValue;
-                //update the slider's position to reflect the override value
-                sliderPoint.Position3 = (percentFolded)*(slider.point2.Position3 - slider.point1.Position3) + slider.point1.Position3;
 
-            }
             //if the boolean is set to animate the figure
-            else if (animateFold)
+            if (animateFold)
             {
-	            if (percentFolded > 1)
-	            {
-		            percentFolded = Mathf.FloorToInt(percentFolded);
-	            }
+	            
                 //increment the degree folded by one degree. 
-                percent = (percentFolded + .01f);
-                if (percent == 1)
+                percentFolded = (percentFolded + .01f);
+                
+                
+                if (percentFolded == 1)
                 {
-	                percent = 1f; //round to whole
+	                percentFolded = 1f; //round to whole
 	                animateFold = false;
+                }
+                
+                if (percentFolded > 1)
+                {
+	                percentFolded = Mathf.FloorToInt(percentFolded);
                 }
                 
                 //update the slider's position to reflect the override value
                 sliderPoint.Position3 = (percentFolded)*(slider.point2.Position3 - slider.point1.Position3) + slider.point1.Position3;
+                percent = percentFolded;
+            } else if (foldOverride)
+            {
+	            percent = foldOverrideValue;
+	            //update the slider's position to reflect the override value
+	            sliderPoint.Position3 = (percentFolded)*(slider.point2.Position3 - slider.point1.Position3) + slider.point1.Position3;
+
             }
             // if the participant is directly manipulating the slider
             else

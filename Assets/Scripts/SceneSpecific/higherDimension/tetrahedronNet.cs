@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Linq;
+using UnityEngine.Analytics;
 
 /// <summary>
 /// A net of a tetrahedron that folds into a tetrahedron.
@@ -11,6 +12,10 @@ using System.Linq;
 /// </summary>
 public class tetrahedronNet : MonoBehaviour
 {
+    
+    static readonly float COMPLETEDFOLD = (180f - Vector3.Angle((Vector3.one - (new Vector3(1,-1,-1)+new Vector3(-1,1,-1))/2f),new Vector3(-1,-1,1)-(new Vector3(1,-1,-1)+new Vector3(-1,1,-1))/2f));
+
+    
     public Mesh mesh
     {
         get { return GetComponent<MeshFilter>().mesh; }
@@ -50,6 +55,7 @@ public class tetrahedronNet : MonoBehaviour
         lineRenderer.endWidth = .01f;
         lineRenderer.SetPositions(lineRendererVerts(0));
     }
+
     /// <summary>
     /// fold tetrahedron net up by angle t
     /// </summary>
@@ -57,7 +63,7 @@ public class tetrahedronNet : MonoBehaviour
     /// <returns></returns>
     private static Vector3[] meshVerts(float percentfolded)
     {
-        float degreefolded = percentfolded * 120f + 180f;
+        float degreefolded = percentfolded * COMPLETEDFOLD + 180f;
         //6 vertices on tetrahedron
         Vector3[] result = new Vector3[6];
 
