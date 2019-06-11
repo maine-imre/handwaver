@@ -59,7 +59,7 @@ namespace IMRE.EmbodiedUserInput
     /// <summary>
     /// This is an example class that uses the emobided input classifier in a Job Component System
     /// </summary>
-    public class EmbodiedUserInputClassifierExample : JobComponentSystem
+    public class EmbodiedUserInputClassifier : JobComponentSystem
     {
         public enum classifierType
         {
@@ -75,7 +75,7 @@ namespace IMRE.EmbodiedUserInput
         /// <summary>
         /// A generic example of a classifier.  This should be renamed in each use case.
         /// </summary>
-        public struct genericClassifier : IEmbodiedClassifier<BodyInput>
+        public struct classifierJob : IEmbodiedClassifier<BodyInput>
         {
             public Chirality chirality;
             public classifierType type;
@@ -195,25 +195,25 @@ namespace IMRE.EmbodiedUserInput
         /// Inspired by LeapPaint https://github.com/leapmotion/Paint
         /// </summary>
         [BurstCompile]
-        public struct EmbodiedUserInputClassifierJob : IJobForEach<BodyInput, genericClassifier>
+        public struct EmbodiedUserInputClassifierJob : IJobForEach<BodyInput, classifierJob>
         {
             
-            public void Execute([ReadOnly] ref BodyInput cBodyInput, ref genericClassifier classifier)
+            public void Execute([ReadOnly] ref BodyInput cBodyInput, ref classifierJob classifierJob)
             {
-                if (!classifier.isEligible)
+                if (!classifierJob.isEligible)
                 {
-                    classifier.isEligible = classifier.shouldActivate(cBodyInput);
-                        classifier.wasActivated = classifier.isEligible;
-                        classifier.wasCancelled = false;
-                        classifier.wasFinished = false;
+                    classifierJob.isEligible = classifierJob.shouldActivate(cBodyInput);
+                        classifierJob.wasActivated = classifierJob.isEligible;
+                        classifierJob.wasCancelled = false;
+                        classifierJob.wasFinished = false;
                 }
                 else
                 {
-                    classifier.wasCancelled = classifier.shouldCancel(cBodyInput);
-                    classifier.wasFinished = classifier.shouldFinish && !classifier.wasCancelled;
-                    classifier.isEligible = !(classifier.wasCancelled || classifier.wasFinished);
-                    classifier.wasActivated = false;
-                    classifier.shouldFinish = false;
+                    classifierJob.wasCancelled = classifierJob.shouldCancel(cBodyInput);
+                    classifierJob.wasFinished = classifierJob.shouldFinish && !classifierJob.wasCancelled;
+                    classifierJob.isEligible = !(classifierJob.wasCancelled || classifierJob.wasFinished);
+                    classifierJob.wasActivated = false;
+                    classifierJob.shouldFinish = false;
                 }
             }
         }
@@ -221,7 +221,7 @@ namespace IMRE.EmbodiedUserInput
         protected override JobHandle OnUpdate(JobHandle inputDependencies)
         {
             var job = new EmbodiedUserInputClassifierJob();
-
+            
             return job.Schedule(this, inputDependencies);
         }
 
