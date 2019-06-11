@@ -8,6 +8,7 @@ namespace IMRE.EmbodiedUserInput
     public enum Chirality
     {
         Left,
-        Right
+        Right,
+        None
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Mathematics;
 
 namespace IMRE.EmbodiedUserInput
 {
@@ -18,7 +19,7 @@ namespace IMRE.EmbodiedUserInput
         /// <summary>
         /// the direction a given finger is pointing in.
         /// </summary>
-        public Vector3 Direction;
+        public float3 Direction;
 
         /// <summary>
         /// Wheter or not a finger is extended (pointing).

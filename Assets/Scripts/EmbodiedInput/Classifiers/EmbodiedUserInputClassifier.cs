@@ -2,12 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using IMRE.Math;
 using Unity.Burst;
 using Unity.Collections;
 using UnityEngine;
 using Unity.Entities;
 using Unity.Jobs;
 using Unity.Mathematics;
+using UnityEditor;
 
 namespace IMRE.EmbodiedUserInput
 {
@@ -80,12 +82,12 @@ namespace IMRE.EmbodiedUserInput
             public Chirality chirality;
             public classifierType type;
             
-            public Vector3 origin;
-            public Vector3 direction;
+            public float3 origin;
+            public float3 direction;
             public bool shouldActivate(BodyInput data)
             {
                 Hand hand;
-                Vector3 velocity;
+                float3 velocity;
                 float speed;
                 float angle;
                 switch (type)
@@ -138,9 +140,10 @@ namespace IMRE.EmbodiedUserInput
                         origin = hand.Palm.Position;
 
                         //we want velocity to be nonzero.
-                         speed = hand.Palm.Velocity.magnitude;
+                        //distance is a workaround for magnitude.
+                        speed = math.distance(float3.zero, velocity); 
                         //we want to have close to zero angle between movement and palm.
-                        angle = Mathf.Abs(Vector3.Angle(velocity, direction));
+                        angle = math.abs(Operations.Angle(velocity, direction));
 //TODO check the tolerances here.
                     return (hand.Fingers.Count(finger => finger.IsExtended) == 5) && speed > .5f && angle < 30f;
                     #endregion
@@ -153,9 +156,9 @@ namespace IMRE.EmbodiedUserInput
                         origin = hand.Palm.Position;
 
                         //we want velocity to be nonzero.
-                        speed = hand.Palm.Velocity.magnitude;
+                        speed = math.distance(float3.zero,hand.Palm.Velocity);
                         //we want to have close to zero angle between movement and palm.
-                        angle = 90 - Mathf.Abs(Vector3.Angle(velocity, direction));
+                        angle = 90 - math.abs(Operations.Angle(velocity, direction));
 //TODO check the tolerances here.
                         return (hand.Fingers.Count(finger => finger.IsExtended) == 5) && speed > .5f && angle <  30f;
                         #endregion

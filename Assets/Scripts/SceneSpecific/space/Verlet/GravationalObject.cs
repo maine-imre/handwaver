@@ -53,12 +53,12 @@ namespace IMRE.HandWaver.Space.BigBertha
 		}
 		public void step3(float dt)
 		{
-			VelVec = VelVec + ((ForceVec / mass) * (float)Math.Pow(dt, 2));
+			VelVec = VelVec + ((ForceVec / mass) * (float)System.Math.Pow(dt, 2));
 		}
 		Vector3d gravityVector(GravationalObject otherObject)
 		{
 			Double distance = Vector3d.Distance(positionVector, otherObject.LastVector);
-			float F = (float)(6.67408 * Math.Pow(10, -11)) * (float)((mass * otherObject.mass) / Math.Pow(distance, 2)); //meters, kg, seconds
+			float F = (float)(6.67408 * System.Math.Pow(10, -11)) * (float)((mass * otherObject.mass) / System.Math.Pow(distance, 2)); //meters, kg, seconds
 			Vector3d vectorn = otherObject.LastVector - positionVector;
 			vectorn.Normalize();
 			vectorn = vectorn * F;
