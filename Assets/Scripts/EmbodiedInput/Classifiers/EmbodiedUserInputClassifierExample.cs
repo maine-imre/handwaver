@@ -79,6 +79,7 @@ namespace IMRE.EmbodiedUserInput
         {
             public Chirality chirality;
             public classifierType type;
+            
             public Vector3 origin;
             public Vector3 direction;
             public bool shouldActivate(BodyInput data)
@@ -108,8 +109,7 @@ namespace IMRE.EmbodiedUserInput
                             (hand.Fingers[1].IsExtended) &&
                             !(hand.Fingers[2].IsExtended) &&
                             !(hand.Fingers[3].IsExtended) &&
-                            !(hand.Fingers[4].IsExtended) //&&
-                            //!(interactionHand.isGraspingObject)
+                            !(hand.Fingers[4].IsExtended)
                         );  
                     #endregion 
                     case classifierType.grasp:
@@ -160,7 +160,18 @@ namespace IMRE.EmbodiedUserInput
                         return (hand.Fingers.Count(finger => finger.IsExtended) == 5) && speed > .5f && angle <  30f;
                         #endregion
                     case classifierType.thumbsUp:
-                        break;
+                        #region Thumbs Up Activate
+                        hand = data.GetHand(chirality);
+                        direction = hand.Fingers[0].Direction;
+                        origin = hand.Fingers[0].Joints[3].Position;
+                        return (
+                            (hand.Fingers[0].IsExtended) &&
+                            !(hand.Fingers[1].IsExtended) &&
+                            !(hand.Fingers[2].IsExtended) &&
+                            !(hand.Fingers[3].IsExtended) &&
+                            !(hand.Fingers[4].IsExtended) 
+                        );  
+                        #endregion
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
@@ -186,8 +197,8 @@ namespace IMRE.EmbodiedUserInput
         [BurstCompile]
         public struct EmbodiedUserInputClassifierJob : IJobForEach<BodyInput, genericClassifier>
         {
-
-            public void Execute([ReadOnly] ref BodyInput cBodyInput, ref genericClassifier classifier) 
+            
+            public void Execute([ReadOnly] ref BodyInput cBodyInput, ref genericClassifier classifier)
             {
                 if (!classifier.isEligible)
                 {
@@ -209,11 +220,7 @@ namespace IMRE.EmbodiedUserInput
         // OnUpdate runs on the main thread.
         protected override JobHandle OnUpdate(JobHandle inputDependencies)
         {
-            var job = new EmbodiedUserInputClassifierJob
-            {
-                //cBodyInput = 
-                //clasifier struct = static
-            };
+            var job = new EmbodiedUserInputClassifierJob();
 
             return job.Schedule(this, inputDependencies);
         }
