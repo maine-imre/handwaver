@@ -1,15 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
+using Unity.Entities;
 using UnityEngine;
 
-namespace IMRE.Gestures
+namespace IMRE.EmbodiedUserInput
 {
     /// <summary>
     /// Generic tracking data for a body and hands
     /// </summary>
     [System.Serializable]
-    public struct BodyInput
+    public struct BodyInput : IComponentData
     {      
         
         #region Tracking Modes
@@ -165,5 +166,21 @@ namespace IMRE.Gestures
                 Position = Vector3.zero,
                 Velocity = Vector3.zero
             };
+        
+        internal Hand GetHand(BodyInput bodyInput, Chirality chirality)
+        {
+            Hand hand = new Hand();
+            switch (chirality)
+            {
+                case Chirality.Left:
+                    hand = bodyInput.LeftHand;
+                    break;
+                case Chirality.Right:
+                    hand = bodyInput.RightHand;
+                    break;
+            }
+
+            return hand;
+        }
     }
 }

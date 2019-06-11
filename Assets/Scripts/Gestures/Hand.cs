@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace IMRE.Gestures
+namespace IMRE.EmbodiedUserInput
 {
     /// <summary>
     /// The generic tracking data for a Hand.

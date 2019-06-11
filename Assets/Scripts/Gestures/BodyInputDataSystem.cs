@@ -16,13 +16,13 @@ using UnityEngine;
 #endif
 
 
-namespace IMRE.Gestures
+namespace IMRE.EmbodiedUserInput
 {
 
     /// <summary>
     /// A class that makes tracking data from different sources generic
     /// </summary>
-    public class GestureInput : MonoBehaviour
+    public class BodyInputDataSystem : MonoBehaviour
     {
         public bool enableLeapMotion = true;
         public bool enableViveSense = true;
@@ -40,13 +40,6 @@ namespace IMRE.Gestures
         private Queue<BodyInput> bodyInputQue = new Queue<BodyInput>();
 
         private Camera mainCamera;
-
-        /// <summary>
-        /// An array of all of the gestures in the scene.
-        /// Used to lookup eligibility in relation to other gestures.
-        /// </summary>
-        public static Gesture[] gestures;
-
 
         //public event HeadTrackingLost ;
         //public event HandTrackingLost ;

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace IMRE.Gestures
+namespace IMRE.EmbodiedUserInput
 {
     /// <summary>
     /// The generic tracking data for a generic body component. 
@@ -24,7 +24,7 @@ namespace IMRE.Gestures
 
         /// <summary>
         /// The average velocity of the component over the last 10 frames.
-        /// This is done on seperate calculation, and it is not needed to be updated outside of <see cref="GestureInput"/>
+        /// This is done on seperate calculation, and it is not needed to be updated outside of <see cref="BodyInputDataSystem"/>
         /// </summary>
         public Vector3 Velocity;
     }

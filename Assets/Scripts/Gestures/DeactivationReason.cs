@@ -1,4 +1,4 @@
-namespace IMRE.Gestures
+namespace IMRE.EmbodiedUserInput
 {
     public enum DeactivationReason {
         FinishedGesture,

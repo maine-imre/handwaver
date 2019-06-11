@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace IMRE.Gestures
+namespace IMRE.EmbodiedUserInput
 {
     [System.Serializable]
     public enum Chirality
