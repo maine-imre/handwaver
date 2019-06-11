@@ -1,11 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Burst;
 using Unity.Collections;
 using UnityEngine;
 using Unity.Entities;
 using Unity.Jobs;
+using Unity.Mathematics;
 
 namespace IMRE.EmbodiedUserInput
 {
@@ -59,19 +61,114 @@ namespace IMRE.EmbodiedUserInput
     /// </summary>
     public class EmbodiedUserInputClassifierExample : JobComponentSystem
     {
+        public enum classifierType
+        {
+            point,
+            grasp,
+            doubleGrasp,
+            openPalm,
+            openPalmPush,
+            openPalmSwipe,
+            thumbsUp
+        };
+        
         /// <summary>
         /// A generic example of a classifier.  This should be renamed in each use case.
         /// </summary>
         public struct genericClassifier : IEmbodiedClassifier<BodyInput>
         {
+            public Chirality chirality;
+            public classifierType type;
+            public Vector3 origin;
+            public Vector3 direction;
             public bool shouldActivate(BodyInput data)
             {
-                throw new NotImplementedException();
+                Hand hand;
+                Vector3 velocity;
+                float speed;
+                float angle;
+                switch (type)
+                {
+                    case classifierType.point:
+                        #region ActivatePoint
+                        //Fingers are indexed from thumb to pinky. The thumb is 0, index is 1
+                        //middle 2, ring 3, pinky 4. Below, we return true if the pinky,
+                        //ring finger, and middle finger are not extended while the index
+                        //finger is extended. There is also an additional portion to this 
+                        //where the hand should not be pointing if there is a pinch happening.
+                        //This prevents false pointing while trying to pinch something
+              
+                        //The thumb is ignored in whether this gesture will activate or not
+             
+                        //note that we need a new concept for grasping object.
+                        hand = data.GetHand(chirality);
+                        direction = hand.Fingers[1].Direction;
+                        origin = hand.Fingers[1].Joints[3].Position;
+                        return (
+                            (hand.Fingers[1].IsExtended) &&
+                            !(hand.Fingers[2].IsExtended) &&
+                            !(hand.Fingers[3].IsExtended) &&
+                            !(hand.Fingers[4].IsExtended) //&&
+                            //!(interactionHand.isGraspingObject)
+                        );  
+                    #endregion 
+                    case classifierType.grasp:
+                        #region ActivateGrasp
+                        hand = data.GetHand(chirality);
+                        return (hand.IsPinching);
+
+                        #endregion
+                    case classifierType.doubleGrasp:
+                        #region ActivateDoubleGrasp
+                        return data.LeftHand.IsPinching && data.RightHand.IsPinching;
+                        #endregion
+                    case classifierType.openPalm:
+                        #region ActivateOpenPalm
+                        hand = data.GetHand(chirality);
+                        direction = hand.Palm.Direction;
+                        origin = hand.Palm.Position;
+                        return (hand.Fingers.Where(finger => finger.IsExtended).Count() == 5);
+                        #endregion
+                    case classifierType.openPalmPush:
+                    #region Activate OpenPalmPush
+                        hand = data.GetHand(chirality);
+                        //want movement in plane of palm within tolerance.
+                        velocity = hand.Palm.Velocity;
+                        direction = hand.Palm.Direction;
+                        origin = hand.Palm.Position;
+
+                        //we want velocity to be nonzero.
+                         speed = hand.Palm.Velocity.magnitude;
+                        //we want to have close to zero angle between movement and palm.
+                        angle = Mathf.Abs(Vector3.Angle(velocity, direction));
+//TODO check the tolerances here.
+                    return (hand.Fingers.Where(finger => finger.IsExtended).Count() == 5) && speed > .5f && angle < 30f;
+                    #endregion
+                    case classifierType.openPalmSwipe:
+                        #region
+                        hand = data.GetHand(chirality);
+                        //want movement in plane of palm within tolerance.
+                        velocity = hand.Palm.Velocity;
+                        direction = hand.Palm.Direction;
+                        origin = hand.Palm.Position;
+
+                        //we want velocity to be nonzero.
+                        speed = hand.Palm.Velocity.magnitude;
+                        //we want to have close to zero angle between movement and palm.
+                        angle = 90 - Mathf.Abs(Vector3.Angle(velocity, direction));
+//TODO check the tolerances here.
+                        return (hand.Fingers.Where(finger => finger.IsExtended).Count() == 5) && speed > .5f && angle <  30f;
+                        #endregion
+                    case classifierType.thumbsUp:
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
             }
 
             public bool shouldCancel(BodyInput data)
             {
-                throw new NotImplementedException();
+                return !shouldActivate(data);
             }
 
             public bool shouldFinish { get; set; }
