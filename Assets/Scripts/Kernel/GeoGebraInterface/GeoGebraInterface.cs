@@ -1,3 +1,12 @@
+using IMRE.HandWaver.Kernel.Geos;
+using Unity.Burst;
+using Unity.Collections;
+using Unity.Entities;
+using Unity.Jobs;
+using Unity.Mathematics;
+using Unity.Transforms;
+using UnityEngine;
+
 namespace IMRE.HandWaver.Kernel.GeoGebraInterface{
 
 public class GeoGebraInterface{
@@ -19,7 +28,7 @@ public class GeoGebraInterface{
     }
 
     // OnUpdate runs on the main thread.
-    protected override JobHandle OnUpdate(JobHandle inputDependencies)
+    protected JobHandle OnUpdate(JobHandle inputDependencies)
     {
         var job = new PointDataJob
         {
