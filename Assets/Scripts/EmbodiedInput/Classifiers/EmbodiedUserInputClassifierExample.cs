@@ -142,7 +142,7 @@ namespace IMRE.EmbodiedUserInput
                         //we want to have close to zero angle between movement and palm.
                         angle = Mathf.Abs(Vector3.Angle(velocity, direction));
 //TODO check the tolerances here.
-                    return (hand.Fingers.Where(finger => finger.IsExtended).Count() == 5) && speed > .5f && angle < 30f;
+                    return (hand.Fingers.Count(finger => finger.IsExtended) == 5) && speed > .5f && angle < 30f;
                     #endregion
                     case classifierType.openPalmSwipe:
                         #region
@@ -157,7 +157,7 @@ namespace IMRE.EmbodiedUserInput
                         //we want to have close to zero angle between movement and palm.
                         angle = 90 - Mathf.Abs(Vector3.Angle(velocity, direction));
 //TODO check the tolerances here.
-                        return (hand.Fingers.Where(finger => finger.IsExtended).Count() == 5) && speed > .5f && angle <  30f;
+                        return (hand.Fingers.Count(finger => finger.IsExtended) == 5) && speed > .5f && angle <  30f;
                         #endregion
                     case classifierType.thumbsUp:
                         break;
