@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using IMRE.HandWaver.HWIO;
 using UnityEngine;
 
+namespace IMRE.HandWaver{
 public class intersectionScript : MonoBehaviour
 {
     public float crossSectionHeight = .5f;
@@ -32,9 +33,19 @@ public class intersectionScript : MonoBehaviour
             float pointPos = height;
             
             //suggest this:
-            //Vector3 pointPos = 
+            //Vector3 pointPos = Vector3.up*radius;
             //Debug.Log(pointPos);
         }
+        //else if (-height == radius)
+        //{
+                                    //comment here to explain what this condition case is geometerically
+
+            //the positing of the point is a Vector3.  
+            //(the point is a 0 dimensional figure, but it exists in a three-dimensional space
+            
+            //Vector3 pointPos = Vector3.down*radius;
+            //Debug.Log(pointPos);
+       // }
         else if (height < radius)
         {
                         //comment here to explain what this condition case is geometerically
@@ -56,7 +67,7 @@ public class intersectionScript : MonoBehaviour
 
     public void crossSectAnnulus(float innerRadius, float outerRadius, float height)
     {
-        //you might think about this as two different circle intersection problems, and use your previous function
+        //you might think about this as two different circle intersection problems, and use bits of your previous function
     
         //assuming annulus is centered at zero.
         //assuming annulus is in which plane?
@@ -143,4 +154,5 @@ public class intersectionScript : MonoBehaviour
         
     }
 
+}
 }
