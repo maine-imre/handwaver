@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using IMRE.HandWaver.HWIO;
+using Leap;
 using UnityEngine;
 
 namespace IMRE.HandWaver{
@@ -29,102 +30,84 @@ public class intersectionScript : MonoBehaviour
         crossSectTorus(.5f, 1f, Vector3.zero, crossSectionHeight, Vector3.forward, Vector3.right)
     }
 
-    public void crossSectCirc(float radius, float height)
+    /// <summary>
+    /// Function to calculate cross section of circle
+    /// </summary>
+    /// <param name="radius"></param>
+    /// <param name="height"></param>
+    public void crossSectCirc(float height)
     {
-        //assuming circle is centered at zero.
-        //assuming circle is in which plane?
+        float radius = 1f;
+        Vector3 pointPos;
         
-        //if the circle is at zero, consider that the height could be positive or negative.
         
-        if (height == radius)
+        //if cross section only hits the edge of the circle
+        if (Math.Abs(height) == radius)
         {
-//TODO @Rene calculate figure parameters
-                        //comment here to explain what this condition case is geometerically
-
-            //the positing of the point is a Vector3.  
-            //(the point is a 0 dimensional figure, but it exists in a three-dimensional space
-            float pointPos = height;
+            //if top of circle, create point at intersection
+            if (height == radius)
+            {
+                pointPos = Vector3.up * radius;
+            }
+            //if bottom of circle, create point at intersection
+            else if (height == -radius)
+            {
+                pointPos = Vector3.down * radius;
+            }
             
-            //suggest this:
-            //Vector3 pointPos = Vector3.up*radius;
-            //Debug.Log(pointPos);
 //TODO @Camden Render Figure
         }
-        //else if (-height == radius)
-        //{
-//TODO @Rene calculate figure parameters
 
-                                    //comment here to explain what this condition case is geometerically
+//TODO @Camden Render Figure
 
-            //the positing of the point is a Vector3.  
-            //(the point is a 0 dimensional figure, but it exists in a three-dimensional space
-            
-            //Vector3 pointPos = Vector3.down*radius;
-            //Debug.Log(pointPos);
- //TODO @Camden Render Figure
-
-       // }
-        else if (height < radius)
+        //cross section is a line that hits two points on the circle (smaller than radius of circle)
+        else if (Math.Abs(height) < radius)
         {
- //TODO @Rene calculate figure parameters
+            float segmentLength = (float)(Math.Sqrt(1 - Math.Pow(height, 2)));
+            Vector3 segmentEndPoint0 = (Vector3.up * height) + (Vector3.right * (segmentLength));
+            Vector3 segmentEndPoint1 = (Vector3.up * height) + (Vector3.left * (segmentLength));
 
-                        //comment here to explain what this condition case is geometerically
+            //TODO @Camden Render Figure
 
-            //if the height is smaller than the inner radius, then each line segment is defined by 2 Vector3s (one for each endpoint).
-            //and you have one line segment.  So you want one pairs of Vector3's.
-            //even though the figure is 2D, it still exists in a 3D space.
-            
-            Vector2 linePos = new Vector2();
-            
-            //suggest this:
-            //Vector3 SegmentAEndpoint0 = 
-            //Vector3 SegmentAEndpoint1 = 
-            //Debug.Log(SegmentAEndpoint0, SegmentAEndpoint1);
-            
- //TODO @Camden Render Figure
-
-         }
-         //what if height > radius
-
+        }
+        else if (Math.Abs(height) > radius)
+        {
+                //do nothing
+        }
+        
     }
 
     public void crossSectAnnulus(float innerRadius, float outerRadius, float height)
     {
+        outerRadius = 1f;
+        innerRadius = 0.5f;
 
         //you might think about this as two different circle intersection problems, and use bits of your previous function
-    
-        //assuming annulus is centered at zero.
-        //assuming annulus is in which plane?
-        
-                //if the center is at zero, consider that the height could be positive or negative.
 
-
-        if (height == outerRadius)
+        //
+        if (Math.Abs(height) == outerRadius)
         {
- //TODO @Rene calculate figure parameters
-
-                        //comment here to explain what this condition case is geometerically
-
-            //the positing of the point is a Vector3.  
-            //(the point is a 0 dimensional figure, but it exists in a three-dimensional space
-            float pointPos = height;
-            
-            //suggest this:
-            //Vector3 pointPos = 
-            //Debug.Log(pointPos);
+            if (height == outerRadius)
+            {
+                Vector3 pointPos = Vector3.up * outerRadius;
+            }
+            else if (height == -outerRadius)
+            {
+                Vector3 pointPos = Vector3.down * outerRadius;
+            }
 //TODO @Camden Render Figure
 
         }
-        else if (height < innerRadius )
+        else if (Math.Abs(height) == innerRadius)
         {
- //TODO @Rene calculate figure parameters
-
-                        //comment here to explain what this condition case is geometerically
+            
+        }
+        else if (Math.Abs(height) < innerRadius )
+        {
 
             //if the height is smaller than the inner radius, then each line segment is defined by 2 Vector3s (one for each endpoint).
             //and you have two line segments.  So you want two pairs of Vector3's.
             //even though the figure is 2D, it still exists in a 3D space.
-            Vector2 linePos = new Vector2();
             
             //suggest this:
             //Vector3 SegmentAEndpoint0 = 
@@ -139,14 +122,11 @@ public class intersectionScript : MonoBehaviour
         {
   //TODO @Rene calculate figure parameters
 
-                //comment here to explain what this condition case is geometerically
 
             //if the height is smaller than the inner radius, then each line segment is defined by 2 Vector3s (one for each endpoint).
             //and you have one line segment.  So you want one pairs of Vector3's.
             //even though the figure is 2D, it still exists in a 3D space.
-            
-            Vector2 linePos = new Vector2();
-            
+                        
             //suggest this:
             //Vector3 SegmentAEndpoint0 = 
             //Vector3 SegmentAEndpoint1 = 
@@ -158,35 +138,51 @@ public class intersectionScript : MonoBehaviour
 
     }
     
-    public void crossSectSphere(float radius, Vector3 center, Vector3 height, Vector3 planeNorm)
+    /// <summary>
+    /// Function to calculate cross section of a sphere
+    /// </summary>
+    /// <param name="radius"></param>
+    /// <param name="center"></param>
+    /// <param name="height"></param>
+    /// <param name="planeNorm"></param>
+    public void crossSectSphere(float height, float radius, Vector3 sphereCenter)
     {
-            //comment here to explain what this case is geometerically
+        radius = 1f;
+        float circRadius;
+        Vector3 circCenter;
 
-                //if the center is at zero, consider that the height could be positive or negative.
-
-
-        Vector3 circCenter = Vector3.Project(height-center, planeNorm) + center;
-
-        if (radius == (circCenter - center).magnitude)
+        //If cross section only hits edge of sphere
+        if (Math.Abs(height) == radius)
         {
- //TODO @Rene calculate figure parameters
+            if (height == radius)
+            {
+                circCenter = Vector3.up * height;
+                circRadius = 0;
+            }
 
-        //comment here to explain what this case is geometerically
-            Vector3 pointPos = new Vector3();
-//TODO @Camden Render Figure
+            if (height == -radius)
+            {
+                circCenter = Vector3.down * height;
+                circRadius = 0;
+            }
+        }
+        //if cross section cuts through sphere, create circular plane
+        else if (Math.Abs(height) < radius)
+        {
+            circCenter = Vector3.up * height;
+            circRadius = (float)Math.Sqrt(1 - Math.Pow(height, 2));
+            Vector3 normPlane = Vector3.up;
             
         }
-        else if (radius > (circCenter - center).magnitude)
+        else
         {
- //TODO @Rene calculate figure parameters
-
-         //comment here to explain what this case is geometerically
-            Vector3 planePos = new Vector3();
-            //in this case, we also want a radius and a center of the circle.
- //TODO @Camden Render Figure
-           
+            if (Math.Abs(height) > radius)
+            {
+                //do nothing
+            }
         }
-        //what if radius < 9circCenter-center).magnitude?
+
+
 
     }
 
