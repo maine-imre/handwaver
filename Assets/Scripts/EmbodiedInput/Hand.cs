@@ -13,12 +13,23 @@ namespace IMRE.EmbodiedUserInput
         /// <summary>
         /// This controls how pinched a hand must be to qualify for the isPinching boolean
         /// </summary>
-        private static float pinchTolerance = 0.8f;
+        private const float pinchTolerance = 0.8f;
+        
+        private bool isLeft;
         
         /// <summary>
         /// The handedness of the hand.
         /// </summary>
-        public Chirality WhichHand;
+        public Chirality WhichHand{
+            get{
+                if(isLeft) 
+                    return Chirality.Left;
+                return Chirality.Right;
+            }
+            set{
+                isLeft = (value == Chirality.Right);
+            }
+        }
 
         /// <summary>
         /// An array of fingers.
@@ -28,7 +39,7 @@ namespace IMRE.EmbodiedUserInput
         /// [3] = Ring Finger
         /// [4] = Pinky
         /// </summary>
-        public Finger[] Fingers;
+        public fixed Finger Fingers[5];
 
         /// <summary>
         /// The palm.  Direction is normal to palm.
@@ -48,6 +59,6 @@ namespace IMRE.EmbodiedUserInput
         /// <summary>
         /// Is the pinch strength sufficient to be pinching?
         /// </summary>
-        public bool IsPinching => PinchStrength >= pinchTolerance;
+        public bool IsPinching => (PinchStrength >= pinchTolerance);
     }
 }
