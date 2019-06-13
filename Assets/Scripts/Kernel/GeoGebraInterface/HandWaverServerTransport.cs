@@ -9,8 +9,10 @@ using WebSocketSharp;
 
 namespace IMRE.HandWaver.Kernel
 {
-    
-//TODO: convert to unitywebrequest
+
+    /// <summary>
+    ///  This static class will be used to communicate with the HandWaver servers.
+    /// </summary>
     public static class HandWaverServerTransport
     {
         /// <summary>
