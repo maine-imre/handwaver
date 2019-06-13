@@ -70,7 +70,7 @@ namespace IMRE.EmbodiedUserInput
         /// [1] Knee
         /// [2] Foot
         /// </summary>
-        public BodyComponent[] RightLeg;
+        public fixed BodyComponent RightLeg[3];
 
         /// <summary>
         /// The left leg.
@@ -78,7 +78,7 @@ namespace IMRE.EmbodiedUserInput
         /// [1] Knee
         /// [2] Foot
         /// </summary>
-        public BodyComponent[] LeftLeg;
+        public fixed BodyComponent LeftLeg[3];
 
         /// <summary>
         /// The right arm.
@@ -86,7 +86,7 @@ namespace IMRE.EmbodiedUserInput
         /// [1] Elbow
         /// [2] Wrist
         /// </summary>
-        public BodyComponent[] RightArm;
+        public fixed BodyComponent RightArm[3];
 
         /// <summary>
         /// The right arm.
@@ -94,7 +94,7 @@ namespace IMRE.EmbodiedUserInput
         /// [1] Elbow
         /// [2] Wrist
         /// </summary>
-        public BodyComponent[] LeftArm;
+        public fixed BodyComponent LeftArm[3];
 
         /// <summary>
         /// The left hand.
