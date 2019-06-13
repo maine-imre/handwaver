@@ -4,7 +4,7 @@ using System.IO;
 using System.Xml;
 using JetBrains.Annotations;
 using UnityEngine.Networking;
-using WebSocketSharp;
+using System;
 
 
 namespace IMRE.HandWaver.Kernel
@@ -19,7 +19,7 @@ namespace IMRE.HandWaver.Kernel
         /// Internal cache of session id.
         /// Access this through the public sessionID var.
         /// </summary>
-        private static string _sessionId;
+        private static string _sessionId = "c55d57b8-8624-11e9-bc42-526af7764f64";
         
         /// <summary>
         /// Public access to the session id string.
@@ -43,7 +43,7 @@ namespace IMRE.HandWaver.Kernel
         /// For now we are selfhosting the server on the computer we are working on.
         /// This MUST be changed for production.
         /// </summary>
-        private const string HOSTURL = "http://localhost:8080";
+        internal const string HOSTURL = "localhost:8080";
 
         /// <summary>
         /// Gets a PNG of the current session.
@@ -73,7 +73,7 @@ namespace IMRE.HandWaver.Kernel
                         Texture tex = ((DownloadHandlerTexture) req.downloadHandler).texture;
 
                         // If the path is null or empty skip saving.
-                        if (path.IsNullOrEmpty()) yield break;
+                        if (string.IsNullOrEmpty(path)) yield break;
                         byte[] bytes = ((Texture2D) tex).EncodeToPNG();
                         File.WriteAllBytes(path, bytes);
                     }
@@ -121,7 +121,7 @@ namespace IMRE.HandWaver.Kernel
                         currSession.LoadXml(((DownloadHandlerFile) req.downloadHandler).text);
 
                         // If the path doesnt exist. Skip saving.
-                        if (path.IsNullOrEmpty()) yield break;
+                        if (string.IsNullOrEmpty(path)) yield break;
                             
                         // Save the xmldocument to the path provided.
                         currSession.Save(path);
@@ -166,7 +166,7 @@ namespace IMRE.HandWaver.Kernel
                         currSession.LoadXml(((DownloadHandlerFile) req.downloadHandler).text);
 
                         // If the path doesnt exist. Skip saving.
-                        if (path.IsNullOrEmpty()) yield break;
+                        if (string.IsNullOrEmpty(path)) yield break;
                             
                         // Save the xmldocument to the path provided.
                         currSession.Save(path);
@@ -217,11 +217,10 @@ namespace IMRE.HandWaver.Kernel
         /// </summary>
         /// <returns></returns>
         public static IEnumerator serverHandhake(){
-            using (UnityWebRequest req = UnityWebRequest.Get(HOSTURL + "/handshake?sessionId=" + sessionId))
+            using (UnityWebRequest req = UnityWebRequest.Get(HOSTURL + "/handshake?sessionId=" + sessionId+"&version="+VERSION))
             {
                 //request and wait for response
                 yield return req.SendWebRequest();
-                
                 if (req.isNetworkError)
                 {
                     Debug.Log(": Error: " + req.error);
@@ -231,7 +230,7 @@ namespace IMRE.HandWaver.Kernel
                 {
                     try
                     {
-                        Debug.Log("Established connection to "+sessionId);
+                        Debug.Log("Established connection to server with session id "+sessionId);
                         
                         //TODO: check if there is a response of a session xml data.
                         //TODO: reconstruct scene using the xml data returned.
