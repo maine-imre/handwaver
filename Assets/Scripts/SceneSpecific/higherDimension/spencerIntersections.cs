@@ -6,7 +6,7 @@ using Leap;
 using UnityEngine;
 
 namespace IMRE.HandWaver{
-public class intersectionScript : MonoBehaviour
+public class spencerIntersections : MonoBehaviour
 {
     public float crossSectionHeight = .5f;
 
@@ -172,7 +172,7 @@ public class intersectionScript : MonoBehaviour
                 circRadius = 0;
             }
         }
-        //if cross section cuts through sphere, create circular plane
+        //if cross section cuts through sphere, create *circle*
         else if (Math.Abs(height) < radius)
         {
             circCenter = Vector3.up * height;
