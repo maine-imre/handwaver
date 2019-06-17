@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Runtime.Remoting.Channels;
+using Unity.Mathematics;
 using UnityEngine;
 using WebSocketSharp;
+
 
 namespace IMRE.HandWaver.Kernel
 {
@@ -16,7 +18,9 @@ namespace IMRE.HandWaver.Kernel
                 ws.OnMessage += (sender, e) => { Debug.Log(e.Data); };
                 ws.Connect();
             }
-            
+                        
+
+
             StartCoroutine(HandWaverServerTransport.execCommand("f:y=x"));
             StartCoroutine(HandWaverServerTransport.execCommand("f:y=-x"));
             
