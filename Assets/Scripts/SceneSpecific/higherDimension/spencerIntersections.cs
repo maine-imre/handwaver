@@ -37,104 +37,109 @@ public class intersectionScript : MonoBehaviour
     /// <param name="height"></param>
     public void crossSectCirc(float height)
     {
-        float radius = 1f;
-        Vector3 pointPos;
         
+        float radius = 1f;
+               
+        //endpoints for line segment if intersection passes through circle
+        Vector3 segmentEndPoint0;
+        Vector3 segmentEndPoint1;
         
         //if cross section only hits the edge of the circle
         if (Math.Abs(height) == radius)
         {
+           
             //if top of circle, create point at intersection
             if (height == radius)
             {
-                pointPos = Vector3.up * radius;
+                segmentEndPoint0 = Vector3.up * radius;
             }
+          
             //if bottom of circle, create point at intersection
             else if (height == -radius)
             {
-                pointPos = Vector3.down * radius;
+                segmentEndPoint0 = Vector3.down * radius;
             }
             
-//TODO @Camden Render Figure
         }
-
-//TODO @Camden Render Figure
-
-        //cross section is a line that hits two points on the circle (smaller than radius of circle)
+       
+        //cross section is a line that hits two points on the circle (height smaller than radius of circle)
         else if (Math.Abs(height) < radius)
         {
-            float segmentLength = (float)(Math.Sqrt(1 - Math.Pow(height, 2)));
-            Vector3 segmentEndPoint0 = (Vector3.up * height) + (Vector3.right * (segmentLength));
-            Vector3 segmentEndPoint1 = (Vector3.up * height) + (Vector3.left * (segmentLength));
-
-            //TODO @Camden Render Figure
+            //horizontal distance from center of circle to point on line segment
+            float segmentLength = (float)Math.Sqrt(1 - Math.Pow(height, 2));
+            
+            //calculations for endpoint coordinates of line segment
+            segmentEndPoint0 = (Vector3.up * height) + (Vector3.left * segmentLength);
+            segmentEndPoint1 = (Vector3.up * height) + (Vector3.right * segmentLength);
 
         }
+       
+        //height for cross section is outside of circle 
         else if (Math.Abs(height) > radius)
         {
-                //do nothing
+            Debug.Log("Height is out of range of object.");
         }
         
     }
 
-    public void crossSectAnnulus(float innerRadius, float outerRadius, float height)
+    /// <summary>
+    /// Function to calculate cross section of an annulus 
+    /// </summary>
+    /// <param name="height"></param>
+    public void crossSectAnnulus(float height)
     {
-        outerRadius = 1f;
-        innerRadius = 0.5f;
+        float outerRadius = 1f;
+        float innerRadius = 0.75f;
+       
+        //point if intersection hits edge, or points for line segment(s) if it passes through annulus
+        Vector3 segmentAEndPoint0, segmentAEndPoint1, segmentBEndPoint0, segmentBEndPoint1;
+       
+        //horizontal distance from center of annulus to points on line segment(s)
+        float x1, x2;
 
-        //you might think about this as two different circle intersection problems, and use bits of your previous function
-
-        //
+        //cross-section only hits edge of annulus
         if (Math.Abs(height) == outerRadius)
         {
+            //if top edge, create point at intersection
             if (height == outerRadius)
             {
-                Vector3 pointPos = Vector3.up * outerRadius;
+                segmentAEndPoint0 = Vector3.up * outerRadius;
             }
+            //if bottom edge, create point at intersection
             else if (height == -outerRadius)
             {
-                Vector3 pointPos = Vector3.down * outerRadius;
+                segmentAEndPoint0 = Vector3.down * outerRadius;
             }
-//TODO @Camden Render Figure
-
         }
-        else if (Math.Abs(height) == innerRadius)
+        //cross section is a line segment in between the inner circle and outer circle
+        else if (Math.Abs(height) < outerRadius && Math.Abs(height) >= innerRadius)
         {
-            
+            //horizontal distance from center to point on outer edge of annulus
+            x1 = (float)(Math.Sqrt(1 - Math.Pow(height, 2)));
+           
+            //calculations for coordinates of line segment endpoints
+            segmentAEndPoint0 = (Vector3.up * height) + (Vector3.right * (x1));
+            segmentAEndPoint1 = (Vector3.up * height) + (Vector3.left * (x1));
         }
+        //cross section height is less than the inner radius, resulting in two line segments
         else if (Math.Abs(height) < innerRadius )
         {
-
-            //if the height is smaller than the inner radius, then each line segment is defined by 2 Vector3s (one for each endpoint).
-            //and you have two line segments.  So you want two pairs of Vector3's.
-            //even though the figure is 2D, it still exists in a 3D space.
+            //horizontal distance from center to point on outer edge (x1) and inner edge (x2) of annulus
+            x1 = (float)(Math.Sqrt(1 - Math.Pow(height, 2)));
+            x2 = (float)(Math.Sqrt(0.75 - Math.Pow(height, 2)));
             
-            //suggest this:
-            //Vector3 SegmentAEndpoint0 = 
-            //Vector3 SegmentAEndpoint1 = 
-            //Vector3 SegmentBEndpoint0 = 
-            //Vector3 SegmentBEndpoint1 = 
-            //Debug.Log(SegmentAEndpoint0, SegmentAEndpoint1, SegmentBEndpoint0, SegmentBEndpoint1);
-//TODO @Camden Render Figure
-
+            //calculations for inner and outer endpoints for each line segment
+            segmentAEndPoint0 = (Vector3.up * height) + (Vector3.left * (x1));
+            segmentAEndPoint1 = (Vector3.up * height) + (Vector3.left * (x2));
+            
+            segmentBEndPoint0 = (Vector3.up * height) + (Vector3.right * (x2));
+            segmentBEndPoint1 = (Vector3.up * height) + (Vector3.right * (x1));
         }
-        else if (height > innerRadius && height < outerRadius)
+        //cross section height is out of range of annulus
+        else if (Math.Abs(height) > outerRadius)
         {
-  //TODO @Rene calculate figure parameters
-
-
-            //if the height is smaller than the inner radius, then each line segment is defined by 2 Vector3s (one for each endpoint).
-            //and you have one line segment.  So you want one pairs of Vector3's.
-            //even though the figure is 2D, it still exists in a 3D space.
-                        
-            //suggest this:
-            //Vector3 SegmentAEndpoint0 = 
-            //Vector3 SegmentAEndpoint1 = 
-            //Debug.Log(SegmentAEndpoint0, SegmentAEndpoint1);
- //TODO @Camden Render Figure
-           
+            Debug.Log("Height is out of range of object.");
         }
-        //here you've missed the case where height == innerRadius.
 
     }
     
@@ -145,21 +150,22 @@ public class intersectionScript : MonoBehaviour
     /// <param name="center"></param>
     /// <param name="height"></param>
     /// <param name="planeNorm"></param>
-    public void crossSectSphere(float height, float radius, Vector3 sphereCenter)
+    public void crossSectSphere(float height)
     {
-        radius = 1f;
+        float radius = 1f;
         float circRadius;
         Vector3 circCenter;
 
         //If cross section only hits edge of sphere
         if (Math.Abs(height) == radius)
         {
+            //if top of sphere, create circle with radius 0 at intersection
             if (height == radius)
             {
                 circCenter = Vector3.up * height;
                 circRadius = 0;
             }
-
+            //if bottom of sphere, create circle with radius 0 at intersection
             if (height == -radius)
             {
                 circCenter = Vector3.down * height;
@@ -174,24 +180,70 @@ public class intersectionScript : MonoBehaviour
             Vector3 normPlane = Vector3.up;
             
         }
-        else
+        else if (Math.Abs(height) > radius)
         {
-            if (Math.Abs(height) > radius)
-            {
-                //do nothing
-            }
+                Debug.Log("Height is out of range of object.");
         }
+        
 
 
 
     }
-
-    public void crossSectTorus(float innerRadius, float outerRadius, Vector3 center, Vector3 height, Vector3 plane1Norm, Vector3 plane2Norm)
+    /// <summary>
+    /// Function to calculate cross section of a torus
+    /// </summary>
+    /// <param name="height"></param>
+    public void crossSectTorus(float height)
     {
- //TODO @Rene calculate figure parameters
+        float innerRadius = 0.75f;
+        float outerRadius = 1f;
+        float ellipse1RadiusA, ellipse1RadiusB, ellipse2Radius1, ellipse2Radius2;
+        Vector3 ellipse1PointA, ellipse1PointB, ellipse2PointA, ellipse2PointB;
+        Vector3 plane1Norm;
+        Vector3 plane2Norm;
         
- //TODO @Camden Render Figure
-       
+
+        if (Math.Abs(height) == outerRadius)
+        {
+            if (height == outerRadius)
+            {
+                ellipse1PointA = Vector3.up * height;
+                ellipse1RadiusA = 0;
+                ellipse1RadiusB = 0;
+            }
+            else if (height == -outerRadius)
+            {
+                ellipse1PointA = Vector3.down * height;
+                ellipse1RadiusA = 0;
+                ellipse1RadiusB = 0;
+            }
+        }
+        else if (Math.Abs(height) < outerRadius && Math.Abs(height) >= innerRadius)
+        {
+            //float fixedRadius =
+            float centerPoint = (float)Math.Sqrt(1 - Math.Pow(height, 2)) / 2;
+            ellipse1PointA = Vector3.up * height + Vector3.left * centerPoint;
+            ellipse1PointB = Vector3.up * height + Vector3.right * centerPoint;
+        }
+        else if (Math.Abs(height) < innerRadius)
+        {
+            
+        }
+        else if (Math.Abs(height) > outerRadius)
+        {
+                Debug.Log("Height is out of range of object.");
+        }
+        
+    }
+
+    public void crossSectHyperSphere(float height)
+    {
+        
+    }
+
+    public void crossSectHyperTorus(float height)
+    {
+        
     }
 
 }
