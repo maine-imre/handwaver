@@ -114,14 +114,15 @@ namespace IMRE.HandWaver.Kernel
                     {
                         Debug.Log("Session saved!");
 
+                        // If the path doesnt exist. Skip saving.
+                        if (string.IsNullOrEmpty(path)) yield break;
+                        
                         // Create XML Document
                         XmlDocument currSession = new XmlDocument();
                             
                         // Load in data from response body
                         currSession.LoadXml(((DownloadHandlerFile) req.downloadHandler).text);
 
-                        // If the path doesnt exist. Skip saving.
-                        if (string.IsNullOrEmpty(path)) yield break;
                             
                         // Save the xmldocument to the path provided.
                         currSession.Save(path);
@@ -166,8 +167,11 @@ namespace IMRE.HandWaver.Kernel
                         currSession.LoadXml(((DownloadHandlerFile) req.downloadHandler).text);
 
                         // If the path doesnt exist. Skip saving.
-                        if (string.IsNullOrEmpty(path)) yield break;
-                            
+                        if (string.IsNullOrEmpty(path))
+                        {
+                            Debug.LogError("Path provided is null or empty: "+path);
+                            yield break;
+                        }
                         // Save the xmldocument to the path provided.
                         currSession.Save(path);
                     }
@@ -195,6 +199,7 @@ namespace IMRE.HandWaver.Kernel
 
             using (UnityWebRequest req = UnityWebRequest.Post( HOSTURL+"/command", form))
             {
+               
                 //request and wait for response
                 yield return req.SendWebRequest();
 
