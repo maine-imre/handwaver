@@ -220,13 +220,12 @@ public class spencerIntersections : MonoBehaviour
         }
         else if (Math.Abs(height) < outerRadius && Math.Abs(height) >= innerRadius)
         {
-            //float fixedRadius =
-            float centerPoint = (float)Math.Sqrt(1 - Math.Pow(height, 2)) / 2;
-            ellipse1PointA = Vector3.up * height + Vector3.left * centerPoint;
-            ellipse1PointB = Vector3.up * height + Vector3.right * centerPoint;
+
         }
         else if (Math.Abs(height) < innerRadius)
         {
+            //egg case
+            
             
         }
         else if (Math.Abs(height) > outerRadius)
