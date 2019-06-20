@@ -1,14 +1,24 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Remoting.Messaging;
+using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
 using IMRE.HandWaver.HWIO;
+using IMRE.HandWaver.Space;
 using Leap;
 using UnityEngine;
+using UnityEngine.SocialPlatforms;
+using Unity.Mathematics;
+
 
 namespace IMRE.HandWaver{
 public class spencerIntersections : MonoBehaviour
 {
     public float crossSectionHeight = .5f;
+   
+    [Range(0, 2f * Mathf.PI)]
+    public float theta;
 
     void Start()
     {
@@ -24,10 +34,10 @@ public class spencerIntersections : MonoBehaviour
     void Update()
     {   
 //TODO @Camden make these functions dynamically accept the paramters from the figures
-        crossSectCirc(1f,crossSectionHeight);
-        crossSectAnnulus(.5f,1f,crossSectAnnulus);
-        crossSectSphere(1f,Vector3.zero,crossSectionHeight,Vector3.up);
-        crossSectTorus(.5f, 1f, Vector3.zero, crossSectionHeight, Vector3.forward, Vector3.right)
+        crossSectCirc(crossSectionHeight);
+        crossSectAnnulus(crossSectionHeight);
+        crossSectSphere(crossSectionHeight);
+        crossSectTorus(crossSectionHeight);
     }
 
     /// <summary>
@@ -66,7 +76,7 @@ public class spencerIntersections : MonoBehaviour
         else if (Math.Abs(height) < radius)
         {
             //horizontal distance from center of circle to point on line segment
-            float segmentLength = (float)Math.Sqrt(1 - Math.Pow(height, 2));
+            float segmentLength = Mathf.Sqrt(1f - Mathf.Pow(height, 2));
             
             //calculations for endpoint coordinates of line segment
             segmentEndPoint0 = (Vector3.up * height) + (Vector3.left * segmentLength);
@@ -95,7 +105,8 @@ public class spencerIntersections : MonoBehaviour
         Vector3 segmentAEndPoint0, segmentAEndPoint1, segmentBEndPoint0, segmentBEndPoint1;
        
         //horizontal distance from center of annulus to points on line segment(s)
-        float x1, x2;
+        float x1;
+        float x2;
 
         //cross-section only hits edge of annulus
         if (Math.Abs(height) == outerRadius)
@@ -115,7 +126,7 @@ public class spencerIntersections : MonoBehaviour
         else if (Math.Abs(height) < outerRadius && Math.Abs(height) >= innerRadius)
         {
             //horizontal distance from center to point on outer edge of annulus
-            x1 = (float)(Math.Sqrt(1 - Math.Pow(height, 2)));
+            x1 = (Mathf.Sqrt(1f - Mathf.Pow(height, 2)));
            
             //calculations for coordinates of line segment endpoints
             segmentAEndPoint0 = (Vector3.up * height) + (Vector3.right * (x1));
@@ -125,8 +136,8 @@ public class spencerIntersections : MonoBehaviour
         else if (Math.Abs(height) < innerRadius )
         {
             //horizontal distance from center to point on outer edge (x1) and inner edge (x2) of annulus
-            x1 = (float)(Math.Sqrt(1 - Math.Pow(height, 2)));
-            x2 = (float)(Math.Sqrt(0.75 - Math.Pow(height, 2)));
+            x1 = (Mathf.Sqrt(1f - Mathf.Pow(height, 2)));
+            x2 = (Mathf.Sqrt(0.75f - Mathf.Pow(height, 2)));
             
             //calculations for inner and outer endpoints for each line segment
             segmentAEndPoint0 = (Vector3.up * height) + (Vector3.left * (x1));
@@ -176,7 +187,7 @@ public class spencerIntersections : MonoBehaviour
         else if (Math.Abs(height) < radius)
         {
             circCenter = Vector3.up * height;
-            circRadius = (float)Math.Sqrt(1 - Math.Pow(height, 2));
+            circRadius = Mathf.Sqrt(1 - Mathf.Pow(height, 2));
             Vector3 normPlane = Vector3.up;
             
         }
@@ -195,44 +206,89 @@ public class spencerIntersections : MonoBehaviour
     /// <param name="height"></param>
     public void crossSectTorus(float height)
     {
-        float innerRadius = 0.75f;
+        float innerRadius = 0.20f;
         float outerRadius = 1f;
-        float ellipse1RadiusA, ellipse1RadiusB, ellipse2Radius1, ellipse2Radius2;
-        Vector3 ellipse1PointA, ellipse1PointB, ellipse2PointA, ellipse2PointB;
-        Vector3 plane1Norm;
-        Vector3 plane2Norm;
         
+        //radius of 2d circle for torus
+        const float circleRadius = 0;
+        
+        //distance from axis that circle will be rotated on
+        const float rotateRadius = 0;
+        
+        //resulting plane's distance from center
+        const float planeDistance = 0;
+        Vector3 torusCenter = Vector3.zero;
+        
+        Vector3 pointPos;
 
+        //convert values to variables for equation
+        float d = 2f * (float)(Math.Pow(circleRadius, 2) + Math.Pow(rotateRadius, 2) - Math.Pow(planeDistance, 2));
+        float e = 2f * (float) (Math.Pow(circleRadius, 2) - Math.Pow(rotateRadius, 2) - Math.Pow(planeDistance, 2));
+        float f = -(circleRadius + rotateRadius + planeDistance) * (circleRadius + rotateRadius - planeDistance) * (circleRadius - rotateRadius + planeDistance) * (circleRadius - rotateRadius - planeDistance);
+
+        //cross section only hits a point on outer edge of torus
         if (Math.Abs(height) == outerRadius)
         {
             if (height == outerRadius)
             {
-                ellipse1PointA = Vector3.up * height;
-                ellipse1RadiusA = 0;
-                ellipse1RadiusB = 0;
+                pointPos = Vector3.up * height;
             }
             else if (height == -outerRadius)
             {
-                ellipse1PointA = Vector3.down * height;
-                ellipse1RadiusA = 0;
-                ellipse1RadiusB = 0;
+                pointPos = Vector3.down * height;
             }
         }
-        else if (Math.Abs(height) < outerRadius && Math.Abs(height) >= innerRadius)
-        {
-
-        }
-        else if (Math.Abs(height) < innerRadius)
-        {
-            //egg case
-            
-            
-        }
+        
+        //height is not within torus
         else if (Math.Abs(height) > outerRadius)
         {
-                Debug.Log("Height is out of range of object.");
+            Debug.Log("Height is out of range of object.");
         }
         
+        //cross section results in spiric shape
+        else
+        {
+            for (float i = 0; i < Mathf.PI * 2f; i++)
+            {
+                spiricMath(theta, d, e, f);
+            }
+
+        }
+        
+    }
+
+    /// <summary>
+    /// Math for calculating intersection of torus and plane
+    /// </summary>
+    /// <param name="theta"></param>
+    /// <param name="d"></param>
+    /// <param name="e"></param>
+    /// <param name="f"></param>
+    /// <returns></returns>
+    private float3x2 spiricMath(float theta, float d, float e, float f)
+    {
+        //distance results 
+        float r0;
+        float r1;
+
+        r0 = Mathf.Sqrt(
+                 -Mathf.Sqrt(
+                     Mathf.Pow(-d * Mathf.Cos(theta) * Mathf.Cos(theta) - e * Mathf.Sin(theta) * Mathf.Sin(theta), 2) +
+                     4 * f) + d * Mathf.Cos(theta) * Mathf.Cos(theta) + e * Mathf.Sin(theta) * Mathf.Sin(theta)) /
+             Mathf.Sqrt(2);
+        
+        r1 = Mathf.Sqrt(
+                 Mathf.Sqrt(
+                     Mathf.Pow(-d * Mathf.Cos(theta) * Mathf.Cos(theta) - e * Mathf.Sin(theta) * Mathf.Sin(theta), 2) +
+                     4 * f) + d * Mathf.Cos(theta) * Mathf.Cos(theta) + e * Mathf.Sin(theta) * Mathf.Sin(theta)) /
+             Mathf.Sqrt(2);;
+        
+        float3x2 result = new float3x2();
+        
+        //distance results converted to theta
+        result.c0 = r0 * (Mathf.Cos(theta) * Vector3.right + Mathf.Sin(theta) * Vector3.forward);
+        result.c1 = r1 * (Mathf.Cos(theta) * Vector3.right + Mathf.Sin(theta) * Vector3.forward);
+        return result;
     }
 
     public void crossSectHyperSphere(float height)
