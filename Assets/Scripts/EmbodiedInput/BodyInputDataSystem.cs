@@ -35,7 +35,7 @@ namespace IMRE.EmbodiedUserInput
         /// This struct could be synced over the network in order to have avatars in a multiplayer context.
         /// This struct is passed to gestures in order to determine if they should be invoked.
         /// </summary>
-        internal static BodyInput bodyInput = new BodyInput();
+        public static BodyInput bodyInput = new BodyInput();
 
         private Queue<BodyInput> bodyInputQue = new Queue<BodyInput>();
 

@@ -14,7 +14,7 @@ namespace IMRE.EmbodiedUserInput
         /// <summary>
         /// A list of joints for each figner. (four joints per finger, indexed 0 through 3)
         /// </summary>
-        public fixed BodyComponent Joints[4];
+        public BodyComponent[] Joints;
 
         /// <summary>
         /// the direction a given finger is pointing in.

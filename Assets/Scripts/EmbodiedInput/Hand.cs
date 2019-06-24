@@ -39,7 +39,7 @@ namespace IMRE.EmbodiedUserInput
         /// [3] = Ring Finger
         /// [4] = Pinky
         /// </summary>
-        public fixed Finger Fingers[5];
+        public Finger[] Fingers;
 
         /// <summary>
         /// The palm.  Direction is normal to palm.

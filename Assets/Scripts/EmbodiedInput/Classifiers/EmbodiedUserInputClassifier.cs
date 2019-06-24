@@ -17,21 +17,21 @@ namespace IMRE.EmbodiedUserInput
     /// An interface for all classifiers of embodied user input.
     /// </summary>
     /// <typeparam name="BodyInput"></typeparam>
-    public interface IEmbodiedClassifier<BodyInput> : IComponentData
+    public interface IEmbodiedClassifier : IComponentData
     {
         /// <summary>
         /// A function to determine if the classifier should activate when deactivated.
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        bool shouldActivate(BodyInput data);
+        bool shouldActivate();
 
         /// <summary>
         /// A classifier to determine if the classifier should cancel while active
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        bool shouldCancel(BodyInput data);
+        bool shouldCancel();
 
         
         /// <summary>
@@ -41,7 +41,7 @@ namespace IMRE.EmbodiedUserInput
         /// <returns></returns>
         bool shouldFinish { get; set; }
         /// <summary>
-        /// Whether is classifier is eligible to trigger an action
+        /// Whether a classifier is eligible to trigger an action
         /// </summary>
         bool isEligible { get; set; }
         /// <summary>
@@ -53,13 +53,13 @@ namespace IMRE.EmbodiedUserInput
         /// </summary>
         bool wasFinished { get; set; }
         /// <summary>
-        /// Whether the classifier was cancelled in the last iteration
+        /// Whether the classifier was activated in the last iteration
         /// </summary>
         bool wasActivated { get; set; }
     }
     
     /// <summary>
-    /// This is an example class that uses the emobided input classifier in a Job Component System
+    /// This is an example class that uses the embodied input classifier in a Job Component System
     /// </summary>
     public class EmbodiedUserInputClassifier : JobComponentSystem
     {
@@ -74,18 +74,20 @@ namespace IMRE.EmbodiedUserInput
             thumbsUp
         };
         
+        /// <inheritdoc />
         /// <summary>
         /// A generic example of a classifier.  This should be renamed in each use case.
         /// </summary>
-        public struct classifierJob : IEmbodiedClassifier<BodyInput>
+        public struct ClassifierJob : IEmbodiedClassifier
         {
             public Chirality chirality;
             public classifierType type;
             
             public float3 origin;
             public float3 direction;
-            public bool shouldActivate(BodyInput data)
+            public bool shouldActivate()
             {
+                BodyInput data = BodyInputDataSystem.bodyInput;
                 Hand hand;
                 float3 velocity;
                 float speed;
@@ -180,8 +182,10 @@ namespace IMRE.EmbodiedUserInput
                 }
             }
 
-            public bool shouldCancel(BodyInput data)
+            public bool shouldCancel()
             {
+                BodyInput data = BodyInputDataSystem.bodyInput;
+
                 return !shouldActivate(data);
             }
 
@@ -198,21 +202,21 @@ namespace IMRE.EmbodiedUserInput
         /// Inspired by LeapPaint https://github.com/leapmotion/Paint
         /// </summary>
         [BurstCompile]
-        public struct EmbodiedUserInputClassifierJob : IJobForEach<BodyInput, classifierJob>
+        public struct EmbodiedUserInputClassifierJob : IJobForEach<ClassifierJob>
         {
             
-            public void Execute([ReadOnly] ref BodyInput cBodyInput, ref classifierJob classifierJob)
+            public void Execute(ref ClassifierJob classifierJob)
             {
                 if (!classifierJob.isEligible)
                 {
-                    classifierJob.isEligible = classifierJob.shouldActivate(cBodyInput);
+                    classifierJob.isEligible = classifierJob.shouldActivate();
                         classifierJob.wasActivated = classifierJob.isEligible;
                         classifierJob.wasCancelled = false;
                         classifierJob.wasFinished = false;
                 }
                 else
                 {
-                    classifierJob.wasCancelled = classifierJob.shouldCancel(cBodyInput);
+                    classifierJob.wasCancelled = classifierJob.shouldCancel();
                     classifierJob.wasFinished = classifierJob.shouldFinish && !classifierJob.wasCancelled;
                     classifierJob.isEligible = !(classifierJob.wasCancelled || classifierJob.wasFinished);
                     classifierJob.wasActivated = false;
