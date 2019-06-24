@@ -15,6 +15,7 @@ namespace IMRE.HandWaver.Kernel
     /// </summary>
     public static class HandWaverServerTransport
     {
+        
         /// <summary>
         /// Internal cache of session id.
         /// Access this through the public sessionID var.
