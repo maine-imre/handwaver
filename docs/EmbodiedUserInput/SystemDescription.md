@@ -22,7 +22,11 @@ There are 3 layers to the gesture system.
 ---
 
 ## Input
-Input is handled in [this file](https://github.com/maine-imre/handwaver/blob/feature/gesture-abstraction/Assets/Scripts/EmbodiedInput/BodyInputDataSystem.cs) where the APIs from the various hardwares are fed into a data structure [defined here,](https://github.com/maine-imre/handwaver/blob/feature/gesture-abstraction/Assets/Scripts/EmbodiedInput/BodyInput.cs) which holds the data in a general way that the rest of the system can use. 
+* **General Description:**  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Input is handled in [this file](https://github.com/maine-imre/handwaver/blob/feature/gesture-abstraction/Assets/Scripts/EmbodiedInput/BodyInputDataSystem.cs) where the APIs from the various hardwares are fed into a data structure, [defined here,](https://github.com/maine-imre/handwaver/blob/feature/gesture-abstraction/Assets/Scripts/EmbodiedInput/BodyInput.cs) which holds the data in a general way that the rest of the system can use. 
+
+* **TheDataStructure**  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BodyInput is made up of BodyComponents and Hands.
 
 ---
 
