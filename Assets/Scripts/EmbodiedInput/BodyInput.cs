@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
 using Unity.Entities;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace IMRE.EmbodiedUserInput
@@ -180,5 +181,129 @@ namespace IMRE.EmbodiedUserInput
             }
 
         }
+    }
+    
+    /// <summary>
+    /// The generic tracking data for a generic body component. 
+    /// </summary>
+    [System.Serializable]
+    public struct BodyComponent
+    {
+        private float3x3 data;
+        /// <summary>
+        /// The position of a given joint
+        /// </summary>
+        public float3 Position{
+            get {return data.c0;}
+            set {data.c0 = value;}
+        }
+
+        /// <summary>
+        /// The direction of a joint.
+        /// Unless otherwise noted, this is a assumeed to be the radial direction
+        /// of the previous connecting bone
+        /// </summary>
+        public float3 Direction{
+            get {return data.c1;}
+            set {data.c1 = value;}
+        }
+
+        /// <summary>
+        /// The average velocity of the component over the last 10 frames.
+        /// This is done on seperate calculation, and it is not needed to be updated outside of <see cref="BodyInputDataSystem"/>
+        /// </summary>
+        public float3 Velocity{
+            get {return data.c2;}
+            set {data.c2 = value;}
+        }
+        
+    }
+    
+    [System.Serializable]
+    public enum Chirality
+    {
+        Left,
+        Right,
+        None
+    }
+    /// <summary>
+    /// A generic tracking data from a finger.
+    /// </summary>
+    [System.Serializable]
+    public struct Finger
+    {
+        /// <summary>
+        /// A list of joints for each figner. (four joints per finger, indexed 0 through 3)
+        /// </summary>
+        public BodyComponent[] Joints;
+
+        /// <summary>
+        /// the direction a given finger is pointing in.
+        /// </summary>
+        public float3 Direction;
+
+        /// <summary>
+        /// Wheter or not a finger is extended (pointing).
+        /// </summary>
+        public bool IsExtended;
+    }
+    
+           
+    /// <summary>
+    /// The generic tracking data for a Hand.
+    /// </summary>
+    [System.Serializable]
+    public struct Hand
+    {
+        /// <summary>
+        /// This controls how pinched a hand must be to qualify for the isPinching boolean
+        /// </summary>
+        private const float pinchTolerance = 0.8f;
+        
+        private bool isLeft;
+        
+        /// <summary>
+        /// The handedness of the hand.
+        /// </summary>
+        public Chirality WhichHand{
+            get{
+                if(isLeft) 
+                    return Chirality.Left;
+                return Chirality.Right;
+            }
+            set{
+                isLeft = (value == Chirality.Right);
+            }
+        }
+
+        /// <summary>
+        /// An array of fingers.
+        /// [0] = Thumb.
+        /// [1] = Index Finger.
+        /// [2] = Middle Finger.
+        /// [3] = Ring Finger
+        /// [4] = Pinky
+        /// </summary>
+        public Finger[] Fingers;
+
+        /// <summary>
+        /// The palm.  Direction is normal to palm.
+        /// </summary>
+        public BodyComponent Palm;
+
+        /// <summary>
+        /// Wrist.  Direction is from wrist to first joint of finger
+        /// </summary>
+        public BodyComponent Wrist;
+
+        /// <summary>
+        /// How close the thumb and pointer finger are as a measure form 0 to 1 where 1 is fully "pinched"
+        /// </summary>
+        public float PinchStrength;
+
+        /// <summary>
+        /// Is the pinch strength sufficient to be pinching?
+        /// </summary>
+        public bool IsPinching => (PinchStrength >= pinchTolerance);
     }
 }
