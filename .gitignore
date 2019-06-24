@@ -17,7 +17,7 @@
 /Assets/Databases/*
 /[Aa]ssets/[Ll]eap[Mm]otion/*
 /Assets/MixCast/*
-/Assets/Plugins/*
+# /Assets/Plugins/*
 /Assets/Photon Unity Networking/*
 /Assets/PhotonChatApi/*
 /Assets/PoolManagerExampleFiles/*
