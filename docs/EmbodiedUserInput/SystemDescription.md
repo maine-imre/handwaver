@@ -6,6 +6,7 @@ To track the progress on this issue [go here](https://github.com/maine-imre/hand
 
 ## Table of Contents
 * [Layers](https://github.com/maine-imre/handwaver/wiki/Gestures#layers)
+* [Input](https://github.com/maine-imre/handwaver/wiki/Gestures#input)
 * [Hardware](https://github.com/maine-imre/handwaver/wiki/Gestures#hardware)
 * [Definitions for Gestures](https://github.com/maine-imre/handwaver/wiki/Gestures#definitions-for-gestures)
      * [Grasp](https://github.com/maine-imre/handwaver/wiki/Gestures#grasp)
@@ -17,6 +18,11 @@ There are 3 layers to the gesture system.
 * The base layer, called Interface Layer, adds support for hardware by using their specific APIs to grab the input from the sources and feed it into the next layers by adding their inputs to the relevant parts of the Imre gestures struct
 * The middle layer, called Classifer Layer, defines states of the body and then checks to see if data on what a person in the environment is doing matches any of those states.
 * The Top Layer, called Action Layer, uses the states found by the Classifier Layer to determine what functionality should be executed.
+
+---
+
+## Input
+Input is handled in [this file](https://github.com/maine-imre/handwaver/blob/feature/gesture-abstraction/Assets/Scripts/EmbodiedInput/BodyInputDataSystem.cs) where the APIs from the various hardwares are fed into a data structure [defined here,](https://github.com/maine-imre/handwaver/blob/feature/gesture-abstraction/Assets/Scripts/EmbodiedInput/BodyInput.cs) which holds the data in a general way that the rest of the system can use. 
 
 ---
 
