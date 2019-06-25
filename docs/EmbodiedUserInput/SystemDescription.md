@@ -46,7 +46,8 @@ There are 3 layers to the gesture system.
 
 ---
 
-## Entity Component System Implementation
+## Entity Component System Implementation  
+*
 
 ---
 
@@ -59,4 +60,4 @@ This is a state of the hand where both the thumb and index finger have their fin
  Performing the "grasp" (pinch) gesture when there is no function attached to the context of where the grasp is happening will turn the index finger and thumb green. This green will be less visible than if the grasp was operating on an object or had some sort of function attached to its current context
 ---
 ---
-updated 6/10/2019
+updated 6/25/2019
