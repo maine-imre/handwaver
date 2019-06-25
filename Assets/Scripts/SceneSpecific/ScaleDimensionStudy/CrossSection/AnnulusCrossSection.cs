@@ -4,88 +4,124 @@ using System.Collections.Generic;
 using System.Xml.Linq;
 using IMRE.HandWaver.Space;
 using Unity.Mathematics;
+using IMRE.HandWaver.HigherDimensions;
 using UnityEngine;
+using System.Linq;
 
 namespace IMRE.HandWaver.ScaleStudy
 {
-    public class AnnulusCrossSection : MonoBehaviour
+    public class AnnulusCrossSection : MonoBehaviour, ISliderInput
     {
-        private int n;
+        public int n = 5;
 
+        #region Components/Variables
+      
+        private Mesh annulusRenderer => GetComponent<MeshFilter>().mesh;
+        private LineRenderer[] crossSectionRenderer => GetComponentsInChildren<LineRenderer>();
         
-        private MeshRenderer annulusRenderer => GetComponent<MeshRenderer>();
-        private LineRenderer crossSectionRenderer => GetComponentInChildren<LineRenderer>();
-        
-        private float height;
-        private float innerRadius = 0.75f;
-        private float outerRadius = 1f;
-        private Vector3 center;
-        private Vector3 normal;
+        public float innerRadius = 0.75f;
+        public float outerRadius = 1f;
+
+        public Material annulusMaterial;
+        public Material crossSectionMaterial;
+        #endregion
+       
 
         // Start is called before the first frame update
         void Start()
         {
-            Mesh mesh = GetComponent<MeshFilter>().mesh;
-            
+            gameObject.AddComponent<MeshRenderer>();
+            gameObject.AddComponent<MeshFilter>();
+            gameObject.GetComponent<MeshRenderer>().material = annulusMaterial;
+
+            #region Vertices/Triangles
+
             //number of vertices within pre-rotated square
-            Vector3[] verts = new Vector3[10];
+            Vector3[] verts = new Vector3[(n + 1) * n];
             
             //Array of 2d vectors for uv mapping
             Vector2[] uvs = new Vector2[verts.Length];
-            float oneNth = 1f / ((float)n);
+            float oneNth = 1f / n;
+            float oneNMinusTwoth = 1f / (n - 2);
 
             
             for (int i = 0; i < n; i++)
             {
-                for (int j = 0; j <= n; j++)
+                for (int j = 0; j < n-1; j++)
                 {
                     //index value computation
                     int idx = i + n * j;
 
                     //find radian value of length of curve
                     float alpha = i*oneNth;
-                    float beta = j * oneNth;
+                    float beta = j * oneNMinusTwoth;
 
                     //map vertices from 2 dimensions to 3
-                    verts[idx] = annulusPosition(alpha,beta);
-                
+                    verts[idx] = annulusPosition(beta, alpha);
+                   
+                    
+
                     //uv mapping 
-                    uvs[idx] = new Vector2(j*oneNth, i*oneNth);
+                    uvs[idx] = new Vector2(alpha, beta);
                 }
             }
             
             //3 vertices x 2 triangles per square x dimension of square
             int[] triangles = new int[6 * n * n];
             
-            for (int k = 0; k < 2 * n * n; k++)
+            for (int k = 0; k < 2 * (n)*n; k++)
             {
                 //for each vertex on each triangle
                 for (int m = 0; m < 3; m++)
                     triangles[3 * k + m] = triangle(k, m);
             }
+            annulusRenderer.vertices = verts;
+            annulusRenderer.triangles = triangles;
+            annulusRenderer.uv = uvs;
+            annulusRenderer.RecalculateNormals();
+            annulusRenderer.Optimize();
+            #endregion
 
-            mesh.vertices = verts;
-            mesh.triangles = triangles;
-            mesh.uv = uvs;
-            mesh.RecalculateNormals();
-            mesh.Optimize();
-            //TODO setup cross-section renderer as child object
-
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-            //TODO dynamic cross section renderer
-            crossSectAnnulus(height, innerRadius, outerRadius, center, normal);
+            #region GameObjects
             
+            GameObject child = new GameObject();
+            child.transform.parent = transform;
+            child.transform.localPosition = Vector3.zero;
+            child.AddComponent<LineRenderer>();
+            
+            GameObject child2 = new GameObject();
+            child2.transform.parent = transform;
+            child2.transform.localPosition = Vector3.zero;
+            child2.AddComponent<LineRenderer>();
+
+            child.GetComponent<LineRenderer>().endWidth = 0.01f;
+            child.GetComponent<LineRenderer>().startWidth = 0.01f;
+            child.GetComponent<LineRenderer>().enabled = false;
+            child2.GetComponent<LineRenderer>().endWidth = 0.01f;
+            child2.GetComponent<LineRenderer>().startWidth = 0.01f;
+            child2.GetComponent<LineRenderer>().enabled = false;
+
+            
+            child2.GetComponent<LineRenderer>().useWorldSpace = false;
+            child.GetComponent<LineRenderer>().useWorldSpace = false;
+            
+            crossSectionRenderer.ToList().ForEach( r => r.material = crossSectionMaterial);
+            #endregion
+
         }
+        
+        //slider to control cross section
+        public float slider
+        {
+            set => crossSectAnnulus(value);
+        }
+        
 
         /// <summary>
         /// Function to calculate cross section of an annulus 
         /// </summary>
         /// <param name="height"></param>
-        public void crossSectAnnulus(float height, float innerRadius, float outerRadius, Vector3 center, Vector3 plane)
+        public void crossSectAnnulus(float height)
         {
 
             //point if intersection hits edge, or points for line segment(s) if it passes through annulus
@@ -104,30 +140,38 @@ namespace IMRE.HandWaver.ScaleStudy
                     segmentAEndPoint0 = Vector3.up * outerRadius;
                 }
                 //if bottom edge, create point at intersection
-                else if (height == -outerRadius)
+                else
                 {
                     segmentAEndPoint0 = Vector3.down * outerRadius;
                 }
-                //TODO update rendering
+
+                crossSectionRenderer[0].enabled = true;
+                crossSectionRenderer[0].SetPosition(0,segmentAEndPoint0);
+                crossSectionRenderer[0].SetPosition(1,segmentAEndPoint0);
+                crossSectionRenderer[1].enabled = false;
             }
             //cross section is a line segment in between the inner circle and outer circle
             else if (Math.Abs(height) < outerRadius && Math.Abs(height) >= innerRadius)
             {
                 //horizontal distance from center to point on outer edge of annulus
-                x1 = (Mathf.Sqrt(1f - Mathf.Pow(height, 2)));
+                x1 = (Mathf.Sqrt(Mathf.Pow(outerRadius, 2) - Mathf.Pow(height, 2)));
 
                 //calculations for coordinates of line segment endpoints
                 segmentAEndPoint0 = (Vector3.up * height) + (Vector3.right * (x1));
                 segmentAEndPoint1 = (Vector3.up * height) + (Vector3.left * (x1));
                 
-                //TODO update rendering
+                crossSectionRenderer[0].enabled = true;
+                crossSectionRenderer[0].SetPosition(0,segmentAEndPoint0);
+                crossSectionRenderer[0].SetPosition(1,segmentAEndPoint1);
+                crossSectionRenderer[1].enabled = false;
+
             }
             //cross section height is less than the inner radius, resulting in two line segments
             else if (Math.Abs(height) < innerRadius)
             {
                 //horizontal distance from center to point on outer edge (x1) and inner edge (x2) of annulus
-                x1 = (Mathf.Sqrt(1f - Mathf.Pow(height, 2)));
-                x2 = (Mathf.Sqrt(0.75f - Mathf.Pow(height, 2)));
+                x1 = (Mathf.Sqrt(Mathf.Pow(outerRadius, 2) - Mathf.Pow(height, 2)));
+                x2 = (Mathf.Sqrt(Mathf.Pow(innerRadius, 2) - Mathf.Pow(height, 2)));
 
                 //calculations for inner and outer endpoints for each line segment
                 segmentAEndPoint0 = (Vector3.up * height) + (Vector3.left * (x1));
@@ -135,7 +179,13 @@ namespace IMRE.HandWaver.ScaleStudy
 
                 segmentBEndPoint0 = (Vector3.up * height) + (Vector3.right * (x2));
                 segmentBEndPoint1 = (Vector3.up * height) + (Vector3.right * (x1));
-                //TODO update rendering
+                crossSectionRenderer[0].enabled = true;
+                crossSectionRenderer[1].enabled = true;
+
+                crossSectionRenderer[0].SetPosition(0,segmentAEndPoint0);
+                crossSectionRenderer[0].SetPosition(1,segmentAEndPoint1);
+                crossSectionRenderer[1].SetPosition(0,segmentBEndPoint0);
+                crossSectionRenderer[1].SetPosition(1,segmentBEndPoint1);
 
             }
             //cross section height is out of range of annulus
@@ -143,6 +193,8 @@ namespace IMRE.HandWaver.ScaleStudy
             {
                 Debug.Log("Height is out of range of object.");
                 //TODO update rendering
+                crossSectionRenderer[0].enabled = false;
+                crossSectionRenderer[1].enabled = false;
 
             }
         }
@@ -161,7 +213,6 @@ namespace IMRE.HandWaver.ScaleStudy
             float length = (beta * (outerRadius - innerRadius)) + innerRadius;
             //rotation mapping
             Vector3 result = (Vector3.right * Mathf.Cos(alpha * 2 * Mathf.PI) + Vector3.up * Mathf.Sin(alpha * 2 * Mathf.PI)) * length;
-
 
             return result;
         }
@@ -217,6 +268,8 @@ namespace IMRE.HandWaver.ScaleStudy
 
             return 0;
         }
+        
+        
 
     }
     

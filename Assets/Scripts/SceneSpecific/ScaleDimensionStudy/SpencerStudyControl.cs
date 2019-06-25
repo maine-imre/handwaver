@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Linq;
+using IMRE.HandWaver.HigherDimensions;
 using UnityEditorInternal.Profiling.Memory.Experimental;
 
 #if Photon
 using Photon.Pun;
 #endif
 
-namespace IMRE.HandWaver.HigherDimensions
+namespace IMRE.HandWaver.ScaleStudy
 {
     /// <summary>
     /// Central control for scale and dimension study.
@@ -93,12 +95,14 @@ namespace IMRE.HandWaver.HigherDimensions
 
         private void Start()
         {
-            //construct a slider as a dependent linesegment, with points at Vector3.zero and Vector3.right.  
+            //construct a slider as a dependent line segment, with points at Vector3.zero and Vector3.right.  
             //Add Vector3.up for height
             slider = GeoObjConstruction.dLineSegment(GeoObjConstruction.dPoint(Vector3.zero+Vector3.up),GeoObjConstruction.dPoint(Vector3.right*.1f+Vector3.up));
             //construct a point on the slider (in the middle)
             //this point will be bound to the slider on update.
             sliderPoint = GeoObjConstruction.iPoint(Vector3.right*.05f);
+
+            _sliderInputs = FindObjectsOfType<MonoBehaviour>().OfType<ISliderInput>().ToList();
         }
 
         void Update()
@@ -157,24 +161,14 @@ namespace IMRE.HandWaver.HigherDimensions
 #if Photon
         [PunRPC]
 #endif
+
+	    private List<ISliderInput> _sliderInputs;
 	    private void setPercentFolded(float percent)
-	    {
+	    {    
 		    percentFolded = percent;
-
-		    //update each of the figures to reflect the degree folded.
-		    //if(hypercube != null)
-		    hypercube.FoldPercent = percentFolded;
-		    //if(fivecell != null)
-		    fivecell.PercentFolded = percentFolded;
-		    //if(cube != null)
-		    cube.PercentFolded = percentFolded;
-		    //if(pyramid != null)
-		    pyramid.PercentFolded = percentFolded;
-		    //if(square != null)
-		    square.PercentFolded = percentFolded;
-		    //if(triangle != null)
-		    triangle.PercentFolded = percentFolded;
-
+		    
+		    _sliderInputs.ForEach(si => si.slider = percentFolded);
+		    
 		    //update slider point on all users.
 		    sliderPoint.Position3 = (percentFolded / 360f) * (slider.point2.Position3 - slider.point1.Position3) +
 		                            slider.point1.Position3;

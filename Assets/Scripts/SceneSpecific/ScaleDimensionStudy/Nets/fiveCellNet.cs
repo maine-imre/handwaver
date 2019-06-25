@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using IMRE.HandWaver.ScaleStudy;
 
 namespace IMRE.HandWaver.HigherDimensions
 {
     /// <summary>
     /// Net of five cell for scale and dimension study.
     /// </summary>
-	public class fiveCellNet : AbstractHigherDimSolid
+	public class fiveCellNet : AbstractHigherDimSolid, ISliderInput
     {
         //basic vector4 values for computations
         private static Vector4 right = (new Vector4(0, 0, 1, 0) - new Vector4(Mathf.Sqrt(8f / 9f), 0, -1f / 3f, 0f)).normalized;
@@ -34,6 +35,14 @@ namespace IMRE.HandWaver.HigherDimensions
                 _percentFolded = value;
                 originalVerts = vertices(value*60f).ToList();
             }
+        }
+        
+        public float slider {
+            set
+            {
+                PercentFolded = value;
+                
+            } 
         }
 
         /// <summary>

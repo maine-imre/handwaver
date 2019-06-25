@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Linq;
+using IMRE.HandWaver.ScaleStudy;
 
 namespace IMRE.HandWaver.HigherDimensions
 {
@@ -10,7 +11,7 @@ namespace IMRE.HandWaver.HigherDimensions
 /// Net of hypercube for scale and dimension study
 /// Projected to 3D
 /// </summary>
-	public class HypercubeNet : AbstractHigherDimSolid
+	public class HypercubeNet : AbstractHigherDimSolid, ISliderInput
     {
         //basic vector4 values for computations
         private static Vector4 up = new Vector4(0, 1, 0, 0);
@@ -44,6 +45,14 @@ namespace IMRE.HandWaver.HigherDimensions
                 _foldPercent = value;
                 originalVerts = vertices(90f*value).ToList();
             }
+        }
+        
+        public float slider {
+            set
+            {
+                FoldPercent = value;
+                
+            } 
         }
 
         /// <summary>

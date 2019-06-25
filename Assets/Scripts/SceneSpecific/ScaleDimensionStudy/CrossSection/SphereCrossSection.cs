@@ -5,25 +5,36 @@ using UnityEngine;
 
 namespace IMRE.HandWaver.ScaleStudy
 {
-    public class SphereCrossSection : MonoBehaviour
+    public class SphereCrossSection : MonoBehaviour, ISliderInput
     {
         private int n;
         private MeshRenderer sphereRendere => GetComponent<MeshRenderer>();
         private LineRenderer crossSectionRenderer => GetComponentInChildren<LineRenderer>();
 
+        public float radius = 1f;
+        public Vector3 center = Vector3.zero;
+        public Vector3 normal = Vector3.up;
+
 
         // Start is called before the first frame update
         void Start()
         {
-            //TODO setup annulus renderer
+            //TODO setup sphere renderer
+            gameObject.AddComponent<MeshRenderer>();
+            gameObject.AddComponent<MeshFilter>();
+                
+            
             //TODO setup cross-section renderer as child object
+            GameObject child = new GameObject();
+            child.transform.parent = transform;
+            child.AddComponent<MeshRenderer>();
+            child.AddComponent<MeshFilter>();
 
         }
 
-        // Update is called once per frame
-        void Update()
+        public float slider
         {
-            //TODO dynamic cross section renderer
+            set => crossSectCirc(value,radius,center,normal);
         }
 
         /// <summary>
@@ -31,7 +42,7 @@ namespace IMRE.HandWaver.ScaleStudy
         /// </summary>
         /// <param name="radius"></param>
         /// <param name="height"></param>
-        public void crossSectCirc(float height, float radius, float center, float normal)
+        public void crossSectCirc(float height, float radius, Vector3 center, Vector3 normal)
         {
             //endpoints for line segment if intersection passes through circle
             Vector3 segmentEndPoint0;

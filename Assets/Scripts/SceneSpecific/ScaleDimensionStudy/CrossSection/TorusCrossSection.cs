@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace IMRE.HandWaver.ScaleStudy
 {
-    public class TorusCrossSection : MonoBehaviour
+    public class TorusCrossSection : MonoBehaviour, ISliderInput
     {
         private int n;
 
@@ -20,20 +20,31 @@ namespace IMRE.HandWaver.ScaleStudy
         const float planeDistance = 0;
 
         private MeshRenderer torusRenderer => GetComponent<MeshRenderer>();
-        private LineRenderer crossSectionRenderer => GetComponentInChildren<LineRenderer>();
+        private MeshFilter[] crossSectionRenderer => GetComponentsInChildren<MeshFilter>();
 
         // Start is called before the first frame update
         void Start()
         {
-            //TODO setup annulus renderer
+            //TODO setup torus renderer
+            gameObject.AddComponent<MeshRenderer>();
+            gameObject.AddComponent<MeshFilter>();
+                
+            
             //TODO setup cross-section renderer as child object
-
+            GameObject child = new GameObject();
+            child.transform.parent = transform;
+            child.AddComponent<MeshRenderer>();
+            child.AddComponent<MeshFilter>();
+            
+            GameObject child2 = new GameObject();
+            child2.transform.parent = transform;
+            child2.AddComponent<MeshRenderer>();
+            child2.AddComponent<MeshFilter>();
         }
 
-        // Update is called once per frame
-        void Update()
+        public float slider
         {
-            //TODO dynamic cross section renderer
+            set => crossSectTorus(value);
         }
 
         /// <summary>
@@ -129,5 +140,6 @@ namespace IMRE.HandWaver.ScaleStudy
             result.c1 = r1 * (Mathf.Cos(theta) * Vector3.right + Mathf.Sin(theta) * Vector3.forward);
             return result;
         }
+
     }
 }
