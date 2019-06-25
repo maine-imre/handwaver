@@ -8,6 +8,7 @@ To track the progress on this issue [go here](https://github.com/maine-imre/hand
 * [Layers](https://github.com/maine-imre/handwaver/blob/feature/gesture-abstraction/docs/EmbodiedUserInput/SystemDescription.md#layers)
 * [Input](https://github.com/maine-imre/handwaver/blob/feature/gesture-abstraction/docs/EmbodiedUserInput/SystemDescription.md#input)
 * [Hardware](https://github.com/maine-imre/handwaver/blob/feature/gesture-abstraction/docs/EmbodiedUserInput/SystemDescription.md#hardware)
+* [Entity Component System Implementation](https://github.com/maine-imre/handwaver/blob/feature/gesture-abstraction/docs/EmbodiedUserInput/SystemDescription.md#entity-component-system-implementation)
 * [Definitions for Gestures](https://github.com/maine-imre/handwaver/blob/feature/gesture-abstraction/docs/EmbodiedUserInput/SystemDescription.md#definitions-for-gestures)
      * [Grasp](https://github.com/maine-imre/handwaver/blob/feature/gesture-abstraction/docs/EmbodiedUserInput/SystemDescription.md#grasp)
 
@@ -42,6 +43,10 @@ There are 3 layers to the gesture system.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Vive Pro hand tracking
 * **Leap Motion**  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Hand tracking with a small peripheral device
+
+---
+
+## Entity Component System Implementation
 
 ---
 
