@@ -25,8 +25,10 @@ There are 3 layers to the gesture system.
 * **General Description:**  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Input is handled in [this file](https://github.com/maine-imre/handwaver/blob/feature/gesture-abstraction/Assets/Scripts/EmbodiedInput/BodyInputDataSystem.cs) where the APIs from the various hardwares are fed into a data structure, [defined here,](https://github.com/maine-imre/handwaver/blob/feature/gesture-abstraction/Assets/Scripts/EmbodiedInput/BodyInput.cs) which holds the data in a general way that the rest of the system can use. 
 
-* **TheDataStructure**  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BodyInput is made up of BodyComponents and Hands.
+* **The Data Structure**  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The generalized data is stored within a struct called **BodyInput** that is made up of other structs called **BodyComponents**. There are two additional structs within BodyInput called hands and fingers. A bodyComponent is made of a float 3x3 which holds three float3s that are for position, direction, and velocity. BodyInput has several instances of bodyComponent called head, neck, chest, waist, and 4 arrays of bodyComponents which represent the right and left leg as well as the right and left arm. There are then the references to the right and left hands.  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The **hands** are made of two bodyComponents representing the palm and wrist, two float values called pinchStrength and PinchTolerance. There is a boolean value called isLeft which chooses the chirality as either left or right. There is an array of 5 fingers where index 0 is the thumb, 1 is the index finger, 2 is the middle finger, 3 is the ring finger, and 4 is the pinky. Finally there is a boolean called isPinching which keeps track of whether a hand is pinching or not by checking if the pinchStrength value is equal to or greater than the pinchTolerance value.  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The **fingers** are made of an array of 4 bodyComponents which refer to the three joints in a finger and the finger tip. There is also a float3 which keeps track of the direction and a boolean called isExtended which is true when the finger is extended.
 
 ---
 
