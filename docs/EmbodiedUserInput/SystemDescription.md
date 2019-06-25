@@ -5,11 +5,11 @@ To track the progress on this issue [go here](https://github.com/maine-imre/hand
 ---
 
 ## Table of Contents
-* [Layers](https://github.com/maine-imre/handwaver/wiki/Gestures#layers)
-* [Input](https://github.com/maine-imre/handwaver/wiki/Gestures#input)
-* [Hardware](https://github.com/maine-imre/handwaver/wiki/Gestures#hardware)
-* [Definitions for Gestures](https://github.com/maine-imre/handwaver/wiki/Gestures#definitions-for-gestures)
-     * [Grasp](https://github.com/maine-imre/handwaver/wiki/Gestures#grasp)
+* [Layers](https://github.com/maine-imre/handwaver/blob/feature/gesture-abstraction/docs/EmbodiedUserInput/SystemDescription.md#layers)
+* [Input](https://github.com/maine-imre/handwaver/blob/feature/gesture-abstraction/docs/EmbodiedUserInput/SystemDescription.md#input)
+* [Hardware](https://github.com/maine-imre/handwaver/blob/feature/gesture-abstraction/docs/EmbodiedUserInput/SystemDescription.md#hardware)
+* [Definitions for Gestures](https://github.com/maine-imre/handwaver/blob/feature/gesture-abstraction/docs/EmbodiedUserInput/SystemDescription.md#definitions-for-gestures)
+     * [Grasp](https://github.com/maine-imre/handwaver/blob/feature/gesture-abstraction/docs/EmbodiedUserInput/SystemDescription.md#grasp)
 
 ---
 
