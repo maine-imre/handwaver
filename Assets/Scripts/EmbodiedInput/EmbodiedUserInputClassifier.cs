@@ -63,6 +63,7 @@ namespace IMRE.EmbodiedUserInput
     /// </summary>
     public class EmbodiedUserInputClassifier : JobComponentSystem
     {
+        //Classifiers are referring to gestures which can be performed.
         public enum classifierType
         {
             point,
@@ -106,9 +107,13 @@ namespace IMRE.EmbodiedUserInput
                         //The thumb is ignored in whether this gesture will activate or not
              
                         //note that we need a new concept for grasping object.
+                        
+                        //is the left or right hand being used?
                         hand = data.GetHand(chirality);
+                        //where is the index finger pointing?
                         direction = hand.Fingers[1].Direction;
                         origin = hand.Fingers[1].Joints[3].Position;
+                        //return true if only the index finger is extended, ignoring what the thumb is doing
                         return (
                             (hand.Fingers[1].IsExtended) &&
                             !(hand.Fingers[2].IsExtended) &&
@@ -118,23 +123,31 @@ namespace IMRE.EmbodiedUserInput
                     #endregion 
                     case classifierType.grasp:
                         #region ActivateGrasp
+                        //is the left or right hand being used?
                         hand = data.GetHand(chirality);
+                        //if the hand is currently performing a pinch then a grasp should be attempted.
                         return (hand.IsPinching);
 
                         #endregion
                     case classifierType.doubleGrasp:
                         #region ActivateDoubleGrasp
+                        //if both hands are performing a pinch, then attempt a double grasp
                         return data.LeftHand.IsPinching && data.RightHand.IsPinching;
                         #endregion
                     case classifierType.openPalm:
                         #region ActivateOpenPalm
+                        //is the left or right hand being used?
                         hand = data.GetHand(chirality);
+                        //how is the palm rotated?
                         direction = hand.Palm.Direction;
+                        //where is the palm?
                         origin = hand.Palm.Position;
+                        //if all fingers are extended, the palm is open
                         return (hand.Fingers.Where(finger => finger.IsExtended).Count() == 5);
                         #endregion
                     case classifierType.openPalmPush:
                     #region Activate OpenPalmPush
+                        //is the left or right hand being used?
                         hand = data.GetHand(chirality);
                         //want movement in plane of palm within tolerance.
                         velocity = hand.Palm.Velocity;
@@ -162,13 +175,18 @@ namespace IMRE.EmbodiedUserInput
                         //we want to have close to zero angle between movement and palm.
                         angle = 90 - math.abs(Operations.Angle(velocity, direction));
 //TODO check the tolerances here.
+                        //if the palm is open and moving, then note the plane it is moving through and activate the
+                        //gesture for swiping
                         return (hand.Fingers.Count(finger => finger.IsExtended) == 5) && speed > .5f && angle <  30f;
                         #endregion
                     case classifierType.thumbsUp:
                         #region Thumbs Up Activate
+                        //is the left or right hand being used?
                         hand = data.GetHand(chirality);
+                        //where is the thumb pointing?
                         direction = hand.Fingers[0].Direction;
                         origin = hand.Fingers[0].Joints[3].Position;
+                        //if only the thumb is extended and all other fingers are retracted, thumbs up
                         return (
                             (hand.Fingers[0].IsExtended) &&
                             !(hand.Fingers[1].IsExtended) &&
@@ -184,6 +202,9 @@ namespace IMRE.EmbodiedUserInput
 
             public bool shouldCancel()
             {
+                //currently the check to see if a gesture should stop is the opposite of if it should start
+                //this is likely not always going to cut it. There will be more reasons for stopping a gesture
+                //than the conditions for activating it no longer being met.
                 BodyInput data = BodyInputDataSystem.bodyInput;
 
                 return !shouldActivate();
@@ -207,19 +228,35 @@ namespace IMRE.EmbodiedUserInput
             
             public void Execute(ref EmbodiedClassifier embodiedClassifier)
             {
+                //Gestures are not always going to stop at the conclusion of their function.
+                //Therefore this is needed to determine if a gesture is ongoing or cancelled during operation
+                //by the user.
+                
+                //if the gesture is not eligible to activate last frame
                 if (!embodiedClassifier.isEligible)
                 {
+                    //check to see if it should activate and update its eligibility to activate
                     embodiedClassifier.isEligible = embodiedClassifier.shouldActivate();
+                        //If this is eligible, and it wasn't eligible before, it is activated
                         embodiedClassifier.wasActivated = embodiedClassifier.isEligible;
+                        //therefore it was not cancelled
                         embodiedClassifier.wasCancelled = false;
+                        //and it was not finished (since it just started)
                         embodiedClassifier.wasFinished = false;
                 }
                 else
                 {
+                    //if the gesture was eligible last frame
+                    //If the gesture should cancel, then cancel it.
                     embodiedClassifier.wasCancelled = embodiedClassifier.shouldCancel();
+                    //The gesture wasn't finished if it is ongoing
                     embodiedClassifier.wasFinished = embodiedClassifier.shouldFinish && !embodiedClassifier.wasCancelled;
+                    //The gesture is not eligible to start if it is ongoing
                     embodiedClassifier.isEligible = !(embodiedClassifier.wasCancelled || embodiedClassifier.wasFinished);
+                    //since it was not activated this frame, set wasActivated to false
                     embodiedClassifier.wasActivated = false;
+                    //the gesture should not finish next frame because it is either still ongoing or not continuing 
+                    //after this frame.
                     embodiedClassifier.shouldFinish = false;
                 }
             }
@@ -229,6 +266,7 @@ namespace IMRE.EmbodiedUserInput
         {
             var job = new EmbodiedUserInputClassifierJob();
             
+            //schedule all of the jobs to be completed which were set up this frame.
             return job.Schedule(this, inputDependencies);
         }
 

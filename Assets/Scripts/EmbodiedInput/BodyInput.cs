@@ -11,7 +11,7 @@ namespace IMRE.EmbodiedUserInput
     /// Generic tracking data for a body and hands
     /// </summary>
     [System.Serializable]
-    public struct BodyInput : IComponentData
+    public struct BodyInput
     {      
         
         #region Tracking Modes
