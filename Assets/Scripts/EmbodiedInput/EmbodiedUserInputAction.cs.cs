@@ -21,7 +21,7 @@ namespace IMRE.EmbodiedUserInput
     {
         public enum ActionType
         {
-            debug, 
+            debug 
         };
 
         /// <inheritdoc />
@@ -38,7 +38,7 @@ namespace IMRE.EmbodiedUserInput
             /// <summary>
             /// The GGB command string to send to the server
             /// </summary>
-            public char command;
+            //public char command;
         }
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace IMRE.EmbodiedUserInput
                         switch (actionData.actionType)  
                         {
                             case ActionType.debug :
-                                actionData.command = 's';
+                                //actionData.command = 's';
                                 break;
                         }
                     }
@@ -70,7 +70,7 @@ namespace IMRE.EmbodiedUserInput
                         switch (actionData.actionType)  
                         {
                             case ActionType.debug :
-                                actionData.command = 'o';
+                                //actionData.command = 'o';
                                 break;
                         }
                         
@@ -86,7 +86,7 @@ namespace IMRE.EmbodiedUserInput
                         switch (actionData.actionType)  
                         {
                             case ActionType.debug :
-                                actionData.command = 'c';
+                                //actionData.command = 'c';
                                 break;
                         }
                     }else if (embodiedClassifier.wasFinished)
@@ -95,7 +95,7 @@ namespace IMRE.EmbodiedUserInput
                         switch (actionData.actionType)  
                         {
                             case ActionType.debug :
-                                actionData.command = 'f';
+                                //actionData.command = 'f';
                                 break;
                         }
                     }
@@ -105,7 +105,7 @@ namespace IMRE.EmbodiedUserInput
                         switch (actionData.actionType)  
                         {
                             case ActionType.debug :
-                                actionData.command = 'f';
+                                //actionData.command = 'f';
                                 break;
                         }
                     }

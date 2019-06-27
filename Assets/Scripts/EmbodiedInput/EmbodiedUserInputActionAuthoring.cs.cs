@@ -50,10 +50,10 @@ namespace IMRE.EmbodiedUserInput
             int amount = EmbodiedUserInputClassifierAuthoring.entities.Length;
             for (int i = 0; i < amount; i++)
             {
-                Debug.Log(
-                    manager.GetComponentData<EmbodiedUserInputClassifier.EmbodiedClassifier>(
-                        EmbodiedUserInputClassifierAuthoring.entities[i]).type + " " + 
-                        manager.GetComponentData<EmbodiedUserInputAction.ActionData>(entities[i]).command);
+                Debug.Log("I am not really sure what to put through this");
+                //manager.GetComponentData<EmbodiedUserInputClassifier.EmbodiedClassifier>(
+                //EmbodiedUserInputClassifierAuthoring.entities[i]).type + " " + 
+                //manager.GetComponentData<EmbodiedUserInputAction.ActionData>(entities[i]).command);
             }
             
         }

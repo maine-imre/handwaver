@@ -245,8 +245,8 @@ namespace IMRE.EmbodiedUserInput
                         embodiedClassifier.wasFinished = false;
                 }
                 else
-                {
-                    //if the gesture was eligible last frame
+                {   //if the gesture was eligible last frame
+                    
                     //If the gesture should cancel, then cancel it.
                     embodiedClassifier.wasCancelled = embodiedClassifier.shouldCancel();
                     //The gesture wasn't finished if it is ongoing
