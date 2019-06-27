@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using IMRE.HandWaver.HWIO;
 using UnityEngine;
 
 namespace IMRE.HandWaver.ScaleStudy
@@ -12,19 +13,29 @@ namespace IMRE.HandWaver.ScaleStudy
         public float radius = 1f;
 
         private LineRenderer circleRenderer => GetComponent<LineRenderer>();
-        private LineRenderer crossSectionRenderer => GetComponentInChildren<LineRenderer>();
+        private LineRenderer crossSectionRenderer => transform.GetChild(0).GetComponent<LineRenderer>();
+        public Material circleMaterial;
+        public Material crossSectionMaterial;
+        
         #endregion
         // Start is called before the first frame update
         void Start()
         {
             #region Render
             gameObject.AddComponent<LineRenderer>();
+            circleRenderer.material = circleMaterial;
+            circleRenderer.startWidth = .005f;
+            circleRenderer.endWidth = .005f;
             renderCircle();
 
             
             GameObject child = new GameObject();
             child.transform.parent = transform;
             child.AddComponent<LineRenderer>();
+            crossSectionRenderer.material = crossSectionMaterial;
+            crossSectionRenderer.startWidth = .005f;
+            crossSectionRenderer.endWidth = .005f;
+
             #endregion
         }
 
@@ -93,6 +104,7 @@ namespace IMRE.HandWaver.ScaleStudy
             {
                 Debug.Log("Height is out of range of object.");
                 //TODO update rendering
+                crossSectionRenderer.enabled = false;
 
             }
         
