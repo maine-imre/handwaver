@@ -14,9 +14,9 @@ namespace IMRE.EmbodiedUserInput
         
         internal EntityManager manager;
         internal static NativeArray<Entity> entities;
-        
-        
-        void Start()
+
+
+        private void Start()
         {
             manager = World.Active.GetOrCreateSystem<EntityManager>();
             addClassifierBatch();

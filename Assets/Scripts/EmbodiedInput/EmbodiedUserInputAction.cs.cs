@@ -38,7 +38,7 @@ namespace IMRE.EmbodiedUserInput
             /// <summary>
             /// The GGB command string to send to the server
             /// </summary>
-            public string command;
+            public char command;
         }
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace IMRE.EmbodiedUserInput
                         switch (actionData.actionType)  
                         {
                             case ActionType.debug :
-                                actionData.command = "start";
+                                actionData.command = 's';
                                 break;
                         }
                     }
@@ -70,7 +70,7 @@ namespace IMRE.EmbodiedUserInput
                         switch (actionData.actionType)  
                         {
                             case ActionType.debug :
-                                actionData.command = "on";
+                                actionData.command = 'o';
                                 break;
                         }
                         
@@ -86,7 +86,7 @@ namespace IMRE.EmbodiedUserInput
                         switch (actionData.actionType)  
                         {
                             case ActionType.debug :
-                                actionData.command = "cancelled";
+                                actionData.command = 'c';
                                 break;
                         }
                     }else if (embodiedClassifier.wasFinished)
@@ -95,7 +95,7 @@ namespace IMRE.EmbodiedUserInput
                         switch (actionData.actionType)  
                         {
                             case ActionType.debug :
-                                actionData.command = "finished";
+                                actionData.command = 'f';
                                 break;
                         }
                     }
@@ -105,7 +105,7 @@ namespace IMRE.EmbodiedUserInput
                         switch (actionData.actionType)  
                         {
                             case ActionType.debug :
-                                actionData.command = "off";
+                                actionData.command = 'f';
                                 break;
                         }
                     }
