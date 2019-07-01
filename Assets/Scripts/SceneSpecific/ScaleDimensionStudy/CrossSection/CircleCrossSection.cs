@@ -16,6 +16,7 @@ namespace IMRE.HandWaver.ScaleStudy
         private LineRenderer crossSectionRenderer => transform.GetChild(0).GetComponent<LineRenderer>();
         public Material circleMaterial;
         public Material crossSectionMaterial;
+        public bool debugRenderer = SpencerStudyControl.debugRendererXC;
         
         #endregion
         // Start is called before the first frame update
@@ -26,6 +27,7 @@ namespace IMRE.HandWaver.ScaleStudy
             circleRenderer.material = circleMaterial;
             circleRenderer.startWidth = .005f;
             circleRenderer.endWidth = .005f;
+            circleRenderer.enabled = debugRenderer;
             renderCircle();
 
             
@@ -33,8 +35,8 @@ namespace IMRE.HandWaver.ScaleStudy
             child.transform.parent = transform;
             child.AddComponent<LineRenderer>();
             crossSectionRenderer.material = crossSectionMaterial;
-            crossSectionRenderer.startWidth = .005f;
-            crossSectionRenderer.endWidth = .005f;
+            crossSectionRenderer.startWidth = SpencerStudyControl.lineRendererWidth;
+            crossSectionRenderer.endWidth = SpencerStudyControl.lineRendererWidth;
 
             #endregion
         }

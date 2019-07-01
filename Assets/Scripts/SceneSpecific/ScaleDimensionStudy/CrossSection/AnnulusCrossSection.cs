@@ -24,7 +24,7 @@ namespace IMRE.HandWaver.ScaleStudy
 
         public Material annulusMaterial;
         public Material crossSectionMaterial;
-        public bool debugRenderer;
+        public bool debugRenderer => SpencerStudyControl.debugRendererXC;
         #endregion
        
 
@@ -84,7 +84,7 @@ namespace IMRE.HandWaver.ScaleStudy
             annulusRenderer.Optimize();
             #endregion
 
-            #region GameObjects
+            #region CrossSections' GameObjects
             
             GameObject child = new GameObject();
             child.transform.parent = transform;
@@ -96,11 +96,11 @@ namespace IMRE.HandWaver.ScaleStudy
             child2.transform.localPosition = Vector3.zero;
             child2.AddComponent<LineRenderer>();
 
-            child.GetComponent<LineRenderer>().endWidth = 0.01f;
-            child.GetComponent<LineRenderer>().startWidth = 0.01f;
+            child.GetComponent<LineRenderer>().endWidth = SpencerStudyControl.lineRendererWidth;
+            child.GetComponent<LineRenderer>().startWidth = SpencerStudyControl.lineRendererWidth;
             child.GetComponent<LineRenderer>().enabled = false;
-            child2.GetComponent<LineRenderer>().endWidth = 0.01f;
-            child2.GetComponent<LineRenderer>().startWidth = 0.01f;
+            child2.GetComponent<LineRenderer>().endWidth = SpencerStudyControl.lineRendererWidth;
+            child2.GetComponent<LineRenderer>().startWidth = SpencerStudyControl.lineRendererWidth;
             child2.GetComponent<LineRenderer>().enabled = false;
 
             

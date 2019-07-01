@@ -48,6 +48,9 @@ namespace IMRE.HandWaver.ScaleStudy
         /// </summary>
         [Range(0, 1)]
         public float foldOverrideValue;
+
+        public static bool debugRendererXC;
+        public static float lineRendererWidth = 0.001f;
 	
 	//In editor controls for 4D Projection Perspective.  No rotation projects along the W axis.
 	[Range(0, 360)]

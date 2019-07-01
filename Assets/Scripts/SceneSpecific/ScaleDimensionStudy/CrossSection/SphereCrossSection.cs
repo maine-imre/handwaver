@@ -8,6 +8,8 @@ namespace IMRE.HandWaver.ScaleStudy
 {
     public class SphereCrossSection : MonoBehaviour, ISliderInput
     {
+        #region variables/components
+
         public int n;
         private Mesh sphereRenderer => GetComponent<MeshFilter>().mesh;
         private LineRenderer crossSectionRenderer => transform.GetChild(0).GetComponent<LineRenderer>();
@@ -19,14 +21,20 @@ namespace IMRE.HandWaver.ScaleStudy
         public Vector3 center = Vector3.zero;
         public Vector3 normal = Vector3.up;
 
+        public bool debugRenderer = SpencerStudyControl.debugRendererXC;
+        #endregion
 
         // Start is called before the first frame update
         void Start()
         {
+
+            #region Render Cross-section
+
             //TODO setup sphere renderer
             gameObject.AddComponent<MeshRenderer>();
             gameObject.AddComponent<MeshFilter>();
             GetComponent<MeshRenderer>().material = sphereMaterial;
+            gameObject.GetComponent<MeshRenderer>().enabled = debugRenderer;
             renderSphere();   
             
             //TODO setup cross-section renderer as child object
@@ -41,6 +49,7 @@ namespace IMRE.HandWaver.ScaleStudy
             crossSectionRenderer.endWidth = .005f;
             crossSectionRenderer.loop = true;
 
+            #endregion
         }
 
         public float slider
