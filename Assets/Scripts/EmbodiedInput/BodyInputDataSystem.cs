@@ -318,6 +318,7 @@ namespace IMRE.EmbodiedUserInput
             resetVelocities(bodyInput);
 
             int queueLength = bodyInputQue.Count;
+
             float frameRate = 90f; // consider automating this
 
             BodyInput[] queueArray = bodyInputQue.ToArray();
@@ -326,11 +327,11 @@ namespace IMRE.EmbodiedUserInput
             // This should loop from the most recent to the least recent pairs of frames.
             // For example an array of length 5, the loop would do 5/4, 4/3, 3/2, 2/1, 1/0. 
             // This should have the behaviour stopping at K = 1 such that k-1 is 0.
-            for (int k = queueLength; k > 0; k--)
+            for (int k = queueLength; k > 2; k--)
             {
                 //take the diff for each frame and divide by framerate
-                BodyInput frame0 = queueArray[k];
-                BodyInput frame1 = queueArray[k-1];
+                BodyInput frame0 = queueArray[k-1];
+                BodyInput frame1 = queueArray[k-2];
 
                 bodyInput.Head.Velocity +=
                     (frame0.Head.Position - frame1.Head.Position) / frameRate;

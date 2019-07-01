@@ -88,7 +88,6 @@ namespace IMRE.EmbodiedUserInput
             public float3 direction;
             public bool shouldActivate()
             {
-                BodyInput data = BodyInputDataSystem.bodyInput;
                 Hand hand;
                 float3 velocity;
                 float speed;
@@ -109,7 +108,7 @@ namespace IMRE.EmbodiedUserInput
                         //note that we need a new concept for grasping object.
                         
                         //is the left or right hand being used?
-                        hand = data.GetHand(chirality);
+                        hand = BodyInputDataSystem.bodyInput.GetHand(chirality);
                         //where is the index finger pointing?
                         direction = hand.Fingers[1].Direction;
                         origin = hand.Fingers[1].Joints[3].Position;
@@ -124,31 +123,31 @@ namespace IMRE.EmbodiedUserInput
                     case classifierType.grasp:
                         #region ActivateGrasp
                         //is the left or right hand being used?
-                        hand = data.GetHand(chirality);
+                        hand = BodyInputDataSystem.bodyInput.GetHand(chirality);
                         //if the hand is currently performing a pinch then a grasp should be attempted.
                         return (hand.IsPinching);
 
-                        #endregion
+                    #endregion
                     case classifierType.doubleGrasp:
                         #region ActivateDoubleGrasp
                         //if both hands are performing a pinch, then attempt a double grasp
-                        return data.LeftHand.IsPinching && data.RightHand.IsPinching;
-                        #endregion
+                        return BodyInputDataSystem.bodyInput.LeftHand.IsPinching && BodyInputDataSystem.bodyInput.RightHand.IsPinching;
+                    #endregion
                     case classifierType.openPalm:
                         #region ActivateOpenPalm
                         //is the left or right hand being used?
-                        hand = data.GetHand(chirality);
+                        hand = BodyInputDataSystem.bodyInput.GetHand(chirality);
                         //how is the palm rotated?
                         direction = hand.Palm.Direction;
                         //where is the palm?
                         origin = hand.Palm.Position;
                         //if all fingers are extended, the palm is open
                         return (hand.Fingers.Where(finger => finger.IsExtended).Count() == 5);
-                        #endregion
+                    #endregion
                     case classifierType.openPalmPush:
-                    #region Activate OpenPalmPush
+                        #region Activate OpenPalmPush
                         //is the left or right hand being used?
-                        hand = data.GetHand(chirality);
+                        hand = BodyInputDataSystem.bodyInput.GetHand(chirality);
                         //want movement in plane of palm within tolerance.
                         velocity = hand.Palm.Velocity;
                         direction = hand.Palm.Direction;
@@ -160,11 +159,11 @@ namespace IMRE.EmbodiedUserInput
                         //we want to have close to zero angle between movement and palm.
                         angle = math.abs(Operations.Angle(velocity, direction));
 //TODO check the tolerances here.
-                    return (hand.Fingers.Count(finger => finger.IsExtended) == 5) && speed > .5f && angle < 30f;
+                        return (hand.Fingers.Count(finger => finger.IsExtended) == 5) && speed > .5f && angle < 30f;
                     #endregion
                     case classifierType.openPalmSwipe:
                         #region
-                        hand = data.GetHand(chirality);
+                        hand = BodyInputDataSystem.bodyInput.GetHand(chirality);
                         //want movement in plane of palm within tolerance.
                         velocity = hand.Palm.Velocity;
                         direction = hand.Palm.Direction;
@@ -178,11 +177,11 @@ namespace IMRE.EmbodiedUserInput
                         //if the palm is open and moving, then note the plane it is moving through and activate the
                         //gesture for swiping
                         return (hand.Fingers.Count(finger => finger.IsExtended) == 5) && speed > .5f && angle <  30f;
-                        #endregion
+                    #endregion
                     case classifierType.thumbsUp:
                         #region Thumbs Up Activate
                         //is the left or right hand being used?
-                        hand = data.GetHand(chirality);
+                        hand = BodyInputDataSystem.bodyInput.GetHand(chirality);
                         //where is the thumb pointing?
                         direction = hand.Fingers[0].Direction;
                         origin = hand.Fingers[0].Joints[3].Position;
@@ -194,7 +193,7 @@ namespace IMRE.EmbodiedUserInput
                             !(hand.Fingers[3].IsExtended) &&
                             !(hand.Fingers[4].IsExtended) 
                         );  
-                        #endregion
+                    #endregion
                     default:
                         throw new ArgumentOutOfRangeException();
                 }
@@ -205,7 +204,7 @@ namespace IMRE.EmbodiedUserInput
                 //currently the check to see if a gesture should stop is the opposite of if it should start
                 //this is likely not always going to cut it. There will be more reasons for stopping a gesture
                 //than the conditions for activating it no longer being met.
-                BodyInput data = BodyInputDataSystem.bodyInput;
+                //BodyInput data = BodyInputDataSystem.bodyInput;
 
                 return !shouldActivate();
             }
@@ -237,12 +236,12 @@ namespace IMRE.EmbodiedUserInput
                 {
                     //check to see if it should activate and update its eligibility to activate
                     embodiedClassifier.isEligible = embodiedClassifier.shouldActivate();
-                        //If this is eligible, and it wasn't eligible before, it is activated
-                        embodiedClassifier.wasActivated = embodiedClassifier.isEligible;
-                        //therefore it was not cancelled
-                        embodiedClassifier.wasCancelled = false;
-                        //and it was not finished (since it just started)
-                        embodiedClassifier.wasFinished = false;
+                    //If this is eligible, and it wasn't eligible before, it is activated
+                    embodiedClassifier.wasActivated = embodiedClassifier.isEligible;
+                    //therefore it was not cancelled
+                    embodiedClassifier.wasCancelled = false;
+                    //and it was not finished (since it just started)
+                    embodiedClassifier.wasFinished = false;
                 }
                 else
                 {   //if the gesture was eligible last frame

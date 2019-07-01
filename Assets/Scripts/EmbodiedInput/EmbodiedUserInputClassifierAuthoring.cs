@@ -29,7 +29,7 @@ namespace IMRE.EmbodiedUserInput
         {
             //each classifier represents a gesture which can be performed.
             
-            int amount = 13;
+            int amount = 1;
             entities = new NativeArray<Entity>(amount, Allocator.Temp);
             manager.Instantiate(classifierPrefab, entities);
             manager.SetComponentData(entities[0], new EmbodiedUserInputClassifier.EmbodiedClassifier
@@ -41,78 +41,78 @@ namespace IMRE.EmbodiedUserInput
                 chirality = Chirality.Left,
                 type = EmbodiedUserInputClassifier.classifierType.point
             });
-            manager.SetComponentData(entities[1], new EmbodiedUserInputClassifier.EmbodiedClassifier
-            {
-                //point gesture's classifier for right hand
-                chirality = Chirality.Right,
-                type = EmbodiedUserInputClassifier.classifierType.point
-            });
-            manager.SetComponentData(entities[2], new EmbodiedUserInputClassifier.EmbodiedClassifier
-            {
-                //grasp gesture's classifier for left hand
-                chirality = Chirality.Left,
-                type = EmbodiedUserInputClassifier.classifierType.grasp
-            });
-            manager.SetComponentData(entities[3], new EmbodiedUserInputClassifier.EmbodiedClassifier
-            {
-                //grasp gesture's classifier for right hand
-                chirality = Chirality.Right,
-                type = EmbodiedUserInputClassifier.classifierType.grasp
-            });
-            manager.SetComponentData(entities[4], new EmbodiedUserInputClassifier.EmbodiedClassifier
-            {
-                //Open Palm gesture's classifier for left hand
-                chirality = Chirality.Left,
-                type = EmbodiedUserInputClassifier.classifierType.openPalm
-            });
-            manager.SetComponentData(entities[5], new EmbodiedUserInputClassifier.EmbodiedClassifier
-            {
-                //open palm gesture's classifier for right hand
-                chirality = Chirality.Right,
-                type = EmbodiedUserInputClassifier.classifierType.openPalm
-            });
-            manager.SetComponentData(entities[6], new EmbodiedUserInputClassifier.EmbodiedClassifier
-            {
-                //open palm push gesture's classifier for left hand
-                chirality = Chirality.Left,
-                type = EmbodiedUserInputClassifier.classifierType.openPalmPush
-            });
-            manager.SetComponentData(entities[7], new EmbodiedUserInputClassifier.EmbodiedClassifier
-            {
-                //open palm push gesture's classifier for right hand
-                chirality = Chirality.Right,
-                type = EmbodiedUserInputClassifier.classifierType.openPalmPush
-            });
-            manager.SetComponentData(entities[8], new EmbodiedUserInputClassifier.EmbodiedClassifier
-            {
-                //open palm swipe gesture's classifier for left hand
-                chirality = Chirality.Left,
-                type = EmbodiedUserInputClassifier.classifierType.openPalmSwipe
-            });
-            manager.SetComponentData(entities[9], new EmbodiedUserInputClassifier.EmbodiedClassifier
-            {
-                //open palm swipe gesture's classifier for right hand
-                chirality = Chirality.Right,
-                type = EmbodiedUserInputClassifier.classifierType.openPalmSwipe
-            });
-            manager.SetComponentData(entities[10], new EmbodiedUserInputClassifier.EmbodiedClassifier
-            {
-                //thumbs up gesture's classifier for left hand
-                chirality = Chirality.Left,
-                type = EmbodiedUserInputClassifier.classifierType.thumbsUp
-            });
-            manager.SetComponentData(entities[11], new EmbodiedUserInputClassifier.EmbodiedClassifier
-            {
-                //thumbs up gesture's classifier for right hand
-                chirality = Chirality.Right,
-                type = EmbodiedUserInputClassifier.classifierType.thumbsUp
-            });
-            manager.SetComponentData(entities[11], new EmbodiedUserInputClassifier.EmbodiedClassifier
-            {
-                //double grasp is a two handed gesture. This means it will only need a single classifier due
-                //to it using both hands and therefore not needing separate instances for which hand is being used.
-                type = EmbodiedUserInputClassifier.classifierType.doubleGrasp
-            });
+//            manager.SetComponentData(entities[1], new EmbodiedUserInputClassifier.EmbodiedClassifier
+//            {
+//                //point gesture's classifier for right hand
+//                chirality = Chirality.Right,
+//                type = EmbodiedUserInputClassifier.classifierType.point
+//            });
+//            manager.SetComponentData(entities[2], new EmbodiedUserInputClassifier.EmbodiedClassifier
+//            {
+//                //grasp gesture's classifier for left hand
+//                chirality = Chirality.Left,
+//                type = EmbodiedUserInputClassifier.classifierType.grasp
+//            });
+//            manager.SetComponentData(entities[3], new EmbodiedUserInputClassifier.EmbodiedClassifier
+//            {
+//                //grasp gesture's classifier for right hand
+//                chirality = Chirality.Right,
+//                type = EmbodiedUserInputClassifier.classifierType.grasp
+//            });
+//            manager.SetComponentData(entities[4], new EmbodiedUserInputClassifier.EmbodiedClassifier
+//            {
+//                //Open Palm gesture's classifier for left hand
+//                chirality = Chirality.Left,
+//                type = EmbodiedUserInputClassifier.classifierType.openPalm
+//            });
+//            manager.SetComponentData(entities[5], new EmbodiedUserInputClassifier.EmbodiedClassifier
+//            {
+//                //open palm gesture's classifier for right hand
+//                chirality = Chirality.Right,
+//                type = EmbodiedUserInputClassifier.classifierType.openPalm
+//            });
+//            manager.SetComponentData(entities[6], new EmbodiedUserInputClassifier.EmbodiedClassifier
+//            {
+//                //open palm push gesture's classifier for left hand
+//                chirality = Chirality.Left,
+//                type = EmbodiedUserInputClassifier.classifierType.openPalmPush
+//            });
+//            manager.SetComponentData(entities[7], new EmbodiedUserInputClassifier.EmbodiedClassifier
+//            {
+//                //open palm push gesture's classifier for right hand
+//                chirality = Chirality.Right,
+//                type = EmbodiedUserInputClassifier.classifierType.openPalmPush
+//            });
+//            manager.SetComponentData(entities[8], new EmbodiedUserInputClassifier.EmbodiedClassifier
+//            {
+//                //open palm swipe gesture's classifier for left hand
+//                chirality = Chirality.Left,
+//                type = EmbodiedUserInputClassifier.classifierType.openPalmSwipe
+//            });
+//            manager.SetComponentData(entities[9], new EmbodiedUserInputClassifier.EmbodiedClassifier
+//            {
+//                //open palm swipe gesture's classifier for right hand
+//                chirality = Chirality.Right,
+//                type = EmbodiedUserInputClassifier.classifierType.openPalmSwipe
+//            });
+//            manager.SetComponentData(entities[10], new EmbodiedUserInputClassifier.EmbodiedClassifier
+//            {
+//                //thumbs up gesture's classifier for left hand
+//                chirality = Chirality.Left,
+//                type = EmbodiedUserInputClassifier.classifierType.thumbsUp
+//            });
+//            manager.SetComponentData(entities[11], new EmbodiedUserInputClassifier.EmbodiedClassifier
+//            {
+//                //thumbs up gesture's classifier for right hand
+//                chirality = Chirality.Right,
+//                type = EmbodiedUserInputClassifier.classifierType.thumbsUp
+//            });
+//            manager.SetComponentData(entities[11], new EmbodiedUserInputClassifier.EmbodiedClassifier
+//            {
+//                //double grasp is a two handed gesture. This means it will only need a single classifier due
+//                //to it using both hands and therefore not needing separate instances for which hand is being used.
+//                type = EmbodiedUserInputClassifier.classifierType.doubleGrasp
+//            });
             
 
         }
