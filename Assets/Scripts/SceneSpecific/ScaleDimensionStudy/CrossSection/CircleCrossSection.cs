@@ -42,7 +42,8 @@ namespace IMRE.HandWaver.ScaleStudy
         //slider to control the cross section
         public float slider
         {
-            set => crossSectCirc(value);
+            //value ranges from 0 to 1, scale to -1 to 1
+            set => crossSectCirc(-1+value*2);
         }
         
         /// <summary>

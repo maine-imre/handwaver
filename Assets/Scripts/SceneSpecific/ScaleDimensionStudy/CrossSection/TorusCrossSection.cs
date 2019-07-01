@@ -54,7 +54,8 @@ namespace IMRE.HandWaver.ScaleStudy
 
         public float slider
         {
-            //set => crossSectTorus(value);
+            //scale value from 0 to 1 to -1 to 1
+            //set => crossSectTorus(-1+value*2);
             set => debugIntersection();
         }
 

@@ -24,6 +24,7 @@ namespace IMRE.HandWaver.ScaleStudy
 
         public Material annulusMaterial;
         public Material crossSectionMaterial;
+        public bool debugRenderer;
         #endregion
        
 
@@ -33,6 +34,7 @@ namespace IMRE.HandWaver.ScaleStudy
             gameObject.AddComponent<MeshRenderer>();
             gameObject.AddComponent<MeshFilter>();
             gameObject.GetComponent<MeshRenderer>().material = annulusMaterial;
+            gameObject.GetComponent<MeshRenderer>().enabled = debugRenderer;
 
             #region Vertices/Triangles
 
@@ -113,7 +115,8 @@ namespace IMRE.HandWaver.ScaleStudy
         //slider to control cross section
         public float slider
         {
-            set => crossSectAnnulus(value);
+            //value ranges from 0 to 1, scale to -1 to 1
+            set => crossSectAnnulus(-1+value*2);
         }
         
 

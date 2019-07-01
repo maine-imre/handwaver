@@ -22,11 +22,13 @@ namespace IMRE.HandWaver.ScaleStudy
         /// The number of degrees that each vertex is folded by.
         /// Consider changing to percent;
         /// </summary>        
-        internal static float percentFolded = 0f;
+        internal static float percentFolded;
         /// <summary>
         /// An override that automatically animates the slider and the folding process
         /// </summary>
-        public bool animateFold = false;
+        public bool animateFold;
+
+        public bool animateUp = true;
 	
         /// <summary>
         /// The point on the slider that determines the position of the slider.
@@ -45,7 +47,7 @@ namespace IMRE.HandWaver.ScaleStudy
         /// The override value with a slider in the editor.
         /// </summary>
         [Range(0, 1)]
-        public float foldOverrideValue = 0f;
+        public float foldOverrideValue;
 	
 	//In editor controls for 4D Projection Perspective.  No rotation projects along the W axis.
 	[Range(0, 360)]
@@ -84,7 +86,8 @@ namespace IMRE.HandWaver.ScaleStudy
 	            allFigures.AddRange(crossSections);
 	            allFigures.AddRange(measures);
             }
-            _sliderInputs = allFigures.OfType<ISliderInput>().ToList();
+            //_sliderInputs = allFigures.OfType<ISliderInput>().ToList();
+            _sliderInputs = allFigures.Where(go => go.GetComponent(typeof(ISliderInput)) != null).ToList();
             _dPerspectives = allFigures.OfType<I4D_Perspective>().ToList();
         }
 
@@ -95,7 +98,7 @@ namespace IMRE.HandWaver.ScaleStudy
 		//Update Rotation Values for Higher Dim Figures
 		_dPerspectives.ForEach(fig => fig.SetRotation(xy,xz,xw,yz,yw,zw));
 	
-            float percent = 0f;
+            float percent;
             //if the override bool is set, use in editor override value
 
 
@@ -104,18 +107,19 @@ namespace IMRE.HandWaver.ScaleStudy
             {
 	            
                 //increment the degree folded by one degree. 
-                percentFolded = (percentFolded + .01f);
+                percentFolded = animateUp ? (percentFolded + .01f) : (percentFolded - .01f);
                 
-                
-                if (percentFolded == 1)
+                              
+                if (percentFolded >= 1)
                 {
 	                percentFolded = 1f; //round to whole
 	                animateFold = false;
-                }
-                
-                if (percentFolded > 1)
+	                animateUp = false;
+                }else if (percentFolded <= 0)
                 {
-	                percentFolded = Mathf.FloorToInt(percentFolded);
+	                percentFolded = 0f;
+	                animateFold = false;
+	                animateUp = true;
                 }
                 
                 //update the slider's position to reflect the override value
@@ -140,19 +144,26 @@ namespace IMRE.HandWaver.ScaleStudy
             setPercentFolded(percent);
 #endif
         }
+        
+        public List<GameObject> _sliderInputs;
+        
 #if Photon
         [PunRPC]
 #endif
-
-	    private List<ISliderInput> _sliderInputs;
 	    private void setPercentFolded(float percent)
 	    {    
-		    percentFolded = percent;
+		    foldOverrideValue = percent;
 		    
-		    _sliderInputs.ForEach(si => si.slider = percentFolded);
+		    _sliderInputs.ForEach(
+			    si =>
+			    {
+				    if(si.activeSelf)
+				    si.GetComponent<ISliderInput>().slider = percent;
+			    }
+		    );
 		    
 		    //update slider point on all users.
-		    sliderPoint.Position3 = (percentFolded / 360f) * (slider.point2.Position3 - slider.point1.Position3) +
+		    sliderPoint.Position3 = (percent / 360f) * (slider.point2.Position3 - slider.point1.Position3) +
 		                            slider.point1.Position3;
 
 	    }

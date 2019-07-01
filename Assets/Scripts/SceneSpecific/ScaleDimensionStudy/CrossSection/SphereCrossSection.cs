@@ -45,7 +45,8 @@ namespace IMRE.HandWaver.ScaleStudy
 
         public float slider
         {
-            set => crossSectSphere(value);
+            //scale value from 0 to 1 range to -1 to 1 range.
+            set => crossSectSphere(-1+value*2);
         }
 
         /// <summary>
