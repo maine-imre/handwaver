@@ -248,6 +248,8 @@ namespace IMRE.EmbodiedUserInput
         private Hand viveHandConversion(Hand myHand, GestureResult viveHand)
         {
             myHand.Palm.Position = viveHand.position;
+            //TODO make this better
+
             myHand.Palm.Direction = Vector3.Cross(viveHand.points[0] - viveHand.points[5],
                 viveHand.points[0] - viveHand.points[17]).normalized;
             myHand.Wrist.Position = viveHand.points[0];
@@ -280,13 +282,13 @@ namespace IMRE.EmbodiedUserInput
                     }
                     else
                     {
+                        //TODO make this better
                         myHand.Fingers[fIDX].Joints[jIDX].Direction =
                             viveHand.points[4 * fIDX + jIDX + 1] - viveHand.points[4 * fIDX + jIDX];
                     }
                 }
 
                 myHand.Fingers[fIDX].IsExtended = isFingerExtended(myHand, fIDX);
-
             }
 
             return myHand;
@@ -295,7 +297,7 @@ namespace IMRE.EmbodiedUserInput
 
         private bool isFingerExtended(Hand currHand, int fingerIndex)
         {
-            //is finger in plane of palm?
+            //TODO make this better, consider curl
             return Vector3.Dot(currHand.Fingers[fingerIndex].Direction, currHand.Palm.Direction) < .1f;
         }
 

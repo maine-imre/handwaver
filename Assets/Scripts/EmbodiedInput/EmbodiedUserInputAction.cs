@@ -34,11 +34,6 @@ namespace IMRE.EmbodiedUserInput
             public ActionType actionType;
             public bool isActive;
             public bool activatable;
-            
-            /// <summary>
-            /// The GGB command string to send to the server
-            /// </summary>
-            //public char command;
         }
 
         /// <summary>
@@ -46,10 +41,10 @@ namespace IMRE.EmbodiedUserInput
         /// Inspired by LeapPaint https://github.com/leapmotion/Paint
         /// </summary>
         [BurstCompile]
-        public struct EmbodiedUserInputClassifierJob : IJobForEach<ActionData, EmbodiedUserInputClassifier.EmbodiedClassifier>
+        public struct EmbodiedUserInputClassifierJob : IJobForEach<ActionData, EmbodiedClassifier>
         {
             
-            public void Execute(ref ActionData actionData, ref EmbodiedUserInputClassifier.EmbodiedClassifier embodiedClassifier)
+            public void Execute(ref ActionData actionData, ref EmbodiedClassifier embodiedClassifier)
             {
                 if (embodiedClassifier.isEligible)
                 {

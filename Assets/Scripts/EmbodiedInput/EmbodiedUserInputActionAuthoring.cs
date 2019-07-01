@@ -27,7 +27,7 @@ namespace IMRE.EmbodiedUserInput
         /// </summary>
         void addClassifierBatch()
         {
-            int amount = EmbodiedUserInputClassifierAuthoring.entities.Length;
+            int amount = EmbodiedUserInputClassifierAuthoring.classifiers.Length;
             entities = new NativeArray<Entity>(amount, Allocator.Temp);
             manager.Instantiate(actionPrefab, entities);
             
@@ -40,14 +40,14 @@ namespace IMRE.EmbodiedUserInput
                     actionType = EmbodiedUserInputAction.ActionType.debug
                     //todo associate classifier
                 });
-                manager.SetComponentData(entities[0], EmbodiedUserInputClassifierAuthoring.manager.GetComponentData<EmbodiedUserInputClassifier.EmbodiedClassifier>(EmbodiedUserInputClassifierAuthoring.entities[i]));
+                manager.SetComponentData(entities[0], EmbodiedUserInputClassifierAuthoring.classifiers[i]);
             }
         }
 
         private void LateUpdate()
         {
             //READ DEBUG ENTITIES
-            int amount = EmbodiedUserInputClassifierAuthoring.entities.Length;
+            int amount = EmbodiedUserInputClassifierAuthoring.classifiers.Length;
             for (int i = 0; i < amount; i++)
             {
                 Debug.Log("I am not really sure what to put through this");
