@@ -22,16 +22,14 @@ namespace IMRE.HandWaver.ScaleStudy
         public LineRenderer lineRenderer => GetComponent<LineRenderer>();
 
         private float _percentFolded = 0f;
+        public bool sliderOverride;
 
         public float slider {
-            set
-            {
-                PercentFolded = value;
-                
-            } 
+            set => PercentFolded = !sliderOverride ? value : 1f;
         }
 
-        
+
+
         public float PercentFolded
         {
             get { return _percentFolded; }

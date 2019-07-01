@@ -32,8 +32,10 @@ namespace IMRE.HandWaver.ScaleStudy
             //TODO setup cross-section renderer as child object
             GameObject child = new GameObject();
             child.transform.parent = transform;
+            child.transform.localPosition = Vector3.zero;
             child.AddComponent<LineRenderer>();
             crossSectionRenderer.material = crossSectionMaterial;
+            crossSectionRenderer.useWorldSpace = false;
 
             crossSectionRenderer.startWidth = .005f;
             crossSectionRenderer.endWidth = .005f;
@@ -54,17 +56,16 @@ namespace IMRE.HandWaver.ScaleStudy
         public void crossSectSphere(float height)
         {
             //endpoints for line segment if intersection passes through circle
-            Vector3 segmentEndPoint0;
-            Vector3 segmentEndPoint1;
 
             //if cross section only hits the edge of the circle
             if (Math.Abs(height) == radius)
             {
-                //if top of circle, create point at intersection
+                //if top of sphere, create point at intersection
                 if (height == radius)
                 {
-                    segmentEndPoint0 = Vector3.up * radius;
+                    Vector3 segmentEndPoint0 = Vector3.up * radius;
                     crossSectionRenderer.enabled = true;
+                    crossSectionRenderer.positionCount = 2;
                     crossSectionRenderer.SetPosition(0, segmentEndPoint0);
                     crossSectionRenderer.SetPosition(1, segmentEndPoint0);
                     
@@ -73,27 +74,21 @@ namespace IMRE.HandWaver.ScaleStudy
                 //if bottom of circle, create point at intersection
                 else if (height == -radius)
                 {
-                    segmentEndPoint0 = Vector3.down * radius;
+                    Vector3 segmentEndPoint0 = Vector3.down * radius;
                     crossSectionRenderer.enabled = true;
+                    crossSectionRenderer.positionCount = 2;
                     crossSectionRenderer.SetPosition(0, segmentEndPoint0);
                     crossSectionRenderer.SetPosition(1, segmentEndPoint0);
                 }
 
             }
 
-            //cross section is a line that hits two points on the circle (height smaller than radius of circle)
+            //cross section is a circle
             else if (Math.Abs(height) < radius)
             {
                 //horizontal distance from center of circle to point on line segment
-                float segmentLength = Mathf.Sqrt(1f - Mathf.Pow(height, 2));
-
-                //calculations for endpoint coordinates of line segment
-                segmentEndPoint0 = (Vector3.up * height) + (Vector3.left * segmentLength);
-                segmentEndPoint1 = (Vector3.up * height) + (Vector3.right * segmentLength);
-                crossSectionRenderer.enabled = true;
-                crossSectionRenderer.SetPosition(0, segmentEndPoint0);
-                crossSectionRenderer.SetPosition(1, segmentEndPoint1);
-
+               
+                renderCircle(Mathf.Sqrt(Mathf.Pow(radius,2) - Mathf.Pow(height, 2)), height*Vector3.up);
             }
 
             //height for cross section is outside of circle 
@@ -200,7 +195,7 @@ namespace IMRE.HandWaver.ScaleStudy
             sphereRenderer.RecalculateBounds();
         }
 
-        private void renderCirclefloat (float radius, Vector3 center)
+        private void renderCircle (float radius, Vector3 center)
         {
             //worldspace rendering of the circle
             
@@ -214,15 +209,13 @@ namespace IMRE.HandWaver.ScaleStudy
             //math for rendering circle
             for (int i = 0; i < n; i++)
             {
-                vertices[i] = radius * (Mathf.Sin((i * Mathf.PI * 2 / (n - 1))) * norm1) + radius * (Mathf.Cos((i * Mathf.PI * 2 / (n - 1))) * norm2) + center;
+                vertices[i] = radius * ((Mathf.Sin((i * Mathf.PI * 2 / (n - 1))) * norm1) + (Mathf.Cos((i * Mathf.PI * 2 / (n - 1))) * norm2)) + center;
                 
             }
 
-            //Render circle
-            LineRenderer lineRenderer = GetComponent<LineRenderer>();
             //lineRenderer.material = new Material(Shader.Find("Particles/Additive"));
-            lineRenderer.positionCount = n;
-            lineRenderer.SetPositions(vertices);
+            crossSectionRenderer.positionCount = n;
+            crossSectionRenderer.SetPositions(vertices);
         }
 
     }

@@ -34,6 +34,8 @@ namespace IMRE.HandWaver.ScaleStudy
         }
 
         private float _percentFolded = 0f;
+        public bool sliderOverride;
+
 
         public float PercentFolded
         {
@@ -49,7 +51,7 @@ namespace IMRE.HandWaver.ScaleStudy
 
         public float slider
         {
-            set { PercentFolded = value; }
+            set => PercentFolded = !sliderOverride ? value : 1f;
         }
 
         private void Start()
@@ -81,20 +83,15 @@ namespace IMRE.HandWaver.ScaleStudy
             result[0] = Vector3.right * (Mathf.Sqrt(3f) / 2f) + Vector3.forward * .5f;
             result[1] = Vector3.right * (Mathf.Sqrt(3f) / 2f) + Vector3.back * .5f;
             result[2] = Vector3.zero;
+            
             //vertex between 0 and 1
             //use trivert() to fold outer vertices up relative to inner vertices
             result[3] = triVert(result[0], result[1], result[2], degreefolded);
-            //result[3] = result[1] + (result[2] - result[0]);
-            //result[3] = result[0] + Quaternion.AngleAxis(t, result[0] - result[1])*(result[1]+result[2]);
 
             //vertex between 1 and 2
             result[4] = triVert(result[1], result[2], result[0], degreefolded);
-            //result[4] = result[1] + Quaternion.AngleAxis(t, result[1] - result[2]) * (result[0] + result[2]);
-
             //vertex between 0 and 2
             result[5] = triVert(result[2], result[0], result[1], degreefolded);
-            //result[5] = result[2] + Quaternion.AngleAxis(t, result[2] - result[3]) * (result[0] + result[1]);
-
             return result;
         }
 

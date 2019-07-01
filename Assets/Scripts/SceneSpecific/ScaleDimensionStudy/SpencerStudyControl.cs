@@ -27,33 +27,6 @@ namespace IMRE.HandWaver.ScaleStudy
         /// An override that automatically animates the slider and the folding process
         /// </summary>
         public bool animateFold = false;
-
-        /// <summary>
-        /// A reference to the hypercube net object in the scene (3D --> 4D)
-        /// </summary>
-        public HypercubeNet hypercube;
-        /// <summary>
-        /// A reference to the five cell net in the scene (3D --> 4D)
-        /// </summary>
-        public fiveCellNet fivecell;
-	
-        /// <summary>
-        /// A reference to the cube net in the scene (2D --> 3D)
-        /// </summary>
-        public cubeNet cube;
-	
-        /// <summary>
-        /// A reference to the tetrahedron net in the scene (2D --> 3D)
-        /// </summary>
-        public tetrahedronNet pyramid;
-        /// <summary>
-        /// A reference to the square net in the scene (1D-->2D)
-        /// </summary>
-        public squareNet square;
-        /// <summary>
-        /// A reference to the triangle net in the scene (1D --> 2D)
-        /// </summary>
-        public triangleNet triangle;
 	
         /// <summary>
         /// The point on the slider that determines the position of the slider.
@@ -92,6 +65,9 @@ namespace IMRE.HandWaver.ScaleStudy
 	
 	[Range(0, 360)]
 	public float zw;
+	
+	
+
 
         private void Start()
         {
@@ -101,8 +77,15 @@ namespace IMRE.HandWaver.ScaleStudy
             //construct a point on the slider (in the middle)
             //this point will be bound to the slider on update.
             sliderPoint = GeoObjConstruction.iPoint(Vector3.right*.05f);
-
-            _sliderInputs = FindObjectsOfType<MonoBehaviour>().OfType<ISliderInput>().ToList();
+            if (allFigures == null)
+            {
+	            allFigures = new List<GameObject>();
+	            allFigures.AddRange(nets);
+	            allFigures.AddRange(crossSections);
+	            allFigures.AddRange(measures);
+            }
+            _sliderInputs = allFigures.OfType<ISliderInput>().ToList();
+            _dPerspectives = allFigures.OfType<I4D_Perspective>().ToList();
         }
 
         void Update()
@@ -110,8 +93,7 @@ namespace IMRE.HandWaver.ScaleStudy
 	        setActiveObjects();
 	        
 		//Update Rotation Values for Higher Dim Figures
-		hypercube.SetRotation(xy,xz,xw,yz,yw,zw);
-		fivecell.SetRotation(xy,xz,xw,yz,yw,zw);
+		_dPerspectives.ForEach(fig => fig.SetRotation(xy,xz,xw,yz,yw,zw));
 	
             float percent = 0f;
             //if the override bool is set, use in editor override value
@@ -175,48 +157,50 @@ namespace IMRE.HandWaver.ScaleStudy
 
 	    }
 
-	    private List<GameObject> nets;
-	    private int itemId = 0;
+	    public List<GameObject> nets;
+	    public List<GameObject> crossSections;
+	    public List<GameObject> measures;
+	    private List<GameObject> allFigures;
+
+	    
+	    private int itemId = -1;
+	    private List<I4D_Perspective> _dPerspectives;
 
 	    private void setActiveObjects()
 	    {
-		    if (nets == null)
+		    if (allFigures == null)
 		    {
-			    nets = new List<GameObject>
-			    {
-				    triangle.gameObject, square.gameObject, pyramid.gameObject, cube.gameObject, fivecell.gameObject,
-				    hypercube.gameObject
-			    };
+			    allFigures = new List<GameObject>();
+			    allFigures.AddRange(nets);
+			    allFigures.AddRange(crossSections);
+			    allFigures.AddRange(measures);
 		    }
-
 		    if (Input.GetKeyDown(KeyCode.F1))
 		    {
-			    nets.ForEach(net => net.SetActive(false));
+			    allFigures.ForEach(net => net.SetActive(false));
 		    }
 
 		    if (Input.GetKeyDown(KeyCode.F2))
 		    {
-			    nets.ForEach(net => net.SetActive(false));
+			    allFigures.ForEach(net => net.SetActive(false));
 			    itemId--;
-			    itemId = itemId % 6;
-			    nets[itemId].SetActive(true);
+			    itemId = itemId % allFigures.Count;
+			    allFigures[itemId].SetActive(true);
 		    }
 
 		    if (Input.GetKeyDown(KeyCode.F3))
 		    {
-			    nets.ForEach(net => net.SetActive(false));
+			    allFigures.ForEach(net => net.SetActive(false));
 			    itemId++;
-			    itemId = itemId % 6;
-			    nets[itemId].SetActive(true);
+			    if (itemId < allFigures.Count)
+			    {
+				    allFigures[itemId].SetActive(true);
+			    }
+			    else
+			    {
+				    Application.Quit();
+			    }
 		    }
-
-		    if (Input.GetKeyDown(KeyCode.F4))
-		    {
-			    nets.ForEach(net => net.GetComponent<meshCopyandScale>().enabled = true);
-			    foldOverride = true;
-			    percentFolded = 1;
-		    }
-
 		    if (Input.GetKeyDown(KeyCode.F5))
 		    {
 			    animateFold = !animateFold;

@@ -13,7 +13,8 @@ namespace IMRE.HandWaver.ScaleStudy
     public class squareNet : MonoBehaviour, ISliderInput
     {
 
-        private float _percentFolded = 0f;
+        private float _percentFolded;
+        public bool sliderOverride;
 
         public float PercentFolded
         {
@@ -29,7 +30,7 @@ namespace IMRE.HandWaver.ScaleStudy
 
         public float slider
         {
-            set { PercentFolded = value; }
+            set => PercentFolded = !sliderOverride ? value : 1f;
         }
 
         private void Start()

@@ -11,7 +11,7 @@ namespace IMRE.HandWaver.HigherDimensions
 /// Net of hypercube for scale and dimension study
 /// Projected to 3D
 /// </summary>
-	public class HypercubeNet : AbstractHigherDimSolid, ISliderInput
+	public class HypercubeNet : AbstractHigherDimSolid, ISliderInput, I4D_Perspective
     {
         //basic vector4 values for computations
         private static Vector4 up = new Vector4(0, 1, 0, 0);
@@ -28,12 +28,9 @@ namespace IMRE.HandWaver.HigherDimensions
             FoldPercent = 0f;
         }
 
-        private void FixedUpdate()
-        {
-            FoldPercent++;
-        }
-
         private float _foldPercent;
+        public bool sliderOverride;
+
         public float FoldPercent
         {
             get
@@ -48,11 +45,7 @@ namespace IMRE.HandWaver.HigherDimensions
         }
         
         public float slider {
-            set
-            {
-                FoldPercent = value;
-                
-            } 
+            set => FoldPercent = !sliderOverride ? value : 1f;
         }
 
         /// <summary>

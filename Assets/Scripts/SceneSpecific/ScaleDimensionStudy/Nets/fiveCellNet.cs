@@ -9,7 +9,7 @@ namespace IMRE.HandWaver.HigherDimensions
     /// <summary>
     /// Net of five cell for scale and dimension study.
     /// </summary>
-	public class fiveCellNet : AbstractHigherDimSolid, ISliderInput
+	public class fiveCellNet : AbstractHigherDimSolid, ISliderInput, I4D_Perspective
     {
         //basic vector4 values for computations
         private static Vector4 right = (new Vector4(0, 0, 1, 0) - new Vector4(Mathf.Sqrt(8f / 9f), 0, -1f / 3f, 0f)).normalized;
@@ -24,6 +24,8 @@ namespace IMRE.HandWaver.HigherDimensions
         //initialize fold
         //read only static float GoldenRatio = (1f + Mathf.Sqrt(5f)) / 2f;
         private float _percentFolded;
+        public bool sliderOverride;
+
         public float PercentFolded
         {
             get
@@ -38,11 +40,7 @@ namespace IMRE.HandWaver.HigherDimensions
         }
         
         public float slider {
-            set
-            {
-                PercentFolded = value;
-                
-            } 
+            set => PercentFolded = !sliderOverride ? value : 1f;
         }
 
         /// <summary>
@@ -75,7 +73,7 @@ namespace IMRE.HandWaver.HigherDimensions
         /// <summary>
         /// matrix for vertices to make faces of tetrahedrons for fivecell
         /// </summary>
-        internal int[] faces = new int[]
+        internal int[] faces = 
         {
             //core tetrahedron
             0,1,2,
