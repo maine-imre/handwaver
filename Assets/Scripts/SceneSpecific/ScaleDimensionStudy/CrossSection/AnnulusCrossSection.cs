@@ -24,7 +24,8 @@ namespace IMRE.HandWaver.ScaleStudy
 
         public Material annulusMaterial;
         public Material crossSectionMaterial;
-        public bool debugRenderer => SpencerStudyControl.debugRendererXC;
+        public List<GameObject> crossSectionPoints = new List<GameObject>();
+        
         #endregion
        
 
@@ -34,7 +35,7 @@ namespace IMRE.HandWaver.ScaleStudy
             gameObject.AddComponent<MeshRenderer>();
             gameObject.AddComponent<MeshFilter>();
             gameObject.GetComponent<MeshRenderer>().material = annulusMaterial;
-            gameObject.GetComponent<MeshRenderer>().enabled = debugRenderer;
+            gameObject.GetComponent<MeshRenderer>().enabled = SpencerStudyControl.debugRendererXC;
 
             #region Vertices/Triangles
 
@@ -98,16 +99,23 @@ namespace IMRE.HandWaver.ScaleStudy
 
             child.GetComponent<LineRenderer>().endWidth = SpencerStudyControl.lineRendererWidth;
             child.GetComponent<LineRenderer>().startWidth = SpencerStudyControl.lineRendererWidth;
-            child.GetComponent<LineRenderer>().enabled = false;
+            child.GetComponent<LineRenderer>().enabled = false && SpencerStudyControl.debugRendererXC;
             child2.GetComponent<LineRenderer>().endWidth = SpencerStudyControl.lineRendererWidth;
             child2.GetComponent<LineRenderer>().startWidth = SpencerStudyControl.lineRendererWidth;
-            child2.GetComponent<LineRenderer>().enabled = false;
+            child2.GetComponent<LineRenderer>().enabled = false && SpencerStudyControl.debugRendererXC;
 
             
             child2.GetComponent<LineRenderer>().useWorldSpace = false;
             child.GetComponent<LineRenderer>().useWorldSpace = false;
             
             crossSectionRenderer.ToList().ForEach( r => r.material = crossSectionMaterial);
+            
+            //generate four points to show crossSections.
+            crossSectionPoints.Add(GameObject.Instantiate(SpencerStudyControl.ins.pointPrefab));
+            crossSectionPoints.Add(GameObject.Instantiate(SpencerStudyControl.ins.pointPrefab));
+            crossSectionPoints.Add(GameObject.Instantiate(SpencerStudyControl.ins.pointPrefab));
+            crossSectionPoints.Add(GameObject.Instantiate(SpencerStudyControl.ins.pointPrefab));
+            crossSectionPoints.ForEach(p => p.transform.SetParent(transform));
             #endregion
 
         }
@@ -148,10 +156,17 @@ namespace IMRE.HandWaver.ScaleStudy
                     segmentAEndPoint0 = Vector3.down * outerRadius;
                 }
 
-                crossSectionRenderer[0].enabled = true;
+                crossSectionRenderer[0].enabled = true && SpencerStudyControl.debugRendererXC;
                 crossSectionRenderer[0].SetPosition(0,segmentAEndPoint0);
                 crossSectionRenderer[0].SetPosition(1,segmentAEndPoint0);
-                crossSectionRenderer[1].enabled = false;
+                crossSectionRenderer[1].enabled = false && SpencerStudyControl.debugRendererXC;
+
+                crossSectionPoints[0].transform.localPosition = segmentAEndPoint0;
+                crossSectionPoints[0].SetActive(true);
+                crossSectionPoints[1].SetActive(false);
+                crossSectionPoints[2].SetActive(false);
+                crossSectionPoints[3].SetActive(false);
+                
             }
             //cross section is a line segment in between the inner circle and outer circle
             else if (Math.Abs(height) < outerRadius && Math.Abs(height) >= innerRadius)
@@ -163,10 +178,17 @@ namespace IMRE.HandWaver.ScaleStudy
                 segmentAEndPoint0 = (Vector3.up * height) + (Vector3.right * (x1));
                 segmentAEndPoint1 = (Vector3.up * height) + (Vector3.left * (x1));
                 
-                crossSectionRenderer[0].enabled = true;
+                crossSectionRenderer[0].enabled = true&& SpencerStudyControl.debugRendererXC;
                 crossSectionRenderer[0].SetPosition(0,segmentAEndPoint0);
                 crossSectionRenderer[0].SetPosition(1,segmentAEndPoint1);
-                crossSectionRenderer[1].enabled = false;
+                crossSectionRenderer[1].enabled = false&& SpencerStudyControl.debugRendererXC;
+                
+                crossSectionPoints[0].transform.localPosition = segmentAEndPoint0;
+                crossSectionPoints[1].transform.localPosition = segmentAEndPoint1;
+                crossSectionPoints[0].SetActive(true);
+                crossSectionPoints[1].SetActive(true);
+                crossSectionPoints[2].SetActive(false);
+                crossSectionPoints[3].SetActive(false);
 
             }
             //cross section height is less than the inner radius, resulting in two line segments
@@ -182,22 +204,35 @@ namespace IMRE.HandWaver.ScaleStudy
 
                 segmentBEndPoint0 = (Vector3.up * height) + (Vector3.right * (x2));
                 segmentBEndPoint1 = (Vector3.up * height) + (Vector3.right * (x1));
-                crossSectionRenderer[0].enabled = true;
-                crossSectionRenderer[1].enabled = true;
+                crossSectionRenderer[0].enabled = true&& SpencerStudyControl.debugRendererXC;
+                crossSectionRenderer[1].enabled = true&& SpencerStudyControl.debugRendererXC;
 
                 crossSectionRenderer[0].SetPosition(0,segmentAEndPoint0);
                 crossSectionRenderer[0].SetPosition(1,segmentAEndPoint1);
                 crossSectionRenderer[1].SetPosition(0,segmentBEndPoint0);
                 crossSectionRenderer[1].SetPosition(1,segmentBEndPoint1);
-
+                
+                crossSectionPoints[0].transform.localPosition = segmentAEndPoint0;
+                crossSectionPoints[1].transform.localPosition = segmentAEndPoint1;
+                crossSectionPoints[2].transform.localPosition = segmentBEndPoint0;
+                crossSectionPoints[3].transform.localPosition = segmentBEndPoint1;
+                crossSectionPoints[0].SetActive(true);
+                crossSectionPoints[1].SetActive(true);
+                crossSectionPoints[2].SetActive(true);
+                crossSectionPoints[3].SetActive(true);
             }
             //cross section height is out of range of annulus
             else if (Math.Abs(height) > outerRadius)
             {
                 Debug.Log("Height is out of range of object.");
                 //TODO update rendering
-                crossSectionRenderer[0].enabled = false;
-                crossSectionRenderer[1].enabled = false;
+                crossSectionRenderer[0].enabled = false&& SpencerStudyControl.debugRendererXC;
+                crossSectionRenderer[1].enabled = false&& SpencerStudyControl.debugRendererXC;
+                
+                crossSectionPoints[0].SetActive(false);
+                crossSectionPoints[1].SetActive(false);
+                crossSectionPoints[2].SetActive(false);
+                crossSectionPoints[3].SetActive(false);
 
             }
         }

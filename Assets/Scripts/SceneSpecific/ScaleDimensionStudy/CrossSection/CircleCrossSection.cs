@@ -18,6 +18,8 @@ namespace IMRE.HandWaver.ScaleStudy
         public Material crossSectionMaterial;
         public bool debugRenderer = SpencerStudyControl.debugRendererXC;
         
+        public List<GameObject> crossSectionPoints = new List<GameObject>();
+        
         #endregion
         // Start is called before the first frame update
         void Start()
@@ -37,6 +39,13 @@ namespace IMRE.HandWaver.ScaleStudy
             crossSectionRenderer.material = crossSectionMaterial;
             crossSectionRenderer.startWidth = SpencerStudyControl.lineRendererWidth;
             crossSectionRenderer.endWidth = SpencerStudyControl.lineRendererWidth;
+            
+            //generate four points to show crossSections.
+            crossSectionPoints.Add(GameObject.Instantiate(SpencerStudyControl.ins.pointPrefab));
+            crossSectionPoints.Add(GameObject.Instantiate(SpencerStudyControl.ins.pointPrefab));
+            crossSectionPoints.Add(GameObject.Instantiate(SpencerStudyControl.ins.pointPrefab));
+            crossSectionPoints.Add(GameObject.Instantiate(SpencerStudyControl.ins.pointPrefab));
+            crossSectionPoints.ForEach(p => p.transform.SetParent(transform));
 
             #endregion
         }
@@ -70,6 +79,12 @@ namespace IMRE.HandWaver.ScaleStudy
                     crossSectionRenderer.enabled = true;
                     crossSectionRenderer.SetPosition(0, segmentEndPoint0);
                     crossSectionRenderer.SetPosition(1, segmentEndPoint0);
+                    
+                    crossSectionPoints[0].transform.localPosition = segmentEndPoint0;
+                    crossSectionPoints[0].SetActive(true); 
+                    crossSectionPoints[1].SetActive(false);
+                    crossSectionPoints[2].SetActive(false);
+                    crossSectionPoints[3].SetActive(false);
                 }
           
                 //if bottom of circle, create point at intersection
@@ -79,6 +94,12 @@ namespace IMRE.HandWaver.ScaleStudy
                     crossSectionRenderer.enabled = true;
                     crossSectionRenderer.SetPosition(0, segmentEndPoint0);
                     crossSectionRenderer.SetPosition(1, segmentEndPoint0);
+                    
+                    crossSectionPoints[0].transform.localPosition = segmentEndPoint0;
+                    crossSectionPoints[0].SetActive(true); 
+                    crossSectionPoints[1].SetActive(false);
+                    crossSectionPoints[2].SetActive(false);
+                    crossSectionPoints[3].SetActive(false);
                 }
                 //TODO update rendering
 

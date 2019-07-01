@@ -18,6 +18,8 @@ namespace IMRE.HandWaver.ScaleStudy
     /// </summary>
     public class SpencerStudyControl : MonoBehaviour
     {
+	    public static SpencerStudyControl ins;
+	    
         /// <summary>
         /// The number of degrees that each vertex is folded by.
         /// Consider changing to percent;
@@ -51,6 +53,8 @@ namespace IMRE.HandWaver.ScaleStudy
 
         public static bool debugRendererXC;
         public static float lineRendererWidth = 0.001f;
+
+        public GameObject pointPrefab;
 	
 	//In editor controls for 4D Projection Perspective.  No rotation projects along the W axis.
 	[Range(0, 360)]
@@ -76,6 +80,8 @@ namespace IMRE.HandWaver.ScaleStudy
 
         private void Start()
         {
+	        ins = this;
+	        
             //construct a slider as a dependent line segment, with points at Vector3.zero and Vector3.right.  
             //Add Vector3.up for height
             slider = GeoObjConstruction.dLineSegment(GeoObjConstruction.dPoint(Vector3.zero+Vector3.up),GeoObjConstruction.dPoint(Vector3.right*.1f+Vector3.up));
