@@ -12,13 +12,13 @@ namespace IMRE.HandWaver.Kernel
         /// <summary>
         /// If this is set, the session will use this session ID rather than generate a new one.
         /// </summary>
-        public string overrideSID;
+        public static string overrideSID;
         
         private void Start()
         {
             initSession();
 
-            WebSocket ws = WebSocketFactory.CreateInstance("ws://" + HandWaverServerTransport.HOSTURL);
+            WebSocket ws = WebSocketFactory.CreateInstance(HandWaverServerTransport.HOSTURL);
             
             // Add OnOpen event listener
             ws.OnOpen += () =>
@@ -31,8 +31,6 @@ namespace IMRE.HandWaver.Kernel
             ws.OnMessage += msg =>
             {
                 Debug.Log("WS received message: " + Encoding.UTF8.GetString(msg));
-
-                ws.Close();
             };
 
             // Add OnError event listener

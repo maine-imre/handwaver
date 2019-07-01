@@ -5,6 +5,7 @@ using System.Xml;
 using JetBrains.Annotations;
 using UnityEngine.Networking;
 using System;
+using UnityEditor;
 
 
 namespace IMRE.HandWaver.Kernel
@@ -21,6 +22,11 @@ namespace IMRE.HandWaver.Kernel
         /// Access this through the public sessionID var.
         /// </summary>
         private static string _sessionId = "c55d57b8-8624-11e9-bc42-526af7764f64";
+
+        /// <summary>
+        /// Internal Guid representation of the <para>_sessionId</para>
+        /// </summary>
+        private static Guid _guid;
         
         /// <summary>
         /// Public access to the session id string.
@@ -30,9 +36,22 @@ namespace IMRE.HandWaver.Kernel
         {
             // This should remain an expression body as we do not need to do anything during a get of sessionId.
             get => _sessionId;
-            
+
             // Change from expression body later if needed to add functionality.
-            set => _sessionId = value;
+            set
+            {
+                // Is it a valid Guid
+                if(Guid.TryParse(value, out _guid))
+                {
+                    // assign
+                    _sessionId = value;
+                }
+                else
+                {
+                    //Throw a format exception
+                    throw new FormatException(value+" is not in valid Guid format!");
+                }
+            }
         }
 
         /// <summary>
