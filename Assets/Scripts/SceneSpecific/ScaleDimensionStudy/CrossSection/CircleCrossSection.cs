@@ -161,8 +161,8 @@ namespace IMRE.HandWaver.ScaleStudy
             //lineRenderer.material = new Material(Shader.Find("Particles/Additive"));
             lineRenderer.startColor = Color.blue;
             lineRenderer.endColor = Color.blue;
-            lineRenderer.startWidth = .005f;
-            lineRenderer.endWidth = .005f;
+            lineRenderer.startWidth = SpencerStudyControl.lineRendererWidth;
+            lineRenderer.endWidth = SpencerStudyControl.lineRendererWidth;
             lineRenderer.positionCount = n;
             lineRenderer.SetPositions(vertices);
         }

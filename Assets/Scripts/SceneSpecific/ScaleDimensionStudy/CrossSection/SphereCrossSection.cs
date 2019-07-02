@@ -30,14 +30,12 @@ namespace IMRE.HandWaver.ScaleStudy
 
             #region Render Cross-section
 
-            //TODO setup sphere renderer
             gameObject.AddComponent<MeshRenderer>();
             gameObject.AddComponent<MeshFilter>();
             GetComponent<MeshRenderer>().material = sphereMaterial;
             gameObject.GetComponent<MeshRenderer>().enabled = debugRenderer;
             renderSphere();   
             
-            //TODO setup cross-section renderer as child object
             GameObject child = new GameObject();
             child.transform.parent = transform;
             child.transform.localPosition = Vector3.zero;
@@ -45,8 +43,8 @@ namespace IMRE.HandWaver.ScaleStudy
             crossSectionRenderer.material = crossSectionMaterial;
             crossSectionRenderer.useWorldSpace = false;
 
-            crossSectionRenderer.startWidth = .005f;
-            crossSectionRenderer.endWidth = .005f;
+            crossSectionRenderer.startWidth = SpencerStudyControl.lineRendererWidth;
+            crossSectionRenderer.endWidth = SpencerStudyControl.lineRendererWidth;
             crossSectionRenderer.loop = true;
 
             #endregion
