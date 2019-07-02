@@ -8,7 +8,7 @@ using UnityEngine;
 #endif
 
 #if ViveSense
-    using Aristo;
+    using ViveHandTracking;
 #endif
 
 #if ValveSkeletal
@@ -298,7 +298,8 @@ namespace IMRE.EmbodiedUserInput
         private bool isFingerExtended(Hand currHand, int fingerIndex)
         {
             //TODO make this better, consider curl
-            return Vector3.Dot(currHand.Fingers[fingerIndex].Direction, currHand.Palm.Direction) < .1f;
+            return Mathf.Abs(Vector3.Angle(currHand.Fingers[fingerIndex].Joints[3].Direction, currHand.Fingers[fingerIndex].Joints[0].Direction)) < 30f;
+            //return Vector3.Dot(currHand.Fingers[fingerIndex].Direction, currHand.Palm.Direction) < .1f;
         }
 
         private void setPositionsRealSense()

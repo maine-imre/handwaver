@@ -718,7 +718,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 264647206}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cdfe6bd84ad3d70ee871059f570eaaeb, type: 3}
+  m_Script: {fileID: 11500000, guid: f4ad9dc529ced5c4c95be6f90dc3c30f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   enableLeapMotion: 0
@@ -749,7 +749,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 264647206}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f00802721d05b2f449f7b0eb1cc261b9, type: 3}
+  m_Script: {fileID: 11500000, guid: 42ff71e30deb4174fa8bed0d152bf4dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &465465668
