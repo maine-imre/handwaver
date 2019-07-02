@@ -298,7 +298,7 @@ namespace IMRE.EmbodiedUserInput
         private bool isFingerExtended(Hand currHand, int fingerIndex)
         {
             //TODO make this better, consider curl
-            return Vector3.Dot(currHand.Fingers[fingerIndex].Direction, currHand.Palm.Direction) < .1f;
+            return Mathf.Abs(Vector3.Angle(currHand.Fingers[fingerIndex].Direction, currHand.Palm.Direction)) < 10f;
         }
 
         private void setPositionsRealSense()
