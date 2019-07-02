@@ -43,8 +43,6 @@ namespace IMRE.HandWaver.ScaleStudy
             //generate four points to show crossSections.
             crossSectionPoints.Add(GameObject.Instantiate(SpencerStudyControl.ins.pointPrefab));
             crossSectionPoints.Add(GameObject.Instantiate(SpencerStudyControl.ins.pointPrefab));
-            crossSectionPoints.Add(GameObject.Instantiate(SpencerStudyControl.ins.pointPrefab));
-            crossSectionPoints.Add(GameObject.Instantiate(SpencerStudyControl.ins.pointPrefab));
             crossSectionPoints.ForEach(p => p.transform.SetParent(transform));
 
             #endregion
@@ -83,8 +81,6 @@ namespace IMRE.HandWaver.ScaleStudy
                     crossSectionPoints[0].transform.localPosition = segmentEndPoint0;
                     crossSectionPoints[0].SetActive(true); 
                     crossSectionPoints[1].SetActive(false);
-                    crossSectionPoints[2].SetActive(false);
-                    crossSectionPoints[3].SetActive(false);
                 }
           
                 //if bottom of circle, create point at intersection
@@ -98,8 +94,6 @@ namespace IMRE.HandWaver.ScaleStudy
                     crossSectionPoints[0].transform.localPosition = segmentEndPoint0;
                     crossSectionPoints[0].SetActive(true); 
                     crossSectionPoints[1].SetActive(false);
-                    crossSectionPoints[2].SetActive(false);
-                    crossSectionPoints[3].SetActive(false);
                 }
                 //TODO update rendering
 
@@ -121,6 +115,12 @@ namespace IMRE.HandWaver.ScaleStudy
                 crossSectionRenderer.SetPosition(0, segmentEndPoint0);
                 crossSectionRenderer.SetPosition(1, segmentEndPoint1);
 
+                crossSectionPoints[0].transform.localPosition = segmentEndPoint0;
+                crossSectionPoints[0].SetActive(true);
+                crossSectionPoints[1].transform.localPosition = segmentEndPoint1;
+                crossSectionPoints[1].SetActive(true);
+
+
             }
        
             //height for cross section is outside of circle 
@@ -129,6 +129,9 @@ namespace IMRE.HandWaver.ScaleStudy
                 Debug.Log("Height is out of range of object.");
                 //TODO update rendering
                 crossSectionRenderer.enabled = false;
+                
+                crossSectionPoints[0].SetActive(false);
+                crossSectionPoints[1].SetActive(false);
 
             }
         
