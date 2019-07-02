@@ -30,7 +30,8 @@ namespace IMRE.HandWaver.ScaleStudy
             set
             {
                 //using solution form here:  https://math.stackexchange.com/questions/1159613/would-the-cross-section-of-a-hypersphere-be-a-sphere
-                renderSphere(Mathf.Sqrt(radius*radius-value*value));
+                float sliderval = -1 + 2*value;
+                renderSphere(Mathf.Sqrt(radius*radius-sliderval*sliderval));
             }
         }
 
