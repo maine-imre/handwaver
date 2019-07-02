@@ -15,7 +15,7 @@ namespace IMRE.HandWaver.ScaleStudy
 
         private float _percentFolded;
         public bool sliderOverride;
-
+        public List<GameObject> foldPoints = new List<GameObject>();
         public float PercentFolded
         {
             get { return _percentFolded; }
@@ -40,8 +40,15 @@ namespace IMRE.HandWaver.ScaleStudy
             //
             GetComponent<LineRenderer>().useWorldSpace = false;
             //start and end width of line
-            GetComponent<LineRenderer>().startWidth = .01f;
-            GetComponent<LineRenderer>().endWidth = .01f;
+            GetComponent<LineRenderer>().startWidth = .008f;
+            GetComponent<LineRenderer>().endWidth = .008f;
+            
+            foldPoints.Add(GameObject.Instantiate(SpencerStudyControl.ins.pointPrefab));
+            foldPoints.Add(GameObject.Instantiate(SpencerStudyControl.ins.pointPrefab));
+            foldPoints.Add(GameObject.Instantiate(SpencerStudyControl.ins.pointPrefab));
+            foldPoints.Add(GameObject.Instantiate(SpencerStudyControl.ins.pointPrefab));
+            foldPoints.Add(GameObject.Instantiate(SpencerStudyControl.ins.pointPrefab));
+            foldPoints.ForEach(p => p.transform.SetParent(transform));
         }
 
         /// <summary>
@@ -62,6 +69,29 @@ namespace IMRE.HandWaver.ScaleStudy
             result[3] = result[2] + Quaternion.AngleAxis(-angle, Vector3.up) * Vector3.left;
             //rotate vertice by -2t around (0, 1, 0)
             result[4] = result[3] + Quaternion.AngleAxis(-2 * angle, Vector3.up) * Vector3.left;
+
+            if (percentFolded == 1)
+            {
+                foldPoints[0].transform.localPosition = result[0];
+                foldPoints[1].transform.localPosition = result[1];
+                foldPoints[2].transform.localPosition = result[2];
+                foldPoints[3].transform.localPosition = result[3];
+                foldPoints[4].transform.localPosition = result[4];
+            }
+            else
+            {
+                foldPoints[0].transform.localPosition = result[0];
+                foldPoints[1].transform.localPosition = result[1];
+                foldPoints[2].transform.localPosition = result[2];
+                foldPoints[3].transform.localPosition = result[3];
+                foldPoints[4].transform.localPosition = result[4];
+            }
+            
+            foldPoints[0].SetActive(true);
+            foldPoints[1].SetActive(true);
+            foldPoints[2].SetActive(true);
+            foldPoints[3].SetActive(true);
+            foldPoints[4].SetActive(true);
             return result;
         }
     }
