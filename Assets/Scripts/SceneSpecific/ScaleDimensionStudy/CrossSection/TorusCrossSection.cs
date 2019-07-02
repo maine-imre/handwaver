@@ -49,15 +49,13 @@ namespace IMRE.HandWaver.ScaleStudy
             crossSectionRenderer.ToList().ForEach(r => r.endWidth = .005f);
             crossSectionRenderer.ToList().ForEach(r => r.loop = true);
             crossSectionRenderer.ToList().ForEach(r => r.positionCount = n);
-            debugIntersection();
             
         }
 
         public float slider
         {
             //scale value from 0 to 1 to -1 to 1
-            //set => crossSectTorus(-1+value*2);
-            set => debugIntersection();
+            set => crossSectTorus(-1+value*2);
         }
 
         /// <summary>
@@ -69,6 +67,15 @@ namespace IMRE.HandWaver.ScaleStudy
             float innerRadius = revolveRadius - circleRadius;
             float outerRadius = revolveRadius + circleRadius;
 
+            //convert values to variables for equation
+            float d = 2f * (float) (Math.Pow(circleRadius, 2) + Math.Pow(revolveRadius, 2) -
+                                    Math.Pow(height, 2));
+            float e = 2f * (float) (Math.Pow(circleRadius, 2) - Math.Pow(revolveRadius, 2) -
+                                    Math.Pow(height, 2));
+            float f = -(circleRadius + revolveRadius + height) *
+                      (circleRadius + revolveRadius - height) *
+                      (circleRadius - revolveRadius + height) *
+                      (circleRadius - revolveRadius - height);
 
             Vector3 torusCenter = Vector3.zero;
 
@@ -122,18 +129,20 @@ namespace IMRE.HandWaver.ScaleStudy
                 //the second renderer is a reflection of the first.
 
                 //todo find thetaMax
-                float thetaMax = Mathf.PI / 2f;
+                float thetaMax = 2 * Mathf.Atan(Mathf.Sqrt((-Mathf.Sqrt(Mathf.Pow(e, 2) - Mathf.Pow(d, 2)) - e) / d));
                 for (int i = 0; i < (n / 2); i++)
                 {
-                    float theta = i * (1 / (n - 2)) * thetaMax;
+                    float twoNth = (2f / (n - 2f));
+                    float theta = i *twoNth* thetaMax;
+                    Debug.Log(theta);
                     //walk forward on first
-                    crossSectionRenderer[0].SetPosition(i, spiricMath(theta, height).c0);
+                    crossSectionRenderer[0].SetPosition(i, spiricMath(thetaMax - theta, height).c0);
                     //walk backward on first
-                    crossSectionRenderer[0].SetPosition((n - 1) - i, spiricMath(-theta, height).c1);
+                    crossSectionRenderer[0].SetPosition((n - 1) - i, spiricMath(thetaMax - theta, height).c1);
                     //walk forward on second
-                    crossSectionRenderer[1].SetPosition(i, spiricMath(Mathf.PI - theta, height).c0);
+                    crossSectionRenderer[1].SetPosition(i, spiricMath(Mathf.PI - (thetaMax - theta), height).c0);
                     //walk backward on second
-                    crossSectionRenderer[1].SetPosition((n - 1) - i, spiricMath(Mathf.PI + theta, height).c1);
+                    crossSectionRenderer[1].SetPosition((n - 1) - i, spiricMath(Mathf.PI - (thetaMax - theta), height).c1);
                 }
 
                 crossSectionRenderer.ToList().ForEach(r => r.enabled = true);
@@ -310,23 +319,6 @@ namespace IMRE.HandWaver.ScaleStudy
             return 0;
         }
 
-        private void debugIntersection()
-        {
-            float height = (revolveRadius - .25f);
-            //convert values to variables for equation
-            float d = 2f * (float) (Math.Pow(circleRadius, 2) + Math.Pow(revolveRadius, 2) -
-                                    Math.Pow(height, 2));
-            float e = 2f * (float) (Math.Pow(circleRadius, 2) - Math.Pow(revolveRadius, 2) -
-                                    Math.Pow(height, 2));
-            float f = -(circleRadius + revolveRadius + height) *
-                      (circleRadius + revolveRadius - height) *
-                      (circleRadius - revolveRadius + height) *
-                      (circleRadius - revolveRadius - height);
-
-            float theta1 = Mathf.Acos(Mathf.Sqrt((2 * Mathf.Sqrt(-Mathf.Pow(e - d, 2) * f)) / (Mathf.Pow(d, 2) - 2 * e * d + Mathf.Pow(e, 2)) - ((e * d) / (Mathf.Pow(d, 2) - 2 * e * d + Mathf.Pow(e, 2))) + Mathf.Pow(e, 2) / (Mathf.Pow(d, 2) - 2 * e * d + Mathf.Pow(e, 2))));
-            float theta2 = Mathf.Acos(Mathf.Sqrt((-2 * Mathf.Sqrt(-Mathf.Pow(e - d, 2) * f) / (Mathf.Pow(d, 2) - 2 * e * d + Mathf.Pow(e, 2)) - ((e * d) / (Mathf.Pow(d, 2) - 2 * e * d + Mathf.Pow(e, 2))) + Mathf.Pow(e, 2) / (Mathf.Pow(d, 2) - 2 * e * d + Mathf.Pow(e, 2)))));
-            Debug.Log(theta1 + "  :  " + theta2);
-        }
 
     }
     
