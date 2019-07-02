@@ -41,8 +41,8 @@ namespace IMRE.HandWaver.ScaleStudy
             GetComponent<LineRenderer>().positionCount = 4;
             GetComponent<LineRenderer>().useWorldSpace = false;
             //start and end width of line
-            GetComponent<LineRenderer>().startWidth = SpencerStudyControl.lineRendererWidth;
-            GetComponent<LineRenderer>().endWidth = SpencerStudyControl.lineRendererWidth;
+            GetComponent<LineRenderer>().startWidth = .008f;
+            GetComponent<LineRenderer>().endWidth = .008f;
             
             foldPoints.Add(GameObject.Instantiate(SpencerStudyControl.ins.pointPrefab));
             foldPoints.Add(GameObject.Instantiate(SpencerStudyControl.ins.pointPrefab));
