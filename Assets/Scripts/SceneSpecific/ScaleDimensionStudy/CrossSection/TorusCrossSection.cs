@@ -30,14 +30,12 @@ namespace IMRE.HandWaver.ScaleStudy
         // Start is called before the first frame update
         void Start()
         {
-            //TODO setup torus renderer
             gameObject.AddComponent<MeshRenderer>();
             gameObject.AddComponent<MeshFilter>();
             GetComponent<MeshRenderer>().material = torusMaterial;
             gameObject.GetComponent<MeshRenderer>().enabled = debugRenderer;
             renderTorus();
 
-            //TODO setup cross-section renderer as child object
             GameObject child = new GameObject();
             child.transform.parent = transform;
             child.AddComponent<LineRenderer>();
