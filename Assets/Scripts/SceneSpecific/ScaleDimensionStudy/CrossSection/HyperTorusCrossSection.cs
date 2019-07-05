@@ -40,8 +40,43 @@ namespace IMRE.HandWaver.ScaleStudy
         }
 
 
-        public float3 HyperToricSectoin(float a, float b, float c)
+        public float3 HyperToricSectoin(float alpha, float beta, float h)
         {
+		float a;
+		float b;
+		float c;
+
+		//since we are fixing one of the x,y,z,w values, we can find a value for a, b, or c and use alpha and beta to parameterize the other two.
+	    switch (plane)
+            {
+		//TODO check multiple solutions for acos and asin
+                case crossSectionPlane.x:
+			float a = alpha;
+			float b = beta;
+			float c = math.asin(h/ (R + (P + math.cos(a)) * math.cos(b)));
+			break;
+                case crossSectionPlane.y:
+			float a = alpha;
+			float b = beta;
+			float c = math.asin(h/ (P + math.cos(a)));
+			break;
+                case crossSectionPlane.z:
+			float b = alpha;
+			float c = beta;
+			float a = math.asin(h);
+			break;
+                case crossSectionPlane.w:
+			float a = alpha;
+			float b = beta;
+			float c = math.asin(h/ (R + (P + math.cos(a)) * math.cos(b)));
+			break;
+                default:
+			float b = alpha;
+			float c = beta;
+			float a = math.asin(h);
+			break;
+            }
+
             float w = (R + (P + math.cos(a)) * math.cos(b)) * math.cos(c);
             float x = (R + (P + math.cos(a)) * math.cos(b)) * math.sin(c);
             float y = (P + math.cos(a)) * math.sin(b);
@@ -84,7 +119,7 @@ namespace IMRE.HandWaver.ScaleStudy
 
                     //map vertices from 2 dimensions to 3
                     //TODO testing with a = arcsin(z), cross secting in z
-                    verts[idx] = HyperToricSectoin(math.asin(height), alpha,beta);
+                    verts[idx] = HyperToricSectoin(alpha, beta, height);
 
                     //uv mapping 
                     uvs[idx] = new Vector2(j * oneNth, i * oneNth);
