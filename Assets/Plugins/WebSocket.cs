@@ -553,7 +553,28 @@ namespace HybridWebSocket
             }
 
         }
+        /// <summary>
+        /// Send string data over the socket.
+        /// </summary>
+        /// <param name="data">Payload data.</param>
+        public void Send(string data)
+        {
 
+            // Check state
+            if (this.ws.ReadyState != WebSocketSharp.WebSocketState.Open)
+                throw new WebSocketInvalidStateException("WebSocket is not in open state.");
+
+            try
+            {
+                this.ws.Send(data);
+            }
+            catch (Exception e)
+            {
+                throw new WebSocketUnexpectedException("Failed to send message.", e);
+            }
+
+        }
+        
         /// <summary>
         /// Send binary data over the socket.
         /// </summary>

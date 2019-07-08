@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using UnityEngine;
 
@@ -18,7 +20,8 @@ namespace IMRE.HandWaver.Kernel
         {
             initSession();
 
-            WebSocket ws = WebSocketFactory.CreateInstance(HandWaverServerTransport.HOSTURL);
+            WebSocket ws = WebSocketFactory.CreateInstance("ws://"+HandWaverServerTransport.HOSTURL);
+            string subscribeString = "subscribe : "+HandWaverServerTransport.sessionId;
             
             // Add OnOpen event listener
             ws.OnOpen += () =>
@@ -47,6 +50,9 @@ namespace IMRE.HandWaver.Kernel
 
             // Connect to the server
             ws.Connect();
+            
+            ws.Send(subscribeString);
+
             
             //Test the command changes
             StartCoroutine(HandWaverServerTransport.execCommand("B = Point({1, 2, 3})"));    // Point A
