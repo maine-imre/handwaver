@@ -254,16 +254,8 @@ namespace IMRE.EmbodiedUserInput
                 viveHand.points[0] - viveHand.points[17]).normalized;
             myHand.Wrist.Position = viveHand.points[0];
             myHand.Wrist.Direction = (viveHand.points[9] - viveHand.points[1]);
-            
-            //binary pinch strength by default
-            if (viveHand.gesture == GestureType.OK)
-            {
-                myHand.PinchStrength = 1f;
-            }
-            else
-            {
-                myHand.PinchStrength = 0f;
-            }
+
+            myHand.PinchStrength = pinchStrength(myHand);
             
             //count through five fingers
             for (int fIDX = 0; fIDX < 5; fIDX++)
@@ -295,15 +287,17 @@ namespace IMRE.EmbodiedUserInput
         }
 #endif
 
-        private bool isFingerExtended(Hand currHand, int fingerIndex)
+        private static bool isFingerExtended(Hand currHand, int fingerIndex)
         {
             //TODO make this better, consider curl
             return Mathf.Abs(Vector3.Angle(currHand.Fingers[fingerIndex].Joints[3].Direction, currHand.Fingers[fingerIndex].Joints[0].Direction)) < 30f;
             //return Vector3.Dot(currHand.Fingers[fingerIndex].Direction, currHand.Palm.Direction) < .1f;
         }
 
-        private void setPositionsRealSense()
+        private static float pinchStrength(Hand currHand)
         {
+            return 1-(Vector3.Magnitude(currHand.Fingers[0].Joints[3].Position -
+                                          currHand.Fingers[1].Joints[3].Position)*10f);
         }
 
         private void setupAvatar()
