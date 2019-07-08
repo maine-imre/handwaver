@@ -13,22 +13,19 @@ namespace IMRE.HandWaver.ScaleStudy
         public int n;
         private Mesh crossSectionRenderer => GetComponent<MeshFilter>().mesh;
         public Material sphereMaterial;
-        public float radius = 1f;
 
+        public bool solutionA;
         #endregion
         
         public enum crossSectionPlane{w,x,y,z}
 
-        private crossSectionPlane plane = crossSectionPlane.z;
+        public crossSectionPlane plane = crossSectionPlane.z;
         public float R;
         public float P;
 
         public float slider
         {
-            set
-            {
-                renderToricSection(-1+2*value);
-            }
+            set => renderToricSection(-1+2*value);
         }
 
         // Start is called before the first frame update
@@ -40,7 +37,7 @@ namespace IMRE.HandWaver.ScaleStudy
         }
 
 
-        public float3 HyperToricSectoin(float alpha, float beta, float h)
+        private float3 HyperToricSection(float alpha, float beta, float h)
         {
 		float a;
 		float b;
@@ -51,29 +48,49 @@ namespace IMRE.HandWaver.ScaleStudy
             {
 		//TODO check multiple solutions for acos and asin
                 case crossSectionPlane.x:
-			float a = alpha;
-			float b = beta;
-			float c = math.asin(h/ (R + (P + math.cos(a)) * math.cos(b)));
+			a = alpha;
+			b = beta;
+			c = math.asin(h/ (R + (P + math.cos(a)) * math.cos(b)));
+            if (solutionA)
+            {
+                c = Mathf.PI - c;
+            }
 			break;
                 case crossSectionPlane.y:
-			float a = alpha;
-			float b = beta;
-			float c = math.asin(h/ (P + math.cos(a)));
+			a = alpha;
+			b = beta;
+			c = math.asin(h/ (P + math.cos(a)));
+            if (solutionA)
+            {
+                c = Mathf.PI - c;
+            }
 			break;
                 case crossSectionPlane.z:
-			float b = alpha;
-			float c = beta;
-			float a = math.asin(h);
+			b = alpha;
+			c = beta;
+			a = math.asin(h);
+            if (solutionA)
+            {
+                a = Mathf.PI - a;
+            }
 			break;
                 case crossSectionPlane.w:
-			float a = alpha;
-			float b = beta;
-			float c = math.asin(h/ (R + (P + math.cos(a)) * math.cos(b)));
+			a = alpha;
+			b = beta;
+			c = math.asin(h/ (R + (P + math.cos(a)) * math.cos(b)));
+            if (solutionA)
+            {
+                c = Mathf.PI - c;
+            }
 			break;
                 default:
-			float b = alpha;
-			float c = beta;
-			float a = math.asin(h);
+			b = alpha;
+			c = beta;
+			a = math.asin(h);
+            if (solutionA)
+            {
+                a = Mathf.PI - a;
+            }
 			break;
             }
 
@@ -119,7 +136,7 @@ namespace IMRE.HandWaver.ScaleStudy
 
                     //map vertices from 2 dimensions to 3
                     //TODO testing with a = arcsin(z), cross secting in z
-                    verts[idx] = HyperToricSectoin(alpha, beta, height);
+                    verts[idx] = HyperToricSection(alpha, beta, height);
 
                     //uv mapping 
                     uvs[idx] = new Vector2(j * oneNth, i * oneNth);

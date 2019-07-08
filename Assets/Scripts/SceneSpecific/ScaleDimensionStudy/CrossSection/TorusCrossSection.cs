@@ -110,12 +110,12 @@ namespace IMRE.HandWaver.ScaleStudy
             }
 
             //cross section results in spiric shape
-            else if (Mathf.Abs(height) < innerRadius)
+            else if (Mathf.Abs(height) > innerRadius)
             {
                 //there is only one spiric
                 for (int i = 0; i < n; i++)
                 {
-                    float theta = i * (1 / n) * Mathf.PI * 2;
+                    float theta = i * (1f/ n) * Mathf.PI * 2;
                     crossSectionRenderer[0].SetPosition(i, spiricMath(theta, height).c0);
                 }
 
@@ -134,16 +134,25 @@ namespace IMRE.HandWaver.ScaleStudy
                 {
                     float twoNth = (2f / (n - 2f));
                     float theta = i *twoNth* thetaMax;
-                    Debug.Log(theta);
-                    //walk forward on first
-                    crossSectionRenderer[0].SetPosition(i, spiricMath(thetaMax - theta, height).c0);
-                    //walk backward on first
-                    crossSectionRenderer[0].SetPosition((n - 1) - i, spiricMath(thetaMax - theta, height).c1);
-                    //walk forward on second
-                    crossSectionRenderer[1].SetPosition(i, spiricMath(Mathf.PI - (thetaMax - theta), height).c0);
-                    //walk backward on second
-                    crossSectionRenderer[1].SetPosition((n - 1) - i, spiricMath(Mathf.PI - (thetaMax - theta), height).c1);
+                    try
+                    {
+                        //walk forward on first
+                        crossSectionRenderer[0].SetPosition(i, spiricMath(thetaMax - theta, height).c0);
+                        //walk backward on first
+                        crossSectionRenderer[0].SetPosition((n - 1) - i, spiricMath(thetaMax - theta, height).c1);
+                        //walk forward on second
+                        crossSectionRenderer[1].SetPosition(i, spiricMath(Mathf.PI - (thetaMax - theta), height).c0);
+                        //walk backward on second
+                        crossSectionRenderer[1].SetPosition((n - 1) - i,
+                            spiricMath(Mathf.PI - (thetaMax - theta), height).c1);
+                    }
+                    catch
+                    {
+                        Debug.Log("theta: " + theta); 
+                        Debug.Log("thetamax: " + thetaMax);
+                    }
                 }
+
 
                 crossSectionRenderer.ToList().ForEach(r => r.enabled = true);
 
@@ -162,10 +171,10 @@ namespace IMRE.HandWaver.ScaleStudy
         private float3x2 spiricMath(float theta, float height)
         {
             //convert values to variables for equation
-            float d = 2f * (float) (Math.Pow(circleRadius, 2) + Math.Pow(revolveRadius, 2) -
-                                    Math.Pow(height, 2));
-            float e = 2f * (float) (Math.Pow(circleRadius, 2) - Math.Pow(revolveRadius, 2) -
-                                    Math.Pow(height, 2));
+            float d = 2f * (Mathf.Pow(circleRadius, 2) + Mathf.Pow(revolveRadius, 2) -
+                                    Mathf.Pow(height, 2));
+            float e = 2f * (Mathf.Pow(circleRadius, 2) - Mathf.Pow(revolveRadius, 2) -
+                                    Mathf.Pow(height, 2));
             float f = -(circleRadius + revolveRadius + height) *
                       (circleRadius + revolveRadius - height) *
                       (circleRadius - revolveRadius + height) *
@@ -176,7 +185,7 @@ namespace IMRE.HandWaver.ScaleStudy
             float r1;
 
             r0 = Mathf.Sqrt(
-                     -Mathf.Sqrt(
+                     Mathf.Sqrt(
                          Mathf.Pow(
                              -d * Mathf.Cos(theta) * Mathf.Cos(theta) - e * Mathf.Sin(theta) * Mathf.Sin(theta),
                              2) +
@@ -185,20 +194,22 @@ namespace IMRE.HandWaver.ScaleStudy
                  Mathf.Sqrt(2);
 
             r1 = Mathf.Sqrt(
-                     Mathf.Sqrt(
+                     -Mathf.Sqrt(
                          Mathf.Pow(
                              -d * Mathf.Cos(theta) * Mathf.Cos(theta) - e * Mathf.Sin(theta) * Mathf.Sin(theta),
                              2) +
                          4 * f) + d * Mathf.Cos(theta) * Mathf.Cos(theta) +
                      e * Mathf.Sin(theta) * Mathf.Sin(theta)) /
                  Mathf.Sqrt(2);
-            ;
+            
 
             float3x2 result = new float3x2();
 
             //distance results converted to theta
-            result.c0 = r0 * (Mathf.Cos(theta) * Vector3.right + Mathf.Sin(theta) * Vector3.forward);
-            result.c1 = r1 * (Mathf.Cos(theta) * Vector3.right + Mathf.Sin(theta) * Vector3.forward);
+            
+            result.c0 = r0 * (Mathf.Cos(theta) * Vector3.right + Mathf.Sin(theta) * Vector3.forward) + Vector3.up*height;
+            result.c1 = -r0 * (Mathf.Cos(theta) * Vector3.right + Mathf.Sin(theta) * Vector3.forward)+ Vector3.up*height;
+            Debug.Log(height + " : " + d + " : " + e + " : " + f +" : " + r0+" : " +r1);
             return result;
         }
 
