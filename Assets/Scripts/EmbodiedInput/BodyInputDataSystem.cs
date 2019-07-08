@@ -258,8 +258,61 @@ namespace IMRE.EmbodiedUserInput
 #if LeapMotion
         private void setPositionsLeapMotion()
         {
-            bodyInput.LeftHand = leapHandConversion(bodyInput.LeftHand, LeapService.MakeTestHand(true));
-            bodyInput.RightHand = leapHandConversion(bodyInput.RightHand, LeapService.MakeTestHand(false));
+            if (Leap.Unity.Hands.Left != null)
+            {
+                bodyInput.LeftHand = leapHandConversion(bodyInput.LeftHand, Leap.Unity.Hands.Left);
+            }
+            else
+            {
+                float3 empty = new float3(-10f,-10f,-10f);
+
+                bodyInput.LeftHand.Palm.Position = empty;
+                bodyInput.LeftHand.Palm.Direction = empty;
+                bodyInput.LeftHand.PinchStrength = 0;
+                        
+                //count through five fingers
+                for (int fIDX = 0; fIDX < 5; fIDX++)
+                {
+                    bodyInput.LeftHand.Fingers[fIDX].Direction = empty;
+
+                    //count through 4 joints
+                    for (int jIDX = 0; jIDX < 4; jIDX++)
+                    {
+                        bodyInput.LeftHand.Fingers[fIDX].Joints[jIDX].Position = empty;
+                        bodyInput.LeftHand.Fingers[fIDX].Joints[jIDX].Direction = empty;
+                    }
+                            
+                    //this could cause problems later if we set some sort of meaning to be derived from making a fist
+                    bodyInput.LeftHand.Fingers[fIDX].IsExtended = false;
+                }
+            }
+
+            if (Leap.Unity.Hands.Right != null)
+            {
+                bodyInput.RightHand = leapHandConversion(bodyInput.RightHand, Leap.Unity.Hands.Right);
+            }
+            else
+            {
+                float3 empty = new float3(-10f,-10f,-10f);
+                bodyInput.RightHand.Palm.Position = empty;
+                bodyInput.RightHand.Palm.Direction = empty;
+                bodyInput.RightHand.PinchStrength = 0;
+                        
+                for (int fIDX = 0; fIDX < 5; fIDX++)
+                {
+                    bodyInput.RightHand.Fingers[fIDX].Direction = empty;
+
+                    //count through 4 joints
+                    for (int jIDX = 0; jIDX < 4; jIDX++)
+                    {
+                        bodyInput.RightHand.Fingers[fIDX].Joints[jIDX].Position = empty;
+                        bodyInput.RightHand.Fingers[fIDX].Joints[jIDX].Direction = empty;
+                    }
+                            
+                    //this could cause problems later if we set some sort of meaning to be derived from making a fist
+                    bodyInput.RightHand.Fingers[fIDX].IsExtended = false;
+                }
+            }
         }
 
         private Hand leapHandConversion(Hand myHand, Leap.Hand lmHand)
