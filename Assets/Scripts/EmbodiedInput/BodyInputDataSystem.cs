@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
+using Unity.Mathematics;
 using UnityEngine;
 #if LeapMotion
     using Leap.Unity;
@@ -133,8 +133,62 @@ namespace IMRE.EmbodiedUserInput
 #endif
 
 #if ViveSense
-            if (enableViveSense)
-            {
+            if (enableViveSense){
+                if (GestureProvider.UpdatedInThisFrame)
+                {
+                    //this will enter here only when there is at least one hand with no new data from the vive pro tracking
+                    //this means that we do not know which hand or if it was both hands that were not seen by the sensor this frame
+                    
+                    //this is a dummy value which will be used to indicate that hands were not tracked
+                    float3 empty = new float3(-10f,-10f,-10f);
+                    
+                    //These two ifs  will check to see which hand was not tracked. Then gives dummy values for all fields
+                    if (GestureProvider.LeftHand == null)
+                    {
+                        bodyInput.LeftHand.Palm.Position = empty;
+                        bodyInput.LeftHand.Palm.Direction = empty;
+                        bodyInput.LeftHand.PinchStrength = 0;
+                        
+                        //count through five fingers
+                        for (int fIDX = 0; fIDX < 5; fIDX++)
+                        {
+                            bodyInput.LeftHand.Fingers[fIDX].Direction = empty;
+
+                            //count through 4 joints
+                            for (int jIDX = 0; jIDX < 4; jIDX++)
+                            {
+                                bodyInput.LeftHand.Fingers[fIDX].Joints[jIDX].Position = empty;
+                                bodyInput.LeftHand.Fingers[fIDX].Joints[jIDX].Direction = empty;
+                            }
+                            
+                            //this could cause problems later if we set some sort of meaning to be derived from making a fist
+                            bodyInput.LeftHand.Fingers[fIDX].IsExtended = false;
+                        }
+                    }
+
+                    if (GestureProvider.RightHand == null){
+                        bodyInput.RightHand.Palm.Position = empty;
+                        bodyInput.RightHand.Palm.Direction = empty;
+                        bodyInput.RightHand.PinchStrength = 0;
+                        
+                        for (int fIDX = 0; fIDX < 5; fIDX++)
+                        {
+                            bodyInput.RightHand.Fingers[fIDX].Direction = empty;
+
+                            //count through 4 joints
+                            for (int jIDX = 0; jIDX < 4; jIDX++)
+                            {
+                                bodyInput.RightHand.Fingers[fIDX].Joints[jIDX].Position = empty;
+                                bodyInput.RightHand.Fingers[fIDX].Joints[jIDX].Direction = empty;
+                            }
+                            
+                            //this could cause problems later if we set some sort of meaning to be derived from making a fist
+                            bodyInput.RightHand.Fingers[fIDX].IsExtended = false;
+                        }
+                    }
+                    
+                }
+
                 setPositionsViveSense();          
             }
 #endif
