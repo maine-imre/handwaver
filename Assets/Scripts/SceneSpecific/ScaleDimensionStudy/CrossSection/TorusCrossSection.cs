@@ -54,9 +54,9 @@ namespace IMRE.HandWaver.ScaleStudy
             child4.AddComponent<LineRenderer>();
 
             crossSectionRenderer.ToList().ForEach(r => r.material = crossSectionMaterial);
-            crossSectionRenderer.ToList().ForEach(r => r.startWidth = .005f);
-            crossSectionRenderer.ToList().ForEach(r => r.endWidth = .005f);
-            crossSectionRenderer.ToList().ForEach(r => r.loop = true);
+            crossSectionRenderer.ToList().ForEach(r => r.startWidth = .05f);
+            crossSectionRenderer.ToList().ForEach(r => r.endWidth = .05f);
+            crossSectionRenderer.ToList().ForEach(r => r.loop = false);
             crossSectionRenderer.ToList().ForEach(r => r.positionCount = n);
 
         }
@@ -73,24 +73,30 @@ namespace IMRE.HandWaver.ScaleStudy
         /// <param name="height"></param>
         public void crossSectTorus(float height)
         {
-            float oneNth = 1f / n;
-            float wMin = 0f;
-            float wMax = 1f;
-            for (int i = 0; i < n; i++)
+            if (math.abs(height) < revolveRadius + circleRadius)
             {
-                float w = (i * oneNth * (wMin - wMax)) + wMin;
-                float3x4 result = spiricMath(w, height, 0f, 0f);
-                crossSectionRenderer[0].SetPosition(i, result.c0);
-                crossSectionRenderer[1].SetPosition(i, result.c1);
-                crossSectionRenderer[2].SetPosition(i, result.c2);
-                crossSectionRenderer[3].SetPosition(i, result.c3);
-            }
+                float oneNth = 1f / (n);
 
-            crossSectionRenderer.ToList().ForEach(r => r.enabled = true);
+                for (int i = 0; i < n; i++)
+                {
+                    crossSectionRenderer[0].SetPosition(i, spiricMath((i * oneNth), height, 0f, 0f,0));
+                    crossSectionRenderer[1].SetPosition(i, spiricMath((i * oneNth), height, 0f, 0f,1));
+                    crossSectionRenderer[2].SetPosition(i, spiricMath((i * oneNth), height, 0f, 0f,2));
+                    crossSectionRenderer[3].SetPosition(i, spiricMath((i * oneNth), height, 05f, 0f,3));
+                }
+
+                crossSectionRenderer.ToList().ForEach(r => r.enabled = true);
+            }
+            else
+            {
+                crossSectionRenderer.ToList().ForEach(r => r.enabled = false);
+
+            }
         }
 
-         private float3x4 spiricMath(float w, float height, float alpha, float phi)
+         private float3 spiricMath(float v, float height, float alpha, float phi, int idx)
         {
+            
             //uses method described here: arXiv:1708.00803v2 [math.GM] 6 Aug 2017
             float p = math.abs(height);
             float x_q = p * math.sin(alpha) * math.cos(phi);
@@ -98,25 +104,43 @@ namespace IMRE.HandWaver.ScaleStudy
             float z_q = p * math.sin(phi);
             float R = revolveRadius;
             float r = circleRadius;
-            
-            float dist = math.sqrt(math.pow(r,2) - math.pow(w*math.cos(phi)+ p*math.sin(phi),2))
-            float t_0 = math.sqrt(-math.pow(p * math.cos(phi) - w * math.sin(phi), 2) + math.pow(R + dist, 2));
-            float t_1 =math.sqrt(-math.pow(p * math.cos(phi) - w * math.sin(phi), 2) + math.pow(R + dist, 2));
-            float t_2 = -t_0;
-            float t_3 = -t_1;
+            float w =.5f * v;
 
-            return new float3x4
-            {
-                c0 = new float3(x_q + t_0 * math.sin(alpha) - w * math.cos(alpha) * math.sin(phi),
-                    y_q - t_0 * math.cos(alpha) - w * math.sin(alpha) * math.sin(phi), z_q + w * math.cos(phi)),
-                c1 = new float3(x_q + t_1 * math.sin(alpha) - w * math.cos(alpha) * math.sin(phi),
-                    y_q - t_1 * math.cos(alpha) - w * math.sin(alpha) * math.sin(phi), z_q + w * math.cos(phi)),
-                c2 = new float3(x_q + t_2 * math.sin(alpha) - w * math.cos(alpha) * math.sin(phi),
-                    y_q - t_2 * math.cos(alpha) - w * math.sin(alpha) * math.sin(phi), z_q + w * math.cos(phi)),
-                c3 = new float3(x_q + t_3 * math.sin(alpha) - w * math.cos(alpha) * math.sin(phi),
-                    y_q - t_3 * math.cos(alpha) - w * math.sin(alpha) * math.sin(phi), z_q + w * math.cos(phi))
-            };
-        }
+
+            //v ranges from -1 to 1
+            //make two valuies of 2 to accomidate different solution constraints
+            //TODO fix these bounds.  the bounds assume phi = 0 and alpha = 0
+
+            //need to project onto different ranges for each solution path.
+            float t_0, t_1, t_2, t_3;
+            
+                float dist0 = math.sqrt(math.pow(r, 2) - math.pow(w * math.cos(phi) + p * math.sin(phi), 2));
+                float dist1 = math.sqrt(math.pow(r, 2) - math.pow(w * math.cos(phi) + p * math.sin(phi), 2));
+                t_0 = math.sqrt(-math.pow(p * math.cos(phi) - w * math.sin(phi), 2) + math.pow(R + dist0, 2));
+                t_1 = -t_0;
+                t_2 = math.sqrt(-math.pow(p * math.cos(phi) - w * math.sin(phi), 2) + math.pow(R - dist1, 2));
+                t_3 = -t_2;
+            
+
+
+                float3 c0 = new float3(x_q + t_0 * math.sin(alpha) - w * math.cos(alpha) * math.sin(phi),
+                    y_q - t_0 * math.cos(alpha) - w * math.sin(alpha) * math.sin(phi), z_q + w * math.cos(phi));
+                float3 c1 = new float3(x_q + t_1 * math.sin(alpha) - w * math.cos(alpha) * math.sin(phi),
+                    y_q - t_1 * math.cos(alpha) - w * math.sin(alpha) * math.sin(phi), z_q + w * math.cos(phi));
+                float3 c2 = new float3(x_q + t_2 * math.sin(alpha) - w * math.cos(alpha) * math.sin(phi),
+                    y_q - t_2 * math.cos(alpha) - w * math.sin(alpha) * math.sin(phi), z_q + w * math.cos(phi));
+                float3 c3 = new float3(x_q + t_3 * math.sin(alpha) - w * math.cos(alpha) * math.sin(phi),
+                    y_q - t_3 * math.cos(alpha) - w * math.sin(alpha) * math.sin(phi), z_q + w * math.cos(phi));
+                    
+                switch (idx)
+                {
+                    case 0: return c0;
+                    case 1: return c1;
+                    case 2: return c2;
+                    case 3: return c3;
+                    default: return new float3();
+                }
+            }
 
         
 
