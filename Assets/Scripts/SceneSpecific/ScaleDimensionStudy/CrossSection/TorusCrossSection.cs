@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using IMRE.HandWaver.HWIO;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -44,18 +45,26 @@ namespace IMRE.HandWaver.ScaleStudy
             child2.transform.parent = transform;
             child2.AddComponent<LineRenderer>();
 
+            GameObject child3 = new GameObject();
+            child3.transform.parent = transform;
+            child3.AddComponent<LineRenderer>();
+
+            GameObject child4 = new GameObject();
+            child4.transform.parent = transform;
+            child4.AddComponent<LineRenderer>();
+
             crossSectionRenderer.ToList().ForEach(r => r.material = crossSectionMaterial);
             crossSectionRenderer.ToList().ForEach(r => r.startWidth = .005f);
             crossSectionRenderer.ToList().ForEach(r => r.endWidth = .005f);
             crossSectionRenderer.ToList().ForEach(r => r.loop = true);
             crossSectionRenderer.ToList().ForEach(r => r.positionCount = n);
-            
+
         }
 
         public float slider
         {
             //scale value from 0 to 1 to -1 to 1
-            set => crossSectTorus(-1+value*2);
+            set => crossSectTorus(-1 + value * 2);
         }
 
         /// <summary>
@@ -64,154 +73,52 @@ namespace IMRE.HandWaver.ScaleStudy
         /// <param name="height"></param>
         public void crossSectTorus(float height)
         {
-            float innerRadius = revolveRadius - circleRadius;
-            float outerRadius = revolveRadius + circleRadius;
-
-            //convert values to variables for equation
-            float d = 2f * (float) (Math.Pow(circleRadius, 2) + Math.Pow(revolveRadius, 2) -
-                                    Math.Pow(height, 2));
-            float e = 2f * (float) (Math.Pow(circleRadius, 2) - Math.Pow(revolveRadius, 2) -
-                                    Math.Pow(height, 2));
-            float f = -(circleRadius + revolveRadius + height) *
-                      (circleRadius + revolveRadius - height) *
-                      (circleRadius - revolveRadius + height) *
-                      (circleRadius - revolveRadius - height);
-
-            Vector3 torusCenter = Vector3.zero;
-
-            Vector3 pointPos;
-
-
-
-            //cross section only hits a point on outer edge of torus
-            if (Math.Abs(height) == outerRadius)
+            float oneNth = 1f / n;
+            float wMin = 0f;
+            float wMax = 1f;
+            for (int i = 0; i < n; i++)
             {
-                if (height == outerRadius)
-                {
-                    pointPos = Vector3.up * height;
-                }
-                else if (height == -outerRadius)
-                {
-                    pointPos = Vector3.down * height;
-                }
-
-                //TODO update rendering
-                crossSectionRenderer.ToList().ForEach(r => r.enabled = false);
-
+                float w = (i * oneNth * (wMin - wMax)) + wMin;
+                float3x4 result = spiricMath(w, height, 0f, 0f);
+                crossSectionRenderer[0].SetPosition(i, result.c0);
+                crossSectionRenderer[1].SetPosition(i, result.c1);
+                crossSectionRenderer[2].SetPosition(i, result.c2);
+                crossSectionRenderer[3].SetPosition(i, result.c3);
             }
 
-            //height is not within torus
-            else if (Math.Abs(height) > outerRadius)
-            {
-                Debug.Log("Height is out of range of object.");
-                //TODO update rendering
-                crossSectionRenderer.ToList().ForEach(r => r.enabled = false);
-
-            }
-
-            //cross section results in spiric shape
-            else if (Mathf.Abs(height) > innerRadius)
-            {
-                //there is only one spiric
-                for (int i = 0; i < n; i++)
-                {
-                    float theta = i * (1f/ n) * Mathf.PI * 2;
-                    crossSectionRenderer[0].SetPosition(i, spiricMath(theta, height).c0);
-                }
-
-                crossSectionRenderer[0].enabled = true;
-                crossSectionRenderer[1].enabled = false;
-            }
-            else
-            {
-                //there is a double spiric
-                //on each render, need to walk renderer forward and back with each solution to cover the spiric.
-                //the second renderer is a reflection of the first.
-
-                //todo find thetaMax
-                float thetaMax = 2 * Mathf.Atan(Mathf.Sqrt((-Mathf.Sqrt(Mathf.Pow(e, 2) - Mathf.Pow(d, 2)) - e) / d));
-                for (int i = 0; i < (n / 2); i++)
-                {
-                    float twoNth = (2f / (n - 2f));
-                    float theta = i *twoNth* thetaMax;
-                    try
-                    {
-                        //walk forward on first
-                        crossSectionRenderer[0].SetPosition(i, spiricMath(thetaMax - theta, height).c0);
-                        //walk backward on first
-                        crossSectionRenderer[0].SetPosition((n - 1) - i, spiricMath(thetaMax - theta, height).c1);
-                        //walk forward on second
-                        crossSectionRenderer[1].SetPosition(i, spiricMath(Mathf.PI - (thetaMax - theta), height).c0);
-                        //walk backward on second
-                        crossSectionRenderer[1].SetPosition((n - 1) - i,
-                            spiricMath(Mathf.PI - (thetaMax - theta), height).c1);
-                    }
-                    catch
-                    {
-                        Debug.Log("theta: " + theta); 
-                        Debug.Log("thetamax: " + thetaMax);
-                    }
-                }
-
-
-                crossSectionRenderer.ToList().ForEach(r => r.enabled = true);
-
-            }
-
+            crossSectionRenderer.ToList().ForEach(r => r.enabled = true);
         }
 
-        /// <summary>
-        /// Math for calculating intersection of torus and plane
-        /// </summary>
-        /// <param name="theta"></param>
-        /// <param name="d"></param>
-        /// <param name="e"></param>
-        /// <param name="f"></param>
-        /// <returns></returns>
-        private float3x2 spiricMath(float theta, float height)
+         private float3x4 spiricMath(float w, float height, float alpha, float phi)
         {
-            //convert values to variables for equation
-            float d = 2f * (Mathf.Pow(circleRadius, 2) + Mathf.Pow(revolveRadius, 2) -
-                                    Mathf.Pow(height, 2));
-            float e = 2f * (Mathf.Pow(circleRadius, 2) - Mathf.Pow(revolveRadius, 2) -
-                                    Mathf.Pow(height, 2));
-            float f = -(circleRadius + revolveRadius + height) *
-                      (circleRadius + revolveRadius - height) *
-                      (circleRadius - revolveRadius + height) *
-                      (circleRadius - revolveRadius - height);
+            //uses method described here: arXiv:1708.00803v2 [math.GM] 6 Aug 2017
+            float p = math.abs(height);
+            float x_q = p * math.sin(alpha) * math.cos(phi);
+            float y_q = p * math.sin(alpha) * math.cos(phi);
+            float z_q = p * math.sin(phi);
+            float R = revolveRadius;
+            float r = circleRadius;
             
-            //distance results 
-            float r0;
-            float r1;
+            float dist = math.sqrt(math.pow(r,2) - math.pow(w*math.cos(phi)+ p*math.sin(phi),2))
+            float t_0 = math.sqrt(-math.pow(p * math.cos(phi) - w * math.sin(phi), 2) + math.pow(R + dist, 2));
+            float t_1 =math.sqrt(-math.pow(p * math.cos(phi) - w * math.sin(phi), 2) + math.pow(R + dist, 2));
+            float t_2 = -t_0;
+            float t_3 = -t_1;
 
-            r0 = Mathf.Sqrt(
-                     Mathf.Sqrt(
-                         Mathf.Pow(
-                             -d * Mathf.Cos(theta) * Mathf.Cos(theta) - e * Mathf.Sin(theta) * Mathf.Sin(theta),
-                             2) +
-                         4 * f) + d * Mathf.Cos(theta) * Mathf.Cos(theta) +
-                     e * Mathf.Sin(theta) * Mathf.Sin(theta)) /
-                 Mathf.Sqrt(2);
-
-            r1 = Mathf.Sqrt(
-                     -Mathf.Sqrt(
-                         Mathf.Pow(
-                             -d * Mathf.Cos(theta) * Mathf.Cos(theta) - e * Mathf.Sin(theta) * Mathf.Sin(theta),
-                             2) +
-                         4 * f) + d * Mathf.Cos(theta) * Mathf.Cos(theta) +
-                     e * Mathf.Sin(theta) * Mathf.Sin(theta)) /
-                 Mathf.Sqrt(2);
-            
-
-            float3x2 result = new float3x2();
-
-            //distance results converted to theta
-            
-            result.c0 = r0 * (Mathf.Cos(theta) * Vector3.right + Mathf.Sin(theta) * Vector3.forward) + Vector3.up*height;
-            result.c1 = -r0 * (Mathf.Cos(theta) * Vector3.right + Mathf.Sin(theta) * Vector3.forward)+ Vector3.up*height;
-            Debug.Log(height + " : " + d + " : " + e + " : " + f +" : " + r0+" : " +r1);
-            return result;
+            return new float3x4
+            {
+                c0 = new float3(x_q + t_0 * math.sin(alpha) - w * math.cos(alpha) * math.sin(phi),
+                    y_q - t_0 * math.cos(alpha) - w * math.sin(alpha) * math.sin(phi), z_q + w * math.cos(phi)),
+                c1 = new float3(x_q + t_1 * math.sin(alpha) - w * math.cos(alpha) * math.sin(phi),
+                    y_q - t_1 * math.cos(alpha) - w * math.sin(alpha) * math.sin(phi), z_q + w * math.cos(phi)),
+                c2 = new float3(x_q + t_2 * math.sin(alpha) - w * math.cos(alpha) * math.sin(phi),
+                    y_q - t_2 * math.cos(alpha) - w * math.sin(alpha) * math.sin(phi), z_q + w * math.cos(phi)),
+                c3 = new float3(x_q + t_3 * math.sin(alpha) - w * math.cos(alpha) * math.sin(phi),
+                    y_q - t_3 * math.cos(alpha) - w * math.sin(alpha) * math.sin(phi), z_q + w * math.cos(phi))
+            };
         }
+
+        
 
         private void renderTorus()
         {
