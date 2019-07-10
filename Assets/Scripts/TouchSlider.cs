@@ -60,6 +60,7 @@ _value = value;
 	tSlider.SetPosition(0, tSliderEndB);
 	tSlider.startWidth = .05f;
 	tSlider.endWidth = .05f;
+	tSlider.useWorldSpace = true;
         //make sure the point aligns with the current position of the line
 
 	//TODO identify and set classifiers
