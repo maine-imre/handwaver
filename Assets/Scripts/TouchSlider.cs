@@ -8,6 +8,7 @@ using Unity.Burst;
 using UnityEngine;
 using Unity.Mathematics;
 
+namespace IMRE.EmbodiedInput{
 public class TouchSlider : MonoBehaviour
 {
     /// <summary>
@@ -19,41 +20,34 @@ public class TouchSlider : MonoBehaviour
     /// Max distance for finger to point interaction to trigger
     /// </summary>
     public float tolerance = 0.2f;
-    /// <summary>
-    /// Position of Left pointer finger
-    /// </summary>
-    private float3 LeftFingerPos;
     
-    /// <summary>
-    /// Position of right pointer finger
-    /// </summary>
-    private float3 RightFingerPos;
-
     /// <summary>
     /// Slider line renderer
     /// </summary>
     private LineRenderer tSlider;
+	public float3 tSliderEndA;
+	public float3 tSldierEndB;
 
-    
-    /// <summary>
-    /// The point on the line which the index finger's fingertip is closest to
-    /// </summary>
-    private Vector3 tSliderInstersectLeft;
-    private Vector3 tSliderInstersectRight;
+	private EmbodiedInputClassifier[] classifiers;
+
 
     /// <summary>
     /// internal percentage of slider
     /// </summary>
     [Range(0,1)]
-    private float _value;
+    private float _sliderValue;
     
     /// <summary>
     /// Field for value to be used to determine what percentage the slider currently represents.
     /// </summary>
-    public float Value
+    public float SliderValue
     {
-        get => _value;
-        set => _value = value;
+        get => _sliderValue;
+        set
+{
+point.position = value * (tSliderEndB - tSliderEndA) + tSliderEndA;
+_value = value;
+}
     }
     
     
@@ -62,8 +56,20 @@ public class TouchSlider : MonoBehaviour
         //make our instance of line renderer equal to the component line renderer on the same Unity
         //game object as the script
         tSlider = GetComponent<LineRenderer>();
+	tSlider.SetPosition(0, tSliderEndA);
+	tSlider.SetPosition(0, tSliderEndB);
+	tSlider.startWidth = .05f;
+	tSlider.endWidth = .05f;
         //make sure the point aligns with the current position of the line
+
+	//TODO identify and set classifiers
+	//classifiers = static reference to the classifier authoring system goes here...
     }
+
+	private void Update()
+{
+	classifiers.ToList().Where(classifier => classifier.isEligible).ForEach(checkClassifier);
+}
 
     //these are kinda like function calls. They do the math and grab the data at the frame which they are
     //used due to the lambda operator (=>)
@@ -72,66 +78,16 @@ public class TouchSlider : MonoBehaviour
     //public float leftFingerMag => Vector3.Magnitude((Vector3) LeftFingerPos - transform.position);
     //public float rightFingerMag => Vector3.Magnitude((Vector3) RightFingerPos - transform.position);
     
-    void Update()
-    {   
-        //grab the position of the index finger's fingertip for both the left hand and the right hand
-        LeftFingerPos = BodyInputDataSystem.bodyInput.LeftHand.Fingers[1].Joints[3].Position;
-        RightFingerPos = BodyInputDataSystem.bodyInput.RightHand.Fingers[1].Joints[3].Position;
+    private void checkClassifier(EmbodiedInputClassifier classifier)
+    {
+	//Notice that this code is totally generic and can be used for any classifier - doesn't need to be pinch.
+	//think lego blocks.   
+        float3 tSliderProjection = Vector3.Project(classifier.position - tSliderEndA, tsliderEndB - tSliderEndA);
+	if(Vector3.magnitude(tsliderProjection - classifier.position) < tolerance)
+	{
+		SliderValue = Vector3.magnitude(tSliderProjection - tSliderEndA)/Vector3.magnitude(tsliderEndB - tSliderEndA);
+	}
 
-        tSliderInstersectLeft = tSlider.GetPosition(0) + Vector3.Project((Vector3)LeftFingerPos 
-                                                                     - tSlider.GetPosition(0),tSlider.GetPosition(1) 
-                                                                                              - tSlider.GetPosition(0));
-        //UnityEngine.Debug.Log("Left slider intersect"+tSlider.GetPosition(0));
-        tSliderInstersectRight = tSlider.GetPosition(0) + Vector3.Project((Vector3)RightFingerPos 
-                                                                     - tSlider.GetPosition(0),tSlider.GetPosition(1) 
-                                                                                              - tSlider.GetPosition(0));
-        
-        //true when the left finger is closer than the right finger
-        if(Vector3.Distance((Vector3)LeftFingerPos,transform.InverseTransformPoint(transform.position)) < Vector3.Distance((Vector3)RightFingerPos, transform.InverseTransformPoint(transform.position))) //(leftFingerMag < rightFingerMag)
-        {    
-            //left finger
-            //if (leftFingerMag <= tolerance)
-            //{
-
-                if (Vector3.Distance((Vector3)LeftFingerPos, tSliderInstersectLeft) <= tolerance)
-                {
-                    //enter here is the fingertip is close enough to the closest point on the line to count as
-                    //the finger intersecting the line
-                    
-                    //Divide the distance from where the finger intersects the line to the starting point of the line
-                    //by the total distance from start to finish of the line to get a value from 0 to 1 which represents
-                    //a percentage of how far from the first position of the line the fingertip is.
-                    Value = Vector3.Distance(tSliderInstersectLeft , tSlider.GetPosition(0)
-                                                 / Vector3.Distance(tSlider.GetPosition(0) 
-                                                     , tSlider.GetPosition(1)));
-                    point.transform.localPosition = tSliderInstersectLeft;
-                }
-
-            //}
-                
-        }
-        else
-        {
-             //right finger
-             //if (rightFingerMag<= tolerance)
-             //{
-
-
-             if (Vector3.Distance((Vector3)RightFingerPos, tSliderInstersectRight) <= tolerance)
-             {
-                 //enter here is the fingertip is close enough to the closest point on the line to count as
-                 //the finger intersecting the line
-                     
-                 //Divide the distance from where the finger intersects the line to the starting point of the line
-                 //by the total distance from start to finish of the line to get a value from 0 to 1 which represents
-                 //a percentage of how far from the first position of the line the fingertip is.
-                 Value = Vector3.Distance(tSliderInstersectRight , tSlider.GetPosition(0)
-                                                                   / Vector3.Distance(tSlider.GetPosition(0) 
-                                                                       , tSlider.GetPosition(1)));
-                 point.transform.localPosition = tSliderInstersectRight;
-             }
-             //}
-            
-        }
     }
+}
 }
