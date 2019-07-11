@@ -56,19 +56,19 @@ namespace IMRE.HandWaver.HigherDimensions
 	    
             //apex of tetrahedron for each additional tetrahedron(from fases of first) foldling by degree t
 	    float4 center1 =  (result[0] + result[1] + result[2]) / 3f
-	    float4 dir1 = center1 - result[3]; //TODO normalize this
+	    float4 dir1 = center1 - result[3]; 
             result[4] = center1 + dir1.rotate(dir1, apex - center1, degreeFolded);
 	    
 	    float4 center2 = (result[0] + result[2] + result[3]) / 3f;
-	    float4 dir2 = center2 - result[1];//TODO normalize this
+	    float4 dir2 = center2 - result[1];
             result[5] = center2 + dir2.rotate(dir2, apex - center2, degreeFolded);
 	    
 	    float4 center3 = (result[0] + result[1] + result[3]) / 3f;
-	    float4 dir3 = center3 - result[2];//TODO normalize this
+	    float4 dir3 = center3 - result[2];
             result[6] = center3 + dir3.rotate(dir3, apex - center3, degreeFolded);
 	    
 	    float4 center4 =  (result[1] + result[2] + result[3]) / 3f;
-	    float4 dir4 = center4-result[0];//TODO normalize this
+	    float4 dir4 = center4-result[0];
 	    result[7] = center4 +  dir4.rotate(dir4, apex - center4, degreeFolded);
             
             return result;
