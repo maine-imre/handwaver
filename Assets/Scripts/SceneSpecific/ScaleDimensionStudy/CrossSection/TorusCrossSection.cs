@@ -73,7 +73,8 @@ namespace IMRE.HandWaver.ScaleStudy
         /// <param name="height"></param>
         public void crossSectTorus(float height)
         {
-            if (math.abs(height) < revolveRadius + circleRadius)
+            //this function is broken into cases where each function is well behaved.
+            if (math.abs(height) < revolveRadius - circleRadius)
             {
                 float oneNth = 1f / (n);
 
@@ -83,9 +84,20 @@ namespace IMRE.HandWaver.ScaleStudy
                     crossSectionRenderer[1].SetPosition(i, spiricMath((i * oneNth), height, 0f, 0f,1));
                     crossSectionRenderer[2].SetPosition(i, spiricMath((i * oneNth), height, 0f, 0f,2));
                     crossSectionRenderer[3].SetPosition(i, spiricMath((i * oneNth), height, 05f, 0f,3));
+                    //may need to use reflection.
                 }
 
                 crossSectionRenderer.ToList().ForEach(r => r.enabled = true);
+            }
+            else if (math.abs(height) < revolveRadius + circleRadius){
+                            //there is only one spiric
+                for (int i = 0; i < n; i++)
+                {
+                    float theta = i * (1f/ n) * Mathf.PI * 2;
+                    crossSectionRenderer[0].SetPosition(i, spiricOutsideMath(theta, height));
+                }
+                crossSectionRenderer.ToList().ForEach(r => r.enabled = false);
+                crossSectionRenderer[0].enabled = true;
             }
             else
             {
@@ -259,6 +271,59 @@ namespace IMRE.HandWaver.ScaleStudy
 
 
             return 0;
+        }
+        
+        /// <summary>
+        /// Math for calculating intersection of torus and plane
+        /// </summary>
+        /// <param name="theta"></param>
+        /// <param name="d"></param>
+        /// <param name="e"></param>
+        /// <param name="f"></param>
+        /// <returns></returns>
+        private float3 spiricOutsideMath(float theta, float height)
+        {
+            //convert values to variables for equation
+            float d = 2f * (Mathf.Pow(circleRadius, 2) + Mathf.Pow(revolveRadius, 2) -
+                                    Mathf.Pow(height, 2));
+            float e = 2f * (Mathf.Pow(circleRadius, 2) - Mathf.Pow(revolveRadius, 2) -
+                                    Mathf.Pow(height, 2));
+            float f = -(circleRadius + revolveRadius + height) *
+                      (circleRadius + revolveRadius - height) *
+                      (circleRadius - revolveRadius + height) *
+                      (circleRadius - revolveRadius - height);
+            
+            //distance results 
+            float r0;
+            float r1;
+
+            r0 = Mathf.Sqrt(
+                     Mathf.Sqrt(
+                         Mathf.Pow(
+                             -d * Mathf.Cos(theta) * Mathf.Cos(theta) - e * Mathf.Sin(theta) * Mathf.Sin(theta),
+                             2) +
+                         4 * f) + d * Mathf.Cos(theta) * Mathf.Cos(theta) +
+                     e * Mathf.Sin(theta) * Mathf.Sin(theta)) /
+                 Mathf.Sqrt(2);
+
+            r1 = Mathf.Sqrt(
+                     -Mathf.Sqrt(
+                         Mathf.Pow(
+                             -d * Mathf.Cos(theta) * Mathf.Cos(theta) - e * Mathf.Sin(theta) * Mathf.Sin(theta),
+                             2) +
+                         4 * f) + d * Mathf.Cos(theta) * Mathf.Cos(theta) +
+                     e * Mathf.Sin(theta) * Mathf.Sin(theta)) /
+                 Mathf.Sqrt(2);
+            
+
+            float3x2 result = new float3x2();
+
+            //distance results converted to theta
+            
+            return r0 * (Mathf.Cos(theta) * Vector3.right + Mathf.Sin(theta) * Vector3.forward) + Vector3.up*height;
+            //result.c1 = -r0 * (Mathf.Cos(theta) * Vector3.right + Mathf.Sin(theta) * Vector3.forward)+ Vector3.up*height;
+            //Debug.Log(height + " : " + d + " : " + e + " : " + f +" : " + r0+" : " +r1);
+            //return result;
         }
 
 
