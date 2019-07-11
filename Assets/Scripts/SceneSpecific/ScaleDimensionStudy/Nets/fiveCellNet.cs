@@ -11,16 +11,6 @@ namespace IMRE.HandWaver.HigherDimensions
     /// </summary>
 	public class fiveCellNet : AbstractHigherDimSolid, ISliderInput, I4D_Perspective
     {
-        //basic vector4 values for computations
-        private static Vector4 right = (new Vector4(0, 0, 1, 0) - new Vector4(Mathf.Sqrt(8f / 9f), 0, -1f / 3f, 0f)).normalized;
-        private static Vector4 left = -right;
-        private static Vector4 up = (new Vector4(0, 0, 1, 0) - new Vector4(-Mathf.Sqrt(2f / 9f), Mathf.Sqrt(2f / 3f), -1f / 3f, 0f)).normalized;
-        private static Vector4 down = -up;
-        private static Vector4 forward = (new Vector4(0, 0, 1, 0) - new Vector4(-Mathf.Sqrt(2f / 9f), -Mathf.Sqrt(2f / 3f), -1f / 3f, 0f)).normalized;
-        private static Vector4 back = -forward;
-        private static Vector4 wForward = new Vector4(0, 0, 0, 1);
-        private static Vector4 wBack = -wForward;
-
         //initialize fold
         //read only static float GoldenRatio = (1f + Mathf.Sqrt(5f)) / 2f;
         private float _percentFolded;
@@ -54,27 +44,32 @@ namespace IMRE.HandWaver.HigherDimensions
             Vector4[] result = new Vector4[8];
            
             //core tetrahedron (does not fold)
-            result[0] = Vector4.zero;
-            result[1] = right;
-            result[2] = up;
-            result[3] = forward;
-
+	    //coordiantes from wikipedia  https://en.wikipedia.org/wiki/5-cell, centered at origin, 
+            result[0] = (new float4(1f/math.sqrt(10f), 1f/math.sqrt(6f), 1f/math.sqrt(3f), 1f))/2f;
+            result[1] = (new float4(1f/math.sqrt(10f), 1f/math.sqrt(6f), 1f/math.sqrt(3f), -1f))/2f;
+            result[2] = (new float4(1f/math.sqrt(10f), 1f/math.sqrt(6f), -2f/math.sqrt(3f), 0f))/2f;
+            result[3] = new float4(1f/math.sqrt(10f), -math.sqrt(3f/2f), 0f, 0f);
+	    
+	    //find position of convergent point for other tetrahedrons in the net.
+	    float4 apex = new float4(-2*math.sqrt(2f/5f), 0f, 0f, 0f);
+	    //TODO consider making the initial projection onto n
+	    
             //apex of tetrahedron for each additional tetrahedron(from fases of first) foldling by degree t
 	    float4 center1 =  (result[0] + result[1] + result[2]) / 3f
 	    float4 dir1 = center1 - result[3]; //TODO normalize this
-            result[4] = center1 + dir1.rotate(dir1, wForward, degreeFolded);
+            result[4] = center1 + dir1.rotate(dir1, apex - center1, degreeFolded);
 	    
 	    float4 center2 = (result[0] + result[2] + result[3]) / 3f;
 	    float4 dir2 = center2 - result[1];//TODO normalize this
-            result[5] = center2 + dir2.rotate(dir2, wForward, degreeFolded);
+            result[5] = center2 + dir2.rotate(dir2, apex - center2, degreeFolded);
 	    
 	    float4 center3 = (result[0] + result[1] + result[3]) / 3f;
 	    float4 dir3 = center3 - result[2];//TODO normalize this
-            result[6] = center3 + dir3.rotate(dir3, wForward, degreeFolded);
+            result[6] = center3 + dir3.rotate(dir3, apex - center3, degreeFolded);
 	    
 	    float4 center4 =  (result[1] + result[2] + result[3]) / 3f;
 	    float4 dir4 = center4-result[0];//TODO normalize this
-	    result[7] = center4 +  dir4.rotate(dir4, wForward, degreeFolded);
+	    result[7] = center4 +  dir4.rotate(dir4, apex - center4, degreeFolded);
             
             return result;
         }
