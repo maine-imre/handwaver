@@ -1,4 +1,6 @@
-#Mathematical Audit of Algorithms for Scale and Dimension Scene
+# Mathematical Audit of Algorithms for Scale and Dimension Scene
+
+In this document, we describe the methods we use (and their sources) for computing the dynamic figures described in the scale and dimension scene.  We acknolwedge that the cases presented here may be limited in nature.  While this scene was being developed a team was working to integrate with a server-side implementation of GeoGebra.  Any generalized version would use the GGB implementation to do the heavy lifting.
 
 ## Cross-Sections
 
