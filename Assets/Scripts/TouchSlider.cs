@@ -69,9 +69,12 @@ namespace IMRE.EmbodiedUserInput
 		{
 			tSlider.SetPosition(0, tSliderEndA);
 			tSlider.SetPosition(1, tSliderEndB);
-			EmbodiedUserInputClassifierAuthoring.classifiers.ToList().
-				Where(classifier => classifier.isEligible && classifier.type == type).
-				ToList().ForEach(checkClassifier);
+
+			EmbodiedUserInputClassifierAuthoring.classifiers.ToList().Where(c => c.type == type)
+				.ToList().ForEach(classifier => checkClassifier(classifier));
+			
+			//Where(classifier => classifier.isEligible && classifier.type == type).
+			//	ToList().
 		}
 
 		//these are kinda like function calls. They do the math and grab the data at the frame which they are
@@ -83,15 +86,26 @@ namespace IMRE.EmbodiedUserInput
 
 		private void checkClassifier(EmbodiedClassifier classifier)
 		{
-			//Notice that this code is totally generic and can be used for any classifier - doesn't need to be pinch.
-			//think lego blocks.   
-			float3 tSliderProjection = Vector3.Project(classifier.origin - tSliderEndA, tSliderEndB - tSliderEndA);
-			if (Vector3.Magnitude(tSliderProjection - classifier.origin) < tolerance)
+			if (classifier.isEligible)
 			{
-				SliderValue = Vector3.Magnitude(tSliderProjection - tSliderEndA) /
-				              Vector3.Magnitude(tSliderEndB - tSliderEndA);
-			}
 
+				//Notice that this code is totally generic and can be used for any classifier - doesn't need to be pinch.
+				//think lego blocks.   
+				float3 tSliderProjection =
+					Vector3.Project(classifier.origin - tSliderEndA, tSliderEndB - tSliderEndA) 
+					+ (Vector3) tSliderEndA;
+				if (Vector3.Magnitude(tSliderProjection - classifier.origin) < tolerance)
+				{
+
+					SliderValue = Vector3.Magnitude(Vector3.Project(classifier.origin - tSliderEndA, 
+						                                tSliderEndB - tSliderEndA) -  (Vector3) tSliderEndA) /
+					              Vector3.Magnitude(tSliderEndB - tSliderEndA);
+				}
+				else
+				{
+					Debug.Log(Vector3.Magnitude(tSliderProjection - classifier.origin));
+				}
+			}
 		}
 	}
 }

@@ -44,6 +44,8 @@ namespace IMRE.EmbodiedUserInput
 
     public class EmbodiedUserInputClassifierAuthoring : MonoBehaviour
     {
+        public bool printDebug;
+        
         public static EmbodiedClassifier[] classifiers; 
         void Start()
         {
@@ -53,7 +55,17 @@ namespace IMRE.EmbodiedUserInput
 
         private void FixedUpdate()
         {
-            classifiers.ToList().ForEach(Classify);
+            for (int i = 0; i < classifiers.Length; i++)
+            {
+                Classify(ref classifiers[i]);
+            }
+
+            if (printDebug)
+            {
+                classifiers.ToList().Where(c => c.isEligible).ToList()
+                    .ForEach(c => Debug.Log(c.type + " : " + c.Chirality));
+            }
+
         }
 
         /// <summary>
@@ -147,7 +159,7 @@ namespace IMRE.EmbodiedUserInput
             };
         }
 
-        private bool shouldActivate(EmbodiedClassifier embodiedClassifier)
+        private static bool shouldActivate(ref EmbodiedClassifier embodiedClassifier)
         {
             Hand hand;
             float3 velocity;
@@ -291,17 +303,17 @@ namespace IMRE.EmbodiedUserInput
         }
 
 
-        private bool shouldCancel(EmbodiedClassifier embodiedClassifier)
+        private static bool shouldCancel(ref EmbodiedClassifier embodiedClassifier)
         {
             //currently the check to see if a gesture should stop is the opposite of if it should start
             //this is likely not always going to cut it. There will be more reasons for stopping a gesture
             //than the conditions for activating it no longer being met.
             //BodyInput data = BodyInputDataSystem.bodyInput;
 
-            return !shouldActivate(embodiedClassifier);
+            return !shouldActivate(ref embodiedClassifier);
         }
 
-        private void Classify(EmbodiedClassifier embodiedClassifier)
+        private static void Classify(ref EmbodiedClassifier embodiedClassifier)
         {
             //Gestures are not always going to stop at the conclusion of their function.
             //Therefore this is needed to determine if a gesture is ongoing or cancelled during operation
@@ -311,7 +323,7 @@ namespace IMRE.EmbodiedUserInput
             if (!embodiedClassifier.isEligible)
             {
                 //check to see if it should activate and update its eligibility to activate
-                embodiedClassifier.isEligible = shouldActivate(embodiedClassifier);
+                embodiedClassifier.isEligible = shouldActivate(ref embodiedClassifier);
                 //If this is eligible, and it wasn't eligible before, it is activated
                 embodiedClassifier.wasActivated = embodiedClassifier.isEligible;
                 //therefore it was not cancelled
@@ -324,7 +336,7 @@ namespace IMRE.EmbodiedUserInput
                 //if the gesture was eligible last frame
 
                 //If the gesture should cancel, then cancel it.
-                embodiedClassifier.wasCancelled = shouldCancel(embodiedClassifier);
+                embodiedClassifier.wasCancelled = shouldCancel(ref embodiedClassifier);
                 //The gesture wasn't finished if it is ongoing
                 embodiedClassifier.wasFinished =
                     embodiedClassifier.shouldFinish && !embodiedClassifier.wasCancelled;
@@ -337,12 +349,6 @@ namespace IMRE.EmbodiedUserInput
                 //after this frame.
                 embodiedClassifier.shouldFinish = false;
             }
-
-            if (embodiedClassifier.isEligible)
-            {
-                Debug.Log(embodiedClassifier.type + " : " + embodiedClassifier.Chirality);
-            }
-
         }
 
     }

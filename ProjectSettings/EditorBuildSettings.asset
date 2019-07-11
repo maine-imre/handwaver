@@ -5,10 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/BaseScenes/HandWaverBase.unity
     guid: 27967793b29ceac48856dd6e75479d1f
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Environments/darkPrototype.unity
     guid: ec7e2c37a44c8044c9e8391c4355bc7e
   - enabled: 0
@@ -32,4 +32,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/ContentLayers/GeometersPlanetariumContent/RSDES.unity
     guid: a5cb8c55a5a107744991c0a90562d371
+  - enabled: 1
+    path: Assets/Scenes/BaseScenes/gestureTesting.unity
+    guid: 82b03661f35058043b5bcc1c31529e0e
   m_configObjects: {}
