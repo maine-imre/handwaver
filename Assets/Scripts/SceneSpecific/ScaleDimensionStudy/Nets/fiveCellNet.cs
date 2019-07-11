@@ -60,13 +60,22 @@ namespace IMRE.HandWaver.HigherDimensions
             result[3] = forward;
 
             //apex of tetrahedron for each additional tetrahedron(from fases of first) foldling by degree t
-            result[4] = (result[0] + result[1] + result[2]) / 3f + forward.rotate(forward, wForward, degreeFolded);
-            result[5] = (result[0] + result[2] + result[3]) / 3f + right.rotate(right, wForward, degreeFolded);
-            result[6] = (result[0] + result[1] + result[3]) / 3f + up.rotate(up, wForward, degreeFolded);
-
-            Vector4 centerOfFaceOpposite0 = (result[1] + result[2] + result[3]) / 3f;
-            //point that apexes of outer tetrahedrons converge to upon folding
-            result[7] = centerOfFaceOpposite0 + centerOfFaceOpposite0.rotate(centerOfFaceOpposite0, wForward, degreeFolded);
+	    float4 center1 =  (result[0] + result[1] + result[2]) / 3f
+	    float4 dir1 = center1 - result[3]; //TODO normalize this
+            result[4] = center1 + dir1.rotate(dir1, wForward, degreeFolded);
+	    
+	    float4 center2 = (result[0] + result[2] + result[3]) / 3f;
+	    float4 dir2 = center2 - result[1];//TODO normalize this
+            result[5] = center2 + dir2.rotate(dir2, wForward, degreeFolded);
+	    
+	    float4 center3 = (result[0] + result[1] + result[3]) / 3f;
+	    float4 dir3 = center3 - result[2];//TODO normalize this
+            result[6] = center3 + dir3.rotate(dir3, wForward, degreeFolded);
+	    
+	    float4 center4 =  (result[1] + result[2] + result[3]) / 3f;
+	    float4 dir4 = center4-result[0];//TODO normalize this
+	    result[7] = center4 +  dir4.rotate(dir4, wForward, degreeFolded);
+            
             return result;
         }
 
@@ -95,6 +104,11 @@ namespace IMRE.HandWaver.HigherDimensions
             0,1,6,
             2,0,6,
             1,2,6
+	    
+	    //tetrahedron 4
+	    1,2,7,
+	    2,3,7
+	    3,1,7
         };
         /// <summary>
         /// override function from abstract class and create figure
