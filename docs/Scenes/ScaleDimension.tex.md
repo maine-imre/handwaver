@@ -15,7 +15,7 @@ Let $2x$ be the distance between the points formed by the intersection of the ci
 Since there is reflective symmetry in any direction on the circle, the points lie $\plusminus x$ in the direction of $L$ from the center of the circle.
 By the pythagorean theorem we have $$(x)^2 + \rho^2 = R^2$$
 
-  So the points lie at $(\plusminus \sqrt{R^2 - \rho^2},0,\rho)$.  If $\rho = R$, the two values are equal and there is only one point formed by the intersection of $C$ and $L$.
+  So the points lie at $(\plusminus \sqrt{R^2 - \rho^2},0,\rho)$.  If $\rho = R$, the two values are equal and there is only one point formed by the intersection of $C$ and $L$.  If $\rho > R$, then there is no intersection.
 
 [//]: # add a diagram to illustrate
 
