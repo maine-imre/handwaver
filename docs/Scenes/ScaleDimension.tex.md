@@ -13,10 +13,7 @@ Let $R$ be the radius of the circle.
 Let $\rho$ be the signed distance between the center of the circle and the line $L$ formed by the intersection of the plane and the circle's plane.
 Let $2x$ be the distance between the points formed by the intersection of the circle and the line $L$.
 Since there is reflective symmetry in any direction on the circle, the points lie $\plusminus x$ in the direction of $L$ from the center of the circle.
-By the pythagorean theorem we have:
-\begin{equation}
-(x)^2 + \rho^2 = R^2
-\end{equation
+By the pythagorean theorem we have $$(x)^2 + \rho^2 = R^2$$
 
   So the points lie at $(\plusminus \sqrt{R^2 - \rho^2},0,\rho)$.  If $\rho = R$, the two values are equal and there is only one point formed by the intersection of $C$ and $L$.
 
