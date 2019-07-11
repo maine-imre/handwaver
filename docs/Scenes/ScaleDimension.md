@@ -44,7 +44,7 @@ By the pythagorean theorem we have <p align="center"><img src="/docs/Scenes/tex/
 
 ### 8-cell
 
-## The process of folding nets
+## Net Folding
 
 ### Triangle
 
@@ -57,6 +57,8 @@ By the pythagorean theorem we have <p align="center"><img src="/docs/Scenes/tex/
 ### 5-cell
 
 ### 8-cell
+
+## Orthogrpahic Projection from 4D to 3D
 
 
 ##References
