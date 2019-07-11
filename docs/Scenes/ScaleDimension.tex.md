@@ -1,7 +1,5 @@
 #Mathematical Audit of Algorithms for Scale and Dimension Scene
 
-[//]: # this is a hybrid document that allows for the use of latex inside markdown.
-
 ## Cross-Sections
 
 
@@ -12,7 +10,7 @@ Consider a circle $C$ in a plane orthagonal to $(0,1,0)$ and and a plane orthago
 Let $R$ be the radius of the circle.
 Let $\rho$ be the signed distance between the center of the circle and the line $L$ formed by the intersection of the plane and the circle's plane.
 Let $2x$ be the distance between the points formed by the intersection of the circle and the line $L$.
-Since there is reflective symmetry in any direction on the circle, the points lie $\plusminus x$ in the direction of L from the center of the circle.
+Since there is reflective symmetry in any direction on the circle, the points lie $\plusminus x$ in the direction of $L$ from the center of the circle.
 By the pythagorean theorem we have:
 \begin{equation}
 (x)^2 + \rho^2 = R^2
