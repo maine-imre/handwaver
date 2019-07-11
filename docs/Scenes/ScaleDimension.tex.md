@@ -27,8 +27,8 @@ $$(x)^2 + \rho^2 = R^2$$
 
 Following the logic used for the circle, the points lie at $(\plusminus \sqrt{R^2 - \rho^2},0,\rho)$.  If $\rho = R$, the two values are equal and there is only one point formed by the intersection of $C$ and $L$. 
 
-The only other case results from the intersection occurcing at a height with a magnitude less than that of the inner radius, giving two line segments. The math for this case is essentially the same as one line segment, but with an additional calculation for the two inner points. 
-Let $2x$ be the distance between the two outer points, one for each line segment. Using the annulus' reflective symmetry, their location can be found with the equation $$(x)^2 + \rho^2 = R^2$$
+The other case results from the intersection occurcing at a height with a magnitude less than that of the inner radius, giving two line segments. The math for this case is essentially the same as one line segment, but with an additional calculation for the two inner points. 
+Let $2x$ be the distance between the two outer points, one for each line segment. As before, their location can be calculated by $$(x)^2 + \rho^2 = R^2$$
 
 Thus, the points lie at $(\plusminus \sqrt{R^2 - \rho^2},0,\rho)$. 
 Now let $2w$ be the distance between the two inner points. The location for both of those points can be found using the same calculation as the outer points, but using $r$ and $w$ instead of $R$ and $x$. Thus, the equation is $$(w)^2 + \rho^2 = r^2$$
