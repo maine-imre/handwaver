@@ -61,10 +61,6 @@ namespace IMRE.HandWaver.Solver
         public NodeList<string> rManList = new NodeList<string>();
         private NodeList<string> updateNodeList = new NodeList<string>();
 
-        //public Transform rControll;
-        //public Transform lControll;
-
-
         public bool blockDelete = false;
 		public Material standardMaterial;
 		public Color defaultColor;
@@ -94,13 +90,7 @@ namespace IMRE.HandWaver.Solver
 			//Interface.worldScaleModifier.ins.OnGestureDeactivated += logScaleChange;
         }
 
-		public Transform toolbox;
 		public Transform globalParentObj;
-
-		private void LoadToolbox()
-		{
-			toolbox.gameObject.SetActive(true);
-		}
 
 		public void addToReactionManager(Node<string> node)
         {

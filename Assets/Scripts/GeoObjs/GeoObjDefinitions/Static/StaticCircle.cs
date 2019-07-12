@@ -5,7 +5,7 @@ See license info in readme.md.
 www.imrelab.org
 **/
 
-﻿using Leap.Unity.Interaction;
+ using Leap.Unity.Interaction;
 using System;
 using UnityEngine;
 

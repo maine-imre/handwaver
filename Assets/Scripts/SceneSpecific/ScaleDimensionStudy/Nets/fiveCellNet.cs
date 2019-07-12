@@ -1,0 +1,149 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using System.Linq;
+using IMRE.HandWaver.ScaleStudy;
+
+namespace IMRE.HandWaver.HigherDimensions
+{
+    /// <summary>
+    /// Net of five cell for scale and dimension study.
+    /// </summary>
+	public class fiveCellNet : AbstractHigherDimSolid, ISliderInput, I4D_Perspective
+    {
+        //initialize fold
+        //read only static float GoldenRatio = (1f + Mathf.Sqrt(5f)) / 2f;
+        private float _percentFolded;
+        public bool sliderOverride;
+
+        public float PercentFolded
+        {
+            get
+            {
+                return _percentFolded;
+            }
+            set
+            {
+                _percentFolded = value;
+                originalVerts = vertices(value*60f).ToList();
+            }
+        }
+        
+        public float slider {
+            set => PercentFolded = !sliderOverride ? value : 1f;
+        }
+
+        /// <summary>
+        /// configure vertices of fivecell around core tetrahedron
+        /// </summary>
+        /// <param name="degreeFolded"></param>
+        /// <returns></returns>
+        private static Vector4[] vertices(float degreeFolded)
+        {
+            //8 points on unfolded fivecell
+            Vector4[] result = new Vector4[8];
+           
+            //core tetrahedron (does not fold)
+	    //coordiantes from wikipedia  https://en.wikipedia.org/wiki/5-cell, centered at origin, 
+            result[0] = (new float4(1f/math.sqrt(10f), 1f/math.sqrt(6f), 1f/math.sqrt(3f), 1f))/2f;
+            result[1] = (new float4(1f/math.sqrt(10f), 1f/math.sqrt(6f), 1f/math.sqrt(3f), -1f))/2f;
+            result[2] = (new float4(1f/math.sqrt(10f), 1f/math.sqrt(6f), -2f/math.sqrt(3f), 0f))/2f;
+            result[3] = new float4(1f/math.sqrt(10f), -math.sqrt(3f/2f), 0f, 0f);
+	    
+	    //find position of convergent point for other tetrahedrons in the net.
+	    float4 apex = new float4(-2*math.sqrt(2f/5f), 0f, 0f, 0f);
+	    
+            //apex of tetrahedron for each additional tetrahedron(from fases of first) foldling by degree t
+	    float4 center1 =  (result[0] + result[1] + result[2]) / 3f
+	    float4 dir1 = center1 - result[3]; 
+            result[4] = center1 + dir1.rotate(dir1, apex - center1, degreeFolded);
+	    
+	    float4 center2 = (result[0] + result[2] + result[3]) / 3f;
+	    float4 dir2 = center2 - result[1];
+            result[5] = center2 + dir2.rotate(dir2, apex - center2, degreeFolded);
+	    
+	    float4 center3 = (result[0] + result[1] + result[3]) / 3f;
+	    float4 dir3 = center3 - result[2];
+            result[6] = center3 + dir3.rotate(dir3, apex - center3, degreeFolded);
+	    
+	    float4 center4 =  (result[1] + result[2] + result[3]) / 3f;
+	    float4 dir4 = center4-result[0];
+	    result[7] = center4 +  dir4.rotate(dir4, apex - center4, degreeFolded);
+            
+            return result;
+        }
+
+        /// <summary>
+        /// matrix for vertices to make faces of tetrahedrons for fivecell
+        /// </summary>
+        internal int[] faces = 
+        {
+            //core tetrahedron
+            0,1,2,
+            0,1,3,
+            2,0,3,
+            1,2,3,
+
+            //tetrahedron 1
+            0,1,4,
+            2,0,4,
+            1,2,4,
+
+            //tetrahedron 2
+            0,1,5,
+            2,0,5,
+            1,2,5,
+
+            //tetrahedron 3
+            0,1,6,
+            2,0,6,
+            1,2,6
+	    
+	    //tetrahedron 4
+	    1,2,7,
+	    2,3,7
+	    3,1,7
+        };
+
+	private Vector2[] _uvs;
+	internal Vector2[] uvs
+	{ 
+		get{
+			
+         	   int numFaces = faces.Length/4;
+		_uvs = new Vector2[3*numFaces];
+
+		    for (int i = 0; i < numFaces; i++)
+		    {
+		        Vector2 uv0 = new Vector2(0, 0);
+		        Vector2 uv1 = new Vector2(1, 0);
+		        Vector2 uv2 = new Vector2(0.5f, 1);
+
+			uvs[3*i] = uv0;
+			uvs[3*i+1] = uv1;
+			uvs[3*i+2] = uv2;
+			
+		    }
+		return _uvs;
+		}
+	}
+	
+	private int[] _triangles;
+	internal int[] triangles
+	{ 
+		get{
+			
+         	   int numFaces = faces.Length/4;
+		_triangles = new int[6*numFaces];
+
+		    for (int i = 0; i < numFaces; i++)
+		    {
+			_triangles[3*i] = faces[4*i];
+			_triangles[3*i+1] = faces[4*i+1];
+			_triangles[3*i+2] = faces[4*i+2];
+		    }
+		return _triangles;
+		}
+	}
+    }
+}
