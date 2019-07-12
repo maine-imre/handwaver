@@ -5,7 +5,7 @@ See license info in readme.md.
 www.imrelab.org
 **/
 
-﻿using System.Collections;
+ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -63,7 +63,7 @@ namespace IMRE.HandWaver.Lattice
 
         private void Awake()
         {
-			Resources.FindObjectsOfTypeAll<FingerPointLineMaker>().ToList().ForEach(f => f.gameObject.SetActive(true));
+			//Resources.FindObjectsOfTypeAll<FingerPointLineMaker>().ToList().ForEach(f => f.gameObject.SetActive(true));
         }
 
 		/// <summary>

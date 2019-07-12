@@ -5,7 +5,7 @@ See license info in readme.md.
 www.imrelab.org
 **/
 
-﻿using System;
+ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,7 +23,7 @@ namespace IMRE.HandWaver
         public Vector3 initialScale;
         public bool changedNeighborNum;
 
-		internal override Vector3 ClosestSystemPosition(Vector3 abstractPosition)
+		public override Vector3 ClosestSystemPosition(Vector3 abstractPosition)
 		{
 			return this.Position3;
 		}

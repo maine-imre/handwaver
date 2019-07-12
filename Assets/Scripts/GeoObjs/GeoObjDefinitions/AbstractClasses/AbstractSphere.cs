@@ -32,7 +32,7 @@ namespace IMRE.HandWaver
         // Latitude ---
         private int nbLat = 100;
 
-		internal override Vector3 ClosestSystemPosition(Vector3 abstractPosition)
+		public override Vector3 ClosestSystemPosition(Vector3 abstractPosition)
 		{
 			Debug.LogWarning("This FIG TYPE DOESN'T SUPPORT CLOSEST SYS POS : " + figType);
 			throw new NotImplementedException();

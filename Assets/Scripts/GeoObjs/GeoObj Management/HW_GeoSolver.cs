@@ -87,7 +87,7 @@ namespace IMRE.HandWaver.Solver
 			ins = this;
 			MasterGeoObj.masterParentObj = globalParentObj;
 			//we need to have an event here that tells us to log the scale change.
-			Interface.worldScaleModifier.ins.OnGestureDeactivated += logScaleChange;
+			//Interface.worldScaleModifier.ins.OnGestureDeactivated += logScaleChange;
         }
 
 		public Transform globalParentObj;

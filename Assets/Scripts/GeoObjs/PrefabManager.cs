@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
@@ -17,7 +17,11 @@ public class PrefabManager : MonoBehaviour
 	private void Start()
 	{
 		ins = this;
-		prefabList.ForEach(p => prefabDictionary.Add(p.name, p));
+		prefabList.ForEach(p =>
+		{
+			if(!prefabDictionary.ContainsKey(p.name))
+				prefabDictionary.Add(p.name, p);
+		});
 	}
 
 	/// <summary>

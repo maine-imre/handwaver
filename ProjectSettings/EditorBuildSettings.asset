@@ -32,4 +32,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/ContentLayers/GeometersPlanetariumContent/RSDES.unity
     guid: a5cb8c55a5a107744991c0a90562d371
+  - enabled: 1
+    path: Assets/Scenes/BaseScenes/gestureTesting.unity
+    guid: 82b03661f35058043b5bcc1c31529e0e
   m_configObjects: {}
