@@ -52,7 +52,6 @@ namespace IMRE.HandWaver.HigherDimensions
 	    
 	    //find position of convergent point for other tetrahedrons in the net.
 	    float4 apex = new float4(-2*math.sqrt(2f/5f), 0f, 0f, 0f);
-	    //TODO consider making the initial projection onto n
 	    
             //apex of tetrahedron for each additional tetrahedron(from fases of first) foldling by degree t
 	    float4 center1 =  (result[0] + result[1] + result[2]) / 3f
@@ -105,22 +104,46 @@ namespace IMRE.HandWaver.HigherDimensions
 	    2,3,7
 	    3,1,7
         };
-        /// <summary>
-        /// override function from abstract class and create figure
-        /// </summary>
-        internal override void drawFigure()
-        {
-            //clear mesh,verts, triangles, uvs
-            mesh.Clear();
-            verts = new List<Vector3>();
-            tris = new List<int>();
-            uvs = new List<Vector2>();
 
-            //create a triangular plane for each face of the fivecell
-            for (int i = 0; i < 13; i++)
-            {
-                CreatePlane(rotatedVerts[faces[i * 3]], rotatedVerts[faces[i * 3+1]], rotatedVerts[faces[i * 3+2]]);
-            }
-        }
+	private Vector2[] _uvs;
+	internal Vector2[] uvs
+	{ 
+		get{
+			
+         	   int numFaces = faces.Length/4;
+		_uvs = new Vector2[3*numFaces];
+
+		    for (int i = 0; i < numFaces; i++)
+		    {
+		        Vector2 uv0 = new Vector2(0, 0);
+		        Vector2 uv1 = new Vector2(1, 0);
+		        Vector2 uv2 = new Vector2(0.5f, 1);
+
+			uvs[3*i] = uv0;
+			uvs[3*i+1] = uv1;
+			uvs[3*i+2] = uv2;
+			
+		    }
+		return _uvs;
+		}
+	}
+	
+	private int[] _triangles;
+	internal int[] triangles
+	{ 
+		get{
+			
+         	   int numFaces = faces.Length/4;
+		_triangles = new int[6*numFaces];
+
+		    for (int i = 0; i < numFaces; i++)
+		    {
+			_triangles[3*i] = faces[4*i];
+			_triangles[3*i+1] = faces[4*i+1];
+			_triangles[3*i+2] = faces[4*i+2];
+		    }
+		return _triangles;
+		}
+	}
     }
 }

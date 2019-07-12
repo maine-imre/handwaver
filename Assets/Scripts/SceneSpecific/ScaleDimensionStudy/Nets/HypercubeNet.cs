@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using System.Linq;
 using IMRE.HandWaver.ScaleStudy;
+using Unity.Mathematics;
 
 namespace IMRE.HandWaver.HigherDimensions
 {
@@ -14,14 +15,14 @@ namespace IMRE.HandWaver.HigherDimensions
 	public class HypercubeNet : AbstractHigherDimSolid, ISliderInput, I4D_Perspective
     {
         //basic vector4 values for computations
-        private static Vector4 up = new Vector4(0, 1, 0, 0);
-        private static Vector4 down = new Vector4(0, -1, 0, 0);
-        private static Vector4 right = new Vector4(1, 0, 0, 0);
-        private static Vector4 left = new Vector4(-1, 0, 0, 0);
-        private static Vector4 forward = new Vector4(0, 0, 1, 0);
-        private static Vector4 back = new Vector4(0, 0, -1, 0);
-        private static Vector4 wForward = new Vector4(0, 0, 0, 1);
-        private static Vector4 wBack = new Vector4(0, 0, 0, -1);
+        private static float4 up = new Vector4(0, 1, 0, 0);
+        private static float4 down = new Vector4(0, -1, 0, 0);
+        private static float4 right = new Vector4(1, 0, 0, 0);
+        private static float4 left = new Vector4(-1, 0, 0, 0);
+        private static float4 forward = new Vector4(0, 0, 1, 0);
+        private static float4 back = new Vector4(0, 0, -1, 0);
+        private static float4 wForward = new Vector4(0, 0, 0, 1);
+        private static float4 wBack = new Vector4(0, 0, 0, -1);
 
         private void Awake()
         {
@@ -40,7 +41,7 @@ namespace IMRE.HandWaver.HigherDimensions
             set
             {
                 _foldPercent = value;
-                originalVerts = vertices(90f*value).ToList();
+                origionalVertices = vertices(90f*value).ToList();
             }
         }
         
@@ -53,9 +54,9 @@ namespace IMRE.HandWaver.HigherDimensions
         /// </summary>
         /// <param name="degreeFolded"></param>
         /// <returns></returns>
-        private static Vector4[] vertices(float degreeFolded)
+        private static float4[] vertices(float degreeFolded)
         {
-            Vector4[] result = new Vector4[4 * 9];
+            float4[] result = new float4[4 * 9];
 
             //core cube (does not fold)
             result[0] = (up + right + forward)/2f;
@@ -112,6 +113,53 @@ namespace IMRE.HandWaver.HigherDimensions
 
             return result;
         }
+	
+	private Vector2[] _uvs;
+	internal Vector2[] uvs
+	{ 
+		get{
+			
+         	   int numFaces = faces.Length/4;
+		_uvs = new Vector2[6*numFaces];
+
+		    for (int i = 0; i < numFaces; i++)
+		    {
+		        Vector2 uv0 = new Vector2(0, 0);
+		        Vector2 uv1 = new Vector2(1, 0);
+		        Vector2 uv2 = new Vector2(0.5f, 1);
+
+			uvs[6*i] = uv0;
+			uvs[6*i+1] = uv1;
+			uvs[6*i+2] = uv2;
+			uvs[6*i+3] = uv0;
+			uvs[6*i+4] = uv1;
+			uvs[6*i+5] = uv2;
+			
+		    }
+		return _uvs;
+		}
+	}
+	
+	private int[] _triangles;
+	internal int[] triangles
+	{ 
+		get{
+			
+         	   int numFaces = faces.Length/4;
+		_triangles = new int[6*numFaces];
+
+		    for (int i = 0; i < numFaces; i++)
+		    {
+			_triangles[6*i] = faces[4*i];
+			_triangles[6*i+1] = faces[4*i+1];
+			_triangles[6*i+2] = faces[4*i+2];
+			_triangles[6*i+3] = faces[4*i];
+			_triangles[6*i+4] = faces[4*i+2];
+			_triangles[6*i+5] = faces[4*i+3];
+		    }
+		return _triangles;
+		}
+	}
 
         private int[] _faces;
 
@@ -161,21 +209,6 @@ namespace IMRE.HandWaver.HigherDimensions
             a0,a3,a4,a7,  //right
             a1,a2,a6,a5,  //left
             };
-        }
-
-        internal override void drawFigure()
-        {
-            mesh.Clear();
-            verts = new List<Vector3>();
-            tris = new List<int>();
-            uvs = new List<Vector2>();
-
-            int numFaces = faces.Length/4;
-
-            for (int i = 0; i < numFaces; i++)
-            {
-                CreatePlane(rotatedVerts[faces[i * 4]], rotatedVerts[faces[i * 4 + 1]], rotatedVerts[faces[i * 4 + 2]], rotatedVerts[faces[i * 4 + 3]]);
-            }
         }
     }
 }
