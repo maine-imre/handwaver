@@ -1,6 +1,0 @@
-Textures in this folder are from:
-
-https://www.solarsystemscope.com/textures/
-
-Used under Apache 4.0 Attribution Licence
-https://creativecommons.org/licenses/by/4.0/
