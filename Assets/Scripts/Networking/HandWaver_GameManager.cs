@@ -3,9 +3,10 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
+#if PHOTON_UNITY_NETWORKING
 using Photon.Pun;
 using Photon.Realtime;
+#endif
 using System.Collections.Generic;
 using IMRE.HandWaver.FourthDimension;
 
@@ -16,6 +17,7 @@ namespace IMRE.HandWaver.Networking {
 	/// </summary>
 	public class HandWaver_GameManager : MonoBehaviourPunCallbacks
 	{
+		#if PHOTON_UNITY_NETWORKING
 		/// <summary>
 		/// This is the scene to be loaded after disconnecting
 		/// </summary>
@@ -237,5 +239,6 @@ namespace IMRE.HandWaver.Networking {
 				ballSpawnPos.Add(ball.transform.position);
 			}
 		}
+		#endif
 	}
 }
