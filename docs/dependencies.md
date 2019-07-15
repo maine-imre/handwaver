@@ -34,21 +34,6 @@ Free and Open-Source.  Used to configure PUN networking.
 
 Free Asset. Used to record mixed reality footage. (Non-essential to function)
 
-### TiltBrush Toolkit
-[Google](https://github.com/googlevr/tilt-brush-toolkit/releases)
-
-Free Asset. Used to import TiltBrush drawings into the project. (Non-essential to function)
-
-### HTC Unity Plugin
-[HTC Github](https://github.com/ViveSoftware/ViveInputUtility-Unity/releases)
-
-Free Asset. Will be used for spacial audio and locomotion. (Non-essential to function)
-
-### Viveport
-[HTC Vive](https://developer.viveport.com/documents/sdk/en/download.html)
-
-Free Asset. Will be used for telemetrics. (Non-essential to function)
-
 ### SteamVR
 [Valve](http://u3d.as/cjo)
 
