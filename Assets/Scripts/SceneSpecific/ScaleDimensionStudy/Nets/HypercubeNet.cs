@@ -107,38 +107,43 @@ namespace IMRE.HandWaver.HigherDimensions
             result[30] = result[7] + Math.Operations.rotate(back,back, wForward, degreeFolded);
             result[31] = result[6] + Math.Operations.rotate(back,back, wForward, degreeFolded);
 
+            float4 tmp = Math.Operations.rotate(down,down, wForward, degreeFolded);
             //down of double down.
-            result[32] = result[12] + Math.Operations.rotate(down,down, wForward, degreeFolded);
-            result[33] = result[13] + Math.Operations.rotate(down,down, wForward, degreeFolded);
-            result[34] = result[14] + Math.Operations.rotate(down,down, wForward, degreeFolded);
-            result[35] = result[15] + Math.Operations.rotate(down,down, wForward, degreeFolded);
+            result[32] = result[12] + Math.Operations.rotate(tmp,tmp, wForward, degreeFolded);
+            result[33] = result[13] + Math.Operations.rotate(tmp,tmp, wForward, degreeFolded);
+            result[34] = result[14] + Math.Operations.rotate(tmp,tmp, wForward, degreeFolded);
+            result[35] = result[15] + Math.Operations.rotate(tmp,tmp, wForward, degreeFolded);
 
             return result;
         }
 	
 	private Vector2[] _uvs;
 	public override Vector2[] uvs
-	{ 
-		get{
-			
-         	   int numFaces = faces.Length/4;
-		_uvs = new Vector2[6*numFaces];
+	{
+		get
+		{
+			if (_uvs == null)
+			{
+				int numFaces = faces.Length / 4;
+				_uvs = new Vector2[6 * numFaces];
 
-		    for (int i = 0; i < numFaces; i++)
-		    {
-		        Vector2 uv0 = new Vector2(0, 0);
-		        Vector2 uv1 = new Vector2(1, 0);
-		        Vector2 uv2 = new Vector2(0.5f, 1);
+				for (int i = 0; i < numFaces; i++)
+				{
+					Vector2 uv0 = new Vector2(0, 0);
+					Vector2 uv1 = new Vector2(1, 0);
+					Vector2 uv2 = new Vector2(0.5f, 1);
 
-			uvs[6*i] = uv0;
-			uvs[6*i+1] = uv1;
-			uvs[6*i+2] = uv2;
-			uvs[6*i+3] = uv0;
-			uvs[6*i+4] = uv1;
-			uvs[6*i+5] = uv2;
-			
-		    }
-		return _uvs;
+					_uvs[6 * i] = uv0;
+					_uvs[6 * i + 1] = uv1;
+					_uvs[6 * i + 2] = uv2;
+					_uvs[6 * i + 3] = uv0;
+					_uvs[6 * i + 4] = uv1;
+					_uvs[6 * i + 5] = uv2;
+
+				}
+			}
+
+			return _uvs;
 		}
 	}
 	

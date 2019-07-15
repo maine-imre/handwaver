@@ -5918,25 +5918,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   viewingPosition:
-    x: 0
-    y: 0
-    z: 0
-    w: 0
+    x: 1
+    y: 1
+    z: 1
+    w: 1
   viewingBasis:
     c0:
-      x: 0
+      x: 1
       y: 0
       z: 0
       w: 0
     c1:
       x: 0
-      y: 0
+      y: 1
       z: 0
       w: 0
     c2:
       x: 0
       y: 0
-      z: 0
+      z: 1
       w: 0
   method: 1
   viewingAngle: 0
@@ -7825,7 +7825,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enableLeapMotion: 0
-  enableViveSense: 0
+  enableViveSense: 1
   enableOSVR: 0
   enableRealSense: 0
   enableValveSkeletal: 0
@@ -8520,7 +8520,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1904034773
 Transform:
   m_ObjectHideFlags: 0
@@ -8548,29 +8548,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   viewingPosition:
-    x: 0
-    y: 0
-    z: 0
-    w: 0
+    x: 1
+    y: 1
+    z: 1
+    w: 1
   viewingBasis:
     c0:
-      x: 0
+      x: 1
       y: 0
       z: 0
       w: 0
     c1:
       x: 0
-      y: 0
+      y: 1
       z: 0
       w: 0
     c2:
       x: 0
       y: 0
-      z: 0
+      z: 1
       w: 0
   method: 1
-  viewingAngle: 0
-  viewingRadius: 0
+  viewingAngle: 100
+  viewingRadius: 1
   sliderOverride: 0
 --- !u!23 &1904034775
 MeshRenderer:
