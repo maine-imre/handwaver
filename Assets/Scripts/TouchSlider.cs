@@ -13,6 +13,8 @@ namespace IMRE.EmbodiedUserInput
 {
 	public class TouchSlider : MonoBehaviour
 	{
+		public Material slidermaterial;
+		
 		/// <summary>
 		/// The point for visual representation on the line
 		/// </summary>
@@ -62,6 +64,7 @@ namespace IMRE.EmbodiedUserInput
 			tSlider.startWidth = .05f;
 			tSlider.endWidth = .05f;
 			tSlider.useWorldSpace = true;
+			tSlider.material = slidermaterial;
 			//make sure the point aligns with the current position of the line
 		}
 
