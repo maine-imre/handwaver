@@ -116,7 +116,7 @@ namespace IMRE.HandWaver.ScaleStudy
             float z_q = p * math.sin(phi);
             float R = revolveRadius;
             float r = circleRadius;
-            float w =.5f * v;
+            float w =.25f * v;
 
 
             //v ranges from -1 to 1
