@@ -24,6 +24,8 @@ namespace IMRE.HandWaver
 /// </summary>
 	public struct leapHands
     {
+#if PHOTON_UNITY_NETWORKING
+
         //these are public so that we can set them in the editor.
         public PolyHand lRhand;
         public PolyHand rRhand;
@@ -385,5 +387,6 @@ namespace IMRE.HandWaver
                 return (int)type;
             }
         }
+#endif
     }
 }

@@ -15,9 +15,15 @@ namespace IMRE.HandWaver.Networking {
 	/// The game manager manages the networked instances of players and objects for the hyperball scene.
 	/// The name of this scene should be updated to reflect it's relationship to the hyperball scene.
 	/// </summary>
-	public class HandWaver_GameManager : MonoBehaviourPunCallbacks
+	public class HandWaver_GameManager : 
+	#if PHOTON_UNITY_NETWORKING
+		MonoBehaviourPunCallbacks
+	#else
+		MonoBehaviour
+	#endif
 	{
 		#if PHOTON_UNITY_NETWORKING
+
 		/// <summary>
 		/// This is the scene to be loaded after disconnecting
 		/// </summary>

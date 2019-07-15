@@ -11,6 +11,7 @@ namespace IMRE.HandWaver
 	/// </summary>
 	public class handColourManager : MonoBehaviour
 	{
+#if PHOTON_UNITY_NETWORKING
 		public static handColourManager ins;
 		public List<PolyHand> handsList;
 
@@ -136,6 +137,6 @@ namespace IMRE.HandWaver
 			FingerModel finger = hand.fingers[fingerIDX];
 			finger.GetComponent<MeshRenderer>().materials[0].color = color;
 		}
-
+#endif
 	}
 }

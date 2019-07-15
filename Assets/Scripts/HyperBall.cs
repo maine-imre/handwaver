@@ -24,7 +24,12 @@ namespace IMRE.HandWaver.FourthDimension {
 	[RequireComponent(typeof(PhotonTransformView))]
 	[RequireComponent(typeof(PhotonRigidbodyView))]
 	#endif
-	public class HyperBall : MonoBehaviourPunCallbacks {
+	public class HyperBall : 	
+#if PHOTON_UNITY_NETWORKING
+		MonoBehaviourPunCallbacks {
+#else
+		MonoBehaviour {
+#endif
 
 		#if PHOTON_UNITY_NETWORKING
 		public static float scaleOfBox = 2f;
