@@ -98,7 +98,7 @@ namespace IMRE.EmbodiedUserInput
 				{
 
 					SliderValue = Vector3.Magnitude(Vector3.Project(classifier.origin - tSliderEndA, 
-						                                tSliderEndB - tSliderEndA) -  (Vector3) tSliderEndA) /
+						                                tSliderEndB - tSliderEndA)) /
 					              Vector3.Magnitude(tSliderEndB - tSliderEndA);
 				}
 				else
