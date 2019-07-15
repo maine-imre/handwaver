@@ -76,3 +76,8 @@ PoolManager may offer some performance gains, and can be dropped into the applic
 [Valve](http://u3d.as/cjo)
 
 Free Asset. 
+
+### Vive Pro Hand Tracking
+[Vive Hand Tracking](https://developer.vive.com/resources/knowledgebase/vive-hand-tracking-sdk/)
+
+Free, early access. Used for allowing gesture controls through the camera of the Vive Pro.
