@@ -38,6 +38,8 @@ namespace IMRE.EmbodiedUserInput
 		/// </summary>
 		[Range(0, 1)] private float _sliderValue;
 
+		public static TouchSlider ins;
+
 		/// <summary>
 		/// Field for value to be used to determine what percentage the slider currently represents.
 		/// </summary>
@@ -62,7 +64,11 @@ namespace IMRE.EmbodiedUserInput
 			tSlider.startWidth = .05f;
 			tSlider.endWidth = .05f;
 			tSlider.useWorldSpace = true;
+
+			point = Instantiate(point);
+			
 			//make sure the point aligns with the current position of the line
+			ins = this;
 		}
 
 		private void Update()

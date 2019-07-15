@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using IMRE.HandWaver.HWIO;
 using UnityEngine;
+using Unity.Mathematics;
 
 namespace IMRE.HandWaver.ScaleStudy
 {
@@ -66,7 +67,7 @@ namespace IMRE.HandWaver.ScaleStudy
             //endpoints for line segment if intersection passes through circle
 
             //if cross section only hits the edge of the circle
-            if (Math.Abs(height) == radius)
+            if (math.abs(height) == radius)
             {
                 //if top of sphere, create point at intersection
                 if (height == radius)
@@ -92,7 +93,7 @@ namespace IMRE.HandWaver.ScaleStudy
             }
 
             //cross section is a circle
-            else if (Math.Abs(height) < radius)
+            else if (math.abs(height) < radius)
             {
                 //horizontal distance from center of circle to point on line segment
                
@@ -100,7 +101,7 @@ namespace IMRE.HandWaver.ScaleStudy
             }
 
             //height for cross section is outside of circle 
-            else if (Math.Abs(height) > radius)
+            else if (math.abs(height) > radius)
             {
                 Debug.Log("Height is out of range of object.");
                 crossSectionRenderer.enabled = false;

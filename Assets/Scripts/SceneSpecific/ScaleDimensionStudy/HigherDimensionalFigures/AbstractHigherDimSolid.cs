@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using Unity.Mathematics;
 
 namespace IMRE.HandWaver.HigherDimensions
 {
@@ -13,21 +15,36 @@ namespace IMRE.HandWaver.HigherDimensions
 /// </summary>
 	public abstract class AbstractHigherDimSolid : MonoBehaviour
     {
-        internal float4[] origionalVertices;
-	private float3[] _projectedVerticies;
-	internal float3[] projectedVerticies
+        internal float4[] originalVertices;
+	private float3[] _projectedVertices;
+	internal float3[] ProjectedVertices
 		{ 
 			get{
-				if(_projectedVerticies == null)
-					_projectedVerticies = new float3[origionalVerticies.length];
+				if(_projectedVertices == null)
+					_projectedVertices = new float3[originalVertices.Length];
 				
-				for (i = 0; i < _projectedVerticies.length; i++)
+				for (int i = 0; i < _projectedVertices.Length; i++)
 				{
-					_projectedVerticies[i] = origionalVerticies[i].projectDownDimension(viewingBasis, method, viewingAngle, viewingPosition, viewingRadius);
+					_projectedVertices[i] = originalVertices[i].projectDownDimension(viewingBasis, method, viewingAngle, viewingPosition, viewingRadius);
 				}
-				return _projectedVerticies;
+				return _projectedVertices;
 			}
 		}
+
+	private Vector3[] ProjectedVerticiesV3
+	{
+		get
+		{
+			float3[] tmp = ProjectedVertices;
+			Vector3[] tmp2 = new Vector3[ProjectedVertices.Length];
+			for (int i = 0; i < +tmp.Length; i++)
+			{
+				tmp2[i] = (Vector3) tmp[i];
+			}
+
+			return tmp2;
+		}
+	}
 
         internal Mesh mesh;
 
@@ -37,15 +54,15 @@ namespace IMRE.HandWaver.HigherDimensions
 	public float viewingAngle = 0f;
 	public float viewingRadius = 0f;
 
-	internal abstract Vector2[] uvs;
-	internal abstract int[] triangles;
+	public abstract Vector2[] uvs { get; }
+	public abstract int[] triangles { get; }
 
-        void Start()
+	void Start()
         {
             mesh = GetComponent<MeshFilter>().mesh;
 
-		mesh.Verticies = projectedVerticies;
-		mesh.uvs = uvs;
+		mesh.vertices = ProjectedVerticiesV3;
+		mesh.uv = uvs;
 		mesh.triangles = triangles;
             mesh.RecalculateNormals();
             mesh.RecalculateBounds();
@@ -53,7 +70,7 @@ namespace IMRE.HandWaver.HigherDimensions
 
         void Update()
         {
-		mesh.Verticies = projectedVerticies;
+		mesh.vertices = ProjectedVerticiesV3;
             mesh.RecalculateNormals();
             mesh.RecalculateBounds();
         }

@@ -10,7 +10,7 @@ namespace IMRE.HandWaver.HigherDimensions
 	/// <summary>
 	/// Net of five cell for scale and dimension study.
 	/// </summary>
-	public class fiveCellNet : AbstractHigherDimSolid, ISliderInput, I4D_Perspective
+	public class fiveCellNet : AbstractHigherDimSolid, ISliderInput
 	{
 		//initialize fold
 		//read only static float GoldenRatio = (1f + Mathf.Sqrt(5f)) / 2f;
@@ -23,7 +23,7 @@ namespace IMRE.HandWaver.HigherDimensions
 			set
 			{
 				_percentFolded = value;
-				originalVerts = vertices(value * 60f).ToList();
+				originalVertices = vertices(value * 60f);
 			}
 		}
 
@@ -37,7 +37,7 @@ namespace IMRE.HandWaver.HigherDimensions
 		/// </summary>
 		/// <param name="degreeFolded"></param>
 		/// <returns></returns>
-		private static Vector4[] vertices(float degreeFolded)
+		private static float4[] vertices(float degreeFolded)
 		{
 			//8 points on unfolded fivecell
 			float4[] result = new float4[8];
@@ -56,27 +56,21 @@ namespace IMRE.HandWaver.HigherDimensions
 			//apex of tetrahedron for each additional tetrahedron(from fases of first) foldling by degree t
 			float4 center1 = (result[0] + result[1] + result[2]) / 3f;
 			float4 dir1 = center1 - result[3];
-			result[4] = center1 + rotate(dir1, dir1, apex - center1, degreeFolded);
+			result[4] = center1 + Math.Operations.rotate(dir1, dir1, apex - center1, degreeFolded);
 
 			float4 center2 = (result[0] + result[2] + result[3]) / 3f;
 			float4 dir2 = center2 - result[1];
-			result[5] = center2 + rotate(dir2, dir2, apex - center2, degreeFolded);
+			result[5] = center2 + Math.Operations.rotate(dir2, dir2, apex - center2, degreeFolded);
 
 			float4 center3 = (result[0] + result[1] + result[3]) / 3f;
 			float4 dir3 = center3 - result[2];
-			result[6] = center3 + rotate(dir3, dir3, apex - center3, degreeFolded);
+			result[6] = center3 + Math.Operations.rotate(dir3, dir3, apex - center3, degreeFolded);
 
 			float4 center4 = (result[1] + result[2] + result[3]) / 3f;
 			float4 dir4 = center4 - result[0];
-			result[7] = center4 + rotate(dir4, dir4, apex - center4, degreeFolded);
+			result[7] = center4 + Math.Operations.rotate(dir4, dir4, apex - center4, degreeFolded);
 
-			Vector4[] results = new Vector4[8];
-			for (int i = 0; i < 8; i++)
-			{
-				results[i] = result[i];
-			}
-
-			return results;
+			return result;
 		}
 
 		/// <summary>
@@ -111,52 +105,7 @@ namespace IMRE.HandWaver.HigherDimensions
 			3, 1, 7
 		};
 
-		/// <summary>
-		/// override function from abstract class and create figure
-		/// </summary>
-		internal override void drawFigure()
-		{
-			//clear mesh,verts, triangles, uvs
-			mesh.Clear();
-			verts = new List<Vector3>();
-			tris = new List<int>();
-			uvs = new List<Vector2>();
-
-			//create a triangular plane for each face of the fivecell
-			for (int i = 0; i < 13; i++)
-			{
-				CreatePlane(rotatedVerts[faces[i * 3]], rotatedVerts[faces[i * 3 + 1]], rotatedVerts[faces[i * 3 + 2]]);
-			}
-		}
-
-		public static float4 rotate(float4 v, float4 basis0, float4 basis1, float theta)
-		{
-			math.normalize(basis0);
-			math.normalize(basis1);
-			//TODO write project function for float4
-			float4 remainder = v - (project(v, basis0) + project(v, basis1));
-			theta *= Mathf.Deg2Rad;
-
-			float4 v2 = v;
-			math.normalize(v2);
-
-			if (math.dot(basis0, basis1) != 0f)
-			{
-				Debug.LogWarning("Basis is not orthagonal");
-			}
-			else if (math.dot(v2, basis0) != 1f || Vector4.Dot(v, basis1) != 0f)
-			{
-				Debug.LogWarning("Original Vector does not lie in the same plane as the first basis vector.");
-			}
-
-			return Vector4.Dot(v, basis0) * (math.cos(theta) * basis0 + basis1 * math.sin(theta)) +
-				   math.dot(v, basis1) * (math.cos(theta) * basis1 + math.sin(theta) * basis0) + remainder;
-		}
-
-		public static float4 project(float4 v, float4 dir)
-		{
-			//TODO verify this.
-			return math.dot(v, dir) * math.normalize(dir);
-		}
+		public override Vector2[] uvs { get; }
+		public override int[] triangles { get; }
 	}
 }

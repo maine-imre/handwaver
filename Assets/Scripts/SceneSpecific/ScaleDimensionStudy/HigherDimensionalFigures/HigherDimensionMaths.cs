@@ -51,84 +51,94 @@ namespace IMRE.HandWaver.HigherDimensions
             math.normalize(axis);
             return math.dot(v, axis) * axis;
         }
-
-
-
+        
         /// <summary>
         /// Writes the projection of a float4 onto a new basis for the hyperplane.
         /// </summary>
         /// <param name="v"></param>
-	/// <param name="basis"> viewing basis </param>
+        /// <param name="basis"> viewing basis </param>
         /// <returns></returns>
-        public static float3 projectDownDimension(this float4 v, float4x3 basis, ProjectionMatheod method, float Vangle = 0f, float4 eyePosition = float4.zero, float viewingRadius = 0f)
+        public static float3 projectDownDimension(this float4 v, float4x3 inputBasis, ProjectionMethod method,
+            float? Vangle, float4? eyePosition, float? viewingRadius)
         {
-
-	switch(method){
-		case ProjectionMethod.orthographic:
-			math.normalize(basis.c0);
-	            math.normalize(basis.c1);
-	            math.normalize(basis.c2);
+            float T, S;
+            float4x4 basis;
+            float4 tmp;
+            //set defaults
+            Vangle = Vangle ?? 0f;
+            eyePosition = eyePosition ?? float4.zero;
+            viewingRadius = viewingRadius ?? 1f;
             
-            		return new float3(math.dot(v,basis.c0), math.dot(v,basis.c1), math.dot(v,basis.c2));
-		case ProjectionMethod.projective:
-			//using http://hollasch.github.io/ray4/Four-Space_Visualization_of_4D_Objects.html#chapter3
-			float T = 1f/(math.tan(Vangle/2f);
-			float4 tmp = v - eyePosition;
-			float4x4 basis = calc4Matrix(eyePosition, basis);
-			S = T/math.dot(v, basis.c3)
-			
-			return new float3(S*math.dot(tmp, basis.c0), S*math.dot(tmp, basis.c1), S*math.dot(tmp, basis.c2));
+            switch (method)
+            {
+                case ProjectionMethod.orthographic:
+                    math.normalize(inputBasis.c0);
+                    math.normalize(inputBasis.c1);
+                    math.normalize(inputBasis.c2);
 
-		case ProjectionMethod.parallel:
-			//using http://hollasch.github.io/ray4/Four-Space_Visualization_of_4D_Objects.html#chapter3
-			float S = 1/viewingRadius;
-			float4 tmp = v - eyePosition;
-			float4x4 basis = calc4Matrix(eyePosition, basis);
-			
-			return new float3(S*math.dot(tmp, basis.c0), S*math.dot(tmp, basis.c1), S*math.dot(tmp, basis.c2));
+                    return new float3(math.dot(v, inputBasis.c0), math.dot(v, inputBasis.c1), math.dot(v, inputBasis.c2));
+                case ProjectionMethod.projective:
+                    //using http://hollasch.github.io/ray4/Four-Space_Visualization_of_4D_Objects.html#chapter3
+                    T = 1f / (math.tan(Vangle.Value / 2f));
+                    tmp = v - eyePosition.Value;
+                    basis = calc4Matrix(eyePosition.Value, inputBasis);
+                    S = T / math.dot(v, basis.c3);
 
-		default: return new float3(0f,0f,0f);
+                    return new float3(S * math.dot(tmp, basis.c0), S * math.dot(tmp, basis.c1),
+                        S * math.dot(tmp, basis.c2));
+
+                case ProjectionMethod.parallel:
+                    //using http://hollasch.github.io/ray4/Four-Space_Visualization_of_4D_Objects.html#chapter3
+                    S = 1f / viewingRadius.Value;
+                    tmp = v - eyePosition.Value;
+                    basis = calc4Matrix(eyePosition.Value, inputBasis);
+
+                    return new float3(S * math.dot(tmp, basis.c0), S * math.dot(tmp, basis.c1),
+                        S * math.dot(tmp, basis.c2));
+
+                default: return new float3(0f, 0f, 0f);
+            }
         }
 
-	public static float4x4 calc4Matrix(float4 from, float4x3 basis){
+        public static float4x4 calc4Matrix(float4 from, float4x3 basis){
 		//using http://hollasch.github.io/ray4/Four-Space_Visualization_of_4D_Objects.html#chapter3
 
 		float4 Up = basis.c1;
 		float4 Over = basis.c2;
 		//Get the normalized Wd column vector.
 		float4 Wd = basis.c0;
-		norm = math.magnitude(Wd);
+		float norm = Math.Operations.magnitude(Wd);
 		if(norm ==0f)
 			Debug.LogError("To point and from point are the same");
 		math.normalize(Wd);
 
 		//calculated the normalized Wa column vector.
-		float4 Wa = math.cross(Up, Over, Wd);
-		norm = math.magnitude(Wa);
+		float4 Wa =  Math.Operations.cross(Up, Over, Wd);
+		norm = Math.Operations.magnitude(Wa);
 		if (norm == 0f)
 			Debug.LogError("Invalid Up Vector");
 		math.normalize(Wa);
 		
 		//Calculate the normalized Wb column vector
-		float4 Wb = math.cross(Over, Wd, Wa);
-		norm = math.magnitude(Wb);
+		float4 Wb = Math.Operations.cross(Over, Wd, Wa);
+		norm = Math.Operations.magnitude(Wb);
 		if (norm == 0f)
 			Debug.LogError("Invalid Over Vector");
 		math.normalize(Wb);
 		
-		float4 Wc = math.cross(Wd, Wa, Wb);
+		float4 Wc = Math.Operations.cross(Wd, Wa, Wb);
 		math.normalize(Wc); //theoretically redundant.
 
-		return new float4x3(Wa, Wb, Wc, Wd);		
+		return new float4x4(Wa, Wb, Wc, Wd);		
 	}
 
-        public static float3[] projectDownDimension(this float4[] vectors, float4 axis)
+        public static float3[] projectDownDimension(this float4[] vectors, float4 axis, ProjectionMethod method, float? Vangle, float4? eyePosition, float? viewingRadius)
         {
             float4x3 basis = axis.basisSystem();
             float3[] result = new float3[vectors.Length];
             for (int i = 0; i < vectors.Length; i++)
             {
-                result[i] = vectors[i].projectDownDimension(basis);
+                result[i] = vectors[i].projectDownDimension(basis,method, Vangle, eyePosition, viewingRadius);
             }
 
             return result;
@@ -202,7 +212,7 @@ namespace IMRE.HandWaver.HigherDimensions
             //returns the basis that spans the hyperplane orthogonal to v
             float4x3 basis = new float4x3(basis0,basis1,basis2);
             //check that v is orthogonal.
-            v.projectDownDimension(basis);
+            v.projectDownDimension(basis, ProjectionMethod.parallel,null, null,null );
             if (v.x != 0 || v.y != 0 || v.z != 0)
             {
                 Debug.LogError("Basis is not orthogonal to v");
@@ -243,42 +253,5 @@ namespace IMRE.HandWaver.HigherDimensions
                 -(bottomRow.x*determinants[3]-bottomRow.y*determinants[1]+bottomRow.z*determinants[0])
              );
         }
-
-        /// <summary>
-        /// Rotate a vertex v around an axis for an angle theta, in degrees.
-        /// </summary>
-        /// <param name="v"></param>
-        /// <param name="axis"></param>
-        /// <param name="theta"></param>
-        /// <returns></returns>
-        public static Vector4 GetRotatedVertex(this Vector4 v, Axis4D axis, float theta)
-        {
-            if(theta %360 == 0)
-            {
-                return v;
-            }
-            switch (axis)
-            {
-                case Axis4D.xy:
-                    return v.rotate(right, up, theta);
-                case Axis4D.xz:
-                    return v.rotate(right, forward, theta);
-                case Axis4D.xw:
-                    return v.rotate(right, wPos, theta);
-                case Axis4D.yz:
-                    return v.rotate(up, forward, theta);
-                case Axis4D.yw:
-                    return v.rotate(up, wPos, theta);
-                case Axis4D.zw:
-                    return v.rotate(forward, wPos, theta);
-                default:
-                    return Vector4.zero;
-            }
-        }
-
-        public static readonly Vector4 right = new Vector4(1, 0, 0, 0);
-        public static readonly Vector4 up = new Vector4(0, 1, 0, 0);
-        public static readonly Vector4 forward = new Vector4(0, 0, 1, 0);
-        public static readonly Vector4 wPos = new Vector4(0, 0, 0, 1);
     }
 }

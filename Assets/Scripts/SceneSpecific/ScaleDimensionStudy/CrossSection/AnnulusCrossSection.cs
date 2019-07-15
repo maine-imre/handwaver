@@ -143,7 +143,7 @@ namespace IMRE.HandWaver.ScaleStudy
             float x2;
 
             //cross-section only hits edge of annulus
-            if (Math.Abs(height) == outerRadius)
+            if (math.abs(height) == outerRadius)
             {
                 //if top edge, create point at intersection
                 if (height == outerRadius)
@@ -169,7 +169,7 @@ namespace IMRE.HandWaver.ScaleStudy
                 
             }
             //cross section is a line segment in between the inner circle and outer circle
-            else if (Math.Abs(height) < outerRadius && Math.Abs(height) >= innerRadius)
+            else if (math.abs(height) < outerRadius && math.abs(height) >= innerRadius)
             {
                 //horizontal distance from center to point on outer edge of annulus
                 x1 = (Mathf.Sqrt(Mathf.Pow(outerRadius, 2) - Mathf.Pow(height, 2)));
@@ -192,7 +192,7 @@ namespace IMRE.HandWaver.ScaleStudy
 
             }
             //cross section height is less than the inner radius, resulting in two line segments
-            else if (Math.Abs(height) < innerRadius)
+            else if (math.abs(height) < innerRadius)
             {
                 //horizontal distance from center to point on outer edge (x1) and inner edge (x2) of annulus
                 x1 = (Mathf.Sqrt(Mathf.Pow(outerRadius, 2) - Mathf.Pow(height, 2)));
@@ -222,7 +222,7 @@ namespace IMRE.HandWaver.ScaleStudy
                 crossSectionPoints[3].SetActive(true);
             }
             //cross section height is out of range of annulus
-            else if (Math.Abs(height) > outerRadius)
+            else if (math.abs(height) > outerRadius)
             {
                 Debug.Log("Height is out of range of object.");
                 //TODO update rendering

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Linq;
+using IMRE.EmbodiedUserInput;
 using IMRE.HandWaver.HigherDimensions;
 using UnityEditorInternal.Profiling.Memory.Experimental;
 
@@ -81,13 +82,6 @@ namespace IMRE.HandWaver.ScaleStudy
         private void Start()
         {
 	        ins = this;
-	        
-            //construct a slider as a dependent line segment, with points at Vector3.zero and Vector3.right.  
-            //Add Vector3.up for height
-            slider = GeoObjConstruction.dLineSegment(GeoObjConstruction.dPoint(Vector3.zero+Vector3.up),GeoObjConstruction.dPoint(Vector3.right*.1f+Vector3.up));
-            //construct a point on the slider (in the middle)
-            //this point will be bound to the slider on update.
-            sliderPoint = GeoObjConstruction.iPoint(Vector3.right*.05f);
             if (allFigures == null)
             {
 	            allFigures = new List<GameObject>();
@@ -131,21 +125,19 @@ namespace IMRE.HandWaver.ScaleStudy
 	                animateUp = true;
                 }
                 
-                //update the slider's position to reflect the override value
-                sliderPoint.Position3 = (percentFolded)*(slider.point2.Position3 - slider.point1.Position3) + slider.point1.Position3;
                 percent = percentFolded;
+                
+                TouchSlider.ins.SliderValue = percent;
             } else if (foldOverride)
             {
 	            percent = foldOverrideValue;
-	            //update the slider's position to reflect the override value
-	            sliderPoint.Position3 = (percentFolded)*(slider.point2.Position3 - slider.point1.Position3) + slider.point1.Position3;
-
+	            
+	            TouchSlider.ins.SliderValue = percent;
             }
             // if the participant is directly manipulating the slider
             else
             {
-                sliderPoint.Position3 = Vector3.Project(sliderPoint.Position3 - slider.point1.Position3,slider.point1.Position3 - slider.point2.Position3) + slider.point1.Position3;
-                percent =(sliderPoint.Position3 - slider.point1.Position3).magnitude/(slider.point1.Position3 - slider.point2.Position3).magnitude;
+	            percent = TouchSlider.ins.SliderValue;
             }
 #if Photon
 	   		 photonView.RPC("setPercentFolded", PhotonTargets.All, percent);
@@ -170,10 +162,6 @@ namespace IMRE.HandWaver.ScaleStudy
 				    si.GetComponent<ISliderInput>().slider = percent;
 			    }
 		    );
-		    
-		    //update slider point on all users.
-		    sliderPoint.Position3 = (percent / 360f) * (slider.point2.Position3 - slider.point1.Position3) +
-		                            slider.point1.Position3;
 
 	    }
 
