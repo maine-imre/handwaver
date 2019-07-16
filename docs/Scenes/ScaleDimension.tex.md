@@ -37,6 +37,8 @@ Thus, the inner points lie at $(\plusminus \sqrt{r^2 - \rho^2},0,\rho)$. In the 
 
 ### Intersection of a plane and a sphere
 
+Consider a sphere $S$ with radius $r$ centered at the origin. Let $\rho$ be the distance between the center of the sphere and the plane $P$ formed by intersecting the sphere with a plane. In the event that the intersection only hits the top or bottom edge of the sphere, the resulting cross-section will simply be a point at the top or bottom of the sphere. 
+
 ### Intersection of a plane and a torus
 
 ### Intersection of a hyperplane and a hypersphere
