@@ -7,11 +7,14 @@ using Leap.Unity.Interaction;
 using System;
 using System.Linq;
 using IMRE.HandWaver.Solver;
+#if PHOTON_UNITY_NETWORKING
 using Photon.Pun;
+#endif
 #endregion
 
 namespace IMRE.HandWaver.FourthDimension {
 
+	#if PHOTON_UNITY_NETWORKING
 	/// <summary>
 	/// A networked object that whose bounds are connected to the graphics in hyperballboundaries.
 	/// Build as an initial test of networking capacity.
@@ -20,8 +23,15 @@ namespace IMRE.HandWaver.FourthDimension {
 	[RequireComponent(typeof(PhotonView))]
 	[RequireComponent(typeof(PhotonTransformView))]
 	[RequireComponent(typeof(PhotonRigidbodyView))]
-	public class HyperBall : MonoBehaviourPunCallbacks {
+	#endif
+	public class HyperBall : 	
+#if PHOTON_UNITY_NETWORKING
+		MonoBehaviourPunCallbacks {
+#else
+		MonoBehaviour {
+#endif
 
+		#if PHOTON_UNITY_NETWORKING
 		public static float scaleOfBox = 2f;
 		internal static Vector3 origin = Vector3.up*scaleOfBox;
 		private PhotonView _photonView;
@@ -216,5 +226,6 @@ namespace IMRE.HandWaver.FourthDimension {
 
 			return pos + origin;
 		}
+		#endif
 	}
 }

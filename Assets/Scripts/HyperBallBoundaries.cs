@@ -1,5 +1,7 @@
 ﻿using IMRE.HandWaver.Networking;
+#if PHOTON_UNITY_NETWORKING
 using Photon.Pun;
+#endif
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,8 +13,13 @@ namespace IMRE.HandWaver.FourthDimension
 	/// Graphics for boundaries of hyperball.
 	/// Part of a networking proof of concept.
 	/// </summary>
-	public class HyperBallBoundaries : MonoBehaviourPunCallbacks
-	{
+	public class HyperBallBoundaries : 
+#if PHOTON_UNITY_NETWORKING
+		MonoBehaviourPunCallbacks {
+#else
+		MonoBehaviour {
+#endif
+	#if PHOTON_UNITY_NETWORKING
 		public enum GeometeryType {ThreeTorus,ThreeSphere,KleinBottle,TrippleTwist};
 		public static GeometeryType myGeometery;
 
@@ -127,5 +134,6 @@ namespace IMRE.HandWaver.FourthDimension
 			t.localScale = Vector3.one * scaleOfBox / 5f;
 			return t;
 		}
+#endif
 	}
 }

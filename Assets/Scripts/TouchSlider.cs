@@ -13,6 +13,8 @@ namespace IMRE.EmbodiedUserInput
 {
 	public class TouchSlider : MonoBehaviour
 	{
+		public Material slidermaterial;
+		
 		/// <summary>
 		/// The point for visual representation on the line
 		/// </summary>
@@ -64,9 +66,8 @@ namespace IMRE.EmbodiedUserInput
 			tSlider.startWidth = .05f;
 			tSlider.endWidth = .05f;
 			tSlider.useWorldSpace = true;
-
+			tSlider.material = slidermaterial;
 			point = Instantiate(point);
-			
 			//make sure the point aligns with the current position of the line
 			ins = this;
 		}
@@ -104,7 +105,7 @@ namespace IMRE.EmbodiedUserInput
 				{
 
 					SliderValue = Vector3.Magnitude(Vector3.Project(classifier.origin - tSliderEndA, 
-						                                tSliderEndB - tSliderEndA) -  (Vector3) tSliderEndA) /
+						                                tSliderEndB - tSliderEndA)) /
 					              Vector3.Magnitude(tSliderEndB - tSliderEndA);
 				}
 				else

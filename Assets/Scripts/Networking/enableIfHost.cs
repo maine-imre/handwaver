@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class enableIfHost : MonoBehaviour
 {
-    
+    #if PHOTON_UNITY_NETWORKING
     void Start()
     {
         if (!Photon.Pun.PhotonNetwork.IsMasterClient)
@@ -12,4 +12,5 @@ public class enableIfHost : MonoBehaviour
             gameObject.SetActive(false);
         }
     }
+    #endif
 }

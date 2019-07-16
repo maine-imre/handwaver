@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if PHOTON_UNITY_NETWORKING
 using Photon.Pun;
 using Photon.Realtime;
+#endif
 using Leap.Unity;
 using Leap.Unity.Interaction;
 using System.Linq;
@@ -13,8 +15,13 @@ namespace IMRE.HandWaver.Networking
 	/// Syncs visual representations of players' hands.
 	/// Will be expanded to handle InterationHands and Interaction Controllers.
 	/// </summary>
-	public class playerHand : MonoBehaviourPunCallbacks
-	{
+	public class playerHand : 
+		
+#if PHOTON_UNITY_NETWORKING
+		MonoBehaviourPunCallbacks {
+#else
+		MonoBehaviour {
+#endif
 		public Chirality whichHand;
 		
 		public Mesh handModel;
@@ -84,6 +91,7 @@ namespace IMRE.HandWaver.Networking
 		}
 		
 		private IEnumerator leapStatus;
+#if PHOTON_UNITY_NETWORKING
 
 		private void Start()
 		{
@@ -115,6 +123,7 @@ namespace IMRE.HandWaver.Networking
 				StartCoroutine(leapStatus);
 			}
 		}
+
 		
 		private void Update()
 		{
@@ -151,7 +160,7 @@ namespace IMRE.HandWaver.Networking
 				yield return new WaitForSeconds(waitTime);
 			}
 		}
-		
+		#endif 
 		
 	}
 }

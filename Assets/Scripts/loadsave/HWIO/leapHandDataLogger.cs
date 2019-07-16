@@ -19,21 +19,26 @@ namespace IMRE.HandWaver
 
     [System.Serializable]
 
-/// <summary>
-/// public struct to assign hand variables to player
-/// </summary>
-	public struct leapHands
+    /// <summary>
+    /// public struct to assign hand variables to player
+    /// </summary>
+    public struct leapHands
     {
+
         //these are public so that we can set them in the editor.
+#if PHOTON_UNITY_NETWORKING
+
         public PolyHand lRhand;
         public PolyHand rRhand;
+#endif
         public InteractionHand lIhand;
         public InteractionHand rIhand;
         public AttachmentHand lAhand;
         public AttachmentHand rAhand;
-		public InteractionXRController lOVR;
-		public InteractionXRController rOVR;
+        public InteractionXRController lOVR;
+        public InteractionXRController rOVR;
 
+#if PHOTON_UNITY_NETWORKING
 
 		public PolyHand Lhand_rigged
         {
@@ -60,85 +65,50 @@ namespace IMRE.HandWaver
                 rRhand = value;
             }
         }
+#endif
 
         public InteractionHand LHand_interaction
         {
-            get
-            {
-                return lIhand;
-            }
+            get { return lIhand; }
 
-            set
-            {
-                lIhand = value;
-            }
+            set { lIhand = value; }
         }
 
         public InteractionHand RHand_interaction
         {
-            get
-            {
-                return rIhand;
-            }
+            get { return rIhand; }
 
-            set
-            {
-                rIhand = value;
-            }
+            set { rIhand = value; }
         }
 
         public AttachmentHand LHand_attachment
         {
-            get
-            {
-                return lAhand;
-            }
+            get { return lAhand; }
 
-            set
-            {
-                lAhand = value;
-            }
+            set { lAhand = value; }
         }
 
         public AttachmentHand RHand_attachment
         {
-            get
-            {
-                return rAhand;
-            }
+            get { return rAhand; }
 
-            set
-            {
-                rAhand = value;
-            }
+            set { rAhand = value; }
         }
 
-		public InteractionXRController LOVR
-		{
-			get
-			{
-				return lOVR;
-			}
+        public InteractionXRController LOVR
+        {
+            get { return lOVR; }
 
-			set
-			{
-				lOVR = value;
-			}
-		}
+            set { lOVR = value; }
+        }
 
-		public InteractionXRController ROVR
-		{
-			get
-			{
-				return rOVR;
-			}
+        public InteractionXRController ROVR
+        {
+            get { return rOVR; }
 
-			set
-			{
-				rOVR = value;
-			}
-		}
-	}
+            set { rOVR = value; }
+        }
+    }
 
     [System.Serializable]
     /// <summary>
@@ -150,18 +120,20 @@ namespace IMRE.HandWaver
         public System.DateTime currTime;
 
         //left hand related data
-        public fingerData[] LHandData;
+        public leapHandDataLogger.fingerData[] LHandData;
         public Vector3 LHandPalmPos;
         public Quaternion LHandPalmRot;
+
         /// <summary>
         /// value between 0 and 1. represents percentage the fingers are pinched.
         /// </summary>
         public float LHandPinchvalue;
 
         //right hand related data
-        public fingerData[] RHandData;
+        public leapHandDataLogger.fingerData[] RHandData;
         public Vector3 RHandPalmPos;
         public Quaternion RHandPalmRot;
+
         /// <summary>
         /// value between 0 and 1. represents percentage the fingers are pinched.
         /// </summary>
@@ -172,22 +144,23 @@ namespace IMRE.HandWaver
         public Quaternion headRot;
     }
 
-/// <summary>
-/// Data logger script.  Also used to find references for LeapHands and OSVR controls.
-/// Might be integrated for networking.
-/// </summary>
+    /// <summary>
+    /// Data logger script.  Also used to find references for LeapHands and OSVR controls.
+    /// Might be integrated for networking.
+    /// </summary>
     public class leapHandDataLogger : MonoBehaviour
     {
 
         public static leapHandDataLogger ins;
-		private string sessionID = IMRE.HandWaver.HWIO.XMLManager.sessionID;
+        private string sessionID = IMRE.HandWaver.HWIO.XMLManager.sessionID;
 
-		public leapHands currHands;
+        public leapHands currHands;
         public leapHandsData currHandsData;
 
-		private void Awake()
+        private void Awake()
         {
             ins = this;
+#if PHOTON_UNITY_NETWORKING
 
             if (currHands.Lhand_rigged == null || currHands.RHand_rigged == null || currHands.LHand_interaction == null || currHands.RHand_interaction == null || currHands.LHand_attachment == null || currHands.RHand_attachment == null)
             {
@@ -254,10 +227,10 @@ namespace IMRE.HandWaver
 #if StandaloneWindows64
 			commandLineArgumentParse.logStateChange.AddListener(checkLog);
             #endif
-			
+#endif
         }
-
-		private void checkLog() {
+        private void checkLog()
+        {
 //#if !UNITY_EDITOR
 //			if (commandLineArgumentParse.logCheck())
 //			{
@@ -265,15 +238,15 @@ namespace IMRE.HandWaver
 //			}
 //#endif
 
-		}
+        }
 
 
-		private void initHandsData()
+        private void initHandsData()
         {
-            currHandsData = new leapHandsData();                //Instanciates a new one
+            currHandsData = new leapHandsData(); //Instanciates a new one
 
-            currHandsData.LHandData = new fingerData[5];        //Sets up array for left hand finger data structs
-            currHandsData.RHandData = new fingerData[5];        //right hand finger data structs
+            currHandsData.LHandData = new fingerData[5]; //Sets up array for left hand finger data structs
+            currHandsData.RHandData = new fingerData[5]; //right hand finger data structs
 
         }
 
@@ -306,7 +279,7 @@ namespace IMRE.HandWaver
 
         public void logData()
         {
-
+#if PHOTON_UNITY_NETWORKING
             if (!(currHands.Lhand_rigged.fingers.Any(f => ((int)f.fingerType == -1)) || currHands.RHand_rigged.fingers.Any(f => ((int)f.fingerType == -1))))
             //if tracking all fingers properly
             //this is due to cases attempting to access array element 0
@@ -315,7 +288,8 @@ namespace IMRE.HandWaver
                 {
                     foreach (RiggedFinger riggedFinger in currHands.Lhand_rigged.fingers)
                     {
-                        currHandsData.LHandData[(int)riggedFinger.fingerType] = new fingerData(riggedFinger/*, currHands.LHand.GetLeapHand().Finger((int)riggedFinger.fingerType)*/);
+                        currHandsData.LHandData[(int)riggedFinger.fingerType] =
+ new fingerData(riggedFinger/*, currHands.LHand.GetLeapHand().Finger((int)riggedFinger.fingerType)*/);
 
                     }
                     currHandsData.LHandPinchvalue = currHands.Lhand_rigged.GetLeapHand().PinchStrength;
@@ -343,46 +317,47 @@ namespace IMRE.HandWaver
                 currHandsData.currTime = System.DateTime.Now;
             }
         }
-    }
-
-
-
-    [System.Serializable]
-    public class fingerData
-    {
-        public fingerData() { }
-
-        private Ray pointRay;
-        [XmlAttribute]
-        public Leap.Finger.FingerType type;
-        public Vector3 tipPosition;
-        public Vector3 pointDirection;
-        //public bool isExtended; bRoke for now
-
-        public fingerData(RiggedFinger riggedFinger/*, Finger finger*/)
-        {
-            this.type = riggedFinger.fingerType;
-            this.pointRay = riggedFinger.GetRay();
-            this.tipPosition = pointRay.origin;
-            this.pointDirection = pointRay.direction;
-            //this.isExtended = finger.IsExtended;
+#endif
         }
 
 
-        /// <summary>
-        /// 	TYPE_UNKNOWN = -1,
-        /// 	TYPE_THUMB = 0,
-        ///		TYPE_INDEX = 1,
-        ///		TYPE_MIDDLE = 2,
-        ///		TYPE_RING = 3,
-        ///		TYPE_PINKY = 4
-        ///		As discribed from comments in "<see cref="Leap.Finger.Type"/>" comments.
-        /// </summary>
-        public int fingerIdx
+
+        [System.Serializable]
+        public class fingerData
         {
-            get
+            public fingerData()
             {
-                return (int)type;
+            }
+
+            private Ray pointRay;
+            [XmlAttribute] public Leap.Finger.FingerType type;
+            public Vector3 tipPosition;
+
+            public Vector3 pointDirection;
+            //public bool isExtended; bRoke for now
+
+            public fingerData(RiggedFinger riggedFinger /*, Finger finger*/)
+            {
+                this.type = riggedFinger.fingerType;
+                this.pointRay = riggedFinger.GetRay();
+                this.tipPosition = pointRay.origin;
+                this.pointDirection = pointRay.direction;
+                //this.isExtended = finger.IsExtended;
+            }
+
+
+            /// <summary>
+            /// 	TYPE_UNKNOWN = -1,
+            /// 	TYPE_THUMB = 0,
+            ///		TYPE_INDEX = 1,
+            ///		TYPE_MIDDLE = 2,
+            ///		TYPE_RING = 3,
+            ///		TYPE_PINKY = 4
+            ///		As discribed from comments in "<see cref="Leap.Finger.Type"/>" comments.
+            /// </summary>
+            public int fingerIdx
+            {
+                get { return (int) type; }
             }
         }
     }
