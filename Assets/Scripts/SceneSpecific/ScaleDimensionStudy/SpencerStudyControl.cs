@@ -34,15 +34,6 @@ namespace IMRE.HandWaver.ScaleStudy
         public bool animateUp = true;
 	
         /// <summary>
-        /// The point on the slider that determines the position of the slider.
-        /// </summary>
-        private InteractablePoint sliderPoint;
-        /// <summary>
-        /// The bounds of the slider.
-        /// </summary>
-        private DependentLineSegment slider;
-
-        /// <summary>
         /// A boolean for debugging that allows the fold to be manipulated in the editor at play
         /// </summary>
         public bool foldOverride;
@@ -57,29 +48,7 @@ namespace IMRE.HandWaver.ScaleStudy
 
         public GameObject pointPrefab;
 	
-	//In editor controls for 4D Projection Perspective.  No rotation projects along the W axis.
-	[Range(0, 360)]
-	public float xy;
-	
-	[Range(0, 360)]
-	public float xz;
-	
-	[Range(0, 360)]
-	public float xw;
-	
-	[Range(0, 360)]
-	public float yz;
-	
-	[Range(0, 360)]
-	public float yw;
-	
-	[Range(0, 360)]
-	public float zw;
-	
-	
-
-
-        private void Start()
+	private void Start()
         {
 	        ins = this;
             if (allFigures == null)
@@ -98,10 +67,7 @@ namespace IMRE.HandWaver.ScaleStudy
         {
 	        setActiveObjects();
 	        
-		//Update Rotation Values for Higher Dim Figures
-		_dPerspectives.ForEach(fig => fig.SetRotation(xy,xz,xw,yz,yw,zw));
-	
-            float percent;
+			float percent;
             //if the override bool is set, use in editor override value
 
 

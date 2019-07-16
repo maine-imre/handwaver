@@ -50,6 +50,13 @@ namespace IMRE.EmbodiedUserInput
 			get => _sliderValue;
 			set
 			{
+				if (value > 1f)
+				{
+					value = 1f;
+				}else if (value < 0f)
+				{
+					value = 0f;
+				}
 				point.position = value * (tSliderEndB - tSliderEndA) + tSliderEndA;
 				_sliderValue = value;
 			}
@@ -58,6 +65,7 @@ namespace IMRE.EmbodiedUserInput
 
 		void Start()
 		{
+			SliderValue = 0f;
 			//make our instance of line renderer equal to the component line renderer on the same Unity
 			//game object as the script
 			tSlider = gameObject.AddComponent<LineRenderer>();

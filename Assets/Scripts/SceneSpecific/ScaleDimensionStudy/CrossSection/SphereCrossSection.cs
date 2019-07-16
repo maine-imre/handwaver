@@ -139,7 +139,7 @@ namespace IMRE.HandWaver.ScaleStudy
             vertices[vertices.Length - 1] = Vector3.up * -radius;
             #endregion
 
-            #region Normales		
+            #region Normals		
             Vector3[] normales = new Vector3[vertices.Length];
             for (int n = 0; n < vertices.Length; n++)
                 normales[n] = vertices[n].normalized;
