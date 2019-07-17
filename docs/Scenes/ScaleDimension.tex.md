@@ -150,9 +150,21 @@ else if (math.abs(height) > radius)
 
 ### Intersection of a plane and a torus
 
+``` c#
+
+```
+
 ### Intersection of a hyperplane and a hypersphere
 
+``` c#
+
+```
+
 ### Intersection of a hyperplane and a three-torus
+
+``` c#
+
+```
 
 
 ## Nets
