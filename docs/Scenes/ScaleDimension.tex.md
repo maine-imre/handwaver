@@ -118,6 +118,36 @@ Debug.Log("Height is out of range of object.");
 
 Consider a sphere $S$ with radius $r$ centered at the origin. Let $\rho$ be the distance between the center of the sphere and the plane $P$ formed by intersecting the sphere with a plane. In the event that the intersection only hits the top or bottom edge of the sphere, the resulting cross-section will simply be a point at the top or bottom of the sphere. 
 
+```c#
+//if cross section only hits the edge of the circle
+if (math.abs(height) == radius)
+{
+    //if top of sphere, create point at intersection
+    if (height == radius)
+    {
+        Vector3 segmentEndPoint0 = Vector3.up * radius;
+    }
+
+    //if bottom of circle, create point at intersection
+    else if (height == -radius)
+    {
+        Vector3 segmentEndPoint0 = Vector3.down * radius;
+    }
+
+}
+//cross section is a circle
+else if (math.abs(height) < radius)
+{
+    //horizontal distance from center of circle to point on line segment
+    renderCircle(Mathf.Sqrt(Mathf.Pow(radius,2) - Mathf.Pow(height, 2)), height*Vector3.up);
+}
+//height for cross section is outside of circle 
+else if (math.abs(height) > radius)
+{
+    Debug.Log("Height is out of range of object.");
+}
+```
+
 ### Intersection of a plane and a torus
 
 ### Intersection of a hyperplane and a hypersphere
