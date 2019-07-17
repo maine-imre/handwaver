@@ -120,7 +120,7 @@ Consider a sphere $S$ with radius $R$ centered at the origin. Let $\rho$ be the 
 If the intersection occurs at a height less than the radius of the sphere, the cross-section will be a circlular plane. Let this circle's radius be $r$. Using the Pythagorean Theorem, the value of $r$ can be calculated with 
 $$(\plusminus \sqrt{R^2 - \rho^2},0,\rho)$$ 
 
-So the circle has a known radius $r$ at a height $\rho$ from the center of the sphere. If the plane intersecting the sphere is outside the radius of the circle, there is no resulting cross-section. 
+So the circle has a known radius $r$ at a height magnitude $\rho$ from the center of the sphere. If the plane intersecting the sphere is outside the radius of the circle, there is no resulting cross-section. 
 
 ```c#
 //if cross section only hits the edge of the circle
@@ -215,7 +215,7 @@ The net of a cube is a collection of six congruent squares,
 One square remains fixed in the center.  
 Four squares share an edge with the center square, and rotate around that edge by $\frac{\pi}{4}$ to fold up the net.
 On one of those four squares, a final square is constructed sharing the opposite edge.
-The final square is rotated by $\frac{\pi}{4}$ with respect to the adjacent square, or $\frac{\pi}{2}$ with respect to it's origional orientation, around it's shared edge, and becomes the "top" face square.
+The final square is rotated by $\frac{\pi}{4}$ with respect to the adjacent square, or $\frac{\pi}{2}$ with respect to it's origional orientation, around it's shared edge, and becomes the "top" square face.
 ```c        
 float degreeFolded = percentFolded * 90f + 180f;
 //14 points on cube net
@@ -256,7 +256,7 @@ float degreeFolded)
 
 ### Regular Tetrahedron
 
-The net of a tetrahedron is a collection of four congruant equilaterial triangles.  One traingle remains fixed in the center, and each of the remaining triangles shares an edge with the center triangle.  All triangles except the center rotate around their shared edge by $\arccos\frac{1}{3}$.
+The net of a tetrahedron is a collection of four congruant equilaterial triangles.  One traingle remains fixed in the center, and each of the remaining triangles shares their bottom edge with the center triangle.  All triangles except the center rotate up around their shared edge by $\arccos\frac{1}{3}$.
 
 ```c#
 //scale the degree folded by the diehdral angle of the folded tetrahedron of ~70.52
