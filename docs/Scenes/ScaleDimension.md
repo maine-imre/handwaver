@@ -19,6 +19,39 @@ By the pythagorean theorem we have <p align="center"><img src="/docs/Scenes/tex/
 
 [//]: # add a diagram to illustrate
 
+```c#
+//if cross section only hits the edge of the circle
+if (math.abs(height) == radius)
+{
+    //if top of circle, create point at intersection
+    if (height == radius)
+    {
+        segmentEndPoint0 = Vector3.up * radius;
+    }
+
+    //if bottom of circle, create point at intersection
+    else if (height == -radius)
+    {
+        segmentEndPoint0 = Vector3.down * radius;
+    }
+}
+//cross section is a line that hits two points on the circle (height smaller than radius of circle)
+else if (math.abs(height) < radius)
+{
+    //horizontal distance from center of circle to point on line segment
+    float segmentLength = Mathf.Sqrt(1f - Mathf.Pow(height, 2));
+
+    //calculations for endpoint coordinates of line segment
+    segmentEndPoint0 = (Vector3.up * height) + (Vector3.left * segmentLength);
+    segmentEndPoint1 = (Vector3.up * height) + (Vector3.right * segmentLength);
+}
+//height for cross section is outside of circle 
+else if (math.abs(height) > radius)
+{
+    Debug.Log("Height is out of range of object.");
+}
+```
+
 ### Intersection of a plane and an annulus
 
 Consider an annulus <img src="/docs/Scenes/tex/53d147e7f3fe6e47ee05b88b166bd3f6.svg?invert_in_darkmode&sanitize=true" align=middle width=12.32879834999999pt height=22.465723500000017pt/> with inner radius <img src="/docs/Scenes/tex/89f2e0d2d24bcf44db73aab8fc03252c.svg?invert_in_darkmode&sanitize=true" align=middle width=7.87295519999999pt height=14.15524440000002pt/> and outer radius <img src="/docs/Scenes/tex/1e438235ef9ec72fc51ac5025516017c.svg?invert_in_darkmode&sanitize=true" align=middle width=12.60847334999999pt height=22.465723500000017pt/>. Let <img src="/docs/Scenes/tex/6dec54c48a0438a5fcde6053bdb9d712.svg?invert_in_darkmode&sanitize=true" align=middle width=8.49888434999999pt height=14.15524440000002pt/> be the distance between the center of the annulus and the line segment <img src="/docs/Scenes/tex/ddcb483302ed36a59286424aa5e0be17.svg?invert_in_darkmode&sanitize=true" align=middle width=11.18724254999999pt height=22.465723500000017pt/> formed by the intersection of a plane with the annulus. This intersection will yield either a point, a line segment, or two line segments. 
