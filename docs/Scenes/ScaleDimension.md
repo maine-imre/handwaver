@@ -50,7 +50,39 @@ Consider a sphere <img src="/docs/Scenes/tex/e257acd1ccbe7fcb654708f1a866bfe9.sv
 
 ### Triangle
 
+The net of a triangle is three line segments.  In it's unfolded state, the line segments are colinear. To fold the triangle net, hold one segment fixed and rotate the other two segments (clockwise and counterclockwise, respectively) by <img src="/docs/Scenes/tex/90ba29b77077491b320c9da207fbeceb.svg?invert_in_darkmode&sanitize=true" align=middle width=18.485245349999996pt height=27.77565449999998pt/> radians.
+
+```C#
+            //angle of rotation in degrees (Unity.Mathematics works in degrees)
+            float t = percentFolded * 120f;
+            //matrix of vertices 
+            Vector3[] result = new Vector3[4];
+            //initial vertices
+            result[2] = Vector3.zero;
+            result[1] = Vector3.right;
+            //rotate vertex by t or -t around (0, 1, 0) with appropriate vector manipulation to connect triangle
+            result[0] = result[1] + Quaternion.AngleAxis(t, Vector3.up) * Vector3.right;
+result[3] = result[2] + Quaternion.AngleAxis(-t, Vector3.up) * Vector3.left;
+```
+
 ### Square
+
+The net of a square is four line segments.  In it's unfolded state, the line segments are colinear.  To fold the square net, hold one of the middle segments fixed.  Rotate the two adjacent segments around their respective endpoints by <img src="/docs/Scenes/tex/4eb105c60f67ef131323b9c0969450b8.svg?invert_in_darkmode&sanitize=true" align=middle width=8.099960549999997pt height=22.853275500000024pt/> radians. The remaining segment is adjacent to one of the rotated segments (segment A).  Rotate that segment by ninety degrees around it's joining endpoint, with respect to the direction of segment A.  In effect, this vertex is rotated by <img src="/docs/Scenes/tex/06798cd2c8dafc8ea4b2e78028094f67.svg?invert_in_darkmode&sanitize=true" align=middle width=8.099960549999997pt height=22.853275500000024pt/> with respect to it's origional direction.
+
+```c#
+            //angle of rotation in degrees (Unity.Mathematics works in degrees)
+            float angle = percentFolded * 90f;
+            //matrix of vertices
+            Vector3[] result = new Vector3[5];
+            //initial vertices that don't need to move/are pivot points
+            result[2] = Vector3.zero;
+            result[1] = Vector3.right;
+            //rotate vertice by t or -t around (0, 1, 0) 
+            result[0] = result[1] + Quaternion.AngleAxis(angle, Vector3.up) * Vector3.right;
+            result[3] = result[2] + Quaternion.AngleAxis(-angle, Vector3.up) * Vector3.left;
+            //rotate vertice by -2t around (0, 1, 0)
+            result[4] = result[3] + Quaternion.AngleAxis(-2 * angle, Vector3.up) * Vector3.left;
+```
 
 ### Cube
 
