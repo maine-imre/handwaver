@@ -47,7 +47,7 @@ namespace IMRE.Math
         {
             math.normalize(basis0);
             math.normalize(basis1);
-            //TODO write project function for float4
+
             float4 remainder = v - (project(v, basis0) + project(v, basis1));
             theta *= Mathf.Deg2Rad;
 
