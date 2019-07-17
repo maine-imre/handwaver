@@ -1,5 +1,5 @@
-### Touch Slider
-## Description
+## Touch Slider
+### Description
 * The touch slider is the first thing to be made with the new system.
 * It is made through constructing a Unity object that has a line renderer component and a sphere.
 * The functionality is intended to be that a person performs a gesture, and then that gesture takes position data from the hands and compares it to the position of the line. When Someone is close enough to the line, the position of the sphere is updated to the closest point on the line to the designated body part.
