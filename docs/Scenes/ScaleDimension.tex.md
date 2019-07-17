@@ -169,4 +169,4 @@ private static Vector3 triVert(Vector3 nSegmentA, Vector3 nSegmentB, Vector3 opp
 ## Orthogrpahic Projection from 4D to 3D
 
 
-##References
+## References
