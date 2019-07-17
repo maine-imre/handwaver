@@ -117,7 +117,8 @@ Debug.Log("Height is out of range of object.");
 ### Intersection of a plane and a sphere
 
 Consider a sphere $S$ with radius $R$ centered at the origin. Let $\rho$ be the distance between the center of the sphere and the plane $P$ formed by intersecting the sphere with a plane. In the event that the intersection only hits the top or bottom edge of the sphere, the resulting cross-section will simply be a point at that edge of the sphere. 
-If the intersection occurs at a height less than the radius of the sphere, the cross-section will be a circlular plane. Let this circle's radius be $r$. Using the Pythagorean Theorem, the value of $r$ can be calculated with $$(\plusminus \sqrt{R^2 - \rho^2},0,\rho)$$ 
+If the intersection occurs at a height less than the radius of the sphere, the cross-section will be a circlular plane. Let this circle's radius be $r$. Using the Pythagorean Theorem, the value of $r$ can be calculated with 
+$$(\plusminus \sqrt{R^2 - \rho^2},0,\rho)$$ 
 So the circle has a known radius $r$ at a height $\rho$ from the center of the sphere. If the plane intersecting the sphere is outside the radius of the circle, there is no resulting cross-section. 
 
 ```c#
