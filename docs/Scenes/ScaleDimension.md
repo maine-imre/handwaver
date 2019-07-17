@@ -127,13 +127,11 @@ if (math.abs(height) == radius)
     {
         Vector3 segmentEndPoint0 = Vector3.up * radius;
     }
-
     //if bottom of circle, create point at intersection
     else if (height == -radius)
     {
         Vector3 segmentEndPoint0 = Vector3.down * radius;
     }
-
 }
 //cross section is a circle
 else if (math.abs(height) < radius)
@@ -283,7 +281,9 @@ private static Vector3 triVert(Vector3 nSegmentA, Vector3 nSegmentB, Vector3 opp
 }
 ```
 
-### 5-cell
+### Regular 5-cell
+
+The net of a five cell is composed of four congruant regular tetrahedrons.  One tetrahedron is fixed at the center.  Each of the remaining tetrahedrons is constructed to share a face of the center tetrahedron.  To fold the 5-cell net, each of the tetrahedrons (except the center) is rotated on a plane perpendicular to the shared face such that the direction from the center of the shared face to the opposite vertex and the direction from the center of the shared face to the end-state of the folded apex form a basis for the plane of rotation.
 
 ```c#
 //8 points on unfolded fivecell
@@ -298,7 +298,6 @@ result[3] = new float4(1f / math.sqrt(10f), -math.sqrt(3f / 2f), 0f, 0f);
 
 //find position of convergent point for other tetrahedrons in the net.
 float4 apex = new float4(-2 * math.sqrt(2f / 5f), 0f, 0f, 0f);
-//TODO consider making the initial projection onto n
 
 //apex of tetrahedron for each additional tetrahedron(from fases of first) foldling by degree t
 float4 center1 = (result[0] + result[1] + result[2]) / 3f;
@@ -318,7 +317,11 @@ float4 dir4 = center4 - result[0];
 result[7] = center4 + Math.Operations.rotate(dir4, dir4, apex - center4, degreeFolded);
 ```
 
-### 8-cell
+### Regular 8-cell
+
+The net of an 8-cell is a collection of eight congruant cubes.  One cube remains fixed in the center, and six additional cubes are constructed sharing the faces of the center cube. The remaining cube is constructed to share the face opposite of the shared face for one of these six cubes.
+
+To fold the net of an 8-cell, the center cube is fixed.  The six adjacent cubes are rotated around a plane that is orthagonal to the face of the cube and colinear with the w-axis (if the net is constructed such that w is fixed for all verticies of the cubes), by <img src="/docs/Scenes/tex/4eb105c60f67ef131323b9c0969450b8.svg?invert_in_darkmode&sanitize=true" align=middle width=8.099960549999997pt height=22.853275500000024pt/>.  The remaining cube is rotated with respect to its adjacent cube by <img src="/docs/Scenes/tex/4eb105c60f67ef131323b9c0969450b8.svg?invert_in_darkmode&sanitize=true" align=middle width=8.099960549999997pt height=22.853275500000024pt/> or by <img src="/docs/Scenes/tex/06798cd2c8dafc8ea4b2e78028094f67.svg?invert_in_darkmode&sanitize=true" align=middle width=8.099960549999997pt height=22.853275500000024pt/> with respect to it's origional position, with the rotation centerd on its shared face (note that this face is also moving during the rotaiton).
 
 
 ```c#
