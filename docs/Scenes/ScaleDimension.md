@@ -48,59 +48,119 @@ Consider a sphere <img src="/docs/Scenes/tex/e257acd1ccbe7fcb654708f1a866bfe9.sv
 
 ## Nets
 
-### Triangle
+### Equaliaterial Triangle
 
-The net of a triangle is three line segments.  In it's unfolded state, the line segments are colinear. To fold the triangle net, hold one segment fixed and rotate the other two segments (clockwise and counterclockwise, respectively) by <img src="/docs/Scenes/tex/90ba29b77077491b320c9da207fbeceb.svg?invert_in_darkmode&sanitize=true" align=middle width=18.485245349999996pt height=27.77565449999998pt/> radians.
+The net of a triangle is three congruant line segments.  In it's unfolded state, the line segments are colinear. To fold the triangle net, hold one segment fixed and rotate the other two segments (clockwise and counterclockwise, respectively) by <img src="/docs/Scenes/tex/90ba29b77077491b320c9da207fbeceb.svg?invert_in_darkmode&sanitize=true" align=middle width=18.485245349999996pt height=27.77565449999998pt/> radians.
 
 ```C#
-            //angle of rotation in degrees (Unity.Mathematics works in degrees)
-            float t = percentFolded * 120f;
-            //matrix of vertices 
-            Vector3[] result = new Vector3[4];
-            //initial vertices
-            result[2] = Vector3.zero;
-            result[1] = Vector3.right;
-            //rotate vertex by t or -t around (0, 1, 0) with appropriate vector manipulation to connect triangle
-            result[0] = result[1] + Quaternion.AngleAxis(t, Vector3.up) * Vector3.right;
+//angle of rotation in degrees (Unity.Mathematics works in degrees)
+float t = percentFolded * 120f;
+//matrix of vertices 
+Vector3[] result = new Vector3[4];
+//initial vertices
+result[2] = Vector3.zero;
+result[1] = Vector3.right;
+//rotate vertex by t or -t around (0, 1, 0) with appropriate vector manipulation to connect triangle
+result[0] = result[1] + Quaternion.AngleAxis(t, Vector3.up) * Vector3.right;
 result[3] = result[2] + Quaternion.AngleAxis(-t, Vector3.up) * Vector3.left;
 ```
 
 ### Square
 
-The net of a square is four line segments.  In it's unfolded state, the line segments are colinear.  To fold the square net, hold one of the middle segments fixed.  Rotate the two adjacent segments around their respective endpoints by <img src="/docs/Scenes/tex/4eb105c60f67ef131323b9c0969450b8.svg?invert_in_darkmode&sanitize=true" align=middle width=8.099960549999997pt height=22.853275500000024pt/> radians. The remaining segment is adjacent to one of the rotated segments (segment A).  Rotate that segment by ninety degrees around it's joining endpoint, with respect to the direction of segment A.  In effect, this vertex is rotated by <img src="/docs/Scenes/tex/06798cd2c8dafc8ea4b2e78028094f67.svg?invert_in_darkmode&sanitize=true" align=middle width=8.099960549999997pt height=22.853275500000024pt/> with respect to it's origional direction.
+The net of a square is four congruant line segments.  In it's unfolded state, the line segments are colinear.  To fold the square net, hold one of the middle segments fixed.  Rotate the two adjacent segments around their respective endpoints by <img src="/docs/Scenes/tex/4eb105c60f67ef131323b9c0969450b8.svg?invert_in_darkmode&sanitize=true" align=middle width=8.099960549999997pt height=22.853275500000024pt/> radians. The remaining segment is adjacent to one of the rotated segments (segment A).  Rotate that segment by ninety degrees around it's joining endpoint, with respect to the direction of segment A.  In effect, this vertex is rotated by <img src="/docs/Scenes/tex/06798cd2c8dafc8ea4b2e78028094f67.svg?invert_in_darkmode&sanitize=true" align=middle width=8.099960549999997pt height=22.853275500000024pt/> with respect to it's origional direction.
 
 ```c#
-            //angle of rotation in degrees (Unity.Mathematics works in degrees)
-            float angle = percentFolded * 90f;
-            //matrix of vertices
-            Vector3[] result = new Vector3[5];
-            //initial vertices that don't need to move/are pivot points
-            result[2] = Vector3.zero;
-            result[1] = Vector3.right;
-            //rotate vertice by t or -t around (0, 1, 0) 
-            result[0] = result[1] + Quaternion.AngleAxis(angle, Vector3.up) * Vector3.right;
-            result[3] = result[2] + Quaternion.AngleAxis(-angle, Vector3.up) * Vector3.left;
-            //rotate vertice by -2t around (0, 1, 0)
-            result[4] = result[3] + Quaternion.AngleAxis(-2 * angle, Vector3.up) * Vector3.left;
+//angle of rotation in degrees (Unity.Mathematics works in degrees)
+float angle = percentFolded * 90f;
+//matrix of vertices
+Vector3[] result = new Vector3[5];
+//initial vertices that don't need to move/are pivot points
+result[2] = Vector3.zero;
+result[1] = Vector3.right;
+//rotate vertice by t or -t around (0, 1, 0) 
+result[0] = result[1] + Quaternion.AngleAxis(angle, Vector3.up) * Vector3.right;
+result[3] = result[2] + Quaternion.AngleAxis(-angle, Vector3.up) * Vector3.left;
+//rotate vertice by -2t around (0, 1, 0)
+result[4] = result[3] + Quaternion.AngleAxis(-2 * angle, Vector3.up) * Vector3.left;
 ```
 
 ### Cube
 
-### Tetrahedron
+The net of a cube is a collection of six congruant squares,
+One square remains fixed in the center.  
+Four squares share an edge with the center square, and rotate around that edge by <img src="/docs/Scenes/tex/4eb105c60f67ef131323b9c0969450b8.svg?invert_in_darkmode&sanitize=true" align=middle width=8.099960549999997pt height=22.853275500000024pt/> to fold up the net.
+On one of those four squares, a final square is constructed sharing the opposite edge.
+The final square is rotated by <img src="/docs/Scenes/tex/4eb105c60f67ef131323b9c0969450b8.svg?invert_in_darkmode&sanitize=true" align=middle width=8.099960549999997pt height=22.853275500000024pt/> with respect to the adjacent square, or <img src="/docs/Scenes/tex/06798cd2c8dafc8ea4b2e78028094f67.svg?invert_in_darkmode&sanitize=true" align=middle width=8.099960549999997pt height=22.853275500000024pt/> with respect to it's origional orientation, around it's shared edge.
+```c        
+float degreeFolded = percentFolded * 90f + 180f;
+//14 points on cube net
+Vector3[] result = new Vector3[14];
 
-### 5-cell
+//4 vertices for base of cube
+result[0] = .5f * (Vector3.forward + Vector3.right);
+result[1] = .5f * (Vector3.forward + Vector3.left);
+result[2] = .5f * (Vector3.back + Vector3.left);
+result[3] = .5f * (Vector3.back + Vector3.right);
 
-### 8-cell
+//use squareVert() to fold outer squares up relative to base square 
+result[4] = squareVert(result[3], result[0], result[1], degreeFolded);
+result[5] = squareVert(result[3], result[0], result[2], degreeFolded);
 
-## Net Folding
+result[6] = squareVert(result[0], result[1], result[3], degreeFolded);
+result[7] = squareVert(result[0], result[1], result[2], degreeFolded);
 
-### Triangle
 
-### Square
+result[8] = squareVert(result[2], result[3], result[1], degreeFolded);
+result[9] = squareVert(result[2], result[3], result[0], degreeFolded);
 
-### Cube
+result[10] = squareVert(result[1], result[2], result[0], degreeFolded);
+result[11] = squareVert(result[1], result[2], result[3], degreeFolded);
 
-### Tetrahedron
+result[12] = squareVert(result[10], result[11], result[1], degreeFolded);
+result[13] = squareVert(result[10], result[11], result[2], degreeFolded);
+```
+
+```c#
+private static Vector3 squareVert(Vector3 nSegmentA, Vector3 nSegmentB, Vector3 oppositePoint,
+float degreeFolded)
+{
+    return Quaternion.AngleAxis(degreeFolded, (nSegmentA - nSegmentB).normalized) *
+       (oppositePoint - (nSegmentA + nSegmentB) / 2f) + (nSegmentA + nSegmentB) / 2f;
+}
+```
+
+### Regular Tetrahedron
+
+The net of a tetrahedron is a collection of four congruant equilaterial triangles.  One traingle remains fixed in the center, and each of the remaining triangles shares an edge with the center triangle.  All triangles except the center rotate around their shared edge by <img src="/docs/Scenes/tex/d198a46d6c0cc6400dd3ea7ebfe0c709.svg?invert_in_darkmode&sanitize=true" align=middle width=55.237455899999986pt height=27.77565449999998pt/>.
+
+```c#
+//scale the degree folded by the diehdral angle of the folded tetrahedron of ~70.52
+float degreefolded = percentfolded * COMPLETEDFOLD + 180f;
+//6 vertices on tetrahedron
+Vector3[] result = new Vector3[6];
+
+//inner 3 vertices
+result[0] = Vector3.right * (Mathf.Sqrt(3f) / 2f) + Vector3.forward * .5f;
+result[1] = Vector3.right * (Mathf.Sqrt(3f) / 2f) + Vector3.back * .5f;
+result[2] = Vector3.zero;
+
+//vertex between 0 and 1
+//use trivert() to fold outer vertices up relative to inner vertices
+result[3] = triVert(result[0], result[1], result[2], degreefolded);
+
+//vertex between 1 and 2
+result[4] = triVert(result[1], result[2], result[0], degreefolded);
+//vertex between 0 and 2
+result[5] = triVert(result[2], result[0], result[1], degreefolded);
+```
+
+```c#
+private static Vector3 triVert(Vector3 nSegmentA, Vector3 nSegmentB, Vector3 oppositePoint, float degreeFolded)
+{
+    return Quaternion.AngleAxis(degreeFolded, (nSegmentA - nSegmentB).normalized) *
+           (oppositePoint - (nSegmentA + nSegmentB) / 2f) + (nSegmentA + nSegmentB) / 2f;
+}
+```
 
 ### 5-cell
 
