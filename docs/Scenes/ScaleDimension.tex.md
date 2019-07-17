@@ -68,6 +68,52 @@ Now let $2w$ be the distance between the two inner points. The location for both
 
 Thus, the inner points lie at $(\plusminus \sqrt{r^2 - \rho^2},0,\rho)$. In the event that $\rho$ > $R$, there is no intersection between the annulus and plane.
 
+```c#
+//cross-section only hits edge of annulus
+if (math.abs(height) == outerRadius)
+{
+//if top edge, create point at intersection
+if (height == outerRadius)
+{
+    segmentAEndPoint0 = Vector3.up * outerRadius;
+}
+//if bottom edge, create point at intersection
+else
+{
+    segmentAEndPoint0 = Vector3.down * outerRadius;
+}
+}
+//cross section is a line segment in between the inner circle and outer circle
+else if (math.abs(height) < outerRadius && math.abs(height) >= innerRadius)
+{
+//horizontal distance from center to point on outer edge of annulus
+x1 = (Mathf.Sqrt(Mathf.Pow(outerRadius, 2) - Mathf.Pow(height, 2)));
+
+//calculations for coordinates of line segment endpoints
+segmentAEndPoint0 = (Vector3.up * height) + (Vector3.right * (x1));
+segmentAEndPoint1 = (Vector3.up * height) + (Vector3.left * (x1));
+}
+//cross section height is less than the inner radius, resulting in two line segments
+else if (math.abs(height) < innerRadius)
+{
+//horizontal distance from center to point on outer edge (x1) and inner edge (x2) of annulus
+x1 = (Mathf.Sqrt(Mathf.Pow(outerRadius, 2) - Mathf.Pow(height, 2)));
+x2 = (Mathf.Sqrt(Mathf.Pow(innerRadius, 2) - Mathf.Pow(height, 2)));
+
+//calculations for inner and outer endpoints for each line segment
+segmentAEndPoint0 = (Vector3.up * height) + (Vector3.left * (x1));
+segmentAEndPoint1 = (Vector3.up * height) + (Vector3.left * (x2));
+
+segmentBEndPoint0 = (Vector3.up * height) + (Vector3.right * (x2));
+segmentBEndPoint1 = (Vector3.up * height) + (Vector3.right * (x1));
+}
+//cross section height is out of range of annulus
+else if (math.abs(height) > outerRadius)
+{
+Debug.Log("Height is out of range of object.");
+}
+```
+
 ### Intersection of a plane and a sphere
 
 Consider a sphere $S$ with radius $r$ centered at the origin. Let $\rho$ be the distance between the center of the sphere and the plane $P$ formed by intersecting the sphere with a plane. In the event that the intersection only hits the top or bottom edge of the sphere, the resulting cross-section will simply be a point at the top or bottom of the sphere. 
