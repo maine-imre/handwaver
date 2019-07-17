@@ -19,6 +19,39 @@ By the pythagorean theorem we have $$(x)^2 + \rho^2 = R^2$$
 
 [//]: # add a diagram to illustrate
 
+```c#
+//if cross section only hits the edge of the circle
+if (math.abs(height) == radius)
+{
+    //if top of circle, create point at intersection
+    if (height == radius)
+    {
+        segmentEndPoint0 = Vector3.up * radius;
+    }
+
+    //if bottom of circle, create point at intersection
+    else if (height == -radius)
+    {
+        segmentEndPoint0 = Vector3.down * radius;
+    }
+}
+//cross section is a line that hits two points on the circle (height smaller than radius of circle)
+else if (math.abs(height) < radius)
+{
+    //horizontal distance from center of circle to point on line segment
+    float segmentLength = Mathf.Sqrt(1f - Mathf.Pow(height, 2));
+
+    //calculations for endpoint coordinates of line segment
+    segmentEndPoint0 = (Vector3.up * height) + (Vector3.left * segmentLength);
+    segmentEndPoint1 = (Vector3.up * height) + (Vector3.right * segmentLength);
+}
+//height for cross section is outside of circle 
+else if (math.abs(height) > radius)
+{
+    Debug.Log("Height is out of range of object.");
+}
+```
+
 ### Intersection of a plane and an annulus
 
 Consider an annulus $A$ with inner radius $r$ and outer radius $R$. Let $\rho$ be the distance between the center of the annulus and the line segment $L$ formed by the intersection of a plane with the annulus. This intersection will yield either a point, a line segment, or two line segments. 
