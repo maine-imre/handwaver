@@ -68,6 +68,52 @@ Now let <img src="/docs/Scenes/tex/b5f9a72535216bfe7d51d9273a867952.svg?invert_i
 
 Thus, the inner points lie at <img src="/docs/Scenes/tex/8f6882a9b1fb02eae1a4bf03b3dc4bfb.svg?invert_in_darkmode&sanitize=true" align=middle width=111.76558964999998pt height=30.173662199999985pt/>. In the event that <img src="/docs/Scenes/tex/6dec54c48a0438a5fcde6053bdb9d712.svg?invert_in_darkmode&sanitize=true" align=middle width=8.49888434999999pt height=14.15524440000002pt/> > <img src="/docs/Scenes/tex/1e438235ef9ec72fc51ac5025516017c.svg?invert_in_darkmode&sanitize=true" align=middle width=12.60847334999999pt height=22.465723500000017pt/>, there is no intersection between the annulus and plane.
 
+```c#
+//cross-section only hits edge of annulus
+if (math.abs(height) == outerRadius)
+{
+//if top edge, create point at intersection
+if (height == outerRadius)
+{
+    segmentAEndPoint0 = Vector3.up * outerRadius;
+}
+//if bottom edge, create point at intersection
+else
+{
+    segmentAEndPoint0 = Vector3.down * outerRadius;
+}
+}
+//cross section is a line segment in between the inner circle and outer circle
+else if (math.abs(height) < outerRadius && math.abs(height) >= innerRadius)
+{
+//horizontal distance from center to point on outer edge of annulus
+x1 = (Mathf.Sqrt(Mathf.Pow(outerRadius, 2) - Mathf.Pow(height, 2)));
+
+//calculations for coordinates of line segment endpoints
+segmentAEndPoint0 = (Vector3.up * height) + (Vector3.right * (x1));
+segmentAEndPoint1 = (Vector3.up * height) + (Vector3.left * (x1));
+}
+//cross section height is less than the inner radius, resulting in two line segments
+else if (math.abs(height) < innerRadius)
+{
+//horizontal distance from center to point on outer edge (x1) and inner edge (x2) of annulus
+x1 = (Mathf.Sqrt(Mathf.Pow(outerRadius, 2) - Mathf.Pow(height, 2)));
+x2 = (Mathf.Sqrt(Mathf.Pow(innerRadius, 2) - Mathf.Pow(height, 2)));
+
+//calculations for inner and outer endpoints for each line segment
+segmentAEndPoint0 = (Vector3.up * height) + (Vector3.left * (x1));
+segmentAEndPoint1 = (Vector3.up * height) + (Vector3.left * (x2));
+
+segmentBEndPoint0 = (Vector3.up * height) + (Vector3.right * (x2));
+segmentBEndPoint1 = (Vector3.up * height) + (Vector3.right * (x1));
+}
+//cross section height is out of range of annulus
+else if (math.abs(height) > outerRadius)
+{
+Debug.Log("Height is out of range of object.");
+}
+```
+
 ### Intersection of a plane and a sphere
 
 Consider a sphere <img src="/docs/Scenes/tex/e257acd1ccbe7fcb654708f1a866bfe9.svg?invert_in_darkmode&sanitize=true" align=middle width=11.027402099999989pt height=22.465723500000017pt/> with radius <img src="/docs/Scenes/tex/89f2e0d2d24bcf44db73aab8fc03252c.svg?invert_in_darkmode&sanitize=true" align=middle width=7.87295519999999pt height=14.15524440000002pt/> centered at the origin. Let <img src="/docs/Scenes/tex/6dec54c48a0438a5fcde6053bdb9d712.svg?invert_in_darkmode&sanitize=true" align=middle width=8.49888434999999pt height=14.15524440000002pt/> be the distance between the center of the sphere and the plane <img src="/docs/Scenes/tex/df5a289587a2f0247a5b97c1e8ac58ca.svg?invert_in_darkmode&sanitize=true" align=middle width=12.83677559999999pt height=22.465723500000017pt/> formed by intersecting the sphere with a plane. In the event that the intersection only hits the top or bottom edge of the sphere, the resulting cross-section will simply be a point at the top or bottom of the sphere. 
