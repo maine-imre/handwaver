@@ -102,7 +102,7 @@ x2 = (Mathf.Sqrt(Mathf.Pow(innerRadius, 2) - Mathf.Pow(height, 2)));
 
 //calculations for inner and outer endpoints for each line segment
 segmentAEndPoint0 = (Vector3.up * height) + (Vector3.left * (x1));
-segmentAEndPoint1 = (Vector3.up * height) + (Vector3.left * (x2));.tex.md
+segmentAEndPoint1 = (Vector3.up * height) + (Vector3.left * (x2));
 
 segmentBEndPoint0 = (Vector3.up * height) + (Vector3.right * (x2));
 segmentBEndPoint1 = (Vector3.up * height) + (Vector3.right * (x1));
@@ -116,7 +116,9 @@ Debug.Log("Height is out of range of object.");
 
 ### Intersection of a plane and a sphere
 
-Consider a sphere <img src="/docs/Scenes/tex/e257acd1ccbe7fcb654708f1a866bfe9.svg?invert_in_darkmode&sanitize=true" align=middle width=11.027402099999989pt height=22.465723500000017pt/> with radius <img src="/docs/Scenes/tex/89f2e0d2d24bcf44db73aab8fc03252c.svg?invert_in_darkmode&sanitize=true" align=middle width=7.87295519999999pt height=14.15524440000002pt/> centered at the origin. Let <img src="/docs/Scenes/tex/6dec54c48a0438a5fcde6053bdb9d712.svg?invert_in_darkmode&sanitize=true" align=middle width=8.49888434999999pt height=14.15524440000002pt/> be the distance between the center of the sphere and the plane <img src="/docs/Scenes/tex/df5a289587a2f0247a5b97c1e8ac58ca.svg?invert_in_darkmode&sanitize=true" align=middle width=12.83677559999999pt height=22.465723500000017pt/> formed by intersecting the sphere with a plane. In the event that the intersection only hits the top or bottom edge of the sphere, the resulting cross-section will simply be a point at the top or bottom of the sphere. 
+Consider a sphere <img src="/docs/Scenes/tex/e257acd1ccbe7fcb654708f1a866bfe9.svg?invert_in_darkmode&sanitize=true" align=middle width=11.027402099999989pt height=22.465723500000017pt/> with radius <img src="/docs/Scenes/tex/1e438235ef9ec72fc51ac5025516017c.svg?invert_in_darkmode&sanitize=true" align=middle width=12.60847334999999pt height=22.465723500000017pt/> centered at the origin. Let <img src="/docs/Scenes/tex/6dec54c48a0438a5fcde6053bdb9d712.svg?invert_in_darkmode&sanitize=true" align=middle width=8.49888434999999pt height=14.15524440000002pt/> be the distance between the center of the sphere and the plane <img src="/docs/Scenes/tex/df5a289587a2f0247a5b97c1e8ac58ca.svg?invert_in_darkmode&sanitize=true" align=middle width=12.83677559999999pt height=22.465723500000017pt/> formed by intersecting the sphere with a plane. In the event that the intersection only hits the top or bottom edge of the sphere, the resulting cross-section will simply be a point at that edge of the sphere. 
+If the intersection occurs at a height less than the radius of the sphere, the cross-section will be a circlular plane. Let this circle's radius be <img src="/docs/Scenes/tex/89f2e0d2d24bcf44db73aab8fc03252c.svg?invert_in_darkmode&sanitize=true" align=middle width=7.87295519999999pt height=14.15524440000002pt/>. Using the Pythagorean Theorem, the value of <img src="/docs/Scenes/tex/89f2e0d2d24bcf44db73aab8fc03252c.svg?invert_in_darkmode&sanitize=true" align=middle width=7.87295519999999pt height=14.15524440000002pt/> can be calculated with <p align="center"><img src="/docs/Scenes/tex/bab904fcd080433ae760f7fa8768d11a.svg?invert_in_darkmode&sanitize=true" align=middle width=116.50112429999999pt height=19.998924pt/></p> 
+So the circle has a known radius <img src="/docs/Scenes/tex/89f2e0d2d24bcf44db73aab8fc03252c.svg?invert_in_darkmode&sanitize=true" align=middle width=7.87295519999999pt height=14.15524440000002pt/> at a height <img src="/docs/Scenes/tex/6dec54c48a0438a5fcde6053bdb9d712.svg?invert_in_darkmode&sanitize=true" align=middle width=8.49888434999999pt height=14.15524440000002pt/> from the center of the sphere. If the plane intersecting the sphere is outside the radius of the circle, there is no resulting cross-section. 
 
 ```c#
 //if cross section only hits the edge of the circle
@@ -127,11 +129,13 @@ if (math.abs(height) == radius)
     {
         Vector3 segmentEndPoint0 = Vector3.up * radius;
     }
+
     //if bottom of circle, create point at intersection
     else if (height == -radius)
     {
         Vector3 segmentEndPoint0 = Vector3.down * radius;
     }
+
 }
 //cross section is a circle
 else if (math.abs(height) < radius)
@@ -281,9 +285,7 @@ private static Vector3 triVert(Vector3 nSegmentA, Vector3 nSegmentB, Vector3 opp
 }
 ```
 
-### Regular 5-cell
-
-The net of a five cell is composed of four congruant regular tetrahedrons.  One tetrahedron is fixed at the center.  Each of the remaining tetrahedrons is constructed to share a face of the center tetrahedron.  To fold the 5-cell net, each of the tetrahedrons (except the center) is rotated on a plane perpendicular to the shared face such that the direction from the center of the shared face to the opposite vertex and the direction from the center of the shared face to the end-state of the folded apex form a basis for the plane of rotation.
+### 5-cell
 
 ```c#
 //8 points on unfolded fivecell
@@ -298,6 +300,7 @@ result[3] = new float4(1f / math.sqrt(10f), -math.sqrt(3f / 2f), 0f, 0f);
 
 //find position of convergent point for other tetrahedrons in the net.
 float4 apex = new float4(-2 * math.sqrt(2f / 5f), 0f, 0f, 0f);
+//TODO consider making the initial projection onto n
 
 //apex of tetrahedron for each additional tetrahedron(from fases of first) foldling by degree t
 float4 center1 = (result[0] + result[1] + result[2]) / 3f;
@@ -317,11 +320,7 @@ float4 dir4 = center4 - result[0];
 result[7] = center4 + Math.Operations.rotate(dir4, dir4, apex - center4, degreeFolded);
 ```
 
-### Regular 8-cell
-
-The net of an 8-cell is a collection of eight congruant cubes.  One cube remains fixed in the center, and six additional cubes are constructed sharing the faces of the center cube. The remaining cube is constructed to share the face opposite of the shared face for one of these six cubes.
-
-To fold the net of an 8-cell, the center cube is fixed.  The six adjacent cubes are rotated around a plane that is orthagonal to the face of the cube and colinear with the w-axis (if the net is constructed such that w is fixed for all verticies of the cubes), by <img src="/docs/Scenes/tex/4eb105c60f67ef131323b9c0969450b8.svg?invert_in_darkmode&sanitize=true" align=middle width=8.099960549999997pt height=22.853275500000024pt/>.  The remaining cube is rotated with respect to its adjacent cube by <img src="/docs/Scenes/tex/4eb105c60f67ef131323b9c0969450b8.svg?invert_in_darkmode&sanitize=true" align=middle width=8.099960549999997pt height=22.853275500000024pt/> or by <img src="/docs/Scenes/tex/06798cd2c8dafc8ea4b2e78028094f67.svg?invert_in_darkmode&sanitize=true" align=middle width=8.099960549999997pt height=22.853275500000024pt/> with respect to it's origional position, with the rotation centerd on its shared face (note that this face is also moving during the rotaiton).
+### 8-cell
 
 
 ```c#
@@ -380,287 +379,7 @@ result[34] = result[14] + Math.Operations.rotate(tmp,tmp, wForward, degreeFolded
 result[35] = result[15] + Math.Operations.rotate(tmp,tmp, wForward, degreeFolded);
 ```
 
-## float3 and float4 Mathematical Library Extensions
-
-### Angle between vectors
-```c#
-public static float Angle(float3 from, float3 to)
-{
-    return math.acos(math.dot(math.normalize(from), math.normalize(to)));
-}
-```
-
-### Magnitude
-Take the 2-norm of the vector v.
-
-```c#
-public static float magnitude(float3 v)
-{
-    return math.sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
-}
-
-public static float magnitude(float4 v)
-{
-    return math.sqrt(v.x * v.x + v.y * v.y + v.z * v.z + v.w * v.w);
-}
-```
-
-### Tripple Cross Product
-
-```c#
-public static float4 cross(float4 v, float4 w, float4 u)
-{
-    //from https://github.com/hollasch/ray4/blob/master/wire4/v4cross.c
-
-    float A, B, C, D, E, F; /* Intermediate Values */
-
-    A = (v.x * w.y) - (v.y * w.x);
-    B = (v.x * w.z) - (v.z * w.x);
-    C = (v.x * w.w) - (v.w * w.x);
-    D = (v.y * w.z) - (v.z * w.y);
-    E = (v.y * w.w) - (v.w * w.y);
-    F = (v.z * w.w) - (v.w * w.z);
-
-    return new float4(
-        u[1] * F - u[2] * E + u[3] * D,
-        -(u[0] * F) + u[2] * C - u[3] * B,
-        u[0] * E - u[1] * C + u[3] * A,
-        -(u[0] * D) + u[1] * B - u[2] * A
-    );
-}
-```
-
-### Rotaitons for Float4s
-
-```c#
-public static float4 rotate(float4 v, float4 basis0, float4 basis1, float theta)
-{
-    math.normalize(basis0);
-    math.normalize(basis1);
-
-float4 remainder = v - (project(v, basis0) + project(v, basis1));
-    theta *= Mathf.Deg2Rad;
-
-    float4 v2 = v;
-    math.normalize(v2);
-
-    if (math.dot(basis0, basis1) != 0f)
-    {
-        Debug.LogWarning("Basis is not orthagonal");
-    }
-    else if (math.dot(v2, basis0) != 1f || Vector4.Dot(v, basis1) != 0f)
-    {
-        Debug.LogWarning("Original Vector does not lie in the same plane as the first basis vector.");
-    }
-
-    return Vector4.Dot(v, basis0) * (math.cos(theta) * basis0 + basis1 * math.sin(theta)) +
-           math.dot(v, basis1) * (math.cos(theta) * basis1 + math.sin(theta) * basis0) + remainder;
-}
-```
-
-### Projection for Float4
-```c#
-public static float4 project(float4 v, float4 dir)
-{
-    return math.dot(v, dir) * math.normalize(dir);
-}
-```
-
-## Determinants and Determinant Coeficients
-```c#
-private static float[] Determinant2X2(float4 v0, float4 v1)
-{
-    //find largest determinant of 2x2
-    float[] determinants = new float[6];
-    determinants[0] = v0.x * v1.y - v0.y * v1.x;
-    determinants[1] = v0.x * v1.z - v0.z * v1.x;
-    determinants[2] = v0.x * v1.w - v0.w * v1.x;
-    determinants[3] = v0.y * v1.z - v0.z * v1.y;
-    determinants[4] = v0.y * v1.w - v0.w * v1.y;
-    determinants[5] = v0.z * v1.w - v0.w * v1.z;
-    return determinants;
-}
-```      
-
-```c#
-/// <summary>
-/// Assume the following structure, return the determinant coeficients for v0, v1, v2, v3
-/// v0 v1 v2 v3
-/// x00 x01 x02 x03
-/// x10 x11 x12 x13
-/// x20 x21 x22 x23
-/// </summary>
-/// <param name="matrix"></param>
-/// <returns></returns>
-private static float4 determinantCoef(float4x3 matrix)
-{
-    float4 bottomRow = matrix.c2;
-    float[] determinants = Determinant2X2(matrix.c0, matrix.c1);
-    return new float4(
-        bottomRow.y*determinants[5]-bottomRow.z*determinants[4]+bottomRow.w*determinants[3],
-        -(bottomRow.x*determinants[5]-bottomRow.z*determinants[2]+bottomRow.w*determinants[3]),
-        bottomRow.x*determinants[4]-bottomRow.y*determinants[2]+bottomRow.w*determinants[0],
-        -(bottomRow.x*determinants[3]-bottomRow.y*determinants[1]+bottomRow.z*determinants[0])
-     );
-}
-```
-
-### Basis for Hyperplane Orthangoal to a Vector
-
-```c#
-public static float4x3 basisSystem(this float4 v)
-{
-    math.normalize(v);
-    //use method described here:  https://www.geometrictools.com/Documentation/OrthonormalSets.pdf
-    if (v.x == 0 && v.y == 0 && v.z == 0 && v.w ==0)
-    {
-        Debug.LogError("Can't form basis from zero vector");
-    }
-    //the vector is the first basis vector for the 4-space, orthag to the hyperplane
-    math.normalize(v);
-    //establish a second basis vector
-    float4 basis0;
-    if (v.x != 0 || v.y != 0)
-    {
-        basis0 = new Vector4(v.y, v.x, 0, 0);
-    }
-    else
-    {
-        basis0 = new Vector4(0 ,0,v.w,v.z);
-    }
-
-    math.normalize(basis0);
-
-    float[] determinants = Determinant2X2(v, basis0);
-
-    //index of largest determinant
-    int idx = 0;
-    for (int i = 0; i < 6; i++)
-    {
-        if (determinants[i] > determinants[idx])
-        {
-            idx = i;
-        }
-    }
-
-    if (determinants[idx] == 0)
-    {
-        Debug.LogError("No non-zero determinant");
-    }
-    //choose bottom row of det matrix to generate next basis vector
-    float4 bottomRow;
-    if (idx == 0 || idx == 1 || idx == 3)
-    {
-        bottomRow = new float4(0,0,0,1);
-    }else if (idx == 2 || idx == 4)
-    {
-        bottomRow = new float4(0,0,1,0);
-    }
-    else
-    {
-        //idx = 5
-        bottomRow = new float4(0,1,0,0);
-    }
-
-    float4 basis1 = determinantCoef(new float4x3(v, basis0, bottomRow));
-    math.normalize(basis1);
-
-    float4 basis2 = determinantCoef(new float4x3(v, basis0, basis1));
-    math.normalize(basis2);
-
-    //returns the basis that spans the hyperplane orthogonal to v
-    float4x3 basis = new float4x3(basis0,basis1,basis2);
-    //check that v is orthogonal.
-    v.projectDownDimension(basis, ProjectionMethod.parallel,null, null,null );
-    if (v.x != 0 || v.y != 0 || v.z != 0)
-    {
-        Debug.LogError("Basis is not orthogonal to v");
-    }
-    return basis;
-}
-```
-
-## Projections from 4D to 3D
-
-
-```c#
-public static float3 projectDownDimension(this float4 v, float4x3 inputBasis, ProjectionMethod method,
-float? Vangle, float4? eyePosition, float? viewingRadius)
-{
-float T, S;
-float4x4 basis;
-float4 tmp;
-//set defaults
-Vangle = Vangle ?? 0f;
-eyePosition = eyePosition ?? float4.zero;
-viewingRadius = viewingRadius ?? 1f;
-
-switch (method)
-{
-    case ProjectionMethod.orthographic:
-        math.normalize(inputBasis.c0);
-        math.normalize(inputBasis.c1);
-        math.normalize(inputBasis.c2);
-
-        return new float3(math.dot(v, inputBasis.c0), math.dot(v, inputBasis.c1), math.dot(v, inputBasis.c2));
-    case ProjectionMethod.projective:
-        //using http://hollasch.github.io/ray4/Four-Space_Visualization_of_4D_Objects.html#chapter3
-        T = 1f / (math.tan(Vangle.Value / 2f));
-        tmp = v - eyePosition.Value;
-        basis = calc4Matrix(eyePosition.Value, inputBasis);
-        S = T / math.dot(v, basis.c3);
-
-        return new float3(S * math.dot(tmp, basis.c0), S * math.dot(tmp, basis.c1),
-            S * math.dot(tmp, basis.c2));
-
-    case ProjectionMethod.parallel:
-        //using http://hollasch.github.io/ray4/Four-Space_Visualization_of_4D_Objects.html#chapter3
-        S = 1f / viewingRadius.Value;
-        tmp = v - eyePosition.Value;
-        basis = calc4Matrix(eyePosition.Value, inputBasis);
-
-        return new float3(S * math.dot(tmp, basis.c0), S * math.dot(tmp, basis.c1),
-            S * math.dot(tmp, basis.c2));
-
-    default: return new float3(0f, 0f, 0f);
-}
-}
-
-public static float4x4 calc4Matrix(float4 from, float4x3 basis){
-//using http://hollasch.github.io/ray4/Four-Space_Visualization_of_4D_Objects.html#chapter3
-
-float4 Up = basis.c1;
-float4 Over = basis.c2;
-//Get the normalized Wd column vector.
-float4 Wd = basis.c0;
-float norm = Math.Operations.magnitude(Wd);
-if(norm ==0f)
-  Debug.LogError("To point and from point are the same");
-math.normalize(Wd);
-
-//calculated the normalized Wa column vector.
-float4 Wa =  Math.Operations.cross(Up, Over, Wd);
-norm = Math.Operations.magnitude(Wa);
-if (norm == 0f)
-  Debug.LogError("Invalid Up Vector");
-math.normalize(Wa);
-
-//Calculate the normalized Wb column vector
-float4 Wb = Math.Operations.cross(Over, Wd, Wa);
-norm = Math.Operations.magnitude(Wb);
-if (norm == 0f)
-  Debug.LogError("Invalid Over Vector");
-math.normalize(Wb);
-
-float4 Wc = Math.Operations.cross(Wd, Wa, Wb);
-math.normalize(Wc); //theoretically redundant.
-
-return new float4x4(Wa, Wb, Wc, Wd);		
-}
-```
-
-## Projections from 3D to 2D
-To project from 2D to 3D, we have used a virtual camera and virtual canvas within Unity.  This allows for both orthographic and projective perspectives, with a fixed origion and perspective without manipulation of mesh properites.
+## Orthogrpahic Projection from 4D to 3D
 
 
 ## References
