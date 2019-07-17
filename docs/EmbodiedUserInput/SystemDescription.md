@@ -8,7 +8,7 @@ To track the progress on this issue [go here](https://github.com/maine-imre/hand
 * [Layers](https://github.com/maine-imre/handwaver/blob/feature/gesture-abstraction/docs/EmbodiedUserInput/SystemDescription.md#layers)
 * [Input](https://github.com/maine-imre/handwaver/blob/feature/gesture-abstraction/docs/EmbodiedUserInput/SystemDescription.md#input)
 * [Hardware](https://github.com/maine-imre/handwaver/blob/feature/gesture-abstraction/docs/EmbodiedUserInput/SystemDescription.md#hardware)
-* [Entity Component System Implementation](https://github.com/maine-imre/handwaver/blob/feature/gesture-abstraction/docs/EmbodiedUserInput/SystemDescription.md#entity-component-system-implementation)
+* [Classifying the Data](https://github.com/maine-imre/handwaver/blob/feature/gesture-abstraction/docs/EmbodiedUserInput/SystemDescription.md#classifying-the-data)
 * [Definitions for Gestures](https://github.com/maine-imre/handwaver/blob/feature/gesture-abstraction/docs/EmbodiedUserInput/SystemDescription.md#definitions-for-gestures)
      * [Grasp](https://github.com/maine-imre/handwaver/blob/feature/gesture-abstraction/docs/EmbodiedUserInput/SystemDescription.md#grasp)
 
@@ -46,8 +46,8 @@ There are 3 layers to the gesture system.
 
 ---
 
-## Entity Component System Implementation  
-*
+## Classifying the Data
+* A new type of classifier is assigned based on what gesture is to be detected. Then the data is used to determine if any of the gestures are active. Then the booleans which keep track of what stage in the functionality of a gesture the user is in are updated based on the previous state of the gesture(s).
 
 ---
 
@@ -59,5 +59,3 @@ This is a state of the hand where both the thumb and index finger have their fin
 * **Visual Feedback**  
  Performing the "grasp" (pinch) gesture when there is no function attached to the context of where the grasp is happening will turn the index finger and thumb green. This green will be less visible than if the grasp was operating on an object or had some sort of function attached to its current context
 ---
----
-updated 6/25/2019
