@@ -175,7 +175,7 @@ else if (math.abs(height) > radius)
 
 ### Equaliaterial Triangle
 
-The net of a triangle is three congruant line segments.  In it's unfolded state, the line segments are colinear. To fold the triangle net, hold one segment fixed and rotate the other two segments (clockwise and counterclockwise, respectively) by $\frac{2}{3} \pi$ radians.
+The net of a triangle is three congruant line segments.  In it's unfolded state, the line segments are colinear. To fold the triangle net, hold the middle segment fixed and rotate the other two segments (clockwise and counterclockwise, respectively) by $\frac{2}{3} \pi$ radians.
 
 ```C#
 //angle of rotation in degrees (Unity.Mathematics works in degrees)
@@ -211,11 +211,11 @@ result[4] = result[3] + Quaternion.AngleAxis(-2 * angle, Vector3.up) * Vector3.l
 
 ### Cube
 
-The net of a cube is a collection of six congruant squares,
+The net of a cube is a collection of six congruent squares,
 One square remains fixed in the center.  
 Four squares share an edge with the center square, and rotate around that edge by $\frac{\pi}{4}$ to fold up the net.
 On one of those four squares, a final square is constructed sharing the opposite edge.
-The final square is rotated by $\frac{\pi}{4}$ with respect to the adjacent square, or $\frac{\pi}{2}$ with respect to it's origional orientation, around it's shared edge.
+The final square is rotated by $\frac{\pi}{4}$ with respect to the adjacent square, or $\frac{\pi}{2}$ with respect to it's origional orientation, around it's shared edge, and becomes the "top" face square.
 ```c        
 float degreeFolded = percentFolded * 90f + 180f;
 //14 points on cube net
