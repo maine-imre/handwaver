@@ -69,9 +69,7 @@ namespace IMRE.HandWaver.HigherDimensions
             result[6] = (down + left + back) / 2f;
             result[7] = (down + right + back) / 2f;
 
-            //above up face.
-            IMRE.Math.Operations.rotate(up, up, wForward, degreeFolded);
-            
+            //above up face.            
             result[8] = result[0] + Math.Operations.rotate(up, up, wForward, degreeFolded);
             result[9] = result[1] + Math.Operations.rotate(up,up, wForward, degreeFolded);
             result[10] = result[2] + Math.Operations.rotate(up, up, wForward, degreeFolded);
