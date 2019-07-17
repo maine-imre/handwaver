@@ -66,7 +66,7 @@ Let $2x$ be the distance between the two outer points, one for each line segment
 Thus, the points lie at $(\plusminus \sqrt{R^2 - \rho^2},0,\rho)$. 
 Now let $2w$ be the distance between the two inner points. The location for both of those points can be found using the same calculation as the outer points, but using $r$ and $w$ instead of $R$ and $x$. Thus, the equation is $$(w)^2 + \rho^2 = r^2$$
 
-Thus, the inner points lie at $(\plusminus \sqrt{r^2 - \rho^2},0,\rho)$. In the event that $\rho$ > $R$, there is no intersection between the annulus and plane.
+Thus, the inner points lie at $(\plusminus \sqrt{r^2 - \rho^2},0,\rho)$. In the case that $\rho$ > $R$, there is no intersection between the annulus and plane.
 
 ```c#
 //cross-section only hits edge of annulus
