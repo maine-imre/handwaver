@@ -437,8 +437,8 @@ public static float4 rotate(float4 v, float4 basis0, float4 basis1, float theta)
 {
     math.normalize(basis0);
     math.normalize(basis1);
-    //TODO write project function for float4
-    float4 remainder = v - (project(v, basis0) + project(v, basis1));
+
+float4 remainder = v - (project(v, basis0) + project(v, basis1));
     theta *= Mathf.Deg2Rad;
 
     float4 v2 = v;
