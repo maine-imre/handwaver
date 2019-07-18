@@ -105,12 +105,11 @@ namespace IMRE.HandWaver.HigherDimensions
             result[30] = result[7] + Math.Operations.rotate(back,back, wForward, degreeFolded);
             result[31] = result[6] + Math.Operations.rotate(back,back, wForward, degreeFolded);
 
-            float4 tmp = Math.Operations.rotate(down,down, wForward, degreeFolded);
             //down of double down.
-            result[32] = result[12] + Math.Operations.rotate(tmp,tmp, wForward, degreeFolded);
-            result[33] = result[13] + Math.Operations.rotate(tmp,tmp, wForward, degreeFolded);
-            result[34] = result[14] + Math.Operations.rotate(tmp,tmp, wForward, degreeFolded);
-            result[35] = result[15] + Math.Operations.rotate(tmp,tmp, wForward, degreeFolded);
+            result[32] = result[12] + Math.Operations.rotate(down,down, wForward, 2f*degreeFolded);
+            result[33] = result[13] + Math.Operations.rotate(down,down, wForward, 2f*degreeFolded);
+            result[34] = result[14] + Math.Operations.rotate(down,down, wForward, 2f*degreeFolded);
+            result[35] = result[15] + Math.Operations.rotate(down,down, wForward, 2f*degreeFolded);
 
             return result;
         }
