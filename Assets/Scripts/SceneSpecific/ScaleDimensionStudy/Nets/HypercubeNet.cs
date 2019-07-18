@@ -177,8 +177,8 @@ namespace IMRE.HandWaver.HigherDimensions
                     cubeFaces(0, 1, 2, 3, 4, 5, 6, 7).CopyTo(result, 0);  //core
                     //other cubes
                     cubeFacesNoTop(0, 1, 2, 3,8, 9, 10, 11).CopyTo(result, 24 + 20 * 1); //up
-                    cubeFacesNoTop(8, 9, 10, 11, 32, 33, 34, 35).CopyTo(result, 24 + 20 * 2); //down
-                    cubeFacesNoTop(4, 5, 6, 7, 12, 13, 14, 15).CopyTo(result, 24 + 20 * 3); //down of down
+                    cubeFacesNoTop(0, 1, 2, 3, 12, 13, 14, 15).CopyTo(result, 24 + 20 * 2); //down
+                    cubeFacesNoTop(32, 33, 34, 35, 12, 13, 14, 15).CopyTo(result, 24 + 20 * 3); //down of down
                     cubeFacesNoTop(0, 3, 7, 4, 16, 17, 18, 19).CopyTo(result, 24 + 20 * 4);//right
                     cubeFacesNoTop(1, 2, 6, 5, 20, 21, 22, 23).CopyTo(result, 24 + 20 * 5); //left
                     cubeFacesNoTop(0, 1, 5, 4, 24, 25, 26, 27).CopyTo(result, 24 + 20 * 6); //forward
