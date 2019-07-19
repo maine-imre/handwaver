@@ -123,13 +123,13 @@ namespace IMRE.HandWaver.HigherDimensions
 			{
 				int numFaces = faces.Length / 4;
 				_uvs = new Vector2[6 * numFaces];
-
+				
+				Vector2 uv0 = new Vector2(0, 0);
+				Vector2 uv1 = new Vector2(1, 0);
+				Vector2 uv2 = new Vector2(0.5f, 1);
+				
 				for (int i = 0; i < numFaces; i++)
 				{
-					Vector2 uv0 = new Vector2(0, 0);
-					Vector2 uv1 = new Vector2(1, 0);
-					Vector2 uv2 = new Vector2(0.5f, 1);
-
 					_uvs[6 * i] = uv0;
 					_uvs[6 * i + 1] = uv1;
 					_uvs[6 * i + 2] = uv2;

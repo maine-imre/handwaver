@@ -23,8 +23,13 @@ namespace IMRE.HandWaver.HigherDimensions
 			set
 			{
 				_percentFolded = value;
-				originalVertices = vertices(value * 60f);
+				originalVertices = vertices(value * math.acos(1f/4f)*Mathf.Rad2Deg);
 			}
+		}
+		
+		private void Awake()
+		{
+			PercentFolded = 0f;
 		}
 
 		public float slider
@@ -60,7 +65,7 @@ namespace IMRE.HandWaver.HigherDimensions
 
 			float4 center2 = (result[0] + result[2] + result[3]) / 3f;
 			float4 dir2 = center2 - result[1];
-			result[5] = center2 + Math.Operations.rotate(dir2,apex - center2, degreeFolded);
+			result[5] = center2 + Math.Operations.rotate(dir2, apex - center2, degreeFolded);
 
 			float4 center3 = (result[0] + result[1] + result[3]) / 3f;
 			float4 dir3 = center3 - result[2];
@@ -73,39 +78,50 @@ namespace IMRE.HandWaver.HigherDimensions
 			return result;
 		}
 
-		/// <summary>
-		/// matrix for vertices to make faces of tetrahedrons for fivecell
-		/// </summary>
-		internal int[] faces =
+		private Vector2[] _uvs;
+		public override Vector2[] uvs
 		{
-			//core tetrahedron
-			0, 1, 2,
-			0, 1, 3,
-			2, 0, 3,
-			1, 2, 3,
+			get
+			{
+				_uvs = new Vector2[originalVertices.Length];
+				for (int i = 0; i < originalVertices.Length; i++)
+				{
+					//temp uv map.
+					_uvs[i] = Vector2.right * ((float)i / originalVertices.Length);
+				}
 
-			//tetrahedron 1
-			0, 1, 4,
-			2, 0, 4,
-			1, 2, 4,
+				return _uvs;
+			}
+		}
 
-			//tetrahedron 2
-			0, 1, 5,
-			2, 0, 5,
-			1, 2, 5,
+		public override int[] triangles =>
+			new int[]
+			{
+				//core tetrahedron
+				0, 1, 2,
+				0, 1, 3,
+				2, 0, 3,
+				1, 2, 3,
 
-			//tetrahedron 3
-			0, 1, 6,
-			2, 0, 6,
-			1, 2, 6,
+				//tetrahedron 1
+				0, 1, 4,
+				2, 0, 4,
+				1, 2, 4,
 
-			//tetrahedron 4
-			1, 2, 7,
-			2, 3, 7,
-			3, 1, 7
-		};
+				//tetrahedron 2
+				0, 1, 5,
+				2, 0, 5,
+				1, 2, 5,
 
-		public override Vector2[] uvs { get; }
-		public override int[] triangles { get; }
+				//tetrahedron 3
+				0, 1, 6,
+				2, 0, 6,
+				1, 2, 6,
+
+				//tetrahedron 4
+				1, 2, 7,
+				2, 3, 7,
+				3, 1, 7
+			};
 	}
 }

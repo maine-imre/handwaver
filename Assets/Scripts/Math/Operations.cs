@@ -63,7 +63,7 @@ namespace IMRE.Math
 
             if (math.dot(basis0, basis1) != 0f)
             {
-                Debug.LogWarning("Basis is not orthagonal");
+                Debug.LogWarning("Basis is not orthagonal : " + (math.dot(basis0,basis1)));
             }
             else if (math.dot(v2, basis0) != 1f || Vector4.Dot(v, basis1) != 0f)
             {
