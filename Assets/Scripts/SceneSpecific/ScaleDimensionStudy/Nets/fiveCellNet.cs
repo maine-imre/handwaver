@@ -23,7 +23,8 @@ namespace IMRE.HandWaver.HigherDimensions
 			set
 			{
 				_percentFolded = value;
-				originalVertices = vertices(value * math.acos(1f/4f)*Mathf.Rad2Deg);
+				//TODO find this value.
+				originalVertices = vertices(value * (180f- math.acos(1f/4f)*Mathf.Rad2Deg));
 			}
 		}
 		
@@ -104,21 +105,25 @@ namespace IMRE.HandWaver.HigherDimensions
 				1, 2, 3,
 
 				//tetrahedron 1
+				//0, 1, 2
 				0, 1, 4,
 				2, 0, 4,
 				1, 2, 4,
 
 				//tetrahedron 2
-				0, 1, 5,
+				//2, 0, 3
+				0, 3, 5,
 				2, 0, 5,
-				1, 2, 5,
+				3, 2, 5,
 
 				//tetrahedron 3
+				//0, 1 ,3
 				0, 1, 6,
-				2, 0, 6,
-				1, 2, 6,
+				3, 0, 6,
+				1, 3, 6,
 
 				//tetrahedron 4
+				//1, 2, 3
 				1, 2, 7,
 				2, 3, 7,
 				3, 1, 7
