@@ -42,6 +42,13 @@ namespace IMRE.Math
                 -(u[0] * D) + u[1] * B - u[2] * A
             );
         }
+
+        public static float4 rotate(float4 from, float4 to, float theta)
+        {
+            float4 basis0 = math.normalize(from);
+            float4 basis1 = math.normalize(to - project(to,from));
+            return rotate(from, basis0, basis1, theta);
+        }
         
         public static float4 rotate(float4 v, float4 basis0, float4 basis1, float theta)
         {

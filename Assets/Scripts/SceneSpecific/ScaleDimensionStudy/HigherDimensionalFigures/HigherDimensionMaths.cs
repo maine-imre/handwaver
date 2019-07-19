@@ -95,6 +95,8 @@ namespace IMRE.HandWaver.HigherDimensions
 
                     return new float3(S * math.dot(tmp, basis.c0), S * math.dot(tmp, basis.c1),
                         S * math.dot(tmp, basis.c2));
+                case ProjectionMethod.stereographic:
+                    
 
                 default: return new float3(0f, 0f, 0f);
             }

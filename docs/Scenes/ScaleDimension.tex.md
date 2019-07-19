@@ -307,26 +307,28 @@ float4 apex = new float4(-2 * math.sqrt(2f / 5f), 0f, 0f, 0f);
 //apex of tetrahedron for each additional tetrahedron(from fases of first) foldling by degree t
 float4 center1 = (result[0] + result[1] + result[2]) / 3f;
 float4 dir1 = center1 - result[3];
-result[4] = center1 + Math.Operations.rotate(dir1, dir1, apex - center1, degreeFolded);
+result[4] = center1 + Math.Operations.rotate(dir1, apex - center1, degreeFolded);
 
 float4 center2 = (result[0] + result[2] + result[3]) / 3f;
 float4 dir2 = center2 - result[1];
-result[5] = center2 + Math.Operations.rotate(dir2, dir2, apex - center2, degreeFolded);
+result[5] = center2 + Math.Operations.rotate(dir2,apex - center2, degreeFolded);
 
 float4 center3 = (result[0] + result[1] + result[3]) / 3f;
 float4 dir3 = center3 - result[2];
-result[6] = center3 + Math.Operations.rotate(dir3, dir3, apex - center3, degreeFolded);
+result[6] = center3 + Math.Operations.rotate(dir3, apex - center3, degreeFolded);
 
 float4 center4 = (result[1] + result[2] + result[3]) / 3f;
 float4 dir4 = center4 - result[0];
-result[7] = center4 + Math.Operations.rotate(dir4, dir4, apex - center4, degreeFolded);
+result[7] = center4 + Math.Operations.rotate(dir4, apex - center4, degreeFolded);
 ```
 
 ### 8-cell
 
 
 ```c#
- //core cube (does not fold)
+float4[] result = new float4[4 * 9];
+
+//core cube (does not fold)
 result[0] = (up + right + forward)/2f;
 result[1] = (up + left + forward)/2f;
 result[2] = (up + left + back)/2f;
@@ -337,48 +339,47 @@ result[5] = (down + left + forward) / 2f;
 result[6] = (down + left + back) / 2f;
 result[7] = (down + right + back) / 2f;
 
-//above up face.
-result[8] = result[0] + Math.Operations.rotate(up, up, wForward, degreeFolded);
-result[9] = result[1] + Math.Operations.rotate(up,up, wForward, degreeFolded);
-result[10] = result[2] + Math.Operations.rotate(up, up, wForward, degreeFolded);
-result[11] = result[3] + Math.Operations.rotate(up, up, wForward, degreeFolded);
+//above up face.            
+result[8] = result[0] + Math.Operations.rotate(up, wForward, degreeFolded);
+result[9] = result[1] + Math.Operations.rotate(up, wForward, degreeFolded);
+result[10] = result[2] + Math.Operations.rotate(up, wForward, degreeFolded);
+result[11] = result[3] + Math.Operations.rotate(up, wForward, degreeFolded);
 
 //below down face
-result[12] = result[4] + Math.Operations.rotate(down,down, wForward, degreeFolded);
-result[13] = result[5] + Math.Operations.rotate(down,down, wForward, degreeFolded);
-result[14] = result[6] + Math.Operations.rotate(down,down, wForward, degreeFolded);
-result[15] = result[7] + Math.Operations.rotate(down,down, wForward, degreeFolded);
+result[12] = result[4] + Math.Operations.rotate(down, wForward, degreeFolded);
+result[13] = result[5] + Math.Operations.rotate(down, wForward, degreeFolded);
+result[14] = result[6] + Math.Operations.rotate(down, wForward, degreeFolded);
+result[15] = result[7] + Math.Operations.rotate(down, wForward, degreeFolded);
 
 //right of right face;
-result[16] = result[0] + Math.Operations.rotate(right, right, wForward, degreeFolded);
-result[17] = result[3] + Math.Operations.rotate(right, right, wForward, degreeFolded);
-result[18] = result[7] + Math.Operations.rotate(right, right, wForward, degreeFolded);
-result[19] = result[4] + Math.Operations.rotate(right, right, wForward, degreeFolded);
+result[16] = result[0] + Math.Operations.rotate(right, wForward, degreeFolded);
+result[17] = result[3] + Math.Operations.rotate(right, wForward, degreeFolded);
+result[18] = result[7] + Math.Operations.rotate(right, wForward, degreeFolded);
+result[19] = result[4] + Math.Operations.rotate(right, wForward, degreeFolded);
 
 //left of left face
-result[20] = result[1] + Math.Operations.rotate(left,left, wForward, degreeFolded);
-result[21] = result[2] + Math.Operations.rotate(left, left,wForward, degreeFolded);
-result[22] = result[6] + Math.Operations.rotate(left, left,wForward, degreeFolded);
-result[23] = result[5] + Math.Operations.rotate(left, left,wForward, degreeFolded);
+result[20] = result[1] + Math.Operations.rotate(left, wForward, degreeFolded);
+result[21] = result[2] + Math.Operations.rotate(left,wForward, degreeFolded);
+result[22] = result[6] + Math.Operations.rotate(left,wForward, degreeFolded);
+result[23] = result[5] + Math.Operations.rotate(left,wForward, degreeFolded);
 
 //forward of forward face.
-result[24] = result[0] + Math.Operations.rotate(forward,forward, wForward, degreeFolded);
-result[25] = result[1] + Math.Operations.rotate(forward,forward, wForward, degreeFolded);
-result[26] = result[5] + Math.Operations.rotate(forward,forward, wForward, degreeFolded);
-result[27] = result[4] + Math.Operations.rotate(forward, forward,wForward, degreeFolded);
+result[24] = result[0] + Math.Operations.rotate(forward, wForward, degreeFolded);
+result[25] = result[1] + Math.Operations.rotate(forward, wForward, degreeFolded);
+result[26] = result[5] + Math.Operations.rotate(forward, wForward, degreeFolded);
+result[27] = result[4] + Math.Operations.rotate(forward,wForward, degreeFolded);
 
 //back of back face.
-result[28] = result[2] + Math.Operations.rotate(back,back, wForward, degreeFolded);
-result[29] = result[3] + Math.Operations.rotate(back,back, wForward, degreeFolded);
-result[30] = result[7] + Math.Operations.rotate(back,back, wForward, degreeFolded);
-result[31] = result[6] + Math.Operations.rotate(back,back, wForward, degreeFolded);
+result[28] = result[2] + Math.Operations.rotate(back, wForward, degreeFolded);
+result[29] = result[3] + Math.Operations.rotate(back, wForward, degreeFolded);
+result[30] = result[7] + Math.Operations.rotate(back, wForward, degreeFolded);
+result[31] = result[6] + Math.Operations.rotate(back, wForward, degreeFolded);
 
-float4 tmp = Math.Operations.rotate(down,down, wForward, degreeFolded);
 //down of double down.
-result[32] = result[12] + Math.Operations.rotate(tmp,tmp, wForward, degreeFolded);
-result[33] = result[13] + Math.Operations.rotate(tmp,tmp, wForward, degreeFolded);
-result[34] = result[14] + Math.Operations.rotate(tmp,tmp, wForward, degreeFolded);
-result[35] = result[15] + Math.Operations.rotate(tmp,tmp, wForward, degreeFolded);
+result[32] = result[12] + Math.Operations.rotate(down, wForward, 2f*degreeFolded);
+result[33] = result[13] + Math.Operations.rotate(down, wForward, 2f*degreeFolded);
+result[34] = result[14] + Math.Operations.rotate(down, wForward, 2f*degreeFolded);
+result[35] = result[15] + Math.Operations.rotate(down, wForward, 2f*degreeFolded);
 ```
 
 ## Orthogrpahic Projection from 4D to 3D
