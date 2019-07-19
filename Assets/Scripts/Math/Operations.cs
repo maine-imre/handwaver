@@ -7,7 +7,7 @@ namespace IMRE.Math
     public static class Operations
     {
 
-        public static float Angle(float3 from, float3 to)
+       public static float Angle(float3 from, float3 to)
         {
             return math.acos(math.dot(math.normalize(from), math.normalize(to)));
         }
@@ -76,9 +76,8 @@ namespace IMRE.Math
 
         public static float4 project(float4 v, float4 dir)
         {
-            //TODO verify this.
             return math.dot(v, dir) * math.normalize(dir);
-        }
+        } 
 
     }
 }
