@@ -9,8 +9,13 @@ namespace IMRE.Math
 
        public static float Angle(float3 from, float3 to)
         {
-            return math.acos(math.dot(math.normalize(from), math.normalize(to)));
+            return math.acos(math.dot(math.normalize(from), math.normalize(to)))*Mathf.Rad2Deg;
         }
+
+       public static float Angle(float4 from, float4 to)
+       {
+           return math.acos(math.dot(math.normalize(from), math.normalize(to)))*Mathf.Rad2Deg;
+       }
 
         public static float magnitude(float3 v)
         {

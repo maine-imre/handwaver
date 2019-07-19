@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Linq;
 using IMRE.HandWaver.ScaleStudy;
 using Unity.Mathematics;
+using Debug = System.Diagnostics.Debug;
 
 namespace IMRE.HandWaver.HigherDimensions
 {
@@ -22,9 +23,19 @@ namespace IMRE.HandWaver.HigherDimensions
 			get { return _percentFolded; }
 			set
 			{
+				
+				float4 a = (new float4(1f / math.sqrt(10f), 1f / math.sqrt(6f), 1f / math.sqrt(3f), 1f)) / 2f;
+				float4 b = (new float4(1f / math.sqrt(10f), 1f / math.sqrt(6f), 1f / math.sqrt(3f), -1f)) / 2f;
+				float4 c = (new float4(1f / math.sqrt(10f), 1f / math.sqrt(6f), -2f / math.sqrt(3f), 0f)) / 2f;
+				float4 d = new float4(1f / math.sqrt(10f), -math.sqrt(3f / 2f), 0f, 0f);
+				float4 center1 = (a+b+c) / 3f;
+				float4 dir1 = center1 - d;
+				float4 apex = new float4(-2 * math.sqrt(2f / 5f), 0f, 0f, 0f);
+				float dihedralAngle = Math.Operations.Angle(dir1, apex - center1);
+				
 				_percentFolded = value;
-				//TODO find this value.
-				originalVertices = vertices(value * (180f- math.acos(1f/4f)*Mathf.Rad2Deg));
+				//TODO find this value.			
+				originalVertices = vertices(value * dihedralAngle);
 			}
 		}
 		
