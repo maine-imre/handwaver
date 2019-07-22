@@ -82,6 +82,7 @@ namespace IMRE.Chess3D
                 this.Location = attemptedMove;
                 board.Check(this, attemptedMove);
             }
+		//TODO remove preview of piece.
 
         }
 

@@ -57,6 +57,7 @@ namespace IMRE.Chess3D {
                     caniditePositions.Add(currentPosition.moveDown(orientation));
 
                     //movign through edges 
+                    //TODO remove redundancies (e.g. back + forward  == forward + back)
                     caniditePositions.Add(currentPosition.moveForward(orientation).moveLeft(orientation));
                     caniditePositions.Add(currentPosition.moveForward(orientation).moveRight(orientation));
                     caniditePositions.Add(currentPosition.moveForward(orientation).moveDown(orientation));
@@ -67,11 +68,26 @@ namespace IMRE.Chess3D {
                     caniditePositions.Add(currentPosition.moveBack(orientation).moveDown(orientation));
                     caniditePositions.Add(currentPosition.moveBack(orientation).moveUp(orientation));
 
+                    caniditePositions.Add(currentPosition.moveLeft(orientation).moveForward(orientation));
+                    caniditePositions.Add(currentPosition.moveLeft(orientation).moveBack(orientation));
                     caniditePositions.Add(currentPosition.moveLeft(orientation).moveDown(orientation));
                     caniditePositions.Add(currentPosition.moveLeft(orientation).moveUp(orientation));
 
+                    caniditePositions.Add(currentPosition.moveRight(orientation).moveForward(orientation));
+                    caniditePositions.Add(currentPosition.moveRight(orientation).moveBack(orientation));
                     caniditePositions.Add(currentPosition.moveRight(orientation).moveDown(orientation));
                     caniditePositions.Add(currentPosition.moveRight(orientation).moveUp(orientation));
+
+                    caniditePositions.Add(currentPosition.moveUp(orientation).moveLeft(orientation));
+                    caniditePositions.Add(currentPosition.moveUp(orientation).moveRight(orientation));
+                    caniditePositions.Add(currentPosition.moveUp(orientation).moveForward(orientation));
+                    caniditePositions.Add(currentPosition.moveUp(orientation).moveBack(orientation));
+
+                    caniditePositions.Add(currentPosition.moveDown(orientation).moveLeft(orientation));
+                    caniditePositions.Add(currentPosition.moveDown(orientation).moveRight(orientation));
+                    caniditePositions.Add(currentPosition.moveDown(orientation).moveForward(orientation));
+                    caniditePositions.Add(currentPosition.moveDown(orientation).moveBack(orientation));
+
                     break;
                 case chessBoard.PieceType.queen:
                     
@@ -88,6 +104,7 @@ namespace IMRE.Chess3D {
                         caniditePositions.Add(currentPosition.moveDown(orientation, i));
 
                         //moving through edges 
+                        //TODO remove redundancies (e.g. back + forward  == forward + back)
                         caniditePositions.Add(currentPosition.moveForward(orientation, i).moveLeft(orientation, i));
                         caniditePositions.Add(currentPosition.moveForward(orientation, i).moveRight(orientation, i));
                         caniditePositions.Add(currentPosition.moveForward(orientation, i).moveDown(orientation, i));
@@ -98,12 +115,27 @@ namespace IMRE.Chess3D {
                         caniditePositions.Add(currentPosition.moveBack(orientation, i).moveDown(orientation, i));
                         caniditePositions.Add(currentPosition.moveBack(orientation, i).moveUp(orientation, i));
 
+                        caniditePositions.Add(currentPosition.moveLeft(orientation, i).moveForward(orientation, i));
+                        caniditePositions.Add(currentPosition.moveLeft(orientation, i).moveBack(orientation, i));
                         caniditePositions.Add(currentPosition.moveLeft(orientation, i).moveDown(orientation, i));
                         caniditePositions.Add(currentPosition.moveLeft(orientation, i).moveUp(orientation, i));
 
+                        caniditePositions.Add(currentPosition.moveRight(orientation, i).moveForward(orientation, i));
+                        caniditePositions.Add(currentPosition.moveRight(orientation, i).moveBack(orientation, i));
                         caniditePositions.Add(currentPosition.moveRight(orientation, i).moveDown(orientation, i));
                         caniditePositions.Add(currentPosition.moveRight(orientation, i).moveUp(orientation, i));
+
+                        caniditePositions.Add(currentPosition.moveUp(orientation, i).moveLeft(orientation, i));
+                        caniditePositions.Add(currentPosition.moveUp(orientation, i).moveRight(orientation, i));
+                        caniditePositions.Add(currentPosition.moveUp(orientation, i).moveForward(orientation, i));
+                        caniditePositions.Add(currentPosition.moveUp(orientation, i).moveBack(orientation, i));
+
+                        caniditePositions.Add(currentPosition.moveDown(orientation, i).moveLeft(orientation, i));
+                        caniditePositions.Add(currentPosition.moveDown(orientation, i).moveRight(orientation, i));
+                        caniditePositions.Add(currentPosition.moveDown(orientation, i).moveForward(orientation, i));
+                        caniditePositions.Add(currentPosition.moveDown(orientation, i).moveBack(orientation, i));
                     }
+
                     break;
                 case chessBoard.PieceType.rook:
                     //rooks can move n units through a face
@@ -118,6 +150,7 @@ namespace IMRE.Chess3D {
                         caniditePositions.Add(currentPosition.moveUp(orientation, i));
                         caniditePositions.Add(currentPosition.moveDown(orientation, i));
                     }
+
                     break;
                 case chessBoard.PieceType.bishop:
                     //diagonal in any direction
@@ -136,12 +169,27 @@ namespace IMRE.Chess3D {
                         caniditePositions.Add(currentPosition.moveBack(orientation, i).moveDown(orientation, i));
                         caniditePositions.Add(currentPosition.moveBack(orientation, i).moveUp(orientation, i));
 
+                        caniditePositions.Add(currentPosition.moveLeft(orientation, i).moveForward(orientation, i));
+                        caniditePositions.Add(currentPosition.moveLeft(orientation, i).moveBack(orientation, i));
                         caniditePositions.Add(currentPosition.moveLeft(orientation, i).moveDown(orientation, i));
                         caniditePositions.Add(currentPosition.moveLeft(orientation, i).moveUp(orientation, i));
 
+                        caniditePositions.Add(currentPosition.moveRight(orientation, i).moveForward(orientation, i));
+                        caniditePositions.Add(currentPosition.moveRight(orientation, i).moveBack(orientation, i));
                         caniditePositions.Add(currentPosition.moveRight(orientation, i).moveDown(orientation, i));
                         caniditePositions.Add(currentPosition.moveRight(orientation, i).moveUp(orientation, i));
+
+                        caniditePositions.Add(currentPosition.moveUp(orientation, i).moveLeft(orientation, i));
+                        caniditePositions.Add(currentPosition.moveUp(orientation, i).moveRight(orientation, i));
+                        caniditePositions.Add(currentPosition.moveUp(orientation, i).moveForward(orientation, i));
+                        caniditePositions.Add(currentPosition.moveUp(orientation, i).moveBack(orientation, i));
+
+                        caniditePositions.Add(currentPosition.moveDown(orientation, i).moveLeft(orientation, i));
+                        caniditePositions.Add(currentPosition.moveDown(orientation, i).moveRight(orientation, i));
+                        caniditePositions.Add(currentPosition.moveDown(orientation, i).moveForward(orientation, i));
+                        caniditePositions.Add(currentPosition.moveDown(orientation, i).moveBack(orientation, i));
                     }
+
                     break;
                 case chessBoard.PieceType.knight:
                     //face then edge
@@ -198,6 +246,7 @@ namespace IMRE.Chess3D {
                         .moveForward(orientation));
                     caniditePositions.Add(currentPosition.moveDown(orientation).moveDown(orientation)
                         .moveBack(orientation));
+
                     break;
                 case chessBoard.PieceType.pawn:
                     //move through forward face
@@ -224,6 +273,7 @@ namespace IMRE.Chess3D {
                         //add those positions to the canidate positions.
                         cPos.Where(p => enemyPieces.contains(p)).ForEach(p => caniditePositions.Add(p));
                     }
+
                     break;
             }
 
@@ -352,7 +402,24 @@ namespace IMRE.Chess3D {
 	private static float magnitude(int3 v)
 	{
 		return (Unity.Mathematics.math.sqrt(v.x*v.x+v.y*v.y+v.z*v.z);
-	}
+	}	
+	
+	public bool placeSelfInCheck(AbstractPiece piece, int3 attemptedMove)
+        {
+            List<AbstractPiece> listToCheck;
+            if (piece.Team == currentTeam.black)
+                listToCheck = whiteTeam;
+            else
+                listToCheck = blackTeam;
+            foreach (AbstractPiece piece in listToCheck)
+            {
+                if (piece.IsValid(attemptedMove))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
         #endregion
     }
 }

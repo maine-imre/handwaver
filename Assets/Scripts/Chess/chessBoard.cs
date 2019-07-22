@@ -16,9 +16,13 @@ namespace IMRE.Chess3D {
 /// The board that keeps track of pieces and moves for spatial chess.
 /// This is central to the game.
 /// </summary>
-	public class chessBoard : MonoBehaviour{
+	public static class chessBoard : MonoBehaviour{
 
         public static int boardSize = 9;
+		
+	public static float3 boardOrigin;
+	public static float boardDimensions;
+		
         AbstractPiece[,,] board = new AbstractPiece[boardSize, boardSize, boardSize];
 #pragma warning disable 0649
 		List<AbstractPiece> whiteTeam;           //white
@@ -59,7 +63,7 @@ namespace IMRE.Chess3D {
         /// </summary>
         /// <param name="moveLocation">move that is being made</param>
         /// <returns>piece that was previously in location</returns>
-        public AbstractPiece TestLocation(Vector3 moveLocation)
+        public AbstractPiece TestLocation(int3 moveLocation)
         {
             if (board[(int)moveLocation.x,(int)moveLocation.y,(int)moveLocation.z] == null)
                 return null;
@@ -72,28 +76,10 @@ namespace IMRE.Chess3D {
         /// </summary>
         /// <param name="piece"></param>
         /// <param name="attemptedMove"></param>
-        internal bool Check(AbstractPiece abstractPiece, Vector3 attemptedMove)
+        internal bool Check(AbstractPiece abstractPiece, int3 attemptedMove)
         {
-            throw new NotImplementedException();
-        }
-
-        internal bool placeSelfInCheck(AbstractPiece king, Vector3 attemptedMove)
-        {
-            List<AbstractPiece> listToCheck;
-            if (king.Team == currentTeam.black)
-                listToCheck = whiteTeam;
-            else
-                listToCheck = blackTeam;
-            foreach (AbstractPiece piece in listToCheck)
-            {
-                if (piece.IsValid(attemptedMove))
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
+		return abstractPiece.validMoves.Contains(attemptedMove);
+	}
         public void pieceCaptured(AbstractPiece pieceDead)
         {
             pieceDead.IsCaptured = true;
