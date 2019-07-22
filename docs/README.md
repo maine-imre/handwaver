@@ -2,4 +2,4 @@ HandWaver is a gesture-based virtual mathematical making environment where learn
 
 HandWaver allows learners to make, modify, measure, and explore mathematical objects in a virtual three dimensional space.  We developed HandWaver to increase access to meaningful mathematical experiences for all learners. HandWaver is developed by the IMRE Lab at the University of Maine under the superivision of Principal Investigator Justin Dimmel and Lead Developer Camden Bock.
 
-[![CodeFactor](https://www.codefactor.io/repository/github/maine-imre/handwaver/badge/feature/scale-dimension-study)](https://www.codefactor.io/repository/github/maine-imre/handwaver/overview/feature/scale-dimension-study)
+[![CodeFactor](https://www.codefactor.io/repository/github/maine-imre/handwaver/badge/unstable/remove-legacy)](https://www.codefactor.io/repository/github/maine-imre/handwaver/overview/unstable/remove-legacy)
