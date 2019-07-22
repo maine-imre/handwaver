@@ -154,7 +154,13 @@ else if (math.abs(height) > radius)
 }
 ```
 
-### Intersection of a plane and a torus (Moroni, 2017; Weisstein, n.d.)
+### Intersection of a plane and a cone - Conic Sections
+Similar to the torus, we only consider cross-sections orthagonal to the axis of the cone.
+
+```c#
+```
+
+### Intersection of a plane and a torus - Toric Sections (Moroni, 2017; Weisstein, n.d.)
 
 ``` c#
 public void crossSectTorus(float height)
@@ -343,6 +349,11 @@ private void renderSphere(float crossSectionRadius)
     vertices[vertices.Length - 1] = Vector3.up * -crossSectionRadius;
     #endregion
 }
+```
+
+### Intersection of a hyperplane and a hypercone
+
+```c#
 ```
 
 ### Intersection of a hyperplane and a three-torus (Hartley, 2007)
