@@ -11,6 +11,12 @@ To track the progress on this issue [go here](https://github.com/maine-imre/hand
 * [Classifying the Data](https://github.com/maine-imre/handwaver/blob/feature/gesture-abstraction/docs/EmbodiedUserInput/SystemDescription.md#classifying-the-data)
 * [Definitions for Gestures](https://github.com/maine-imre/handwaver/blob/feature/gesture-abstraction/docs/EmbodiedUserInput/SystemDescription.md#definitions-for-gestures)
      * [Grasp](https://github.com/maine-imre/handwaver/blob/feature/gesture-abstraction/docs/EmbodiedUserInput/SystemDescription.md#grasp)
+     * [Double Grasp](https://github.com/maine-imre/handwaver/blob/feature/gesture-abstraction/docs/EmbodiedUserInput/SystemDescription.md#double_grasp)
+     * [Point](https://github.com/maine-imre/handwaver/blob/feature/gesture-abstraction/docs/EmbodiedUserInput/SystemDescription.md#point)
+     * [Thumbs Up](https://github.com/maine-imre/handwaver/blob/feature/gesture-abstraction/docs/EmbodiedUserInput/SystemDescription.md#thumbs_up)
+     * [Open Palm](https://github.com/maine-imre/handwaver/blob/feature/gesture-abstraction/docs/EmbodiedUserInput/SystemDescription.md#open_palm)
+     * [Open Palm Push](https://github.com/maine-imre/handwaver/blob/feature/gesture-abstraction/docs/EmbodiedUserInput/SystemDescription.md#open_palm_push)
+     * [Open Palm Swipe](https://github.com/maine-imre/handwaver/blob/feature/gesture-abstraction/docs/EmbodiedUserInput/SystemDescription.md#open_palm_Swipe)
 
 ---
 
@@ -55,7 +61,32 @@ There are 3 layers to the gesture system.
 ### Grasp  
 
 * **Definition**  
-This is a state of the hand where both the thumb and index finger have their fingertips brought together. The other fingers do not have a specific state that is required. There is a "closeness" value which looks at how close the fingertips have to be before the grasp is initiated. Tweaking this value changes how easy or how hard it is to grasp something by changing the precision of the grasping and how large the radius is that grasping occurs within.  
+Grasping is enacted during near contact or contact between the fingertips of the index finger and the thumb. The other fingers do not have a specific state that is required. There is a tolerance value which looks at how close the fingertips have to be before the grasp is initiated. Tweaking this value changes how easy or how hard it is to grasp something by changing the precision of the grasping and how large the radius is that grasping occurs within.  
 * **Visual Feedback**  
- Performing the "grasp" (pinch) gesture when there is no function attached to the context of where the grasp is happening will turn the index finger and thumb green. This green will be less visible than if the grasp was operating on an object or had some sort of function attached to its current context
+Performing the "grasp" (pinch) gesture when there is no function attached to the context of where the grasp is happening will turn the index finger and thumb green. This green will be less visible than if the grasp was operating on an object or had some sort of function attached to its current context.  
+ 
+### Double Grasp  
+* **Definition**  
+A double grasp is enacted during near contact or contact between the fingertips of the index finger and the thumb that share a hand while the other hand simultaneously achieves this state. The same tolerance value is used to determine a double grasp as with the single grasp. Activating this gesture is therefore also activating the single grasp gesture on each hand.
+ 
+### Point  
+* **Definition**  
+Pointing is enacted when the index finger is directed at something. This gesture is recognized by having the pinky, ring finger and middle finger not extended while the index finger is extended. The thumb's extension state is not tracked for pointing.  
+
+### Thumbs Up  
+* **Definition**  
+A thumbs up is enacted by extending the thumb while the other fingers are not extended. Usually this would require the thumb to be pointing at a certain angle, however it is not neccessary to do anything except extend only the thumb to activate this gesture.  
+
+### Open Palm
+* **Definition**  
+An open palm is enacted by extending all fingers.  
+
+### Open Palm Push  
+* **Definition**  
+An open palm push is enacted by extending all fingers and then moving the hand as if you were applying pressure to something.
+
+### Open Palm Swipe
+* **Definition**  
+An open palm swipe is enacted by extending all fingers and then moving the hand as if you were chopping something.
+
 ---
