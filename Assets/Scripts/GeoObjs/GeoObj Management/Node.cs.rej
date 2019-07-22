@@ -1,9 +1,0 @@
-diff a/Assets/Scripts/GeoObjs/GeoObj Management/Node.cs b/Assets/Scripts/GeoObjs/GeoObj Management/Node.cs	(rejected hunks)
-@@ -176,6 +176,7 @@
-         }
- 		public Node<T> FindByValue (T value)
- 		{
-+			return Items.Where(node => node.Value.Equals(value)).FirstOrDefault();		//returns first occurent of the value passed in. default is null if not within set
- 
- 			//// search the list for the value
- 			//foreach (Node<T> node in Items)
