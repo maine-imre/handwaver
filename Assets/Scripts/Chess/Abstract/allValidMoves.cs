@@ -282,6 +282,9 @@ namespace IMRE.Chess3D {
             
             //check if occupied by friendly
             caniditePositions = caniditePositions.Where(p => !friendlyPieces.Contains(p));
+	       
+	      //check if places self in check
+	       caniditePositions = canidatePositions.Where(p => !placeSelfInCheck(piece, p));
 
             //queen, rook, bishop - check if passing through any piece
             if (piece == chessBoard.PieceType.queen || piece == chessBoard.PieceType.rook ||
@@ -374,6 +377,23 @@ namespace IMRE.Chess3D {
             }
 
             return testResult;
+        }
+		
+	public bool placeSelfInCheck(AbstractPiece piece, int3 attemptedMove)
+        {
+            List<AbstractPiece> listToCheck;
+            if (piece.Team == currentTeam.black)
+                listToCheck = whiteTeam;
+            else
+                listToCheck = blackTeam;
+            foreach (AbstractPiece piece in listToCheck)
+            {
+                if (piece.IsValid(attemptedMove))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
         #endregion
     }
