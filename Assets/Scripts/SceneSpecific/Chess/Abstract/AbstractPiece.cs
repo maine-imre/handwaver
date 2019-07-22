@@ -23,7 +23,6 @@ namespace IMRE.Chess3D
             return Board.otherTeam(Team);
         }
 
-
         /// <summary>
         ///     Tests requested move compared to current location
         /// </summary>
@@ -33,12 +32,10 @@ namespace IMRE.Chess3D
 
         public abstract System.Collections.Generic.List<UnityEngine.Vector3> validMoves();
 
-
         /// <summary>
         ///     Called when the peice is captured
         /// </summary>
         public abstract void capture();
-
 
         /// <summary>
         ///     Moves the piece after testing if it is a valid move

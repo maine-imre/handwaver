@@ -7,10 +7,10 @@ www.imrelab.org
 
 namespace IMRE.Chess3D
 {
-	/// <summary>
-	///     Builds an array for  the spatial chess board.
-	/// </summary>
-	public class boardCreator : UnityEngine.MonoBehaviour
+    /// <summary>
+    ///     Builds an array for  the spatial chess board.
+    /// </summary>
+    public class boardCreator : UnityEngine.MonoBehaviour
     {
         public UnityEngine.Material mat;
 
@@ -28,7 +28,6 @@ namespace IMRE.Chess3D
                 }
             }
         }
-
 
         private UnityEngine.GameObject GenerateSphere(string name, UnityEngine.Vector3 spawnPoint)
         {

@@ -1,6 +1,4 @@
-﻿
-
-/*
+﻿/*
  * V4.0 Released 08.16.18 By Timothy Bruce
  * It pretty much works I guess. This version only works to the PREVIOUS HOUR. Seconds have not been implemented.
  * Example of calling this script:
@@ -12,12 +10,11 @@
  * Also, I think this version has been edited by IMRE for HandWaver.
  */
 
-
 namespace IMRE.HandWaver.Space
 {
-	/// <summary>
-	/// </summary>
-	public class planetData
+    /// <summary>
+    /// </summary>
+    public class planetData
     {
         public int id;
         public string name; //Name of the object
@@ -39,9 +36,9 @@ namespace IMRE.HandWaver.Space
         }
     }
 
-	/// <summary>
-	/// </summary>
-	public class Horizons : UnityEngine.MonoBehaviour
+    /// <summary>
+    /// </summary>
+    public class Horizons : UnityEngine.MonoBehaviour
     {
         public static Horizons ins;
 

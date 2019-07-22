@@ -60,7 +60,6 @@
         internal System.Collections.Generic.Dictionary<RSDESPin, pinData> pinDB =
             new System.Collections.Generic.Dictionary<RSDESPin, pinData>();
 
-
         public System.Collections.Generic.List<pinData> PinnedPoints
         {
             get => pinnedPoints;
@@ -177,7 +176,6 @@
         public UnityEngine.Material MoonMaterial;
 
         public UnityEngine.Transform RSDESStar;
-
 
         //public leapButtonToggleExtension showSun;
         //public leapButtonToggleExtension showMoon;
@@ -640,7 +638,6 @@
                 ghaRenderer[i].enabled = sGHA;
             }
         }
-
 
         public void updatePoleLine()
         {

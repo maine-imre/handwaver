@@ -7,23 +7,23 @@ www.imrelab.org
 
 namespace IMRE.HandWaver
 {
-	/// <summary>
-	///     Mode to determine how many tools are loaded at a time.
-	///     Meant to integrate with tutorial.
-	///     Depreciated.
-	/// </summary>
-	public static class playMode
+    /// <summary>
+    ///     Mode to determine how many tools are loaded at a time.
+    ///     Meant to integrate with tutorial.
+    ///     Depreciated.
+    /// </summary>
+    public static class playMode
     {
-	    /// <summary>
-	    ///     Boolean controlling if it is currently in demo mode. Use this to pseudo-hide in-progress or buggy features for
-	    ///     demos.
-	    /// </summary>
-	    private static bool _demo;
+        /// <summary>
+        ///     Boolean controlling if it is currently in demo mode. Use this to pseudo-hide in-progress or buggy features for
+        ///     demos.
+        /// </summary>
+        private static bool _demo;
 
-	    /// <summary>
-	    ///     Returns true when in demo mode.
-	    /// </summary>
-	    public static bool demo
+        /// <summary>
+        ///     Returns true when in demo mode.
+        /// </summary>
+        public static bool demo
         {
             get => _demo;
 
@@ -35,9 +35,9 @@ namespace IMRE.HandWaver
             }
         }
 
-	    /// <summary>
-	    ///     Action called when the mode is changed in and out of demo mode.
-	    /// </summary>
-	    public static event System.Action modeChangeEvent;
+        /// <summary>
+        ///     Action called when the mode is changed in and out of demo mode.
+        /// </summary>
+        public static event System.Action modeChangeEvent;
     }
 }

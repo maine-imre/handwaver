@@ -1,6 +1,4 @@
-﻿
-
-/// <summary>
+﻿/// <summary>
 /// This script aligns the Earth model to the correct Latitude/Longitude positioning in the RSDES scene.
 /// The main contributor(s) to this script is NG
 /// </summary>

@@ -206,7 +206,6 @@
             return starRayRendererCoordiantes(myPinData, myPinData);
         }
 
-
         private static UnityEngine.Vector3[] greatCircleCoordinates(UnityEngine.Vector3 normal, int count)
         {
             //we have a plane through the earth's center with normal direction of 
@@ -475,7 +474,6 @@
             float spacing = RSDESManager.EarthRadius / count;
             return starRayRendererCoordiantes(subpoint, spacing, count, coordinateSystem.polar);
         }
-
 
         public static UnityEngine.Vector3[,] starRayRendererCoordiantesWithinEarth(UnityEngine.Vector3 subpoint,
             float spacing, int count)

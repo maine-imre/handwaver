@@ -1,11 +1,11 @@
 ﻿namespace IMRE.HandWaver.Space.BigBertha
 {
-	/// <summary>
-	///     This script does ___.
-	///     The main contributor(s) to this script is TB
-	///     Status: WORKING
-	/// </summary>
-	public class bodyCollaboration : UnityEngine.MonoBehaviour
+    /// <summary>
+    ///     This script does ___.
+    ///     The main contributor(s) to this script is TB
+    ///     Status: WORKING
+    /// </summary>
+    public class bodyCollaboration : UnityEngine.MonoBehaviour
     {
         public float scale = 1; //Scale for every body in the scene
         public float sizeScale = 1; //The sale of the body size. 1 Is actual size

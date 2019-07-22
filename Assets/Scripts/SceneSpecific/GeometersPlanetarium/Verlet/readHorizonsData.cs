@@ -1,11 +1,11 @@
 ﻿namespace IMRE.HandWaver.Space.BigBertha
 {
-	/// <summary>
-	///     This script does ___.
-	///     The main contributor(s) to this script is TB
-	///     Status: WORKING
-	/// </summary>
-	public class readHorizonsData : UnityEngine.MonoBehaviour
+    /// <summary>
+    ///     This script does ___.
+    ///     The main contributor(s) to this script is TB
+    ///     Status: WORKING
+    /// </summary>
+    public class readHorizonsData : UnityEngine.MonoBehaviour
     {
         private string bodyName = ""; //The given name of the object
         private string date; //The current date (for getting the current to the hour data)

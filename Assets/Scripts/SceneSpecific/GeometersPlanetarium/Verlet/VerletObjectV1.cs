@@ -1,11 +1,11 @@
 ﻿namespace IMRE.HandWaver.Space.BigBertha
 {
-	/// <summary>
-	///     This script does ___.
-	///     The main contributor(s) to this script is TB
-	///     Status: WORKING
-	/// </summary>
-	public class VerletObjectV1 : UnityEngine.MonoBehaviour
+    /// <summary>
+    ///     This script does ___.
+    ///     The main contributor(s) to this script is TB
+    ///     Status: WORKING
+    /// </summary>
+    public class VerletObjectV1 : UnityEngine.MonoBehaviour
     {
         public UnityEngine.Vector3d
             acceleration; //The Acceleration of the body for verlet (Note to self: Does this need to be public?)

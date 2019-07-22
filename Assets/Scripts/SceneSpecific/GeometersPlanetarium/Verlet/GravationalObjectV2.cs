@@ -1,11 +1,11 @@
 ﻿namespace IMRE.HandWaver.Space.BigBertha
 {
-	/// <summary>
-	///     This script does ___.
-	///     The main contributor(s) to this script is TB
-	///     Status: WORKING
-	/// </summary>
-	public class GravationalObjectV2 : UnityEngine.MonoBehaviour
+    /// <summary>
+    ///     This script does ___.
+    ///     The main contributor(s) to this script is TB
+    ///     Status: WORKING
+    /// </summary>
+    public class GravationalObjectV2 : UnityEngine.MonoBehaviour
     {
         public float mass;
 

@@ -2,10 +2,10 @@
 
 namespace IMRE.HandWaver.Space
 {
-	/// <summary>
-	///     A control for data collection in the Geometer's Planetarium Scene.
-	/// </summary>
-	public class RSDESExperimentControl : UnityEngine.MonoBehaviour
+    /// <summary>
+    ///     A control for data collection in the Geometer's Planetarium Scene.
+    /// </summary>
+    public class RSDESExperimentControl : UnityEngine.MonoBehaviour
     {
         private RSDESManager man => RSDESManager.ins;
 

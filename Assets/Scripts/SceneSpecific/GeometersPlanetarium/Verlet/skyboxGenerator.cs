@@ -1,11 +1,11 @@
 ﻿namespace IMRE.HandWaver.Space.BigBertha
 {
-	/// <summary>
-	///     This script does ___.
-	///     The main contributor(s) to this script is TB
-	///     Status: WORKING
-	/// </summary>
-	public class skyboxGenerator : UnityEngine.MonoBehaviour
+    /// <summary>
+    ///     This script does ___.
+    ///     The main contributor(s) to this script is TB
+    ///     Status: WORKING
+    /// </summary>
+    public class skyboxGenerator : UnityEngine.MonoBehaviour
     {
         public UnityEngine.Material skybox;
         public UnityEngine.Vector2 skyboxDimensions = new UnityEngine.Vector2(1800, 3600);

@@ -1,11 +1,11 @@
 ﻿namespace IMRE.HandWaver.Space
 {
-	/// <summary>
-	///     Script Created 8.13.18 by Timothy Bruce
-	///     Based on the SkyboxGenerator script, this takes star data and returns the data as cartesian coordinates.
-	///     This program uses the HYG database to get its data.
-	/// </summary>
-	public static class StellarData
+    /// <summary>
+    ///     Script Created 8.13.18 by Timothy Bruce
+    ///     Based on the SkyboxGenerator script, this takes star data and returns the data as cartesian coordinates.
+    ///     This program uses the HYG database to get its data.
+    /// </summary>
+    public static class StellarData
     {
         public static System.Collections.Generic.List<Star>
             Stars = new System.Collections.Generic.List<Star>(); //A list of stars (this is where you get your output).
@@ -47,7 +47,6 @@
             public string ProperName; //The proper name of the star. Note that the Sun is marked SOL, Cody!
             public UnityEngine.Vector3 velocity; //The X Y Z velocity of the star (without offset).
             public float VisualMagnitude; //The star's appearent visual magnitude (from sol I think).
-
 
             public Star(int idi, string ProperNamei, float distancei, float VisualMagnitudei, float ColorIndexi,
                 UnityEngine.Vector3 positioni, UnityEngine.Vector3 velocityi, float luminousityi)
