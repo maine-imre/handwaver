@@ -368,7 +368,7 @@ namespace IMRE.HandWaver.Space
                                     {
                                         starRays[(equalAltitudeCount * i) + j] = spawnStarRay();
                                         starRays[(equalAltitudeCount * i) + j].startColor = pinBcolor;
-                                        starRays[(equalAltitudeCount * i() + j].endColor = pinBcolor;
+                                        starRays[(equalAltitudeCount * i) + j].endColor = pinBcolor;
                                     }
 
                                     starRays[(equalAltitudeCount * i) + j].SetPositions(
