@@ -63,7 +63,7 @@ namespace IMRE.Chess3D {
         /// </summary>
         /// <param name="moveLocation">move that is being made</param>
         /// <returns>piece that was previously in location</returns>
-        public AbstractPiece TestLocation(Vector3 moveLocation)
+        public AbstractPiece TestLocation(int3 moveLocation)
         {
             if (board[(int)moveLocation.x,(int)moveLocation.y,(int)moveLocation.z] == null)
                 return null;
@@ -76,12 +76,12 @@ namespace IMRE.Chess3D {
         /// </summary>
         /// <param name="piece"></param>
         /// <param name="attemptedMove"></param>
-        internal bool Check(AbstractPiece abstractPiece, Vector3 attemptedMove)
+        internal bool Check(AbstractPiece abstractPiece, int3 attemptedMove)
         {
-            throw new NotImplementedException();
-        }
+		return allValidMoves(abstractPiece).Contains(attemptedMove);
+	}
 
-        internal bool placeSelfInCheck(AbstractPiece king, Vector3 attemptedMove)
+        internal bool placeSelfInCheck(AbstractPiece king, int3 attemptedMove)
         {
             List<AbstractPiece> listToCheck;
             if (king.Team == currentTeam.black)
