@@ -5,18 +5,18 @@ To track the progress on this issue [go here](https://github.com/maine-imre/hand
 ---
 
 ## Table of Contents
-* [Layers](https://github.com/maine-imre/handwaver/blob/feature/gesture-abstraction/docs/EmbodiedUserInput/SystemDescription.md#layers)
-* [Input](https://github.com/maine-imre/handwaver/blob/feature/gesture-abstraction/docs/EmbodiedUserInput/SystemDescription.md#input)
-* [Hardware](https://github.com/maine-imre/handwaver/blob/feature/gesture-abstraction/docs/EmbodiedUserInput/SystemDescription.md#hardware)
-* [Classifying the Data](https://github.com/maine-imre/handwaver/blob/feature/gesture-abstraction/docs/EmbodiedUserInput/SystemDescription.md#classifying-the-data)
-* [Definitions for Gestures](https://github.com/maine-imre/handwaver/blob/feature/gesture-abstraction/docs/EmbodiedUserInput/SystemDescription.md#definitions-for-gestures)
-     * [Grasp](https://github.com/maine-imre/handwaver/blob/feature/gesture-abstraction/docs/EmbodiedUserInput/SystemDescription.md#grasp)
-     * [Double Grasp](https://github.com/maine-imre/handwaver/blob/feature/gesture-abstraction/docs/EmbodiedUserInput/SystemDescription.md#double-grasp)
-     * [Point](https://github.com/maine-imre/handwaver/blob/feature/gesture-abstraction/docs/EmbodiedUserInput/SystemDescription.md#point)
-     * [Thumbs Up](https://github.com/maine-imre/handwaver/blob/feature/gesture-abstraction/docs/EmbodiedUserInput/SystemDescription.md#thumbs-up)
-     * [Open Palm](https://github.com/maine-imre/handwaver/blob/feature/gesture-abstraction/docs/EmbodiedUserInput/SystemDescription.md#open-palm)
-     * [Open Palm Push](https://github.com/maine-imre/handwaver/blob/feature/gesture-abstraction/docs/EmbodiedUserInput/SystemDescription.md#open-palm-push)
-     * [Open Palm Swipe](https://github.com/maine-imre/handwaver/blob/feature/gesture-abstraction/docs/EmbodiedUserInput/SystemDescription.md#open-palm-Swipe)
+* [Layers](SystemDescription.md#layers)
+* [Input](SystemDescription.md#input)
+* [Hardware](SystemDescription.md#hardware)
+* [Classifying the Data](SystemDescription.md#classifying-the-data)
+* [Definitions for Gestures](SystemDescription.md#definitions-for-gestures)
+     * [Grasp](SystemDescription.md#grasp)
+     * [Double Grasp](SystemDescription.md#double-grasp)
+     * [Point](SystemDescription.md#point)
+     * [Thumbs Up](SystemDescription.md#thumbs-up)
+     * [Open Palm](SystemDescription.md#open-palm)
+     * [Open Palm Push](SystemDescription.md#open-palm-push)
+     * [Open Palm Swipe](SystemDescription.md#open-palm-Swipe)
 
 ---
 
