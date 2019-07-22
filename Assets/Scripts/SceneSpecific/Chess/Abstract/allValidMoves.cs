@@ -5,259 +5,260 @@ See license info in readme.md.
 www.imrelab.org
 **/
 
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace IMRE.Chess3D {
+namespace IMRE.Chess3D
+{
     /// <summary>
-    /// A list of all of  the valid moves for each piece type in spatial chess.
-    /// This needs to be checked, only works in one direction.
-    /// Maybe we can express these in terms of a basis system?
+    ///     A list of all of  the valid moves for each piece type in spatial chess.
+    ///     This needs to be checked, only works in one direction.
+    ///     Maybe we can express these in terms of a basis system?
     /// </summary>
-	public static class allValidMoves {
-
-        public static List<Vector3> kingMoves(Vector3 position, List<AbstractPiece> friendlyPieces)
+    public static class allValidMoves
+    {
+        public static System.Collections.Generic.List<UnityEngine.Vector3> kingMoves(UnityEngine.Vector3 position,
+            System.Collections.Generic.List<AbstractPiece> friendlyPieces)
         {
-            List<Vector3> posList = new List<Vector3>();
-            posList.Add(position + Vector3.up);
-            posList.Add(position + Vector3.down);
-            posList.Add(position + Vector3.forward);
-            posList.Add(position + Vector3.back);
-            posList.Add(position + Vector3.right);
-            posList.Add(position + Vector3.left);
+            System.Collections.Generic.List<UnityEngine.Vector3> posList =
+                new System.Collections.Generic.List<UnityEngine.Vector3>();
+            posList.Add(position + UnityEngine.Vector3.up);
+            posList.Add(position + UnityEngine.Vector3.down);
+            posList.Add(position + UnityEngine.Vector3.forward);
+            posList.Add(position + UnityEngine.Vector3.back);
+            posList.Add(position + UnityEngine.Vector3.right);
+            posList.Add(position + UnityEngine.Vector3.left);
 
-            posList.Add(position + Vector3.up + Vector3.left);
-            posList.Add(position + Vector3.up + Vector3.right);
-            posList.Add(position + Vector3.up + Vector3.back);
-            posList.Add(position + Vector3.up + Vector3.forward);
+            posList.Add(position + UnityEngine.Vector3.up + UnityEngine.Vector3.left);
+            posList.Add(position + UnityEngine.Vector3.up + UnityEngine.Vector3.right);
+            posList.Add(position + UnityEngine.Vector3.up + UnityEngine.Vector3.back);
+            posList.Add(position + UnityEngine.Vector3.up + UnityEngine.Vector3.forward);
 
-            posList.Add(position + Vector3.down + Vector3.left);
-            posList.Add(position + Vector3.down + Vector3.right);
-            posList.Add(position + Vector3.down + Vector3.back);
-            posList.Add(position + Vector3.down + Vector3.forward);
+            posList.Add(position + UnityEngine.Vector3.down + UnityEngine.Vector3.left);
+            posList.Add(position + UnityEngine.Vector3.down + UnityEngine.Vector3.right);
+            posList.Add(position + UnityEngine.Vector3.down + UnityEngine.Vector3.back);
+            posList.Add(position + UnityEngine.Vector3.down + UnityEngine.Vector3.forward);
 
-            posList.Add(position + Vector3.left + Vector3.back);
-            posList.Add(position + Vector3.left + Vector3.forward);
+            posList.Add(position + UnityEngine.Vector3.left + UnityEngine.Vector3.back);
+            posList.Add(position + UnityEngine.Vector3.left + UnityEngine.Vector3.forward);
 
-            posList.Add(position + Vector3.right + Vector3.back);
-            posList.Add(position + Vector3.right + Vector3.forward);
+            posList.Add(position + UnityEngine.Vector3.right + UnityEngine.Vector3.back);
+            posList.Add(position + UnityEngine.Vector3.right + UnityEngine.Vector3.forward);
 
-            posList.Add(position + Vector3.up + Vector3.left + Vector3.forward);
-            posList.Add(position + Vector3.up + Vector3.left + Vector3.back);
-            posList.Add(position + Vector3.up + Vector3.right + Vector3.forward);
-            posList.Add(position + Vector3.up + Vector3.right + Vector3.back);
+            posList.Add(position + UnityEngine.Vector3.up + UnityEngine.Vector3.left + UnityEngine.Vector3.forward);
+            posList.Add(position + UnityEngine.Vector3.up + UnityEngine.Vector3.left + UnityEngine.Vector3.back);
+            posList.Add(position + UnityEngine.Vector3.up + UnityEngine.Vector3.right + UnityEngine.Vector3.forward);
+            posList.Add(position + UnityEngine.Vector3.up + UnityEngine.Vector3.right + UnityEngine.Vector3.back);
 
-            posList.Add(position + Vector3.down + Vector3.left + Vector3.forward);
-            posList.Add(position + Vector3.down + Vector3.left + Vector3.back);
-            posList.Add(position + Vector3.down + Vector3.right + Vector3.forward);
-            posList.Add(position + Vector3.down + Vector3.right + Vector3.back);
+            posList.Add(position + UnityEngine.Vector3.down + UnityEngine.Vector3.left + UnityEngine.Vector3.forward);
+            posList.Add(position + UnityEngine.Vector3.down + UnityEngine.Vector3.left + UnityEngine.Vector3.back);
+            posList.Add(position + UnityEngine.Vector3.down + UnityEngine.Vector3.right + UnityEngine.Vector3.forward);
+            posList.Add(position + UnityEngine.Vector3.down + UnityEngine.Vector3.right + UnityEngine.Vector3.back);
 
 
-            List<Vector3> posListClone = posList;
+            System.Collections.Generic.List<UnityEngine.Vector3> posListClone = posList;
 
-            foreach (Vector3 pos in posListClone) {
-                foreach (AbstractPiece piece in friendlyPieces)
-                {
-                    if (piece.Location == pos)
-                    {
-                        posList.Remove(pos);
-                    }
-                }
-            }
-
-            return posList;
-
-        }
-        public static List<Vector3> queenMoves(Vector3 position, List<AbstractPiece> enemyPieces, List<AbstractPiece> friendlyPieces)
-        {
-            List<Vector3> posList = new List<Vector3>();
-            pathMoves(Vector3.up, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.down, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.forward, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.back, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.right, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.left, position, enemyPieces, friendlyPieces, posList);
-
-            pathMoves(Vector3.up + Vector3.left, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.up + Vector3.right, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.up + Vector3.back, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.up + Vector3.forward, position, enemyPieces, friendlyPieces, posList);
-
-            pathMoves(Vector3.down + Vector3.left, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.down + Vector3.right, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.down + Vector3.back, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.down + Vector3.forward, position, enemyPieces, friendlyPieces, posList);
-
-            pathMoves(Vector3.left + Vector3.back, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.left + Vector3.forward, position, enemyPieces, friendlyPieces, posList);
-
-            pathMoves(Vector3.right + Vector3.back, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.right + Vector3.forward, position, enemyPieces, friendlyPieces, posList);
-
-            pathMoves(Vector3.up + Vector3.left + Vector3.forward, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.up + Vector3.left + Vector3.back, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.up + Vector3.right + Vector3.forward, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.up + Vector3.right + Vector3.back, position, enemyPieces, friendlyPieces, posList);
-
-            pathMoves(Vector3.down + Vector3.left + Vector3.forward, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.down + Vector3.left + Vector3.back, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.down + Vector3.right + Vector3.forward, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.down + Vector3.right + Vector3.back, position, enemyPieces, friendlyPieces, posList);
-
-            List<Vector3> posListClone = posList;
-
-            foreach (Vector3 pos in posListClone)
+            foreach (UnityEngine.Vector3 pos in posListClone)
             {
                 foreach (AbstractPiece piece in friendlyPieces)
                 {
-                    if (piece.Location == pos)
-                    {
-                        posList.Remove(pos);
-                    }
+                    if (piece.Location == pos) posList.Remove(pos);
                 }
             }
 
             return posList;
-
         }
 
-        private static void pathMoves(Vector3 direction, Vector3 position, List<AbstractPiece> enemyPieces, List<AbstractPiece> friendlyPieces, List<Vector3> posList)
+        public static System.Collections.Generic.List<UnityEngine.Vector3> queenMoves(UnityEngine.Vector3 position,
+            System.Collections.Generic.List<AbstractPiece> enemyPieces,
+            System.Collections.Generic.List<AbstractPiece> friendlyPieces)
         {
-            Vector3 newPos = Vector3.zero;
+            System.Collections.Generic.List<UnityEngine.Vector3> posList =
+                new System.Collections.Generic.List<UnityEngine.Vector3>();
+            pathMoves(UnityEngine.Vector3.up, position, enemyPieces, friendlyPieces, posList);
+            pathMoves(UnityEngine.Vector3.down, position, enemyPieces, friendlyPieces, posList);
+            pathMoves(UnityEngine.Vector3.forward, position, enemyPieces, friendlyPieces, posList);
+            pathMoves(UnityEngine.Vector3.back, position, enemyPieces, friendlyPieces, posList);
+            pathMoves(UnityEngine.Vector3.right, position, enemyPieces, friendlyPieces, posList);
+            pathMoves(UnityEngine.Vector3.left, position, enemyPieces, friendlyPieces, posList);
+
+            pathMoves(UnityEngine.Vector3.up + UnityEngine.Vector3.left, position, enemyPieces, friendlyPieces,
+                posList);
+            pathMoves(UnityEngine.Vector3.up + UnityEngine.Vector3.right, position, enemyPieces, friendlyPieces,
+                posList);
+            pathMoves(UnityEngine.Vector3.up + UnityEngine.Vector3.back, position, enemyPieces, friendlyPieces,
+                posList);
+            pathMoves(UnityEngine.Vector3.up + UnityEngine.Vector3.forward, position, enemyPieces, friendlyPieces,
+                posList);
+
+            pathMoves(UnityEngine.Vector3.down + UnityEngine.Vector3.left, position, enemyPieces, friendlyPieces,
+                posList);
+            pathMoves(UnityEngine.Vector3.down + UnityEngine.Vector3.right, position, enemyPieces, friendlyPieces,
+                posList);
+            pathMoves(UnityEngine.Vector3.down + UnityEngine.Vector3.back, position, enemyPieces, friendlyPieces,
+                posList);
+            pathMoves(UnityEngine.Vector3.down + UnityEngine.Vector3.forward, position, enemyPieces, friendlyPieces,
+                posList);
+
+            pathMoves(UnityEngine.Vector3.left + UnityEngine.Vector3.back, position, enemyPieces, friendlyPieces,
+                posList);
+            pathMoves(UnityEngine.Vector3.left + UnityEngine.Vector3.forward, position, enemyPieces, friendlyPieces,
+                posList);
+
+            pathMoves(UnityEngine.Vector3.right + UnityEngine.Vector3.back, position, enemyPieces, friendlyPieces,
+                posList);
+            pathMoves(UnityEngine.Vector3.right + UnityEngine.Vector3.forward, position, enemyPieces, friendlyPieces,
+                posList);
+
+            pathMoves(UnityEngine.Vector3.up + UnityEngine.Vector3.left + UnityEngine.Vector3.forward, position,
+                enemyPieces, friendlyPieces, posList);
+            pathMoves(UnityEngine.Vector3.up + UnityEngine.Vector3.left + UnityEngine.Vector3.back, position,
+                enemyPieces, friendlyPieces, posList);
+            pathMoves(UnityEngine.Vector3.up + UnityEngine.Vector3.right + UnityEngine.Vector3.forward, position,
+                enemyPieces, friendlyPieces, posList);
+            pathMoves(UnityEngine.Vector3.up + UnityEngine.Vector3.right + UnityEngine.Vector3.back, position,
+                enemyPieces, friendlyPieces, posList);
+
+            pathMoves(UnityEngine.Vector3.down + UnityEngine.Vector3.left + UnityEngine.Vector3.forward, position,
+                enemyPieces, friendlyPieces, posList);
+            pathMoves(UnityEngine.Vector3.down + UnityEngine.Vector3.left + UnityEngine.Vector3.back, position,
+                enemyPieces, friendlyPieces, posList);
+            pathMoves(UnityEngine.Vector3.down + UnityEngine.Vector3.right + UnityEngine.Vector3.forward, position,
+                enemyPieces, friendlyPieces, posList);
+            pathMoves(UnityEngine.Vector3.down + UnityEngine.Vector3.right + UnityEngine.Vector3.back, position,
+                enemyPieces, friendlyPieces, posList);
+
+            System.Collections.Generic.List<UnityEngine.Vector3> posListClone = posList;
+
+            foreach (UnityEngine.Vector3 pos in posListClone)
+            {
+                foreach (AbstractPiece piece in friendlyPieces)
+                {
+                    if (piece.Location == pos) posList.Remove(pos);
+                }
+            }
+
+            return posList;
+        }
+
+        private static void pathMoves(UnityEngine.Vector3 direction, UnityEngine.Vector3 position,
+            System.Collections.Generic.List<AbstractPiece> enemyPieces,
+            System.Collections.Generic.List<AbstractPiece> friendlyPieces,
+            System.Collections.Generic.List<UnityEngine.Vector3> posList)
+        {
+            UnityEngine.Vector3 newPos = UnityEngine.Vector3.zero;
             for (int i = 0; i < 9; i++)
             {
-                newPos = position + i*direction;
+                newPos = position + i * direction;
                 if (!(newPos.x > 9 || newPos.y > 9 || newPos.z > 9 || newPos.x < 0 || newPos.y < 0 || newPos.z < 0))
                 {
                     bool result = false;
                     foreach (AbstractPiece enemy in enemyPieces)
                     {
-                        if (enemy.Location == newPos)
-                        {
-                            result = true;
-                        }
+                        if (enemy.Location == newPos) result = true;
                     }
+
                     if (result)
                     {
                         posList.Add(newPos);
                         break;
                     }
-                    else
+
+                    foreach (AbstractPiece friendly in friendlyPieces)
                     {
-                        foreach (AbstractPiece friendly in friendlyPieces)
-                        {
-                            if (friendly.Location == newPos)
-                            {
-                                result = true;
-                            }
-                        }
-                        if (result)
-                        {
-                            break;
-                        }
+                        if (friendly.Location == newPos) result = true;
                     }
+
+                    if (result) break;
                 }
             }
         }
 
-        public static List<Vector3> knightMoves(Vector3 position, List<AbstractPiece> friendlyPieces)
+        public static System.Collections.Generic.List<UnityEngine.Vector3> knightMoves(UnityEngine.Vector3 position,
+            System.Collections.Generic.List<AbstractPiece> friendlyPieces)
         {
-            List<Vector3> posList = new List<Vector3>();
-            posList.Add(position + 2 * Vector3.right + Vector3.up);
-            posList.Add(position + 2 * Vector3.right + Vector3.down);
-            posList.Add(position + 2 * Vector3.right + Vector3.forward);
-            posList.Add(position + 2 * Vector3.right + Vector3.back);
-            posList.Add(position + 2 * Vector3.left + Vector3.up);
-            posList.Add(position + 2 * Vector3.left + Vector3.down);
-            posList.Add(position + 2 * Vector3.left + Vector3.forward);
-            posList.Add(position + 2 * Vector3.left + Vector3.back);
+            System.Collections.Generic.List<UnityEngine.Vector3> posList =
+                new System.Collections.Generic.List<UnityEngine.Vector3>();
+            posList.Add(position + 2 * UnityEngine.Vector3.right + UnityEngine.Vector3.up);
+            posList.Add(position + 2 * UnityEngine.Vector3.right + UnityEngine.Vector3.down);
+            posList.Add(position + 2 * UnityEngine.Vector3.right + UnityEngine.Vector3.forward);
+            posList.Add(position + 2 * UnityEngine.Vector3.right + UnityEngine.Vector3.back);
+            posList.Add(position + 2 * UnityEngine.Vector3.left + UnityEngine.Vector3.up);
+            posList.Add(position + 2 * UnityEngine.Vector3.left + UnityEngine.Vector3.down);
+            posList.Add(position + 2 * UnityEngine.Vector3.left + UnityEngine.Vector3.forward);
+            posList.Add(position + 2 * UnityEngine.Vector3.left + UnityEngine.Vector3.back);
 
-            posList.Add(position + 2 * Vector3.up + Vector3.right);
-            posList.Add(position + 2 * Vector3.up + Vector3.left);
-            posList.Add(position + 2 * Vector3.up + Vector3.forward);
-            posList.Add(position + 2 * Vector3.up + Vector3.back);
-            posList.Add(position + 2 * Vector3.down + Vector3.right);
-            posList.Add(position + 2 * Vector3.down + Vector3.left);
-            posList.Add(position + 2 * Vector3.down + Vector3.forward);
-            posList.Add(position + 2 * Vector3.down + Vector3.back);
+            posList.Add(position + 2 * UnityEngine.Vector3.up + UnityEngine.Vector3.right);
+            posList.Add(position + 2 * UnityEngine.Vector3.up + UnityEngine.Vector3.left);
+            posList.Add(position + 2 * UnityEngine.Vector3.up + UnityEngine.Vector3.forward);
+            posList.Add(position + 2 * UnityEngine.Vector3.up + UnityEngine.Vector3.back);
+            posList.Add(position + 2 * UnityEngine.Vector3.down + UnityEngine.Vector3.right);
+            posList.Add(position + 2 * UnityEngine.Vector3.down + UnityEngine.Vector3.left);
+            posList.Add(position + 2 * UnityEngine.Vector3.down + UnityEngine.Vector3.forward);
+            posList.Add(position + 2 * UnityEngine.Vector3.down + UnityEngine.Vector3.back);
 
-            posList.Add(position + 2 * Vector3.forward + Vector3.up);
-            posList.Add(position + 2 * Vector3.forward + Vector3.down);
-            posList.Add(position + 2 * Vector3.forward + Vector3.left);
-            posList.Add(position + 2 * Vector3.forward + Vector3.right);
-            posList.Add(position + 2 * Vector3.back + Vector3.up);
-            posList.Add(position + 2 * Vector3.back + Vector3.down);
-            posList.Add(position + 2 * Vector3.back + Vector3.left);
-            posList.Add(position + 2 * Vector3.back + Vector3.right);
+            posList.Add(position + 2 * UnityEngine.Vector3.forward + UnityEngine.Vector3.up);
+            posList.Add(position + 2 * UnityEngine.Vector3.forward + UnityEngine.Vector3.down);
+            posList.Add(position + 2 * UnityEngine.Vector3.forward + UnityEngine.Vector3.left);
+            posList.Add(position + 2 * UnityEngine.Vector3.forward + UnityEngine.Vector3.right);
+            posList.Add(position + 2 * UnityEngine.Vector3.back + UnityEngine.Vector3.up);
+            posList.Add(position + 2 * UnityEngine.Vector3.back + UnityEngine.Vector3.down);
+            posList.Add(position + 2 * UnityEngine.Vector3.back + UnityEngine.Vector3.left);
+            posList.Add(position + 2 * UnityEngine.Vector3.back + UnityEngine.Vector3.right);
 
 
-            List<Vector3> posListClone = posList;
+            System.Collections.Generic.List<UnityEngine.Vector3> posListClone = posList;
 
-            foreach (Vector3 pos in posListClone) {
+            foreach (UnityEngine.Vector3 pos in posListClone)
+            {
                 foreach (AbstractPiece piece in friendlyPieces)
                 {
-                    if (piece.Location == pos)
-                    {
-                        posList.Remove(pos);
-                    }
+                    if (piece.Location == pos) posList.Remove(pos);
                 }
             }
 
             return posList;
         }
 
-        public static List<Vector3> pawnMoves(Vector3 position, List<AbstractPiece> enemyPieces, List<AbstractPiece> friendlyPieces, chessBoard.currentTeam team)
+        public static System.Collections.Generic.List<UnityEngine.Vector3> pawnMoves(UnityEngine.Vector3 position,
+            System.Collections.Generic.List<AbstractPiece> enemyPieces,
+            System.Collections.Generic.List<AbstractPiece> friendlyPieces, chessBoard.currentTeam team)
         {
             if (team == chessBoard.currentTeam.white)
             {
-
-                List<Vector3> posList = new List<Vector3>();
+                System.Collections.Generic.List<UnityEngine.Vector3> posList =
+                    new System.Collections.Generic.List<UnityEngine.Vector3>();
 
                 bool blocked = false;
 
                 foreach (AbstractPiece piece in enemyPieces)
                 {
-                    if (piece.Location == position + Vector3.forward)
+                    if (piece.Location == position + UnityEngine.Vector3.forward)
                         blocked = true;
                 }
 
                 foreach (AbstractPiece piece in friendlyPieces)
                 {
-                    if (piece.Location == position + Vector3.forward)
+                    if (piece.Location == position + UnityEngine.Vector3.forward)
                         blocked = true;
                 }
 
                 if (!blocked)
                 {
-                    posList.Add(Vector3.forward + position);
+                    posList.Add(UnityEngine.Vector3.forward + position);
 
 
-                    if (position.z == 1 || position.z == 8)
-                    {
-                        posList.Add(2 * Vector3.forward + position);
-                    }
+                    if (position.z == 1 || position.z == 8) posList.Add(2 * UnityEngine.Vector3.forward + position);
                 }
                 else
                 {
                     foreach (AbstractPiece piece in enemyPieces)
                     {
-                        if (piece.Location == Vector3.forward + Vector3.up + position)
-                        {
-                            posList.Add(Vector3.forward + Vector3.up + position);
-                        }
-                        else if (piece.Location == Vector3.forward + Vector3.down + position)
-                        {
-                            posList.Add(Vector3.forward + Vector3.down + position);
-                        }
-                        else if (piece.Location == Vector3.forward + Vector3.right + position)
-                        {
-                            posList.Add(Vector3.forward + Vector3.right + position);
-                        }
-                        else if (piece.Location == Vector3.forward + Vector3.left + position)
-                        {
-                            posList.Add(Vector3.forward + Vector3.left + position);
-                        }
+                        if (piece.Location == UnityEngine.Vector3.forward + UnityEngine.Vector3.up + position)
+                            posList.Add(UnityEngine.Vector3.forward + UnityEngine.Vector3.up + position);
+                        else if (piece.Location == UnityEngine.Vector3.forward + UnityEngine.Vector3.down + position)
+                            posList.Add(UnityEngine.Vector3.forward + UnityEngine.Vector3.down + position);
+                        else if (piece.Location == UnityEngine.Vector3.forward + UnityEngine.Vector3.right + position)
+                            posList.Add(UnityEngine.Vector3.forward + UnityEngine.Vector3.right + position);
+                        else if (piece.Location == UnityEngine.Vector3.forward + UnityEngine.Vector3.left + position)
+                            posList.Add(UnityEngine.Vector3.forward + UnityEngine.Vector3.left + position);
                     }
                 }
 
@@ -266,125 +267,137 @@ namespace IMRE.Chess3D {
 
             if (team == chessBoard.currentTeam.black)
             {
-                List<Vector3> posList = new List<Vector3>();
+                System.Collections.Generic.List<UnityEngine.Vector3> posList =
+                    new System.Collections.Generic.List<UnityEngine.Vector3>();
 
                 bool blocked = false;
 
                 foreach (AbstractPiece piece in enemyPieces)
                 {
-                    if (piece.Location == position + Vector3.back)
+                    if (piece.Location == position + UnityEngine.Vector3.back)
                         blocked = true;
                 }
 
                 foreach (AbstractPiece piece in friendlyPieces)
                 {
-                    if (piece.Location == position + Vector3.back)
+                    if (piece.Location == position + UnityEngine.Vector3.back)
                         blocked = true;
                 }
 
                 if (!blocked)
                 {
-                    posList.Add(Vector3.back + position);
+                    posList.Add(UnityEngine.Vector3.back + position);
 
 
-                    if (position.z == 1 || position.z == 8)
-                    {
-                        posList.Add(2 * Vector3.back + position);
-                    }
+                    if (position.z == 1 || position.z == 8) posList.Add(2 * UnityEngine.Vector3.back + position);
                 }
                 else
                 {
                     foreach (AbstractPiece piece in enemyPieces)
                     {
-                        if (piece.Location == Vector3.back + Vector3.up + position)
-                        {
-                            posList.Add(Vector3.back + Vector3.up + position);
-                        }
-                        else if (piece.Location == Vector3.back + Vector3.down + position)
-                        {
-                            posList.Add(Vector3.back + Vector3.down + position);
-                        }
-                        else if (piece.Location == Vector3.back + Vector3.right + position)
-                        {
-                            posList.Add(Vector3.back + Vector3.right + position);
-                        }
-                        else if (piece.Location == Vector3.back + Vector3.left + position)
-                        {
-                            posList.Add(Vector3.back + Vector3.left + position);
-                        }
+                        if (piece.Location == UnityEngine.Vector3.back + UnityEngine.Vector3.up + position)
+                            posList.Add(UnityEngine.Vector3.back + UnityEngine.Vector3.up + position);
+                        else if (piece.Location == UnityEngine.Vector3.back + UnityEngine.Vector3.down + position)
+                            posList.Add(UnityEngine.Vector3.back + UnityEngine.Vector3.down + position);
+                        else if (piece.Location == UnityEngine.Vector3.back + UnityEngine.Vector3.right + position)
+                            posList.Add(UnityEngine.Vector3.back + UnityEngine.Vector3.right + position);
+                        else if (piece.Location == UnityEngine.Vector3.back + UnityEngine.Vector3.left + position)
+                            posList.Add(UnityEngine.Vector3.back + UnityEngine.Vector3.left + position);
                     }
                 }
 
                 return posList;
             }
+
             return null;
-            
         }
-        public static List<Vector3> bishopMoves(Vector3 position, List<AbstractPiece> enemyPieces, List<AbstractPiece> friendlyPieces)
+
+        public static System.Collections.Generic.List<UnityEngine.Vector3> bishopMoves(UnityEngine.Vector3 position,
+            System.Collections.Generic.List<AbstractPiece> enemyPieces,
+            System.Collections.Generic.List<AbstractPiece> friendlyPieces)
         {
-            List<Vector3> posList = new List<Vector3>();
-  
-            pathMoves(Vector3.up + Vector3.left, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.up + Vector3.right, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.up + Vector3.back, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.up + Vector3.forward, position, enemyPieces, friendlyPieces, posList);
+            System.Collections.Generic.List<UnityEngine.Vector3> posList =
+                new System.Collections.Generic.List<UnityEngine.Vector3>();
 
-            pathMoves(Vector3.down + Vector3.left, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.down + Vector3.right, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.down + Vector3.back, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.down + Vector3.forward, position, enemyPieces, friendlyPieces, posList);
+            pathMoves(UnityEngine.Vector3.up + UnityEngine.Vector3.left, position, enemyPieces, friendlyPieces,
+                posList);
+            pathMoves(UnityEngine.Vector3.up + UnityEngine.Vector3.right, position, enemyPieces, friendlyPieces,
+                posList);
+            pathMoves(UnityEngine.Vector3.up + UnityEngine.Vector3.back, position, enemyPieces, friendlyPieces,
+                posList);
+            pathMoves(UnityEngine.Vector3.up + UnityEngine.Vector3.forward, position, enemyPieces, friendlyPieces,
+                posList);
 
-            pathMoves(Vector3.left + Vector3.back, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.left + Vector3.forward, position, enemyPieces, friendlyPieces, posList);
+            pathMoves(UnityEngine.Vector3.down + UnityEngine.Vector3.left, position, enemyPieces, friendlyPieces,
+                posList);
+            pathMoves(UnityEngine.Vector3.down + UnityEngine.Vector3.right, position, enemyPieces, friendlyPieces,
+                posList);
+            pathMoves(UnityEngine.Vector3.down + UnityEngine.Vector3.back, position, enemyPieces, friendlyPieces,
+                posList);
+            pathMoves(UnityEngine.Vector3.down + UnityEngine.Vector3.forward, position, enemyPieces, friendlyPieces,
+                posList);
 
-            pathMoves(Vector3.right + Vector3.back, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.right + Vector3.forward, position, enemyPieces, friendlyPieces, posList);
+            pathMoves(UnityEngine.Vector3.left + UnityEngine.Vector3.back, position, enemyPieces, friendlyPieces,
+                posList);
+            pathMoves(UnityEngine.Vector3.left + UnityEngine.Vector3.forward, position, enemyPieces, friendlyPieces,
+                posList);
 
-            pathMoves(Vector3.up + Vector3.left + Vector3.forward, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.up + Vector3.left + Vector3.back, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.up + Vector3.right + Vector3.forward, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.up + Vector3.right + Vector3.back, position, enemyPieces, friendlyPieces, posList);
+            pathMoves(UnityEngine.Vector3.right + UnityEngine.Vector3.back, position, enemyPieces, friendlyPieces,
+                posList);
+            pathMoves(UnityEngine.Vector3.right + UnityEngine.Vector3.forward, position, enemyPieces, friendlyPieces,
+                posList);
 
-            pathMoves(Vector3.down + Vector3.left + Vector3.forward, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.down + Vector3.left + Vector3.back, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.down + Vector3.right + Vector3.forward, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.down + Vector3.right + Vector3.back, position, enemyPieces, friendlyPieces, posList);
+            pathMoves(UnityEngine.Vector3.up + UnityEngine.Vector3.left + UnityEngine.Vector3.forward, position,
+                enemyPieces, friendlyPieces, posList);
+            pathMoves(UnityEngine.Vector3.up + UnityEngine.Vector3.left + UnityEngine.Vector3.back, position,
+                enemyPieces, friendlyPieces, posList);
+            pathMoves(UnityEngine.Vector3.up + UnityEngine.Vector3.right + UnityEngine.Vector3.forward, position,
+                enemyPieces, friendlyPieces, posList);
+            pathMoves(UnityEngine.Vector3.up + UnityEngine.Vector3.right + UnityEngine.Vector3.back, position,
+                enemyPieces, friendlyPieces, posList);
 
-            List<Vector3> posListClone = posList;
+            pathMoves(UnityEngine.Vector3.down + UnityEngine.Vector3.left + UnityEngine.Vector3.forward, position,
+                enemyPieces, friendlyPieces, posList);
+            pathMoves(UnityEngine.Vector3.down + UnityEngine.Vector3.left + UnityEngine.Vector3.back, position,
+                enemyPieces, friendlyPieces, posList);
+            pathMoves(UnityEngine.Vector3.down + UnityEngine.Vector3.right + UnityEngine.Vector3.forward, position,
+                enemyPieces, friendlyPieces, posList);
+            pathMoves(UnityEngine.Vector3.down + UnityEngine.Vector3.right + UnityEngine.Vector3.back, position,
+                enemyPieces, friendlyPieces, posList);
 
-            foreach (Vector3 pos in posListClone)
+            System.Collections.Generic.List<UnityEngine.Vector3> posListClone = posList;
+
+            foreach (UnityEngine.Vector3 pos in posListClone)
             {
                 foreach (AbstractPiece piece in friendlyPieces)
                 {
-                    if (piece.Location == pos)
-                    {
-                        posList.Remove(pos);
-                    }
+                    if (piece.Location == pos) posList.Remove(pos);
                 }
             }
 
             return posList;
         }
-        public static List<Vector3> rookMoves(Vector3 position, List<AbstractPiece> enemyPieces, List<AbstractPiece> friendlyPieces)
+
+        public static System.Collections.Generic.List<UnityEngine.Vector3> rookMoves(UnityEngine.Vector3 position,
+            System.Collections.Generic.List<AbstractPiece> enemyPieces,
+            System.Collections.Generic.List<AbstractPiece> friendlyPieces)
         {
-            List<Vector3> posList = new List<Vector3>();
-            pathMoves(Vector3.up, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.down, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.forward, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.back, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.right, position, enemyPieces, friendlyPieces, posList);
-            pathMoves(Vector3.left, position, enemyPieces, friendlyPieces, posList);
+            System.Collections.Generic.List<UnityEngine.Vector3> posList =
+                new System.Collections.Generic.List<UnityEngine.Vector3>();
+            pathMoves(UnityEngine.Vector3.up, position, enemyPieces, friendlyPieces, posList);
+            pathMoves(UnityEngine.Vector3.down, position, enemyPieces, friendlyPieces, posList);
+            pathMoves(UnityEngine.Vector3.forward, position, enemyPieces, friendlyPieces, posList);
+            pathMoves(UnityEngine.Vector3.back, position, enemyPieces, friendlyPieces, posList);
+            pathMoves(UnityEngine.Vector3.right, position, enemyPieces, friendlyPieces, posList);
+            pathMoves(UnityEngine.Vector3.left, position, enemyPieces, friendlyPieces, posList);
 
-            List<Vector3> posListClone = posList;
+            System.Collections.Generic.List<UnityEngine.Vector3> posListClone = posList;
 
-            foreach (Vector3 pos in posListClone)
+            foreach (UnityEngine.Vector3 pos in posListClone)
             {
                 foreach (AbstractPiece piece in friendlyPieces)
                 {
-                    if (piece.Location == pos)
-                    {
-                        posList.Remove(pos);
-                    }
+                    if (piece.Location == pos) posList.Remove(pos);
                 }
             }
 

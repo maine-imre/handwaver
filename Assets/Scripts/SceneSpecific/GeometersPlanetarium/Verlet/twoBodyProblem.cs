@@ -1,31 +1,24 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace IMRE.HandWaver.Space.BigBertha
+﻿namespace IMRE.HandWaver.Space.BigBertha
 {
 	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is TB
-	/// Status: WORKING
+	///     This script does ___.
+	///     The main contributor(s) to this script is TB
+	///     Status: WORKING
 	/// </summary>
-	public class twoBodyProblem : MonoBehaviour
-	{
+	public class twoBodyProblem : UnityEngine.MonoBehaviour
+    {
+        private void twoBodyAlgorithm()
+        {
+        }
 
-		void twoBodyAlgorithm()
-		{
+        // Use this for initialization
+        private void Start()
+        {
+        }
 
-		}
-		// Use this for initialization
-		void Start()
-		{
-
-		}
-
-		// Update is called once per frame
-		void Update()
-		{
-
-		}
-	}
+        // Update is called once per frame
+        private void Update()
+        {
+        }
+    }
 }

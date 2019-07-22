@@ -1,71 +1,77 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System.Threading;
+﻿public class AbstractThread
+{
+    private readonly object m_Handle = new object();
+    private bool m_IsDone;
+    private string m_Name;
+    private System.Threading.Thread m_Thread;
 
-public class AbstractThread {
-	private bool m_IsDone = false;
-	private object m_Handle = new object();
-	private Thread m_Thread = null;
-	private string m_Name = null;
+    public string ThreadName
+    {
+        get
+        {
+            string tmp;
+            lock (m_Handle) tmp = m_Name;
+            return tmp;
+        }
+        set
+        {
+            lock (m_Handle) m_Name = value;
+        }
+    }
 
-	public string ThreadName {
-		get {
-			string tmp;
-			lock (m_Handle) {
-				tmp = m_Name;
-			}
-			return tmp;
-		}
-		set {
-			lock (m_Handle) {
-				m_Name = value;
-			}
-		}
-	}
+    public bool IsDone
+    {
+        get
+        {
+            bool tmp;
+            lock (m_Handle) tmp = m_IsDone;
+            return tmp;
+        }
+        set
+        {
+            lock (m_Handle) m_IsDone = value;
+        }
+    }
 
-	public bool IsDone {
-		get {
-			bool tmp;
-			lock (m_Handle) {
-				tmp = m_IsDone;
-			}
-			return tmp;
-		}
-		set {
-			lock (m_Handle) {
-				m_IsDone = value;
-			}
-		}
-	}
+    public virtual void Start()
+    {
+        m_Thread = new System.Threading.Thread(Run);
+        m_Thread.Start();
+    }
 
-	public virtual void Start () {
-		m_Thread = new Thread(Run);
-		m_Thread.Start();
-	}
-	public virtual void Abort () {
-		m_Thread.Abort();
-	}
-	protected virtual void ThreadedFunction() {}
+    public virtual void Abort()
+    {
+        m_Thread.Abort();
+    }
 
-	protected virtual Vector3d OnFinished() {return new Vector3d();}
+    protected virtual void ThreadedFunction()
+    {
+    }
 
-	public virtual bool Update() {
-		if(IsDone) {
-			OnFinished();
-			return true;
-		}
-		return false;
-	}
+    protected virtual UnityEngine.Vector3d OnFinished()
+    {
+        return new UnityEngine.Vector3d();
+    }
 
-	public IEnumerator WaitFor() {
-		while(!Update()) {
-			yield return null;
-		}
-	}
+    public virtual bool Update()
+    {
+        if (IsDone)
+        {
+            OnFinished();
+            return true;
+        }
 
-	public void Run() {
-		ThreadedFunction();
-		IsDone = true;
-	}
+        return false;
+    }
+
+    public System.Collections.IEnumerator WaitFor()
+    {
+        while (!Update()) yield return null;
+    }
+
+    public void Run()
+    {
+        ThreadedFunction();
+        IsDone = true;
+    }
 }

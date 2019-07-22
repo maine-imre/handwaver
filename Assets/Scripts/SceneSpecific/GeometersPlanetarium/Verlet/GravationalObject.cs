@@ -1,68 +1,69 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System;
-
-namespace IMRE.HandWaver.Space.BigBertha
+﻿namespace IMRE.HandWaver.Space.BigBertha
 {
 	/// <summary>
-	/// This script does ___.
-	/// The main contributor(s) to this script is TB
-	/// Status: WORKING
+	///     This script does ___.
+	///     The main contributor(s) to this script is TB
+	///     Status: WORKING
 	/// </summary>
-	public class GravationalObject : MonoBehaviour
-	{
-		public float mass;
-		public Vector3d positionVector = new Vector3d();    //position vector
+	public class GravationalObject : UnityEngine.MonoBehaviour
+    {
+        public UnityEngine.Vector3d ForceVec; //Force Vector
 
-		public float scale = 1;
+        [UnityEngine.HideInInspector] public UnityEngine.Vector3d LastVector;
 
-		[HideInInspector]
-		public Vector3d LastVector;
-		public Vector3d VelVec = new Vector3d(); //Velocity Vector
-		public Vector3 VelocityVector = new Vector3(); //UI velocity vector
-		public Vector3d ForceVec = new Vector3d(); //Force Vector
-		public Vector3 position;    //UI position vector
+        public float mass;
+        public UnityEngine.Vector3 position; //UI position vector
+        public UnityEngine.Vector3d positionVector; //position vector
 
-		// Use this for initialization
-		void Start()
-		{
-			VelVec.x = (double)VelocityVector.x;
-			VelVec.y = (double)VelocityVector.y;
-			VelVec.z = (double)VelocityVector.z;
+        public float scale = 1;
+        public UnityEngine.Vector3 VelocityVector; //UI velocity vector
+        public UnityEngine.Vector3d VelVec; //Velocity Vector
 
-			positionVector.x = position.x;
-			positionVector.y = position.y;
-			positionVector.z = position.z;
-		}
+        // Use this for initialization
+        private void Start()
+        {
+            VelVec.x = VelocityVector.x;
+            VelVec.y = VelocityVector.y;
+            VelVec.z = VelocityVector.z;
 
-		// Update is called once per frame
-		void Update()
-		{
-			gameObject.transform.position = new Vector3((float)positionVector.x * scale, (float)positionVector.y * scale, (float)positionVector.z * scale);
-		}
-		public void step1(float dt)
-		{
-			ForceVec = VelVec * (mass / dt);
-			LastVector = positionVector;
-			Debug.Log(ForceVec);
-		}
-		public void step2(GravationalObject gravitationObject, float dt)
-		{
-			ForceVec = ForceVec + gravityVector(gravitationObject);
-		}
-		public void step3(float dt)
-		{
-			VelVec = VelVec + ((ForceVec / mass) * (float)Math.Pow(dt, 2));
-		}
-		Vector3d gravityVector(GravationalObject otherObject)
-		{
-			Double distance = Vector3d.Distance(positionVector, otherObject.LastVector);
-			float F = (float)(6.67408 * Math.Pow(10, -11)) * (float)((mass * otherObject.mass) / Math.Pow(distance, 2)); //meters, kg, seconds
-			Vector3d vectorn = otherObject.LastVector - positionVector;
-			vectorn.Normalize();
-			vectorn = vectorn * F;
-			return vectorn;
-		}
-	}
+            positionVector.x = position.x;
+            positionVector.y = position.y;
+            positionVector.z = position.z;
+        }
+
+        // Update is called once per frame
+        private void Update()
+        {
+            gameObject.transform.position = new UnityEngine.Vector3((float) positionVector.x * scale,
+                (float) positionVector.y * scale, (float) positionVector.z * scale);
+        }
+
+        public void step1(float dt)
+        {
+            ForceVec = VelVec * (mass / dt);
+            LastVector = positionVector;
+            UnityEngine.Debug.Log(ForceVec);
+        }
+
+        public void step2(GravationalObject gravitationObject, float dt)
+        {
+            ForceVec = ForceVec + gravityVector(gravitationObject);
+        }
+
+        public void step3(float dt)
+        {
+            VelVec = VelVec + ForceVec / mass * (float) System.Math.Pow(dt, 2);
+        }
+
+        private UnityEngine.Vector3d gravityVector(GravationalObject otherObject)
+        {
+            double distance = UnityEngine.Vector3d.Distance(positionVector, otherObject.LastVector);
+            float F = (float) (6.67408 * System.Math.Pow(10, -11)) *
+                      (float) (mass * otherObject.mass / System.Math.Pow(distance, 2)); //meters, kg, seconds
+            UnityEngine.Vector3d vectorn = otherObject.LastVector - positionVector;
+            vectorn.Normalize();
+            vectorn = vectorn * F;
+            return vectorn;
+        }
+    }
 }

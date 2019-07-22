@@ -1,27 +1,22 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Leap.Unity.Interaction;
-using System;
-
-namespace IMRE.HandWaver.HigherDimensions
+﻿namespace IMRE.HandWaver.HigherDimensions
 {
     /// <summary>
-    /// Central control for scale and dimension study.
-    /// needs to be renamed to reflect this.
+    ///     Central control for scale and dimension study.
+    ///     needs to be renamed to reflect this.
     /// </summary>
-	public class HigherDimExperimentControl : MonoBehaviour
+    public class HigherDimExperimentControl : UnityEngine.MonoBehaviour
     {
-        public InteractionSlider foldSlider_lm;
-        public UnityEngine.UI.Slider foldSlider_onScreen;
-        internal static float degreeFolded = 0f;
-        public bool animateFold = false;
-        public InteractionSlider animateButton_lm;
+        internal static float degreeFolded;
         public UnityEngine.UI.Button aniamteButton_onScreen;
+        public Leap.Unity.Interaction.InteractionSlider animateButton_lm;
+        public bool animateFold;
 
         public bool foldOverride;
-        [Range(0, 360)]
-        public float foldOverrideValue = 0f;
+
+        [UnityEngine.RangeAttribute(0, 360)] public float foldOverrideValue;
+
+        public Leap.Unity.Interaction.InteractionSlider foldSlider_lm;
+        public UnityEngine.UI.Slider foldSlider_onScreen;
 
         private void Awake()
         {
@@ -64,20 +59,17 @@ namespace IMRE.HandWaver.HigherDimensions
             degreeFolded = foldSlider_lm.normalizedHorizontalValue * 360f;
         }
 
-        void Update()
+        private void Update()
         {
-            if (foldOverride)
-            {
-                degreeFolded = foldOverrideValue;
-            }
+            if (foldOverride) degreeFolded = foldOverrideValue;
             if (animateFold)
             {
-                Debug.Log(degreeFolded);
+                UnityEngine.Debug.Log(degreeFolded);
                 degreeFolded++;
-                if(foldSlider_lm != null)
-                foldSlider_lm.HorizontalSliderValue = degreeFolded / 360f;
-                if(foldSlider_onScreen != null)
-                foldSlider_onScreen.normalizedValue = degreeFolded / 360f;
+                if (foldSlider_lm != null)
+                    foldSlider_lm.HorizontalSliderValue = degreeFolded / 360f;
+                if (foldSlider_onScreen != null)
+                    foldSlider_onScreen.normalizedValue = degreeFolded / 360f;
             }
         }
     }

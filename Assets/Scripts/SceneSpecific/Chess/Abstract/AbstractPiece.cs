@@ -5,146 +5,74 @@ See license info in readme.md.
 www.imrelab.org
 **/
 
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Leap.Unity.Interaction;
-
 namespace IMRE.Chess3D
 {
-    [RequireComponent(typeof(InteractionBehaviour))]
-
-/// <summary>
-/// An abstracted version of the chess piece.
-/// </summary>
-	public abstract class AbstractPiece : MonoBehaviour
+    [UnityEngine.RequireComponent(typeof(Leap.Unity.Interaction.InteractionBehaviour))]
+    /// <summary>
+    /// An abstracted version of the chess piece.
+    /// </summary>
+    public abstract class AbstractPiece : UnityEngine.MonoBehaviour
     {
-        private chessBoard board;
-
-        private Vector3 location;
-        private chessBoard.currentTeam team;
-        private chessBoard.PieceType pieceType;
-        private bool isCaptured = false;
-
-        public List<AbstractPiece> myTeam()
+        public System.Collections.Generic.List<AbstractPiece> myTeam()
         {
-            return board.myTeam(team);
+            return Board.myTeam(Team);
         }
-        public List<AbstractPiece> otherTeam()
+
+        public System.Collections.Generic.List<AbstractPiece> otherTeam()
         {
-            return board.otherTeam(team);
+            return Board.otherTeam(Team);
         }
 
 
         /// <summary>
-        /// Tests requested move compared to current location 
+        ///     Tests requested move compared to current location
         /// </summary>
         /// <param name="attemptedMove">the attempted move on this current piece</param>
         /// <returns>true if the move requested is valid</returns>
-        public abstract bool IsValid(Vector3 attemptedMove);
+        public abstract bool IsValid(UnityEngine.Vector3 attemptedMove);
 
-        public abstract List<Vector3> validMoves();
-
+        public abstract System.Collections.Generic.List<UnityEngine.Vector3> validMoves();
 
 
         /// <summary>
-        /// Called when the peice is captured
+        ///     Called when the peice is captured
         /// </summary>
         public abstract void capture();
 
 
-
         /// <summary>
-        /// Moves the piece after testing if it is a valid move
+        ///     Moves the piece after testing if it is a valid move
         /// </summary>
         /// <param name="attemptedMove">the attempted move on this current piece</param>
-        public void move(Vector3 attemptedMove)
+        public void move(UnityEngine.Vector3 attemptedMove)
         {
             if (IsValid(attemptedMove))
             {
-                AbstractPiece pieceInSpot = board.TestLocation(attemptedMove);
-                if (pieceInSpot != null)
-                {
-                    pieceInSpot.capture();
-                }
-                this.Location.Set(attemptedMove.x, attemptedMove.y, attemptedMove.z);
-                board.Check(this, attemptedMove);
+                AbstractPiece pieceInSpot = Board.TestLocation(attemptedMove);
+                if (pieceInSpot != null) pieceInSpot.capture();
+                Location.Set(attemptedMove.x, attemptedMove.y, attemptedMove.z);
+                Board.Check(this, attemptedMove);
             }
-
         }
 
         #region GettersSetters
-        /// <summary>
-        /// Current location of the piece
-        /// </summary>
-        public Vector3 Location
-        {
-            get
-            {
-                return location;
-            }
-
-            set
-            {
-                location = value;
-            }
-        }
 
         /// <summary>
-        /// Is piece captured by opponent
+        ///     Current location of the piece
         /// </summary>
-        public bool IsCaptured
-        {
-            get
-            {
-                return isCaptured;
-            }
+        public UnityEngine.Vector3 Location { get; set; }
 
-            set
-            {
-                this.isCaptured = value;
-            }
-        }
+        /// <summary>
+        ///     Is piece captured by opponent
+        /// </summary>
+        public bool IsCaptured { get; set; } = false;
 
-        public chessBoard.PieceType PieceType
-        {
-            get
-            {
-                return pieceType;
-            }
+        public chessBoard.PieceType PieceType { get; set; }
 
-            set
-            {
-                pieceType = value;
-            }
-        }
-        public chessBoard.currentTeam Team
-        {
-            get
-            {
-                return team;
-            }
+        public chessBoard.currentTeam Team { get; set; }
 
-            set
-            {
-                team = value;
-            }
-        }
-
-        public chessBoard Board
-        {
-            get
-            {
-                return board;
-            }
-
-            set
-            {
-                board = value;
-            }
-        }
+        public chessBoard Board { get; set; }
 
         #endregion
-
     }
 }
