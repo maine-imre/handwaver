@@ -46,8 +46,8 @@ There are 3 layers to the gesture system.
 This sections notes which individual implementations we have added to our data structure by generalizing the data passed by the specific APIs.
 * **OSVR**  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Allows easy setup and use of multiple VR hardware brands and types.
-* **Aristo**  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Vive Pro hand tracking
+* **Vive Hand Tracking**  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Vive Pro hand tracking, previously called Aristo.
 * **Leap Motion**  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Hand tracking with a small peripheral device
 
