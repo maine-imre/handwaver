@@ -60,7 +60,6 @@
                     UnityEngine.Vector3.up);
                 //int latitude = Mathf.RoundToInt(((Vector3.SignedAngle(Vector3.right, Vector3.ProjectOnPlane(starData[i],Vector3.forward).normalized, Vector3.forward)+180)));
 
-
                 float latitude = UnityEngine.Vector3.Angle(
                     UnityEngine.Vector3.ProjectOnPlane(starPosData[i], UnityEngine.Vector3.up).normalized,
                     starPosData[i].normalized);

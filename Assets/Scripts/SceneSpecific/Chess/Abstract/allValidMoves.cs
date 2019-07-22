@@ -52,7 +52,6 @@ namespace IMRE.Chess3D
             posList.Add(position + UnityEngine.Vector3.down + UnityEngine.Vector3.right + UnityEngine.Vector3.forward);
             posList.Add(position + UnityEngine.Vector3.down + UnityEngine.Vector3.right + UnityEngine.Vector3.back);
 
-
             System.Collections.Generic.List<UnityEngine.Vector3> posListClone = posList;
 
             foreach (UnityEngine.Vector3 pos in posListClone)
@@ -203,7 +202,6 @@ namespace IMRE.Chess3D
             posList.Add(position + 2 * UnityEngine.Vector3.back + UnityEngine.Vector3.left);
             posList.Add(position + 2 * UnityEngine.Vector3.back + UnityEngine.Vector3.right);
 
-
             System.Collections.Generic.List<UnityEngine.Vector3> posListClone = posList;
 
             foreach (UnityEngine.Vector3 pos in posListClone)
@@ -243,7 +241,6 @@ namespace IMRE.Chess3D
                 if (!blocked)
                 {
                     posList.Add(UnityEngine.Vector3.forward + position);
-
 
                     if (position.z == 1 || position.z == 8) posList.Add(2 * UnityEngine.Vector3.forward + position);
                 }
@@ -287,7 +284,6 @@ namespace IMRE.Chess3D
                 if (!blocked)
                 {
                     posList.Add(UnityEngine.Vector3.back + position);
-
 
                     if (position.z == 1 || position.z == 8) posList.Add(2 * UnityEngine.Vector3.back + position);
                 }

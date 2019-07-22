@@ -57,7 +57,6 @@ public class cubeNet : UnityEngine.MonoBehaviour
         result[6] = squareVert(result[0], result[1], result[3], t);
         result[7] = squareVert(result[0], result[1], result[2], t);
 
-
         result[8] = squareVert(result[2], result[3], result[1], t);
         result[9] = squareVert(result[2], result[3], result[0], t);
 
