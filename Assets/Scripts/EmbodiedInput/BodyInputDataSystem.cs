@@ -1,60 +1,54 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Mathematics;
-using UnityEngine;
 #if LeapMotion
-    using Leap.Unity;
+using Leap.Unity;
 #endif
-
 #if ViveSense
-    using ViveHandTracking;
+using ViveHandTracking;
+
 #endif
 
 #if ValveSkeletal
     using Valve.VR;
 #endif
 
-
 namespace IMRE.EmbodiedUserInput
 {
-
     /// <summary>
-    /// A class that makes tracking data from different sources generic
+    ///     A class that makes tracking data from different sources generic
     /// </summary>
-    public class BodyInputDataSystem : MonoBehaviour
+    public class BodyInputDataSystem : UnityEngine.MonoBehaviour
     {
         public bool enableLeapMotion = true;
         public bool enableViveSense = true;
-        public bool enableOSVR = false;
-        public bool enableRealSense = false;
-        public bool enableValveSkeletal = false;
+        public bool enableOSVR;
+        public bool enableRealSense;
+        public bool enableValveSkeletal;
 
         /// <summary>
-        /// The struct that stores tracking data in a generic form.
-        /// This struct could be synced over the network in order to have avatars in a multiplayer context.
-        /// This struct is passed to gestures in order to determine if they should be invoked.
+        ///     The struct that stores tracking data in a generic form.
+        ///     This struct could be synced over the network in order to have avatars in a multiplayer context.
+        ///     This struct is passed to gestures in order to determine if they should be invoked.
         /// </summary>
-        public static BodyInput bodyInput = new BodyInput();
+        public static BodyInput bodyInput;
 
-        private Queue<BodyInput> bodyInputQue = new Queue<BodyInput>();
+        private readonly System.Collections.Generic.Queue<BodyInput> bodyInputQue =
+            new System.Collections.Generic.Queue<BodyInput>();
 
-        private Camera mainCamera;
+        private UnityEngine.Camera mainCamera;
 
         //public event HeadTrackingLost ;
         //public event HandTrackingLost ;
         //public event BodyTrackingLost ;
 
 #if LeapMotion
-        private static Leap.Unity.LeapXRServiceProvider LeapService;
+        private static LeapXRServiceProvider LeapService;
 #endif
 
         /// <summary>
-        /// Setup the BodyInput for each source.
+        ///     Setup the BodyInput for each source.
         /// </summary>
         public void Awake()
         {
-            mainCamera = Camera.main;
+            mainCamera = UnityEngine.Camera.main;
 
             bodyInput = BodyInput.newInput();
             bodyInput.FullBodyTracking = false;
@@ -62,10 +56,7 @@ namespace IMRE.EmbodiedUserInput
             bodyInput.SimulatedHandTracking = false;
             bodyInput.HeadTracking = false;
             bodyInput.SimulatedHeadTracking = false;
-            if (enableOSVR)
-            {
-                bodyInput.HeadTracking = true;
-            }
+            if (enableOSVR) bodyInput.HeadTracking = true;
 
 #if ViveSense
             if (enableViveSense)
@@ -73,7 +64,7 @@ namespace IMRE.EmbodiedUserInput
                 bodyInput.FullBodyTracking = true;
                 bodyInput.HandTracking = true;
                 bodyInput.SimulatedHandTracking = true;
-                bodyInput.HeadTracking = true;            
+                bodyInput.HeadTracking = true;
             }
 #endif
 
@@ -98,7 +89,7 @@ namespace IMRE.EmbodiedUserInput
 #endif
 
 #if LeapMotion
-            LeapService = FindObjectOfType<Leap.Unity.LeapXRServiceProvider>();
+            LeapService = FindObjectOfType<LeapXRServiceProvider>();
             if (enableLeapMotion)
             {
                 bodyInput.HandTracking = true;
@@ -118,10 +109,8 @@ namespace IMRE.EmbodiedUserInput
             setupAvatar();
         }
 
-
-
         /// <summary>
-        /// Every 1/90th of a second, update the Body Input
+        ///     Every 1/90th of a second, update the Body Input
         /// </summary>
         public void FixedUpdate()
         {
@@ -133,22 +122,23 @@ namespace IMRE.EmbodiedUserInput
 #endif
 
 #if ViveSense
-            if (enableViveSense){
+            if (enableViveSense)
+            {
                 if (GestureProvider.UpdatedInThisFrame)
                 {
                     //this will enter here only when there is at least one hand with no new data from the vive pro tracking
                     //this means that we do not know which hand or if it was both hands that were not seen by the sensor this frame
-                    
+
                     //this is a dummy value which will be used to indicate that hands were not tracked
-                    float3 empty = new float3(-10f,-10f,-10f);
-                    
+                    Unity.Mathematics.float3 empty = new Unity.Mathematics.float3(-10f, -10f, -10f);
+
                     //These two ifs  will check to see which hand was not tracked. Then gives dummy values for all fields
                     if (GestureProvider.LeftHand == null)
                     {
                         bodyInput.LeftHand.Palm.Position = empty;
                         bodyInput.LeftHand.Palm.Direction = empty;
                         bodyInput.LeftHand.PinchStrength = 0;
-                        
+
                         //count through five fingers
                         for (int fIDX = 0; fIDX < 5; fIDX++)
                         {
@@ -160,17 +150,18 @@ namespace IMRE.EmbodiedUserInput
                                 bodyInput.LeftHand.Fingers[fIDX].Joints[jIDX].Position = empty;
                                 bodyInput.LeftHand.Fingers[fIDX].Joints[jIDX].Direction = empty;
                             }
-                            
+
                             //this could cause problems later if we set some sort of meaning to be derived from making a fist
                             bodyInput.LeftHand.Fingers[fIDX].IsExtended = false;
                         }
                     }
 
-                    if (GestureProvider.RightHand == null){
+                    if (GestureProvider.RightHand == null)
+                    {
                         bodyInput.RightHand.Palm.Position = empty;
                         bodyInput.RightHand.Palm.Direction = empty;
                         bodyInput.RightHand.PinchStrength = 0;
-                        
+
                         for (int fIDX = 0; fIDX < 5; fIDX++)
                         {
                             bodyInput.RightHand.Fingers[fIDX].Direction = empty;
@@ -181,15 +172,14 @@ namespace IMRE.EmbodiedUserInput
                                 bodyInput.RightHand.Fingers[fIDX].Joints[jIDX].Position = empty;
                                 bodyInput.RightHand.Fingers[fIDX].Joints[jIDX].Direction = empty;
                             }
-                            
+
                             //this could cause problems later if we set some sort of meaning to be derived from making a fist
                             bodyInput.RightHand.Fingers[fIDX].IsExtended = false;
                         }
                     }
-                    
                 }
 
-                setPositionsViveSense();          
+                setPositionsViveSense();
             }
 #endif
 
@@ -207,7 +197,6 @@ namespace IMRE.EmbodiedUserInput
 
                 bodyInput.Head.Position = mainCamera.transform.position;
                 bodyInput.Head.Direction = mainCamera.transform.forward;
-
             }
 #endif
 
@@ -254,22 +243,21 @@ namespace IMRE.EmbodiedUserInput
             }
 #endif
 
-
 #if LeapMotion
         private void setPositionsLeapMotion()
         {
-            if (Leap.Unity.Hands.Left != null)
+            if (Hands.Left != null)
             {
-                bodyInput.LeftHand = leapHandConversion(bodyInput.LeftHand, Leap.Unity.Hands.Left);
+                bodyInput.LeftHand = leapHandConversion(bodyInput.LeftHand, Hands.Left);
             }
             else
             {
-                float3 empty = new float3(-10f,-10f,-10f);
+                Unity.Mathematics.float3 empty = new Unity.Mathematics.float3(-10f, -10f, -10f);
 
                 bodyInput.LeftHand.Palm.Position = empty;
                 bodyInput.LeftHand.Palm.Direction = empty;
                 bodyInput.LeftHand.PinchStrength = 0;
-                        
+
                 //count through five fingers
                 for (int fIDX = 0; fIDX < 5; fIDX++)
                 {
@@ -281,23 +269,23 @@ namespace IMRE.EmbodiedUserInput
                         bodyInput.LeftHand.Fingers[fIDX].Joints[jIDX].Position = empty;
                         bodyInput.LeftHand.Fingers[fIDX].Joints[jIDX].Direction = empty;
                     }
-                            
+
                     //this could cause problems later if we set some sort of meaning to be derived from making a fist
                     bodyInput.LeftHand.Fingers[fIDX].IsExtended = false;
                 }
             }
 
-            if (Leap.Unity.Hands.Right != null)
+            if (Hands.Right != null)
             {
-                bodyInput.RightHand = leapHandConversion(bodyInput.RightHand, Leap.Unity.Hands.Right);
+                bodyInput.RightHand = leapHandConversion(bodyInput.RightHand, Hands.Right);
             }
             else
             {
-                float3 empty = new float3(-10f,-10f,-10f);
+                Unity.Mathematics.float3 empty = new Unity.Mathematics.float3(-10f, -10f, -10f);
                 bodyInput.RightHand.Palm.Position = empty;
                 bodyInput.RightHand.Palm.Direction = empty;
                 bodyInput.RightHand.PinchStrength = 0;
-                        
+
                 for (int fIDX = 0; fIDX < 5; fIDX++)
                 {
                     bodyInput.RightHand.Fingers[fIDX].Direction = empty;
@@ -308,7 +296,7 @@ namespace IMRE.EmbodiedUserInput
                         bodyInput.RightHand.Fingers[fIDX].Joints[jIDX].Position = empty;
                         bodyInput.RightHand.Fingers[fIDX].Joints[jIDX].Direction = empty;
                     }
-                            
+
                     //this could cause problems later if we set some sort of meaning to be derived from making a fist
                     bodyInput.RightHand.Fingers[fIDX].IsExtended = false;
                 }
@@ -345,11 +333,10 @@ namespace IMRE.EmbodiedUserInput
 #if ViveSense
         private void setPositionsViveSense()
         {
-            if(GestureProvider.LeftHand != null)
+            if (GestureProvider.LeftHand != null)
                 bodyInput.LeftHand = viveHandConversion(bodyInput.LeftHand, GestureProvider.LeftHand);
-            if(GestureProvider.RightHand != null)
-                bodyInput.RightHand = viveHandConversion(bodyInput.RightHand,GestureProvider.RightHand);
-            
+            if (GestureProvider.RightHand != null)
+                bodyInput.RightHand = viveHandConversion(bodyInput.RightHand, GestureProvider.RightHand);
         }
 
         private Hand viveHandConversion(Hand myHand, GestureResult viveHand)
@@ -357,34 +344,29 @@ namespace IMRE.EmbodiedUserInput
             myHand.Palm.Position = viveHand.position;
             //TODO make this better
 
-            myHand.Palm.Direction = Vector3.Cross(viveHand.points[0] - viveHand.points[5],
+            myHand.Palm.Direction = UnityEngine.Vector3.Cross(viveHand.points[0] - viveHand.points[5],
                 viveHand.points[0] - viveHand.points[17]).normalized;
             myHand.Wrist.Position = viveHand.points[0];
-            myHand.Wrist.Direction = (viveHand.points[9] - viveHand.points[1]);
+            myHand.Wrist.Direction = viveHand.points[9] - viveHand.points[1];
 
             myHand.PinchStrength = pinchStrength(myHand);
-            
+
             //count through five fingers
             for (int fIDX = 0; fIDX < 5; fIDX++)
             {
                 //average dir across last two joints
-                myHand.Fingers[fIDX].Direction = viveHand.points[4 * fIDX + 4] - viveHand.points[4 * fIDX + 2];
+                myHand.Fingers[fIDX].Direction = viveHand.points[(4 * fIDX) + 4] - viveHand.points[(4 * fIDX) + 2];
 
                 //count through 4 joints
                 for (int jIDX = 0; jIDX < 4; jIDX++)
                 {
-                    myHand.Fingers[fIDX].Joints[jIDX].Position = viveHand.points[4 * fIDX + jIDX + 1];
+                    myHand.Fingers[fIDX].Joints[jIDX].Position = viveHand.points[(4 * fIDX) + jIDX + 1];
                     if (jIDX == 0)
-                    {
                         myHand.Fingers[fIDX].Joints[jIDX].Direction =
-                            viveHand.points[4 * fIDX + jIDX + 1] - viveHand.points[0];
-                    }
+                            viveHand.points[(4 * fIDX) + jIDX + 1] - viveHand.points[0];
                     else
-                    {
-                        //TODO make this better
                         myHand.Fingers[fIDX].Joints[jIDX].Direction =
-                            viveHand.points[4 * fIDX + jIDX + 1] - viveHand.points[4 * fIDX + jIDX];
-                    }
+                            viveHand.points[(4 * fIDX) + jIDX + 1] - viveHand.points[(4 * fIDX) + jIDX];
                 }
 
                 myHand.Fingers[fIDX].IsExtended = isFingerExtended(myHand, fIDX);
@@ -397,14 +379,15 @@ namespace IMRE.EmbodiedUserInput
         private static bool isFingerExtended(Hand currHand, int fingerIndex)
         {
             //TODO make this better, consider curl
-            return Mathf.Abs(Vector3.Angle(currHand.Fingers[fingerIndex].Joints[3].Direction, currHand.Fingers[fingerIndex].Joints[0].Direction)) < 30f;
+            return UnityEngine.Mathf.Abs(UnityEngine.Vector3.Angle(currHand.Fingers[fingerIndex].Joints[3].Direction,
+                       currHand.Fingers[fingerIndex].Joints[0].Direction)) < 30f;
             //return Vector3.Dot(currHand.Fingers[fingerIndex].Direction, currHand.Palm.Direction) < .1f;
         }
 
         private static float pinchStrength(Hand currHand)
         {
-            return 1-(Vector3.Magnitude(currHand.Fingers[0].Joints[3].Position -
-                                          currHand.Fingers[1].Joints[3].Position)*10f);
+            return 1 - (UnityEngine.Vector3.Magnitude(currHand.Fingers[0].Joints[3].Position -
+                                                      currHand.Fingers[1].Joints[3].Position) * 10f);
         }
 
         private void setupAvatar()
@@ -427,15 +410,14 @@ namespace IMRE.EmbodiedUserInput
 
             BodyInput[] queueArray = bodyInputQue.ToArray();
 
-            
             // This should loop from the most recent to the least recent pairs of frames.
             // For example an array of length 5, the loop would do 5/4, 4/3, 3/2, 2/1, 1/0. 
             // This should have the behaviour stopping at K = 1 such that k-1 is 0.
             for (int k = queueLength; k > 2; k--)
             {
                 //take the diff for each frame and divide by framerate
-                BodyInput frame0 = queueArray[k-1];
-                BodyInput frame1 = queueArray[k-2];
+                BodyInput frame0 = queueArray[k - 1];
+                BodyInput frame1 = queueArray[k - 2];
 
                 bodyInput.Head.Velocity +=
                     (frame0.Head.Position - frame1.Head.Position) / frameRate;
@@ -464,7 +446,8 @@ namespace IMRE.EmbodiedUserInput
                         (frame0.LeftLeg[i].Position - frame1.LeftLeg[i].Position) / frameRate;
                     bodyInput.RightLeg[i].Velocity +=
                         (frame0.RightLeg[i].Position - frame1.RightLeg[i].Position) / frameRate;
-                }                
+                }
+
                 for (int i = 0; i < 5; i++)
                 {
                     for (int j = 0; j < 4; j++)
@@ -478,38 +461,34 @@ namespace IMRE.EmbodiedUserInput
                     }
                 }
             }
-
-
         }
 
         private void resetVelocities(BodyInput currBodyInput)
         {
-            currBodyInput.Head.Velocity = Vector3.zero;
-            currBodyInput.Neck.Velocity = Vector3.zero;
-            currBodyInput.Chest.Velocity = Vector3.zero;
-            currBodyInput.Waist.Velocity = Vector3.zero;
-            currBodyInput.RightHand.Palm.Velocity = Vector3.zero;
-            currBodyInput.LeftHand.Palm.Velocity = Vector3.zero;
-            currBodyInput.RightHand.Wrist.Velocity = Vector3.zero;
-            currBodyInput.LeftHand.Wrist.Velocity = Vector3.zero;
+            currBodyInput.Head.Velocity = UnityEngine.Vector3.zero;
+            currBodyInput.Neck.Velocity = UnityEngine.Vector3.zero;
+            currBodyInput.Chest.Velocity = UnityEngine.Vector3.zero;
+            currBodyInput.Waist.Velocity = UnityEngine.Vector3.zero;
+            currBodyInput.RightHand.Palm.Velocity = UnityEngine.Vector3.zero;
+            currBodyInput.LeftHand.Palm.Velocity = UnityEngine.Vector3.zero;
+            currBodyInput.RightHand.Wrist.Velocity = UnityEngine.Vector3.zero;
+            currBodyInput.LeftHand.Wrist.Velocity = UnityEngine.Vector3.zero;
 
             for (int i = 0; i < 3; i++)
             {
-                currBodyInput.LeftArm[i].Velocity = Vector3.zero;
-                currBodyInput.RightArm[i].Velocity = Vector3.zero;
-                currBodyInput.LeftLeg[i].Velocity = Vector3.zero;
-                currBodyInput.RightLeg[i].Velocity = Vector3.zero;
+                currBodyInput.LeftArm[i].Velocity = UnityEngine.Vector3.zero;
+                currBodyInput.RightArm[i].Velocity = UnityEngine.Vector3.zero;
+                currBodyInput.LeftLeg[i].Velocity = UnityEngine.Vector3.zero;
+                currBodyInput.RightLeg[i].Velocity = UnityEngine.Vector3.zero;
             }
 
             for (int i = 0; i < 5; i++)
             {
-
                 for (int j = 0; j < 4; j++)
                 {
-                    currBodyInput.LeftHand.Fingers[i].Joints[j].Velocity = Vector3.zero;
-                    currBodyInput.RightHand.Fingers[i].Joints[j].Velocity = Vector3.zero;
+                    currBodyInput.LeftHand.Fingers[i].Joints[j].Velocity = UnityEngine.Vector3.zero;
+                    currBodyInput.RightHand.Fingers[i].Joints[j].Velocity = UnityEngine.Vector3.zero;
                 }
-
             }
         }
     }
