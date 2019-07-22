@@ -2,6 +2,8 @@
 
 In this document, we describe the methods we use (and their sources) for computing the dynamic figures described in the scale and dimension scene.  We acknolwedge that the cases presented here may be limited in nature.  While this scene was being developed a team was working to integrate with a server-side implementation of GeoGebra.  Any generalized version would use the GGB implementation to do the heavy lifting.
 
+There are four main sections.  The first section describes algorithms for cross sections.  The second section describes algorithms for rendering and folding nets of figures.  The third section describes algorithms for projection of 4D figures into 3D.  The fourth section describes extensions of the Unity.Mathematics library that are necessary to work with the other algorithms.
+
 ## Cross-Sections
 
 
@@ -571,7 +573,7 @@ private static Vector3 triVert(Vector3 nSegmentA, Vector3 nSegmentB, Vector3 opp
 }
 ```
 
-### 5-cell
+### Regular 5-cell
 
 ```c#
 //8 points on unfolded fivecell
@@ -606,7 +608,7 @@ float4 dir4 = center4 - result[0];
 result[7] = center4 + Math.Operations.rotate(dir4, apex - center4, degreeFolded);
 ```
 
-### 8-cell
+### Regular 8-cell
 
 
 ```c#
