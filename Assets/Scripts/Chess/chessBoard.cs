@@ -21,7 +21,7 @@ namespace IMRE.Chess3D {
         public static int boardSize = 9;
 		
 	public static float3 boardOrigin;
-	public static float3 boardDimensions;
+	public static float boardDimensions;
 		
         AbstractPiece[,,] board = new AbstractPiece[boardSize, boardSize, boardSize];
 #pragma warning disable 0649
