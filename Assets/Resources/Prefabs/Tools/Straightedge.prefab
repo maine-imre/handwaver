@@ -16,11 +16,11 @@ GameObject:
   - component: {fileID: 114241979768465734}
   - component: {fileID: 114270360115030558}
   - component: {fileID: 114998953470976522}
+  - component: {fileID: 114148415412259422}
   - component: {fileID: 114738860799767358}
+  - component: {fileID: 114815096054916396}
   - component: {fileID: 114552890470223502}
   - component: {fileID: 82737892036635752}
-  - component: {fileID: 6419151482285546768}
-  - component: {fileID: 8416315399480681874}
   m_Layer: 0
   m_Name: Straightedge
   m_TagString: Straightedge

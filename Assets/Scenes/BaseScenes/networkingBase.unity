@@ -160,8 +160,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1320767845}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_GeneratorAsset: {fileID: 0}
   m_Script: {fileID: 11500000, guid: 84ba3165ae47b554ebe7ac3682039b9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxPlayersPerRoom: 6
+  maxPlayersPerRoom: 4
