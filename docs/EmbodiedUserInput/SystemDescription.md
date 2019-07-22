@@ -42,7 +42,8 @@ There are 3 layers to the gesture system.
 
 ---
 
-## Hardware
+## Hardware  
+This sections notes which individual implementations we have added to our data structure by generalizing the data passed by the specific APIs.
 * **OSVR**  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Allows easy setup and use of multiple VR hardware brands and types.
 * **Aristo**  
