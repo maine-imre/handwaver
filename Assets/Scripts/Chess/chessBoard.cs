@@ -16,9 +16,13 @@ namespace IMRE.Chess3D {
 /// The board that keeps track of pieces and moves for spatial chess.
 /// This is central to the game.
 /// </summary>
-	public class chessBoard : MonoBehaviour{
+	public static class chessBoard : MonoBehaviour{
 
         public static int boardSize = 9;
+		
+	public static float3 boardOrigin;
+	public static float3 boardDimensions;
+		
         AbstractPiece[,,] board = new AbstractPiece[boardSize, boardSize, boardSize];
 #pragma warning disable 0649
 		List<AbstractPiece> whiteTeam;           //white
