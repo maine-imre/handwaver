@@ -1,143 +1,146 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System.Linq;
-using IMRE.HandWaver.ScaleStudy;
-using Unity.Mathematics;
-using Debug = System.Diagnostics.Debug;
-
-namespace IMRE.HandWaver.HigherDimensions
+﻿namespace IMRE.HandWaver.HigherDimensions
 {
-	/// <summary>
-	/// Net of five cell for scale and dimension study.
-	/// </summary>
-	public class fiveCellNet : AbstractHigherDimSolid, ISliderInput
-	{
-		//initialize fold
-		//read only static float GoldenRatio = (1f + Mathf.Sqrt(5f)) / 2f;
-		private float _percentFolded;
-		public bool sliderOverride;
+    /// <summary>
+    ///     Net of five cell for scale and dimension study.
+    /// </summary>
+    public class fiveCellNet : AbstractHigherDimSolid, IMRE.HandWaver.ScaleStudy.ISliderInput
+    {
+        //initialize fold
+        //read only static float GoldenRatio = (1f + Mathf.Sqrt(5f)) / 2f;
+        private float _percentFolded;
 
-		public float PercentFolded
-		{
-			get { return _percentFolded; }
-			set
-			{
-				
-				float4 a = (new float4(1f / math.sqrt(10f), 1f / math.sqrt(6f), 1f / math.sqrt(3f), 1f)) / 2f;
-				float4 b = (new float4(1f / math.sqrt(10f), 1f / math.sqrt(6f), 1f / math.sqrt(3f), -1f)) / 2f;
-				float4 c = (new float4(1f / math.sqrt(10f), 1f / math.sqrt(6f), -2f / math.sqrt(3f), 0f)) / 2f;
-				float4 d = new float4(1f / math.sqrt(10f), -math.sqrt(3f / 2f), 0f, 0f);
-				float4 center1 = (a+b+c) / 3f;
-				float4 dir1 = center1 - d;
-				float4 apex = new float4(-2 * math.sqrt(2f / 5f), 0f, 0f, 0f);
-				float dihedralAngle = Math.Operations.Angle(dir1, apex - center1);
-				
-				_percentFolded = value;
-				//TODO find this value.			
-				originalVertices = vertices(value * dihedralAngle);
-			}
-		}
-		
-		private void Awake()
-		{
-			PercentFolded = 0f;
-		}
+        private UnityEngine.Vector2[] _uvs;
+        public bool sliderOverride;
 
-		public float slider
-		{
-			set => PercentFolded = !sliderOverride ? value : 1f;
-		}
+        public float PercentFolded
+        {
+            get => _percentFolded;
+            set
+            {
+                Unity.Mathematics.float4 a = new Unity.Mathematics.float4(1f / Unity.Mathematics.math.sqrt(10f),
+                                                 1f / Unity.Mathematics.math.sqrt(6f),
+                                                 1f / Unity.Mathematics.math.sqrt(3f), 1f) / 2f;
+                Unity.Mathematics.float4 b = new Unity.Mathematics.float4(1f / Unity.Mathematics.math.sqrt(10f),
+                                                 1f / Unity.Mathematics.math.sqrt(6f),
+                                                 1f / Unity.Mathematics.math.sqrt(3f), -1f) / 2f;
+                Unity.Mathematics.float4 c = new Unity.Mathematics.float4(1f / Unity.Mathematics.math.sqrt(10f),
+                                                 1f / Unity.Mathematics.math.sqrt(6f),
+                                                 -2f / Unity.Mathematics.math.sqrt(3f), 0f) / 2f;
+                Unity.Mathematics.float4 d = new Unity.Mathematics.float4(1f / Unity.Mathematics.math.sqrt(10f),
+                    -Unity.Mathematics.math.sqrt(3f / 2f), 0f, 0f);
+                Unity.Mathematics.float4 center1 = (a + b + c) / 3f;
+                Unity.Mathematics.float4 dir1 = center1 - d;
+                Unity.Mathematics.float4 apex =
+                    new Unity.Mathematics.float4(-2 * Unity.Mathematics.math.sqrt(2f / 5f), 0f, 0f, 0f);
+                float dihedralAngle = IMRE.Math.Operations.Angle(dir1, apex - center1);
 
-		/// <summary>
-		/// configure vertices of fivecell around core tetrahedron
-		/// </summary>
-		/// <param name="degreeFolded"></param>
-		/// <returns></returns>
-		private static float4[] vertices(float degreeFolded)
-		{
-			//8 points on unfolded fivecell
-			float4[] result = new float4[8];
+                _percentFolded = value;
+                //TODO find this value.			
+                originalVertices = vertices(value * dihedralAngle);
+            }
+        }
 
-			//core tetrahedron (does not fold)
-			//coordiantes from wikipedia  https://en.wikipedia.org/wiki/5-cell, centered at origin, 
-			result[0] = (new float4(1f / math.sqrt(10f), 1f / math.sqrt(6f), 1f / math.sqrt(3f), 1f)) / 2f;
-			result[1] = (new float4(1f / math.sqrt(10f), 1f / math.sqrt(6f), 1f / math.sqrt(3f), -1f)) / 2f;
-			result[2] = (new float4(1f / math.sqrt(10f), 1f / math.sqrt(6f), -2f / math.sqrt(3f), 0f)) / 2f;
-			result[3] = new float4(1f / math.sqrt(10f), -math.sqrt(3f / 2f), 0f, 0f);
+        public override UnityEngine.Vector2[] uvs
+        {
+            get
+            {
+                _uvs = new UnityEngine.Vector2[originalVertices.Length];
+                for (int i = 0; i < originalVertices.Length; i++)
+                    //temp uv map.
+                    _uvs[i] = UnityEngine.Vector2.right * ((float) i / originalVertices.Length);
 
-			//find position of convergent point for other tetrahedrons in the net.
-			float4 apex = new float4(-2 * math.sqrt(2f / 5f), 0f, 0f, 0f);
-			//TODO consider making the initial projection onto n
+                return _uvs;
+            }
+        }
 
-			//apex of tetrahedron for each additional tetrahedron(from fases of first) foldling by degree t
-			float4 center1 = (result[0] + result[1] + result[2]) / 3f;
-			float4 dir1 = center1 - result[3];
-			result[4] = center1 + Math.Operations.rotate(dir1, apex - center1, degreeFolded);
+        public override int[] triangles =>
+            new[]
+            {
+                //core tetrahedron
+                0, 1, 2,
+                0, 1, 3,
+                2, 0, 3,
+                1, 2, 3,
 
-			float4 center2 = (result[0] + result[2] + result[3]) / 3f;
-			float4 dir2 = center2 - result[1];
-			result[5] = center2 + Math.Operations.rotate(dir2, apex - center2, degreeFolded);
+                //tetrahedron 1
+                //0, 1, 2
+                0, 1, 4,
+                2, 0, 4,
+                1, 2, 4,
 
-			float4 center3 = (result[0] + result[1] + result[3]) / 3f;
-			float4 dir3 = center3 - result[2];
-			result[6] = center3 + Math.Operations.rotate(dir3, apex - center3, degreeFolded);
+                //tetrahedron 2
+                //2, 0, 3
+                0, 3, 5,
+                2, 0, 5,
+                3, 2, 5,
 
-			float4 center4 = (result[1] + result[2] + result[3]) / 3f;
-			float4 dir4 = center4 - result[0];
-			result[7] = center4 + Math.Operations.rotate(dir4, apex - center4, degreeFolded);
+                //tetrahedron 3
+                //0, 1 ,3
+                0, 1, 6,
+                3, 0, 6,
+                1, 3, 6,
 
-			return result;
-		}
+                //tetrahedron 4
+                //1, 2, 3
+                1, 2, 7,
+                2, 3, 7,
+                3, 1, 7
+            };
 
-		private Vector2[] _uvs;
-		public override Vector2[] uvs
-		{
-			get
-			{
-				_uvs = new Vector2[originalVertices.Length];
-				for (int i = 0; i < originalVertices.Length; i++)
-				{
-					//temp uv map.
-					_uvs[i] = Vector2.right * ((float)i / originalVertices.Length);
-				}
+        public float slider
+        {
+            set => PercentFolded = !sliderOverride ? value : 1f;
+        }
 
-				return _uvs;
-			}
-		}
+        private void Awake()
+        {
+            PercentFolded = 0f;
+        }
 
-		public override int[] triangles =>
-			new int[]
-			{
-				//core tetrahedron
-				0, 1, 2,
-				0, 1, 3,
-				2, 0, 3,
-				1, 2, 3,
+        /// <summary>
+        ///     configure vertices of fivecell around core tetrahedron
+        /// </summary>
+        /// <param name="degreeFolded"></param>
+        /// <returns></returns>
+        private static Unity.Mathematics.float4[] vertices(float degreeFolded)
+        {
+            //8 points on unfolded fivecell
+            Unity.Mathematics.float4[] result = new Unity.Mathematics.float4[8];
 
-				//tetrahedron 1
-				//0, 1, 2
-				0, 1, 4,
-				2, 0, 4,
-				1, 2, 4,
+            //core tetrahedron (does not fold)
+            //coordiantes from wikipedia  https://en.wikipedia.org/wiki/5-cell, centered at origin, 
+            result[0] = new Unity.Mathematics.float4(1f / Unity.Mathematics.math.sqrt(10f),
+                            1f / Unity.Mathematics.math.sqrt(6f), 1f / Unity.Mathematics.math.sqrt(3f), 1f) / 2f;
+            result[1] = new Unity.Mathematics.float4(1f / Unity.Mathematics.math.sqrt(10f),
+                            1f / Unity.Mathematics.math.sqrt(6f), 1f / Unity.Mathematics.math.sqrt(3f), -1f) / 2f;
+            result[2] = new Unity.Mathematics.float4(1f / Unity.Mathematics.math.sqrt(10f),
+                            1f / Unity.Mathematics.math.sqrt(6f), -2f / Unity.Mathematics.math.sqrt(3f), 0f) / 2f;
+            result[3] = new Unity.Mathematics.float4(1f / Unity.Mathematics.math.sqrt(10f),
+                -Unity.Mathematics.math.sqrt(3f / 2f), 0f, 0f);
 
-				//tetrahedron 2
-				//2, 0, 3
-				0, 3, 5,
-				2, 0, 5,
-				3, 2, 5,
+            //find position of convergent point for other tetrahedrons in the net.
+            Unity.Mathematics.float4 apex =
+                new Unity.Mathematics.float4(-2 * Unity.Mathematics.math.sqrt(2f / 5f), 0f, 0f, 0f);
+            //TODO consider making the initial projection onto n
 
-				//tetrahedron 3
-				//0, 1 ,3
-				0, 1, 6,
-				3, 0, 6,
-				1, 3, 6,
+            //apex of tetrahedron for each additional tetrahedron(from fases of first) foldling by degree t
+            Unity.Mathematics.float4 center1 = (result[0] + result[1] + result[2]) / 3f;
+            Unity.Mathematics.float4 dir1 = center1 - result[3];
+            result[4] = center1 + IMRE.Math.Operations.rotate(dir1, apex - center1, degreeFolded);
 
-				//tetrahedron 4
-				//1, 2, 3
-				1, 2, 7,
-				2, 3, 7,
-				3, 1, 7
-			};
-	}
+            Unity.Mathematics.float4 center2 = (result[0] + result[2] + result[3]) / 3f;
+            Unity.Mathematics.float4 dir2 = center2 - result[1];
+            result[5] = center2 + IMRE.Math.Operations.rotate(dir2, apex - center2, degreeFolded);
+
+            Unity.Mathematics.float4 center3 = (result[0] + result[1] + result[3]) / 3f;
+            Unity.Mathematics.float4 dir3 = center3 - result[2];
+            result[6] = center3 + IMRE.Math.Operations.rotate(dir3, apex - center3, degreeFolded);
+
+            Unity.Mathematics.float4 center4 = (result[1] + result[2] + result[3]) / 3f;
+            Unity.Mathematics.float4 dir4 = center4 - result[0];
+            result[7] = center4 + IMRE.Math.Operations.rotate(dir4, apex - center4, degreeFolded);
+
+            return result;
+        }
+    }
 }

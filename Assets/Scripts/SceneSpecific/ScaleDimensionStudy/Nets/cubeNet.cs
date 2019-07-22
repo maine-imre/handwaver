@@ -1,38 +1,26 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using IMRE.HandWaver.ScaleStudy;
+﻿using Enumerable = System.Linq.Enumerable;
 
 namespace IMRE.HandWaver.ScaleStudy
 {
-
     /// <summary>
-    /// A net of a cube that folds into a cube
-    /// The main contributor(s) to this script is __
-    /// Status: ???
+    ///     A net of a cube that folds into a cube
+    ///     The main contributor(s) to this script is __
+    ///     Status: ???
     /// </summary>
-    public class cubeNet : MonoBehaviour, ISliderInput
+    public class cubeNet : UnityEngine.MonoBehaviour, ISliderInput
     {
-        //public DateTime startTime;
-        public Mesh mesh => GetComponent<MeshFilter>().mesh;
+        private float _percentFolded;
 
-        public LineRenderer lineRenderer => GetComponent<LineRenderer>();
-
-        private float _percentFolded = 0f;
         public bool sliderOverride;
 
-        public float slider {
-            set => PercentFolded = !sliderOverride ? value : 1f;
-        }
+        //public DateTime startTime;
+        public UnityEngine.Mesh mesh => GetComponent<UnityEngine.MeshFilter>().mesh;
 
-
+        public UnityEngine.LineRenderer lineRenderer => GetComponent<UnityEngine.LineRenderer>();
 
         public float PercentFolded
         {
-            get { return _percentFolded; }
+            get => _percentFolded;
             //set positions for linerenderer and vertices for mesh
             set
             {
@@ -40,10 +28,14 @@ namespace IMRE.HandWaver.ScaleStudy
                 _percentFolded = value;
                 lineRenderer.SetPositions(lineRendererVerts(_percentFolded));
                 //array of vertices converted to list
-                mesh.SetVertices(meshVerts(_percentFolded).ToList());
+                mesh.SetVertices(Enumerable.ToList(meshVerts(_percentFolded)));
             }
         }
 
+        public float slider
+        {
+            set => PercentFolded = !sliderOverride ? value : 1f;
+        }
 
         private void Start()
         {
@@ -62,21 +54,21 @@ namespace IMRE.HandWaver.ScaleStudy
         //startTime = DateTime.Now
 
         /// <summary>
-        /// configure vertices of cube around base square
+        ///     configure vertices of cube around base square
         /// </summary>
         /// <param name="percentFolded"></param>
         /// <returns></returns>
-        private static Vector3[] meshVerts(float percentFolded)
+        private static UnityEngine.Vector3[] meshVerts(float percentFolded)
         {
-            float degreeFolded = percentFolded * 90f + 180f;
+            float degreeFolded = (percentFolded * 90f) + 180f;
             //14 points on cube net
-            Vector3[] result = new Vector3[14];
+            UnityEngine.Vector3[] result = new UnityEngine.Vector3[14];
 
             //4 vertices for base of cube
-            result[0] = .5f * (Vector3.forward + Vector3.right);
-            result[1] = .5f * (Vector3.forward + Vector3.left);
-            result[2] = .5f * (Vector3.back + Vector3.left);
-            result[3] = .5f * (Vector3.back + Vector3.right);
+            result[0] = .5f * (UnityEngine.Vector3.forward + UnityEngine.Vector3.right);
+            result[1] = .5f * (UnityEngine.Vector3.forward + UnityEngine.Vector3.left);
+            result[2] = .5f * (UnityEngine.Vector3.back + UnityEngine.Vector3.left);
+            result[3] = .5f * (UnityEngine.Vector3.back + UnityEngine.Vector3.right);
 
             //use squareVert() to fold outer squares up relative to base square 
             result[4] = squareVert(result[3], result[0], result[1], degreeFolded);
@@ -84,7 +76,6 @@ namespace IMRE.HandWaver.ScaleStudy
 
             result[6] = squareVert(result[0], result[1], result[3], degreeFolded);
             result[7] = squareVert(result[0], result[1], result[2], degreeFolded);
-
 
             result[8] = squareVert(result[2], result[3], result[1], degreeFolded);
             result[9] = squareVert(result[2], result[3], result[0], degreeFolded);
@@ -99,23 +90,24 @@ namespace IMRE.HandWaver.ScaleStudy
         }
 
         /// <summary>
-        /// function to calculate vertices on outer faces
+        ///     function to calculate vertices on outer faces
         /// </summary>
         /// <param name="nSegmentA"></param>
         /// <param name="nSegmentB"></param>
         /// <param name="oppositePoint"></param>
         /// <param name="degreeFolded"></param>
         /// <returns></returns>
-        private static Vector3 squareVert(Vector3 nSegmentA, Vector3 nSegmentB, Vector3 oppositePoint,
+        private static UnityEngine.Vector3 squareVert(UnityEngine.Vector3 nSegmentA, UnityEngine.Vector3 nSegmentB,
+            UnityEngine.Vector3 oppositePoint,
             float degreeFolded)
         {
             //
-            return Quaternion.AngleAxis(degreeFolded, (nSegmentA - nSegmentB).normalized) *
-                   (oppositePoint - (nSegmentA + nSegmentB) / 2f) + (nSegmentA + nSegmentB) / 2f;
+            return (UnityEngine.Quaternion.AngleAxis(degreeFolded, (nSegmentA - nSegmentB).normalized) *
+                    (oppositePoint - ((nSegmentA + nSegmentB) / 2f))) + ((nSegmentA + nSegmentB) / 2f);
         }
 
         /// <summary>
-        /// create an array for each square that divides it into two triangles
+        ///     create an array for each square that divides it into two triangles
         /// </summary>
         /// <param name="a"></param>
         /// <param name="b"></param>
@@ -124,11 +116,11 @@ namespace IMRE.HandWaver.ScaleStudy
         /// <returns></returns>
         private static int[] meshQuad(int a, int b, int c, int d)
         {
-            return new int[] {a, b, d, d, b, c};
+            return new[] {a, b, d, d, b, c};
         }
 
         /// <summary>
-        /// divide each face of the cube net into two triangles and copy them into a new array of the triangles
+        ///     divide each face of the cube net into two triangles and copy them into a new array of the triangles
         /// </summary>
         /// <returns></returns>
         private static int[] meshTris()
@@ -144,15 +136,15 @@ namespace IMRE.HandWaver.ScaleStudy
         }
 
         /// <summary>
-        /// mapping of outline of unfold
+        ///     mapping of outline of unfold
         /// </summary>
         /// <param name="percentFolded"></param>
         /// <returns></returns>
-        private static Vector3[] lineRendererVerts(float percentFolded)
+        private static UnityEngine.Vector3[] lineRendererVerts(float percentFolded)
         {
-            Vector3[] result = new Vector3[22];
+            UnityEngine.Vector3[] result = new UnityEngine.Vector3[22];
             //map vertices on line segment to vertices on unfolded cube
-            Vector3[] tmp = meshVerts(percentFolded);
+            UnityEngine.Vector3[] tmp = meshVerts(percentFolded);
             result[0] = tmp[0];
             result[1] = tmp[4];
             result[2] = tmp[5];
@@ -178,7 +170,5 @@ namespace IMRE.HandWaver.ScaleStudy
 
             return result;
         }
-
-
     }
 }

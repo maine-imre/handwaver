@@ -1,30 +1,28 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System;
-
-namespace IMRE.HandWaver.ScaleStudy
+﻿namespace IMRE.HandWaver.ScaleStudy
 {
     /// <summary>
-    /// A net of a square that folds from a sequence of parallel line segments.
-    /// Not integrated with kernel.
-    /// used in study of scale and dimension
+    ///     A net of a square that folds from a sequence of parallel line segments.
+    ///     Not integrated with kernel.
+    ///     used in study of scale and dimension
     /// </summary>
-    public class squareNet : MonoBehaviour, ISliderInput
+    public class squareNet : UnityEngine.MonoBehaviour, ISliderInput
     {
-
         private float _percentFolded;
+
+        public System.Collections.Generic.List<UnityEngine.GameObject> foldPoints =
+            new System.Collections.Generic.List<UnityEngine.GameObject>();
+
         public bool sliderOverride;
-        public List<GameObject> foldPoints = new List<GameObject>();
+
         public float PercentFolded
         {
-            get { return _percentFolded; }
+            get => _percentFolded;
 
             set
             {
                 //set vertices using vert function
                 _percentFolded = value;
-                GetComponent<LineRenderer>().SetPositions(verts(_percentFolded));
+                GetComponent<UnityEngine.LineRenderer>().SetPositions(verts(_percentFolded));
             }
         }
 
@@ -36,39 +34,42 @@ namespace IMRE.HandWaver.ScaleStudy
         private void Start()
         {
             //intial line segment with 5 points (2 vertices merge)
-            GetComponent<LineRenderer>().positionCount = 5;
+            GetComponent<UnityEngine.LineRenderer>().positionCount = 5;
             //
-            GetComponent<LineRenderer>().useWorldSpace = false;
+            GetComponent<UnityEngine.LineRenderer>().useWorldSpace = false;
             //start and end width of line
-            GetComponent<LineRenderer>().startWidth = .008f;
-            GetComponent<LineRenderer>().endWidth = .008f;
-            
-            foldPoints.Add(GameObject.Instantiate(SpencerStudyControl.ins.pointPrefab));
-            foldPoints.Add(GameObject.Instantiate(SpencerStudyControl.ins.pointPrefab));
-            foldPoints.Add(GameObject.Instantiate(SpencerStudyControl.ins.pointPrefab));
-            foldPoints.Add(GameObject.Instantiate(SpencerStudyControl.ins.pointPrefab));
-            foldPoints.Add(GameObject.Instantiate(SpencerStudyControl.ins.pointPrefab));
+            GetComponent<UnityEngine.LineRenderer>().startWidth = .008f;
+            GetComponent<UnityEngine.LineRenderer>().endWidth = .008f;
+
+            foldPoints.Add(Instantiate(SpencerStudyControl.ins.pointPrefab));
+            foldPoints.Add(Instantiate(SpencerStudyControl.ins.pointPrefab));
+            foldPoints.Add(Instantiate(SpencerStudyControl.ins.pointPrefab));
+            foldPoints.Add(Instantiate(SpencerStudyControl.ins.pointPrefab));
+            foldPoints.Add(Instantiate(SpencerStudyControl.ins.pointPrefab));
             foldPoints.ForEach(p => p.transform.SetParent(transform));
         }
 
         /// <summary>
-        /// generate vertices for square
+        ///     generate vertices for square
         /// </summary>
         /// <param name="t"></param>
         /// <returns></returns>
-        private Vector3[] verts(float percentFolded)
+        private UnityEngine.Vector3[] verts(float percentFolded)
         {
             float angle = percentFolded * 90f;
             //matrix of vertices
-            Vector3[] result = new Vector3[5];
+            UnityEngine.Vector3[] result = new UnityEngine.Vector3[5];
             //initial vertices that don't need to move/are pivot points
-            result[2] = Vector3.zero;
-            result[1] = Vector3.right;
+            result[2] = UnityEngine.Vector3.zero;
+            result[1] = UnityEngine.Vector3.right;
             //rotate vertice by t or -t around (0, 1, 0) 
-            result[0] = result[1] + Quaternion.AngleAxis(angle, Vector3.up) * Vector3.right;
-            result[3] = result[2] + Quaternion.AngleAxis(-angle, Vector3.up) * Vector3.left;
+            result[0] = result[1] + (UnityEngine.Quaternion.AngleAxis(angle, UnityEngine.Vector3.up) *
+                                     UnityEngine.Vector3.right);
+            result[3] = result[2] + (UnityEngine.Quaternion.AngleAxis(-angle, UnityEngine.Vector3.up) *
+                                     UnityEngine.Vector3.left);
             //rotate vertice by -2t around (0, 1, 0)
-            result[4] = result[3] + Quaternion.AngleAxis(-2 * angle, Vector3.up) * Vector3.left;
+            result[4] = result[3] + (UnityEngine.Quaternion.AngleAxis(-2 * angle, UnityEngine.Vector3.up) *
+                                     UnityEngine.Vector3.left);
 
             if (percentFolded == 1)
             {
@@ -86,7 +87,7 @@ namespace IMRE.HandWaver.ScaleStudy
                 foldPoints[3].transform.localPosition = result[3];
                 foldPoints[4].transform.localPosition = result[4];
             }
-            
+
             foldPoints[0].SetActive(true);
             foldPoints[1].SetActive(true);
             foldPoints[2].SetActive(true);

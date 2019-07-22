@@ -1,33 +1,31 @@
-﻿using IMRE.HandWaver;
-using Unity.Mathematics;
-using UnityEngine;
-
-namespace IMRE.Math
+﻿namespace IMRE.Math
 {
     public static class Operations
     {
-
-       public static float Angle(float3 from, float3 to)
+        public static float Angle(Unity.Mathematics.float3 from, Unity.Mathematics.float3 to)
         {
-            return math.acos(math.dot(math.normalize(from), math.normalize(to)))*Mathf.Rad2Deg;
+            return Unity.Mathematics.math.acos(Unity.Mathematics.math.dot(Unity.Mathematics.math.normalize(from),
+                       Unity.Mathematics.math.normalize(to))) * UnityEngine.Mathf.Rad2Deg;
         }
 
-       public static float Angle(float4 from, float4 to)
-       {
-           return math.acos(math.dot(math.normalize(from), math.normalize(to)))*Mathf.Rad2Deg;
-       }
-
-        public static float magnitude(float3 v)
+        public static float Angle(Unity.Mathematics.float4 from, Unity.Mathematics.float4 to)
         {
-            return math.sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
+            return Unity.Mathematics.math.acos(Unity.Mathematics.math.dot(Unity.Mathematics.math.normalize(from),
+                       Unity.Mathematics.math.normalize(to))) * UnityEngine.Mathf.Rad2Deg;
         }
 
-        public static float magnitude(float4 v)
+        public static float magnitude(Unity.Mathematics.float3 v)
         {
-            return math.sqrt(v.x * v.x + v.y * v.y + v.z * v.z + v.w * v.w);
+            return Unity.Mathematics.math.sqrt((v.x * v.x) + (v.y * v.y) + (v.z * v.z));
         }
 
-        public static float4 cross(float4 v, float4 w, float4 u)
+        public static float magnitude(Unity.Mathematics.float4 v)
+        {
+            return Unity.Mathematics.math.sqrt((v.x * v.x) + (v.y * v.y) + (v.z * v.z) + (v.w * v.w));
+        }
+
+        public static Unity.Mathematics.float4 cross(Unity.Mathematics.float4 v, Unity.Mathematics.float4 w,
+            Unity.Mathematics.float4 u)
         {
             //from https://github.com/hollasch/ray4/blob/master/wire4/v4cross.c
 
@@ -40,50 +38,50 @@ namespace IMRE.Math
             E = (v.y * w.w) - (v.w * w.y);
             F = (v.z * w.w) - (v.w * w.z);
 
-            return new float4(
-                u[1] * F - u[2] * E + u[3] * D,
-                -(u[0] * F) + u[2] * C - u[3] * B,
-                u[0] * E - u[1] * C + u[3] * A,
-                -(u[0] * D) + u[1] * B - u[2] * A
+            return new Unity.Mathematics.float4(
+                ((u[1] * F) - (u[2] * E)) + (u[3] * D),
+                (-(u[0] * F) + (u[2] * C)) - (u[3] * B),
+                ((u[0] * E) - (u[1] * C)) + (u[3] * A),
+                (-(u[0] * D) + (u[1] * B)) - (u[2] * A)
             );
         }
 
-        public static float4 rotate(float4 from, float4 to, float theta)
+        public static Unity.Mathematics.float4 rotate(Unity.Mathematics.float4 from, Unity.Mathematics.float4 to,
+            float theta)
         {
-            float4 basis0 = math.normalize(from);
-            float4 basis1 = math.normalize(to - project(to,from));
+            Unity.Mathematics.float4 basis0 = Unity.Mathematics.math.normalize(from);
+            Unity.Mathematics.float4 basis1 = Unity.Mathematics.math.normalize(to - project(to, from));
             return rotate(from, basis0, basis1, theta);
         }
-        
-        public static float4 rotate(float4 v, float4 basis0, float4 basis1, float theta)
+
+        public static Unity.Mathematics.float4 rotate(Unity.Mathematics.float4 v, Unity.Mathematics.float4 basis0,
+            Unity.Mathematics.float4 basis1, float theta)
         {
-            math.normalize(basis0);
-            math.normalize(basis1);
+            Unity.Mathematics.math.normalize(basis0);
+            Unity.Mathematics.math.normalize(basis1);
 
-            float4 remainder = v - (project(v, basis0) + project(v, basis1));
-            theta *= Mathf.Deg2Rad;
+            Unity.Mathematics.float4 remainder = v - (project(v, basis0) + project(v, basis1));
+            theta *= UnityEngine.Mathf.Deg2Rad;
 
-            float4 v2 = v;
-            math.normalize(v2);
+            Unity.Mathematics.float4 v2 = v;
+            Unity.Mathematics.math.normalize(v2);
 
-            if (math.dot(basis0, basis1) != 0f)
-            {
-                Debug.LogWarning("Basis is not orthagonal : " + (math.dot(basis0,basis1)));
-            }
-            else if (math.dot(v2, basis0) != 1f || Vector4.Dot(v, basis1) != 0f)
-            {
-                Debug.LogWarning("Original Vector does not lie in the same plane as the first basis vector.");
-            }
+            if (Unity.Mathematics.math.dot(basis0, basis1) != 0f)
+                UnityEngine.Debug.LogWarning("Basis is not orthagonal : " + Unity.Mathematics.math.dot(basis0, basis1));
+            else if ((Unity.Mathematics.math.dot(v2, basis0) != 1f) || (UnityEngine.Vector4.Dot(v, basis1) != 0f))
+                UnityEngine.Debug.LogWarning(
+                    "Original Vector does not lie in the same plane as the first basis vector.");
 
-            return Vector4.Dot(v, basis0) * (math.cos(theta) * basis0 + basis1 * math.sin(theta)) +
-                   math.dot(v, basis1) * (math.cos(theta) * basis1 + math.sin(theta) * basis0) + remainder;
+            return (UnityEngine.Vector4.Dot(v, basis0) *
+                    ((Unity.Mathematics.math.cos(theta) * basis0) + (basis1 * Unity.Mathematics.math.sin(theta)))) +
+                   (Unity.Mathematics.math.dot(v, basis1) *
+                    ((Unity.Mathematics.math.cos(theta) * basis1) + (Unity.Mathematics.math.sin(theta) * basis0))) +
+                   remainder;
         }
 
-        public static float4 project(float4 v, float4 dir)
+        public static Unity.Mathematics.float4 project(Unity.Mathematics.float4 v, Unity.Mathematics.float4 dir)
         {
-            return math.dot(v, dir) * math.normalize(dir);
-        } 
-
+            return Unity.Mathematics.math.dot(v, dir) * Unity.Mathematics.math.normalize(dir);
+        }
     }
 }
-

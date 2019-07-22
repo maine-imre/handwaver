@@ -1,123 +1,112 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using IMRE.HandWaver.HWIO;
-using Unity.Mathematics;
-using UnityEngine;
+﻿using Enumerable = System.Linq.Enumerable;
 
 namespace IMRE.HandWaver.ScaleStudy
 {
-    public class TorusCrossSection : MonoBehaviour, ISliderInput
+    public class TorusCrossSection : UnityEngine.MonoBehaviour, ISliderInput
     {
-        public int n;
-
         //radius of 2d circle for torus
         public float circleRadius = .5f;
+        public UnityEngine.Material crossSectionMaterial;
+
+        public bool debugRenderer = SpencerStudyControl.debugRendererXC;
+        public int n;
 
         //distance from axis that circle will be rotated on
         public float revolveRadius = 1f;
 
+        public UnityEngine.Material torusMaterial;
 
-
-        private Mesh torusRenderer => GetComponent<MeshFilter>().mesh;
-        private LineRenderer[] crossSectionRenderer => GetComponentsInChildren<LineRenderer>();
-
-        public Material torusMaterial;
-        public Material crossSectionMaterial;
-
-        public bool debugRenderer = SpencerStudyControl.debugRendererXC;
-
-        // Start is called before the first frame update
-        void Start()
-        {
-            gameObject.AddComponent<MeshRenderer>();
-            gameObject.AddComponent<MeshFilter>();
-            GetComponent<MeshRenderer>().material = torusMaterial;
-            gameObject.GetComponent<MeshRenderer>().enabled = debugRenderer;
-            renderTorus();
-
-            GameObject child = new GameObject();
-            child.transform.parent = transform;
-            child.AddComponent<LineRenderer>();
-
-            GameObject child2 = new GameObject();
-            child2.transform.parent = transform;
-            child2.AddComponent<LineRenderer>();
-
-            GameObject child3 = new GameObject();
-            child3.transform.parent = transform;
-            child3.AddComponent<LineRenderer>();
-
-            GameObject child4 = new GameObject();
-            child4.transform.parent = transform;
-            child4.AddComponent<LineRenderer>();
-
-            crossSectionRenderer.ToList().ForEach(r => r.material = crossSectionMaterial);
-            crossSectionRenderer.ToList().ForEach(r => r.startWidth = .05f);
-            crossSectionRenderer.ToList().ForEach(r => r.endWidth = .05f);
-            crossSectionRenderer.ToList().ForEach(r => r.loop = false);
-            crossSectionRenderer.ToList().ForEach(r => r.positionCount = n);
-
-        }
+        private UnityEngine.Mesh torusRenderer => GetComponent<UnityEngine.MeshFilter>().mesh;
+        private UnityEngine.LineRenderer[] crossSectionRenderer => GetComponentsInChildren<UnityEngine.LineRenderer>();
 
         public float slider
         {
             //scale value from 0 to 1 to -1 to 1
-            set => crossSectTorus(-1 + value * 2);
+            set => crossSectTorus(-1 + (value * 2));
+        }
+
+        // Start is called before the first frame update
+        private void Start()
+        {
+            gameObject.AddComponent<UnityEngine.MeshRenderer>();
+            gameObject.AddComponent<UnityEngine.MeshFilter>();
+            GetComponent<UnityEngine.MeshRenderer>().material = torusMaterial;
+            gameObject.GetComponent<UnityEngine.MeshRenderer>().enabled = debugRenderer;
+            renderTorus();
+
+            UnityEngine.GameObject child = new UnityEngine.GameObject();
+            child.transform.parent = transform;
+            child.AddComponent<UnityEngine.LineRenderer>();
+
+            UnityEngine.GameObject child2 = new UnityEngine.GameObject();
+            child2.transform.parent = transform;
+            child2.AddComponent<UnityEngine.LineRenderer>();
+
+            UnityEngine.GameObject child3 = new UnityEngine.GameObject();
+            child3.transform.parent = transform;
+            child3.AddComponent<UnityEngine.LineRenderer>();
+
+            UnityEngine.GameObject child4 = new UnityEngine.GameObject();
+            child4.transform.parent = transform;
+            child4.AddComponent<UnityEngine.LineRenderer>();
+
+            Enumerable.ToList(crossSectionRenderer).ForEach(r => r.material = crossSectionMaterial);
+            Enumerable.ToList(crossSectionRenderer).ForEach(r => r.startWidth = .05f);
+            Enumerable.ToList(crossSectionRenderer).ForEach(r => r.endWidth = .05f);
+            Enumerable.ToList(crossSectionRenderer).ForEach(r => r.loop = false);
+            Enumerable.ToList(crossSectionRenderer).ForEach(r => r.positionCount = n);
         }
 
         /// <summary>
-        /// Function to calculate cross section of a torus
+        ///     Function to calculate cross section of a torus
         /// </summary>
         /// <param name="height"></param>
         public void crossSectTorus(float height)
         {
             //this function is broken into cases where each function is well behaved.
-            if (math.abs(height) < revolveRadius - circleRadius)
+            if (Unity.Mathematics.math.abs(height) < (revolveRadius - circleRadius))
             {
-                float oneNth = 1f / (n);
+                float oneNth = 1f / n;
 
                 for (int i = 0; i < n; i++)
                 {
-                    crossSectionRenderer[0].SetPosition(i, spiricMath((i * oneNth), height, 0f, 0f,0));
-                    crossSectionRenderer[1].SetPosition(i, spiricMath((i * oneNth), height, 0f, 0f,1));
-                    crossSectionRenderer[2].SetPosition(i, spiricMath((i * oneNth), height, 0f, 0f,2));
-                    crossSectionRenderer[3].SetPosition(i, spiricMath((i * oneNth), height, 05f, 0f,3));
+                    crossSectionRenderer[0].SetPosition(i, spiricMath(i * oneNth, height, 0f, 0f, 0));
+                    crossSectionRenderer[1].SetPosition(i, spiricMath(i * oneNth, height, 0f, 0f, 1));
+                    crossSectionRenderer[2].SetPosition(i, spiricMath(i * oneNth, height, 0f, 0f, 2));
+                    crossSectionRenderer[3].SetPosition(i, spiricMath(i * oneNth, height, 05f, 0f, 3));
                     //may need to use reflection.
                 }
 
-                crossSectionRenderer.ToList().ForEach(r => r.enabled = true);
+                Enumerable.ToList(crossSectionRenderer).ForEach(r => r.enabled = true);
             }
-            else if (math.abs(height) < revolveRadius + circleRadius){
-                            //there is only one spiric
+            else if (Unity.Mathematics.math.abs(height) < (revolveRadius + circleRadius))
+            {
+                //there is only one spiric
                 for (int i = 0; i < n; i++)
                 {
-                    float theta = i * (1f/ n) * Mathf.PI * 2;
+                    float theta = i * (1f / n) * UnityEngine.Mathf.PI * 2;
                     crossSectionRenderer[0].SetPosition(i, spiricOutsideMath(theta, height));
                 }
-                crossSectionRenderer.ToList().ForEach(r => r.enabled = false);
+
+                Enumerable.ToList(crossSectionRenderer).ForEach(r => r.enabled = false);
                 crossSectionRenderer[0].enabled = true;
             }
             else
             {
-                crossSectionRenderer.ToList().ForEach(r => r.enabled = false);
-
+                Enumerable.ToList(crossSectionRenderer).ForEach(r => r.enabled = false);
             }
         }
 
-         private float3 spiricMath(float v, float height, float alpha, float phi, int idx)
+        private Unity.Mathematics.float3 spiricMath(float v, float height, float alpha, float phi, int idx)
         {
-            
             //uses method described here: arXiv:1708.00803v2 [math.GM] 6 Aug 2017
-            float p = math.abs(height);
-            float x_q = p * math.sin(alpha) * math.cos(phi);
-            float y_q = p * math.sin(alpha) * math.cos(phi);
-            float z_q = p * math.sin(phi);
+            float p = Unity.Mathematics.math.abs(height);
+            float x_q = p * Unity.Mathematics.math.sin(alpha) * Unity.Mathematics.math.cos(phi);
+            float y_q = p * Unity.Mathematics.math.sin(alpha) * Unity.Mathematics.math.cos(phi);
+            float z_q = p * Unity.Mathematics.math.sin(phi);
             float R = revolveRadius;
             float r = circleRadius;
-            float w =.25f * v;
-
+            float w = .25f * v;
 
             //v ranges from -1 to 1
             //make two valuies of 2 to accomidate different solution constraints
@@ -125,44 +114,68 @@ namespace IMRE.HandWaver.ScaleStudy
 
             //need to project onto different ranges for each solution path.
             float t_0, t_1, t_2, t_3;
-            
-                float dist0 = math.sqrt(math.pow(r, 2) - math.pow(w * math.cos(phi) + p * math.sin(phi), 2));
-                float dist1 = math.sqrt(math.pow(r, 2) - math.pow(w * math.cos(phi) + p * math.sin(phi), 2));
-                t_0 = math.sqrt(-math.pow(p * math.cos(phi) - w * math.sin(phi), 2) + math.pow(R + dist0, 2));
-                t_1 = -t_0;
-                t_2 = math.sqrt(-math.pow(p * math.cos(phi) - w * math.sin(phi), 2) + math.pow(R - dist1, 2));
-                t_3 = -t_2;
-            
 
+            float dist0 = Unity.Mathematics.math.sqrt(Unity.Mathematics.math.pow(r, 2) -
+                                                      Unity.Mathematics.math.pow(
+                                                          (w * Unity.Mathematics.math.cos(phi)) +
+                                                          (p * Unity.Mathematics.math.sin(phi)), 2));
+            float dist1 = Unity.Mathematics.math.sqrt(Unity.Mathematics.math.pow(r, 2) -
+                                                      Unity.Mathematics.math.pow(
+                                                          (w * Unity.Mathematics.math.cos(phi)) +
+                                                          (p * Unity.Mathematics.math.sin(phi)), 2));
+            t_0 = Unity.Mathematics.math.sqrt(
+                -Unity.Mathematics.math.pow(
+                    (p * Unity.Mathematics.math.cos(phi)) - (w * Unity.Mathematics.math.sin(phi)), 2) +
+                Unity.Mathematics.math.pow(R + dist0, 2));
+            t_1 = -t_0;
+            t_2 = Unity.Mathematics.math.sqrt(
+                -Unity.Mathematics.math.pow(
+                    (p * Unity.Mathematics.math.cos(phi)) - (w * Unity.Mathematics.math.sin(phi)), 2) +
+                Unity.Mathematics.math.pow(R - dist1, 2));
+            t_3 = -t_2;
 
-                float3 c0 = new float3(x_q + t_0 * math.sin(alpha) - w * math.cos(alpha) * math.sin(phi),
-                    y_q - t_0 * math.cos(alpha) - w * math.sin(alpha) * math.sin(phi), z_q + w * math.cos(phi));
-                float3 c1 = new float3(x_q + t_1 * math.sin(alpha) - w * math.cos(alpha) * math.sin(phi),
-                    y_q - t_1 * math.cos(alpha) - w * math.sin(alpha) * math.sin(phi), z_q + w * math.cos(phi));
-                float3 c2 = new float3(x_q + t_2 * math.sin(alpha) - w * math.cos(alpha) * math.sin(phi),
-                    y_q - t_2 * math.cos(alpha) - w * math.sin(alpha) * math.sin(phi), z_q + w * math.cos(phi));
-                float3 c3 = new float3(x_q + t_3 * math.sin(alpha) - w * math.cos(alpha) * math.sin(phi),
-                    y_q - t_3 * math.cos(alpha) - w * math.sin(alpha) * math.sin(phi), z_q + w * math.cos(phi));
-                    
-                switch (idx)
-                {
-                    case 0: return c0;
-                    case 1: return c1;
-                    case 2: return c2;
-                    case 3: return c3;
-                    default: return new float3();
-                }
+            Unity.Mathematics.float3 c0 = new Unity.Mathematics.float3(
+                (x_q + (t_0 * Unity.Mathematics.math.sin(alpha))) -
+                (w * Unity.Mathematics.math.cos(alpha) * Unity.Mathematics.math.sin(phi)),
+                y_q - (t_0 * Unity.Mathematics.math.cos(alpha)) -
+                (w * Unity.Mathematics.math.sin(alpha) * Unity.Mathematics.math.sin(phi)),
+                z_q + (w * Unity.Mathematics.math.cos(phi)));
+            Unity.Mathematics.float3 c1 = new Unity.Mathematics.float3(
+                (x_q + (t_1 * Unity.Mathematics.math.sin(alpha))) -
+                (w * Unity.Mathematics.math.cos(alpha) * Unity.Mathematics.math.sin(phi)),
+                y_q - (t_1 * Unity.Mathematics.math.cos(alpha)) -
+                (w * Unity.Mathematics.math.sin(alpha) * Unity.Mathematics.math.sin(phi)),
+                z_q + (w * Unity.Mathematics.math.cos(phi)));
+            Unity.Mathematics.float3 c2 = new Unity.Mathematics.float3(
+                (x_q + (t_2 * Unity.Mathematics.math.sin(alpha))) -
+                (w * Unity.Mathematics.math.cos(alpha) * Unity.Mathematics.math.sin(phi)),
+                y_q - (t_2 * Unity.Mathematics.math.cos(alpha)) -
+                (w * Unity.Mathematics.math.sin(alpha) * Unity.Mathematics.math.sin(phi)),
+                z_q + (w * Unity.Mathematics.math.cos(phi)));
+            Unity.Mathematics.float3 c3 = new Unity.Mathematics.float3(
+                (x_q + (t_3 * Unity.Mathematics.math.sin(alpha))) -
+                (w * Unity.Mathematics.math.cos(alpha) * Unity.Mathematics.math.sin(phi)),
+                y_q - (t_3 * Unity.Mathematics.math.cos(alpha)) -
+                (w * Unity.Mathematics.math.sin(alpha) * Unity.Mathematics.math.sin(phi)),
+                z_q + (w * Unity.Mathematics.math.cos(phi)));
+
+            switch (idx)
+            {
+                case 0: return c0;
+                case 1: return c1;
+                case 2: return c2;
+                case 3: return c3;
+                default: return new Unity.Mathematics.float3();
             }
-
-        
+        }
 
         private void renderTorus()
         {
-            Vector3[] verts = new Vector3[(n + 1) * (n - 1) + 1];
+            UnityEngine.Vector3[] verts = new UnityEngine.Vector3[((n + 1) * (n - 1)) + 1];
 
             //Array of 2D vectors for UV map of vertices
-            Vector2[] uvs = new Vector2[verts.Length];
-            float oneNth = 1f / ((float) n);
+            UnityEngine.Vector2[] uvs = new UnityEngine.Vector2[verts.Length];
+            float oneNth = 1f / n;
 
             //loop through n-1 times, since edges wrap around
             for (int i = 0; i < n; i++)
@@ -170,17 +183,17 @@ namespace IMRE.HandWaver.ScaleStudy
                 for (int j = 0; j < n; j++)
                 {
                     //index value computation
-                    int idx = i + n * j;
+                    int idx = i + (n * j);
 
                     //find radian value of length of curve
-                    float alpha = i * oneNth * 2 * Mathf.PI;
-                    float beta = j * oneNth * 2 * Mathf.PI;
+                    float alpha = i * oneNth * 2 * UnityEngine.Mathf.PI;
+                    float beta = j * oneNth * 2 * UnityEngine.Mathf.PI;
 
                     //map vertices from 2 dimensions to 3
                     verts[idx] = torusPosition(alpha, beta);
 
                     //uv mapping 
-                    uvs[idx] = new Vector2(j * oneNth, i * oneNth);
+                    uvs[idx] = new UnityEngine.Vector2(j * oneNth, i * oneNth);
                 }
             }
 
@@ -188,11 +201,11 @@ namespace IMRE.HandWaver.ScaleStudy
             int[] triangles = new int[6 * n * n];
 
             //for each triangle
-            for (int k = 0; k < 2 * n * n; k++)
+            for (int k = 0; k < (2 * n * n); k++)
             {
                 //for each vertex on each triangle
                 for (int m = 0; m < 3; m++)
-                    triangles[3 * k + m] = triangle(k, m);
+                    triangles[(3 * k) + m] = triangle(k, m);
             }
 
             torusRenderer.vertices = verts;
@@ -203,38 +216,42 @@ namespace IMRE.HandWaver.ScaleStudy
         }
 
         /// <summary>
-        /// Take alpha and beta to be angles describing turns around the primary and secondary revolutions of a torus.
-        /// Take r1 and r2 to be the radii of those revolutions
-        /// Find the position on the surface of the torus
+        ///     Take alpha and beta to be angles describing turns around the primary and secondary revolutions of a torus.
+        ///     Take r1 and r2 to be the radii of those revolutions
+        ///     Find the position on the surface of the torus
         /// </summary>
         /// <param name="alpha">x</param>
         /// <param name="beta">y</param>
         /// <returns></returns>
-        private Vector3 torusPosition(float alpha, float beta)
+        private UnityEngine.Vector3 torusPosition(float alpha, float beta)
         {
             //3D vectors for describing positions on the circle
             //the center of a cricle (which could be revolved to create the torus
-            Vector3 firstPosition = new Vector3(revolveRadius * Mathf.Cos(alpha), revolveRadius * Mathf.Sin(alpha), 0f);
+            UnityEngine.Vector3 firstPosition = new UnityEngine.Vector3(revolveRadius * UnityEngine.Mathf.Cos(alpha),
+                revolveRadius * UnityEngine.Mathf.Sin(alpha), 0f);
             //the position of a vertex with a circle centered at Vector3.right*rotateRadius
-            Vector3 secondPosition = new Vector3(circleRadius * Mathf.Cos(beta), 0f, circleRadius * Mathf.Sin(beta)) +
-                                     Vector3.right * revolveRadius;
+            UnityEngine.Vector3 secondPosition = new UnityEngine.Vector3(circleRadius * UnityEngine.Mathf.Cos(beta), 0f,
+                                                     circleRadius * UnityEngine.Mathf.Sin(beta)) +
+                                                 (UnityEngine.Vector3.right * revolveRadius);
 
             //mapping of rotation
-            Vector3 result = firstPosition + Quaternion.FromToRotation(Vector3.right, firstPosition) * secondPosition;
+            UnityEngine.Vector3 result = firstPosition +
+                                         (UnityEngine.Quaternion.FromToRotation(UnityEngine.Vector3.right,
+                                              firstPosition) * secondPosition);
             return result;
         }
 
         /// <summary>
-        /// Finds the vertex indices for the kth triangle
-        /// returns the mth vertex index of the kth triangle
-        /// Triangles indexed for clockwise front face
+        ///     Finds the vertex indices for the kth triangle
+        ///     returns the mth vertex index of the kth triangle
+        ///     Triangles indexed for clockwise front face
         /// </summary>
         /// <param name="k"></param>
         /// <param name="m"></param>
         /// <returns></returns>
         private int triangle(int k, int m)
         {
-            if (k < n * n)
+            if (k < (n * n))
             {
                 //lower half triangle
                 switch (m)
@@ -242,91 +259,85 @@ namespace IMRE.HandWaver.ScaleStudy
                     case 0:
                         return k;
                     case 2:
-                        return Mathf.FloorToInt((k) / n) * n + ((k + 1) % n);
+                        return (UnityEngine.Mathf.FloorToInt(k / n) * n) + ((k + 1) % n);
                     case 1:
-                        return ((Mathf.FloorToInt((k) / n) + 1) % n) * n + ((k + 1) % n);
+                        return (((UnityEngine.Mathf.FloorToInt(k / n) + 1) % n) * n) + ((k + 1) % n);
                 }
             }
             else
             {
-                k = k - n * n;
+                k = k - (n * n);
 
                 switch (m)
                 {
-
                     case 0:
                         return k;
                     case 2:
-                        return ((Mathf.FloorToInt((k) / n) + 1) % n) * n + ((k + 1) % n);
+                        return (((UnityEngine.Mathf.FloorToInt(k / n) + 1) % n) * n) + ((k + 1) % n);
                     case 1:
-                        return ((Mathf.FloorToInt((k) / n) + 1) % n) * n + (k % n);
-
-
-
+                        return (((UnityEngine.Mathf.FloorToInt(k / n) + 1) % n) * n) + (k % n);
                 }
             }
 
-            Debug.LogError("Invalid parameter.");
-
-
+            UnityEngine.Debug.LogError("Invalid parameter.");
 
             return 0;
         }
-        
+
         /// <summary>
-        /// Math for calculating intersection of torus and plane
+        ///     Math for calculating intersection of torus and plane
         /// </summary>
         /// <param name="theta"></param>
         /// <param name="d"></param>
         /// <param name="e"></param>
         /// <param name="f"></param>
         /// <returns></returns>
-        private float3 spiricOutsideMath(float theta, float height)
+        private Unity.Mathematics.float3 spiricOutsideMath(float theta, float height)
         {
             //convert values to variables for equation
-            float d = 2f * (Mathf.Pow(circleRadius, 2) + Mathf.Pow(revolveRadius, 2) -
-                                    Mathf.Pow(height, 2));
-            float e = 2f * (Mathf.Pow(circleRadius, 2) - Mathf.Pow(revolveRadius, 2) -
-                                    Mathf.Pow(height, 2));
+            float d = 2f * ((UnityEngine.Mathf.Pow(circleRadius, 2) + UnityEngine.Mathf.Pow(revolveRadius, 2)) -
+                            UnityEngine.Mathf.Pow(height, 2));
+            float e = 2f * (UnityEngine.Mathf.Pow(circleRadius, 2) - UnityEngine.Mathf.Pow(revolveRadius, 2) -
+                            UnityEngine.Mathf.Pow(height, 2));
             float f = -(circleRadius + revolveRadius + height) *
-                      (circleRadius + revolveRadius - height) *
-                      (circleRadius - revolveRadius + height) *
+                      ((circleRadius + revolveRadius) - height) *
+                      ((circleRadius - revolveRadius) + height) *
                       (circleRadius - revolveRadius - height);
-            
+
             //distance results 
             float r0;
             float r1;
 
-            r0 = Mathf.Sqrt(
-                     Mathf.Sqrt(
-                         Mathf.Pow(
-                             -d * Mathf.Cos(theta) * Mathf.Cos(theta) - e * Mathf.Sin(theta) * Mathf.Sin(theta),
+            r0 = UnityEngine.Mathf.Sqrt(
+                     UnityEngine.Mathf.Sqrt(
+                         UnityEngine.Mathf.Pow(
+                             (-d * UnityEngine.Mathf.Cos(theta) * UnityEngine.Mathf.Cos(theta)) -
+                             (e * UnityEngine.Mathf.Sin(theta) * UnityEngine.Mathf.Sin(theta)),
                              2) +
-                         4 * f) + d * Mathf.Cos(theta) * Mathf.Cos(theta) +
-                     e * Mathf.Sin(theta) * Mathf.Sin(theta)) /
-                 Mathf.Sqrt(2);
+                         (4 * f)) + (d * UnityEngine.Mathf.Cos(theta) * UnityEngine.Mathf.Cos(theta)) +
+                     (e * UnityEngine.Mathf.Sin(theta) * UnityEngine.Mathf.Sin(theta))) /
+                 UnityEngine.Mathf.Sqrt(2);
 
-            r1 = Mathf.Sqrt(
-                     -Mathf.Sqrt(
-                         Mathf.Pow(
-                             -d * Mathf.Cos(theta) * Mathf.Cos(theta) - e * Mathf.Sin(theta) * Mathf.Sin(theta),
+            r1 = UnityEngine.Mathf.Sqrt(
+                     -UnityEngine.Mathf.Sqrt(
+                         UnityEngine.Mathf.Pow(
+                             (-d * UnityEngine.Mathf.Cos(theta) * UnityEngine.Mathf.Cos(theta)) -
+                             (e * UnityEngine.Mathf.Sin(theta) * UnityEngine.Mathf.Sin(theta)),
                              2) +
-                         4 * f) + d * Mathf.Cos(theta) * Mathf.Cos(theta) +
-                     e * Mathf.Sin(theta) * Mathf.Sin(theta)) /
-                 Mathf.Sqrt(2);
-            
+                         (4 * f)) + (d * UnityEngine.Mathf.Cos(theta) * UnityEngine.Mathf.Cos(theta)) +
+                     (e * UnityEngine.Mathf.Sin(theta) * UnityEngine.Mathf.Sin(theta))) /
+                 UnityEngine.Mathf.Sqrt(2);
 
-            float3x2 result = new float3x2();
+            Unity.Mathematics.float3x2 result = new Unity.Mathematics.float3x2();
 
             //distance results converted to theta
-            
-            return r0 * (Mathf.Cos(theta) * Vector3.right + Mathf.Sin(theta) * Vector3.forward) + Vector3.up*height;
+
+            return (r0 * ((UnityEngine.Mathf.Cos(theta) * UnityEngine.Vector3.right) +
+                          (UnityEngine.Mathf.Sin(theta) * UnityEngine.Vector3.forward))) +
+                   (UnityEngine.Vector3.up * height);
             //result.c1 = -r0 * (Mathf.Cos(theta) * Vector3.right + Mathf.Sin(theta) * Vector3.forward)+ Vector3.up*height;
             //Debug.Log(height + " : " + d + " : " + e + " : " + f +" : " + r0+" : " +r1);
             //return result;
         }
-
-
     }
-    
 }
