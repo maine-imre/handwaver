@@ -178,7 +178,7 @@ namespace IMRE.HandWaver.Space
                         break;
                 }
 
-                transform.position = GeoPlanetMaths.directionFromLatLong(latlong) * RSDESManager.EarthRadius +
+                transform.position = (GeoPlanetMaths.directionFromLatLong(latlong) * RSDESManager.EarthRadius) +
                                      RSDESManager.earthPos;
                 transform.rotation = UnityEngine.Quaternion.FromToRotation(UnityEngine.Vector3.down,
                     GeoPlanetMaths.directionFromLatLong(latlong).normalized) /**RSDESManager.earthRot*/;
@@ -366,15 +366,15 @@ namespace IMRE.HandWaver.Space
                                 {
                                     if (initialize)
                                     {
-                                        starRays[equalAltitudeCount * i + j] = spawnStarRay();
-                                        starRays[equalAltitudeCount * i + j].startColor = pinBcolor;
-                                        starRays[equalAltitudeCount * i + j].endColor = pinBcolor;
+                                        starRays[(equalAltitudeCount * i) + j] = spawnStarRay();
+                                        starRays[(equalAltitudeCount * i) + j].startColor = pinBcolor;
+                                        starRays[(equalAltitudeCount * i() + j].endColor = pinBcolor;
                                     }
 
-                                    starRays[equalAltitudeCount * i + j].SetPositions(
+                                    starRays[(equalAltitudeCount * i) + j].SetPositions(
                                         GeoPlanetMaths.starRayRendererCoordiantes(dbPinData,
                                             (thisPinDirection +
-                                             UnityEngine.Quaternion.AngleAxis(j * 360 / equalAltitudeCount,
+                                             UnityEngine.Quaternion.AngleAxis((j * 360) / equalAltitudeCount,
                                                  thisPinDirection) * diff).latlong()));
                                 }
                             }
