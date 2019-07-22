@@ -1,10 +1,9 @@
-﻿/// <summary>
-/// This script aligns the Earth model to the correct Latitude/Longitude positioning in the RSDES scene.
-/// The main contributor(s) to this script is NG
-/// </summary>
-
-namespace IMRE.HandWaver.Space
+﻿namespace IMRE.HandWaver.Space
 {
+    /// <summary>
+    /// This script aligns the Earth model to the correct Latitude/Longitude positioning in the RSDES scene.
+    /// The main contributor(s) to this script is NG
+    /// </summary>
     public class AlignEarthModel : UnityEngine.MonoBehaviour
     {
         // Use this for initialization

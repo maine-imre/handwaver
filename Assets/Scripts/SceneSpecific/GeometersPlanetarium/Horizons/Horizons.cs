@@ -1,4 +1,6 @@
-﻿/*
+﻿using UnityEngine;
+
+/*
  * V4.0 Released 08.16.18 By Timothy Bruce
  * It pretty much works I guess. This version only works to the PREVIOUS HOUR. Seconds have not been implemented.
  * Example of calling this script:
@@ -38,7 +40,7 @@ namespace IMRE.HandWaver.Space
 
     /// <summary>
     /// </summary>
-    public class Horizons : UnityEngine.MonoBehaviour
+    public class Horizons : MonoBehaviour
     {
         public static Horizons ins;
 
