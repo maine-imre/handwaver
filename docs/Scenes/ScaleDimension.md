@@ -155,19 +155,303 @@ else if (math.abs(height) > radius)
 ### Intersection of a plane and a torus (Moroni, 2017; Weisstein, n.d.)
 
 ``` c#
+public void crossSectTorus(float height)
+{
+    //this function is broken into cases where each function is well behaved.
+    if (math.abs(height) < revolveRadius - circleRadius)
+    {
+        float oneNth = 1f / (n);
 
+        for (int i = 0; i < n; i++)
+        {
+            crossSectionRenderer[0].SetPosition(i, spiricMath((i * oneNth), height, 0f, 0f,0));
+            crossSectionRenderer[1].SetPosition(i, spiricMath((i * oneNth), height, 0f, 0f,1));
+            crossSectionRenderer[2].SetPosition(i, spiricMath((i * oneNth), height, 0f, 0f,2));
+            crossSectionRenderer[3].SetPosition(i, spiricMath((i * oneNth), height, 05f, 0f,3));
+            //may need to use reflection.
+        }
+
+        crossSectionRenderer.ToList().ForEach(r => r.enabled = true);
+    }
+    else if (math.abs(height) < revolveRadius + circleRadius){
+                    //there is only one spiric
+        for (int i = 0; i < n; i++)
+        {
+            float theta = i * (1f/ n) * Mathf.PI * 2;
+            crossSectionRenderer[0].SetPosition(i, spiricOutsideMath(theta, height));
+        }
+        crossSectionRenderer.ToList().ForEach(r => r.enabled = false);
+        crossSectionRenderer[0].enabled = true;
+    }
+    else
+    {
+        crossSectionRenderer.ToList().ForEach(r => r.enabled = false);
+
+    }
+}
 ```
 
-### Intersection of a hyperplane and a hypersphere (Hartley, 2007)
+```c#
+private float3 spiricMath(float v, float height, float alpha, float phi, int idx)
+{
 
-``` c#
+    //uses method described here: arXiv:1708.00803v2 [math.GM] 6 Aug 2017
+    float p = math.abs(height);
+    float x_q = p * math.sin(alpha) * math.cos(phi);
+    float y_q = p * math.sin(alpha) * math.cos(phi);
+    float z_q = p * math.sin(phi);
+    float R = revolveRadius;
+    float r = circleRadius;
+    float w =.25f * v;
 
+
+    //v ranges from -1 to 1
+    //make two valuies of 2 to accomidate different solution constraints
+    //TODO fix these bounds.  the bounds assume phi = 0 and alpha = 0
+
+    //need to project onto different ranges for each solution path.
+    float t_0, t_1, t_2, t_3;
+
+        float dist0 = math.sqrt(math.pow(r, 2) - math.pow(w * math.cos(phi) + p * math.sin(phi), 2));
+        float dist1 = math.sqrt(math.pow(r, 2) - math.pow(w * math.cos(phi) + p * math.sin(phi), 2));
+        t_0 = math.sqrt(-math.pow(p * math.cos(phi) - w * math.sin(phi), 2) + math.pow(R + dist0, 2));
+        t_1 = -t_0;
+        t_2 = math.sqrt(-math.pow(p * math.cos(phi) - w * math.sin(phi), 2) + math.pow(R - dist1, 2));
+        t_3 = -t_2;
+
+
+
+        float3 c0 = new float3(x_q + t_0 * math.sin(alpha) - w * math.cos(alpha) * math.sin(phi),
+            y_q - t_0 * math.cos(alpha) - w * math.sin(alpha) * math.sin(phi), z_q + w * math.cos(phi));
+        float3 c1 = new float3(x_q + t_1 * math.sin(alpha) - w * math.cos(alpha) * math.sin(phi),
+            y_q - t_1 * math.cos(alpha) - w * math.sin(alpha) * math.sin(phi), z_q + w * math.cos(phi));
+        float3 c2 = new float3(x_q + t_2 * math.sin(alpha) - w * math.cos(alpha) * math.sin(phi),
+            y_q - t_2 * math.cos(alpha) - w * math.sin(alpha) * math.sin(phi), z_q + w * math.cos(phi));
+        float3 c3 = new float3(x_q + t_3 * math.sin(alpha) - w * math.cos(alpha) * math.sin(phi),
+            y_q - t_3 * math.cos(alpha) - w * math.sin(alpha) * math.sin(phi), z_q + w * math.cos(phi));
+
+        switch (idx)
+        {
+            case 0: return c0;
+            case 1: return c1;
+            case 2: return c2;
+            case 3: return c3;
+            default: return new float3();
+        }
+    }
 ```
 
-### Intersection of a hyperplane and a three-torus (Makholm, 2015)
+```c#
+private float3 spiricOutsideMath(float theta, float height)
+{
+    //convert values to variables for equation
+    float d = 2f * (Mathf.Pow(circleRadius, 2) + Mathf.Pow(revolveRadius, 2) -
+                            Mathf.Pow(height, 2));
+    float e = 2f * (Mathf.Pow(circleRadius, 2) - Mathf.Pow(revolveRadius, 2) -
+                            Mathf.Pow(height, 2));
+    float f = -(circleRadius + revolveRadius + height) *
+              (circleRadius + revolveRadius - height) *
+              (circleRadius - revolveRadius + height) *
+              (circleRadius - revolveRadius - height);
+
+    //distance results 
+    float r0;
+    float r1;
+
+    r0 = Mathf.Sqrt(
+             Mathf.Sqrt(
+                 Mathf.Pow(
+                     -d * Mathf.Cos(theta) * Mathf.Cos(theta) - e * Mathf.Sin(theta) * Mathf.Sin(theta),
+                     2) +
+                 4 * f) + d * Mathf.Cos(theta) * Mathf.Cos(theta) +
+             e * Mathf.Sin(theta) * Mathf.Sin(theta)) /
+         Mathf.Sqrt(2);
+
+    r1 = Mathf.Sqrt(
+             -Mathf.Sqrt(
+                 Mathf.Pow(
+                     -d * Mathf.Cos(theta) * Mathf.Cos(theta) - e * Mathf.Sin(theta) * Mathf.Sin(theta),
+                     2) +
+                 4 * f) + d * Mathf.Cos(theta) * Mathf.Cos(theta) +
+             e * Mathf.Sin(theta) * Mathf.Sin(theta)) /
+         Mathf.Sqrt(2);
+
+
+    float3x2 result = new float3x2();
+
+    //distance results converted to theta
+
+    return r0 * (Mathf.Cos(theta) * Vector3.right + Mathf.Sin(theta) * Vector3.forward) + Vector3.up*height;
+    //result.c1 = -r0 * (Mathf.Cos(theta) * Vector3.right + Mathf.Sin(theta) * Vector3.forward)+ Vector3.up*height;
+    //Debug.Log(height + " : " + d + " : " + e + " : " + f +" : " + r0+" : " +r1);
+    //return result;
+}
+```
+
+```c#
+private Vector3 torusPosition(float alpha, float beta)
+{
+    //3D vectors for describing positions on the circle
+    //the center of a cricle (which could be revolved to create the torus
+    Vector3 firstPosition = new Vector3(revolveRadius * Mathf.Cos(alpha), revolveRadius * Mathf.Sin(alpha), 0f);
+    //the position of a vertex with a circle centered at Vector3.right*rotateRadius
+    Vector3 secondPosition = new Vector3(circleRadius * Mathf.Cos(beta), 0f, circleRadius * Mathf.Sin(beta)) +
+                             Vector3.right * revolveRadius;
+
+    //mapping of rotation
+    Vector3 result = firstPosition + Quaternion.FromToRotation(Vector3.right, firstPosition) * secondPosition;
+    return result;
+}
+```
+
+### Intersection of a hyperplane and a hypersphere (Makholm, 2015)
 
 ``` c#
+renderSphere(Mathf.Sqrt(radius*radius-sliderval*sliderval));
+```
 
+```c#
+private void renderSphere(float crossSectionRadius)
+{
+    crossSectionRenderer.Clear();
+    int nbLong = n;
+    int nbLat = n;
+
+    #region Vertices
+    Vector3[] vertices = new Vector3[(nbLong + 1) * nbLat + 2];
+    float pi = Mathf.PI;
+    float _2pi = pi * 2f;
+
+    vertices[0] = Vector3.up * crossSectionRadius;
+    for (int lat = 0; lat < nbLat; lat++)
+    {
+        float a1 = pi * (float)(lat + 1) / (nbLat + 1);
+        float sin1 = Mathf.Sin(a1);
+        float cos1 = Mathf.Cos(a1);
+
+        for (int lon = 0; lon <= nbLong; lon++)
+        {
+            float a2 = _2pi * (float)(lon == nbLong ? 0 : lon) / nbLong;
+            float sin2 = Mathf.Sin(a2);
+            float cos2 = Mathf.Cos(a2);
+
+            vertices[lon + lat * (nbLong + 1) + 1] = new Vector3(sin1 * cos2, cos1, sin1 * sin2) * crossSectionRadius;
+        }
+    }
+    vertices[vertices.Length - 1] = Vector3.up * -crossSectionRadius;
+    #endregion
+}
+```
+
+### Intersection of a hyperplane and a three-torus (Hartley, 2007)
+
+``` c#
+private float3 HyperToricSection(float alpha, float beta, float h)
+{
+float a;
+float b;
+float c;
+
+//since we are fixing one of the x,y,z,w values, we can find a value for a, b, or c and use alpha and beta to parameterize the other two.
+switch (plane)
+    {
+case crossSectionPlane.x:
+a = alpha;
+b = beta;
+c = math.asin(h/ (R + (P + math.cos(a)) * math.cos(b)));
+    if (solutionA)
+    {
+        c = Mathf.PI - c;
+    }
+break;
+        case crossSectionPlane.y:
+a = alpha;
+b = beta;
+c = math.asin(h/ (P + math.cos(a)));
+    if (solutionA)
+    {
+        c = Mathf.PI - c;
+    }
+break;
+        case crossSectionPlane.z:
+b = alpha;
+c = beta;
+a = math.asin(h);
+    if (solutionA)
+    {
+        a = Mathf.PI - a;
+    }
+break;
+        case crossSectionPlane.w:
+a = alpha;
+b = beta;
+c = math.asin(h/ (R + (P + math.cos(a)) * math.cos(b)));
+    if (solutionA)
+    {
+        c = Mathf.PI - c;
+    }
+break;
+        default:
+b = alpha;
+c = beta;
+a = math.asin(h);
+    if (solutionA)
+    {
+        a = Mathf.PI - a;
+    }
+break;
+    }
+
+    float w = (R + (P + math.cos(a)) * math.cos(b)) * math.cos(c);
+    float x = (R + (P + math.cos(a)) * math.cos(b)) * math.sin(c);
+    float y = (P + math.cos(a)) * math.sin(b);
+    float z = math.sin(a);
+
+    switch (plane)
+    {
+        case crossSectionPlane.x:
+            return new float3(w,y,z);
+        case crossSectionPlane.y:
+            return new float3(w,x,z);
+        case crossSectionPlane.z:
+            return new float3(x,y,w);
+        case crossSectionPlane.w:
+            return new float3(x,y,z);
+        default:
+            return new float3(0,0,0);
+    }
+}
+```
+
+```c#
+        private void renderToricSection(float height)
+        {
+            Vector3[] verts = new Vector3[(n + 1) * (n - 1) + 1];
+
+            //Array of 2D vectors for UV map of vertices
+            Vector2[] uvs = new Vector2[verts.Length];
+            float oneNth = 1f / ((float) n);
+
+            //loop through n-1 times, since edges wrap around
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = 0; j < n; j++)
+                {
+                    //index value computation
+                    int idx = i + n * j;
+
+                    //find radian value of length of curve
+                    float alpha = i * oneNth * 2 * Mathf.PI;
+                    float beta = j * oneNth * 2 * Mathf.PI;
+
+                    //map vertices from 2 dimensions to 3
+                    verts[idx] = HyperToricSection(alpha, beta, height);
+
+                    //uv mapping 
+                    uvs[idx] = new Vector2(j * oneNth, i * oneNth);
+                }
+            }
+        }
 ```
 
 
