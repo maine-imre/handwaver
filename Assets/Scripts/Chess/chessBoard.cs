@@ -80,24 +80,6 @@ namespace IMRE.Chess3D {
         {
 		return abstractPiece.validMoves.Contains(attemptedMove);
 	}
-
-        internal bool placeSelfInCheck(AbstractPiece piece, int3 attemptedMove)
-        {
-            List<AbstractPiece> listToCheck;
-            if (piece.Team == currentTeam.black)
-                listToCheck = whiteTeam;
-            else
-                listToCheck = blackTeam;
-            foreach (AbstractPiece piece in listToCheck)
-            {
-                if (piece.IsValid(attemptedMove))
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
         public void pieceCaptured(AbstractPiece pieceDead)
         {
             pieceDead.IsCaptured = true;
