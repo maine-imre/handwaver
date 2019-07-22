@@ -569,25 +569,7 @@
 
         public static UnityEngine.Vector3[] starRayRendererCoordiantes(pinData SUBPOINT, pinData CENTER)
         {
-            UnityEngine.Vector3 subpoint = directionFromLatLong(SUBPOINT.latLong).Translate(RSDESManager.earthPos);
-            UnityEngine.Vector3 center = directionFromLatLong(CENTER.latLong).ScaleMultiplier(RSDESManager.EarthRadius)
-                .Translate(RSDESManager.earthPos);
-            UnityEngine.Vector3[] result = new UnityEngine.Vector3[2];
-
-            UnityEngine.Vector3 direction = subpoint - RSDESManager.earthPos;
-
-            //the moon is a special case where the lines are not parallel.
-            if (SUBPOINT.pin.myPintype == RSDESPin.pintype.Moon)
-                direction = directionFromLatLong(SUBPOINT.latLong)
-                                .ScaleMultiplier(RSDESManager.SimulationScale * RSDESManager.moonDist)
-                                .Translate(RSDESManager.earthPos) - center;
-
-            UnityEngine.Vector3 earthPos = RSDESManager.earthPos;
-            float earthRad = RSDESManager.EarthRadius;
-
-            result[0] = center + 500 * direction;
-            result[1] = center - 500 * direction;
-            return result;
+            return starRayRendererCoordiantes(SUBPOINT, CENTER.latLong);
         }
 
         public static UnityEngine.Vector3[] starRayRendererCoordiantes(pinData SUBPOINT, UnityEngine.Vector2 CENTER)

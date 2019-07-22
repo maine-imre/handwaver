@@ -35,8 +35,8 @@
     /// </summary>
     public class RSDESManager : UnityEngine.MonoBehaviour
     {
-        private bool activeMenus;
         private readonly float realEarthtilt = 23.44f;
+        private bool activeMenus;
         public bool sunBetweenTropics = true;
 
         public void enableNSPoleMenus()
@@ -272,8 +272,8 @@
 
         //public leapButtonToggleExtension drawCircle;
 
-        private readonly
-            System.Collections.Generic.Dictionary<System.Collections.Generic.List<pinData>, UnityEngine.LineRenderer>
+        private readonly System.Collections.Generic.Dictionary<System.Collections.Generic.List<pinData>,
+                UnityEngine.LineRenderer>
             greatArcsLRs =
                 new System.Collections.Generic.Dictionary<System.Collections.Generic.List<pinData>,
                     UnityEngine.LineRenderer>();
@@ -406,10 +406,12 @@
         internal void updateNightSky()
         {
             foreach (UnityEngine.Transform star in starDataMap.Keys)
+            {
                 star.position =
                     new UnityEngine.Vector3(starDataMap[star].position.x * 4841427,
                             starDataMap[star].position.y * 4841427, starDataMap[star].position.z * 4841427).normalized
                         .ScaleMultiplier(radiusOfLargerSphere).Translate(earthPos);
+            }
         }
 
         #endregion Behaviour Functions
