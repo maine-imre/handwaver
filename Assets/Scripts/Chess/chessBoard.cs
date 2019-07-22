@@ -78,7 +78,7 @@ namespace IMRE.Chess3D {
         /// <param name="attemptedMove"></param>
         internal bool Check(AbstractPiece abstractPiece, int3 attemptedMove)
         {
-		return allValidMoves(abstractPiece).Contains(attemptedMove);
+		return abstractPiece.validMoves.Contains(attemptedMove);
 	}
 
         internal bool placeSelfInCheck(AbstractPiece king, int3 attemptedMove)
