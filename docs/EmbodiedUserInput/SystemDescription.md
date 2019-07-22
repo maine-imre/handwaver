@@ -11,12 +11,12 @@ To track the progress on this issue [go here](https://github.com/maine-imre/hand
 * [Classifying the Data](https://github.com/maine-imre/handwaver/blob/feature/gesture-abstraction/docs/EmbodiedUserInput/SystemDescription.md#classifying-the-data)
 * [Definitions for Gestures](https://github.com/maine-imre/handwaver/blob/feature/gesture-abstraction/docs/EmbodiedUserInput/SystemDescription.md#definitions-for-gestures)
      * [Grasp](https://github.com/maine-imre/handwaver/blob/feature/gesture-abstraction/docs/EmbodiedUserInput/SystemDescription.md#grasp)
-     * [Double Grasp](https://github.com/maine-imre/handwaver/blob/feature/gesture-abstraction/docs/EmbodiedUserInput/SystemDescription.md#double_grasp)
+     * [Double Grasp](https://github.com/maine-imre/handwaver/blob/feature/gesture-abstraction/docs/EmbodiedUserInput/SystemDescription.md#double-grasp)
      * [Point](https://github.com/maine-imre/handwaver/blob/feature/gesture-abstraction/docs/EmbodiedUserInput/SystemDescription.md#point)
-     * [Thumbs Up](https://github.com/maine-imre/handwaver/blob/feature/gesture-abstraction/docs/EmbodiedUserInput/SystemDescription.md#thumbs_up)
-     * [Open Palm](https://github.com/maine-imre/handwaver/blob/feature/gesture-abstraction/docs/EmbodiedUserInput/SystemDescription.md#open_palm)
-     * [Open Palm Push](https://github.com/maine-imre/handwaver/blob/feature/gesture-abstraction/docs/EmbodiedUserInput/SystemDescription.md#open_palm_push)
-     * [Open Palm Swipe](https://github.com/maine-imre/handwaver/blob/feature/gesture-abstraction/docs/EmbodiedUserInput/SystemDescription.md#open_palm_Swipe)
+     * [Thumbs Up](https://github.com/maine-imre/handwaver/blob/feature/gesture-abstraction/docs/EmbodiedUserInput/SystemDescription.md#thumbs-up)
+     * [Open Palm](https://github.com/maine-imre/handwaver/blob/feature/gesture-abstraction/docs/EmbodiedUserInput/SystemDescription.md#open-palm)
+     * [Open Palm Push](https://github.com/maine-imre/handwaver/blob/feature/gesture-abstraction/docs/EmbodiedUserInput/SystemDescription.md#open-palm-push)
+     * [Open Palm Swipe](https://github.com/maine-imre/handwaver/blob/feature/gesture-abstraction/docs/EmbodiedUserInput/SystemDescription.md#open-palm-Swipe)
 
 ---
 
