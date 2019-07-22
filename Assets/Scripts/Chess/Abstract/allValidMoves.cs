@@ -21,7 +21,7 @@ namespace IMRE.Chess3D {
         /// </summary>
         /// <param name="piece"></param>
         /// <returns></returns>
-        public static float3[] validMoves(AbstractPiece piece)
+        public static int3[] validMoves(AbstractPiece piece)
         {
             Vector3 orientation = Vector3.forward;
             if (piece.Team == currentTeam.black)
@@ -39,10 +39,10 @@ namespace IMRE.Chess3D {
         }
 
        #region CalculateMoves
-        private static float3[] validMoves(chessBoard.PieceType piece, Vector3 currentPosition, List<Vector3> friendlyPieces, List<Vector3> enemyPieces, Vector3 orientation)
+        private static int3[] validMoves(chessBoard.PieceType piece, Vector3 currentPosition, List<Vector3> friendlyPieces, List<Vector3> enemyPieces, Vector3 orientation)
         {
             //list all possible positions
-            List<float3> caniditePositions = new List<float3>();
+            List<int3> caniditePositions = new List<int3>();
             switch (piece)
             {
                 case chessBoard.PieceType.king:
@@ -57,7 +57,6 @@ namespace IMRE.Chess3D {
                     caniditePositions.Add(currentPosition.moveDown(orientation));
 
                     //movign through edges 
-                    //TODO remove redundancies (e.g. back + forward  == forward + back)
                     caniditePositions.Add(currentPosition.moveForward(orientation).moveLeft(orientation));
                     caniditePositions.Add(currentPosition.moveForward(orientation).moveRight(orientation));
                     caniditePositions.Add(currentPosition.moveForward(orientation).moveDown(orientation));
@@ -68,26 +67,11 @@ namespace IMRE.Chess3D {
                     caniditePositions.Add(currentPosition.moveBack(orientation).moveDown(orientation));
                     caniditePositions.Add(currentPosition.moveBack(orientation).moveUp(orientation));
 
-                    caniditePositions.Add(currentPosition.moveLeft(orientation).moveForward(orientation));
-                    caniditePositions.Add(currentPosition.moveLeft(orientation).moveBack(orientation));
                     caniditePositions.Add(currentPosition.moveLeft(orientation).moveDown(orientation));
                     caniditePositions.Add(currentPosition.moveLeft(orientation).moveUp(orientation));
 
-                    caniditePositions.Add(currentPosition.moveRight(orientation).moveForward(orientation));
-                    caniditePositions.Add(currentPosition.moveRight(orientation).moveBack(orientation));
                     caniditePositions.Add(currentPosition.moveRight(orientation).moveDown(orientation));
                     caniditePositions.Add(currentPosition.moveRight(orientation).moveUp(orientation));
-
-                    caniditePositions.Add(currentPosition.moveUp(orientation).moveLeft(orientation));
-                    caniditePositions.Add(currentPosition.moveUp(orientation).moveRight(orientation));
-                    caniditePositions.Add(currentPosition.moveUp(orientation).moveForward(orientation));
-                    caniditePositions.Add(currentPosition.moveUp(orientation).moveBack(orientation));
-
-                    caniditePositions.Add(currentPosition.moveDown(orientation).moveLeft(orientation));
-                    caniditePositions.Add(currentPosition.moveDown(orientation).moveRight(orientation));
-                    caniditePositions.Add(currentPosition.moveDown(orientation).moveForward(orientation));
-                    caniditePositions.Add(currentPosition.moveDown(orientation).moveBack(orientation));
-
                     break;
                 case chessBoard.PieceType.queen:
                     
@@ -104,7 +88,6 @@ namespace IMRE.Chess3D {
                         caniditePositions.Add(currentPosition.moveDown(orientation, i));
 
                         //moving through edges 
-                        //TODO remove redundancies (e.g. back + forward  == forward + back)
                         caniditePositions.Add(currentPosition.moveForward(orientation, i).moveLeft(orientation, i));
                         caniditePositions.Add(currentPosition.moveForward(orientation, i).moveRight(orientation, i));
                         caniditePositions.Add(currentPosition.moveForward(orientation, i).moveDown(orientation, i));
@@ -115,27 +98,12 @@ namespace IMRE.Chess3D {
                         caniditePositions.Add(currentPosition.moveBack(orientation, i).moveDown(orientation, i));
                         caniditePositions.Add(currentPosition.moveBack(orientation, i).moveUp(orientation, i));
 
-                        caniditePositions.Add(currentPosition.moveLeft(orientation, i).moveForward(orientation, i));
-                        caniditePositions.Add(currentPosition.moveLeft(orientation, i).moveBack(orientation, i));
                         caniditePositions.Add(currentPosition.moveLeft(orientation, i).moveDown(orientation, i));
                         caniditePositions.Add(currentPosition.moveLeft(orientation, i).moveUp(orientation, i));
 
-                        caniditePositions.Add(currentPosition.moveRight(orientation, i).moveForward(orientation, i));
-                        caniditePositions.Add(currentPosition.moveRight(orientation, i).moveBack(orientation, i));
                         caniditePositions.Add(currentPosition.moveRight(orientation, i).moveDown(orientation, i));
                         caniditePositions.Add(currentPosition.moveRight(orientation, i).moveUp(orientation, i));
-
-                        caniditePositions.Add(currentPosition.moveUp(orientation, i).moveLeft(orientation, i));
-                        caniditePositions.Add(currentPosition.moveUp(orientation, i).moveRight(orientation, i));
-                        caniditePositions.Add(currentPosition.moveUp(orientation, i).moveForward(orientation, i));
-                        caniditePositions.Add(currentPosition.moveUp(orientation, i).moveBack(orientation, i));
-
-                        caniditePositions.Add(currentPosition.moveDown(orientation, i).moveLeft(orientation, i));
-                        caniditePositions.Add(currentPosition.moveDown(orientation, i).moveRight(orientation, i));
-                        caniditePositions.Add(currentPosition.moveDown(orientation, i).moveForward(orientation, i));
-                        caniditePositions.Add(currentPosition.moveDown(orientation, i).moveBack(orientation, i));
                     }
-
                     break;
                 case chessBoard.PieceType.rook:
                     //rooks can move n units through a face
@@ -150,7 +118,6 @@ namespace IMRE.Chess3D {
                         caniditePositions.Add(currentPosition.moveUp(orientation, i));
                         caniditePositions.Add(currentPosition.moveDown(orientation, i));
                     }
-
                     break;
                 case chessBoard.PieceType.bishop:
                     //diagonal in any direction
@@ -169,27 +136,12 @@ namespace IMRE.Chess3D {
                         caniditePositions.Add(currentPosition.moveBack(orientation, i).moveDown(orientation, i));
                         caniditePositions.Add(currentPosition.moveBack(orientation, i).moveUp(orientation, i));
 
-                        caniditePositions.Add(currentPosition.moveLeft(orientation, i).moveForward(orientation, i));
-                        caniditePositions.Add(currentPosition.moveLeft(orientation, i).moveBack(orientation, i));
                         caniditePositions.Add(currentPosition.moveLeft(orientation, i).moveDown(orientation, i));
                         caniditePositions.Add(currentPosition.moveLeft(orientation, i).moveUp(orientation, i));
 
-                        caniditePositions.Add(currentPosition.moveRight(orientation, i).moveForward(orientation, i));
-                        caniditePositions.Add(currentPosition.moveRight(orientation, i).moveBack(orientation, i));
                         caniditePositions.Add(currentPosition.moveRight(orientation, i).moveDown(orientation, i));
                         caniditePositions.Add(currentPosition.moveRight(orientation, i).moveUp(orientation, i));
-
-                        caniditePositions.Add(currentPosition.moveUp(orientation, i).moveLeft(orientation, i));
-                        caniditePositions.Add(currentPosition.moveUp(orientation, i).moveRight(orientation, i));
-                        caniditePositions.Add(currentPosition.moveUp(orientation, i).moveForward(orientation, i));
-                        caniditePositions.Add(currentPosition.moveUp(orientation, i).moveBack(orientation, i));
-
-                        caniditePositions.Add(currentPosition.moveDown(orientation, i).moveLeft(orientation, i));
-                        caniditePositions.Add(currentPosition.moveDown(orientation, i).moveRight(orientation, i));
-                        caniditePositions.Add(currentPosition.moveDown(orientation, i).moveForward(orientation, i));
-                        caniditePositions.Add(currentPosition.moveDown(orientation, i).moveBack(orientation, i));
                     }
-
                     break;
                 case chessBoard.PieceType.knight:
                     //face then edge
@@ -246,7 +198,6 @@ namespace IMRE.Chess3D {
                         .moveForward(orientation));
                     caniditePositions.Add(currentPosition.moveDown(orientation).moveDown(orientation)
                         .moveBack(orientation));
-
                     break;
                 case chessBoard.PieceType.pawn:
                     //move through forward face
@@ -273,7 +224,6 @@ namespace IMRE.Chess3D {
                         //add those positions to the canidate positions.
                         cPos.Where(p => enemyPieces.contains(p)).ForEach(p => caniditePositions.Add(p));
                     }
-
                     break;
             }
 
@@ -293,88 +243,116 @@ namespace IMRE.Chess3D {
 	       return canidatePositions.ToArray();
         }
 
-        private static float3 moveDirection(float3 position, float3 orientation, float3 direction)
+        private static int3 moveDirection(int3 position, float3 orientation, float3 direction)
         {
-            math.normalize(orientation);
-            return position + Quaternion.FromTo(Vector3.forward, direction)*orientation;
+		math.normalize(orientation);
+            return position + Quaternion.FromTo(new float3(1,0,0), direction)*orientation;
         }
         //single unit movement.
 
-        private static float3 moveForward(this float3 position, float3 orientation)
+        private static int3 moveForward(this int3 position, float3 orientation)
         {
-            return moveDirection(position, orientation, Vector3.forward);
+            return moveDirection(position, orientation, new float3(1,0,0));
         }
-        private static float3 moveBack(this float3 position, float3 orientation)
+        private static int3 moveBack(this int3 position, float3 orientation)
         {
-            return moveDirection(position, orientation, Vector3.back);
+            return moveDirection(position, orientation, new float3(-1,0,0));
         }
-        private static float3 moveLeft(this float3 position, float3 orientation)
+        private static int3 moveLeft(this int3 position, float3 orientation)
         {
-            return moveDirection(position, orientation, Vector3.left);
+            return moveDirection(position, orientation, new float3(0,0,-1));
         }
-        private static float3 moveRight(this float3 position, float3 orientation)
+        private static int3 moveRight(this int3 position, float3 orientation)
         {
-            return moveDirection(position, orientation, Vector3.right);
+            return moveDirection(position, orientation, new float3(0,0,1));
         }
-        private static float3 MoveUp(this float3 position, float3 orientation)
+        private static int3 moveUp(this int3 position, float3 orientation)
         {
-            return moveDirection(position, orientation, Vector3.up);
+            return moveDirection(position, orientation, new float3(0,1,0));
         }
-        private static float3 MoveDown(this float3 position, float3 orientation)
+        private static int3 moveDown(this int3 position, float3 orientation)
         {
-            return moveDirection(position, orientation, Vector3.down);
+            return moveDirection(position, orientation, new float3(0,-1,0));
         }
         
         //multiple unit movement
-        private static float3 moveForward(this float3 position, float3 orientation, int i)
+        private static int3 moveForward(this int3 position, float3 orientation, int i)
         {
-            return moveDirection(position, orientation, Vector3.forward);
+            int3 result = position;
+		for (idx = 0; idx < i; idx ++){
+			result.moveForward(orientation);
+		}
+		return result;
         }
-        private static float3 moveBack(this float3 position, float3 orientation, int i)
+        private static int3 moveBack(this int3 position, float3 orientation, int i)
         {
-            return moveDirection(position, orientation, Vector3.back);
+            int3 result = position;
+		for (idx = 0; idx < i; idx ++){
+			result.moveBack(orientation);
+		}
+		return result;
         }
-        private static float3 moveLeft(this float3 position, float3 orientation, int i)
+        private static int3 moveLeft(this int3 position, float3 orientation, int i)
         {
-            return moveDirection(position, orientation, Vector3.left);
+            int3 result = position;
+		for (idx = 0; idx < i; idx ++){
+			result.moveLeft(orientation);
+		}
+		return result;
         }
-        private static float3 moveRight(this float3 position, float3 orientation, int i)
+        private static int3 moveRight(this int3 position, float3 orientation, int i)
         {
-            return moveDirection(position, orientation, Vector3.right);
+            int3 result = position;
+		for (idx = 0; idx < i; idx ++){
+			result.moveRight(orientation);
+		}
+		return result;
         }
-        private static float3 MoveUp(this float3 position, float3 orientation, int i)
+        private static int3 moveUp(this int3 position, float3 orientation, int i)
         {
-            return moveDirection(position, orientation, Vector3.up);
+            int3 result = position;
+		for (idx = 0; idx < i; idx ++){
+			result.moveUp(orientation);
+		}
+		return result;
         }
-        private static float3 MoveDown(this float3 position, float3 orientation, int i)
+        private static int3 moveDown(this int3 position, float3 orientation, int i)
         {
-            return moveDirection(position, orientation, Vector3.down);
+            int3 result = position;
+		for (idx = 0; idx < i; idx ++){
+			result.moveDown(orientation);
+		}
+		return result;
         }
 
-        private static bool onBoard(this float3 position)
+        private static bool onBoard(this int3 position)
         {
             return p.x >= 0 && p.x <= 8 && p.y >= 0 && p.y <= 8 && p.z >= 0 && p.z <= 8;
         }
 
-        private static bool PiecesInPath(float3 position, float3 destination, List<float3> friendly, List<float3> enemy)
+        private static bool PiecesInPath(int3 position, int3 destination, List<int3> friendly, List<int3> enemy)
         {
-            bool testResult = false;
+            bool testResult = !friendly.Contains(desitnation);
             direction = destination - position;
-            length = (int) direction.magnitude;
+            length = (int) magnitude(direction);
             if (length == 1)
             {
-                //assume that friendlies have already been ruled out.
-                return false;
+                return testResult;
             }
             
             for (i = 1; i < length; i++)
             {
-                checkAtPos = position + direction.normalized * i;
+                checkAtPos = position + math.normalize(direction) * i;
                 testResult = testResult && friendly.Contains(checkAtPos) && enemy.Contains(checkAtPos);
             }
 
             return testResult;
         }
+	
+	private static float magnitude(int3 v)
+	{
+		return (Unity.Mathematics.math.sqrt(v.x*v.x+v.y*v.y+v.z*v.z);
+	}
         #endregion
     }
 }
