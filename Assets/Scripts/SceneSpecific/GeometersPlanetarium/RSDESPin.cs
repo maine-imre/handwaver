@@ -248,7 +248,6 @@ namespace IMRE.HandWaver.Space
             return tmp;
         }
 
-
         public starFieldSelect StarMode
         {
             get => starMode;
@@ -804,6 +803,7 @@ namespace IMRE.HandWaver.Space
                 UnityEngine.Debug.Log("IM NOT ON THE SURFACE");
             }
         }
+
         #endregion Behaviour Functions
 
         #region Setup Functions
@@ -878,6 +878,7 @@ namespace IMRE.HandWaver.Space
             //this.transform.position = GeoPlanetMaths.directionFromLatLong(latlong) * RSDESManager.EarthRadius + RSDESManager.earthPos;
             //this.transform.rotation = Quaternion.FromToRotation(Vector3.down, GeoPlanetMaths.directionFromLatLong(latlong).normalized);
         }
+
         #endregion Setup Functions
 
         #region Editor Functions
@@ -918,6 +919,7 @@ namespace IMRE.HandWaver.Space
         {
             toggleStarField();
         }
+
         #endregion Editor Functions
     }
 }
