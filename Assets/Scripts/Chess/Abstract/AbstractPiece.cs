@@ -158,6 +158,15 @@ namespace IMRE.Chess3D
         }
 
         #endregion
-
+	public void highlightValidCells(){
+		foreach(int3 validMove in validMoves){
+			//TODO higlihgt validMove;
+			Debug.Log(validMove);
+		}
+	}
+		
+	public void movePreview(){
+		//TODO make preview to move
+	}
     }
 }
