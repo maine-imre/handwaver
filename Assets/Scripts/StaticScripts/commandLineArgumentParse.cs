@@ -4,8 +4,8 @@ HandWaver, developed at the Maine IMRE Lab at the University of Maine's College 
 See license info in readme.md.
 www.imrelab.org
 **/
-#if StandaloneWindows64
 
+#if StandaloneWindows64
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -75,7 +75,8 @@ namespace IMRE.HandWaver
 				if (argument.ToLower().Contains("-l"))
 				{
 					//index of the argument that is directly after "-l" unless it is the last argument in which case we just leave it at the flag value.
-					loadHW = Array.IndexOf(commandLineArguments, "-l") < commandLineArguments.Length ? Array.IndexOf(commandLineArguments, "-l")+1 : -1;		
+					loadHW =
+ Array.IndexOf(commandLineArguments, "-l") < commandLineArguments.Length ? Array.IndexOf(commandLineArguments, "-l")+1 : -1;		
 					
 				}
 				

@@ -1,44 +1,38 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using IMRE.EmbodiedUserInput;
-using IMRE.HandWaver;
-using Leap;
-using Unity.Burst;
-using UnityEngine;
-using Unity.Mathematics;
-using System.Linq;
+﻿using Enumerable = System.Linq.Enumerable;
 
 namespace IMRE.EmbodiedUserInput
 {
-	public class TouchSlider : MonoBehaviour
-	{
-		public Material slidermaterial;
-		
-		/// <summary>
-		/// The point for visual representation on the line
-		/// </summary>
-		public Transform point;
+    public class TouchSlider : UnityEngine.MonoBehaviour
+    {
+        /// <summary>
+        ///     internal percentage of slider
+        /// </summary>
+        [UnityEngine.RangeAttribute(0, 1)] private float _sliderValue;
 
-		/// <summary>
-		/// Max distance for finger to point interaction to trigger
-		/// </summary>
-		public float tolerance = 0.2f;
+        /// <summary>
+        ///     The point for visual representation on the line
+        /// </summary>
+        public UnityEngine.Transform point;
 
-		/// <summary>
-		/// Slider line renderer
-		/// </summary>
-		private LineRenderer tSlider;
+        public UnityEngine.Material slidermaterial;
 
-		public float3 tSliderEndA;
-		public float3 tSliderEndB;
+        /// <summary>
+        ///     Max distance for finger to point interaction to trigger
+        /// </summary>
+        public float tolerance = 0.2f;
 
-		public classifierType type;
+        /// <summary>
+        ///     Slider line renderer
+        /// </summary>
+        private UnityEngine.LineRenderer tSlider;
 
 		/// <summary>
 		/// internal percentage of slider
 		/// </summary>
 		[Range(0, 1)] private float _sliderValue;
+
+        public Unity.Mathematics.float3 tSliderEndA;
+        public Unity.Mathematics.float3 tSliderEndB;
 
 		public static TouchSlider ins;
 
@@ -61,6 +55,7 @@ namespace IMRE.EmbodiedUserInput
 				_sliderValue = value;
 			}
 		}
+
 
 
 		void Start()
