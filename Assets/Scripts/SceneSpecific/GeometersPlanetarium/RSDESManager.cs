@@ -1,7 +1,4 @@
-﻿using IMRE.HandWaver.Interface;
-using Leap.Unity.Interaction;
-
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -252,17 +249,17 @@ namespace IMRE.HandWaver.Space
 			}
 		}
 
-		public leapButtonToggleExtension allowTiltButton;
+		//public leapButtonToggleExtension allowTiltButton;
 		public CapsuleCollider axisCollider;
 		public MeshRenderer axisRenderer;
 
-		public leapButtonToggleExtension showLatitude;
-		public leapButtonToggleExtension showLongitude;
-		public leapButtonToggleExtension showGHA;
-		public leapButtonToggleExtension showDeclination;
-		public leapButtonToggleExtension showGreatArc;
-		public leapButtonToggleExtension showEarth;
-		public leapButtonToggleExtension showLights;
+		//public leapButtonToggleExtension showLatitude;
+		//public leapButtonToggleExtension showLongitude;
+		//public leapButtonToggleExtension showGHA;
+		//public leapButtonToggleExtension showDeclination;
+		//public leapButtonToggleExtension showGreatArc;
+		//public leapButtonToggleExtension showEarth;
+		//public leapButtonToggleExtension showLights;
 		public Leap.Unity.LeapPaint_v3.PressableSlider timeScaleSlider;
 		public TMPro.TextMeshPro timeScaleDisplay;
 
@@ -288,11 +285,11 @@ namespace IMRE.HandWaver.Space
 			}
 		}
 
-		public leapButtonToggleExtension drawCircle;
+		//public leapButtonToggleExtension drawCircle;
 
 		private Dictionary<List<pinData>, LineRenderer> greatArcsLRs = new Dictionary<List<pinData>, LineRenderer>();
 
-		public leapButtonToggleExtension findDistance;
+		//public leapButtonToggleExtension findDistance;
 
 		private List<RSDESLineData> arcLineData = new List<RSDESLineData>();
 
@@ -328,7 +325,7 @@ namespace IMRE.HandWaver.Space
 			//initialize system scales to agree.
 			SimulationTime = DateTime.UtcNow;
 			simulationScale = earthRadius / earthTrueRadius;
-			worldScaleModifier.ins.AbsoluteScale = simulationScale;
+//			worldScaleModifier.ins.AbsoluteScale = simulationScale;
 
 			earthPos = this.transform.position;
 			//Debug.Log(earthRot.eulerAngles);
@@ -436,12 +433,12 @@ namespace IMRE.HandWaver.Space
 
 		public void toggleLights()
 		{
-			globalLight.gameObject.SetActive(showLights.ToggleState);
+//			globalLight.gameObject.SetActive(showLights.ToggleState);
 		}
 
 		public void toggleEarth()
 		{
-			GetComponent<MeshRenderer>().enabled = showEarth.ToggleState;
+			//GetComponent<MeshRenderer>().enabled = showEarth.ToggleState;
 		}
 
 		public void resetEarthTilt()
@@ -574,8 +571,8 @@ namespace IMRE.HandWaver.Space
 			}
 			bool lat = (myLatMode == latitudeMode.both || myLatMode == latitudeMode.incremental);
             bool specialLat = (myLatMode == latitudeMode.both || myLatMode == latitudeMode.special);
-            bool dec = showDeclination.ToggleState && !(myLatMode == latitudeMode.special);
-            bool specialDec = showDeclination.ToggleState && specialLat;
+            bool dec = !(myLatMode == latitudeMode.special);
+            bool specialDec = specialLat;
 			for (int i = 0; i < nLatDivisions + specialLatitudeCount; i++)
 			{
 				if (lat || dec || specialLat)
@@ -620,8 +617,8 @@ namespace IMRE.HandWaver.Space
 			}
 
 
-			bool sLong = showLongitude.ToggleState;
-			bool sGHA = showGHA.ToggleState;
+			bool sLong = true;
+			bool sGHA = true;
 			for (int i = 0; i < nLongDivisions; i++)
 			{
 				if (sLong || sGHA)
@@ -741,8 +738,8 @@ namespace IMRE.HandWaver.Space
 			//	Debug.Log("no arc line data found.");
 			//arcLineData.ForEach(a => a.isDistTextEnabled = findDistance.ToggleState);
 
-			GameObject.FindObjectsOfType<RSDESLineData>().ToList().ForEach(a => a.isDistTextEnabled = findDistance.ToggleState);
-			GameObject.FindObjectsOfType<RSDESPin>().ToList().ForEach(a => a.latlongLabel.gameObject.SetActive(findDistance.ToggleState));
+//			GameObject.FindObjectsOfType<RSDESLineData>().ToList().ForEach(a => a.isDistTextEnabled = findDistance.ToggleState);
+//			GameObject.FindObjectsOfType<RSDESPin>().ToList().ForEach(a => a.latlongLabel.gameObject.SetActive(findDistance.ToggleState));
 
 		}
 

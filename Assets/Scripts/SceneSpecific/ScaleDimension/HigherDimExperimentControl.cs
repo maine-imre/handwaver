@@ -19,13 +19,6 @@ namespace IMRE.HandWaver.HigherDimensions
         public InteractionSlider animateButton_lm;
         public UnityEngine.UI.Button aniamteButton_onScreen;
 
-        public HypercubeNet hypercube;
-        public fiveCellNet fivecell;
-        public cubeNet cube;
-        public tetrahedronNet pyramid;
-        public squareNet square;
-        public triangleNet triangle;
-
         public bool foldOverride;
         [Range(0, 360)]
         public float foldOverrideValue = 0f;
@@ -85,13 +78,6 @@ namespace IMRE.HandWaver.HigherDimensions
                 foldSlider_lm.HorizontalSliderValue = degreeFolded / 360f;
                 if(foldSlider_onScreen != null)
                 foldSlider_onScreen.normalizedValue = degreeFolded / 360f;
-
-                hypercube.Fold = degreeFolded;
-                fivecell.Fold = degreeFolded;
-                cube.Fold = degreeFolded;
-                pyramid.Fold = degreeFolded;
-                square.Fold = degreeFolded;
-                triangle.Fold = degreeFolded;
             }
         }
     }
