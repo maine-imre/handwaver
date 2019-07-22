@@ -81,7 +81,9 @@ namespace IMRE.Chess3D
 
                 this.Location = attemptedMove;
                 board.Check(this, attemptedMove);
-            }
+            }else{
+		    this.Location = this.Location;
+	    }
 
         }
 
