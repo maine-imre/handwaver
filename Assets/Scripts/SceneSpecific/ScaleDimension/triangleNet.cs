@@ -31,8 +31,10 @@ public class triangleNet : UnityEngine.MonoBehaviour
         UnityEngine.Vector3[] result = new UnityEngine.Vector3[4];
         result[2] = UnityEngine.Vector3.zero;
         result[1] = UnityEngine.Vector3.right;
-        result[0] = result[1] + UnityEngine.Quaternion.AngleAxis(t, UnityEngine.Vector3.up) * UnityEngine.Vector3.right;
-        result[3] = result[2] + UnityEngine.Quaternion.AngleAxis(-t, UnityEngine.Vector3.up) * UnityEngine.Vector3.left;
+        result[0] = result[1] +
+                    (UnityEngine.Quaternion.AngleAxis(t, UnityEngine.Vector3.up) * UnityEngine.Vector3.right);
+        result[3] = result[2] +
+                    (UnityEngine.Quaternion.AngleAxis(-t, UnityEngine.Vector3.up) * UnityEngine.Vector3.left);
         return result;
     }
 }

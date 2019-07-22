@@ -68,7 +68,7 @@
         if (gameObject.name != "Sol")
             diameter = 0.0000000067f * 2 * bodyScale * radius;
         else
-            diameter = 0.0000000067f * 2 * bodyScale / sunscale * radius;
+            diameter = ((0.0000000067f * 2 * bodyScale) / sunscale) * radius;
         transform.localScale = new UnityEngine.Vector3(diameter, diameter, diameter);
     }
 

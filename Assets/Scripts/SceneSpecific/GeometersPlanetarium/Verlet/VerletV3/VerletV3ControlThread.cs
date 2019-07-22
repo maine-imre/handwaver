@@ -34,10 +34,10 @@
 
     public void testfunction()
     {
-        if (multiThreadFlag == multithreadedJobs.Length && timestep != 0)
+        if ((multiThreadFlag == multithreadedJobs.Length) && (timestep != 0))
         {
             System.DateTime start = System.DateTime.Now.AddMilliseconds(6);
-            while (System.DateTime.Now < start || stepCounter < steps)
+            while ((System.DateTime.Now < start) || (stepCounter < steps))
             {
                 stepCounter++;
                 masterTimeCounter += timestep; //Problematic
@@ -66,7 +66,8 @@
                     int counter = 0;
                     for (int i = 0; i < multithreadedJobs.Length; i++)
                     {
-                        if (multithreadedJobs[i].IsDone) counter += 1;
+                        if (multithreadedJobs[i].IsDone)
+                            counter += 1;
                     }
 
                     if (counter == multithreadedJobs.Length) allFinished = true;

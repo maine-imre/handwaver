@@ -110,7 +110,7 @@
 
         public void callUpdateStarFieldsGlobal()
         {
-            if (updateStarFieldsGlobal != null && updateStarFieldsGlobal.Method != null)
+            if ((updateStarFieldsGlobal != null) && (updateStarFieldsGlobal.Method != null))
                 updateStarFieldsGlobal.Invoke();
         }
 
@@ -126,7 +126,7 @@
             set
             {
                 earthRadius = value;
-                if (onEarthTilt != null && onEarthTilt.Method != null)
+                if ((onEarthTilt != null) && (onEarthTilt.Method != null))
                     onEarthTilt.Invoke();
             }
         }
@@ -139,7 +139,7 @@
 
             set
             {
-                if (simulationScale != float.NaN && simulationScale != 0)
+                if ((simulationScale != float.NaN) && (simulationScale != 0))
                 {
                     EarthRadius *= value / simulationScale;
                     ins.transform.localScale *= value / simulationScale;
@@ -207,12 +207,12 @@
         {
             UnityEngine.Vector3 EarthOffset = UnityEngine.Vector3.zero;
             if (Horizons.planetsHaveValues) EarthOffset = Horizons.Planets.Find(p => p.id == 399).position;
-            if (Sun != null && sunPin != null && Horizons.planetsHaveValues)
+            if ((Sun != null) && (sunPin != null) && Horizons.planetsHaveValues)
             {
                 if (sunBetweenTropics)
                 {
                     UnityEngine.Vector2 tmp = (Horizons.Planets.Find(p => p.id == 10).position - EarthOffset).latlong();
-                    tmp.x = tmp.x / realEarthtilt * earthTiltDeg;
+                    tmp.x = (tmp.x / realEarthtilt) * earthTiltDeg;
                     sunPin.Latlong = tmp;
                 }
                 else
@@ -226,7 +226,7 @@
                 RSDESPin.Constructor().GetComponent<RSDESPin>().setupSun();
             }
 
-            if (Moon != null && moonPin != null && Horizons.planetsHaveValues)
+            if ((Moon != null) && (moonPin != null) && Horizons.planetsHaveValues)
             {
                 moonPin.Latlong = (Horizons.Planets.Find(p => p.id == 301).position - EarthOffset).latlong();
             }
@@ -359,7 +359,7 @@
             _specialLat[2] = 0 - earthTiltDeg; //tropic of cancer
             _specialLat[3] = 0 + earthTiltDeg; //tropic of capricorn
 
-            if (onEarthTilt != null && onEarthTilt.Method != null) onEarthTilt.Invoke();
+            if ((onEarthTilt != null) && (onEarthTilt.Method != null)) onEarthTilt.Invoke();
         }
 
         internal void setTime()
@@ -483,11 +483,11 @@
             if (latRenderer == null)
             {
                 latRenderer = new UnityEngine.LineRenderer[nLatDivisions + specialLatitudeCount];
-                for (int i = 0; i < nLatDivisions + specialLatitudeCount; i++)
+                for (int i = 0; i < (nLatDivisions + specialLatitudeCount); i++)
                 {
                     latRenderer[i] = RSDESGeneratedLine();
                     latRenderer[i].positionCount = LR_Resolution;
-                    if (i % 2 == 0 && i < nLatDivisions)
+                    if (((i % 2) == 0) && (i < nLatDivisions))
                     {
                         latRenderer[i].startWidth = LR_width * 3f;
                         latRenderer[i].endWidth = LR_width * 3f;
@@ -505,11 +505,11 @@
             if (decRenderer == null)
             {
                 decRenderer = new UnityEngine.LineRenderer[nLatDivisions + specialLatitudeCount];
-                for (int i = 0; i < nLatDivisions + specialLatitudeCount; i++)
+                for (int i = 0; i < (nLatDivisions + specialLatitudeCount); i++)
                 {
                     decRenderer[i] = RSDESGeneratedLine();
                     decRenderer[i].positionCount = LR_Resolution;
-                    if (i % 2 == 0 && i < nLatDivisions)
+                    if (((i % 2) == 0) && (i < nLatDivisions))
                     {
                         decRenderer[i].startWidth = LR_width * 3f;
                         decRenderer[i].endWidth = LR_width * 3f;
@@ -534,7 +534,7 @@
                         longRenderer[i] = RSDESGeneratedLine();
                     }
                     longRenderer[i].positionCount = LR_Resolution;
-                    if (i % 2 == 0)
+                    if ((i % 2) == 0)
                     {
                         longRenderer[i].startWidth = LR_width * 3f;
                         longRenderer[i].endWidth = LR_width * 3f;
@@ -556,7 +556,7 @@
                 {
                     ghaRenderer[i] = RSDESGeneratedLine();
                     ghaRenderer[i].positionCount = LR_Resolution;
-                    if (i % 2 == 0)
+                    if ((i % 2) == 0)
                     {
                         ghaRenderer[i].startWidth = LR_width * 3f;
                         ghaRenderer[i].endWidth = LR_width * 3f;
@@ -571,15 +571,15 @@
                 }
             }
 
-            bool lat = myLatMode == latitudeMode.both || myLatMode == latitudeMode.incremental;
-            bool specialLat = myLatMode == latitudeMode.both || myLatMode == latitudeMode.special;
+            bool lat = (myLatMode == latitudeMode.both) || (myLatMode == latitudeMode.incremental);
+            bool specialLat = (myLatMode == latitudeMode.both) || (myLatMode == latitudeMode.special);
             bool dec = !(myLatMode == latitudeMode.special);
             bool specialDec = specialLat;
-            for (int i = 0; i < nLatDivisions + specialLatitudeCount; i++)
+            for (int i = 0; i < (nLatDivisions + specialLatitudeCount); i++)
             {
                 if (lat || dec || specialLat)
                 {
-                    float theta = i * 180f / (nLatDivisions - 1) - 90f;
+                    float theta = ((i * 180f) / (nLatDivisions - 1)) - 90f;
                     if (i >= nLatDivisions) theta = _specialLat[i - nLatDivisions];
                     UnityEngine.Vector3[] positions = GeoPlanetMaths
                         .latAtPoint(GeoPlanetMaths.directionFromLatLong(theta, 0) + earthPos, LR_Resolution)
@@ -628,7 +628,7 @@
                 {
                     //we only need to consider positive longitude since they are great circles.				
                     UnityEngine.Vector3[] positions = GeoPlanetMaths.longAtPoint(
-                        GeoPlanetMaths.directionFromLatLong(new UnityEngine.Vector2(0, 180f / nLongDivisions * i)) +
+                        GeoPlanetMaths.directionFromLatLong(new UnityEngine.Vector2(0, (180f / nLongDivisions) * i)) +
                         earthPos, LR_Resolution);
                     longRenderer[i].SetPositions(positions);
                     ghaRenderer[i].SetPositions(positions.Translate(-earthPos)
@@ -665,7 +665,7 @@
         public void toggleCircles()
         {
             if (SelectedPoints.Count >= 2)
-                for (int i = 0; i < selectedPoints.Count - 1; i++)
+                for (int i = 0; i < (selectedPoints.Count - 1); i++)
                 for (int j = i + 1; j < selectedPoints.Count; j++)
                     instantiateGreatCircle(selectedPoints[i], selectedPoints[j]);
         }
@@ -696,7 +696,7 @@
         {
             {
                 if (SelectedPoints.Count >= 2)
-                    for (int i = 0; i < selectedPoints.Count - 1; i++)
+                    for (int i = 0; i < (selectedPoints.Count - 1); i++)
                     for (int j = i + 1; j < selectedPoints.Count; j++)
                         instantiateGreatArc(selectedPoints[i], selectedPoints[j]);
             }

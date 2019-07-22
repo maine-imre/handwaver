@@ -35,10 +35,7 @@ namespace IMRE.Chess3D
             if (UnityEngine.Mathf.Abs(UnityEngine.Vector3.Dot(tmp, UnityEngine.Vector3.right)) > 1) return false;
 
             if (UnityEngine.Mathf.Abs(UnityEngine.Vector3.Dot(tmp, UnityEngine.Vector3.up)) > 1) return false;
-            if (UnityEngine.Mathf.Abs(UnityEngine.Vector3.Dot(tmp, UnityEngine.Vector3.forward)) > 1)
-            {
-                return false;
-            }
+            if (UnityEngine.Mathf.Abs(UnityEngine.Vector3.Dot(tmp, UnityEngine.Vector3.forward)) > 1) return false;
 
             if (Board.placeSelfInCheck(this, moveToTest)) return false;
             return true;

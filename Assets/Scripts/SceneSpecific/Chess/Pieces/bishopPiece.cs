@@ -29,22 +29,22 @@ namespace IMRE.Chess3D
             UnityEngine.Vector3 tmp = moveToTest - Location;
             if (tmp == UnityEngine.Vector3.zero)
                 return false; //no move
-            if (tmp.x == tmp.y && tmp.x == tmp.z)
+            if ((tmp.x == tmp.y) && (tmp.x == tmp.z))
                 result = true; //diagoinal
-            else if (tmp.x == tmp.y && tmp.z == 0)
+            else if ((tmp.x == tmp.y) && (tmp.z == 0))
                 result = true; //diagoinal
-            else if (tmp.x == tmp.z && tmp.y == 0)
+            else if ((tmp.x == tmp.z) && (tmp.y == 0))
                 result = true; //diagoinal
-            else if (tmp.y == tmp.z && tmp.x == 0)
+            else if ((tmp.y == tmp.z) && (tmp.x == 0))
                 result = true; //diagoinal
             else
                 return false; //not diagonal
             int max = (int) UnityEngine.Mathf.Max(UnityEngine.Mathf.Abs(tmp.x), UnityEngine.Mathf.Abs(tmp.y),
                 UnityEngine.Mathf.Abs(tmp.z));
             tmp /= max;
-            for (int i = 1; i < max - 1; i++)
+            for (int i = 1; i < (max - 1); i++)
             {
-                if (Board.TestLocation(i * tmp + Location) != null)
+                if (Board.TestLocation((i * tmp) + Location) != null)
                     return false; //if it hits a piece before getting to location
             }
 

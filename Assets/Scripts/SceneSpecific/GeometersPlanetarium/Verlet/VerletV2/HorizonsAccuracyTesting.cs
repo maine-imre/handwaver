@@ -1,5 +1,8 @@
 ﻿public class HorizonsAccuracyTesting : UnityEngine.MonoBehaviour
 {
+    private readonly System.Collections.Generic.List<System.DateTime> UpdateTimes =
+        new System.Collections.Generic.List<System.DateTime>();
+
     //public GameObject defaultBody;		//The default version of a massive object
     private string bodyName = ""; //The given name of the object
     public VerletV2 controlScript;
@@ -12,9 +15,6 @@
     private System.DateTime STARTTIME;
     private string time; //The current time (assists above)
     private bool timePassedFlag = false;
-
-    private readonly System.Collections.Generic.List<System.DateTime> UpdateTimes =
-        new System.Collections.Generic.List<System.DateTime>();
 
     private float vx; //The X Velocity of the object
     private float vy; //The Y Velocity of the object

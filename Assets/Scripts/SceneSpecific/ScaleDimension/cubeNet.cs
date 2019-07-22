@@ -1,6 +1,4 @@
-﻿using Enumerable = System.Linq.Enumerable;
-
-/// <summary>
+﻿/// <summary>
 ///     This script does ___.
 ///     The main contributor(s) to this script is __
 ///     Status: ???
@@ -22,7 +20,7 @@ public class cubeNet : UnityEngine.MonoBehaviour
         {
             fold = value;
             lr.SetPositions(lineRendererVerts(fold));
-            m.SetVertices(Enumerable.ToList(meshVerts(fold)));
+            m.SetVertices(System.Linq.Enumerable.ToList(meshVerts(fold)));
         }
     }
 
@@ -72,8 +70,8 @@ public class cubeNet : UnityEngine.MonoBehaviour
     private static UnityEngine.Vector3 squareVert(UnityEngine.Vector3 nSegmentA, UnityEngine.Vector3 nSegmentB,
         UnityEngine.Vector3 oppositePoint, float t)
     {
-        return UnityEngine.Quaternion.AngleAxis(t, (nSegmentA - nSegmentB).normalized) *
-               (oppositePoint - (nSegmentA + nSegmentB) / 2f) + (nSegmentA + nSegmentB) / 2f;
+        return (UnityEngine.Quaternion.AngleAxis(t, (nSegmentA - nSegmentB).normalized) *
+                (oppositePoint - ((nSegmentA + nSegmentB) / 2f))) + ((nSegmentA + nSegmentB) / 2f);
     }
 
     private static int[] meshQuad(int a, int b, int c, int d)

@@ -1,5 +1,6 @@
 ﻿public class VerletV3 : UnityEngine.MonoBehaviour
 {
+    private readonly VerletV2Thread[] multithreadedJobs = new VerletV2Thread[0]; //List of all of the active threads
     public float bodyScale = 1; //Multipliciative scale of the size of the bodies in the system
     public string CenterBody = "Sol";
     public UnityEngine.Vector3d CenterBodyOffset = new UnityEngine.Vector3d(0, 0, 0);
@@ -18,7 +19,6 @@
     private int minicounter; //Counter of the number of update calls
     private int mode1FlipCounter = 0;
     public float multiple = 10;
-    private readonly VerletV2Thread[] multithreadedJobs = new VerletV2Thread[0]; //List of all of the active threads
     private int multiThreadFlag; //This flag indicates how many threads have been completed
     private float previousTimeStep; //The previous timestep for time corrected verlet
     public int reducing; //0 has not been reduced, 1 is reducing and 2 is reduced
@@ -50,35 +50,35 @@
 
     private void runThreads()
     {
-        if (multiThreadFlag == multithreadedJobs.Length && timeStep != 0)
+        if ((multiThreadFlag == multithreadedJobs.Length) && (timeStep != 0))
         {
             //If the threads have completed
-            if (timeStep != 0 && timeStep == previousTimeStep)
+            if ((timeStep != 0) && (timeStep == previousTimeStep))
             {
                 UnityEngine.Debug.Log(lastFrameCompleted + "	" + stepTimeStep + "	" + timeStep + "	" +
-                                      stepTimeStep / timeStep + "	" +
+                                      (stepTimeStep / timeStep) + "	" +
                                       UnityEngine.Mathf.CeilToInt(stepTimeStep / timeStep));
                 //Debug.Log(lastFrameCompleted + "	" + multiple + "	" + stepTimeStep + "	" + (multiple - Mathf.Log(Mathf.Pow(multiple, 1/6))));
-                if (lastFrameCompleted && multiple >= 1.05)
+                if (lastFrameCompleted && (multiple >= 1.05))
                 {
                     stepTimeStep = stepTimeStep / multiple;
                     stepsPerFrame = UnityEngine.Mathd.CeilToInt(timeStep / stepTimeStep);
                 }
 
-                if (!lastFrameCompleted && multiple >= 1.05)
+                if (!lastFrameCompleted && (multiple >= 1.05))
                 {
                     stepTimeStep = stepTimeStep * multiple;
                     stepsPerFrame = UnityEngine.Mathd.CeilToInt(timeStep / stepTimeStep);
                     multiple = multiple - UnityEngine.Mathf.Log(UnityEngine.Mathf.Pow(multiple, 1 / 6));
                 }
 
-                if (lastFrameCompleted && multiple < 1.05 || UnityEngine.Mathf.Abs(stepTimeStep) < 0.05)
+                if ((lastFrameCompleted && (multiple < 1.05)) || (UnityEngine.Mathf.Abs(stepTimeStep) < 0.05))
                 {
                     UnityEngine.Debug.Log("Ping");
                     multiple = 1;
                 }
 
-                if (!lastFrameCompleted && multiple < 1.05) multiple = 5;
+                if (!lastFrameCompleted && (multiple < 1.05)) multiple = 5;
             }
             else if (previousTimeStep != timeStep)
             {

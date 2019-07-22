@@ -240,7 +240,7 @@ namespace UnityEngine
 
         public static double Lerp(double from, double to, double t)
         {
-            return from + (to - from) * Clamp01(t);
+            return from + ((to - from) * Clamp01(t));
         }
 
         public static double LerpAngle(double a, double b, double t)
@@ -248,14 +248,14 @@ namespace UnityEngine
             double num = Repeat(b - a, 360d);
             if (num > 180.0d)
                 num -= 360d;
-            return a + num * Clamp01(t);
+            return a + (num * Clamp01(t));
         }
 
         public static double MoveTowards(double current, double target, double maxDelta)
         {
             if (Abs(target - current) <= maxDelta)
                 return target;
-            return current + Sign(target - current) * maxDelta;
+            return current + (Sign(target - current) * maxDelta);
         }
 
         public static double MoveTowardsAngle(double current, double target, double maxDelta)
@@ -267,8 +267,8 @@ namespace UnityEngine
         public static double SmoothStep(double from, double to, double t)
         {
             t = Clamp01(t);
-            t = -2.0 * t * t * t + 3.0 * t * t;
-            return to * t + from * (1.0 - t);
+            t = (-2.0 * t * t * t) + (3.0 * t * t);
+            return (to * t) + (from * (1.0 - t));
         }
 
         public static double Gamma(double value, double absmax, double gamma)
@@ -315,17 +315,17 @@ namespace UnityEngine
             smoothTime = Max(0.0001d, smoothTime);
             double num1 = 2d / smoothTime;
             double num2 = num1 * deltaTime;
-            double num3 = 1.0d / (1.0d + num2 + 0.479999989271164d * num2 * num2 +
-                                  0.234999999403954d * num2 * num2 * num2);
+            double num3 = 1.0d / (1.0d + num2 + (0.479999989271164d * num2 * num2) +
+                                  (0.234999999403954d * num2 * num2 * num2));
             double num4 = current - target;
             double num5 = target;
             double max = maxSpeed * smoothTime;
             double num6 = Clamp(num4, -max, max);
             target = current - num6;
-            double num7 = (currentVelocity + num1 * num6) * deltaTime;
-            currentVelocity = (currentVelocity - num1 * num7) * num3;
-            double num8 = target + (num6 + num7) * num3;
-            if (num5 - current > 0.0 == num8 > num5)
+            double num7 = (currentVelocity + (num1 * num6)) * deltaTime;
+            currentVelocity = (currentVelocity - (num1 * num7)) * num3;
+            double num8 = target + ((num6 + num7) * num3);
+            if (((num5 - current) > 0.0) == (num8 > num5))
             {
                 num8 = num5;
                 currentVelocity = (num8 - num5) / deltaTime;
@@ -358,7 +358,7 @@ namespace UnityEngine
 
         public static double Repeat(double t, double length)
         {
-            return t - Floor(t / length) * length;
+            return t - (Floor(t / length) * length);
         }
 
         public static double PingPong(double t, double length)
@@ -386,7 +386,7 @@ namespace UnityEngine
                 return 1d;
             if (value > from)
                 return 0d;
-            return 1.0d - (value - to) / (from - to);
+            return 1.0d - ((value - to) / (from - to));
         }
 
         public static double DeltaAngle(double current, double target)
@@ -403,13 +403,13 @@ namespace UnityEngine
             double num2 = p2.y - p1.y;
             double num3 = p4.x - p3.x;
             double num4 = p4.y - p3.y;
-            double num5 = num1 * num4 - num2 * num3;
+            double num5 = (num1 * num4) - (num2 * num3);
             if (num5 == 0.0d)
                 return false;
             double num6 = p3.x - p1.x;
             double num7 = p3.y - p1.y;
-            double num8 = (num6 * num4 - num7 * num3) / num5;
-            result = new Vector2d(p1.x + num8 * num1, p1.y + num8 * num2);
+            double num8 = ((num6 * num4) - (num7 * num3)) / num5;
+            result = new Vector2d(p1.x + (num8 * num1), p1.y + (num8 * num2));
             return true;
         }
 
@@ -420,18 +420,18 @@ namespace UnityEngine
             double num2 = p2.y - p1.y;
             double num3 = p4.x - p3.x;
             double num4 = p4.y - p3.y;
-            double num5 = num1 * num4 - num2 * num3;
+            double num5 = (num1 * num4) - (num2 * num3);
             if (num5 == 0.0d)
                 return false;
             double num6 = p3.x - p1.x;
             double num7 = p3.y - p1.y;
-            double num8 = (num6 * num4 - num7 * num3) / num5;
-            if (num8 < 0.0d || num8 > 1.0d)
+            double num8 = ((num6 * num4) - (num7 * num3)) / num5;
+            if ((num8 < 0.0d) || (num8 > 1.0d))
                 return false;
-            double num9 = (num6 * num2 - num7 * num1) / num5;
-            if (num9 < 0.0d || num9 > 1.0d)
+            double num9 = ((num6 * num2) - (num7 * num1)) / num5;
+            if ((num9 < 0.0d) || (num9 > 1.0d))
                 return false;
-            result = new Vector2d(p1.x + num8 * num1, p1.y + num8 * num2);
+            result = new Vector2d(p1.x + (num8 * num1), p1.y + (num8 * num2));
             return true;
         }
     }

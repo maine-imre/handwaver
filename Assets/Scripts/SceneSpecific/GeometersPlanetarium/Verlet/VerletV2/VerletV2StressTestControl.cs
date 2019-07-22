@@ -25,7 +25,7 @@
         {
             text.text = (numberOfBodies / 5).ToString();
             numberOfBodies += 1;
-            for (int i = 0; i < numberOfBodies - internalNumber; i++)
+            for (int i = 0; i < (numberOfBodies - internalNumber); i++)
             {
                 ((VerletObjectV2) massiveBody.GetComponent("VerletObjectV2")).mass =
                     UnityEngine.Random.Range(100000, 1000000000000);

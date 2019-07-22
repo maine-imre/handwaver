@@ -41,7 +41,7 @@
     private void runThreads()
     {
         float tmpTs = timeStep; //Temperory timestep to prevent input mess
-        if (multiThreadFlag == multithreadedJobs.Length && timeStep != 0)
+        if ((multiThreadFlag == multithreadedJobs.Length) && (timeStep != 0))
         {
             //If the threads have completed
             float tmppTs = previousTimeStep;

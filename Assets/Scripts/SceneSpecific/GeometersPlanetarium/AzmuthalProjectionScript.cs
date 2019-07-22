@@ -22,27 +22,27 @@
             {
                 for (int j = 0; j < count; j++)
                 {
-                    vertices[count * i + j] = UnityEngine.Vector3.right * i + UnityEngine.Vector3.forward * j;
+                    vertices[(count * i) + j] = (UnityEngine.Vector3.right * i) + (UnityEngine.Vector3.forward * j);
 
                     //azmuthal projecction UVs.  how to check this?
-                    uvs[count * i + j] =
-                        j / count *
-                        (UnityEngine.Vector3.right *
-                         UnityEngine.Mathf.Sin((1f / 2f - i / count) * UnityEngine.Mathf.PI) +
-                         UnityEngine.Vector3.forward *
-                         UnityEngine.Mathf.Cos((1f / 2f - i / count) * UnityEngine.Mathf.PI));
+                    uvs[(count * i) + j] =
+                        (j / count) *
+                        ((UnityEngine.Vector3.right *
+                          UnityEngine.Mathf.Sin(((1f / 2f) - (i / count)) * UnityEngine.Mathf.PI)) +
+                         (UnityEngine.Vector3.forward *
+                          UnityEngine.Mathf.Cos(((1f / 2f) - (i / count)) * UnityEngine.Mathf.PI)));
 
-                    if (i != 0 && j != 0)
+                    if ((i != 0) && (j != 0))
                     {
                         //check clockwise/counter for quad.
-                        int idx = (count - 1) * (i - 1) + (j - 1);
-                        triangles[6 * idx] = count * i + j;
-                        triangles[6 * idx + 1] = count * (i - 1) + j;
-                        triangles[6 * idx + 2] = count * i + (j - 1);
+                        int idx = ((count - 1) * (i - 1)) + (j - 1);
+                        triangles[6 * idx] = (count * i) + j;
+                        triangles[(6 * idx) + 1] = (count * (i - 1)) + j;
+                        triangles[(6 * idx) + 2] = (count * i) + (j - 1);
 
-                        triangles[6 * idx + 3] = count * (i - 1) + (j - 1);
-                        triangles[6 * idx + 4] = count * (i - 1) + j;
-                        triangles[6 * idx + 5] = count * i + (j - 1);
+                        triangles[(6 * idx) + 3] = (count * (i - 1)) + (j - 1);
+                        triangles[(6 * idx) + 4] = (count * (i - 1)) + j;
+                        triangles[(6 * idx) + 5] = (count * i) + (j - 1);
                     }
                 }
             }

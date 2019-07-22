@@ -50,9 +50,9 @@ namespace UnityEngine
             }
         }
 
-        public double magnitude => Mathd.Sqrt(x * x + y * y);
+        public double magnitude => Mathd.Sqrt((x * x) + (y * y));
 
-        public double sqrMagnitude => x * x + y * y;
+        public double sqrMagnitude => (x * x) + (y * y);
 
         public static Vector2d zero => new Vector2d(0.0d, 0.0d);
 
@@ -110,12 +110,12 @@ namespace UnityEngine
 
         public static bool operator ==(Vector2d lhs, Vector2d rhs)
         {
-            return SqrMagnitude(lhs - rhs) < 0.0 / 1.0;
+            return SqrMagnitude(lhs - rhs) < (0.0 / 1.0);
         }
 
         public static bool operator !=(Vector2d lhs, Vector2d rhs)
         {
-            return SqrMagnitude(lhs - rhs) >= 0.0 / 1.0;
+            return SqrMagnitude(lhs - rhs) >= (0.0 / 1.0);
         }
 
         public void Set(double new_x, double new_y)
@@ -127,16 +127,16 @@ namespace UnityEngine
         public static Vector2d Lerp(Vector2d from, Vector2d to, double t)
         {
             t = Mathd.Clamp01(t);
-            return new Vector2d(from.x + (to.x - from.x) * t, from.y + (to.y - from.y) * t);
+            return new Vector2d(from.x + ((to.x - from.x) * t), from.y + ((to.y - from.y) * t));
         }
 
         public static Vector2d MoveTowards(Vector2d current, Vector2d target, double maxDistanceDelta)
         {
             Vector2d vector2 = target - current;
             double magnitude = vector2.magnitude;
-            if (magnitude <= maxDistanceDelta || magnitude == 0.0d)
+            if ((magnitude <= maxDistanceDelta) || (magnitude == 0.0d))
                 return target;
-            return current + vector2 / magnitude * maxDistanceDelta;
+            return current + ((vector2 / magnitude) * maxDistanceDelta);
         }
 
         public static Vector2d Scale(Vector2d a, Vector2d b)
@@ -208,7 +208,7 @@ namespace UnityEngine
 
         public static double Dot(Vector2d lhs, Vector2d rhs)
         {
-            return lhs.x * rhs.x + lhs.y * rhs.y;
+            return (lhs.x * rhs.x) + (lhs.y * rhs.y);
         }
 
         public static double Angle(Vector2d from, Vector2d to)
@@ -223,19 +223,19 @@ namespace UnityEngine
 
         public static Vector2d ClampMagnitude(Vector2d vector, double maxLength)
         {
-            if (vector.sqrMagnitude > maxLength * maxLength)
+            if (vector.sqrMagnitude > (maxLength * maxLength))
                 return vector.normalized * maxLength;
             return vector;
         }
 
         public static double SqrMagnitude(Vector2d a)
         {
-            return a.x * a.x + a.y * a.y;
+            return (a.x * a.x) + (a.y * a.y);
         }
 
         public double SqrMagnitude()
         {
-            return x * x + y * y;
+            return (x * x) + (y * y);
         }
 
         public static Vector2d Min(Vector2d lhs, Vector2d rhs)

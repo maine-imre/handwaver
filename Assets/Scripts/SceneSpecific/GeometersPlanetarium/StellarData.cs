@@ -26,7 +26,7 @@
                 string[] lv = hygLines[i].Split(',');
                 //(below) Add star class to list with data from line.
 
-                if (lv.Length > 16 && lv[16] != "")
+                if ((lv.Length > 16) && (lv[16] != ""))
                     Stars.Add(new Star(int.Parse(lv[0]), lv[6], float.Parse(lv[9]), float.Parse(lv[13]),
                         float.Parse(lv[16]),
                         new UnityEngine.Vector3(float.Parse(lv[17]), float.Parse(lv[18]), float.Parse(lv[19])) + offset,

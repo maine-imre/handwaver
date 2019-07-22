@@ -58,7 +58,8 @@ namespace IMRE.Chess3D
             {
                 foreach (AbstractPiece piece in friendlyPieces)
                 {
-                    if (piece.Location == pos) posList.Remove(pos);
+                    if (piece.Location == pos)
+                        posList.Remove(pos);
                 }
             }
 
@@ -130,7 +131,8 @@ namespace IMRE.Chess3D
             {
                 foreach (AbstractPiece piece in friendlyPieces)
                 {
-                    if (piece.Location == pos) posList.Remove(pos);
+                    if (piece.Location == pos)
+                        posList.Remove(pos);
                 }
             }
 
@@ -145,13 +147,15 @@ namespace IMRE.Chess3D
             UnityEngine.Vector3 newPos = UnityEngine.Vector3.zero;
             for (int i = 0; i < 9; i++)
             {
-                newPos = position + i * direction;
-                if (!(newPos.x > 9 || newPos.y > 9 || newPos.z > 9 || newPos.x < 0 || newPos.y < 0 || newPos.z < 0))
+                newPos = position + (i * direction);
+                if (!((newPos.x > 9) || (newPos.y > 9) || (newPos.z > 9) || (newPos.x < 0) || (newPos.y < 0) ||
+                      (newPos.z < 0)))
                 {
                     bool result = false;
                     foreach (AbstractPiece enemy in enemyPieces)
                     {
-                        if (enemy.Location == newPos) result = true;
+                        if (enemy.Location == newPos)
+                            result = true;
                     }
 
                     if (result)
@@ -162,7 +166,8 @@ namespace IMRE.Chess3D
 
                     foreach (AbstractPiece friendly in friendlyPieces)
                     {
-                        if (friendly.Location == newPos) result = true;
+                        if (friendly.Location == newPos)
+                            result = true;
                     }
 
                     if (result) break;
@@ -175,32 +180,32 @@ namespace IMRE.Chess3D
         {
             System.Collections.Generic.List<UnityEngine.Vector3> posList =
                 new System.Collections.Generic.List<UnityEngine.Vector3>();
-            posList.Add(position + 2 * UnityEngine.Vector3.right + UnityEngine.Vector3.up);
-            posList.Add(position + 2 * UnityEngine.Vector3.right + UnityEngine.Vector3.down);
-            posList.Add(position + 2 * UnityEngine.Vector3.right + UnityEngine.Vector3.forward);
-            posList.Add(position + 2 * UnityEngine.Vector3.right + UnityEngine.Vector3.back);
-            posList.Add(position + 2 * UnityEngine.Vector3.left + UnityEngine.Vector3.up);
-            posList.Add(position + 2 * UnityEngine.Vector3.left + UnityEngine.Vector3.down);
-            posList.Add(position + 2 * UnityEngine.Vector3.left + UnityEngine.Vector3.forward);
-            posList.Add(position + 2 * UnityEngine.Vector3.left + UnityEngine.Vector3.back);
+            posList.Add(position + (2 * UnityEngine.Vector3.right) + UnityEngine.Vector3.up);
+            posList.Add(position + (2 * UnityEngine.Vector3.right) + UnityEngine.Vector3.down);
+            posList.Add(position + (2 * UnityEngine.Vector3.right) + UnityEngine.Vector3.forward);
+            posList.Add(position + (2 * UnityEngine.Vector3.right) + UnityEngine.Vector3.back);
+            posList.Add(position + (2 * UnityEngine.Vector3.left) + UnityEngine.Vector3.up);
+            posList.Add(position + (2 * UnityEngine.Vector3.left) + UnityEngine.Vector3.down);
+            posList.Add(position + (2 * UnityEngine.Vector3.left) + UnityEngine.Vector3.forward);
+            posList.Add(position + (2 * UnityEngine.Vector3.left) + UnityEngine.Vector3.back);
 
-            posList.Add(position + 2 * UnityEngine.Vector3.up + UnityEngine.Vector3.right);
-            posList.Add(position + 2 * UnityEngine.Vector3.up + UnityEngine.Vector3.left);
-            posList.Add(position + 2 * UnityEngine.Vector3.up + UnityEngine.Vector3.forward);
-            posList.Add(position + 2 * UnityEngine.Vector3.up + UnityEngine.Vector3.back);
-            posList.Add(position + 2 * UnityEngine.Vector3.down + UnityEngine.Vector3.right);
-            posList.Add(position + 2 * UnityEngine.Vector3.down + UnityEngine.Vector3.left);
-            posList.Add(position + 2 * UnityEngine.Vector3.down + UnityEngine.Vector3.forward);
-            posList.Add(position + 2 * UnityEngine.Vector3.down + UnityEngine.Vector3.back);
+            posList.Add(position + (2 * UnityEngine.Vector3.up) + UnityEngine.Vector3.right);
+            posList.Add(position + (2 * UnityEngine.Vector3.up) + UnityEngine.Vector3.left);
+            posList.Add(position + (2 * UnityEngine.Vector3.up) + UnityEngine.Vector3.forward);
+            posList.Add(position + (2 * UnityEngine.Vector3.up) + UnityEngine.Vector3.back);
+            posList.Add(position + (2 * UnityEngine.Vector3.down) + UnityEngine.Vector3.right);
+            posList.Add(position + (2 * UnityEngine.Vector3.down) + UnityEngine.Vector3.left);
+            posList.Add(position + (2 * UnityEngine.Vector3.down) + UnityEngine.Vector3.forward);
+            posList.Add(position + (2 * UnityEngine.Vector3.down) + UnityEngine.Vector3.back);
 
-            posList.Add(position + 2 * UnityEngine.Vector3.forward + UnityEngine.Vector3.up);
-            posList.Add(position + 2 * UnityEngine.Vector3.forward + UnityEngine.Vector3.down);
-            posList.Add(position + 2 * UnityEngine.Vector3.forward + UnityEngine.Vector3.left);
-            posList.Add(position + 2 * UnityEngine.Vector3.forward + UnityEngine.Vector3.right);
-            posList.Add(position + 2 * UnityEngine.Vector3.back + UnityEngine.Vector3.up);
-            posList.Add(position + 2 * UnityEngine.Vector3.back + UnityEngine.Vector3.down);
-            posList.Add(position + 2 * UnityEngine.Vector3.back + UnityEngine.Vector3.left);
-            posList.Add(position + 2 * UnityEngine.Vector3.back + UnityEngine.Vector3.right);
+            posList.Add(position + (2 * UnityEngine.Vector3.forward) + UnityEngine.Vector3.up);
+            posList.Add(position + (2 * UnityEngine.Vector3.forward) + UnityEngine.Vector3.down);
+            posList.Add(position + (2 * UnityEngine.Vector3.forward) + UnityEngine.Vector3.left);
+            posList.Add(position + (2 * UnityEngine.Vector3.forward) + UnityEngine.Vector3.right);
+            posList.Add(position + (2 * UnityEngine.Vector3.back) + UnityEngine.Vector3.up);
+            posList.Add(position + (2 * UnityEngine.Vector3.back) + UnityEngine.Vector3.down);
+            posList.Add(position + (2 * UnityEngine.Vector3.back) + UnityEngine.Vector3.left);
+            posList.Add(position + (2 * UnityEngine.Vector3.back) + UnityEngine.Vector3.right);
 
             System.Collections.Generic.List<UnityEngine.Vector3> posListClone = posList;
 
@@ -208,7 +213,8 @@ namespace IMRE.Chess3D
             {
                 foreach (AbstractPiece piece in friendlyPieces)
                 {
-                    if (piece.Location == pos) posList.Remove(pos);
+                    if (piece.Location == pos)
+                        posList.Remove(pos);
                 }
             }
 
@@ -228,13 +234,13 @@ namespace IMRE.Chess3D
 
                 foreach (AbstractPiece piece in enemyPieces)
                 {
-                    if (piece.Location == position + UnityEngine.Vector3.forward)
+                    if (piece.Location == (position + UnityEngine.Vector3.forward))
                         blocked = true;
                 }
 
                 foreach (AbstractPiece piece in friendlyPieces)
                 {
-                    if (piece.Location == position + UnityEngine.Vector3.forward)
+                    if (piece.Location == (position + UnityEngine.Vector3.forward))
                         blocked = true;
                 }
 
@@ -242,19 +248,20 @@ namespace IMRE.Chess3D
                 {
                     posList.Add(UnityEngine.Vector3.forward + position);
 
-                    if (position.z == 1 || position.z == 8) posList.Add(2 * UnityEngine.Vector3.forward + position);
+                    if ((position.z == 1) || (position.z == 8))
+                        posList.Add((2 * UnityEngine.Vector3.forward) + position);
                 }
                 else
                 {
                     foreach (AbstractPiece piece in enemyPieces)
                     {
-                        if (piece.Location == UnityEngine.Vector3.forward + UnityEngine.Vector3.up + position)
+                        if (piece.Location == (UnityEngine.Vector3.forward + UnityEngine.Vector3.up + position))
                             posList.Add(UnityEngine.Vector3.forward + UnityEngine.Vector3.up + position);
-                        else if (piece.Location == UnityEngine.Vector3.forward + UnityEngine.Vector3.down + position)
+                        else if (piece.Location == (UnityEngine.Vector3.forward + UnityEngine.Vector3.down + position))
                             posList.Add(UnityEngine.Vector3.forward + UnityEngine.Vector3.down + position);
-                        else if (piece.Location == UnityEngine.Vector3.forward + UnityEngine.Vector3.right + position)
+                        else if (piece.Location == (UnityEngine.Vector3.forward + UnityEngine.Vector3.right + position))
                             posList.Add(UnityEngine.Vector3.forward + UnityEngine.Vector3.right + position);
-                        else if (piece.Location == UnityEngine.Vector3.forward + UnityEngine.Vector3.left + position)
+                        else if (piece.Location == (UnityEngine.Vector3.forward + UnityEngine.Vector3.left + position))
                             posList.Add(UnityEngine.Vector3.forward + UnityEngine.Vector3.left + position);
                     }
                 }
@@ -271,13 +278,13 @@ namespace IMRE.Chess3D
 
                 foreach (AbstractPiece piece in enemyPieces)
                 {
-                    if (piece.Location == position + UnityEngine.Vector3.back)
+                    if (piece.Location == (position + UnityEngine.Vector3.back))
                         blocked = true;
                 }
 
                 foreach (AbstractPiece piece in friendlyPieces)
                 {
-                    if (piece.Location == position + UnityEngine.Vector3.back)
+                    if (piece.Location == (position + UnityEngine.Vector3.back))
                         blocked = true;
                 }
 
@@ -285,19 +292,19 @@ namespace IMRE.Chess3D
                 {
                     posList.Add(UnityEngine.Vector3.back + position);
 
-                    if (position.z == 1 || position.z == 8) posList.Add(2 * UnityEngine.Vector3.back + position);
+                    if ((position.z == 1) || (position.z == 8)) posList.Add((2 * UnityEngine.Vector3.back) + position);
                 }
                 else
                 {
                     foreach (AbstractPiece piece in enemyPieces)
                     {
-                        if (piece.Location == UnityEngine.Vector3.back + UnityEngine.Vector3.up + position)
+                        if (piece.Location == (UnityEngine.Vector3.back + UnityEngine.Vector3.up + position))
                             posList.Add(UnityEngine.Vector3.back + UnityEngine.Vector3.up + position);
-                        else if (piece.Location == UnityEngine.Vector3.back + UnityEngine.Vector3.down + position)
+                        else if (piece.Location == (UnityEngine.Vector3.back + UnityEngine.Vector3.down + position))
                             posList.Add(UnityEngine.Vector3.back + UnityEngine.Vector3.down + position);
-                        else if (piece.Location == UnityEngine.Vector3.back + UnityEngine.Vector3.right + position)
+                        else if (piece.Location == (UnityEngine.Vector3.back + UnityEngine.Vector3.right + position))
                             posList.Add(UnityEngine.Vector3.back + UnityEngine.Vector3.right + position);
-                        else if (piece.Location == UnityEngine.Vector3.back + UnityEngine.Vector3.left + position)
+                        else if (piece.Location == (UnityEngine.Vector3.back + UnityEngine.Vector3.left + position))
                             posList.Add(UnityEngine.Vector3.back + UnityEngine.Vector3.left + position);
                     }
                 }
@@ -367,7 +374,8 @@ namespace IMRE.Chess3D
             {
                 foreach (AbstractPiece piece in friendlyPieces)
                 {
-                    if (piece.Location == pos) posList.Remove(pos);
+                    if (piece.Location == pos)
+                        posList.Remove(pos);
                 }
             }
 
@@ -393,7 +401,8 @@ namespace IMRE.Chess3D
             {
                 foreach (AbstractPiece piece in friendlyPieces)
                 {
-                    if (piece.Location == pos) posList.Remove(pos);
+                    if (piece.Location == pos)
+                        posList.Remove(pos);
                 }
             }
 

@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-/*
+﻿/*
  * V4.0 Released 08.16.18 By Timothy Bruce
  * It pretty much works I guess. This version only works to the PREVIOUS HOUR. Seconds have not been implemented.
  * Example of calling this script:
@@ -40,7 +38,7 @@ namespace IMRE.HandWaver.Space
 
     /// <summary>
     /// </summary>
-    public class Horizons : MonoBehaviour
+    public class Horizons : UnityEngine.MonoBehaviour
     {
         public static Horizons ins;
 
@@ -111,8 +109,11 @@ namespace IMRE.HandWaver.Space
                 //Loops while the fields have not been populated
                 int count = 0; //This bit checks if rawData has been populated for everything
                 foreach (planetData body in planets)
+                {
                     if (body.rawData != null)
                         count += 1;
+                }
+
                 if (count == planets.Count)
                 {
                     flag = true;
@@ -133,7 +134,7 @@ namespace IMRE.HandWaver.Space
 
                         if (RSDESManager.verboseLogging) UnityEngine.Debug.Log(body.ToString());
                         planetsHaveValues = true; //Mark that the planets have values.
-                        if (planetsDataUpdated != null && planetsDataUpdated.Method != null)
+                        if ((planetsDataUpdated != null) && (planetsDataUpdated.Method != null))
                             planetsDataUpdated.Invoke();
                     }
                 }

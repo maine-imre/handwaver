@@ -76,8 +76,11 @@ namespace IMRE.Chess3D
             else
                 listToCheck = blackTeam;
             foreach (AbstractPiece piece in listToCheck)
+            {
                 if (piece.IsValid(attemptedMove))
                     return true;
+            }
+
             return false;
         }
 

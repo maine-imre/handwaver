@@ -25,7 +25,7 @@
     {
         calculateAcceleration(); //Calculates acceleration
         UnityEngine.Vector3d tp = p; //Saves the position for next calculation BELOW:The Verlet Calculation
-        p = p + (p - pp) * (ts / pts) + a * ts * ts;
+        p = p + ((p - pp) * (ts / pts)) + (a * ts * ts);
         pts = ts; //Saves the timestep for next calculation (ABOVE) The actual time adjusted verlet algorithm
         pp = tp; //Saves the position for next calculation
     }

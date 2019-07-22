@@ -43,7 +43,7 @@
             string append = " ";
             if (f == 0)
                 append = " ";
-            else if (latitude && f > 0)
+            else if (latitude && (f > 0))
                 append = "N";
             else if (latitude)
                 append = "S";
@@ -61,7 +61,7 @@
             sec %= 3600;
             int min = sec / 60;
             //sec %= 60;
-            decimal SEC = (decimal) (UnityEngine.Mathf.Abs(f * 3600) - deg * 3600 - min * 60);
+            decimal SEC = (decimal) (UnityEngine.Mathf.Abs(f * 3600) - (deg * 3600) - (min * 60));
             return deg + "° " + min + "' " + System.Math.Round(SEC, 3) + "'' ";
         }
 
@@ -134,7 +134,7 @@
         public static float angleDifference(float angle1, float angle2)
         {
             //this signed angle difference accoutns for a cut at 180/-180.
-            if (angle1 - angle2 < 180)
+            if ((angle1 - angle2) < 180)
                 return angle1 - angle2;
             if (angle1 > angle2)
                 return (angle1 - angle2) % 180;
@@ -143,7 +143,7 @@
 
         public static UnityEngine.Vector3 directionFromLatLong(this RSDESPin pin)
         {
-            if (RSDESManager.verboseLogging && pin == null)
+            if (RSDESManager.verboseLogging && (pin == null))
                 UnityEngine.Debug.Log("dead pin", pin);
             return directionFromLatLong(pin.Latlong);
         }
@@ -175,14 +175,14 @@
 
         public static UnityEngine.Vector3[] latAtPoint(this RSDESPin pin)
         {
-            return latAtPoint(directionFromLatLong(pin.Latlong) * RSDESManager.EarthRadius + RSDESManager.earthPos,
+            return latAtPoint((directionFromLatLong(pin.Latlong) * RSDESManager.EarthRadius) + RSDESManager.earthPos,
                 RSDESManager.LR_Resolution);
         }
 
         public static UnityEngine.Vector3[] longAtPoint(UnityEngine.Vector3 pointOnSurface, int count)
         {
             return greatCircleCoordinates(pointOnSurface,
-                RSDESManager.earthPos + RSDESManager.earthRot * (RSDESManager.EarthRadius * UnityEngine.Vector3.up),
+                RSDESManager.earthPos + (RSDESManager.earthRot * (RSDESManager.EarthRadius * UnityEngine.Vector3.up)),
                 count);
         }
 
@@ -216,8 +216,8 @@
             UnityEngine.Vector3 basis1 = UnityEngine.Vector3.Cross(normal, UnityEngine.Vector3.up).normalized;
             if (basis1.magnitude == 0)
                 basis1 = UnityEngine.Vector3.Cross(normal, UnityEngine.Vector3.forward).normalized;
-            return greatCircleCoordinates(basis0 * RSDESManager.EarthRadius + RSDESManager.earthPos,
-                basis1 * RSDESManager.EarthRadius + RSDESManager.earthPos, count);
+            return greatCircleCoordinates((basis0 * RSDESManager.EarthRadius) + RSDESManager.earthPos,
+                (basis1 * RSDESManager.EarthRadius) + RSDESManager.earthPos, count);
         }
 
         public static UnityEngine.Vector3[] greatCircleCoordinates(pinData pin1, pinData pin2)
@@ -265,8 +265,8 @@
             UnityEngine.Quaternion rot = UnityEngine.Quaternion.FromToRotation(UnityEngine.Vector3.up, normal);
             UnityEngine.Vector3 point1 = rot * UnityEngine.Vector3.right;
             UnityEngine.Vector3 point2 = rot * UnityEngine.Vector3.forward;
-            return arcCoordinates(center, radius, radius * point1.normalized + center,
-                radius * point2.normalized + center, count, startAlpha, endAlpha);
+            return arcCoordinates(center, radius, (radius * point1.normalized) + center,
+                (radius * point2.normalized) + center, count, startAlpha, endAlpha);
         }
 
         public static UnityEngine.Vector3[] arcCoordinates(UnityEngine.Vector3 center, float radius,
@@ -317,9 +317,10 @@
             UnityEngine.Vector3[] result = new UnityEngine.Vector3[count];
             for (int i = 0; i < count; i++)
             {
-                float alpha = (startAlpha + i * angleDiff) / count;
-                result[i] = radius * (basis0 * UnityEngine.Mathf.Cos(alpha * UnityEngine.Mathf.PI / 180) +
-                                      basis1 * UnityEngine.Mathf.Sin(alpha * UnityEngine.Mathf.PI / 180)) + center;
+                float alpha = (startAlpha + (i * angleDiff)) / count;
+                result[i] = (radius * ((basis0 * UnityEngine.Mathf.Cos((alpha * UnityEngine.Mathf.PI) / 180)) +
+                                       (basis1 * UnityEngine.Mathf.Sin((alpha * UnityEngine.Mathf.PI) / 180)))) +
+                            center;
             }
 
             return result;
@@ -367,9 +368,10 @@
         {
             //eventually this will query data base and interpolate.
             //really the question is where is the subpoint.
-            float latitude = 23.5f / 180f * (simulationTime.DayOfYear % 180 - 90f);
-            if (simulationTime.DayOfYear < 365f / 4f || simulationTime.DayOfYear > 365f * 3f / 4f) latitude *= -1;
-            float longitude = 360f / 24f * 60f * 60f * (float) simulationTime.TimeOfDay.TotalSeconds;
+            float latitude = (23.5f / 180f) * ((simulationTime.DayOfYear % 180) - 90f);
+            if ((simulationTime.DayOfYear < (365f / 4f)) || (simulationTime.DayOfYear > ((365f * 3f) / 4f)))
+                latitude *= -1;
+            float longitude = (360f / 24f) * 60f * 60f * (float) simulationTime.TimeOfDay.TotalSeconds;
             return directionFromLatLong(latitude, longitude);
         }
 
@@ -381,8 +383,8 @@
         internal static UnityEngine.Vector3 MoonDirection(System.DateTime simulationTime)
         {
             //eventually this will query data base and interpolate.
-            float longitude = 360f / 24f * 60f * 60f * 27f * (float) simulationTime.TimeOfDay.TotalSeconds +
-                              27f * (simulationTime.DayOfYear % 27);
+            float longitude = ((360f / 24f) * 60f * 60f * 27f * (float) simulationTime.TimeOfDay.TotalSeconds) +
+                              (27f * (simulationTime.DayOfYear % 27));
 
             float latitude = 0f;
             //deal with latitude later;
@@ -396,7 +398,7 @@
             int year = 2018;
             int month = 3 + UnityEngine.Mathf.RoundToInt(coordinates.x * (3f / 23.5f));
             month = month % 12;
-            int day = 21 + UnityEngine.Mathf.RoundToInt(coordinates.x * (90f / 23.5f) - (month - 3) * 30f);
+            int day = 21 + UnityEngine.Mathf.RoundToInt((coordinates.x * (90f / 23.5f)) - ((month - 3) * 30f));
             while (day > 30)
             {
                 month++;
@@ -410,8 +412,8 @@
             }
 
             int hour = (int) (coordinates.y * (24 / 360)) % 24;
-            int min = (int) (coordinates.y * (24 * 60 / 360)) % (24 * 60);
-            int sec = (int) (coordinates.y * (24 * 60 * 60 / 360)) % (24 * 60 * 60);
+            int min = (int) (coordinates.y * ((24 * 60) / 360)) % (24 * 60);
+            int sec = (int) (coordinates.y * ((24 * 60 * 60) / 360)) % (24 * 60 * 60);
 
             return new System.DateTime(year, month, day, hour, min, sec);
         }
@@ -428,9 +430,9 @@
 
             UnityEngine.Vector2 diff = angleDifference(p1, p2);
 
-            float cosc = UnityEngine.Mathf.Cos(90 - p1.y) * UnityEngine.Mathf.Cos(90 - p2.y) +
-                         UnityEngine.Mathf.Sin(90 - p1.y) * UnityEngine.Mathf.Sin(90 - p2.y) *
-                         UnityEngine.Mathf.Cos(diff.x);
+            float cosc = (UnityEngine.Mathf.Cos(90 - p1.y) * UnityEngine.Mathf.Cos(90 - p2.y)) +
+                         (UnityEngine.Mathf.Sin(90 - p1.y) * UnityEngine.Mathf.Sin(90 - p2.y) *
+                          UnityEngine.Mathf.Cos(diff.x));
             float rads = UnityEngine.Mathf.Acos(cosc);
 
             return rads * RSDESManager.earthTrueRadius;
@@ -450,10 +452,10 @@
             UnityEngine.Vector2 diff = angleDifference(p1, p2) * UnityEngine.Mathf.Deg2Rad;
 
             float cosc =
-                UnityEngine.Mathf.Cos((90 - p1.x) * UnityEngine.Mathf.Deg2Rad) *
-                UnityEngine.Mathf.Cos((90 - p2.x) * UnityEngine.Mathf.Deg2Rad) +
-                UnityEngine.Mathf.Sin((90 - p1.x) * UnityEngine.Mathf.Deg2Rad) *
-                UnityEngine.Mathf.Sin((90 - p2.x) * UnityEngine.Mathf.Deg2Rad) * UnityEngine.Mathf.Cos(diff.y);
+                (UnityEngine.Mathf.Cos((90 - p1.x) * UnityEngine.Mathf.Deg2Rad) *
+                 UnityEngine.Mathf.Cos((90 - p2.x) * UnityEngine.Mathf.Deg2Rad)) +
+                (UnityEngine.Mathf.Sin((90 - p1.x) * UnityEngine.Mathf.Deg2Rad) *
+                 UnityEngine.Mathf.Sin((90 - p2.x) * UnityEngine.Mathf.Deg2Rad) * UnityEngine.Mathf.Cos(diff.y));
             float rads = UnityEngine.Mathf.Acos(cosc);
             return rads;
         }
@@ -501,10 +503,10 @@
             switch (cs)
             {
                 case coordinateSystem.cartesian:
-                    size = (int) UnityEngine.Mathf.Pow(2 * count - 1, 2);
+                    size = (int) UnityEngine.Mathf.Pow((2 * count) - 1, 2);
                     break;
                 case coordinateSystem.polar:
-                    size = count * count + 1;
+                    size = (count * count) + 1;
                     break;
             }
 
@@ -516,13 +518,13 @@
                 basis0 = UnityEngine.Vector3.Cross(direction, UnityEngine.Vector3.forward).normalized;
             UnityEngine.Vector3 basis1 = UnityEngine.Vector3.Cross(direction, basis0).normalized;
 
-            if (UnityEngine.Mathf.Abs(UnityEngine.Vector3.Dot(basis0, basis1)) +
-                UnityEngine.Mathf.Abs(UnityEngine.Vector3.Dot(basis0, direction)) +
-                UnityEngine.Mathf.Abs(UnityEngine.Vector3.Dot(basis1, direction)) != 0)
+            if ((UnityEngine.Mathf.Abs(UnityEngine.Vector3.Dot(basis0, basis1)) +
+                 UnityEngine.Mathf.Abs(UnityEngine.Vector3.Dot(basis0, direction)) +
+                 UnityEngine.Mathf.Abs(UnityEngine.Vector3.Dot(basis1, direction))) != 0)
             {
                 if (UnityEngine.Vector3.Dot(basis0, basis1) != 0) UnityEngine.Debug.LogWarning("BASIS NOT ORTHAGNOAL");
-                if (UnityEngine.Mathf.Abs(UnityEngine.Vector3.Dot(basis0, direction)) +
-                    UnityEngine.Mathf.Abs(UnityEngine.Vector3.Dot(basis1, direction)) !=
+                if ((UnityEngine.Mathf.Abs(UnityEngine.Vector3.Dot(basis0, direction)) +
+                     UnityEngine.Mathf.Abs(UnityEngine.Vector3.Dot(basis1, direction))) !=
                     0) UnityEngine.Debug.Log("BASIS NOT NORMAL");
                 UnityEngine.Vector3.OrthoNormalize(ref direction, ref basis0, ref basis1);
             }
@@ -534,10 +536,12 @@
                     {
                         for (int j = -count + 1; j < count; j++)
                         {
-                            UnityEngine.Vector3 center1 = i * spacing * basis0 + j * spacing * basis1 + subpoint;
+                            UnityEngine.Vector3 center1 = (i * spacing * basis0) + (j * spacing * basis1) + subpoint;
 
-                            result[0, (count + i - 1) * (2 * count - 1) + (count + j - 1)] = center1 + 500 * direction;
-                            result[1, (count + i - 1) * (2 * count - 1) + (count + j - 1)] = center1 - 500 * direction;
+                            result[0, (((count + i) - 1) * ((2 * count) - 1)) + ((count + j) - 1)] =
+                                center1 + (500 * direction);
+                            result[1, (((count + i) - 1) * ((2 * count) - 1)) + ((count + j) - 1)] =
+                                center1 - (500 * direction);
                         }
                     }
 
@@ -546,21 +550,21 @@
                     for (int i = 0; i < count; i++)
                     {
                         //iterate around circles
-                        float theta = i * 360f * UnityEngine.Mathf.Deg2Rad / count;
+                        float theta = (i * 360f * UnityEngine.Mathf.Deg2Rad) / count;
                         for (int j = 0; j < count; j++)
                         {
                             //iterate through radius.
                             float rad = (j + 1) * spacing;
                             UnityEngine.Vector3 center2 =
-                                basis0 * rad * UnityEngine.Mathf.Cos(theta) +
-                                basis1 * rad * UnityEngine.Mathf.Sin(theta) + subpoint;
-                            result[0, i * count + j] = center2 + 500 * direction;
-                            result[1, i * count + j] = center2 - 500 * direction;
+                                (basis0 * rad * UnityEngine.Mathf.Cos(theta)) +
+                                (basis1 * rad * UnityEngine.Mathf.Sin(theta)) + subpoint;
+                            result[0, (i * count) + j] = center2 + (500 * direction);
+                            result[1, (i * count) + j] = center2 - (500 * direction);
                         }
                     }
 
-                    result[0, count * count] = subpoint + 500 * direction;
-                    result[1, count * count] = subpoint - 500 * direction;
+                    result[0, count * count] = subpoint + (500 * direction);
+                    result[1, count * count] = subpoint - (500 * direction);
                     break;
             }
 
@@ -589,8 +593,8 @@
             UnityEngine.Vector3 earthPos = RSDESManager.earthPos;
             float earthRad = RSDESManager.EarthRadius;
 
-            result[0] = center + 500 * direction;
-            result[1] = center - 500 * direction;
+            result[0] = center + (500 * direction);
+            result[1] = center - (500 * direction);
             return result;
         }
 

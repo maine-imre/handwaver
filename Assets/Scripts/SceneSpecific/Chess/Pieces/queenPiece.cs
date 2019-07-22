@@ -28,19 +28,19 @@ namespace IMRE.Chess3D
             UnityEngine.Vector3 tmp = moveToTest - Location;
             if (tmp == UnityEngine.Vector3.zero)
                 return false;
-            if (tmp.x == tmp.y && tmp.x == tmp.z)
+            if ((tmp.x == tmp.y) && (tmp.x == tmp.z))
                 return true;
-            if (tmp.x == tmp.y && tmp.z == 0)
+            if ((tmp.x == tmp.y) && (tmp.z == 0))
                 return true;
-            if (tmp.x == tmp.z && tmp.y == 0)
+            if ((tmp.x == tmp.z) && (tmp.y == 0))
                 return true;
-            if (tmp.y == tmp.z && tmp.x == 0)
+            if ((tmp.y == tmp.z) && (tmp.x == 0))
                 return true;
-            if (tmp.y == 0 && tmp.z == 0)
+            if ((tmp.y == 0) && (tmp.z == 0))
                 return true;
-            if (tmp.x == 0 && tmp.z == 0)
+            if ((tmp.x == 0) && (tmp.z == 0))
                 return true;
-            if (tmp.x == 0 && tmp.y == 0)
+            if ((tmp.x == 0) && (tmp.y == 0))
                 return true;
             return false;
         }

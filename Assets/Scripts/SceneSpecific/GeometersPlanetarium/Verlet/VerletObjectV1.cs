@@ -65,8 +65,8 @@
             calculateAcceleration(); //Calculates acceleration
             UnityEngine.Vector3d
                 tempPosition = position; //Saves the position for next calculation BELOW:The Verlet Calculation
-            position = position + (position - previousPosition) * (timeStep / previousTimeStep) +
-                       acceleration * timeStep * timeStep;
+            position = position + ((position - previousPosition) * (timeStep / previousTimeStep)) +
+                       (acceleration * timeStep * timeStep);
             previousTimeStep =
                 timeStep; //Saves the timestep for next calculation (ABOVE) The actual time adjusted verlet algorithm
             previousPosition = tempPosition; //Saves the position for next calculation

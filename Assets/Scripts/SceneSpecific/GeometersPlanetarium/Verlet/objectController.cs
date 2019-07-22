@@ -26,7 +26,8 @@
             {
                 for (int r = 0; r < objects.Length; r++)
                 {
-                    if (i != r) objects[i].step2(objects[r], dt);
+                    if (i != r)
+                        objects[i].step2(objects[r], dt);
                 }
             }
 

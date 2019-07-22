@@ -98,10 +98,10 @@
             {
                 int[] thisStar =
                 {
-                    UnityEngine.Mathf.RoundToInt(data[i][0] * longitudeScale) + width / 2,
-                    UnityEngine.Mathf.RoundToInt(data[i][1] * latitudeScale) + height / 2
+                    UnityEngine.Mathf.RoundToInt(data[i][0] * longitudeScale) + (width / 2),
+                    UnityEngine.Mathf.RoundToInt(data[i][1] * latitudeScale) + (height / 2)
                 };
-                if (thisStar[0] >= width - 5 || thisStar[1] >= height - 5)
+                if ((thisStar[0] >= (width - 5)) || (thisStar[1] >= (height - 5)))
                 {
                     a += 1;
                 }
@@ -124,9 +124,9 @@
                         brightness = 0;
                     }
 
-                    imageBytes[thisStar[0] + thisStar[1] * width] = ReturnBrighter(
+                    imageBytes[thisStar[0] + (thisStar[1] * width)] = ReturnBrighter(
                         BrightnessADJ(convertCItoRGB(starData[i][1]), brightness),
-                        imageBytes[thisStar[0] + thisStar[1] * width]);
+                        imageBytes[thisStar[0] + (thisStar[1] * width)]);
                     //Debug.Log(imageBytes[thisStar[0]+(thisStar[1]*width)]);
                     //imageBytes[thisStar[0]+(thisStar[1]*width)] = new Color(255,201,156);
                 }
@@ -154,7 +154,7 @@
 
         private UnityEngine.Color ReturnBrighter(UnityEngine.Color a, UnityEngine.Color b)
         {
-            if (a.a + a.r + a.g + a.b > b.a + b.r + b.g + b.b)
+            if ((a.a + a.r + a.g + a.b) > (b.a + b.r + b.g + b.b))
                 return a;
             return b;
         }
@@ -175,7 +175,7 @@
 
         private float convertCItoK(float colorIndex)
         {
-            return 4600f * (1f / (0.92f * colorIndex + 1.7f) + 1f / (0.92f * colorIndex + 0.62f));
+            return 4600f * ((1f / ((0.92f * colorIndex) + 1.7f)) + (1f / ((0.92f * colorIndex) + 0.62f)));
         }
 
         //http://www.tannerhelland.com/4435/convert-temperature-rgb-algorithm-code/
@@ -201,7 +201,7 @@
             //Calculate Green Value
             if (k <= 66)
             {
-                int tmp = UnityEngine.Mathf.RoundToInt(99.4708025861f * UnityEngine.Mathf.Log(k) - 161.1195681661f);
+                int tmp = UnityEngine.Mathf.RoundToInt((99.4708025861f * UnityEngine.Mathf.Log(k)) - 161.1195681661f);
                 if (tmp < 0)
                     tmp = 0;
                 else if (tmp > 255) tmp = 255;
@@ -227,7 +227,7 @@
             }
             else
             {
-                int tmp = UnityEngine.Mathf.RoundToInt(138.5177312231f * UnityEngine.Mathf.Log(k) - 305.0447927307f);
+                int tmp = UnityEngine.Mathf.RoundToInt((138.5177312231f * UnityEngine.Mathf.Log(k)) - 305.0447927307f);
                 if (tmp < 0)
                     tmp = 0;
                 else if (tmp > 255) tmp = 255;

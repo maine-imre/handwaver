@@ -24,7 +24,7 @@
         private void Start()
         {
             thisLR = GetComponent<UnityEngine.LineRenderer>();
-            if (associatedPins != null && associatedPins.Count > 0)
+            if ((associatedPins != null) && (associatedPins.Count > 0))
             {
                 associatedPins.ForEach(p => p.pin.onPinMove += updateLineRenderers);
                 associatedPins.ForEach(p => p.pin.onDelete += despawn);
@@ -98,7 +98,7 @@
                 if (distanceText != null)
                 {
                     distanceText.gameObject.SetActive(value);
-                    if (associatedPins != null && associatedPins.Count == 2)
+                    if ((associatedPins != null) && (associatedPins.Count == 2))
                         updateDistanceText();
                 }
             }
@@ -141,8 +141,8 @@
         private void updateDistanceText()
         {
             //distanceText.SetText(distance + " RAD");
-            distanceText.SetText(distance * UnityEngine.Mathf.Rad2Deg + " DEG");
-            distanceText.transform.position = _distanceTextPosition * (1f + .01f * RSDESManager.EarthRadius);
+            distanceText.SetText((distance * UnityEngine.Mathf.Rad2Deg) + " DEG");
+            distanceText.transform.position = _distanceTextPosition * (1f + (.01f * RSDESManager.EarthRadius));
         }
 
         #endregion

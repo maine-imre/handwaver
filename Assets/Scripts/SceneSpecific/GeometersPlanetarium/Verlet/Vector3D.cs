@@ -48,9 +48,9 @@ namespace UnityEngine
 
         public Vector3d normalized => Normalize(this);
 
-        public double magnitude => System.Math.Sqrt(x * x + y * y + z * z);
+        public double magnitude => System.Math.Sqrt((x * x) + (y * y) + (z * z));
 
-        public double sqrMagnitude => x * x + y * y + z * z;
+        public double sqrMagnitude => (x * x) + (y * y) + (z * z);
 
         public static Vector3d zero => new Vector3d(0d, 0d, 0d);
 
@@ -131,12 +131,12 @@ namespace UnityEngine
 
         public static bool operator ==(Vector3d lhs, Vector3d rhs)
         {
-            return SqrMagnitude(lhs - rhs) < 0.0 / 1.0;
+            return SqrMagnitude(lhs - rhs) < (0.0 / 1.0);
         }
 
         public static bool operator !=(Vector3d lhs, Vector3d rhs)
         {
-            return SqrMagnitude(lhs - rhs) >= 0.0 / 1.0;
+            return SqrMagnitude(lhs - rhs) >= (0.0 / 1.0);
         }
 
         public static explicit operator Vector3(Vector3d vector3d)
@@ -147,8 +147,8 @@ namespace UnityEngine
         public static Vector3d Lerp(Vector3d from, Vector3d to, double t)
         {
             t = Mathd.Clamp01(t);
-            return new Vector3d(from.x + (to.x - from.x) * t, from.y + (to.y - from.y) * t,
-                from.z + (to.z - from.z) * t);
+            return new Vector3d(from.x + ((to.x - from.x) * t), from.y + ((to.y - from.y) * t),
+                from.z + ((to.z - from.z) * t));
         }
 
         public static Vector3d Slerp(Vector3d from, Vector3d to, double t)
@@ -186,9 +186,9 @@ namespace UnityEngine
         {
             Vector3d vector3 = target - current;
             double magnitude = vector3.magnitude;
-            if (magnitude <= maxDistanceDelta || magnitude == 0.0d)
+            if ((magnitude <= maxDistanceDelta) || (magnitude == 0.0d))
                 return target;
-            return current + vector3 / magnitude * maxDistanceDelta;
+            return current + ((vector3 / magnitude) * maxDistanceDelta);
         }
 
         public static Vector3d RotateTowards(Vector3d current, Vector3d target, double maxRadiansDelta,
@@ -220,16 +220,16 @@ namespace UnityEngine
             smoothTime = Mathd.Max(0.0001d, smoothTime);
             double num1 = 2d / smoothTime;
             double num2 = num1 * deltaTime;
-            double num3 = 1.0d / (1.0d + num2 + 0.479999989271164d * num2 * num2 +
-                                  0.234999999403954d * num2 * num2 * num2);
+            double num3 = 1.0d / (1.0d + num2 + (0.479999989271164d * num2 * num2) +
+                                  (0.234999999403954d * num2 * num2 * num2));
             Vector3d vector = current - target;
             Vector3d vector3_1 = target;
             double maxLength = maxSpeed * smoothTime;
             Vector3d vector3_2 = ClampMagnitude(vector, maxLength);
             target = current - vector3_2;
-            Vector3d vector3_3 = (currentVelocity + num1 * vector3_2) * deltaTime;
-            currentVelocity = (currentVelocity - num1 * vector3_3) * num3;
-            Vector3d vector3_4 = target + (vector3_2 + vector3_3) * num3;
+            Vector3d vector3_3 = (currentVelocity + (num1 * vector3_2)) * deltaTime;
+            currentVelocity = (currentVelocity - (num1 * vector3_3)) * num3;
+            Vector3d vector3_4 = target + ((vector3_2 + vector3_3) * num3);
             if (Dot(vector3_1 - current, vector3_4 - vector3_1) > 0.0)
             {
                 vector3_4 = vector3_1;
@@ -260,8 +260,8 @@ namespace UnityEngine
 
         public static Vector3d Cross(Vector3d lhs, Vector3d rhs)
         {
-            return new Vector3d(lhs.y * rhs.z - lhs.z * rhs.y, lhs.z * rhs.x - lhs.x * rhs.z,
-                lhs.x * rhs.y - lhs.y * rhs.x);
+            return new Vector3d((lhs.y * rhs.z) - (lhs.z * rhs.y), (lhs.z * rhs.x) - (lhs.x * rhs.z),
+                (lhs.x * rhs.y) - (lhs.y * rhs.x));
         }
 
         public override int GetHashCode()
@@ -281,7 +281,7 @@ namespace UnityEngine
 
         public static Vector3d Reflect(Vector3d inDirection, Vector3d inNormal)
         {
-            return -2d * Dot(inNormal, inDirection) * inNormal + inDirection;
+            return (-2d * Dot(inNormal, inDirection) * inNormal) + inDirection;
         }
 
         public static Vector3d Normalize(Vector3d value)
@@ -309,7 +309,7 @@ namespace UnityEngine
 
         public static double Dot(Vector3d lhs, Vector3d rhs)
         {
-            return lhs.x * rhs.x + lhs.y * rhs.y + lhs.z * rhs.z;
+            return (lhs.x * rhs.x) + (lhs.y * rhs.y) + (lhs.z * rhs.z);
         }
 
         public static Vector3d Project(Vector3d vector, Vector3d onNormal)
@@ -317,7 +317,7 @@ namespace UnityEngine
             double num = Dot(onNormal, onNormal);
             if (num < 1.40129846432482E-45d)
                 return zero;
-            return onNormal * Dot(vector, onNormal) / num;
+            return (onNormal * Dot(vector, onNormal)) / num;
         }
 
         public static Vector3d Exclude(Vector3d excludeThis, Vector3d fromThat)
@@ -333,24 +333,24 @@ namespace UnityEngine
         public static double Distance(Vector3d a, Vector3d b)
         {
             Vector3d vector3d = new Vector3d(a.x - b.x, a.y - b.y, a.z - b.z);
-            return System.Math.Sqrt(vector3d.x * vector3d.x + vector3d.y * vector3d.y + vector3d.z * vector3d.z);
+            return System.Math.Sqrt((vector3d.x * vector3d.x) + (vector3d.y * vector3d.y) + (vector3d.z * vector3d.z));
         }
 
         public static Vector3d ClampMagnitude(Vector3d vector, double maxLength)
         {
-            if (vector.sqrMagnitude > maxLength * maxLength)
+            if (vector.sqrMagnitude > (maxLength * maxLength))
                 return vector.normalized * maxLength;
             return vector;
         }
 
         public static double Magnitude(Vector3d a)
         {
-            return System.Math.Sqrt(a.x * a.x + a.y * a.y + a.z * a.z);
+            return System.Math.Sqrt((a.x * a.x) + (a.y * a.y) + (a.z * a.z));
         }
 
         public static double SqrMagnitude(Vector3d a)
         {
-            return a.x * a.x + a.y * a.y + a.z * a.z;
+            return (a.x * a.x) + (a.y * a.y) + (a.z * a.z);
         }
 
         public static Vector3d Min(Vector3d lhs, Vector3d rhs)

@@ -25,7 +25,7 @@
         {
             text.text = (numberOfBodies / 5).ToString();
             numberOfBodies += 1;
-            for (int i = 0; i < numberOfBodies - internalNumber; i++)
+            for (int i = 0; i < (numberOfBodies - internalNumber); i++)
             {
                 massiveBody.transform.position = new UnityEngine.Vector3(UnityEngine.Random.Range(-10, 10),
                     UnityEngine.Random.Range(-10, 10), UnityEngine.Random.Range(-10, 10));

@@ -36,7 +36,7 @@
             }
             else
             {
-                for (int a = 0; a < objects.Length - 1; a++)
+                for (int a = 0; a < (objects.Length - 1); a++)
                 for (int b = a + 1; b < objects.Length; b++)
                     fGrav(objects[a], objects[b]);
                 for (int i = 0; i < objects.Length; i++)
@@ -55,20 +55,20 @@
                                                      UnityEngine.Mathd.Pow(b.y - a.y, 2) +
                                                      UnityEngine.Mathd.Pow(b.z - a.z, 2));
             float F = (float) (6.67408 * UnityEngine.Mathd.Pow(10, -11)) *
-                      (float) (a.mass * b.mass / UnityEngine.Mathd.Pow(distance, 2)); //meters, kg, seconds
+                      (float) ((a.mass * b.mass) / UnityEngine.Mathd.Pow(distance, 2)); //meters, kg, seconds
             //Debug.Log(F);
 
             //Calculate new vector for a
             UnityEngine.Vector3d veca = new UnityEngine.Vector3d(b.x, b.y, b.z) -
                                         new UnityEngine.Vector3d(a.x, a.y, a.z); //direction vector
-            veca = veca.normalized * (F * dt / a.mass); //force vector
+            veca = veca.normalized * ((F * dt) / a.mass); //force vector
             //veca = veca*(dt/a.mass);
             a.VVec = a.VVec + veca;
 
             //Calculate new vector for b
             UnityEngine.Vector3d vecb = new UnityEngine.Vector3d(a.x, a.y, a.z) -
                                         new UnityEngine.Vector3d(b.x, b.y, b.z); //direction vector
-            vecb = vecb.normalized * (F * dt / b.mass); //force vector
+            vecb = vecb.normalized * ((F * dt) / b.mass); //force vector
             //vecb = (vecb*dt)/b.mass;
             b.VVec = b.VVec + vecb;
         }
