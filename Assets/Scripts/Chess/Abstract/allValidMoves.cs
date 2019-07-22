@@ -21,7 +21,7 @@ namespace IMRE.Chess3D {
         /// </summary>
         /// <param name="piece"></param>
         /// <returns></returns>
-        public static List<Vector3> validMoves(AbstractPiece piece)
+        public static float3[] validMoves(AbstractPiece piece)
         {
             Vector3 orientation = Vector3.forward;
             if (piece.Team == currentTeam.black)
@@ -39,10 +39,10 @@ namespace IMRE.Chess3D {
         }
 
        #region CalculateMoves
-        private static List<Vector3> validMoves(chessBoard.PieceType piece, Vector3 currentPosition, List<Vector3> friendlyPieces, List<Vector3> enemyPieces, Vector3 orientation)
+        private static float3[] validMoves(chessBoard.PieceType piece, Vector3 currentPosition, List<Vector3> friendlyPieces, List<Vector3> enemyPieces, Vector3 orientation)
         {
             //list all possible positions
-            List<Vector3> caniditePositions = new List<Vector3>();
+            List<float3> caniditePositions = new List<float3>();
             switch (piece)
             {
                 case chessBoard.PieceType.king:
@@ -290,72 +290,73 @@ namespace IMRE.Chess3D {
                 caniditePositions =
                     caniditePositions.Where(p => !piecesInPath(currentPosition, p, friendlyPieces, enemyPieces));
             }
+	       return canidatePositions.ToArray();
         }
 
-        private static Vector3 moveDirection(Vector3 position, Vector3 orientation, Vector3 direction)
+        private static float3 moveDirection(float3 position, float3 orientation, float3 direction)
         {
-            orientation = orientation.normalized;
+            math.normalize(orientation);
             return position + Quaternion.FromTo(Vector3.forward, direction)*orientation;
         }
         //single unit movement.
 
-        private static Vector3 moveForward(this Vector3 position, Vector3 orientation)
+        private static float3 moveForward(this float3 position, float3 orientation)
         {
             return moveDirection(position, orientation, Vector3.forward);
         }
-        private static Vector3 moveBack(this Vector3 position, Vector3 orientation)
+        private static float3 moveBack(this float3 position, float3 orientation)
         {
             return moveDirection(position, orientation, Vector3.back);
         }
-        private static Vector3 moveLeft(this Vector3 position, Vector3 orientation)
+        private static float3 moveLeft(this float3 position, float3 orientation)
         {
             return moveDirection(position, orientation, Vector3.left);
         }
-        private static Vector3 moveRight(this Vector3 position, Vector3 orientation)
+        private static float3 moveRight(this float3 position, float3 orientation)
         {
             return moveDirection(position, orientation, Vector3.right);
         }
-        private static Vector3 MoveUp(this Vector3 position, Vector3 orientation)
+        private static float3 MoveUp(this float3 position, float3 orientation)
         {
             return moveDirection(position, orientation, Vector3.up);
         }
-        private static Vector3 MoveDown(this Vector3 position, Vector3 orientation)
+        private static float3 MoveDown(this float3 position, float3 orientation)
         {
             return moveDirection(position, orientation, Vector3.down);
         }
         
         //multiple unit movement
-        private static Vector3 moveForward(this Vector3 position, Vector3 orientation, int i)
+        private static float3 moveForward(this float3 position, float3 orientation, int i)
         {
             return moveDirection(position, orientation, Vector3.forward);
         }
-        private static Vector3 moveBack(this Vector3 position, Vector3 orientation, int i)
+        private static float3 moveBack(this float3 position, float3 orientation, int i)
         {
             return moveDirection(position, orientation, Vector3.back);
         }
-        private static Vector3 moveLeft(this Vector3 position, Vector3 orientation, int i)
+        private static float3 moveLeft(this float3 position, float3 orientation, int i)
         {
             return moveDirection(position, orientation, Vector3.left);
         }
-        private static Vector3 moveRight(this Vector3 position, Vector3 orientation, int i)
+        private static float3 moveRight(this float3 position, float3 orientation, int i)
         {
             return moveDirection(position, orientation, Vector3.right);
         }
-        private static Vector3 MoveUp(this Vector3 position, Vector3 orientation, int i)
+        private static float3 MoveUp(this float3 position, float3 orientation, int i)
         {
             return moveDirection(position, orientation, Vector3.up);
         }
-        private static Vector3 MoveDown(this Vector3 position, Vector3 orientation, int i)
+        private static float3 MoveDown(this float3 position, float3 orientation, int i)
         {
             return moveDirection(position, orientation, Vector3.down);
         }
 
-        private static bool onBoard(this Vector3 position)
+        private static bool onBoard(this float3 position)
         {
             return p.x >= 0 && p.x <= 8 && p.y >= 0 && p.y <= 8 && p.z >= 0 && p.z <= 8;
         }
 
-        private static bool PiecesInPath(Vector3 position, Vector3 destination, List<Vector3> friendly, List<Vector3 enemy)
+        private static bool PiecesInPath(float3 position, float3 destination, List<float3> friendly, List<float3> enemy)
         {
             bool testResult = false;
             direction = destination - position;
