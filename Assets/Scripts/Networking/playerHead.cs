@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if PHOTON_UNITY_NETWORKING
 using Photon.Pun;
 using Photon.Realtime;
+#endif
 using System;
 using UnityEngine.XR;
 
@@ -13,16 +15,21 @@ namespace IMRE.HandWaver.Networking
 /// Will be expanded to include a representation of the player's body.
 /// Eventually additional trackers could be used to have a logical leg position.
 /// </summary>
-	public class playerHead : MonoBehaviourPunCallbacks
-	{
+	public class playerHead : 
+#if PHOTON_UNITY_NETWORKING
+		MonoBehaviourPunCallbacks {
+#else
+	MonoBehaviour {
+#endif
 
-		#region Constant Values
+	#region Constant Values
 
 		const int MAXPLAYERCOUNT = 4;
 
 		#endregion
 
 
+#if PHOTON_UNITY_NETWORKING
 
 		[Tooltip("Player Hands")]
 		public playerHand lHand;
@@ -130,6 +137,8 @@ namespace IMRE.HandWaver.Networking
 			rHand.GetComponent<MeshRenderer>().materials[0].color = myColor;
 
 		}
+
+#endif
 
 	}
 }

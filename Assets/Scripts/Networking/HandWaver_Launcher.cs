@@ -1,5 +1,8 @@
-﻿using Photon.Pun;
+
+#if PHOTON_UNITY_NETWORKING
+using Photon.Pun;
 using Photon.Realtime;
+#endif
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -11,8 +14,14 @@ namespace IMRE.HandWaver.Networking
 /// This launcher manages connection to PUN, loading of scenes and divion into rooms.
 /// A UI will be added to integrate with this script and expand it's functionality.
 /// </summary>
-	public class HandWaver_Launcher : MonoBehaviourPunCallbacks
-	{
+	public class HandWaver_Launcher : 	
+#if PHOTON_UNITY_NETWORKING
+		MonoBehaviourPunCallbacks {
+#else
+	MonoBehaviour {
+#endif
+	
+#if PHOTON_UNITY_NETWORKING
 		#region Private Serializable Fields
 		/// <summary>
 		/// The maximum number of players per room. When a room is full, it can't be joined by new players, and so new room will be created.
@@ -96,5 +105,6 @@ namespace IMRE.HandWaver.Networking
 			PhotonNetwork.LoadLevel("ThreeTorus");
 		}
 		#endregion
+#endif
 	}
 }

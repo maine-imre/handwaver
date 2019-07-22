@@ -446,7 +446,7 @@ namespace IMRE.HandWaver.Space
             int min = sec / 60;
 			//sec %= 60;
 			decimal SEC = (decimal) (Mathf.Abs(f * 3600) - deg * 3600 - min * 60);
-            return (deg + "° " + min + "' " + Math.Round(SEC,3) + "'' ");
+            return (deg + "° " + min + "' " + System.Math.Round(SEC,3) + "'' ");
         }
 
         #region Star Field Stuff

@@ -40,6 +40,42 @@ namespace IMRE.HandWaver
         private Quaternion _rotation3;
         private float _scale;
 
+        public int Dimension
+        {
+	        get
+	        {
+		        switch (figType)
+		        {
+			        case GeoObjType.point:
+				        return 0;
+			        case GeoObjType.line:
+				        return 1;
+			        case GeoObjType.polygon:
+				        return 2;
+			        case GeoObjType.prism:
+				        return 3;
+			        case GeoObjType.pyramid:
+				        return 4;
+			        case GeoObjType.circle:
+				        return 1;
+			        case GeoObjType.sphere:
+				        return 2;
+			        case GeoObjType.revolvedsurface:
+				        return 2;
+			        case GeoObjType.torus:
+				        return 3;
+			        case GeoObjType.flatface:
+				        return 2;
+			        case GeoObjType.straightedge:
+				        return 1;
+			        case GeoObjType.none:
+				        return 0;
+			        default:						//error case
+				        return -1;
+		        }
+	        }
+        }
+
         internal static Vector3 LocalPosition(Vector3 systemPosition)
         {
             return HW_GeoSolver.ins.localPosition(systemPosition);
@@ -103,7 +139,7 @@ namespace IMRE.HandWaver
 		/// </summary>
 		/// <param name="abstractPosition"></param>
 		/// <returns></returns>
-		internal abstract Vector3 ClosestSystemPosition(Vector3 abstractPosition);
+		public abstract Vector3 ClosestSystemPosition(Vector3 abstractPosition);
 
 		/// <summary>
 		///
@@ -270,7 +306,7 @@ namespace IMRE.HandWaver
 		}
 		private IEnumerator cUpdateRMan;
 		public IEnumerator waitForStretch;
-		internal bool stretchEnabled = true;
+		public bool stretchEnabled = true;
 
 		private bool _leapInteraction;
 #pragma warning disable 0169
