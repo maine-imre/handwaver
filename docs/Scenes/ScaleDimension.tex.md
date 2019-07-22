@@ -152,19 +152,19 @@ else if (math.abs(height) > radius)
 }
 ```
 
-### Intersection of a plane and a torus
+### Intersection of a plane and a torus (Moroni, 2017; Weisstein, n.d.)
 
 ``` c#
 
 ```
 
-### Intersection of a hyperplane and a hypersphere
+### Intersection of a hyperplane and a hypersphere (Hartley, 2007)
 
 ``` c#
 
 ```
 
-### Intersection of a hyperplane and a three-torus
+### Intersection of a hyperplane and a three-torus (Makholm, 2015)
 
 ``` c#
 
@@ -382,9 +382,14 @@ result[34] = result[14] + Math.Operations.rotate(down, wForward, 2f*degreeFolded
 result[35] = result[15] + Math.Operations.rotate(down, wForward, 2f*degreeFolded);
 ```
 
-## Orthogrpahic Projection from 4D to 3D
+## Parallel Projection from 4D to 3D (Hollasch, 1991)
+
+## Projective Projection from 4D to 3D (Hollasch, 1991)
+
+## Stereographic Projection from 4D to 3D (Brisson, 1978)
 
 ## Projection from 3D to 2D
+We have used a virtual camera and rendered that camera's perspective on a plane surface, using the UnityEngine to project 3D figures into 2D.  This avoids manipulation of meshes and line renderers and allows for Parallel and Projective perspecitves.
 
 ## Mathematics Library Extensions
 
@@ -488,5 +493,14 @@ public static float4 project(float4 v, float4 dir)
 
 
 ## References
+Brisson, D. W. (1978). Hypergraphics: visualizing complex relationships in art, science, and technology. Boulder, Colo.: Published by Westview Press for the American Association for the Advancement of Science.
+
+Hartley, M. (2007). 4D torus. Retrieved July 22, 2019, from http://www.dr-mikes-maths.com/4d-torus.html
 
 Hollasch, Steven (1991).  "Four-Space Visualization of 4D Objects."  Masters Thesis, Arizona State University.
+
+Makholm, Henning (2015).  "Would the cross section of a hypersphere be a sphere?" Mathematics Stack Exchange.  Retrieved from https://math.stackexchange.com/questions/1159613/would-the-cross-section-of-a-hypersphere-be-a-sphere
+
+Moroni, L. (2017). The toric sections: a simple introduction. ArXiv:1708.00803 [Math]. Retrieved from http://arxiv.org/abs/1708.00803
+
+ Weisstein, Eric W. (n.d.) "Spiric Section." From MathWorld--A Wolfram Web Resource. http://mathworld.wolfram.com/SpiricSection.html 
