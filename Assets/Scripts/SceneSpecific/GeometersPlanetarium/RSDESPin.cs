@@ -295,11 +295,9 @@ namespace IMRE.HandWaver.Space
                         }
 
                         starRays[0].SetPositions(GeoPlanetMaths.starRayRendererCoordiantes(dbPinData));
-
                         Enumerable.ToList(starRays).ForEach(p => p.startWidth = RSDESManager.LR_width);
                         Enumerable.ToList(starRays).ForEach(p => p.endWidth = RSDESManager.LR_width);
                         Enumerable.ToList(starRays).ForEach(p => p.positionCount = 2);
-
                         break;
 
                     case starFieldSelect.allPins:
@@ -313,8 +311,6 @@ namespace IMRE.HandWaver.Space
                             if (initialize)
                             {
                                 UnityEngine.LineRenderer currStarRay = starRays[0];
-
-
                                 starRays = new UnityEngine.LineRenderer[pins.Count];
                                 starRays[0] = currStarRay;
                             }

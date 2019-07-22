@@ -618,7 +618,6 @@
                 decRenderer[nLatDivisions + 3].endColor = tropicsRenderer;
             }
 
-
             bool sLong = true;
             bool sGHA = true;
             for (int i = 0; i < nLongDivisions; i++)
