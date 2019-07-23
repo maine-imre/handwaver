@@ -1,7 +1,7 @@
 ﻿namespace IMRE.HandWaver.HigherDimensions
 {
     /// <summary>
-    ///     Net of five cell for scale and dimension study.
+    /// Net of five cell for scale and dimension study.
     /// </summary>
     public class fiveCellNet : AbstractHigherDimSolid, IMRE.HandWaver.ScaleStudy.ISliderInput
     {
@@ -53,6 +53,9 @@
             }
         }
 
+        /// <summary>
+        /// vertex values for triangles of each tetrahedron
+        /// </summary>
         public override int[] triangles =>
             new[]
             {
@@ -98,7 +101,7 @@
         }
 
         /// <summary>
-        ///     configure vertices of fivecell around core tetrahedron
+        /// configure vertices of fivecell around core tetrahedron
         /// </summary>
         /// <param name="degreeFolded"></param>
         /// <returns></returns>

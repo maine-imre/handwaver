@@ -58,7 +58,7 @@ namespace IMRE.HandWaver.ScaleStudy
         }
 
         /// <summary>
-        ///     Function to calculate cross section of a torus
+        /// Function to calculate cross section of a torus
         /// </summary>
         /// <param name="height"></param>
         public void crossSectTorus(float height)
@@ -97,6 +97,16 @@ namespace IMRE.HandWaver.ScaleStudy
             }
         }
 
+        /// <summary>
+        /// Function that calculates cross-section of torus
+        /// using the distance from the center of the torus, 
+        /// </summary>
+        /// <param name="v"></param>
+        /// <param name="height"></param>
+        /// <param name="alpha"></param>
+        /// <param name="phi"></param>
+        /// <param name="idx"></param>
+        /// <returns></returns>
         private Unity.Mathematics.float3 spiricMath(float v, float height, float alpha, float phi, int idx)
         {
             //uses method described here: arXiv:1708.00803v2 [math.GM] 6 Aug 2017
@@ -109,7 +119,7 @@ namespace IMRE.HandWaver.ScaleStudy
             float w = .25f * v;
 
             //v ranges from -1 to 1
-            //make two valuies of 2 to accomidate different solution constraints
+            //make two values of 2 to accommodate different solution constraints
             //TODO fix these bounds.  the bounds assume phi = 0 and alpha = 0
 
             //need to project onto different ranges for each solution path.
@@ -169,6 +179,9 @@ namespace IMRE.HandWaver.ScaleStudy
             }
         }
 
+        /// <summary>
+        /// renders a torus by rotating a 1x1 square around two different axes
+        /// </summary>
         private void renderTorus()
         {
             UnityEngine.Vector3[] verts = new UnityEngine.Vector3[((n + 1) * (n - 1)) + 1];
@@ -216,9 +229,9 @@ namespace IMRE.HandWaver.ScaleStudy
         }
 
         /// <summary>
-        ///     Take alpha and beta to be angles describing turns around the primary and secondary revolutions of a torus.
-        ///     Take r1 and r2 to be the radii of those revolutions
-        ///     Find the position on the surface of the torus
+        /// Take alpha and beta to be angles describing turns around the primary and secondary revolutions of a torus.
+        /// Take r1 and r2 to be the radii of those revolutions
+        /// Find the position on the surface of the torus
         /// </summary>
         /// <param name="alpha">x</param>
         /// <param name="beta">y</param>

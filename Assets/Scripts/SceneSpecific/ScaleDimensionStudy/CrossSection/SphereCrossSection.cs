@@ -30,6 +30,7 @@
         // Start is called before the first frame update
         private void Start()
         {
+            
             #region Render Cross-section
 
             gameObject.AddComponent<UnityEngine.MeshRenderer>();
@@ -48,12 +49,14 @@
             crossSectionRenderer.startWidth = SpencerStudyControl.lineRendererWidth;
             crossSectionRenderer.endWidth = SpencerStudyControl.lineRendererWidth;
             crossSectionRenderer.loop = true;
-
+            
+               
             #endregion
+            
         }
 
         /// <summary>
-        ///     Function to calculate cross section of circle
+        /// Function to calculate cross section of circle
         /// </summary>
         /// <param name="radius"></param>
         /// <param name="height"></param>
@@ -103,6 +106,11 @@
             }
         }
 
+        /// <summary>
+        /// Function that renders a circle using a centerpoint coordinate and a radius
+        /// </summary>
+        /// <param name="radius"></param>
+        /// <param name="center"></param>
         private void renderCircle(float radius, UnityEngine.Vector3 center)
         {
             //worldspace rendering of the circle

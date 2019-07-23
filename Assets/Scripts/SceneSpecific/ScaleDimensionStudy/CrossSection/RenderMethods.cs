@@ -40,8 +40,9 @@ namespace IMRE.HandWaver.ScaleDimension
             #region Normales		
 
             UnityEngine.Vector3[] normales = new UnityEngine.Vector3[vertices.Length];
-            for (int j = 0; j < vertices.Length; n++)
-                normales[j] = vertices[n].normalized;
+            UnityEngine.Debug.Log(vertices.Length);
+            for (int j = 0; j < vertices.Length; j++)
+                normales[j] = vertices[j].normalized;
 
             #endregion
 
