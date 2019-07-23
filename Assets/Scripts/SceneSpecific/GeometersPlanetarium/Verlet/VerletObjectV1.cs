@@ -1,29 +1,31 @@
-﻿namespace IMRE.HandWaver.Space.BigBertha
+﻿using UnityEngine;
+
+namespace IMRE.HandWaver.Space.BigBertha
 {
     /// <summary>
     ///     This script does ___.
     ///     The main contributor(s) to this script is TB
     ///     Status: WORKING
     /// </summary>
-    public class VerletObjectV1 : UnityEngine.MonoBehaviour
+    public class VerletObjectV1 : MonoBehaviour
     {
-        public UnityEngine.Vector3d
+        public Vector3d
             acceleration; //The Acceleration of the body for verlet (Note to self: Does this need to be public?)
 
         public double distance;
 
-        public UnityEngine.Vector3d
+        public Vector3d
             initialVelocity; //The initial velocity of the body (note: doesn't change once the calculation starts)
 
-        public UnityEngine.Vector3 inputPosition;
-        public UnityEngine.Vector3 inputVelocity;
+        public Vector3 inputPosition;
+        public Vector3 inputVelocity;
         public float mass; //The mass of the body
 
-        private UnityEngine.GameObject[]
+        private GameObject[]
             massObject; //A list of the rest of the bodies (Note to self: Bring down to nLog(n) using control script)
 
-        public UnityEngine.Vector3d position; //The position vector of the body
-        public UnityEngine.Vector3d previousPosition; //The previous position of the body
+        public Vector3d position; //The position vector of the body
+        public Vector3d previousPosition; //The previous position of the body
         public float previousTimeStep; //The previous timestep for time corrected verlet
         public float radius; //The radius of the body
         public float scale = 1;
@@ -51,10 +53,10 @@
         private void CalculateNextPosition()
         {
             massObject =
-                UnityEngine.GameObject
+                GameObject
                     .FindGameObjectsWithTag("massObject"); //Gathers all of the massObjects for calculation
             verletIntegration(); //Calls the verlet integration function
-            UnityEngine.Vector3 outputPosition = V3DtoV3(position); //For displaying position in Unity editor
+            var outputPosition = V3DtoV3(position); //For displaying position in Unity editor
             transform.position = outputPosition * scale; //Updates the position of the unity object
             inputPosition = outputPosition; //This line is for tracking purposes and should not be included in the build
             inputVelocity = V3DtoV3(position - previousPosition); //For displaying velocity in Unity editor
@@ -63,10 +65,10 @@
         public void verletIntegration()
         {
             calculateAcceleration(); //Calculates acceleration
-            UnityEngine.Vector3d
+            var
                 tempPosition = position; //Saves the position for next calculation BELOW:The Verlet Calculation
-            position = position + ((position - previousPosition) * (timeStep / previousTimeStep)) +
-                       (acceleration * timeStep * timeStep);
+            position = position + (position - previousPosition) * (timeStep / previousTimeStep) +
+                       acceleration * timeStep * timeStep;
             previousTimeStep =
                 timeStep; //Saves the timestep for next calculation (ABOVE) The actual time adjusted verlet algorithm
             previousPosition = tempPosition; //Saves the position for next calculation
@@ -74,48 +76,46 @@
 
         public void calculateAcceleration()
         {
-            UnityEngine.Vector3d ForceVector = UnityEngine.Vector3d.zero;
-            for (int i = 0; i < massObject.Length; i++)
-            {
+            var ForceVector = Vector3d.zero;
+            for (var i = 0; i < massObject.Length; i++)
                 //For the rest of the objects...
                 if (massObject[i] != gameObject)
                 {
                     //If the object isn't this object
-                    VerletObjectV1 mO = massObject[i].GetComponent<VerletObjectV1>(); //The "O" is a letter not a number
-                    distance = UnityEngine.Mathd.Sqrt(UnityEngine.Mathd.Pow(position.x - mO.position.x, 2) +
-                                                      UnityEngine.Mathd.Pow(position.y - mO.position.y, 2) +
-                                                      UnityEngine.Mathd.Pow(position.z - mO.position.z, 2));
-                    double Force = 1.9934976 * UnityEngine.Mathd.Pow(10, -44) * (mass * mO.mass) *
-                                   (1 / UnityEngine.Mathd.Pow(distance,
-                                        2)); //This and ABOVE calculate force of gravity and distance between bodies respectively
+                    var mO = massObject[i].GetComponent<VerletObjectV1>(); //The "O" is a letter not a number
+                    distance = Mathd.Sqrt(Mathd.Pow(position.x - mO.position.x, 2) +
+                                          Mathd.Pow(position.y - mO.position.y, 2) +
+                                          Mathd.Pow(position.z - mO.position.z, 2));
+                    var Force = 1.9934976 * Mathd.Pow(10, -44) * (mass * mO.mass) *
+                                (1 / Mathd.Pow(distance,
+                                     2)); //This and ABOVE calculate force of gravity and distance between bodies respectively
 
-                    UnityEngine.Vector3d
+                    var
                         thisVector =
                             (mO.position - position).normalized *
                             Force; //Updates the velocity vector based on each body, thus calculating all relationships
                     ForceVector = ForceVector + thisVector;
                 }
-            }
 
             acceleration = ForceVector * (1 / mass); //Calculates the actual accleration
         }
 
-        private UnityEngine.Vector3 V3DtoV3(UnityEngine.Vector3d value)
+        private Vector3 V3DtoV3(Vector3d value)
         {
             //Convert from Vector3d to Vector3
-            float xVal = (float) value.x;
-            float yVal = (float) value.y;
-            float zVal = (float) value.z;
-            return new UnityEngine.Vector3(xVal, yVal, zVal);
+            var xVal = (float) value.x;
+            var yVal = (float) value.y;
+            var zVal = (float) value.z;
+            return new Vector3(xVal, yVal, zVal);
         }
 
-        private UnityEngine.Vector3d V3toV3D(UnityEngine.Vector3 value)
+        private Vector3d V3toV3D(Vector3 value)
         {
             //Convert from Vector3 to Vector3d
             double xVal = value.x;
             double yVal = value.y;
             double zVal = value.z;
-            return new UnityEngine.Vector3d(xVal, yVal, zVal);
+            return new Vector3d(xVal, yVal, zVal);
         }
     }
 }

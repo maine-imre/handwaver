@@ -1,4 +1,9 @@
-﻿using Enumerable = System.Linq.Enumerable;
+﻿using System;
+using System.Linq;
+using IMRE.Math;
+using Unity.Entities;
+using Unity.Mathematics;
+using UnityEngine;
 
 namespace IMRE.EmbodiedUserInput
 {
@@ -18,13 +23,13 @@ namespace IMRE.EmbodiedUserInput
     /// <summary>
     ///     A generic example of a classifier.  This should be renamed in each use case.
     /// </summary>
-    public struct EmbodiedClassifier : Unity.Entities.IComponentData
+    public struct EmbodiedClassifier : IComponentData
     {
         public Chirality Chirality;
         public classifierType type;
 
-        public Unity.Mathematics.float3 origin;
-        public Unity.Mathematics.float3 direction;
+        public float3 origin;
+        public float3 direction;
 
         public bool shouldFinish;
         public bool isEligible;
@@ -33,7 +38,7 @@ namespace IMRE.EmbodiedUserInput
         public bool wasActivated;
     }
 
-    public class EmbodiedUserInputClassifierAuthoring : UnityEngine.MonoBehaviour
+    public class EmbodiedUserInputClassifierAuthoring : MonoBehaviour
     {
         public static EmbodiedClassifier[] classifiers;
         public bool printDebug;
@@ -46,11 +51,11 @@ namespace IMRE.EmbodiedUserInput
 
         private void FixedUpdate()
         {
-            for (int i = 0; i < classifiers.Length; i++) Classify(ref classifiers[i]);
+            for (var i = 0; i < classifiers.Length; i++) Classify(ref classifiers[i]);
 
             if (printDebug)
                 Enumerable.ToList(Enumerable.Where(Enumerable.ToList(classifiers), c => c.isEligible))
-                    .ForEach(c => UnityEngine.Debug.Log(c.type + " : " + c.Chirality));
+                    .ForEach(c => Debug.Log(c.type + " : " + c.Chirality));
         }
 
         /// <summary>
@@ -60,7 +65,7 @@ namespace IMRE.EmbodiedUserInput
         {
             //each classifier represents a gesture which can be performed.
 
-            int amount = 13;
+            var amount = 13;
             classifiers[0] = new EmbodiedClassifier
             {
                 //the point gesture is a one handed gesture. Therefore there must be a classifier for each hand's
@@ -147,7 +152,7 @@ namespace IMRE.EmbodiedUserInput
         private static bool shouldActivate(ref EmbodiedClassifier embodiedClassifier)
         {
             Hand hand;
-            Unity.Mathematics.float3 velocity;
+            float3 velocity;
             float speed;
 
             float angle;
@@ -231,13 +236,13 @@ namespace IMRE.EmbodiedUserInput
 
                     //we want velocity to be nonzero.
                     //distance is a workaround for magnitude.
-                    speed = Unity.Mathematics.math.distance(Unity.Mathematics.float3.zero, velocity);
+                    speed = math.distance(float3.zero, velocity);
                     //we want to have close to zero angle between movement and palm.
-                    angle = Unity.Mathematics.math.abs(IMRE.Math.Operations.Angle(velocity,
+                    angle = math.abs(Operations.Angle(velocity,
                         embodiedClassifier.direction));
 //TODO check the tolerances here.
-                    return (Enumerable.Count(hand.Fingers, finger => finger.IsExtended) == 5) && (speed > .5f) &&
-                           (angle < 30f);
+                    return Enumerable.Count(hand.Fingers, finger => finger.IsExtended) == 5 && speed > .5f &&
+                           angle < 30f;
 
                 #endregion
 
@@ -252,15 +257,15 @@ namespace IMRE.EmbodiedUserInput
                     embodiedClassifier.origin = hand.Palm.Position;
 
                     //we want velocity to be nonzero.
-                    speed = Unity.Mathematics.math.distance(Unity.Mathematics.float3.zero, hand.Palm.Velocity);
+                    speed = math.distance(float3.zero, hand.Palm.Velocity);
                     //we want to have close to zero angle between movement and palm.
-                    angle = 90 - Unity.Mathematics.math.abs(IMRE.Math.Operations.Angle(velocity,
+                    angle = 90 - math.abs(Operations.Angle(velocity,
                                 embodiedClassifier.direction));
 //TODO check the tolerances here.
                     //if the palm is open and moving, then note the plane it is moving through and activate the
                     //gesture for swiping
-                    return (Enumerable.Count(hand.Fingers, finger => finger.IsExtended) == 5) && (speed > .5f) &&
-                           (angle < 30f);
+                    return Enumerable.Count(hand.Fingers, finger => finger.IsExtended) == 5 && speed > .5f &&
+                           angle < 30f;
 
                 #endregion
 
@@ -283,7 +288,7 @@ namespace IMRE.EmbodiedUserInput
                 #endregion
 
                 default:
-                    throw new System.ArgumentOutOfRangeException();
+                    throw new ArgumentOutOfRangeException();
             }
         }
 

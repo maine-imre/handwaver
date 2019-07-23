@@ -10,6 +10,13 @@
  * Also, I think this version has been edited by IMRE for HandWaver.
  */
 
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
+using UnityEngine;
+using UnityEngine.Networking;
+
 namespace IMRE.HandWaver.Space
 {
     /// <summary>
@@ -20,10 +27,10 @@ namespace IMRE.HandWaver.Space
         public string name; //Name of the object
 
         //Storage system for the data related to the object
-        public UnityEngine.Vector3 position; //The position of the object
+        public Vector3 position; //The position of the object
         public string rawData; //The complete data from horizons for the object.
         public string time; //Timestamp of the data
-        public UnityEngine.Vector3 velocity; //Velocity of the object in case you want it
+        public Vector3 velocity; //Velocity of the object in case you want it
 
         public override string ToString()
         {
@@ -38,40 +45,40 @@ namespace IMRE.HandWaver.Space
 
     /// <summary>
     /// </summary>
-    public class Horizons : UnityEngine.MonoBehaviour
+    public class Horizons : MonoBehaviour
     {
         public static Horizons ins;
 
         public static int[] ids = {10, 399, 301}; //This is the list of objects that the function will calling.
 
-        public static System.Action planetsDataUpdated;
+        public static Action planetsDataUpdated;
 
-        private static readonly System.Collections.Generic.List<planetData> planets =
-            new System.Collections.Generic.List<planetData>(); //This is where each planet object is stored.
+        private static readonly List<planetData> planets =
+            new List<planetData>(); //This is where each planet object is stored.
 
         public static bool planetsHaveValues; //Is true when planets should be populated with nonzero values.
 
-        private static UnityEngine.WWW www; //The www object for the horizons database.
+        private static WWW www; //The www object for the horizons database.
 
         /// <summary>
         ///     Output that dynamically updates?
         ///     MAYBE NULL
         /// </summary>
-        public static System.Collections.Generic.List<planetData> Planets =>
-            planetsHaveValues ? planets : new System.Collections.Generic.List<planetData>();
+        public static List<planetData> Planets =>
+            planetsHaveValues ? planets : new List<planetData>();
 
         private void Start()
         {
             ins = this;
         }
 
-        public void generateData(System.DateTime time)
+        public void generateData(DateTime time)
         {
             //Call this script to generate the planetData objects for every value in ids
             if (planets.Count < ids.Length)
-                foreach (int id in ids) //For all ids
+                foreach (var id in ids) //For all ids
                 {
-                    planetData body = new planetData(); //Create an object
+                    var body = new planetData(); //Create an object
                     body.id = id;
                     planets.Add(body); //Add the object to the list
                 }
@@ -82,16 +89,16 @@ namespace IMRE.HandWaver.Space
                 updateData()); //When all values are recived from the interwebz, populate the fields in the object
         }
 
-        private System.Collections.IEnumerator getData(System.DateTime time, int bodyID, planetData body)
+        private IEnumerator getData(DateTime time, int bodyID, planetData body)
         {
             //Gets the data from the horizons server and populates the raw data field of the appropriate object
-            UnityEngine.Networking.UnityWebRequest www =
-                UnityEngine.Networking.UnityWebRequest.Get(generateURL(System.DateTime.Now, bodyID));
+            var www =
+                UnityWebRequest.Get(generateURL(DateTime.Now, bodyID));
             yield return www.SendWebRequest(); //Wait for return fromrequest
 
             if (www.isNetworkError || www.isHttpError) //If error, output error
             {
-                UnityEngine.Debug.Log(www.error);
+                Debug.Log(www.error);
             }
             else //Else populate rawData
             {
@@ -100,41 +107,39 @@ namespace IMRE.HandWaver.Space
             }
         }
 
-        private System.Collections.IEnumerator updateData()
+        private IEnumerator updateData()
         {
             //Populates the fields other than raw data once rawData has been populated
-            bool flag = false;
+            var flag = false;
             while (!flag)
             {
                 //Loops while the fields have not been populated
-                int count = 0; //This bit checks if rawData has been populated for everything
-                foreach (planetData body in planets)
-                {
+                var count = 0; //This bit checks if rawData has been populated for everything
+                foreach (var body in planets)
                     if (body.rawData != null)
                         count += 1;
-                }
 
                 if (count == planets.Count)
                 {
                     flag = true;
-                    foreach (planetData body in planets) //When the rawData is populated, for every object:
+                    foreach (var body in planets) //When the rawData is populated, for every object:
                     {
                         //(below) Split by lines
-                        string[] lines = body.rawData.Split('\r', '\n');
-                        string name = System.Text.RegularExpressions.Regex.Replace(lines[1], @"\s+", " ")
+                        var lines = body.rawData.Split('\r', '\n');
+                        var name = Regex.Replace(lines[1], @"\s+", " ")
                             .Split(null)[5];
                         //(above) get the name
-                        int counter = 0;
-                        foreach (string line in lines)
+                        var counter = 0;
+                        foreach (var line in lines)
                         {
                             if (line == "$$SOE") //When start of data is encountered,
                                 readData(lines[counter + 1], name, body);
                             counter++;
                         }
 
-                        if (RSDESManager.verboseLogging) UnityEngine.Debug.Log(body.ToString());
+                        if (RSDESManager.verboseLogging) Debug.Log(body.ToString());
                         planetsHaveValues = true; //Mark that the planets have values.
-                        if ((planetsDataUpdated != null) && (planetsDataUpdated.Method != null))
+                        if (planetsDataUpdated != null && planetsDataUpdated.Method != null)
                             planetsDataUpdated.Invoke();
                     }
                 }
@@ -147,17 +152,17 @@ namespace IMRE.HandWaver.Space
 
         private static void readData(string input, string name, planetData body)
         {
-            string[] data = input.Split(','); //Populates the body object with the position data.
+            var data = input.Split(','); //Populates the body object with the position data.
             body.time = data[1];
-            body.position = new UnityEngine.Vector3(float.Parse(data[2]), float.Parse(data[4]), float.Parse(data[3]));
-            body.velocity = new UnityEngine.Vector3(float.Parse(data[5]), float.Parse(data[7]), float.Parse(data[6]));
+            body.position = new Vector3(float.Parse(data[2]), float.Parse(data[4]), float.Parse(data[3]));
+            body.velocity = new Vector3(float.Parse(data[5]), float.Parse(data[7]), float.Parse(data[6]));
             body.name = name;
         }
 
-        private static string generateURL(System.DateTime time, int bodyID)
+        private static string generateURL(DateTime time, int bodyID)
         {
             //Generates a url to access using the inputted time and bodyID number.
-            string url = string.Format(
+            var url = string.Format(
                 "https://ssd.jpl.nasa.gov/horizons_batch.cgi?batch=1%20&COMMAND=%27{0}%27%20&TABLE_TYPE=%27VECTORS%27%20&CENTER=%27399%27%20&START_TIME=%27{1}STOP_TIME=%27{2}STEP_SIZE=%2760%20min%27%20&OUT_UNITS%20%20=%20%27KM-D%27%20&VEC_TABLE%20=%20%273%27%20&CSV_FORMAT=%27YES%27"
                 , bodyID
                 , ins.generateDateInput(time)
@@ -165,10 +170,10 @@ namespace IMRE.HandWaver.Space
             return url;
         }
 
-        private string generateDateInput(System.DateTime time)
+        private string generateDateInput(DateTime time)
         {
             //Generates a date field in the format that the horizons database likes.
-            string targetDateTime = time.Year + "-";
+            var targetDateTime = time.Year + "-";
 
             if (time.Month < 10) targetDateTime += "0";
             targetDateTime += time.Month + "-";

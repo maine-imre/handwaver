@@ -1,32 +1,37 @@
-﻿namespace IMRE.HandWaver.HigherDimensions
+﻿using Leap.Unity.Interaction;
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.XR;
+
+namespace IMRE.HandWaver.HigherDimensions
 {
     /// <summary>
     ///     Central control for scale and dimension study.
     ///     needs to be renamed to reflect this.
     /// </summary>
-    public class HigherDimExperimentControl : UnityEngine.MonoBehaviour
+    public class HigherDimExperimentControl : MonoBehaviour
     {
         internal static float degreeFolded;
-        public UnityEngine.UI.Button aniamteButton_onScreen;
-        public Leap.Unity.Interaction.InteractionSlider animateButton_lm;
+        public Button aniamteButton_onScreen;
+        public InteractionSlider animateButton_lm;
         public bool animateFold;
 
         public bool foldOverride;
 
-        [UnityEngine.RangeAttribute(0, 360)] public float foldOverrideValue;
+        [Range(0, 360)] public float foldOverrideValue;
 
-        public Leap.Unity.Interaction.InteractionSlider foldSlider_lm;
-        public UnityEngine.UI.Slider foldSlider_onScreen;
+        public InteractionSlider foldSlider_lm;
+        public Slider foldSlider_onScreen;
 
         private void Awake()
         {
-            foldSlider_onScreen.gameObject.SetActive(!UnityEngine.XR.XRDevice.isPresent);
-            foldSlider_lm.gameObject.SetActive(UnityEngine.XR.XRDevice.isPresent);
+            foldSlider_onScreen.gameObject.SetActive(!XRDevice.isPresent);
+            foldSlider_lm.gameObject.SetActive(XRDevice.isPresent);
 
-            aniamteButton_onScreen.gameObject.SetActive(!UnityEngine.XR.XRDevice.isPresent);
-            animateButton_lm.gameObject.SetActive(UnityEngine.XR.XRDevice.isPresent);
+            aniamteButton_onScreen.gameObject.SetActive(!XRDevice.isPresent);
+            animateButton_lm.gameObject.SetActive(XRDevice.isPresent);
 
-            if (UnityEngine.XR.XRDevice.isPresent)
+            if (XRDevice.isPresent)
             {
                 foldSlider_lm.OnPress += updateLMSlider;
                 animateButton_lm.OnPress += updateAnimateLM;
@@ -64,7 +69,7 @@
             if (foldOverride) degreeFolded = foldOverrideValue;
             if (animateFold)
             {
-                UnityEngine.Debug.Log(degreeFolded);
+                Debug.Log(degreeFolded);
                 degreeFolded++;
                 if (foldSlider_lm != null)
                     foldSlider_lm.HorizontalSliderValue = degreeFolded / 360f;

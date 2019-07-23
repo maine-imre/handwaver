@@ -85,7 +85,8 @@ namespace IMRE.HandWaver
 				//	Attempt to use the next argument as a sessionID
 				if (argument.ToLower().Contains("-sid") && Array.IndexOf(commandLineArguments, "-sid")+1 < commandLineArguments.Length)
 				{
-					HandWaverServerSocket.overrideSID = commandLineArguments[Array.IndexOf(commandLineArguments, "-sid")+1];
+					HandWaverServerSocket.overrideSID =
+ commandLineArguments[Array.IndexOf(commandLineArguments, "-sid")+1];
 				}
                 
             }

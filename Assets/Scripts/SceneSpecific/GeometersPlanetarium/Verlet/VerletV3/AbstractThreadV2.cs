@@ -1,23 +1,33 @@
-﻿public class AbstractThreadV2
+﻿using System.Collections;
+using System.Threading;
+
+public class AbstractThreadV2
 {
     private readonly object m_Handle = new object(); //This is the actual thread
 
     //This is an abstract class defining various components of a thread
     private bool m_IsDone; //True if the thread is done
     private string m_Name; //Name of the thread
-    private System.Threading.Thread m_Thread;
+    private Thread m_Thread;
 
     public string ThreadName
     {
         get
         {
             string tmp;
-            lock (m_Handle) tmp = m_Name;
+            lock (m_Handle)
+            {
+                tmp = m_Name;
+            }
+
             return tmp;
         }
         set
         {
-            lock (m_Handle) m_Name = value;
+            lock (m_Handle)
+            {
+                m_Name = value;
+            }
         }
     }
 
@@ -26,19 +36,26 @@
         get
         {
             bool tmp;
-            lock (m_Handle) tmp = m_IsDone;
+            lock (m_Handle)
+            {
+                tmp = m_IsDone;
+            }
+
             return tmp;
         }
         set
         {
-            lock (m_Handle) m_IsDone = value;
+            lock (m_Handle)
+            {
+                m_IsDone = value;
+            }
         }
     }
 
     public virtual void Start()
     {
         //Start the thread
-        m_Thread = new System.Threading.Thread(Run);
+        m_Thread = new Thread(Run);
         m_Thread.Start();
     }
 
@@ -69,10 +86,10 @@
         return false;
     }
 
-    public System.Collections.IEnumerator WaitFor()
+    public IEnumerator WaitFor()
     {
         //This may be what is causing problems
-        while (!Update()) System.Threading.Thread.Sleep(20);
+        while (!Update()) Thread.Sleep(20);
         if (!Update()) yield return null;
     }
 

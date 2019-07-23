@@ -1,22 +1,24 @@
-﻿public class VerletObjectV3 : UnityEngine.MonoBehaviour
+﻿using UnityEngine;
+
+public class VerletObjectV3 : MonoBehaviour
 {
     private float bodyScale = 1;
-    private UnityEngine.Vector3d CenterBodyOffset;
+    private Vector3d CenterBodyOffset;
     private VerletV3 controlScript;
 
-    public UnityEngine.Vector3d
+    public Vector3d
         initialVelocity; //The initial velocity of the body (note: doesn't change once the calculation starts)
 
-    public UnityEngine.Vector3 inputPosition;
-    public UnityEngine.Vector3 inputVelocity;
+    public Vector3 inputPosition;
+    public Vector3 inputVelocity;
     public float mass; //The mass of the body
     private double oldSecondCounter;
-    public UnityEngine.Vector3d position; //The position vector of the body
-    public UnityEngine.Vector3d previousPosition; //The previous position of the body
+    public Vector3d position; //The position vector of the body
+    public Vector3d previousPosition; //The previous position of the body
     public float radius; //The radius of the body
     public float rotation;
     private float scale = 1;
-    private UnityEngine.GameObject sceneController;
+    private GameObject sceneController;
     public float sunscale = 1;
     private double timePassed = 0;
 
@@ -24,8 +26,8 @@
 
     public static VerletObjectV3 Constructor()
     {
-        UnityEngine.GameObject go =
-            Instantiate(UnityEngine.Resources.Load<UnityEngine.GameObject>("Prefabs/Space/VerletObjectV3"));
+        var go =
+            Instantiate(Resources.Load<GameObject>("Prefabs/Space/VerletObjectV3"));
         return go.GetComponent<VerletObjectV3>();
     }
 
@@ -34,7 +36,7 @@
     // Use this for initialization
     private void Start()
     {
-        sceneController = UnityEngine.GameObject.Find("SceneController"); //To keep various variables up to date
+        sceneController = GameObject.Find("SceneController"); //To keep various variables up to date
         controlScript = (VerletV3) sceneController.GetComponent("VerletV3");
         position = V3toV3D(inputPosition); //Convert input floats to doubles
         initialVelocity = V3toV3D(inputVelocity); //Ditto above
@@ -47,20 +49,20 @@
     // Update is called once per frame
     private void Update()
     {
-        double time = controlScript.masterTimeCounter;
+        var time = controlScript.masterTimeCounter;
         scale = controlScript.scale;
         if (rotation != 0)
         {
             transform.rotation *=
-                UnityEngine.Quaternion.AngleAxis((float) (time - oldSecondCounter) * (360 / (rotation * 86400)),
-                    UnityEngine.Vector3.up);
+                Quaternion.AngleAxis((float) (time - oldSecondCounter) * (360 / (rotation * 86400)),
+                    Vector3.up);
             oldSecondCounter = time;
         }
 
         bodyScale = controlScript.bodyScale * controlScript.scale;
         CenterBodyOffset = controlScript.CenterBodyOffset;
 
-        UnityEngine.Vector3
+        var
             outputPosition = V3DtoV3(position - CenterBodyOffset); //For displaying position in Unity editor
         transform.position = outputPosition * scale; //Updates the position of the unity object
 
@@ -68,31 +70,31 @@
         if (gameObject.name != "Sol")
             diameter = 0.0000000067f * 2 * bodyScale * radius;
         else
-            diameter = ((0.0000000067f * 2 * bodyScale) / sunscale) * radius;
-        transform.localScale = new UnityEngine.Vector3(diameter, diameter, diameter);
+            diameter = 0.0000000067f * 2 * bodyScale / sunscale * radius;
+        transform.localScale = new Vector3(diameter, diameter, diameter);
     }
 
-    public void newPos(UnityEngine.Vector3d np)
+    public void newPos(Vector3d np)
     {
         previousPosition = position; //Saves the position for next calculation
         position = np;
     }
 
-    private UnityEngine.Vector3 V3DtoV3(UnityEngine.Vector3d value)
+    private Vector3 V3DtoV3(Vector3d value)
     {
         //Convert from Vector3d to Vector3
-        float xVal = (float) value.x;
-        float yVal = (float) value.y;
-        float zVal = (float) value.z;
-        return new UnityEngine.Vector3(xVal, yVal, zVal);
+        var xVal = (float) value.x;
+        var yVal = (float) value.y;
+        var zVal = (float) value.z;
+        return new Vector3(xVal, yVal, zVal);
     }
 
-    private UnityEngine.Vector3d V3toV3D(UnityEngine.Vector3 value)
+    private Vector3d V3toV3D(Vector3 value)
     {
         //Convert from Vector3 to Vector3d
         double xVal = value.x;
         double yVal = value.y;
         double zVal = value.z;
-        return new UnityEngine.Vector3d(xVal, yVal, zVal);
+        return new Vector3d(xVal, yVal, zVal);
     }
 }

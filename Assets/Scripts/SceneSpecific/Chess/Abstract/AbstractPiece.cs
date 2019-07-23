@@ -5,20 +5,24 @@ See license info in readme.md.
 www.imrelab.org
 **/
 
+using System.Collections.Generic;
+using Leap.Unity.Interaction;
+using UnityEngine;
+
 namespace IMRE.Chess3D
 {
-    [UnityEngine.RequireComponent(typeof(Leap.Unity.Interaction.InteractionBehaviour))]
+    [RequireComponent(typeof(InteractionBehaviour))]
     /// <summary>
     /// An abstracted version of the chess piece.
     /// </summary>
-    public abstract class AbstractPiece : UnityEngine.MonoBehaviour
+    public abstract class AbstractPiece : MonoBehaviour
     {
-        public System.Collections.Generic.List<AbstractPiece> myTeam()
+        public List<AbstractPiece> myTeam()
         {
             return Board.myTeam(Team);
         }
 
-        public System.Collections.Generic.List<AbstractPiece> otherTeam()
+        public List<AbstractPiece> otherTeam()
         {
             return Board.otherTeam(Team);
         }
@@ -28,9 +32,9 @@ namespace IMRE.Chess3D
         /// </summary>
         /// <param name="attemptedMove">the attempted move on this current piece</param>
         /// <returns>true if the move requested is valid</returns>
-        public abstract bool IsValid(UnityEngine.Vector3 attemptedMove);
+        public abstract bool IsValid(Vector3 attemptedMove);
 
-        public abstract System.Collections.Generic.List<UnityEngine.Vector3> validMoves();
+        public abstract List<Vector3> validMoves();
 
         /// <summary>
         ///     Called when the peice is captured
@@ -41,11 +45,11 @@ namespace IMRE.Chess3D
         ///     Moves the piece after testing if it is a valid move
         /// </summary>
         /// <param name="attemptedMove">the attempted move on this current piece</param>
-        public void move(UnityEngine.Vector3 attemptedMove)
+        public void move(Vector3 attemptedMove)
         {
             if (IsValid(attemptedMove))
             {
-                AbstractPiece pieceInSpot = Board.TestLocation(attemptedMove);
+                var pieceInSpot = Board.TestLocation(attemptedMove);
                 if (pieceInSpot != null) pieceInSpot.capture();
                 Location.Set(attemptedMove.x, attemptedMove.y, attemptedMove.z);
                 Board.Check(this, attemptedMove);
@@ -57,7 +61,7 @@ namespace IMRE.Chess3D
         /// <summary>
         ///     Current location of the piece
         /// </summary>
-        public UnityEngine.Vector3 Location { get; set; }
+        public Vector3 Location { get; set; }
 
         /// <summary>
         ///     Is piece captured by opponent

@@ -1,11 +1,13 @@
-﻿namespace IMRE.HandWaver.Space.BigBertha
+﻿using UnityEngine;
+
+namespace IMRE.HandWaver.Space.BigBertha
 {
     /// <summary>
     ///     This script does ___.
     ///     The main contributor(s) to this script is TB
     ///     Status: WORKING
     /// </summary>
-    public class objectController : UnityEngine.MonoBehaviour
+    public class objectController : MonoBehaviour
     {
         public double counter;
         public float dt = 0.001f;
@@ -21,23 +23,19 @@
 
         private void test()
         {
-            for (int i = 0; i < objects.Length; i++) objects[i].step1(dt);
-            for (int i = 0; i < objects.Length; i++)
-            {
-                for (int r = 0; r < objects.Length; r++)
-                {
-                    if (i != r)
-                        objects[i].step2(objects[r], dt);
-                }
-            }
+            for (var i = 0; i < objects.Length; i++) objects[i].step1(dt);
+            for (var i = 0; i < objects.Length; i++)
+            for (var r = 0; r < objects.Length; r++)
+                if (i != r)
+                    objects[i].step2(objects[r], dt);
 
-            for (int i = 0; i < objects.Length; i++) objects[i].step3(dt);
+            for (var i = 0; i < objects.Length; i++) objects[i].step3(dt);
         }
 
         // Update is called once per frame
         private void Update()
         {
-            for (int i = 0; i < stepsPerFrame; i++) test();
+            for (var i = 0; i < stepsPerFrame; i++) test();
             counter += stepsPerFrame * dt;
         }
     }

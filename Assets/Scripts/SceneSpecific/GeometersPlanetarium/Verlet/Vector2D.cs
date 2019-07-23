@@ -2,6 +2,8 @@
 // Assembly: UnityEngine, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // Assembly location: C:\Program Files (x86)\Unity\Editor\Data\Managed\UnityEngine.dll
 
+using System;
+
 namespace UnityEngine
 {
     public struct Vector2d
@@ -21,7 +23,7 @@ namespace UnityEngine
                     case 1:
                         return y;
                     default:
-                        throw new System.IndexOutOfRangeException("Invalid Vector2d index!");
+                        throw new IndexOutOfRangeException("Invalid Vector2d index!");
                 }
             }
             set
@@ -35,7 +37,7 @@ namespace UnityEngine
                         y = value;
                         break;
                     default:
-                        throw new System.IndexOutOfRangeException("Invalid Vector2d index!");
+                        throw new IndexOutOfRangeException("Invalid Vector2d index!");
                 }
             }
         }
@@ -44,15 +46,15 @@ namespace UnityEngine
         {
             get
             {
-                Vector2d vector2d = new Vector2d(x, y);
+                var vector2d = new Vector2d(x, y);
                 vector2d.Normalize();
                 return vector2d;
             }
         }
 
-        public double magnitude => Mathd.Sqrt((x * x) + (y * y));
+        public double magnitude => Mathd.Sqrt(x * x + y * y);
 
-        public double sqrMagnitude => (x * x) + (y * y);
+        public double sqrMagnitude => x * x + y * y;
 
         public static Vector2d zero => new Vector2d(0.0d, 0.0d);
 
@@ -110,12 +112,12 @@ namespace UnityEngine
 
         public static bool operator ==(Vector2d lhs, Vector2d rhs)
         {
-            return SqrMagnitude(lhs - rhs) < (0.0 / 1.0);
+            return SqrMagnitude(lhs - rhs) < 0.0 / 1.0;
         }
 
         public static bool operator !=(Vector2d lhs, Vector2d rhs)
         {
-            return SqrMagnitude(lhs - rhs) >= (0.0 / 1.0);
+            return SqrMagnitude(lhs - rhs) >= 0.0 / 1.0;
         }
 
         public void Set(double new_x, double new_y)
@@ -127,16 +129,16 @@ namespace UnityEngine
         public static Vector2d Lerp(Vector2d from, Vector2d to, double t)
         {
             t = Mathd.Clamp01(t);
-            return new Vector2d(from.x + ((to.x - from.x) * t), from.y + ((to.y - from.y) * t));
+            return new Vector2d(from.x + (to.x - from.x) * t, from.y + (to.y - from.y) * t);
         }
 
         public static Vector2d MoveTowards(Vector2d current, Vector2d target, double maxDistanceDelta)
         {
-            Vector2d vector2 = target - current;
-            double magnitude = vector2.magnitude;
-            if ((magnitude <= maxDistanceDelta) || (magnitude == 0.0d))
+            var vector2 = target - current;
+            var magnitude = vector2.magnitude;
+            if (magnitude <= maxDistanceDelta || magnitude == 0.0d)
                 return target;
-            return current + ((vector2 / magnitude) * maxDistanceDelta);
+            return current + vector2 / magnitude * maxDistanceDelta;
         }
 
         public static Vector2d Scale(Vector2d a, Vector2d b)
@@ -152,7 +154,7 @@ namespace UnityEngine
 
         public void Normalize()
         {
-            double magnitude = this.magnitude;
+            var magnitude = this.magnitude;
             if (magnitude > 9.99999974737875E-06)
                 this = this / magnitude;
             else
@@ -200,7 +202,7 @@ namespace UnityEngine
         {
             if (!(other is Vector2d))
                 return false;
-            Vector2d vector2d = (Vector2d) other;
+            var vector2d = (Vector2d) other;
             if (x.Equals(vector2d.x))
                 return y.Equals(vector2d.y);
             return false;
@@ -208,7 +210,7 @@ namespace UnityEngine
 
         public static double Dot(Vector2d lhs, Vector2d rhs)
         {
-            return (lhs.x * rhs.x) + (lhs.y * rhs.y);
+            return lhs.x * rhs.x + lhs.y * rhs.y;
         }
 
         public static double Angle(Vector2d from, Vector2d to)
@@ -223,19 +225,19 @@ namespace UnityEngine
 
         public static Vector2d ClampMagnitude(Vector2d vector, double maxLength)
         {
-            if (vector.sqrMagnitude > (maxLength * maxLength))
+            if (vector.sqrMagnitude > maxLength * maxLength)
                 return vector.normalized * maxLength;
             return vector;
         }
 
         public static double SqrMagnitude(Vector2d a)
         {
-            return (a.x * a.x) + (a.y * a.y);
+            return a.x * a.x + a.y * a.y;
         }
 
         public double SqrMagnitude()
         {
-            return (x * x) + (y * y);
+            return x * x + y * y;
         }
 
         public static Vector2d Min(Vector2d lhs, Vector2d rhs)

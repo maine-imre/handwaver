@@ -1,4 +1,8 @@
-﻿public class HorizonsV2 : UnityEngine.MonoBehaviour
+﻿using System;
+using System.Xml;
+using UnityEngine;
+
+public class HorizonsV2 : MonoBehaviour
 {
     //public GameObject defaultBody;		//The default version of a massive object
     private string bodyName = ""; //The given name of the object
@@ -18,22 +22,21 @@
     // Use this for initialization
     private void Start()
     {
-        System.Xml.XmlDocument dataFile = new System.Xml.XmlDocument(); //The file of data about the bodies
+        var dataFile = new XmlDocument(); //The file of data about the bodies
         dataFile.Load(@"Assets/Big-Birtha/PlanetaryData/filename.xml");
-        System.Xml.XmlDocument orbitFile = new System.Xml.XmlDocument(); //The file of the orbit data for each body
+        var orbitFile = new XmlDocument(); //The file of the orbit data for each body
         orbitFile.Load(@"Assets/Big-Birtha/PlanetaryData/orbitData.xml");
-        foreach (System.Xml.XmlNode node in dataFile.DocumentElement.ChildNodes)
+        foreach (XmlNode node in dataFile.DocumentElement.ChildNodes)
         {
             //For every body
             bodyName = node.Attributes["name"].Value; //Name the body
-            foreach (System.Xml.XmlNode subnode in node.ChildNodes)
-            {
+            foreach (XmlNode subnode in node.ChildNodes)
                 //For all accociated data
                 if (subnode.Name == "mass")
                 {
                     //Get the mass
                     //mass = float.Parse(subnode.InnerText);
-                    bool successfullyParsed = float.TryParse(subnode.InnerText, out mass);
+                    var successfullyParsed = float.TryParse(subnode.InnerText, out mass);
                     if (!successfullyParsed)
                     {
                         flag = true;
@@ -49,10 +52,9 @@
                 {
                     rotation = float.Parse(subnode.InnerText);
                 }
-            }
 
-            System.DateTime currenttime = System.DateTime.Now; //The current date/time
-            string currentMonth = "";
+            var currenttime = DateTime.Now; //The current date/time
+            var currentMonth = "";
             switch (currenttime.Month)
             {
                 //Getting the month correct
@@ -94,18 +96,16 @@
                     break;
             }
 
-            string targetDateTime = currenttime.Year + "-" + currentMonth + "-";
+            var targetDateTime = currenttime.Year + "-" + currentMonth + "-";
             if (currenttime.Day < 10) targetDateTime += "0";
             targetDateTime += currenttime.Day + " ";
             if (currenttime.Hour < 10) targetDateTime += "0";
             targetDateTime += currenttime.Hour + ":00:00.0000";
 
-            foreach (System.Xml.XmlNode orbitNode in orbitFile.DocumentElement.ChildNodes)
-            {
+            foreach (XmlNode orbitNode in orbitFile.DocumentElement.ChildNodes)
                 //For every planet
                 if (orbitNode.Attributes["name"].Value == bodyName)
-                    foreach (System.Xml.XmlNode orbitsubnode in orbitNode.ChildNodes)
-                    {
+                    foreach (XmlNode orbitsubnode in orbitNode.ChildNodes)
                         //For every orbit datapoint
                         if (orbitsubnode.Attributes["timeStamp"].Value == targetDateTime)
                         {
@@ -116,19 +116,17 @@
                             vy = float.Parse(orbitsubnode["VY"].InnerText);
                             vz = float.Parse(orbitsubnode["VZ"].InnerText);
                         }
-                    }
-            }
 
             if (!flag)
             {
                 //Flag prevents bad input
                 //defaultBody.name = bodyName;										//This code sets the default body values to the given data and instantiates it
-                VerletObjectV2 df = VerletObjectV2.Constructor();
+                var df = VerletObjectV2.Constructor();
                 //VerletObjectV2 df = defaultBody.GetComponent<VerletObjectV2>();
                 df.gameObject.name = bodyName;
                 df.mass = mass;
-                df.inputPosition = new UnityEngine.Vector3(x, y, z);
-                df.inputVelocity = new UnityEngine.Vector3(vx, vy, vz);
+                df.inputPosition = new Vector3(x, y, z);
+                df.inputVelocity = new Vector3(vx, vy, vz);
                 df.radius = radius;
                 df.rotation = rotation;
                 //GameObject body = Instantiate(defaultBody);

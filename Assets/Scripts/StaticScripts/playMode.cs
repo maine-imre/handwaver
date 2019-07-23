@@ -5,6 +5,8 @@ See license info in readme.md.
 www.imrelab.org
 **/
 
+using System;
+
 namespace IMRE.HandWaver
 {
     /// <summary>
@@ -38,6 +40,6 @@ namespace IMRE.HandWaver
         /// <summary>
         ///     Action called when the mode is changed in and out of demo mode.
         /// </summary>
-        public static event System.Action modeChangeEvent;
+        public static event Action modeChangeEvent;
     }
 }

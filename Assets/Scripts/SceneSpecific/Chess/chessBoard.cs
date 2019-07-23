@@ -5,13 +5,17 @@ See license info in readme.md.
 www.imrelab.org
 **/
 
+using System;
+using System.Collections.Generic;
+using UnityEngine;
+
 namespace IMRE.Chess3D
 {
     /// <summary>
     ///     The board that keeps track of pieces and moves for spatial chess.
     ///     This is central to the game.
     /// </summary>
-    public class chessBoard : UnityEngine.MonoBehaviour
+    public class chessBoard : MonoBehaviour
     {
         public enum currentTeam
         {
@@ -32,14 +36,14 @@ namespace IMRE.Chess3D
         public static int boardSize = 9;
         private readonly AbstractPiece[,,] board = new AbstractPiece[boardSize, boardSize, boardSize];
 
-        public System.Collections.Generic.List<AbstractPiece> myTeam(currentTeam team)
+        public List<AbstractPiece> myTeam(currentTeam team)
         {
             if (team == currentTeam.white)
                 return whiteTeam;
             return blackTeam;
         }
 
-        public System.Collections.Generic.List<AbstractPiece> otherTeam(currentTeam team)
+        public List<AbstractPiece> otherTeam(currentTeam team)
         {
             if (team == currentTeam.black)
                 return whiteTeam;
@@ -51,7 +55,7 @@ namespace IMRE.Chess3D
         /// </summary>
         /// <param name="moveLocation">move that is being made</param>
         /// <returns>piece that was previously in location</returns>
-        public AbstractPiece TestLocation(UnityEngine.Vector3 moveLocation)
+        public AbstractPiece TestLocation(Vector3 moveLocation)
         {
             if (board[(int) moveLocation.x, (int) moveLocation.y, (int) moveLocation.z] == null)
                 return null;
@@ -63,23 +67,21 @@ namespace IMRE.Chess3D
         /// </summary>
         /// <param name="piece"></param>
         /// <param name="attemptedMove"></param>
-        internal bool Check(AbstractPiece abstractPiece, UnityEngine.Vector3 attemptedMove)
+        internal bool Check(AbstractPiece abstractPiece, Vector3 attemptedMove)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
-        internal bool placeSelfInCheck(AbstractPiece king, UnityEngine.Vector3 attemptedMove)
+        internal bool placeSelfInCheck(AbstractPiece king, Vector3 attemptedMove)
         {
-            System.Collections.Generic.List<AbstractPiece> listToCheck;
+            List<AbstractPiece> listToCheck;
             if (king.Team == currentTeam.black)
                 listToCheck = whiteTeam;
             else
                 listToCheck = blackTeam;
-            foreach (AbstractPiece piece in listToCheck)
-            {
+            foreach (var piece in listToCheck)
                 if (piece.IsValid(attemptedMove))
                     return true;
-            }
 
             return false;
         }
@@ -99,11 +101,11 @@ namespace IMRE.Chess3D
             }
         }
 #pragma warning disable 0649
-        private System.Collections.Generic.List<AbstractPiece> whiteTeam; //white
-        private System.Collections.Generic.List<AbstractPiece> blackTeam; //black
+        private List<AbstractPiece> whiteTeam; //white
+        private List<AbstractPiece> blackTeam; //black
 
-        private System.Collections.Generic.List<AbstractPiece> whiteGraveyard;
-        private System.Collections.Generic.List<AbstractPiece> blackGraveyard;
+        private List<AbstractPiece> whiteGraveyard;
+        private List<AbstractPiece> blackGraveyard;
 #pragma warning restore 0649
     }
 }
