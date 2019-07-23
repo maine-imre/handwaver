@@ -5,32 +5,8 @@
     ///     Not integrated with kernel.
     ///     used in study of scale and dimension
     /// </summary>
-    public class squareNet : UnityEngine.MonoBehaviour, ISliderInput
+    public class squareNet : net2D
     {
-        private float _percentFolded;
-
-        public System.Collections.Generic.List<UnityEngine.GameObject> foldPoints =
-            new System.Collections.Generic.List<UnityEngine.GameObject>();
-
-        public bool sliderOverride;
-
-        public float PercentFolded
-        {
-            get => _percentFolded;
-
-            set
-            {
-                //set vertices using vert function
-                _percentFolded = value;
-                GetComponent<UnityEngine.LineRenderer>().SetPositions(verts(_percentFolded));
-            }
-        }
-
-        public float slider
-        {
-            set => PercentFolded = !sliderOverride ? value : 1f;
-        }
-
         private void Start()
         {
             //intial line segment with 5 points (2 vertices merge)
@@ -54,7 +30,7 @@
         /// </summary>
         /// <param name="t"></param>
         /// <returns></returns>
-        private UnityEngine.Vector3[] verts(float percentFolded)
+        public override UnityEngine.Vector3[] verts(float percentFolded)
         {
             float angle = percentFolded * 90f;
             //matrix of vertices

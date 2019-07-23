@@ -5,32 +5,8 @@
     ///     Used in study of scale and dimension
     ///     not integrated with kernel.
     /// </summary>
-    public class triangleNet : UnityEngine.MonoBehaviour, ISliderInput
+    public class triangleNet : net2D
     {
-        private float _percentFolded;
-
-        public System.Collections.Generic.List<UnityEngine.GameObject> foldPoints =
-            new System.Collections.Generic.List<UnityEngine.GameObject>();
-
-        public bool sliderOverride;
-
-        public float PercentFolded
-        {
-            get => _percentFolded;
-
-            set
-            {
-                //set vertices using verts function
-                _percentFolded = value;
-                GetComponent<UnityEngine.LineRenderer>().SetPositions(verts(_percentFolded));
-            }
-        }
-
-        public float slider
-        {
-            set => PercentFolded = !sliderOverride ? value : 1f;
-        }
-
         private void Start()
         {
             //intitial 4 vertices (one extra point that merges with another)
@@ -52,7 +28,7 @@
         /// </summary>
         /// <param name="t"></param>
         /// <returns></returns>
-        private UnityEngine.Vector3[] verts(float percentFolded)
+        public override UnityEngine.Vector3[] verts(float percentFolded)
         {
             float t = percentFolded * 120f;
             //matrix of vertices 
