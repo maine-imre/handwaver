@@ -13,6 +13,7 @@ using UnityEngine;
 //using BlueprintReality.MixCast;
 using System.Linq;
 using IMRE.HandWaver.HWIO;
+using IMRE.HandWaver.Kernel;
 using UnityEngine.Events;
 using WebSocketSharp;
 
@@ -80,53 +81,13 @@ namespace IMRE.HandWaver
 					
 				}
 				
-                if (argument.ToLower().Contains("-handwaver"))
-                {
-                    playMode.demo = true;
-                    debugkeyboardinput.loadNewBaseScene("HandWaverBase");
-                }
-
-                if (argument.ToLower().Contains("-geoplanet"))
-                {
-                    playMode.demo = true;
-                    debugkeyboardinput.loadNewBaseScene("GeometersPlanetariumBase");
-                }
-
-                if (argument.ToLower().Contains("-chess3d"))
-                {
-                    playMode.demo = true;
-                    debugkeyboardinput.loadSceneAsyncByName("Chess3DLayer", false);
-                }
-
-                if (argument.ToLower().Contains("-tutorial"))
-                {
-                    playMode.demo = true;
-                    debugkeyboardinput.loadSceneAsyncByName("tutorialLayer", false);
-                }
-
-                if (argument.ToLower().Contains("-LittleBeartha"))
-                {
-                    playMode.demo = true;
-                    debugkeyboardinput.loadSceneAsyncByName("LittleBeartha", true);
-                }
-
-                if (argument.ToLower().Contains("-HorizonAnalysis"))
-                {
-                    playMode.demo = true;
-                    debugkeyboardinput.loadSceneAsyncByName("HorizonAnalysis", true);
-                }
-
-                if (argument.ToLower().Contains("-HigherDimensionsLayer"))
-                {
-                    playMode.demo = true;
-                    debugkeyboardinput.loadSceneAsyncByName("HigherDimensionsLayer", false);
-                }
-
-                if (argument.ToLower().Contains("-LatticeLand"))
-                {
-                    playMode.demo = true;
-                    debugkeyboardinput.loadSceneAsyncByName("LatticeLand", false);
-                }
+				// If argument is -sid
+				//	Attempt to use the next argument as a sessionID
+				if (argument.ToLower().Contains("-sid") && Array.IndexOf(commandLineArguments, "-sid")+1 < commandLineArguments.Length)
+				{
+					HandWaverServerSocket.overrideSID = commandLineArguments[Array.IndexOf(commandLineArguments, "-sid")+1];
+				}
+                
             }
 
 			//If a -L flag was found
@@ -173,7 +134,7 @@ namespace IMRE.HandWaver
 			}
 
 			return result;
-		}*/s
+		}*/
 
 	}
 }
