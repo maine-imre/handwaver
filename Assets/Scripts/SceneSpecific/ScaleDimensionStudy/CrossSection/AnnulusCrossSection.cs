@@ -103,7 +103,7 @@ namespace IMRE.HandWaver.ScaleStudy
         }
 
         /// <summary>
-        ///     Function to calculate cross section of an annulus
+        /// Function to calculate cross section of an annulus by finding points of intersection and connecting them
         /// </summary>
         /// <param name="height"></param>
         public void crossSectAnnulus(float height)
@@ -205,9 +205,9 @@ namespace IMRE.HandWaver.ScaleStudy
         }
 
         /// <summary>
-        ///     Take alpha to be the angle describing the rotation around a center axis to form the annulus
-        ///     and beta as the length to be converted
-        ///     Find position on annulus
+        /// Take alpha to be the angle describing the rotation around a center axis to form the annulus
+        /// and beta as the length to be converted
+        /// Find position on annulus
         /// </summary>
         /// <param name="alpha">angle</param>
         /// <param name="beta">length</param>
@@ -225,8 +225,8 @@ namespace IMRE.HandWaver.ScaleStudy
         }
 
         /// <summary>
-        ///     Function to map vertices on each triangle
-        ///     Mapping was copied from torusRevolve script in horizon scene
+        /// Function to map vertices on each triangle
+        /// Mapping was copied from torusRevolve script in horizon scene
         /// </summary>
         /// <param name="k">triangle</param>
         /// <param name="m">vertex</param>

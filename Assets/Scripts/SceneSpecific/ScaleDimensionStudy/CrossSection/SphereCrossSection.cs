@@ -30,7 +30,6 @@
         // Start is called before the first frame update
         private void Start()
         {
-            
             #region Render Cross-section
 
             gameObject.AddComponent<UnityEngine.MeshRenderer>();
@@ -51,12 +50,11 @@
             crossSectionRenderer.loop = true;
             
                
-            #endregion
-            
+            #endregion  
         }
 
         /// <summary>
-        /// Function to calculate cross section of circle
+        /// Function to calculate cross section of sphere
         /// </summary>
         /// <param name="radius"></param>
         /// <param name="height"></param>

@@ -120,7 +120,7 @@
         }
 
         /// <summary>
-        ///     configure vertices based around core cube
+        /// configure vertices of each cube based around core cube
         /// </summary>
         /// <param name="degreeFolded"></param>
         /// <returns></returns>

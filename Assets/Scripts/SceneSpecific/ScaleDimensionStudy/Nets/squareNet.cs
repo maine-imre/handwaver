@@ -26,7 +26,7 @@
         }
 
         /// <summary>
-        ///     generate vertices for square
+        /// calculate position of vertices for folding of square
         /// </summary>
         /// <param name="t"></param>
         /// <returns></returns>

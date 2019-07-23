@@ -32,7 +32,7 @@ namespace IMRE.HandWaver.ScaleStudy
         }
 
         /// <summary>
-        ///     fold tetrahedron net up by angle t
+        /// fold tetrahedron net up by angle t
         /// </summary>
         /// <param name="percentfolded"></param>
         /// <returns></returns>
@@ -76,7 +76,7 @@ namespace IMRE.HandWaver.ScaleStudy
         }
 
         /// <summary>
-        ///     return array of vertices for the 4 triangles in the unfolded tetrahedron
+        /// return array of vertices for the 4 triangles in the unfolded tetrahedron
         /// </summary>
         /// <returns></returns>
         private static int[] meshTris()
@@ -91,7 +91,7 @@ namespace IMRE.HandWaver.ScaleStudy
         }
 
         /// <summary>
-        ///     trace edges of mesh
+        /// trace edges of mesh
         /// </summary>
         /// <param name="t"></param>
         /// <returns></returns>

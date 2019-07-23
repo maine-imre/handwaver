@@ -37,7 +37,7 @@
         }
 
         /// <summary>
-        ///     Function to calculate cross section of circle
+        /// Function to calculate cross section of circle by connecting points of intersection
         /// </summary>
         /// <param name="radius"></param>
         /// <param name="height"></param>
@@ -112,7 +112,7 @@
         }
 
         /// <summary>
-        ///     Function to outline and render a circle
+        /// Function to render the outline of a circle
         /// </summary>
         public void renderCircle()
         {

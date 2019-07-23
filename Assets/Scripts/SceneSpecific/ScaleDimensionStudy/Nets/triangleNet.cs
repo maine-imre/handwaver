@@ -24,7 +24,7 @@
         }
 
         /// <summary>
-        ///     fold line segment of 4 points by degree t
+        /// fold line segment of 4 points by degree t
         /// </summary>
         /// <param name="t"></param>
         /// <returns></returns>

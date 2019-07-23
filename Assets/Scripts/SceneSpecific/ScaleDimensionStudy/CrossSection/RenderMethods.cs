@@ -40,7 +40,6 @@ namespace IMRE.HandWaver.ScaleDimension
             #region Normales		
 
             UnityEngine.Vector3[] normales = new UnityEngine.Vector3[vertices.Length];
-            UnityEngine.Debug.Log(vertices.Length);
             for (int j = 0; j < vertices.Length; j++)
                 normales[j] = vertices[j].normalized;
 
@@ -114,9 +113,9 @@ namespace IMRE.HandWaver.ScaleDimension
 
 
         /// <summary>
-        ///     Finds the vertex indices for the kth triangle
-        ///     returns the mth vertex index of the kth triangle
-        ///     Triangles indexed for clockwise front face
+        /// Finds the vertex indices for the kth triangle
+        /// returns the mth vertex index of the kth triangle
+        /// Triangles indexed for clockwise front face
         /// </summary>
         /// <param name="k"></param>
         /// <param name="m"></param>
