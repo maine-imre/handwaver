@@ -2,7 +2,6 @@
 {
     public class SphereCrossSection : UnityEngine.MonoBehaviour, ISliderInput
     {
-
         #region variables/components
 
         public int n;
