@@ -9,34 +9,6 @@ namespace IMRE.HandWaver.ScaleStudy
     /// </summary>
     public class cubeNet : UnityEngine.MonoBehaviour, ISliderInput
     {
-        private float _percentFolded;
-
-        public bool sliderOverride;
-
-        //public DateTime startTime;
-        public UnityEngine.Mesh mesh => GetComponent<UnityEngine.MeshFilter>().mesh;
-
-        public UnityEngine.LineRenderer lineRenderer => GetComponent<UnityEngine.LineRenderer>();
-
-        public float PercentFolded
-        {
-            get => _percentFolded;
-            //set positions for linerenderer and vertices for mesh
-            set
-            {
-                //set vertices on line segment
-                _percentFolded = value;
-                lineRenderer.SetPositions(lineRendererVerts(_percentFolded));
-                //array of vertices converted to list
-                mesh.SetVertices(Enumerable.ToList(meshVerts(_percentFolded)));
-            }
-        }
-
-        public float slider
-        {
-            set => PercentFolded = !sliderOverride ? value : 1f;
-        }
-
         private void Start()
         {
             //assign mesh
@@ -58,7 +30,7 @@ namespace IMRE.HandWaver.ScaleStudy
         /// </summary>
         /// <param name="percentFolded"></param>
         /// <returns></returns>
-        private static UnityEngine.Vector3[] meshVerts(float percentFolded)
+        public override static UnityEngine.Vector3[] meshVerts(float percentFolded)
         {
             float degreeFolded = (percentFolded * 90f) + 180f;
             //14 points on cube net
@@ -140,7 +112,7 @@ namespace IMRE.HandWaver.ScaleStudy
         /// </summary>
         /// <param name="percentFolded"></param>
         /// <returns></returns>
-        private static UnityEngine.Vector3[] lineRendererVerts(float percentFolded)
+        public override static UnityEngine.Vector3[] lineRendererVerts(float percentFolded)
         {
             UnityEngine.Vector3[] result = new UnityEngine.Vector3[22];
             //map vertices on line segment to vertices on unfolded cube

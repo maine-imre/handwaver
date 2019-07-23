@@ -17,31 +17,6 @@ namespace IMRE.HandWaver.ScaleStudy
                                                           new UnityEngine.Vector3(-1, -1, 1) -
                                                           ((new UnityEngine.Vector3(1, -1, -1) +
                                                             new UnityEngine.Vector3(-1, 1, -1)) / 2f));
-
-        private float _percentFolded;
-        public bool sliderOverride;
-
-        public UnityEngine.Mesh mesh => GetComponent<UnityEngine.MeshFilter>().mesh;
-
-        public UnityEngine.LineRenderer lineRenderer => GetComponent<UnityEngine.LineRenderer>();
-
-        public float PercentFolded
-        {
-            get => _percentFolded;
-
-            set
-            {
-                _percentFolded = value;
-                lineRenderer.SetPositions(lineRendererVerts(_percentFolded));
-                mesh.SetVertices(Enumerable.ToList(meshVerts(_percentFolded)));
-            }
-        }
-
-        public float slider
-        {
-            set => PercentFolded = !sliderOverride ? value : 1f;
-        }
-
         private void Start()
         {
             //unfolded shape(degree of fold = 0)
@@ -61,7 +36,7 @@ namespace IMRE.HandWaver.ScaleStudy
         /// </summary>
         /// <param name="percentfolded"></param>
         /// <returns></returns>
-        private static UnityEngine.Vector3[] meshVerts(float percentfolded)
+        public override static UnityEngine.Vector3[] meshVerts(float percentfolded)
         {
             float degreefolded = (percentfolded * COMPLETEDFOLD) + 180f;
             //6 vertices on tetrahedron
@@ -120,7 +95,7 @@ namespace IMRE.HandWaver.ScaleStudy
         /// </summary>
         /// <param name="t"></param>
         /// <returns></returns>
-        private static UnityEngine.Vector3[] lineRendererVerts(float t)
+        public override static UnityEngine.Vector3[] lineRendererVerts(float t)
         {
             UnityEngine.Vector3[] result = new UnityEngine.Vector3[11];
 
