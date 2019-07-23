@@ -37,16 +37,12 @@ namespace IMRE.Chess3D
         {
             return ((IList) validMoves).Contains(newLocation);
         }
-
-
-
+        
         /// <summary>
         /// Called when the peice is captured
         /// </summary>
         public abstract void capture();
-
-
-
+        
         /// <summary>
         /// Moves the piece after testing if it is a valid move
         /// </summary>
@@ -65,7 +61,6 @@ namespace IMRE.Chess3D
                 chessBoard.Check(this, attemptedMove);
             }
 		//TODO remove preview of piece.
-
         }
 
         #region GettersSetters
