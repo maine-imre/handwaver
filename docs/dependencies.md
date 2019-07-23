@@ -1,5 +1,6 @@
 # Open Source Attributions
-###socket.io-client-unity3d
+### Socket.io-client-unity3d
+
 written by [nhn](https://github.com/nhn/socket.io-client-unity3d)
 
 # Package Dependencies
