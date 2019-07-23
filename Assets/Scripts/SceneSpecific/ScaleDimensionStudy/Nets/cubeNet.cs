@@ -30,7 +30,7 @@ namespace IMRE.HandWaver.ScaleStudy
         /// </summary>
         /// <param name="percentFolded"></param>
         /// <returns></returns>
-        public override static UnityEngine.Vector3[] meshVerts(float percentFolded)
+        public override UnityEngine.Vector3[] meshVerts(float percentFolded)
         {
             float degreeFolded = (percentFolded * 90f) + 180f;
             //14 points on cube net
@@ -112,7 +112,7 @@ namespace IMRE.HandWaver.ScaleStudy
         /// </summary>
         /// <param name="percentFolded"></param>
         /// <returns></returns>
-        public override static UnityEngine.Vector3[] lineRendererVerts(float percentFolded)
+        public override  UnityEngine.Vector3[] lineRendererVerts(float percentFolded)
         {
             UnityEngine.Vector3[] result = new UnityEngine.Vector3[22];
             //map vertices on line segment to vertices on unfolded cube

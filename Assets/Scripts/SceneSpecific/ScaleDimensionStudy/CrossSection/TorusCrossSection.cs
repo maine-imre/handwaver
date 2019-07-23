@@ -205,7 +205,7 @@ namespace IMRE.HandWaver.ScaleStudy
             {
                 //for each vertex on each triangle
                 for (int m = 0; m < 3; m++)
-                    triangles[(3 * k) + m] = RenderMethods.ToricTriangle(k, m, n);
+                    triangles[(3 * k) + m] = IMRE.HandWaver.ScaleDimension.RenderMethods.ToricTriangle(k, m, n);
             }
 
             torusRenderer.vertices = verts;

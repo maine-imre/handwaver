@@ -8,9 +8,8 @@
             {
                 //using solution form here:  https://math.stackexchange.com/questions/1159613/would-the-cross-section-of-a-hypersphere-be-a-sphere
                 float sliderval = -1 + (2 * value);
-		float3[] verts;
-		
-                RenderMethods.RenderSphere(UnityEngine.Mathf.Sqrt((radius * radius) - (sliderval * sliderval)), new float3(0f,0f,0f), crossSectionRenderer);
+
+                IMRE.HandWaver.ScaleDimension.RenderMethods.RenderSphere(UnityEngine.Mathf.Sqrt((radius * radius) - (sliderval * sliderval)), new Unity.Mathematics.float3(0f,0f,0f), crossSectionRenderer, n);
             }
         }
 

@@ -1,6 +1,9 @@
 namespace IMRE.HandWaver.ScaleDimension
-public static class RenderMethods{
-public static void RenderSphere(float crossSectionRadius, float3 center, UnityEngine.Mesh crossSectionRenderer)
+{
+    public static class RenderMethods
+    {
+        public static void RenderSphere(float crossSectionRadius, Unity.Mathematics.float3 center,
+            UnityEngine.Mesh crossSectionRenderer, int n)
         {
             crossSectionRenderer.Clear();
             int nbLong = n;
@@ -37,8 +40,8 @@ public static void RenderSphere(float crossSectionRadius, float3 center, UnityEn
             #region Normales		
 
             UnityEngine.Vector3[] normales = new UnityEngine.Vector3[vertices.Length];
-            for (int n = 0; n < vertices.Length; n++)
-                normales[n] = vertices[n].normalized;
+            for (int j = 0; j < vertices.Length; n++)
+                normales[j] = vertices[n].normalized;
 
             #endregion
 
@@ -117,7 +120,7 @@ public static void RenderSphere(float crossSectionRadius, float3 center, UnityEn
         /// <param name="k"></param>
         /// <param name="m"></param>
         /// <returns></returns>
-        private static int ToricTriangle(int k, int m, int n)
+        public static int ToricTriangle(int k, int m, int n)
         {
             if (k < (n * n))
             {
@@ -151,4 +154,5 @@ public static void RenderSphere(float crossSectionRadius, float3 center, UnityEn
 
             return 0;
         }
+    }
 }

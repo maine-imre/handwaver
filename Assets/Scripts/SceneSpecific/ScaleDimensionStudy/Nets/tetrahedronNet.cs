@@ -36,7 +36,7 @@ namespace IMRE.HandWaver.ScaleStudy
         /// </summary>
         /// <param name="percentfolded"></param>
         /// <returns></returns>
-        public override static UnityEngine.Vector3[] meshVerts(float percentfolded)
+        public override UnityEngine.Vector3[] meshVerts(float percentfolded)
         {
             float degreefolded = (percentfolded * COMPLETEDFOLD) + 180f;
             //6 vertices on tetrahedron
@@ -95,7 +95,7 @@ namespace IMRE.HandWaver.ScaleStudy
         /// </summary>
         /// <param name="t"></param>
         /// <returns></returns>
-        public override static UnityEngine.Vector3[] lineRendererVerts(float t)
+        public override UnityEngine.Vector3[] lineRendererVerts(float t)
         {
             UnityEngine.Vector3[] result = new UnityEngine.Vector3[11];
 

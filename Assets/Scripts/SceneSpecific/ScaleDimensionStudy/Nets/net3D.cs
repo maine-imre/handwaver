@@ -1,6 +1,6 @@
 namespace IMRE.HandWaver.ScaleStudy
 {
-    public abstract class cubeNet : UnityEngine.MonoBehaviour, ISliderInput
+    public abstract class net3D : UnityEngine.MonoBehaviour, ISliderInput
     {
         private float _percentFolded;
 
@@ -21,7 +21,7 @@ namespace IMRE.HandWaver.ScaleStudy
                 _percentFolded = value;
                 lineRenderer.SetPositions(lineRendererVerts(_percentFolded));
                 //array of vertices converted to list
-                mesh.SetVertices(Enumerable.ToList(meshVerts(_percentFolded)));
+                mesh.SetVertices(System.Linq.Enumerable.ToList(meshVerts(_percentFolded)));
             }
         }
 
@@ -29,8 +29,7 @@ namespace IMRE.HandWaver.ScaleStudy
         {
             set => PercentFolded = !sliderOverride ? value : 1f;
         }
-
-	public abstract static UnityEngine.Vector3[] meshVerts(float percentFolded);
-        public abstract static UnityEngine.Vector3[] lineRendererVerts(float percentFolded)
+	    public abstract UnityEngine.Vector3[] meshVerts(float percentFolded);
+        public abstract UnityEngine.Vector3[] lineRendererVerts(float percentFolded);
     }
 }
