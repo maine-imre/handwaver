@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using UnityEngine;
-
-using HybridWebSocket;
 
 namespace IMRE.HandWaver.Kernel
 {
@@ -19,42 +14,21 @@ namespace IMRE.HandWaver.Kernel
         private void Start()
         {
             initSession();
-
-            WebSocket ws = WebSocketFactory.CreateInstance("ws://"+HandWaverServerTransport.HOSTURL);
-            string subscribeString = "subscribe : "+HandWaverServerTransport.sessionId;
-            
-            // Add OnOpen event listener
-            ws.OnOpen += () =>
-            {
-                Debug.Log("WS connected!");
-                Debug.Log("WS state: " + ws.GetState());
-            };
-
-            // Add OnMessage event listener
-            ws.OnMessage += msg =>
-            {
-                Debug.Log("WS received message: " + Encoding.UTF8.GetString(msg));
-            };
-
-            // Add OnError event listener
-            ws.OnError += errMsg =>
-            {
-                Debug.Log("WS error: " + errMsg);
-            };
-
-            // Add OnClose event listener
-            ws.OnClose += code =>
-            {
-                Debug.Log("WS closed with code: " + code.ToString());
-            };
-
-            // Connect to the server
-            ws.Connect();
-            
-            ws.Send(subscribeString);
-
-            
-            //Test the command changes
+                                                                                             
+            /*Socket sock = new Socket("http://localhost:8080");                                                  
+                                                                                                 
+            sock.On("connect", () => Debug.Log("connected"));                                                
+            sock.On("disconnect", () => { Debug.Log("disconnected"); });                                     
+            sock.On("connect_error", e => { Debug.Log("failed to connect: " + e); });                        
+                                                                                                 
+            sock.On("add", args => Debug.Log("add:"+args));                                                  
+            sock.On("remove", args => Debug.Log("remove:"+ args));                                           
+            sock.On("update", args => Debug.Log("update:"+ args));                                           
+            sock.On("rename", args => Debug.Log("rename:"+ args));                                           
+                                                                                                 
+            sock.Emit("subscribe", HandWaverServerTransport.sessionId);                                                          
+        */
+        //Test the command changes
             StartCoroutine(HandWaverServerTransport.execCommand("B = Point({1, 2, 3})"));    // Point A
 //            StartCoroutine(HandWaverServerTransport.execCommand("Point({3, 5, 1})"));    // Point B
 //            StartCoroutine(HandWaverServerTransport.execCommand("Line(A, B)"));          // Line f
