@@ -9,6 +9,7 @@ www.imrelab.org
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+ using Unity.Mathematics;
 
 namespace IMRE.Chess3D {
     /// <summary>
@@ -24,7 +25,7 @@ namespace IMRE.Chess3D {
         public static int3[] validMoves(AbstractPiece piece)
         {
             Vector3 orientation = Vector3.forward;
-            if (piece.Team == currentTeam.black)
+            if (piece.Team == chessBoard.currentTeam.black)
             {
                 orientation = Vector3.back;
             }
@@ -35,10 +36,9 @@ namespace IMRE.Chess3D {
             List<Vector3> enemy = new List<Vector3>(); 
             piece.otherTeam().ForEach(p => enemy.Add(p.Location));
             
-            return validMoves(piece.PieceType, orientation, piece.Location, friendly,enemy,orientation);
+            return validMoves(piece.PieceType,  piece.Location, friendly,enemy,orientation);
         }
 
-       #region CalculateMoves
         private static int3[] validMoves(chessBoard.PieceType piece, Vector3 currentPosition, List<Vector3> friendlyPieces, List<Vector3> enemyPieces, Vector3 orientation)
         {
             //list all possible positions
@@ -278,7 +278,7 @@ namespace IMRE.Chess3D {
             }
 
             //check if off board
-            caniditePositions = caniditePositions.Where(p => p.onBoard())
+            caniditePositions = caniditePositions.Where(p => p.onBoard());
             
             //check if occupied by friendly
             caniditePositions = caniditePositions.Where(p => !friendlyPieces.Contains(p));
@@ -290,7 +290,8 @@ namespace IMRE.Chess3D {
                 caniditePositions =
                     caniditePositions.Where(p => !piecesInPath(currentPosition, p, friendlyPieces, enemyPieces));
             }
-	       return canidatePositions.ToArray();
+
+            return canidatePositions.ToArray();
         }
 
         private static int3 moveDirection(int3 position, float3 orientation, float3 direction)
@@ -401,25 +402,24 @@ namespace IMRE.Chess3D {
 	
 	private static float magnitude(int3 v)
 	{
-		return (Unity.Mathematics.math.sqrt(v.x*v.x+v.y*v.y+v.z*v.z);
+		return (Unity.Mathematics.math.sqrt(v.x*v.x+v.y*v.y+v.z*v.z));
 	}	
 	
-	public bool placeSelfInCheck(AbstractPiece piece, int3 attemptedMove)
+	public static bool placeSelfInCheck(AbstractPiece piece, int3 attemptedMove)
         {
             List<AbstractPiece> listToCheck;
-            if (piece.Team == currentTeam.black)
-                listToCheck = whiteTeam;
+            if (piece.Team == chessBoard.currentTeam.black)
+                listToCheck = chessBoard.whiteTeam;
             else
-                listToCheck = blackTeam;
-            foreach (AbstractPiece piece in listToCheck)
+                listToCheck = chessBoard.blackTeam;
+            foreach (AbstractPiece p in listToCheck)
             {
-                if (piece.IsValid(attemptedMove))
+                if (p.IsValid(attemptedMove))
                 {
                     return true;
                 }
             }
             return false;
         }
-        #endregion
     }
 }

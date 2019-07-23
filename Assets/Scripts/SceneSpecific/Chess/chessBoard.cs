@@ -5,10 +5,11 @@ See license info in readme.md.
 www.imrelab.org
 **/
 
-﻿using System;
+ using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+ using Unity.Mathematics;
+ using UnityEngine;
 
 namespace IMRE.Chess3D {
 
@@ -25,14 +26,14 @@ namespace IMRE.Chess3D {
 		
         AbstractPiece[,,] board = new AbstractPiece[boardSize, boardSize, boardSize];
 #pragma warning disable 0649
-		List<AbstractPiece> whiteTeam;           //white
-        List<AbstractPiece> blackTeam;           //black
+    public static List<AbstractPiece> whiteTeam;           //white
+    public static List<AbstractPiece> blackTeam;           //black
 
         List<AbstractPiece> whiteGraveyard;
         List<AbstractPiece> blackGraveyard;
 #pragma warning restore 0649
 
-		public List<AbstractPiece> myTeam(currentTeam team)
+		public static List<AbstractPiece> myTeam(currentTeam team)
         {
             if (team == currentTeam.white)
             {
@@ -43,7 +44,7 @@ namespace IMRE.Chess3D {
             }
         }
 
-        public List<AbstractPiece> otherTeam(currentTeam team)
+        public static List<AbstractPiece> otherTeam(currentTeam team)
         {
             if (team == currentTeam.black)
             {
@@ -63,7 +64,7 @@ namespace IMRE.Chess3D {
         /// </summary>
         /// <param name="moveLocation">move that is being made</param>
         /// <returns>piece that was previously in location</returns>
-        public AbstractPiece TestLocation(int3 moveLocation)
+        public static AbstractPiece TestLocation(int3 moveLocation)
         {
             if (board[(int)moveLocation.x,(int)moveLocation.y,(int)moveLocation.z] == null)
                 return null;

@@ -5,10 +5,10 @@ See license info in readme.md.
 www.imrelab.org
 **/
 
-﻿using System.Collections;
+ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Leap.Unity.Interaction;
+ using Unity.Mathematics;
 
 namespace IMRE.Chess3D
 {
@@ -17,41 +17,25 @@ namespace IMRE.Chess3D
 /// </summary>
 	public abstract class AbstractPiece
     {
-        private chessBoard board;
-
-        private Vector3 location;
+        private int3 location;
         private chessBoard.currentTeam team;
         private chessBoard.PieceType pieceType;
         private bool isCaptured = false;
 
         public List<AbstractPiece> myTeam()
         {
-            return board.myTeam(team);
+            return chessBoard.myTeam(team);
         }
         public List<AbstractPiece> otherTeam()
         {
-            return board.otherTeam(team);
+            return chessBoard.otherTeam(team);
         }
+        
+        public int3[] validMoves => allValidMoves.validMoves(this);
 
-
-        /// <summary>
-        /// Tests requested move compared to current location 
-        /// </summary>
-        /// <param name="attemptedMove">the attempted move on this current piece</param>
-        /// <returns>true if the move requested is valid</returns>
-        public abstract bool IsValid(Vector3 attemptedMove);
-
-        public List<Vector3> validMoves
+        public bool IsValid(int3 newLocation)
         {
-            get
-            {
-                return allValidMoves.validMoves(this);
-            }
-        }
-
-        public bool IsValid(Vector3 newLocation)
-        {
-            return validMoves.Contains(newLocation);
+            return ((IList) validMoves).Contains(newLocation);
         }
 
 
@@ -67,18 +51,18 @@ namespace IMRE.Chess3D
         /// Moves the piece after testing if it is a valid move
         /// </summary>
         /// <param name="attemptedMove">the attempted move on this current piece</param>
-        public void move(Vector3 attemptedMove)
+        public void move(int3 attemptedMove)
         {
             if (IsValid(attemptedMove))
             {
-                AbstractPiece pieceInSpot = board.TestLocation(attemptedMove);
+                AbstractPiece pieceInSpot = chessBoard.TestLocation(attemptedMove);
                 if (pieceInSpot != null && pieceInSpot.Team != team)
                 {
                     pieceInSpot.capture();
                 }
 
                 this.Location = attemptedMove;
-                board.Check(this, attemptedMove);
+                chessBoard.Check(this, attemptedMove);
             }
 		//TODO remove preview of piece.
 
@@ -88,7 +72,7 @@ namespace IMRE.Chess3D
         /// <summary>
         /// Current location of the piece
         /// </summary>
-        public Vector3 Location
+        public int3 Location
         {
             get
             {
@@ -114,6 +98,7 @@ namespace IMRE.Chess3D
             set
             {
                 this.isCaptured = value;
+                //move piece
             }
         }
 
@@ -139,19 +124,6 @@ namespace IMRE.Chess3D
             set
             {
                 team = value;
-            }
-        }
-
-        public chessBoard Board
-        {
-            get
-            {
-                return board;
-            }
-
-            set
-            {
-                board = value;
             }
         }
 
