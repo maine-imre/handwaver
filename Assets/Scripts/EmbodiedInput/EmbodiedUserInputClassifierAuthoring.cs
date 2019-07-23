@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Management.Instrumentation;
-using IMRE.Math;
-using Unity.Collections;
-using Unity.Entities;
-using UnityEngine;
-using Unity.Mathematics;
+﻿using Enumerable = System.Linq.Enumerable;
 
 namespace IMRE.EmbodiedUserInput
 {
@@ -21,19 +12,19 @@ namespace IMRE.EmbodiedUserInput
         openPalmPush,
         openPalmSwipe,
         thumbsUp
-    };
+    }
 
     /// <inheritdoc />
     /// <summary>
-    /// A generic example of a classifier.  This should be renamed in each use case.
+    ///     A generic example of a classifier.  This should be renamed in each use case.
     /// </summary>
-    public struct EmbodiedClassifier : IComponentData
+    public struct EmbodiedClassifier : Unity.Entities.IComponentData
     {
         public Chirality Chirality;
         public classifierType type;
 
-        public float3 origin;
-        public float3 direction;
+        public Unity.Mathematics.float3 origin;
+        public Unity.Mathematics.float3 direction;
 
         public bool shouldFinish;
         public bool isEligible;
@@ -42,12 +33,12 @@ namespace IMRE.EmbodiedUserInput
         public bool wasActivated;
     }
 
-    public class EmbodiedUserInputClassifierAuthoring : MonoBehaviour
+    public class EmbodiedUserInputClassifierAuthoring : UnityEngine.MonoBehaviour
     {
+        public static EmbodiedClassifier[] classifiers;
         public bool printDebug;
-        
-        public static EmbodiedClassifier[] classifiers; 
-        void Start()
+
+        private void Start()
         {
             classifiers = new EmbodiedClassifier[13];
             addClassifierBatch();
@@ -55,23 +46,17 @@ namespace IMRE.EmbodiedUserInput
 
         private void FixedUpdate()
         {
-            for (int i = 0; i < classifiers.Length; i++)
-            {
-                Classify(ref classifiers[i]);
-            }
+            for (int i = 0; i < classifiers.Length; i++) Classify(ref classifiers[i]);
 
             if (printDebug)
-            {
-                classifiers.ToList().Where(c => c.isEligible).ToList()
-                    .ForEach(c => Debug.Log(c.type + " : " + c.Chirality));
-            }
-
+                Enumerable.ToList(Enumerable.Where(Enumerable.ToList(classifiers), c => c.isEligible))
+                    .ForEach(c => UnityEngine.Debug.Log(c.type + " : " + c.Chirality));
         }
 
         /// <summary>
-        /// Adds one of each type of classifier to the job list
+        ///     Adds one of each type of classifier to the job list
         /// </summary>
-        void addClassifierBatch()
+        private void addClassifierBatch()
         {
             //each classifier represents a gesture which can be performed.
 
@@ -162,7 +147,7 @@ namespace IMRE.EmbodiedUserInput
         private static bool shouldActivate(ref EmbodiedClassifier embodiedClassifier)
         {
             Hand hand;
-            float3 velocity;
+            Unity.Mathematics.float3 velocity;
             float speed;
 
             float angle;
@@ -190,12 +175,10 @@ namespace IMRE.EmbodiedUserInput
                     embodiedClassifier.direction = hand.Fingers[1].Direction;
                     embodiedClassifier.origin = hand.Fingers[1].Joints[3].Position;
                     //return true if only the index finger is extended, ignoring what the thumb is doing
-                    return (
-                        (hand.Fingers[1].IsExtended) &&
-                        !(hand.Fingers[2].IsExtended) &&
-                        !(hand.Fingers[3].IsExtended) &&
-                        !(hand.Fingers[4].IsExtended)
-                    );
+                    return hand.Fingers[1].IsExtended &&
+                           !hand.Fingers[2].IsExtended &&
+                           !hand.Fingers[3].IsExtended &&
+                           !hand.Fingers[4].IsExtended;
 
                 #endregion
 
@@ -206,7 +189,7 @@ namespace IMRE.EmbodiedUserInput
                     //is the left or right hand being used?
                     hand = BodyInputDataSystem.bodyInput.GetHand(embodiedClassifier.Chirality);
                     //if the hand is currently performing a pinch then a grasp should be attempted.
-                    return (hand.IsPinching);
+                    return hand.IsPinching;
 
                 #endregion
 
@@ -231,7 +214,7 @@ namespace IMRE.EmbodiedUserInput
                     //where is the palm?
                     embodiedClassifier.origin = hand.Palm.Position;
                     //if all fingers are extended, the palm is open
-                    return (hand.Fingers.Count(finger => finger.IsExtended) == 5);
+                    return Enumerable.Count(hand.Fingers, finger => finger.IsExtended) == 5;
 
                 #endregion
 
@@ -248,11 +231,13 @@ namespace IMRE.EmbodiedUserInput
 
                     //we want velocity to be nonzero.
                     //distance is a workaround for magnitude.
-                    speed = math.distance(float3.zero, velocity);
+                    speed = Unity.Mathematics.math.distance(Unity.Mathematics.float3.zero, velocity);
                     //we want to have close to zero angle between movement and palm.
-                    angle = math.abs(Operations.Angle(velocity, embodiedClassifier.direction));
+                    angle = Unity.Mathematics.math.abs(IMRE.Math.Operations.Angle(velocity,
+                        embodiedClassifier.direction));
 //TODO check the tolerances here.
-                    return (hand.Fingers.Count(finger => finger.IsExtended) == 5) && speed > .5f && angle < 30f;
+                    return (Enumerable.Count(hand.Fingers, finger => finger.IsExtended) == 5) && (speed > .5f) &&
+                           (angle < 30f);
 
                 #endregion
 
@@ -267,13 +252,15 @@ namespace IMRE.EmbodiedUserInput
                     embodiedClassifier.origin = hand.Palm.Position;
 
                     //we want velocity to be nonzero.
-                    speed = math.distance(float3.zero, hand.Palm.Velocity);
+                    speed = Unity.Mathematics.math.distance(Unity.Mathematics.float3.zero, hand.Palm.Velocity);
                     //we want to have close to zero angle between movement and palm.
-                    angle = 90 - math.abs(Operations.Angle(velocity, embodiedClassifier.direction));
+                    angle = 90 - Unity.Mathematics.math.abs(IMRE.Math.Operations.Angle(velocity,
+                                embodiedClassifier.direction));
 //TODO check the tolerances here.
                     //if the palm is open and moving, then note the plane it is moving through and activate the
                     //gesture for swiping
-                    return (hand.Fingers.Count(finger => finger.IsExtended) == 5) && speed > .5f && angle < 30f;
+                    return (Enumerable.Count(hand.Fingers, finger => finger.IsExtended) == 5) && (speed > .5f) &&
+                           (angle < 30f);
 
                 #endregion
 
@@ -287,21 +274,18 @@ namespace IMRE.EmbodiedUserInput
                     embodiedClassifier.direction = hand.Fingers[0].Direction;
                     embodiedClassifier.origin = hand.Fingers[0].Joints[3].Position;
                     //if only the thumb is extended and all other fingers are retracted, thumbs up
-                    return (
-                        (hand.Fingers[0].IsExtended) &&
-                        !(hand.Fingers[1].IsExtended) &&
-                        !(hand.Fingers[2].IsExtended) &&
-                        !(hand.Fingers[3].IsExtended) &&
-                        !(hand.Fingers[4].IsExtended)
-                    );
+                    return hand.Fingers[0].IsExtended &&
+                           !hand.Fingers[1].IsExtended &&
+                           !hand.Fingers[2].IsExtended &&
+                           !hand.Fingers[3].IsExtended &&
+                           !hand.Fingers[4].IsExtended;
 
                 #endregion
 
                 default:
-                    throw new ArgumentOutOfRangeException();
+                    throw new System.ArgumentOutOfRangeException();
             }
         }
-
 
         private static bool shouldCancel(ref EmbodiedClassifier embodiedClassifier)
         {
@@ -350,6 +334,5 @@ namespace IMRE.EmbodiedUserInput
                 embodiedClassifier.shouldFinish = false;
             }
         }
-
     }
 }
