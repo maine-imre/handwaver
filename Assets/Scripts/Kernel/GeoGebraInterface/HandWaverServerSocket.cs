@@ -1,4 +1,5 @@
 ﻿using System;
+using IBM.SocketIO.Impl;
 using UnityEngine;
 
 namespace IMRE.HandWaver.Kernel
@@ -15,8 +16,7 @@ namespace IMRE.HandWaver.Kernel
         {
             initSession();
                                                                                              
-            /*Socket sock = new Socket("http://localhost:8080");                                                  
-                                                                                                 
+            SocketMediator sock = new SocketMediator("http://localhost:8080");                                                                                                                                  
             sock.On("connect", () => Debug.Log("connected"));                                                
             sock.On("disconnect", () => { Debug.Log("disconnected"); });                                     
             sock.On("connect_error", e => { Debug.Log("failed to connect: " + e); });                        
@@ -27,7 +27,7 @@ namespace IMRE.HandWaver.Kernel
             sock.On("rename", args => Debug.Log("rename:"+ args));                                           
                                                                                                  
             sock.Emit("subscribe", HandWaverServerTransport.sessionId);                                                          
-        */
+        
         //Test the command changes
             StartCoroutine(HandWaverServerTransport.execCommand("B = Point({1, 2, 3})"));    // Point A
 //            StartCoroutine(HandWaverServerTransport.execCommand("Point({3, 5, 1})"));    // Point B
