@@ -7,7 +7,7 @@ namespace IMRE.HandWaver.ScaleStudy
     ///     used in study of scale and dimension
     ///     not integrated with kernel.
     /// </summary>
-    public class tetrahedronNet : UnityEngine.MonoBehaviour, ISliderInput
+    public class tetrahedronNet : net3D
     {
         private static readonly float COMPLETEDFOLD = 180f - UnityEngine.Vector3.Angle(
                                                           UnityEngine.Vector3.one -

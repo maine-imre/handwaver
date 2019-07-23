@@ -7,7 +7,7 @@ namespace IMRE.HandWaver.ScaleStudy
     ///     The main contributor(s) to this script is __
     ///     Status: ???
     /// </summary>
-    public class cubeNet : UnityEngine.MonoBehaviour, ISliderInput
+    public class cubeNet : net3D
     {
         private void Start()
         {

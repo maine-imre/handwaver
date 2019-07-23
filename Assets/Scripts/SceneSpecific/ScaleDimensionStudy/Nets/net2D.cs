@@ -1,6 +1,6 @@
 ﻿namespace IMRE.HandWaver.ScaleStudy
 {
-    public class net2D : UnityEngine.MonoBehaviour, ISliderInput
+    public abstract class net2D : UnityEngine.MonoBehaviour, ISliderInput
     {
         private float _percentFolded;
 

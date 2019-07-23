@@ -1,11 +1,6 @@
 namespace IMRE.HandWaver.ScaleStudy
 {
-    /// <summary>
-    ///     A net of a cube that folds into a cube
-    ///     The main contributor(s) to this script is __
-    ///     Status: ???
-    /// </summary>
-    public class cubeNet : UnityEngine.MonoBehaviour, ISliderInput
+    public abstract class cubeNet : UnityEngine.MonoBehaviour, ISliderInput
     {
         private float _percentFolded;
 
