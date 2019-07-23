@@ -136,7 +136,7 @@
             {
                 //for each vertex on each triangle
                 for (int m = 0; m < 3; m++)
-                    triangles[(3 * k) + m] = triangle(k, m);
+                    triangles[(3 * k) + m] = ToricTriangle(k, m, n);
             }
 
             crossSectionRenderer.vertices = verts;
@@ -144,49 +144,6 @@
             crossSectionRenderer.uv = uvs;
             crossSectionRenderer.RecalculateNormals();
             crossSectionRenderer.Optimize();
-        }
-
-        /// <summary>
-        ///     Finds the vertex indices for the kth triangle
-        ///     returns the mth vertex index of the kth triangle
-        ///     Triangles indexed for clockwise front face
-        /// </summary>
-        /// <param name="k"></param>
-        /// <param name="m"></param>
-        /// <returns></returns>
-        private int triangle(int k, int m)
-        {
-            if (k < (n * n))
-            {
-                //lower half triangle
-                switch (m)
-                {
-                    case 0:
-                        return k;
-                    case 2:
-                        return (UnityEngine.Mathf.FloorToInt(k / n) * n) + ((k + 1) % n);
-                    case 1:
-                        return (((UnityEngine.Mathf.FloorToInt(k / n) + 1) % n) * n) + ((k + 1) % n);
-                }
-            }
-            else
-            {
-                k = k - (n * n);
-
-                switch (m)
-                {
-                    case 0:
-                        return k;
-                    case 2:
-                        return (((UnityEngine.Mathf.FloorToInt(k / n) + 1) % n) * n) + ((k + 1) % n);
-                    case 1:
-                        return (((UnityEngine.Mathf.FloorToInt(k / n) + 1) % n) * n) + (k % n);
-                }
-            }
-
-            UnityEngine.Debug.LogError("Invalid parameter.");
-
-            return 0;
         }
 
         #region variables/components
