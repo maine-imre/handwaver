@@ -314,42 +314,14 @@ private Vector3 torusPosition(float alpha, float beta)
 
 ### Intersection of a hyperplane and a hypersphere (Makholm, 2015)
 
+If a (n-1) dimensional hyperplane intersects an n-dimensional hypersphere, the result is an (n-1) dimensional hypersphere.  In particular, the intersection of a 3-plane and a 3-sphere is a 2-sphere.
+
+If we take the 3-plane to be the 3-dimensional renderings space, the center of the 2-sphere appears fixed for all cross-sections (suppose this is at the origin).  Additionally, we can relate ther radius $r$ of the 2-sphere to the radius $R$ of the 3-sphere and the "height" $h$ of the hyperplane by $R^2 = h^2 + r^2$ (Makholm, 2015).
+
 ``` c#
 renderSphere(Mathf.Sqrt(radius*radius-sliderval*sliderval));
 ```
 
-```c#
-private void renderSphere(float crossSectionRadius)
-{
-    crossSectionRenderer.Clear();
-    int nbLong = n;
-    int nbLat = n;
-
-    #region Vertices
-    Vector3[] vertices = new Vector3[(nbLong + 1) * nbLat + 2];
-    float pi = Mathf.PI;
-    float _2pi = pi * 2f;
-
-    vertices[0] = Vector3.up * crossSectionRadius;
-    for (int lat = 0; lat < nbLat; lat++)
-    {
-        float a1 = pi * (float)(lat + 1) / (nbLat + 1);
-        float sin1 = Mathf.Sin(a1);
-        float cos1 = Mathf.Cos(a1);
-
-        for (int lon = 0; lon <= nbLong; lon++)
-        {
-            float a2 = _2pi * (float)(lon == nbLong ? 0 : lon) / nbLong;
-            float sin2 = Mathf.Sin(a2);
-            float cos2 = Mathf.Cos(a2);
-
-            vertices[lon + lat * (nbLong + 1) + 1] = new Vector3(sin1 * cos2, cos1, sin1 * sin2) * crossSectionRadius;
-        }
-    }
-    vertices[vertices.Length - 1] = Vector3.up * -crossSectionRadius;
-    #endregion
-}
-```
 
 ### Intersection of a hyperplane and a hypercone
 
@@ -357,6 +329,21 @@ private void renderSphere(float crossSectionRadius)
 ```
 
 ### Intersection of a hyperplane and a three-torus (Hartley, 2007)
+
+We limit the case of the hyperplane and three-torus intersection to a three-torus to be cross-sected along axises perpendicular to the revolutions used to construct the three torus.
+We also choose our three-dimensional perpsective to be embedded within the hyperplane.
+
+Hartley (2007) describes a set of parametric equations for a three-torus.
+
+$$W = (R + (P+\cos(a))\cos(b))\cos(c)$$
+$$X = (4 + (2+\cos(a))\cos(b))\sin(c)$$
+$$Y = (2 + \cos(a))\sin(b)$$
+$$Z = \sin(a)$$
+
+We are only interested in cross-sections where either $W, X, Y,$ or $Z$ are fixed. We choose our coordinate system to map $x,y,z$ to the remaining three axis.
+We need a function that maps $\alpha, \beta$ ranging from $0$ to $1$ to $x,y,z$.
+Fix a value of $h$, the cross-section height. 
+For any choice of $W,X,Y,Z$ to be fixed to the value of $h$, we can map $\alpha, \beta$ to a subset of $a,b,c$ and solve for the remainign variable (e.g. choose $Z = h$, sovle for $a$, map $X \leftarrow  x$, $Y \leftarrow y$, $W \leftarrow z$) for those values of $\alpha, \beta$.
 
 ``` c#
 private float3 HyperToricSection(float alpha, float beta, float h)
@@ -459,9 +446,6 @@ break;
 
                     //map vertices from 2 dimensions to 3
                     verts[idx] = HyperToricSection(alpha, beta, height);
-
-                    //uv mapping 
-                    uvs[idx] = new Vector2(j * oneNth, i * oneNth);
                 }
             }
         }
