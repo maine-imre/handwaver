@@ -570,6 +570,10 @@ private static Vector3 triVert(Vector3 nSegmentA, Vector3 nSegmentB, Vector3 opp
 
 ### Regular 5-cell
 
+The regular 5-cell is a collection of four congruant regular tetrahedrons.  One regular tetrahedron is fixed at the center.  Four tetrahedrons are constructed to share a face with the center tetrahedron.
+
+In this algorithm we calculate the folded state of the folded 5-cell net to determine the angle needed to fully fold the 5-cell net into a five-cell.  Below the apex is the value of the folded state of the vertex opposite to the face shared with the centra tetrahedron for each of the outer tetrahedrons.
+
 ```c#
 //8 points on unfolded fivecell
 float4[] result = new float4[8];
@@ -605,11 +609,18 @@ result[7] = center4 + Math.Operations.rotate(dir4, apex - center4, degreeFolded)
 
 ### Regular 8-cell
 
+The net of a regular 8-cell or hypercube is a collection of eight congruant cubes.  One cube is fixed at the center.  Six cubes are constructed from the faces of the center cube.  The remaining cube is constructed on the opposite face of one of the six outer cubes.
+
+To fold the net of the tetrahedron, the verticies of the opposite faces of the an outer cube are rotated in a 2-plane (whose basis is constructed from a vector orthagonal to all of the faces of the adjacent cube and the cross-product of the sides of the face shared with an adjacent cube).  If two faces are shared with an adjacent cube, choose the adjacent cube to be the core (center) cube.  A vertex is rotated around the vertex of the opposite face which shares a segment of the cube.
+
+Note that the 8th cube (below: down of down) is rotated with respect to its adjacent cube and not the core cube.  Effectively, it is rotated by twice the angle, with respect to the lower cube.
+
+The cubes of the regular 8-cell net are folded by 90-degrees to construct the regular 8-cell.
 
 ```c#
 float4[] result = new float4[4 * 9];
 
-//core cube (does not fold)
+//core or center cube (does not fold)
 result[0] = (up + right + forward)/2f;
 result[1] = (up + left + forward)/2f;
 result[2] = (up + left + back)/2f;
