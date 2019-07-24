@@ -32,7 +32,9 @@
                 Unity.Mathematics.float4 dir1 = center1 - d;
                 Unity.Mathematics.float4 apex =
                     new Unity.Mathematics.float4(-2 * Unity.Mathematics.math.sqrt(2f / 5f), 0f, 0f, 0f);
-                float dihedralAngle = IMRE.Math.Operations.Angle(dir1, apex - center1);
+                
+                //the calculated result for the dihedral angle is about 91 degrees
+                float dihedralAngle = IMRE.Math.Operations.Angle(dir1, apex - center1);f
 
                 _percentFolded = value;
                 //TODO find this value.			
