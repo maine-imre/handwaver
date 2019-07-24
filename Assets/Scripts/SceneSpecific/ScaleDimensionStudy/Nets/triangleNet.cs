@@ -1,9 +1,9 @@
 ﻿namespace IMRE.HandWaver.ScaleStudy
 {
     /// <summary>
-    ///     A net of a triangle that folds into a triangle.
-    ///     Used in study of scale and dimension
-    ///     not integrated with kernel.
+    /// A net of a triangle that folds into a triangle.
+    /// Used in study of scale and dimension
+    /// not integrated with kernel.
     /// </summary>
     public class triangleNet : net2D
     {
@@ -24,7 +24,7 @@
         }
 
         /// <summary>
-        /// fold line segment of 4 points by degree t
+        /// fold outer two line segments up around stationary middle line segment by angle t
         /// </summary>
         /// <param name="t"></param>
         /// <returns></returns>

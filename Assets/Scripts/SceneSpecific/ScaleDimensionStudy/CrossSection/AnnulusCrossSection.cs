@@ -2,6 +2,9 @@
 
 namespace IMRE.HandWaver.ScaleStudy
 {
+    /// <summary>
+    /// cross-section of an annulus represented by points where intersection between annulus and line segment occurs 
+    /// </summary>
     public class AnnulusCrossSection : UnityEngine.MonoBehaviour, ISliderInput
     {
         public int n = 5;

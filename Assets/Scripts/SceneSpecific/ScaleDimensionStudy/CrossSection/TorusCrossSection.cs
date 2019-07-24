@@ -2,6 +2,10 @@
 
 namespace IMRE.HandWaver.ScaleStudy
 {
+    /// <summary>
+    /// cross section of torus, which could result in one of several different cross-sections depending on the height
+    /// which are all covered by "spiric sections"
+    /// </summary>
     public class TorusCrossSection : UnityEngine.MonoBehaviour, ISliderInput
     {
         //radius of 2d circle for torus
@@ -58,7 +62,7 @@ namespace IMRE.HandWaver.ScaleStudy
         }
 
         /// <summary>
-        /// Function to calculate cross section of a torus
+        /// Function to calculate break toric cross-section into different cases depending on the height it occurs
         /// </summary>
         /// <param name="height"></param>
         public void crossSectTorus(float height)
@@ -98,7 +102,7 @@ namespace IMRE.HandWaver.ScaleStudy
         }
 
         /// <summary>
-        /// Function that calculates cross-section of torus
+        /// Function that calculates the math for the cross-section of torus
         /// using the distance from the center of the torus, 
         /// </summary>
         /// <param name="v"></param>
@@ -255,7 +259,7 @@ namespace IMRE.HandWaver.ScaleStudy
         }
 
         /// <summary>
-        ///     Math for calculating intersection of torus and plane
+        /// Math for calculating intersection of torus and plane
         /// </summary>
         /// <param name="theta"></param>
         /// <param name="d"></param>

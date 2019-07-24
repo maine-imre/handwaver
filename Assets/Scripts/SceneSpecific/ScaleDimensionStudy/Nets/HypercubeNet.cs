@@ -63,6 +63,9 @@
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public override int[] triangles
         {
             get

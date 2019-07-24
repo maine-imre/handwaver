@@ -1,7 +1,11 @@
 ﻿namespace IMRE.HandWaver.ScaleStudy
 {
+    /// <summary>
+    /// cross-section of a hypertorus, which could result in one of three kinds of tori
+    /// </summary>
     public class HyperTorusCrossSection : UnityEngine.MonoBehaviour, ISliderInput
     {
+        //enums for different planes
         public enum crossSectionPlane
         {
             w,
@@ -15,6 +19,7 @@
         public crossSectionPlane plane = crossSectionPlane.z;
         public float R;
 
+        //slider to control cross-section height
         public float slider
         {
             set => renderToricSection(-1 + (2 * value));
@@ -28,6 +33,14 @@
             GetComponent<UnityEngine.MeshRenderer>().material = sphereMaterial;
         }
 
+        /// <summary>
+        /// Math for cross-section of a hypertorus using two angles and the distance the intersection occurs from the center of the hypertorus
+        /// this will result in one of three tori depending on where it is intersected
+        /// </summary>
+        /// <param name="alpha"></param>
+        /// <param name="beta"></param>
+        /// <param name="h"></param>
+        /// <returns></returns>
         private Unity.Mathematics.float3 HyperToricSection(float alpha, float beta, float h)
         {
             float a;
@@ -99,6 +112,10 @@
             }
         }
 
+        /// <summary>
+        /// renders the torus specific to the cross-section at the specified height on the hypertorus
+        /// </summary>
+        /// <param name="height"></param>
         private void renderToricSection(float height)
         {
             UnityEngine.Vector3[] verts = new UnityEngine.Vector3[((n + 1) * (n - 1)) + 1];
