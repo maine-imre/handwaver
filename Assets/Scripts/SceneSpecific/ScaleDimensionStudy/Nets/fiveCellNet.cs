@@ -32,14 +32,13 @@
                 Unity.Mathematics.float4 dir1 = center1 - d;
                 Unity.Mathematics.float4 apex =
                     new Unity.Mathematics.float4(-2 * Unity.Mathematics.math.sqrt(2f / 5f), 0f, 0f, 0f);
-                Unity.Mathematics.float4 dihedralAngle = IMRE.Math.Operations.Angle(dir1, apex - center1);
-                if(apex != e)
-                UnityEngine.Debug.Log(apex + " : " + e);
-                
+                float dihedralAngle = IMRE.Math.Operations.Angle(dir1, apex - center1);
+
                 //check that the apex matches the rotated state with the calculated angle
-                Unity.Mathematics.float4 center1 = (result[0] + result[1] + result[2]) / 3f;
-                Unity.Mathematics.float4 dir1 = center1 - result[3];
-                float4 e = center1 + IMRE.Math.Operations.rotate(dir1, apex - center1, degreeFolded);
+                Unity.Mathematics.float4 e = center1 + IMRE.Math.Operations.rotate(dir1, apex - center1, dihedralAngle);
+                
+                if(apex.x != e.x || apex.y != e.y || apex.z != e.z || apex.w != e.w)
+                    UnityEngine.Debug.Log(apex + " : " + e);
                 
                 _percentFolded = value;
                 //TODO find this value.			
