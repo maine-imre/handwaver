@@ -19,6 +19,9 @@
         public Unity.Mathematics.float4 viewingPosition;
         public float viewingRadius;
 
+        /// <summary>
+        /// 
+        /// </summary>
         internal Unity.Mathematics.float3[] ProjectedVertices
         {
             get

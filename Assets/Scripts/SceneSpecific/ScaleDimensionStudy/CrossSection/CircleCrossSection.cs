@@ -1,5 +1,9 @@
 ﻿namespace IMRE.HandWaver.ScaleStudy
 {
+    /// <summary>
+    /// cross-section of a circle represented by two points where intersection occurs in circle
+    /// or one point if it only hits an edge 
+    /// </summary>
     public class CircleCrossSection : UnityEngine.MonoBehaviour, ISliderInput
     {
         //slider to control the cross section

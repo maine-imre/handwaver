@@ -1,7 +1,11 @@
 ﻿namespace IMRE.HandWaver.ScaleStudy
 {
+    /// <summary>
+    /// cross section of hypersphere and hyperplane, resulting in a sphere with varying size
+    /// </summary>
     public class HyperSphereCrossSection : UnityEngine.MonoBehaviour, ISliderInput
     {
+        //slider to control cross section height
         public float slider
         {
             set

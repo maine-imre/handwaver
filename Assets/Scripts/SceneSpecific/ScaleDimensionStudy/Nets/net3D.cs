@@ -29,7 +29,19 @@ namespace IMRE.HandWaver.ScaleStudy
         {
             set => PercentFolded = !sliderOverride ? value : 1f;
         }
+        
+        /// <summary>
+        /// abstract function for positioning mesh vertices for rendering based on percent that the net is folded
+        /// </summary>
+        /// <param name="percentFolded"></param>
+        /// <returns></returns>
 	    public abstract UnityEngine.Vector3[] meshVerts(float percentFolded);
+        
+        /// <summary>
+        /// abstract function for positioning line renderers based on percent that the net is folded
+        /// </summary>
+        /// <param name="percentFolded"></param>
+        /// <returns></returns>
         public abstract UnityEngine.Vector3[] lineRendererVerts(float percentFolded);
     }
 }

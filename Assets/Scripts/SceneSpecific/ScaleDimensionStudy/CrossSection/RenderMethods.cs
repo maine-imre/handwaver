@@ -2,6 +2,14 @@ namespace IMRE.HandWaver.ScaleDimension
 {
     public static class RenderMethods
     {
+        /// <summary>
+        /// method for rendering a sphere
+        /// by taking a centerpoint, radius, mesh, and n vertices
+        /// </summary>
+        /// <param name="crossSectionRadius"></param>
+        /// <param name="center"></param>
+        /// <param name="crossSectionRenderer"></param>
+        /// <param name="n"></param>
         public static void RenderSphere(float crossSectionRadius, Unity.Mathematics.float3 center,
             UnityEngine.Mesh crossSectionRenderer, int n)
         {

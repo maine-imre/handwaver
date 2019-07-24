@@ -9,6 +9,9 @@ namespace IMRE.HandWaver.ScaleStudy
     /// </summary>
     public class tetrahedronNet : net3D
     {
+        /// <summary>
+        /// 
+        /// </summary>
         private static readonly float COMPLETEDFOLD = 180f - UnityEngine.Vector3.Angle(
                                                           UnityEngine.Vector3.one -
                                                           ((new UnityEngine.Vector3(1, -1, -1) +
@@ -33,6 +36,7 @@ namespace IMRE.HandWaver.ScaleStudy
 
         /// <summary>
         /// fold tetrahedron net up by angle t
+        /// by folding outer 3 triangles up around the base triangle
         /// </summary>
         /// <param name="percentfolded"></param>
         /// <returns></returns>
@@ -61,7 +65,7 @@ namespace IMRE.HandWaver.ScaleStudy
         }
 
         /// <summary>
-        ///     function to calculate outer vertices position relative to inner vertices
+        /// function to calculate outer vertices position relative to inner vertices
         /// </summary>
         /// <param name="nSegmentA"></param>
         /// <param name="nSegmentB"></param>

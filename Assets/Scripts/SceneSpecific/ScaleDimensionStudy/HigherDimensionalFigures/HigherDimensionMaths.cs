@@ -14,7 +14,7 @@
     public static class HigherDimensionsMaths
     {
         /// <summary>
-        ///     Rotate the vector v around a plane for a given angle, in degrees.
+        /// Rotate the vector v around a plane for a given angle, in degrees.
         /// </summary>
         /// <param name="v"></param>
         /// <param name="basis0"></param>
@@ -42,7 +42,7 @@
         }
 
         /// <summary>
-        ///     Projects a vector onto another vector using a dot product.
+        /// Projects a vector onto another vector using a dot product.
         /// </summary>
         /// <param name="v"></param>
         /// <param name="axis"></param>
@@ -54,7 +54,7 @@
         }
 
         /// <summary>
-        ///     Writes the projection of a float4 onto a new basis for the hyperplane.
+        /// Writes the projection of a float4 onto a new basis for the hyperplane.
         /// </summary>
         /// <param name="v"></param>
         /// <param name="basis"> viewing basis </param>
@@ -107,6 +107,12 @@
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="from"></param>
+        /// <param name="basis"></param>
+        /// <returns></returns>
         public static Unity.Mathematics.float4x4 calc4Matrix(Unity.Mathematics.float4 from,
             Unity.Mathematics.float4x3 basis)
         {
@@ -141,6 +147,16 @@
             return new Unity.Mathematics.float4x4(Wa, Wb, Wc, Wd);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vectors"></param>
+        /// <param name="axis"></param>
+        /// <param name="method"></param>
+        /// <param name="Vangle"></param>
+        /// <param name="eyePosition"></param>
+        /// <param name="viewingRadius"></param>
+        /// <returns></returns>
         public static Unity.Mathematics.float3[] projectDownDimension(this Unity.Mathematics.float4[] vectors,
             Unity.Mathematics.float4 axis, ProjectionMethod method,
             float? Vangle, Unity.Mathematics.float4? eyePosition, float? viewingRadius)
@@ -154,7 +170,7 @@
         }
 
         /// <summary>
-        ///     Return the basis of a hyper plane orthagonal to a given vector
+        ///  Return the basis of a hyper plane orthagonal to a given vector
         /// </summary>
         /// <param name="v"></param>
         /// <returns></returns>
@@ -224,11 +240,11 @@
         }
 
         /// <summary>
-        ///     Assume the following structure, return the determinant coeficients for v0, v1, v2, v3
-        ///     v0 v1 v2 v3
-        ///     x00 x01 x02 x03
-        ///     x10 x11 x12 x13
-        ///     x20 x21 x22 x23
+        /// Assume the following structure, return the determinant coeficients for v0, v1, v2, v3
+        /// v0 v1 v2 v3
+        /// x00 x01 x02 x03
+        /// x10 x11 x12 x13
+        /// x20 x21 x22 x23
         /// </summary>
         /// <param name="matrix"></param>
         /// <returns></returns>

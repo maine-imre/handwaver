@@ -3,9 +3,8 @@
 namespace IMRE.HandWaver.ScaleStudy
 {
     /// <summary>
-    ///     A net of a cube that folds into a cube
-    ///     The main contributor(s) to this script is __
-    ///     Status: ???
+    /// A net of a cube that folds into a cube
+    /// The main contributor(s) to this script is __
     /// </summary>
     public class cubeNet : net3D
     {
@@ -26,7 +25,7 @@ namespace IMRE.HandWaver.ScaleStudy
         //startTime = DateTime.Now
 
         /// <summary>
-        ///     configure vertices of cube around base square
+        /// configure vertices of cube around base square
         /// </summary>
         /// <param name="percentFolded"></param>
         /// <returns></returns>
@@ -62,7 +61,7 @@ namespace IMRE.HandWaver.ScaleStudy
         }
 
         /// <summary>
-        ///     function to calculate vertices on outer faces
+        /// function to calculate vertices on outer faces
         /// </summary>
         /// <param name="nSegmentA"></param>
         /// <param name="nSegmentB"></param>
@@ -79,7 +78,7 @@ namespace IMRE.HandWaver.ScaleStudy
         }
 
         /// <summary>
-        ///     create an array for each square that divides it into two triangles
+        /// create an array for each square that divides it into two triangles
         /// </summary>
         /// <param name="a"></param>
         /// <param name="b"></param>
@@ -92,7 +91,7 @@ namespace IMRE.HandWaver.ScaleStudy
         }
 
         /// <summary>
-        ///     divide each face of the cube net into two triangles and copy them into a new array of the triangles
+        /// divide each face of the cube net into two triangles and copy them into a new array of the triangles
         /// </summary>
         /// <returns></returns>
         private static int[] meshTris()
@@ -108,7 +107,7 @@ namespace IMRE.HandWaver.ScaleStudy
         }
 
         /// <summary>
-        ///     mapping of outline of unfold
+        /// mapping of outline of unfold
         /// </summary>
         /// <param name="percentFolded"></param>
         /// <returns></returns>

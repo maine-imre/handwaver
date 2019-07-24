@@ -1,5 +1,8 @@
 ﻿namespace IMRE.HandWaver.ScaleStudy
 {
+    /// <summary>
+    /// cross section of a sphere, resulting in either a circle, a point, or nothing
+    /// </summary>
     public class SphereCrossSection : UnityEngine.MonoBehaviour, ISliderInput
     {
         #region variables/components
@@ -21,6 +24,7 @@
 
         #endregion
 
+        //slider to determine cross section height
         public float slider
         {
             //scale value from 0 to 1 range to -1 to 1 range.
@@ -48,8 +52,7 @@
             crossSectionRenderer.startWidth = SpencerStudyControl.lineRendererWidth;
             crossSectionRenderer.endWidth = SpencerStudyControl.lineRendererWidth;
             crossSectionRenderer.loop = true;
-            
-               
+                           
             #endregion  
         }
 

@@ -1,9 +1,9 @@
 ﻿namespace IMRE.HandWaver.ScaleStudy
 {
     /// <summary>
-    ///     A net of a square that folds from a sequence of parallel line segments.
-    ///     Not integrated with kernel.
-    ///     used in study of scale and dimension
+    /// A net of a square that folds from a sequence of parallel line segments.
+    /// Not integrated with kernel.
+    /// used in study of scale and dimension
     /// </summary>
     public class squareNet : net2D
     {
@@ -26,7 +26,8 @@
         }
 
         /// <summary>
-        /// calculate position of vertices for folding of square
+        /// calculate position of vertices for folding of square 
+        /// by rotating three line segments around one stationary line segment
         /// </summary>
         /// <param name="t"></param>
         /// <returns></returns>
