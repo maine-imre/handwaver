@@ -343,7 +343,7 @@ $$Z = \sin(a)$$
 We are only interested in cross-sections where either $W, X, Y,$ or $Z$ are fixed. We choose our coordinate system to map $x,y,z$ to the remaining three axis.
 We need a function that maps $\alpha, \beta$ ranging from $0$ to $1$ to $x,y,z$.
 Fix a value of $h$, the cross-section height. 
-For any choice of $W,X,Y,Z$ to be fixed to the value of $h$, we can map $\alpha, \beta$ to a subset of $a,b,c$ and solve for the remainign variable (e.g. choose $Z = h$, sovle for $a$, map $X \leftarrow  x$, $Y \leftarrow y$, $W \leftarrow z$) for those values of $\alpha, \beta$.
+For any choice of $W,X,Y,Z$ to be fixed to the value of $h$, we can map $\alpha, \beta$ to a subset of $a,b,c$ and solve for the remainign variable (e.g. choose $Z = h$, sovle for $a$, map $X \rightarrow x$, $Y \rightarrow y$, $W \rightarrow z$) for those values of $\alpha, \beta$.
 
 ``` c#
 private float3 HyperToricSection(float alpha, float beta, float h)
