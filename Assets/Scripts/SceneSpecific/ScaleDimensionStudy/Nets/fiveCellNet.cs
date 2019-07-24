@@ -34,14 +34,8 @@
                     new Unity.Mathematics.float4(-2 * Unity.Mathematics.math.sqrt(2f / 5f), 0f, 0f, 0f);
                 
                 //the calculated result for the dihedral angle is about 91 degrees
-                float dihedralAngle = IMRE.Math.Operations.Angle(dir1, apex - center1);
+                float dihedralAngle = IMRE.Math.Operations.Angle(dir1, apex - center1);f
 
-                //check that the apex matches the rotated state with the calculated angle
-                Unity.Mathematics.float4 e = center1 + IMRE.Math.Operations.rotate(dir1, apex - center1, dihedralAngle);
-                
-                if(apex.x != e.x || apex.y != e.y || apex.z != e.z || apex.w != e.w)
-                    UnityEngine.Debug.Log(apex + " : " + e + " : " + dihedralAngle);
-                
                 _percentFolded = value;
                 //TODO find this value.			
                 originalVertices = vertices(value * dihedralAngle);
