@@ -2,7 +2,7 @@ using Enumerable = System.Linq.Enumerable;
 
 namespace IMRE.EmbodiedUserInput
 {
-  public abstract class AbstractAction : UnityEngine.MonoBehaviour{
+  public abstract class EmbodiedAction : UnityEngine.MonoBehaviour{
             public classifierType type;
   }
   
