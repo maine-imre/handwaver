@@ -314,42 +314,14 @@ private Vector3 torusPosition(float alpha, float beta)
 
 ### Intersection of a hyperplane and a hypersphere (Makholm, 2015)
 
+If a (n-1) dimensional hyperplane intersects an n-dimensional hypersphere, the result is an (n-1) dimensional hypersphere.  In particular, the intersection of a 3-plane and a 3-sphere is a 2-sphere.
+
+If we take the 3-plane to be the 3-dimensional renderings space, the center of the 2-sphere appears fixed for all cross-sections (suppose this is at the origin).  Additionally, we can relate ther radius <img src="/docs/Scenes/tex/89f2e0d2d24bcf44db73aab8fc03252c.svg?invert_in_darkmode&sanitize=true" align=middle width=7.87295519999999pt height=14.15524440000002pt/> of the 2-sphere to the radius <img src="/docs/Scenes/tex/1e438235ef9ec72fc51ac5025516017c.svg?invert_in_darkmode&sanitize=true" align=middle width=12.60847334999999pt height=22.465723500000017pt/> of the 3-sphere and the "height" <img src="/docs/Scenes/tex/2ad9d098b937e46f9f58968551adac57.svg?invert_in_darkmode&sanitize=true" align=middle width=9.47111549999999pt height=22.831056599999986pt/> of the hyperplane by <img src="/docs/Scenes/tex/8261e5c490c1e693d8f0ee4865e18b64.svg?invert_in_darkmode&sanitize=true" align=middle width=93.26282789999998pt height=26.76175259999998pt/> (Makholm, 2015).
+
 ``` c#
 renderSphere(Mathf.Sqrt(radius*radius-sliderval*sliderval));
 ```
 
-```c#
-private void renderSphere(float crossSectionRadius)
-{
-    crossSectionRenderer.Clear();
-    int nbLong = n;
-    int nbLat = n;
-
-    #region Vertices
-    Vector3[] vertices = new Vector3[(nbLong + 1) * nbLat + 2];
-    float pi = Mathf.PI;
-    float _2pi = pi * 2f;
-
-    vertices[0] = Vector3.up * crossSectionRadius;
-    for (int lat = 0; lat < nbLat; lat++)
-    {
-        float a1 = pi * (float)(lat + 1) / (nbLat + 1);
-        float sin1 = Mathf.Sin(a1);
-        float cos1 = Mathf.Cos(a1);
-
-        for (int lon = 0; lon <= nbLong; lon++)
-        {
-            float a2 = _2pi * (float)(lon == nbLong ? 0 : lon) / nbLong;
-            float sin2 = Mathf.Sin(a2);
-            float cos2 = Mathf.Cos(a2);
-
-            vertices[lon + lat * (nbLong + 1) + 1] = new Vector3(sin1 * cos2, cos1, sin1 * sin2) * crossSectionRadius;
-        }
-    }
-    vertices[vertices.Length - 1] = Vector3.up * -crossSectionRadius;
-    #endregion
-}
-```
 
 ### Intersection of a hyperplane and a hypercone
 
@@ -357,6 +329,21 @@ private void renderSphere(float crossSectionRadius)
 ```
 
 ### Intersection of a hyperplane and a three-torus (Hartley, 2007)
+
+We limit the case of the hyperplane and three-torus intersection to a three-torus to be cross-sected along axises perpendicular to the revolutions used to construct the three torus.
+We also choose our three-dimensional perpsective to be embedded within the hyperplane.
+
+Hartley (2007) describes a set of parametric equations for a three-torus.
+
+<p align="center"><img src="/docs/Scenes/tex/9af53b7a396bd302151b390126388f0d.svg?invert_in_darkmode&sanitize=true" align=middle width=263.64520875pt height=16.438356pt/></p>
+<p align="center"><img src="/docs/Scenes/tex/3d76cea205f5c56c064c2e23772e641b.svg?invert_in_darkmode&sanitize=true" align=middle width=249.9123297pt height=16.438356pt/></p>
+<p align="center"><img src="/docs/Scenes/tex/d4364be5e7a858a2d67849ea539f1a9d.svg?invert_in_darkmode&sanitize=true" align=middle width=162.45616035pt height=16.438356pt/></p>
+<p align="center"><img src="/docs/Scenes/tex/afd5bcf2a9c83e55ee3830ff3e4165fb.svg?invert_in_darkmode&sanitize=true" align=middle width=75.97217429999999pt height=16.438356pt/></p>
+
+We are only interested in cross-sections where either <img src="/docs/Scenes/tex/7f4304bf2e52f41a41fc13b12bd19e48.svg?invert_in_darkmode&sanitize=true" align=middle width=58.69858169999999pt height=22.465723500000017pt/> or <img src="/docs/Scenes/tex/5b51bd2e6f329245d425b8002d7cf942.svg?invert_in_darkmode&sanitize=true" align=middle width=12.397274999999992pt height=22.465723500000017pt/> are fixed. We choose our coordinate system to map <img src="/docs/Scenes/tex/244be3c7db382d3e1400c7c4caa1023a.svg?invert_in_darkmode&sanitize=true" align=middle width=41.02358204999999pt height=14.15524440000002pt/> to the remaining three axis.
+We need a function that maps <img src="/docs/Scenes/tex/d7093223b4d827e8c29d4ed84b7ae088.svg?invert_in_darkmode&sanitize=true" align=middle width=28.047932549999988pt height=22.831056599999986pt/> ranging from <img src="/docs/Scenes/tex/29632a9bf827ce0200454dd32fc3be82.svg?invert_in_darkmode&sanitize=true" align=middle width=8.219209349999991pt height=21.18721440000001pt/> to <img src="/docs/Scenes/tex/034d0a6be0424bffe9a6e7ac9236c0f5.svg?invert_in_darkmode&sanitize=true" align=middle width=8.219209349999991pt height=21.18721440000001pt/> to <img src="/docs/Scenes/tex/244be3c7db382d3e1400c7c4caa1023a.svg?invert_in_darkmode&sanitize=true" align=middle width=41.02358204999999pt height=14.15524440000002pt/>.
+Fix a value of <img src="/docs/Scenes/tex/2ad9d098b937e46f9f58968551adac57.svg?invert_in_darkmode&sanitize=true" align=middle width=9.47111549999999pt height=22.831056599999986pt/>, the cross-section height. 
+For any choice of <img src="/docs/Scenes/tex/e427f148d4d1d76000bc79cdbffe89dc.svg?invert_in_darkmode&sanitize=true" align=middle width=73.83551504999998pt height=22.465723500000017pt/> to be fixed to the value of <img src="/docs/Scenes/tex/2ad9d098b937e46f9f58968551adac57.svg?invert_in_darkmode&sanitize=true" align=middle width=9.47111549999999pt height=22.831056599999986pt/>, we can map <img src="/docs/Scenes/tex/d7093223b4d827e8c29d4ed84b7ae088.svg?invert_in_darkmode&sanitize=true" align=middle width=28.047932549999988pt height=22.831056599999986pt/> to a subset of <img src="/docs/Scenes/tex/0b1666db7be254fa8998cf3a27c985bb.svg?invert_in_darkmode&sanitize=true" align=middle width=37.46952164999999pt height=22.831056599999986pt/> and solve for the remainign variable (e.g. choose <img src="/docs/Scenes/tex/12976e89aecd7544d72cc0e1be762587.svg?invert_in_darkmode&sanitize=true" align=middle width=43.78601369999999pt height=22.831056599999986pt/>, sovle for <img src="/docs/Scenes/tex/44bc9d542a92714cac84e01cbbb7fd61.svg?invert_in_darkmode&sanitize=true" align=middle width=8.68915409999999pt height=14.15524440000002pt/>, map <img src="/docs/Scenes/tex/8dd4ba3d734e9e4c6d16d09fec70db5e.svg?invert_in_darkmode&sanitize=true" align=middle width=49.87425464999999pt height=22.465723500000017pt/>, <img src="/docs/Scenes/tex/d2a6827434f41287c396d501787e3e70.svg?invert_in_darkmode&sanitize=true" align=middle width=47.416205099999985pt height=22.465723500000017pt/>, <img src="/docs/Scenes/tex/f5850fcbd847ff711d211b46323ea97e.svg?invert_in_darkmode&sanitize=true" align=middle width=51.74647994999999pt height=22.465723500000017pt/>) for those values of <img src="/docs/Scenes/tex/d7093223b4d827e8c29d4ed84b7ae088.svg?invert_in_darkmode&sanitize=true" align=middle width=28.047932549999988pt height=22.831056599999986pt/>.
 
 ``` c#
 private float3 HyperToricSection(float alpha, float beta, float h)
@@ -459,9 +446,6 @@ break;
 
                     //map vertices from 2 dimensions to 3
                     verts[idx] = HyperToricSection(alpha, beta, height);
-
-                    //uv mapping 
-                    uvs[idx] = new Vector2(j * oneNth, i * oneNth);
                 }
             }
         }
