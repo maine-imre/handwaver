@@ -50,7 +50,7 @@
             float theta)
         {
             Unity.Mathematics.float4 basis0 = Unity.Mathematics.math.normalize(from);
-            Unity.Mathematics.float4 basis1 = Unity.Mathematics.math.normalize(to - project(to, from));
+            Unity.Mathematics.float4 basis1 = Unity.Mathematics.math.normalize(to - project(to, Unity.Mathematics.math.normalize(from)));
             return rotate(from, basis0, basis1, theta);
         }
 
