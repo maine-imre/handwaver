@@ -1,4 +1,6 @@
-﻿namespace IMRE.HandWaver.HigherDimensions
+﻿using UnityEngine;
+
+namespace IMRE.HandWaver.HigherDimensions
 {
     /// <summary>
     /// Net of five cell for scale and dimension study.
@@ -27,14 +29,16 @@
                                                  1f / Unity.Mathematics.math.sqrt(6f),
                                                  -2f / Unity.Mathematics.math.sqrt(3f), 0f) / 2f;
                 Unity.Mathematics.float4 d = new Unity.Mathematics.float4(1f / Unity.Mathematics.math.sqrt(10f),
-                    -Unity.Mathematics.math.sqrt(3f / 2f), 0f, 0f);
+                    -Unity.Mathematics.math.sqrt(3f / 2f), 0f, 0f)/2f;
                 Unity.Mathematics.float4 center1 = (a + b + c) / 3f;
                 Unity.Mathematics.float4 dir1 = center1 - d;
                 Unity.Mathematics.float4 apex =
                     new Unity.Mathematics.float4(-2 * Unity.Mathematics.math.sqrt(2f / 5f), 0f, 0f, 0f);
                 
                 //the calculated result for the dihedral angle is about 91 degrees
-                float dihedralAngle = IMRE.Math.Operations.Angle(dir1, apex - center1);
+                //float dihedralAngle = IMRE.Math.Operations.Angle(dir1, apex - center1);
+                //this is a rough guess for the value by an empirical approach.
+                float dihedralAngle = 104.7f;
 
                 _percentFolded = value;
                 //TODO find this value.			
@@ -121,12 +125,11 @@
             result[2] = new Unity.Mathematics.float4(1f / Unity.Mathematics.math.sqrt(10f),
                             1f / Unity.Mathematics.math.sqrt(6f), -2f / Unity.Mathematics.math.sqrt(3f), 0f) / 2f;
             result[3] = new Unity.Mathematics.float4(1f / Unity.Mathematics.math.sqrt(10f),
-                -Unity.Mathematics.math.sqrt(3f / 2f), 0f, 0f);
+                -Unity.Mathematics.math.sqrt(3f / 2f), 0f, 0f)/2f;
 
             //find position of convergent point for other tetrahedrons in the net.
             Unity.Mathematics.float4 apex =
                 new Unity.Mathematics.float4(-2 * Unity.Mathematics.math.sqrt(2f / 5f), 0f, 0f, 0f);
-            //TODO consider making the initial projection onto n
 
             //apex of tetrahedron for each additional tetrahedron(from fases of first) foldling by degree t
             Unity.Mathematics.float4 center1 = (result[0] + result[1] + result[2]) / 3f;
@@ -144,8 +147,28 @@
             Unity.Mathematics.float4 center4 = (result[1] + result[2] + result[3]) / 3f;
             Unity.Mathematics.float4 dir4 = center4 - result[0];
             result[7] = center4 + IMRE.Math.Operations.rotate(dir4, apex - center4, degreeFolded);
+            
+            Debug.Log(Math.Operations.Angle(dir1, apex-center1) + " : " + Math.Operations.Angle(dir2, apex-center2) + " : " + Math.Operations.Angle(dir3, apex-center3) + " : " + Math.Operations.Angle(dir4, apex-center4));
 
             return result;
+        }
+
+        private static void confirmResult(float degreeFolded)
+        {
+            Unity.Mathematics.float4[] verts = vertices(degreeFolded);
+            Unity.Mathematics.float4 apex =
+                new Unity.Mathematics.float4(-2 * Unity.Mathematics.math.sqrt(2f / 5f), 0f, 0f, 0f);
+            if (!areEqual(apex, verts[4], verts[5], verts[6], verts[7]))
+                Debug.Log(apex + " : " + verts[4] + " : " + verts[5] + " : " + verts[6] + " : " + verts[7]);
+        }
+
+        private static bool areEqual(Unity.Mathematics.float4 a, Unity.Mathematics.float4 b, Unity.Mathematics.float4 c,
+            Unity.Mathematics.float4 d, Unity.Mathematics.float4 e)
+        {
+            return a.x == b.x && a.x == c.x && a.x == d.x && a.x == e.x &&
+                   a.y == b.y && a.y == c.y && a.y == d.y && a.y == e.y &&
+                   a.z == b.z && a.z == c.z && a.z == d.z && a.z == e.z &&
+                   a.w == b.w && a.w == c.w && a.w == d.w && a.w == e.w;
         }
     }
 }
