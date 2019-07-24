@@ -4,9 +4,9 @@
     - [Gestures at the pin](Geometer'sPlanetariumEmbodiedUserInputActions.md#Gestures-at-the-Pins)
     - **Open Palm toggles at pins**
         - [tangent plane](Geometer'sPlanetariumEmbodiedUserInputActions.md#Tangent-Plane) 
-        - terminator, 
-        - latitude, 
-        - longitude
+        - [terminator](Geometer'sPlanetariumEmbodiedUserInputActions.md#Terminator) 
+        - [latitude](Geometer'sPlanetariumEmbodiedUserInputActions.md#latitude) 
+        - [longitude](Geometer'sPlanetariumEmbodiedUserInputActions.md#longitude)
     - Double Pinch and Stretch to cycle starlight at pin
     - **Pin selection / connections**
         - Great Arc
@@ -24,8 +24,7 @@
     This is the action of activating a comparison of the position of a classifier.position value and the closest point on the surface of 
     the Earth. The position of the index finger's finger tip will be used in this case for the classifier.position value.
     The gesture of choice to activate this comparison is the point gesture. The position comparison will not place a pin on the planet's 
-    surface until the distance between the index finger and Earth's surface is small enough to essentially be touching. This distance will
-    be determined by a tolerance value.  
+    surface until the distance between the index finger and Earth's surface is small enough to essentially be touching. This distance       will be determined by a tolerance value.  
       
     The pin that is placed will hold the position data and facilitate further interactions that allow for dynamic location based
     functionality to happen.
@@ -60,10 +59,13 @@
     to toggle this, the proximity between the classifier.position of the hand and the position of the pin on the surface of the planet will
     need to be very close or touching.  
     The Palm of the hand will need to be facing at a 90 degree angle to the surface where the pin touches the planet. This means that the
-    rotation of the hand will have the palm facing neither directly at or directly away from the earth but instead it will be oreiented in
+    rotation of the hand will have the palm facing neither directly at or directly away from the earth but instead it will be orieented in
     a way which has the hand stacking the fingers on top of one another, usually the most comfortable position for this has the pinky at the
-    bottom.
+    bottom. The hand will also need to be approximately parallel with latitude lines.
     The prefered gesture for this is the open palm.
     
     * #### Longitude
-    Longitude in this case is specific to the longitude line which intersects the pin. When these increase in value the position
+    Longitude, in this case, is specific to the longitude line which intersects the pin. When these increase in value the position described is getting farther East or West from the Greenwich Meridian. The longitude line for the pin is rendered around the entire planet when this is toggled on.  
+    To toggle this, the proximity between the classifier.position of the hand and the position of the pin must be very close or touching.  
+    The Palm of the hand will need to be facing at a 90 degree angle to the surface of the Earth. This means that the rotation of the hand will have the palm facing neither directly at or directly away from the earth but instead it will be oriented in a way which has the hand stacking the fingers on top of one another, usually the most comfortable postion for this has the pinky at the bottom. The hand wil also need to be approximately parallel with the longitude lines.  
+    The prefered gesture for this is the open palm.
