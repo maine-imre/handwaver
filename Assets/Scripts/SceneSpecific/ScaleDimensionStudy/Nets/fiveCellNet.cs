@@ -148,7 +148,7 @@ namespace IMRE.HandWaver.HigherDimensions
             Unity.Mathematics.float4 dir4 = center4 - result[0];
             result[7] = center4 + IMRE.Math.Operations.rotate(dir4, apex - center4, degreeFolded);
             
-            Debug.Log(Math.Operations.Angle(dir1, apex-center1) + " : " + Math.Operations.Angle(dir2, apex-center2) + " : " + Math.Operations.Angle(dir3, apex-center3) + " : " + Math.Operations.Angle(dir4, apex-center4));
+            //Debug.Log(Math.Operations.Angle(dir1, apex-center1) + " : " + Math.Operations.Angle(dir2, apex-center2) + " : " + Math.Operations.Angle(dir3, apex-center3) + " : " + Math.Operations.Angle(dir4, apex-center4));
 
             return result;
         }
