@@ -1,6 +1,7 @@
 ﻿using System;
 using socket.io;
 using UnityEngine;
+using Random = System.Random;
 
 namespace IMRE.HandWaver.Kernel
 {
@@ -12,21 +13,23 @@ namespace IMRE.HandWaver.Kernel
         public static string overrideSID;
 
         private void Start()
-        {
+        {           
+
             initSession();
-            var sock = Socket.Connect("http://localhost:8080");                                                                                                                                  
-            sock.On("connect", () => Debug.Log("connected"));                                                
-            sock.On("disconnect", () => { Debug.Log("disconnected"); });                                     
-            sock.On("connect_error", debugLog);                        
-            sock.On("add", debugLog);                                                  
+            
+            var sock = Socket.Connect("http://localhost:8080"); 
+                                                                                                                               
+            sock.On("connect", () => Debug.Log("connected"));
+            sock.On("disconnect", () => { Debug.Log("disconnected"); });
+            sock.On("connect_error", debugLog);
+            sock.On("add", debugLog);
             sock.On("remove", debugLog);
             sock.On("update", debugLog);
             sock.On("rename", debugLog);
-
             sock.Emit("subscribe", HandWaverServerTransport.sessionId);
 
-            //Test the command changes
-            StartCoroutine(HandWaverServerTransport.execCommand("A = Point({1, 2, 3})")); // Point A
+           
+
 //            StartCoroutine(HandWaverServerTransport.execCommand("Point({3, 5, 1})"));    // Point B
 //            StartCoroutine(HandWaverServerTransport.execCommand("Line(A, B)"));          // Line f
 //            StartCoroutine(HandWaverServerTransport.execCommand("A=Point({2,3,4})"));    // Move Point Attempts
@@ -36,10 +39,16 @@ namespace IMRE.HandWaver.Kernel
         {
             Debug.Log(str);
         }
-        
-        
-        
-        
+
+        private int xint;
+        [ContextMenu("test cmd")]
+        public void testCMD()
+        {
+            
+            //Test the command changes
+            StartCoroutine(HandWaverServerTransport.execCommand("A = ("+(xint++)+", 2, 3)")); // Point A
+
+        }
 
         /// <summary>
         ///     Initializes the Session ID within the HWServer Transport.

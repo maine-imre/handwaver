@@ -112,7 +112,7 @@ namespace socket.io {
         /// <returns></returns>
         IEnumerator InitCore(UniRx.IObserver<Socket> observer, UniRx.CancellationToken cancelToken) {
             // Declare to connect in socket.io v1.0
-            _urlQueries.Add("EIO", "3");
+            _urlQueries.Add("EIO", "4");
             _urlQueries.Add("transport", "polling");
             _urlQueries.Add("t", TimeStamp.Now);
 
@@ -131,10 +131,11 @@ namespace socket.io {
                     observer.OnError(new Exception(www.error));
                     yield break;
                 }
-
                 var textIndex = www.text.IndexOf('{');
+                var textIndex2 = www.text.IndexOf('}');
+
                 if (textIndex != -1) {
-                    var json = www.text.Substring(textIndex);
+                    var json = www.text.Substring(textIndex,textIndex2-3);
                     var answer = JsonUtility.FromJson<PollingUrlAnswer>(json);
                     _urlQueries.Add("sid", answer.sid);
                 }

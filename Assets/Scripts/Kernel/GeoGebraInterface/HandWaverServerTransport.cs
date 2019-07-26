@@ -38,6 +38,12 @@ namespace IMRE.HandWaver.Kernel
         private static Guid _guid;
 
         /// <summary>
+        /// Returns true when a valid session is established with a server.
+        /// </summary>
+        private static bool sessionEstablished = false;
+        
+        
+        /// <summary>
         ///     Public access to the session id string.
         ///     This should be used for getting/setting
         /// </summary>
@@ -205,6 +211,10 @@ namespace IMRE.HandWaver.Kernel
         /// <returns></returns>
         public static IEnumerator execCommand(string cmdString)
         {
+            while (!sessionEstablished)
+            {
+                yield return new WaitForEndOfFrame();
+            }
             // Request body
             var form = new WWWForm();
             // Populate request body
@@ -246,7 +256,7 @@ namespace IMRE.HandWaver.Kernel
                     try
                     {
                         Debug.Log("Established connection to server with session id " + sessionId);
-
+                        sessionEstablished = true;
                         //TODO: check if there is a response of a session xml data.
                         //TODO: reconstruct scene using the xml data returned.
                     }
