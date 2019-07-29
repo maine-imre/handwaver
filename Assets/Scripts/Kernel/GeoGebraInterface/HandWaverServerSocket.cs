@@ -12,34 +12,61 @@ namespace IMRE.HandWaver.Kernel
         /// </summary>
         public static string overrideSID;
 
+        public Socket sock;
+
+
         private void Start()
-        {           
+        {
 
             initSession();
-            
-            var sock = Socket.Connect("http://localhost:8080"); 
-                                                                                                                               
-            sock.On("connect", () => Debug.Log("connected"));
+            sock = Socket.Connect("http://localhost:8080");
+
+            sock.On("connect", subscribeCallback);
             sock.On("disconnect", () => { Debug.Log("disconnected"); });
-            sock.On("connect_error", debugLog);
-            sock.On("add", debugLog);
-            sock.On("remove", debugLog);
-            sock.On("update", debugLog);
-            sock.On("rename", debugLog);
-            sock.Emit("subscribe", HandWaverServerTransport.sessionId);
+            sock.On("connect_error", (string str) => { Debug.LogError(str); });
+            sock.On("add", addFunc);
+            sock.On("remove", removeFunc);
+            sock.On("update", updateFunc);
+            sock.On("rename", renameFunc);
 
-           
-
-//            StartCoroutine(HandWaverServerTransport.execCommand("Point({3, 5, 1})"));    // Point B
-//            StartCoroutine(HandWaverServerTransport.execCommand("Line(A, B)"));          // Line f
-//            StartCoroutine(HandWaverServerTransport.execCommand("A=Point({2,3,4})"));    // Move Point Attempts
+            testCMD();
+            StartCoroutine(HandWaverServerTransport.execCommand("B = (5,5,6)"));    // Point B
+            StartCoroutine(HandWaverServerTransport.execCommand("Line(A, B)"));          // Line f
         }
 
-        void debugLog(string str)
+        void subscribeCallback()
         {
-            Debug.Log(str);
+            sock.Emit("subscribe", HandWaverServerTransport.sessionId);
+        }
+        public void addFunc(string objName)
+        {
+            Debug.Log("Add "+objName);
+            //TODO: Implement
         }
 
+        public void removeFunc(string objName)
+        {
+            Debug.Log("remove "+objName);
+
+            //TODO: Implement
+        }
+
+        public void updateFunc(string objName)
+        {
+            Debug.Log("update "+objName);
+
+            //TODO: Implement
+        }
+        public void renameFunc(string objName)
+        {
+            Debug.Log("rename "+objName);
+
+            //TODO: Implement
+        }
+       
+        
+        
+        
         private int xint;
         [ContextMenu("test cmd")]
         public void testCMD()
