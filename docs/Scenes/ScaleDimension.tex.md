@@ -685,7 +685,7 @@ result[35] = result[15] + Math.Operations.rotate(down, wForward, 2f*degreeFolded
 We consider a hypercube or a 5-cell where the verticies are arranged on a sphere with radius $r$.
 Then, the stereographic projection of a vertex is the intersection of the line through the north pole $(0,0,0,r)$ and the vertex and the $z=0$ hyperplane.
 
-That is, $v' = (NorthPole-v)*\frac{|NorthPole|}{((NorthPole-v)\cdot NorthPole)} + NorthPole$
+That is, $v' = (NorthPole-v)*\frac{|NorthPole|}{((NorthPole-v)\cdot \frac{NorthPole}{|NorthPole|})} + NorthPole$
 
 
 ## Projection from 3D to 2D
