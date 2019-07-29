@@ -1,22 +1,22 @@
 ## Geometer's Planetarium Embodied User Input Actions
 
-- [Pointing to Select Location on Earth](Geometer'sPlanetariumEmbodiedUserInputActions.md#Point-to-Select-a-Location-on-the-Earth)
+- [Point to Select Location on Earth](Geometer'sPlanetariumEmbodiedUserInputActions.md#Point-to-Select-a-Location-on-the-Earth)
     - [Gestures at the pin](Geometer'sPlanetariumEmbodiedUserInputActions.md#Gestures-at-the-Pins)
     - **Open Palm toggles at pins**
         - [tangent plane](Geometer'sPlanetariumEmbodiedUserInputActions.md#Tangent-Plane) 
         - [terminator](Geometer'sPlanetariumEmbodiedUserInputActions.md#Terminator) 
         - [latitude](Geometer'sPlanetariumEmbodiedUserInputActions.md#latitude) 
         - [longitude](Geometer'sPlanetariumEmbodiedUserInputActions.md#longitude)
-    - Double Pinch and Stretch to cycle starlight at pin
+    - [Starlight Rays](Geometer'sPlanetariumEmbodiedUserInputActions.md#Tangent-Plane) 
     - **Pin selection / connections**
-        - Great Arc
-        - Great Circle
-    - Double Pinch to Scale (refactor)
-    - Pinch to move (new base class, similar to grasp, refactor physics system)
-    - Swipe to Rotate Earth
-    - Global Latitude
-    - Global Longitude
-    - Push Earth
+        - [Great Arc](Geometer'sPlanetariumEmbodiedUserInputActions.md#Great-Arc) 
+        - [Great Circle](Geometer'sPlanetariumEmbodiedUserInputActions.md#Great-Circle) 
+    - [Double Pinch to Scale](Geometer'sPlanetariumEmbodiedUserInputActions.md#Double-Pinch-to-scale) 
+    - [Pinch to move](Geometer'sPlanetariumEmbodiedUserInputActions.md#Pinch-to-Move) 
+    - [Rotate Earth](Geometer'sPlanetariumEmbodiedUserInputActions.md#Rotate-Earth) 
+    - [Push Earth](Geometer'sPlanetariumEmbodiedUserInputActions.md#Push Earth) 
+    - [Global Latitude](Geometer'sPlanetariumEmbodiedUserInputActions.md#Global-Latitude) 
+    - [Global Longitude](Geometer'sPlanetariumEmbodiedUserInputActions.md#Global-Longitude) 
     
     ---
     
@@ -80,14 +80,14 @@
     * #### Great Circle  
     A great circle is the circle along the surface of a sphere. In this case we are forming these through the use of two point on the surface of the sphere. The idea with this is that it will be a continuation of the great arc. When a great arc is formed, if you do not cancel the gesture and instead bring your finger back to the original pin, then a great circle will appear that interects both of the two pins which were involved in its creation. See great arc above for notes on the gesture.  
     
-    ---
+---
     
 ### Double Pinch to scale  
 Scaling in this scene refers to the dynamic alteration of the environment's scale. When the scale is made smaller, the surroundings appear to get larger relative to the user and vice versa.  
 This gesture will require the user to perform the two handed gesture in mid air without a pin near one of the hands. Then moving the hands closer will make the objects smaller and moving their hands farther apart will make the objects larger. 
 This needs to be exclusive with the starlight rays toggle. To do this the functionality could be limited if near the pins or in genreal when near the surface of the Earth.
     
-    ---
+---
     
 ### Pinch to Move  
 Pinching to move within the context of geometer's planetarium will generally be the pins themselves being moved from one location to another along the Earth's surface.  
