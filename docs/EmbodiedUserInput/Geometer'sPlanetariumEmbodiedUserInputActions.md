@@ -7,7 +7,7 @@
         - [terminator](Geometer'sPlanetariumEmbodiedUserInputActions.md#Terminator) 
         - [latitude](Geometer'sPlanetariumEmbodiedUserInputActions.md#latitude) 
         - [longitude](Geometer'sPlanetariumEmbodiedUserInputActions.md#longitude)
-    - [Starlight Rays](Geometer'sPlanetariumEmbodiedUserInputActions.md#Tangent-Plane) 
+        - [Starlight Rays](Geometer'sPlanetariumEmbodiedUserInputActions.md#Tangent-Plane) 
     - **Pin selection / connections**
         - [Great Arc](Geometer'sPlanetariumEmbodiedUserInputActions.md#Great-Arc) 
         - [Great Circle](Geometer'sPlanetariumEmbodiedUserInputActions.md#Great-Circle) 
