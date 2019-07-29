@@ -678,7 +678,13 @@ result[35] = result[15] + Math.Operations.rotate(down, wForward, 2f*degreeFolded
 
 ## Projective Projection from 4D to 3D (Hollasch, 1991)
 
-## Stereographic Projection from 4D to 3D (Brisson, 1978)
+## Stereographic Projection from 4D to 3D 
+We consider a hypercube or a 5-cell where the verticies are arranged on a sphere with radius $r$.
+Then, the stereographic projection of a vertex is the intersection of the line through the north pole $(0,0,0,r)$ and the vertex and the $z=0$ hyperplane.
+
+That is, $v' = (NorthPole-v)*|NorthPole|/((NorthPole-v)\cdot NorthPole) + NorthPole$
+
+
 
 ## Projection from 3D to 2D
 We have used a virtual camera and rendered that camera's perspective on a plane surface, using the UnityEngine to project 3D figures into 2D.  This avoids manipulation of meshes and line renderers and allows for Parallel and Projective perspecitves.
