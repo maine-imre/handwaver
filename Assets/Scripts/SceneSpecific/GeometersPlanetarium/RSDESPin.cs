@@ -25,6 +25,15 @@ namespace IMRE.HandWaver.Space
             return Instantiate(Resources.Load<GameObject>("Prefabs/RSDES/RSDESoushPinPrefab"))
                 .GetComponent<RSDESPin>();
         }
+        
+        public static RSDESPin Constructor(Vector2 latlong)
+        {
+            RSDESPin pin = Instantiate(Resources.Load<GameObject>("Prefabs/RSDES/RSDESoushPinPrefab"))
+                .GetComponent<RSDESPin>();
+            pin.Latlong = latlong;
+
+            return pin;
+        }
 
         #endregion
 
