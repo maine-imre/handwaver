@@ -199,12 +199,10 @@ namespace IMRE.HandWaver
 						foreach (MeshRenderer meshRenderer in GetComponentsInChildren<MeshRenderer>())
 						{
 							meshRenderer.material.SetColor("_Color",HW_GeoSolver.ins.selectedColor);
-							Debug.Log("Set Material to Selected");
 						}
 						foreach (LineRenderer lineRenderer in GetComponentsInChildren<LineRenderer>())
 						{
 							lineRenderer.material.SetColor("_Color",HW_GeoSolver.ins.selectedColor);
-							Debug.Log("Set Material to Selected");
 						}
 						break;
 					case SelectionStatus.active:
@@ -236,39 +234,33 @@ namespace IMRE.HandWaver
 								foreach (MeshRenderer meshRenderer in GetComponentsInChildren<MeshRenderer>())
 								{
 									meshRenderer.material.SetColor("_Color",HW_GeoSolver.ins.dependentColor);
-									Debug.Log("Set Material to Default");
 								}
 								foreach (LineRenderer lineRenderer in GetComponentsInChildren<LineRenderer>())
 								{
 									lineRenderer.material.SetColor("_Color",HW_GeoSolver.ins.dependentColor);
 
-									Debug.Log("Set Material to Default");
 								}
 								break;
 							case updateCapability.interactable:
 								foreach (MeshRenderer meshRenderer in GetComponentsInChildren<MeshRenderer>())
 								{
 									meshRenderer.material.SetColor("_Color",HW_GeoSolver.ins.defaultColor);
-									Debug.Log("Set Material to Default");
 								}
 								foreach (LineRenderer lineRenderer in GetComponentsInChildren<LineRenderer>())
 								{
 									lineRenderer.material.SetColor("_Color",HW_GeoSolver.ins.defaultColor);
 
-									Debug.Log("Set Material to Default");
 								}
 								break;
 							case updateCapability.geoStatic:
 								foreach (MeshRenderer meshRenderer in GetComponentsInChildren<MeshRenderer>())
 								{
 									meshRenderer.material.SetColor("_Color",HW_GeoSolver.ins.staticColor);
-									Debug.Log("Set Material to Default");
 								}
 								foreach (LineRenderer lineRenderer in GetComponentsInChildren<LineRenderer>())
 								{
 									lineRenderer.material.SetColor("_Color",HW_GeoSolver.ins.staticColor);
 
-									Debug.Log("Set Material to Default");
 								}
 								break;
 						}
@@ -310,7 +302,7 @@ namespace IMRE.HandWaver
 		}
 		private IEnumerator cUpdateRMan;
 		public IEnumerator waitForStretch;
-		public bool stretchEnabled = true;
+		internal bool stretchEnabled = true;
 
 		private bool _leapInteraction;
 #pragma warning disable 0169
@@ -394,6 +386,20 @@ namespace IMRE.HandWaver
 			//attempt to fix colors.
 			thisSelectStatus = thisSelectStatus;
 
+			if (this.GetComponent("Halo")!= null)
+			{
+				halo = this.GetComponent("Halo");
+			}
+
+
+			//if (this.GetComponent<InteractionBehaviour>() != null)
+			//{
+				//this.thisIBehave = this.GetComponent<InteractionBehaviour>();
+				thisIBehave.OnGraspBegin += StartInteraction;
+				thisIBehave.OnPerControllerGraspBegin += Stretch;
+				thisIBehave.OnGraspEnd += EndInteraction;
+			//}
+==== BASE ====
 			cUpdateRMan = UpdateRMan();
 			waitForStretch = WaitForStretch();
 			HW_GeoSolver.ins.addComponent(this);
@@ -441,7 +447,8 @@ namespace IMRE.HandWaver
 		{
 			stretchEnabled = false;
 			yield return new WaitForSeconds(0.35f);
-			stretchEnabled = true;
+			if(!strechOverride)
+				stretchEnabled = true;
 		}
 
 		public void AddToRManager()
@@ -460,6 +467,10 @@ namespace IMRE.HandWaver
 
 		private Node<string> myGraphNode;
 		internal static Transform masterParentObj;
+		/// <summary>
+		/// Set true to disable streching for all objects of this type
+		/// </summary>
+		public bool strechOverride = false;
 
 		public Node<string> FindGraphNode()
 		{

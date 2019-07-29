@@ -21,17 +21,27 @@ namespace IMRE.HandWaver.FourthDimension {
 	/// A networked object that whose bounds are connected to the graphics in hyperballboundaries.
 	/// Build as an initial test of networking capacity.
 	/// </summary>
+	[RequireComponent(typeof(InteractionBehaviour))]
+	[RequireComponent(typeof(PhotonView))]
+	[RequireComponent(typeof(PhotonTransformView))]
+	[RequireComponent(typeof(PhotonRigidbodyView))]
 	public class HyperBall : MonoBehaviourPunCallbacks {
 
 		public static float scaleOfBox = 2f;
 		private Rigidbody myRB;
 		internal static Vector3 origin = Vector3.up*scaleOfBox;
+		private PhotonView _photonView;
+		private Rigidbody _rigidbody;
+		private TrailRenderer _trailRenderer;
 
 		//public Transform wallPrefab;
 
 
 		private void Start()
 		{
+			_trailRenderer = GetComponent<TrailRenderer>();
+			_rigidbody = GetComponent<Rigidbody>();
+			_photonView = GetComponent<PhotonView>();
 			if (PhotonNetwork.IsMasterClient)
 			{
 				float tmp = UnityEngine.Random.Range(0f, 1f);
