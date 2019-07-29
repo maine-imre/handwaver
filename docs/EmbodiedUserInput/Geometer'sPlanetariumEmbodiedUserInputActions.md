@@ -14,7 +14,7 @@
     - [Double Pinch to Scale](Geometer'sPlanetariumEmbodiedUserInputActions.md#Double-Pinch-to-scale) 
     - [Pinch to move](Geometer'sPlanetariumEmbodiedUserInputActions.md#Pinch-to-Move) 
     - [Rotate Earth](Geometer'sPlanetariumEmbodiedUserInputActions.md#Rotate-Earth) 
-    - [Push Earth](Geometer'sPlanetariumEmbodiedUserInputActions.md#Push Earth) 
+    - [Push Earth](Geometer'sPlanetariumEmbodiedUserInputActions.md#Push-Earth) 
     - [Global Latitude](Geometer'sPlanetariumEmbodiedUserInputActions.md#Global-Latitude) 
     - [Global Longitude](Geometer'sPlanetariumEmbodiedUserInputActions.md#Global-Longitude) 
     
