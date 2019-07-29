@@ -5,33 +5,30 @@ See license info in readme.md.
 www.imrelab.org
 **/
 
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
 
 namespace IMRE.HandWaver
 {
     /// <summary>
-    /// A script to extend the Unity editor that adds buttons to switch to important scenes for our build.
+    ///     A script to extend the Unity editor that adds buttons to switch to important scenes for our build.
     /// </summary>
-	public class IMREEditorLayerLoad : MonoBehaviour
+    public class IMREEditorLayerLoad : MonoBehaviour
     {
-
-        public String baseScene  = "LeapVive_GeoBase";
+        public string baseScene = "LeapVive_GeoBase";
 
         private void Start()
         {
-
             if (!SceneContains())
             {
 #if UNITY_EDITOR
-                String cScene = SceneManager.GetActiveScene().name;
-                SceneManager.LoadSceneAsync(baseScene, LoadSceneMode.Additive);
-                SceneManager.MoveGameObjectToScene(gameObject, SceneManager.GetSceneByName(baseScene));
-                Debug.LogWarning("Hey Stupid, you loaded the base scene layer after the additive scene layer. Do not expect things to work well; just saying.");
+                var cScene = SceneManager.GetActiveScene().name;
+                SceneManager.LoadSceneAsync(baseScene,
+                    LoadSceneMode.Additive);
+                SceneManager.MoveGameObjectToScene(gameObject,
+                    SceneManager.GetSceneByName(baseScene));
+                Debug.LogWarning(
+                    "Hey Stupid, you loaded the base scene layer after the additive scene layer. Do not expect things to work well; just saying.");
                 //reloadcScenes();
 #endif
             }
@@ -58,11 +55,10 @@ namespace IMRE.HandWaver
 
         private bool SceneContains()
         {
-            for (int i = 0; i < SceneManager.sceneCount; i++)
-            {
+            for (var i = 0; i < SceneManager.sceneCount; i++)
                 if (SceneManager.GetSceneAt(i).name == baseScene)
                     return true;
-            }
+
             return false;
         }
     }
