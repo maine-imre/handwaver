@@ -674,6 +674,9 @@ result[34] = result[14] + Math.Operations.rotate(down, wForward, 2f*degreeFolded
 result[35] = result[15] + Math.Operations.rotate(down, wForward, 2f*degreeFolded);
 ```
 
+## Projections
+
+
 ## Parallel Projection from 4D to 3D (Hollasch, 1991)
 
 ## Projective Projection from 4D to 3D (Hollasch, 1991)
@@ -683,7 +686,6 @@ We consider a hypercube or a 5-cell where the verticies are arranged on a sphere
 Then, the stereographic projection of a vertex is the intersection of the line through the north pole <img src="/docs/Scenes/tex/41b6c06aff103f46a64d6965e91ed06f.svg?invert_in_darkmode&sanitize=true" align=middle width=67.23366705pt height=24.65753399999998pt/> and the vertex and the <img src="/docs/Scenes/tex/cf4b72df1e2b52767fb792da8da43986.svg?invert_in_darkmode&sanitize=true" align=middle width=38.50445939999999pt height=21.18721440000001pt/> hyperplane.
 
 That is, <img src="/docs/Scenes/tex/5944653b97373b4dae2b1ce8596b36c4.svg?invert_in_darkmode&sanitize=true" align=middle width=595.2589697999999pt height=24.7161288pt/>
-
 
 
 ## Projection from 3D to 2D
