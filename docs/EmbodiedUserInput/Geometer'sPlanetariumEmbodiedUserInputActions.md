@@ -82,6 +82,13 @@
     
     ---
     
+### Double Pinch to scale  
+Scaling in this scene refers to the dynamic alteration of the environment's scale. When the scale is made smaller, the surroundings appear to get larger relative to the user and vice versa.  
+This gesture will require the user to perform the two handed gesture in mid air without a pin near one of the hands. Then moving the hands closer will make the objects smaller and moving their hands farther apart will make the objects larger. 
+This needs to be exclusive with the starlight rays toggle. To do this the functionality could be limited if near the pins or in genreal when near the surface of the Earth.
+    
+    ---
+    
 ### Pinch to Move  
 Pinching to move within the context of geometer's planetarium will generally be the pins themselves being moved from one location to another along the Earth's surface.  
 This will require close proximity between the classifier.position and pin position while a gesture is performed, in this case a pinch. 
@@ -90,7 +97,26 @@ A case which may need to be handled is distance during the gesture's activation.
 
 ---
 
+### Rotate Earth  
+Rotating the Earth will ideally require a gesture with a velocity. However velocity is currently not properly tracked for vive pro and so a different gesture will be slotted in. The gesture will be performed at the surface of the Earth and the placeholder will have a set speed for the rotation of the Earth.  
+This gesture will be open palm. The gesture will require proximity to the surface of the Earth. Due to this gesture choice, there needs to be an exclusive relationship with the other gestures that uses open palm but requires proximity with a pin. This could be in the form of requiring the initial activation to be away from pin positions. But once the gesture begins it must be cancelled (no longer performed) to stop the rotation. This choice for needing to be cancelled would allow the hand to pass through pins which are rotating with the Earth without stopping if one of the pins gets too close to the hand.
+
+---
+
+### Push Earth  
+Pushing the Earth would ideally require a gesture with a velocity. However velocity is currently not properly tracked for vive pro and so a different gesture will be slotted in. The gesture will be performed at the surface of the Earth and the placeholder will have a set speed for the movement of the user relative to the Earth.  
+This gesture will be thumbs up. The gesture will require proximity to the surface of the Earth. Due to the gesture choice it will be in need of exclusivity with the global latitude and longitude actions.
+
+---
+
 ### Global Latitude  
-The global latitude refers to the latitude lines along the entirety of the surface of the Earth and the projections of latitude beyond the Earth. This therefore represent four states: No lines, Just Latitude lines on the Earth, Just the projections of the Latitude lines beyond Earth, and both of the Latitude lines on the Earth and Beyond the Earth active.  
+The global latitude refers to the latitude lines along the entirety of the surface of the Earth and the projections of latitude beyond the Earth. This therefore represents four states: No lines, Just Latitude lines on the Earth, Just the projections of the Latitude lines beyond Earth, and both of the Latitude lines on the Earth and Beyond the Earth active.  
 The classifier gesture that activates this will be aligned with the floor horizontally. In this case the gesture to be used is the thumbs up. The thumb should be pointed sideways.  
+To toggle through the 4 states, there needs to be a cooldown between each toggle. This will allow a person to activate the gesture and then wait while it is still activated in order to get to other states, if the desired state is not attained with the first toggle from that activation of the gesture. This cooldown will stop the toggling from needing 4 activations of the gesture to get through all of the states. This also stops the gesture from making the lines flash wildly as each state is achieved every new frame when the check is made.
+
+---
+
+### Global Longitude  
+The global longitude refers to the longitude lines along the entirety of the surface of the Earth and the projections of longitude beyond the Earth. This therefore represents four states: No lines, Just Longitude lines on the Earth, Just the projections of the Longitude lines beyond Earth, and both of the Longitude lines on the Earth and Beyond the Earth active.  
+The classifier gesture that activates this will be aligned with the floor vertically. In this case the gesture to be used is the thumbs up. The thumb should be pointed upwards.  
 To toggle through the 4 states, there needs to be a cooldown between each toggle. This will allow a person to activate the gesture and then wait while it is still activated in order to get to other states, if the desired state is not attained with the first toggle from that activation of the gesture. This cooldown will stop the toggling from needing 4 activations of the gesture to get through all of the states. This also stops the gesture from making the lines flash wildly as each state is achieved every new frame when the check is made.
