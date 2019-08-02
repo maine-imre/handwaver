@@ -1,5 +1,7 @@
 ﻿using System;
 using Unity.Mathematics;
+using UnityEngine;
+using IMRE.Math;
 
 namespace IMRE.HandWaver.Rendering
 {
@@ -48,15 +50,8 @@ namespace IMRE.HandWaver.Rendering
 
         public static bool Line(float3 point, float3 direction)
         {
-            try
-            {
                 direction = Unity.Mathematics.math.normalize(direction);
                 return Segment(point + 100f * direction, point - 100f * direction);
-            }
-            catch
-            {
-                return false;
-            }
         }
 
         public static bool Point(float3 location)
@@ -116,6 +111,10 @@ namespace IMRE.HandWaver.Rendering
         {
             try
             {
+                
+                Segment(segmentStart, segmentAEndpoint);
+                Segment(segmentStart, segmentBEndpoint);
+                
                 #region Render Circle
                 UnityEngine.Mesh semiCircleMesh = new UnityEngine.Mesh();
 
@@ -141,10 +140,7 @@ namespace IMRE.HandWaver.Rendering
                 semiCircleMesh.vertices = vertices;
                 //semiCircleMesh.SetPositions(vertices);
                 render(semiCircleMesh);
-                #endregion
-
-                Segment(segmentStart, segmentAEndpoint);
-                Segment(segmentStart, segmentBEndpoint);
+                #endregion           
 
                 return true;
             }
@@ -213,6 +209,36 @@ namespace IMRE.HandWaver.Rendering
         {
             throw new NotImplementedException();
         }
+        
+        public static bool Polygon(float3[] pointFloat3Array)
+        {
+
+            try
+            {
+                Vector3[] pointVectorArray = new Vector3[pointFloat3Array.Length];
+
+                UnityEngine.Mesh mesh = new UnityEngine.Mesh();
+                for (int i = 0; i < pointFloat3Array.Length; i++)
+                {
+                    pointVectorArray[i] = pointFloat3Array[i].ToVector3();
+                }
+
+                mesh.vertices = pointVectorArray;
+
+                //TODO make triangles between groups of three points, starting with smallest x value and increasing
+                foreach (Vector3 point in pointVectorArray)
+                {
+                    
+                }
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
 
         public static bool Ray( /*Data needed to render*/)
         {
