@@ -387,7 +387,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -17.090027, y: -13.94}
+  m_AnchoredPosition: {x: -17.090027, y: -13.939941}
   m_SizeDelta: {x: 34.2, y: 27.88}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &145819188
@@ -581,8 +581,9 @@ GameObject:
   m_Component:
   - component: {fileID: 296351166}
   - component: {fileID: 296351165}
+  - component: {fileID: 296351167}
   m_Layer: 0
-  m_Name: backgroundManager
+  m_Name: Managers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -615,6 +616,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &296351167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 296351164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d7004eae70666346a4aad4643c7eb1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  optionsPanel: {fileID: 0}
+  settings: {fileID: 0}
+  quit: {fileID: 0}
 --- !u!1 &358118042
 GameObject:
   m_ObjectHideFlags: 0
@@ -1050,7 +1066,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -50.88, y: -13.94}
+  m_AnchoredPosition: {x: -50.880005, y: -13.939941}
   m_SizeDelta: {x: 34.2, y: 27.88}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1379625973
@@ -1196,7 +1212,7 @@ Camera:
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
-  m_TargetEye: 3
+  m_TargetEye: 0
   m_HDR: 1
   m_AllowMSAA: 1
   m_AllowDynamicResolution: 0
