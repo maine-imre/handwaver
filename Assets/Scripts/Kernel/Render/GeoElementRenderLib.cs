@@ -210,26 +210,41 @@ namespace IMRE.HandWaver.Rendering
             throw new NotImplementedException();
         }
         
+        /// <summary>
+        /// Render a polygon from an input of an array of points
+        /// Function is passed points in clockwise connection of dots
+        /// </summary>
+        /// <param name="pointFloat3Array"></param>
+        /// <returns></returns>
         public static bool Polygon(float3[] pointFloat3Array)
         {
 
             try
             {
                 Vector3[] pointVectorArray = new Vector3[pointFloat3Array.Length];
-
-                UnityEngine.Mesh mesh = new UnityEngine.Mesh();
+               
                 for (int i = 0; i < pointFloat3Array.Length; i++)
                 {
                     pointVectorArray[i] = pointFloat3Array[i].ToVector3();
                 }
 
+                for (int i = 0; i < pointVectorArray.Length; i++)
+                {
+                    Segment(i, i + 1);
+                }
+                
+                Sort(pointVectorArray);
+
+                //vertices
+                UnityEngine.Mesh mesh = new UnityEngine.Mesh();
                 mesh.vertices = pointVectorArray;
 
-                //TODO make triangles between groups of three points, starting with smallest x value and increasing
-                foreach (Vector3 point in pointVectorArray)
-                {
-                    
-                }
+                //triangles
+                
+                
+                //uvs
+                
+                //normals
 
                 return true;
             }
@@ -289,6 +304,33 @@ namespace IMRE.HandWaver.Rendering
         {
             throw new NotImplementedException();
         }
+        
+        public static void Sort(Vector3[] data)
+        {
+            Console.Write("\nSorted Array Elements :(Step by Step)\n\n");
+            int smallest; 
+            for (int i = 0; i < data.Length - 1; i++)
+            {
+                smallest = i;
+
+                for (int index = i + 1; index < data.Length; index++)
+                {
+                    if (data[index].x < data[smallest].x)
+                    {
+                        smallest = index;
+                    }
+                }
+                Swap(i, smallest, data);
+            }
+            	
+        }
+        
+        public static void Swap(int first, int second, Vector3[] data)
+        {
+            Vector3 temporary = data[first];    
+            data[first] = data[second];  
+            data[second] = temporary;  
+        }  
 
     }
 }
