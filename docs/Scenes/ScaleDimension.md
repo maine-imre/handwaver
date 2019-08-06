@@ -687,6 +687,61 @@ Then, the stereographic projection of a vertex is the intersection of the line t
 
 That is, <img src="/docs/Scenes/tex/a7dbabc722e053fe8366a461a1b19ee0.svg?invert_in_darkmode&sanitize=true" align=middle width=450.15178890000004pt height=33.20539859999999pt/>
 
+```c#
+ float r = Math.Operations.magnitude(v);
+ //assume north pole is at (0,0,0,1);
+ float4 north = new float4(0,0,0,1)*r;
+ float4 vPrime = (north-v)*(Math.Operations.magnitude(north)/(Unity.Mathemathics.math.dot((north - v),Unity.Mathematics.normalize(north))+north;
+  return new float3 (vPrime.x, vPrime.y, vPrime.z);
+```
+
+### Projections of Segments and Quads
+Each segment and quad (mesh) is projected according to the given method.  In the case of stereogrphaic projection, segments and quads are inflated to lie on the surface of the hypersphere.
+
+NOTE - triangles need to be adapted to this system
+```c#
+public static Unity.Mathematics.float3[] projectSegment(Unity.Mathematics.float4 a, Unity.Mathematics.float4 b, int n, Unity.Mathematics.float4x3 inputBasis, ProjectionMethod method,
+            float? Vangle, Unity.Mathematics.float4? eyePosition, float? viewingRadius)
+        {
+            Unity.Mathematics.float3[] result = new Unity.Mathematics.float3[n];
+            for(int i = 0; i < n; i ++)
+            {
+                Unity.Mathematics.float4 v = ((float)i/((float)n-1f))*(b-a)+a;
+                if(method == ProjectionMethod.stereographic)
+                {
+                    //assume center == Vector4.zero;
+                    //assume a and b are on surface of sp
+                    v = Unity.Mathematics.math.normalize(v)*Math.Operations.magnitude(a);
+                }    
+                result[i] = projectDownDimension(v,inputBasis,method,Vangle, eyePosition, viewingRadius);
+            }    
+            return result;
+        }
+        public static Unity.Mathematics.float3[] projectQuad  (Unity.Mathematics.float4 a, Unity.Mathematics.float4 b, 
+                                                               Unity.Mathematics.float4 c, Unity.Mathematics.float4 d,
+                                                               int n, Unity.Mathematics.float4x3 inputBasis, ProjectionMethod method,
+                                                                float? Vangle, Unity.Mathematics.float4? eyePosition, float? viewingRadius)
+         {
+             Unity.Mathematics.float4[] result = new Unity.Mathematics.float4[n];
+
+             for(int i = 0; i < n; i++){
+                 Unity.Mathematics.float4 a1 = ((float)i/((float)n-1f))*(b-a)+a;
+                 Unity.Mathematics.float4 b1 = ((float)i/((float)n-1f))*(c-d)+d;
+                if(method == ProjectionMethod.stereographic)
+                {
+                    //assume center == Vector4.zero;
+                    //assume a and b are on surface of sp
+                    a1 = Unity.Mathematics.math.normalize(a1)*Math.Operations.magnitude(a);
+                    b1 = Unity.Mathematics.math.normalize(b1)*Math.Operations.magnitude(b);
+                }   
+                 Unity.Mathematics.float4[] seg = projectSegment(a1, b1, n, inputBasis, method,
+                                                        Vangle, eyePosition, viewingRadius);
+                 Copy(seg, 0, result, i*n,n);
+             }
+             return result;
+         }
+```
+
 
 ## Projection from 3D to 2D
 We have used a virtual camera and rendered that camera's perspective on a plane surface, using the UnityEngine to project 3D figures into 2D.  This avoids manipulation of meshes and line renderers and allows for Parallel and Projective perspecitves.
