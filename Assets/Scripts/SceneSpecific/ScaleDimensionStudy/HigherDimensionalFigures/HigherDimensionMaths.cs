@@ -60,7 +60,7 @@
         /// <param name="basis"> viewing basis </param>
         /// <returns></returns>
         public static Unity.Mathematics.float3 projectDownDimension(this Unity.Mathematics.float4 v,
-            Unity.Mathematics.float4x3 inputBasis, ProjectionMethod method,
+            Unity.Mathematics.float4x3? inputBasis, ProjectionMethod method,
             float? Vangle, Unity.Mathematics.float4? eyePosition, float? viewingRadius)
         {
             float T, S;
@@ -105,10 +105,41 @@
                     float r = Math.Operations.magnitude(v);
                     //assume north pole is at (0,0,0,1);
                     float4 north = new float4(0,0,0,1)*r;
-                    return (north-v)*(Math.Operations.magnitude(north)/(Unity.Mathemathics.math.dot((north-v),Unity.Mathematics.normalize(north))+north;
+                    float4 vPrime = (north-v)*(Math.Operations.magnitude(north)/(Unity.Mathemathics.math.dot((north-v),Unity.Mathematics.normalize(north))+north;
+                    return new float3 (vPrime.x, vPrime.y, vPrime.z);                                                             
                 default: return new Unity.Mathematics.float3(0f, 0f, 0f);
             }
         }
+                                                                                 
+        public static Unity.Mathematics.float3[] projectSegment(Unity.Mathematics.float4 a, Unity.Mathematics.float4 b, int n, Unity.Mathematics.float4x3 inputBasis, ProjectionMethod method,
+            float? Vangle, Unity.Mathematics.float4? eyePosition, float? viewingRadius)
+        {
+            Unity.Mathematics.float3[] result = new Unity.Mathematics.float3[n];
+            for(int i = 0; i < n; i ++)
+            {
+                Unity.Mathematics.float4 v = ((float)i/((float)n-1f))*(b-a)+a;
+                result[i] = projectDownDimension(v,inputBasis,method,Vangle, eyePosition, viewingRadius);
+            }    
+            return result;
+        }
+        public static Unity.Mathematics.float3[] projectQuad  (Unity.Mathematics.float4 a, Unity.Mathematics.float4 b, 
+                                                               Unity.Mathematics.float4 c, Unity.Mathematics.float4 d,
+                                                               int n, Unity.Mathematics.float4x3 inputBasis, ProjectionMethod method,
+                                                                float? Vangle, Unity.Mathematics.float4? eyePosition, float? viewingRadius)
+         {
+             Unity.Mathematics.float4[] result = new Unity.Mathematics.float4[n];
+
+             for(int i = 0; i < n; i++){
+                 Unity.Mathematics.float4 a1 = ((float)i/((float)n-1f))*(b-a)+a;
+                 Unity.Mathematics.float4 b1 = ((float)i/((float)n-1f))*(c-d)+d;
+
+                 Unity.Mathematics.float4[] seg = projectSegment(a1, b1, n, inputBasis, method,
+                                                        Vangle, eyePosition, viewingRadius);
+                 Copy(seg, 0, result, i*n,n);
+             }
+             return result;
+         }
+                                                                
 
         /// <summary>
         /// 
