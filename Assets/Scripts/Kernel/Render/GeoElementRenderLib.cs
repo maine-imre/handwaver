@@ -55,8 +55,10 @@ namespace IMRE.HandWaver.Rendering
         }
 
         public static bool Point(float3 location)
-        {
-            throw new NotImplementedException();
+        {           
+            //TODO a better visualization of a point
+            float3 dir = (width/2f)*(new float3(1,1,1));
+            return Segment(location - dir, location + dir);
         }
 
         public static bool Segment(float3 endpointA, float3 endpointB)
