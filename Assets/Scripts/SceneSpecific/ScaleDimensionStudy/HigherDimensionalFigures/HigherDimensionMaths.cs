@@ -102,7 +102,10 @@
                         S * Unity.Mathematics.math.dot(tmp, basis.c1),
                         S * Unity.Mathematics.math.dot(tmp, basis.c2));
                 case ProjectionMethod.stereographic:
-
+                    float r = Math.Operations.magnitude(v);
+                    //assume north pole is at (0,0,0,1);
+                    float4 north = new float4(0,0,0,1)*r;
+                    return (north-v)*(Math.Operations.magnitude(north)/(Unity.Mathemathics.math.dot((north-v),Unity.Mathematics.normalize(north))+north;
                 default: return new Unity.Mathematics.float3(0f, 0f, 0f);
             }
         }
