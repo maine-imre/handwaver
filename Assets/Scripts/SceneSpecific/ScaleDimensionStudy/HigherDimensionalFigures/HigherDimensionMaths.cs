@@ -151,6 +151,14 @@
              }
              return result;
          }
+                                                                                 
+         public static Unity.Mathematics.float3[] projectTriangle  (Unity.Mathematics.float4 a, Unity.Mathematics.float4 b, 
+                                                               Unity.Mathematics.float4 c,
+                                                               int n, Unity.Mathematics.float4x3 inputBasis, ProjectionMethod method,
+                                                                float? Vangle, Unity.Mathematics.float4? eyePosition, float? viewingRadius)
+         {
+             return  projectQuad  (a, b,c,c, n, inputBasis, method, Vangle, eyePosition, viewingRadius);
+         }
                                                                 
 
         /// <summary>
