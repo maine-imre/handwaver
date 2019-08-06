@@ -698,7 +698,8 @@ That is, $v' = (NorthPole-v)*\frac{|NorthPole|}{((NorthPole-v)\cdot \frac{NorthP
 ### Projections of Segments and Quads
 Each segment and quad (mesh) is projected according to the given method.  In the case of stereogrphaic projection, segments and quads are inflated to lie on the surface of the hypersphere.
 
-NOTE - triangles need to be adapted to this system
+A triangle is treated as a quad where two verticies lie at the same point.  This may be refactored in the future.  As a result, the density of subtriangles is greater near one of the verticies.
+
 ```c#
 public static Unity.Mathematics.float3[] projectSegment(Unity.Mathematics.float4 a, Unity.Mathematics.float4 b, int n, Unity.Mathematics.float4x3 inputBasis, ProjectionMethod method,
             float? Vangle, Unity.Mathematics.float4? eyePosition, float? viewingRadius)
@@ -717,6 +718,20 @@ public static Unity.Mathematics.float3[] projectSegment(Unity.Mathematics.float4
             }    
             return result;
         }
+```
+
+```c#
+         public static Unity.Mathematics.float3[] projectTriangle  (Unity.Mathematics.float4 a, Unity.Mathematics.float4 b, 
+                                                               Unity.Mathematics.float4 c,
+                                                               int n, Unity.Mathematics.float4x3 inputBasis, ProjectionMethod method,
+                                                                float? Vangle, Unity.Mathematics.float4? eyePosition, float? viewingRadius)
+         {
+             return  projectQuad  (a, b,c,c, n, inputBasis, method, Vangle, eyePosition, viewingRadius);
+         }
+```
+
+
+```c#
         public static Unity.Mathematics.float3[] projectQuad  (Unity.Mathematics.float4 a, Unity.Mathematics.float4 b, 
                                                                Unity.Mathematics.float4 c, Unity.Mathematics.float4 d,
                                                                int n, Unity.Mathematics.float4x3 inputBasis, ProjectionMethod method,
