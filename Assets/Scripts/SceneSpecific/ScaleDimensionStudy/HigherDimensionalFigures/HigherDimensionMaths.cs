@@ -118,6 +118,12 @@
             for(int i = 0; i < n; i ++)
             {
                 Unity.Mathematics.float4 v = ((float)i/((float)n-1f))*(b-a)+a;
+                if(method == ProjectionMethod.stereographic)
+                {
+                    //assume center == Vector4.zero;
+                    //assume a and b are on surface of sp
+                    v = Unity.Mathematics.math.normalize(v)*Math.Operations.magnitude(a);
+                }    
                 result[i] = projectDownDimension(v,inputBasis,method,Vangle, eyePosition, viewingRadius);
             }    
             return result;
@@ -132,7 +138,13 @@
              for(int i = 0; i < n; i++){
                  Unity.Mathematics.float4 a1 = ((float)i/((float)n-1f))*(b-a)+a;
                  Unity.Mathematics.float4 b1 = ((float)i/((float)n-1f))*(c-d)+d;
-
+                if(method == ProjectionMethod.stereographic)
+                {
+                    //assume center == Vector4.zero;
+                    //assume a and b are on surface of sp
+                    a1 = Unity.Mathematics.math.normalize(a1)*Math.Operations.magnitude(a);
+                    b1 = Unity.Mathematics.math.normalize(b1)*Math.Operations.magnitude(b);
+                }   
                  Unity.Mathematics.float4[] seg = projectSegment(a1, b1, n, inputBasis, method,
                                                         Vangle, eyePosition, viewingRadius);
                  Copy(seg, 0, result, i*n,n);
