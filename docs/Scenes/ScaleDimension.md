@@ -676,10 +676,44 @@ result[35] = result[15] + Math.Operations.rotate(down, wForward, 2f*degreeFolded
 
 ## Projections
 
+## Orthographic Projection from 4D to 3D
+
+```c#
+Unity.Mathematics.math.normalize(inputBasis.c0);
+Unity.Mathematics.math.normalize(inputBasis.c1);
+Unity.Mathematics.math.normalize(inputBasis.c2);
+
+return new Unity.Mathematics.float3(Unity.Mathematics.math.dot(v, inputBasis.c0),
+    Unity.Mathematics.math.dot(v, inputBasis.c1),
+    Unity.Mathematics.math.dot(v, inputBasis.c2));
+```
 
 ## Parallel Projection from 4D to 3D (Hollasch, 1991)
 
+```c#
+//using http://hollasch.github.io/ray4/Four-Space_Visualization_of_4D_Objects.html#chapter3
+T = 1f / Unity.Mathematics.math.tan(Vangle.Value / 2f);
+tmp = v - eyePosition.Value;
+basis = calc4Matrix(eyePosition.Value, inputBasis);
+S = T / Unity.Mathematics.math.dot(v, basis.c3);
+
+return new Unity.Mathematics.float3(S * Unity.Mathematics.math.dot(tmp, basis.c0),
+    S * Unity.Mathematics.math.dot(tmp, basis.c1),
+    S * Unity.Mathematics.math.dot(tmp, basis.c2));
+```
+
 ## Projective Projection from 4D to 3D (Hollasch, 1991)
+
+```c#
+//using http://hollasch.github.io/ray4/Four-Space_Visualization_of_4D_Objects.html#chapter3
+S = 1f / viewingRadius.Value;
+tmp = v - eyePosition.Value;
+basis = calc4Matrix(eyePosition.Value, inputBasis);
+
+return new Unity.Mathematics.float3(S * Unity.Mathematics.math.dot(tmp, basis.c0),
+    S * Unity.Mathematics.math.dot(tmp, basis.c1),
+    S * Unity.Mathematics.math.dot(tmp, basis.c2));
+```
 
 ## Stereographic Projection from 4D to 3D 
 We consider a hypercube or a 5-cell where the verticies are arranged on a sphere with radius <img src="/docs/Scenes/tex/89f2e0d2d24bcf44db73aab8fc03252c.svg?invert_in_darkmode&sanitize=true" align=middle width=7.87295519999999pt height=14.15524440000002pt/>.
