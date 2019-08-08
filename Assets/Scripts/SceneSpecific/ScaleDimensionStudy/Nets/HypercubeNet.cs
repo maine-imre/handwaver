@@ -1,4 +1,6 @@
-﻿namespace IMRE.HandWaver.HigherDimensions
+﻿using System.Linq;
+
+namespace IMRE.HandWaver.HigherDimensions
 {
     /// <summary>
     ///     Net of hypercube for scale and dimension study
@@ -184,6 +186,11 @@
             result[34] = result[14] + IMRE.Math.Operations.rotate(down, wForward, 2f * degreeFolded);
             result[35] = result[15] + IMRE.Math.Operations.rotate(down, wForward, 2f * degreeFolded);
 
+            for (int i = 0; i < result.Length; i++)
+            {
+                result[i] += new Unity.Mathematics.float4(2f,2f,2f,2f);
+            }
+            
             return result;
         }
 
