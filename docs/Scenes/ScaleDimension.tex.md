@@ -1,8 +1,8 @@
 # Mathematical Audit of Algorithms for Scale and Dimension Scene
 
-In this document, we describe the methods we use (and their sources) for computing the dynamic figures described in the scale and dimension scene.  We acknolwedge that the cases presented here may be limited in nature.  While this scene was being developed a team was working to integrate with a server-side implementation of GeoGebra.  Any generalized version would use the GGB implementation to do the heavy lifting.
+In this document, we describe the methods we use (and their sources) for computing the dynamic figures described in the scale and dimension scene. We acknolwedge that the cases presented here may be limited in nature. While this scene was being developed, a team was working to integrate with a server-side implementation of GeoGebra. Any generalized version would use the GGB implementation to do the heavy lifting.
 
-There are four main sections.  The first section describes algorithms for cross sections.  The second section describes algorithms for rendering and folding nets of figures.  The third section describes algorithms for projection of 4D figures into 3D.  The fourth section describes extensions of the Unity.Mathematics library that are necessary to work with the other algorithms.
+There are four main sections. The first section describes algorithms for cross sections. The second section describes algorithms for rendering and folding nets of figures. The third section describes algorithms for projection of 4D figures into 3D. The fourth section describes extensions of the Unity.Mathematics library that are necessary to work with the other algorithms.
 
 ## Cross-Sections
 
@@ -17,7 +17,7 @@ Let $2x$ be the distance between the points formed by the intersection of the ci
 Since there is reflective symmetry in any direction on the circle, the points lie $\plusminus x$ in the direction of $L$ from the center of the circle.
 By the pythagorean theorem we have $$(x)^2 + \rho^2 = R^2$$
 
-  So the points lie at $(\plusminus \sqrt{R^2 - \rho^2},0,\rho)$.  If $\rho = R$, the two values are equal and there is only one point formed by the intersection of $C$ and $L$.  If $\rho > R$, then there is no intersection.
+So the points lie at $(\plusminus \sqrt{R^2 - \rho^2},0,\rho)$.  If $\rho = R$, the two values are equal and there is only one point formed by the intersection of $C$ and $L$.  If $\rho > R$, then there is no intersection.
 
 [//]: # add a diagram to illustrate
 
@@ -122,7 +122,7 @@ Consider a sphere $S$ with radius $R$ centered at the origin. Let $\rho$ be the 
 If the intersection occurs at a height less than the radius of the sphere, the cross-section will be a circlular plane. Let this circle's radius be $r$. Using the Pythagorean Theorem, the value of $r$ can be calculated with 
 $$(\plusminus \sqrt{R^2 - \rho^2},0,\rho)$$ 
 
-So the circle has a known radius $r$ at a height magnitude $\rho$ from the center of the sphere. If the plane intersecting the sphere is outside the radius of the circle, there is no resulting cross-section. 
+So the circle has a known radius $r$ at a distance of magnitude $\rho$ from the center of the sphere. If the plane intersecting the sphere is outside the radius of the circle, there is no resulting cross-section. 
 
 ```c#
 //if cross section only hits the edge of the circle
@@ -314,9 +314,9 @@ private Vector3 torusPosition(float alpha, float beta)
 
 ### Intersection of a hyperplane and a hypersphere (Makholm, 2015)
 
-If a (n-1) dimensional hyperplane intersects an n-dimensional hypersphere, the result is an (n-1) dimensional hypersphere.  In particular, the intersection of a 3-plane and a 3-sphere is a 2-sphere.
+If an (n-1) dimensional hyperplane intersects an n-dimensional hypersphere, the result is an (n-1) dimensional hypersphere. In particular, the intersection of a 3-plane and a 3-sphere is a 2-sphere.
 
-If we take the 3-plane to be the 3-dimensional renderings space, the center of the 2-sphere appears fixed for all cross-sections (suppose this is at the origin).  Additionally, we can relate ther radius $r$ of the 2-sphere to the radius $R$ of the 3-sphere and the "height" $h$ of the hyperplane by $R^2 = h^2 + r^2$ (Makholm, 2015).
+If we take the 3-plane to be the 3-dimensional rendering's space, the center of the 2-sphere appears fixed for all cross-sections (suppose this is at the origin). Additionally, we can relate their radius $r$ of the 2-sphere to the radius $R$ of the 3-sphere and the "height" $h$ of the hyperplane by $R^2 = h^2 + r^2$ (Makholm, 2015).
 
 ``` c#
 renderSphere(Mathf.Sqrt(radius*radius-sliderval*sliderval));
@@ -330,7 +330,7 @@ renderSphere(Mathf.Sqrt(radius*radius-sliderval*sliderval));
 
 ### Intersection of a hyperplane and a three-torus (Hartley, 2007)
 
-We limit the case of the hyperplane and three-torus intersection to a three-torus to be cross-sected along axises perpendicular to the revolutions used to construct the three torus.
+We limit the case of the hyperplane and three-torus intersection to a three-torus to be cross-sected along axes perpendicular to the revolutions used to construct the three torus.
 We also choose our three-dimensional perpsective to be embedded within the hyperplane.
 
 Hartley (2007) describes a set of parametric equations for a three-torus.
@@ -343,7 +343,7 @@ $$Z = \sin(a)$$
 We are only interested in cross-sections where either $W, X, Y,$ or $Z$ are fixed. We choose our coordinate system to map $x,y,z$ to the remaining three axis.
 We need a function that maps $\alpha, \beta$ ranging from $0$ to $1$ to $x,y,z$.
 Fix a value of $h$, the cross-section height. 
-For any choice of $W,X,Y,Z$ to be fixed to the value of $h$, we can map $\alpha, \beta$ to a subset of $a,b,c$ and solve for the remainign variable (e.g. choose $Z = h$, sovle for $a$, map $X \rightarrow x$, $Y \rightarrow y$, $W \rightarrow z$) for those values of $\alpha, \beta$.
+For any choice of $W,X,Y,Z$ to be fixed to the value of $h$, we can map $\alpha, \beta$ to a subset of $a,b,c$ and solve for the remaining variable (e.g. choose $Z = h$, sovle for $a$, map $X \rightarrow x$, $Y \rightarrow y$, $W \rightarrow z$) for those values of $\alpha, \beta$.
 
 ``` c#
 private float3 HyperToricSection(float alpha, float beta, float h)
@@ -456,7 +456,7 @@ break;
 
 ### Equaliaterial Triangle
 
-The net of a triangle is three congruant line segments.  In it's unfolded state, the line segments are colinear. To fold the triangle net, hold the middle segment fixed and rotate the other two segments (clockwise and counterclockwise, respectively) by $\frac{2}{3} \pi$ radians.
+The net of a triangle is three congruent line segments. In its unfolded state, the line segments are colinear. To fold the triangle net, hold the middle segment fixed and rotate the other two segments (clockwise and counterclockwise, respectively) by $\frac{2}{3} \pi$ radians.
 
 ```C#
 //angle of rotation in degrees (Unity.Mathematics works in degrees)
@@ -473,7 +473,7 @@ result[3] = result[2] + Quaternion.AngleAxis(-t, Vector3.up) * Vector3.left;
 
 ### Square
 
-The net of a square is four congruant line segments.  In it's unfolded state, the line segments are colinear.  To fold the square net, hold one of the middle segments fixed.  Rotate the two adjacent segments around their respective endpoints by $\frac{\pi}{4}$ radians. The remaining segment is adjacent to one of the rotated segments (segment A).  Rotate that segment by ninety degrees around it's joining endpoint, with respect to the direction of segment A.  In effect, this vertex is rotated by $\frac{\pi}{2}$ with respect to it's origional direction.
+The net of a square is four congruent line segments. In its unfolded state, the line segments are colinear. To fold the square net, hold one of the middle segments fixed. Rotate the two adjacent segments around their respective endpoints by $\frac{\pi}{4}$ radians. The remaining segment is adjacent to one of the rotated segments (segment A).  Rotate that segment by ninety degrees around its joining endpoint, with respect to the direction of segment A.  In effect, this vertex is rotated by $\frac{\pi}{2}$ with respect to its origional direction.
 
 ```c#
 //angle of rotation in degrees (Unity.Mathematics works in degrees)
@@ -492,11 +492,11 @@ result[4] = result[3] + Quaternion.AngleAxis(-2 * angle, Vector3.up) * Vector3.l
 
 ### Cube
 
-The net of a cube is a collection of six congruent squares,
+The net of a cube is a collection of six congruent squares.
 One square remains fixed in the center.  
 Four squares share an edge with the center square, and rotate around that edge by $\frac{\pi}{4}$ to fold up the net.
 On one of those four squares, a final square is constructed sharing the opposite edge.
-The final square is rotated by $\frac{\pi}{4}$ with respect to the adjacent square, or $\frac{\pi}{2}$ with respect to it's origional orientation, around it's shared edge, and becomes the "top" square face.
+The final square is rotated by $\frac{\pi}{4}$ with respect to the adjacent square, or $\frac{\pi}{2}$ with respect to its origional orientation, around it's shared edge, and becomes the "top" square face.
 ```c        
 float degreeFolded = percentFolded * 90f + 180f;
 //14 points on cube net
@@ -537,7 +537,7 @@ float degreeFolded)
 
 ### Regular Tetrahedron
 
-The net of a tetrahedron is a collection of four congruant equilaterial triangles.  One traingle remains fixed in the center, and each of the remaining triangles shares their bottom edge with the center triangle.  All triangles except the center rotate up around their shared edge by $\arccos\frac{1}{3}$.
+The net of a tetrahedron is a collection of four congruent equilaterial triangles. One traingle remains fixed in the center, and each of the remaining triangles shares their bottom edge with the center triangle. All triangles except the center rotate up around their shared edge by $\arccos\frac{1}{3}$.
 
 ```c#
 //scale the degree folded by the diehdral angle of the folded tetrahedron of ~70.52
@@ -568,9 +568,9 @@ private static Vector3 triVert(Vector3 nSegmentA, Vector3 nSegmentB, Vector3 opp
 }
 ```
 
-### Regular 5-cell
+### Regular 5-cell (Hypertetrahedron)
 
-The regular 5-cell is a collection of four congruant regular tetrahedrons.  One regular tetrahedron is fixed at the center.  Four tetrahedrons are constructed to share a face with the center tetrahedron.
+The regular 5-cell is a collection of four congruent regular tetrahedrons. One regular tetrahedron is fixed at the center. Four tetrahedrons are constructed to share a face with the center tetrahedron.
 
 In this algorithm we calculate the folded state of the folded 5-cell net to determine the angle needed to fully fold the 5-cell net into a five-cell.  Below the apex is the value of the folded state of the vertex opposite to the face shared with the centra tetrahedron for each of the outer tetrahedrons.
 
