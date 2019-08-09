@@ -1,4 +1,5 @@
-﻿using Enumerable = System.Linq.Enumerable;
+﻿using UnityEngine;
+using Enumerable = System.Linq.Enumerable;
 
 namespace IMRE.HandWaver.ScaleStudy
 {
@@ -8,18 +9,40 @@ namespace IMRE.HandWaver.ScaleStudy
     /// </summary>
     public class cubeNet : net3D
     {
+
         private void Start()
         {
+            
+            
+            //uvs
+            Vector2[] uvs = new Vector2[14];
+            uvs[0] = new Vector2(0.25f, 1f/3f);
+            uvs[1] = new Vector2(0.25f, 0f);
+            uvs[2] = new Vector2(0.5f, 0f);
+            uvs[3] = new Vector2(0.5f, 1f/3f);
+            uvs[4] = new Vector2(0.75f, 1f/3f);
+            uvs[5] = new Vector2(1f, 1f/3f);
+            uvs[6] = new Vector2(1f, 2f/3f);
+            uvs[7] = new Vector2(0.75f, 2f/3f);
+            uvs[8] = new Vector2(0.5f, 2f/3f);
+            uvs[9] = new Vector2(0.5f, 1f);
+            uvs[10] = new Vector2(0.25f, 1f);
+            uvs[11] = new Vector2(0.25f, 2f/3f);
+            uvs[12] = new Vector2(0f, 2f/3);
+            uvs[13] = new Vector2(0f, 1f/3f);
+
             //assign mesh
             mesh.vertices = meshVerts(0);
             mesh.triangles = meshTris();
-
+            mesh.uv = uvs;
+            
             //22 vertices on trace of cube net
             lineRenderer.positionCount = 22;
             lineRenderer.useWorldSpace = false;
             lineRenderer.startWidth = .01f;
             lineRenderer.endWidth = .01f;
             lineRenderer.SetPositions(lineRendererVerts(0));
+            
         }
 
         //startTime = DateTime.Now
