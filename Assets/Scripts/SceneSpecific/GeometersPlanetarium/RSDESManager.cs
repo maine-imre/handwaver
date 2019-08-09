@@ -184,6 +184,49 @@ namespace IMRE.HandWaver.Space
         public Material MoonMaterial;
 
         public Transform RSDESStar;
+        
+        private bool gLat;
+        public bool GlobalLatitude{
+        		set{
+				bool lat = myLatMode == latitudeMode.both || myLatMode == latitudeMode.incremental;
+				bool specialLat = myLatMode == latitudeMode.both || myLatMode == latitudeMode.special;
+				bool dec = !(myLatMode == latitudeMode.special);
+				bool specialDec = specialLat;
+        		for (int i = 0; i < latRenderer.Length; i++){
+        			if (i < nLatDivisions)
+                {
+                    latRenderer[i].enabled = lat && value;
+                    decRenderer[i].enabled = dec && value;
+                }
+                else
+                {
+                    latRenderer[i].enabled = specialLat && value;
+                    decRenderer[i].enabled = specialDec && value;
+                }
+                gLat = value;
+        		}
+        		get => gLat;
+        }
+        private bool gLong;
+        public bool GlobalLongitude{
+        		set{
+				bool lng = myLatMode == latitudeMode.both || myLatMode == latitudeMode.incremental;
+				bool gha = myLatMode == latitudeMode.both || myLatMode == latitudeMode.incremental;
+        		    bool sLong = myLatMode == latitudeMode.both || myLatMode == latitudeMode.special;
+            		bool sGHA = myLatMode == latitudeMode.both || myLatMode == latitudeMode.special;
+        		for (int i = 0; i < longRenderer.Length; i++){
+				if (i < nLongDivisions){
+					longRenderer[i].enabled = lng && value;
+					ghaRenderer[i].enabled = gha && value;
+				}else{
+					longRenderer[i].enabled = sLong && value;
+					ghaRenderer[i].enabled = sGHA && value;
+				}
+        		}
+        		gLong = value;
+        		}
+        		get => gLong;
+        }
 
         //public leapButtonToggleExtension showSun;
         //public leapButtonToggleExtension showMoon;

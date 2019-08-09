@@ -2,16 +2,18 @@
 
 namespace IMRE.HandWaver.Space
 {
-public class PinStarlightRaysToggle : EmbodiedAction
+public class PinStarlightRaysToggle : PinFunctions
     {
-        public override void checkClassifier(EmbodiedClassifier classifier)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override void endAction(EmbodiedClassifier classifier)
-        {
-            throw new System.NotImplementedException();
-        }
+    
+    		public override Unity.Mathematics.float3 pinDirection(RSDESPin pin){
+    			return (Unity.Mathematics.float3) pin.contactPoint;
+    		}
+    		
+        public override void pinFunction(RSDESPin pin){
+			if(pin != null)
+			{
+				pin.pin.StarMode ++;
+			}
+		}
     }
 }

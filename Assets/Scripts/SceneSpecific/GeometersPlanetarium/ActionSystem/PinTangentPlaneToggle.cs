@@ -3,16 +3,19 @@
 namespace IMRE.HandWaver.Space
 {
 
-    public class PinTangentPlaneToggle : EmbodiedAction
+    public class PinTangentPlaneToggle : PinFunctions
     {
-        public override void checkClassifier(EmbodiedClassifier classifier)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override void endAction(EmbodiedClassifier classifier)
-        {
-            throw new System.NotImplementedException();
-        }
+    		public override float desiredAngle = 90f;
+    		
+    		public override void pinFunction(RSDESPin pin){
+			if(pin != null)
+			{
+				pin.toggleHorizonPlane();
+			}
+		}
+		
+    		public override Unity.Mathematics.float3 pinDirection(RSDESPin pin){
+    			return (Unity.Mathematics.float3) pin.contactPoint;
+    		}
     }
 }
