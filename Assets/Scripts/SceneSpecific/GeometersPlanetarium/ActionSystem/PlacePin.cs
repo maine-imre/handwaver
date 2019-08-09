@@ -32,8 +32,13 @@ namespace IMRE.HandWaver.Space
             float dist = IMRE.Math.Operations.magnitude((float3) RSDESManager.earthPos - classifier.origin);
             if (RSDESManager.EarthRadius - dist < tolerance && Time.time > startTime + cooldown)
             {
+                    //figure out when the gesture began
                     startTime = Time.time;
+                    
+                    //make a pin at a location on the Earth closest to where the gesture is
                     RSDESPin.Constructor(GeoPlanetMaths.latlong(classifier.origin, RSDESManager.earthPos));
+                    
+                    //the gesture has completed the functionality.
                     classifier.shouldFinish = true;
             }
         }
