@@ -1,8 +1,8 @@
 # Mathematical Audit of Algorithms for Scale and Dimension Scene
 
-In this document, we describe the methods we use (and their sources) for computing the dynamic figures described in the scale and dimension scene.  We acknolwedge that the cases presented here may be limited in nature.  While this scene was being developed a team was working to integrate with a server-side implementation of GeoGebra.  Any generalized version would use the GGB implementation to do the heavy lifting.
+In this document, we describe the methods we use (and their sources) for computing the dynamic figures described in the scale and dimension scene. We acknolwedge that the cases presented here may be limited in nature. While this scene was being developed, a team was working to integrate with a server-side implementation of GeoGebra. Any generalized version would use the GGB implementation to do the heavy lifting.
 
-There are four main sections.  The first section describes algorithms for cross sections.  The second section describes algorithms for rendering and folding nets of figures.  The third section describes algorithms for projection of 4D figures into 3D.  The fourth section describes extensions of the Unity.Mathematics library that are necessary to work with the other algorithms.
+There are four main sections. The first section describes algorithms for cross sections. The second section describes algorithms for rendering and folding nets of figures. The third section describes algorithms for projection of 4D figures into 3D. The fourth section describes extensions of the Unity.Mathematics library that are necessary to work with the other algorithms.
 
 ## Cross-Sections
 
@@ -17,7 +17,7 @@ Let <img src="/docs/Scenes/tex/5a5214935f8b6ee914efeece84e7535c.svg?invert_in_da
 Since there is reflective symmetry in any direction on the circle, the points lie <img src="/docs/Scenes/tex/234b0c11974419b7414095e977d1aed7.svg?invert_in_darkmode&sanitize=true" align=middle width=9.39498779999999pt height=14.15524440000002pt/> in the direction of <img src="/docs/Scenes/tex/ddcb483302ed36a59286424aa5e0be17.svg?invert_in_darkmode&sanitize=true" align=middle width=11.18724254999999pt height=22.465723500000017pt/> from the center of the circle.
 By the pythagorean theorem we have <p align="center"><img src="/docs/Scenes/tex/d90b91fd06dac0b69ccee3297e55ee3a.svg?invert_in_darkmode&sanitize=true" align=middle width=106.59806355pt height=18.312383099999998pt/></p>
 
-  So the points lie at <img src="/docs/Scenes/tex/88b6ae92dc45e65fe3ca08e37c808f5e.svg?invert_in_darkmode&sanitize=true" align=middle width=116.50112429999999pt height=30.173662199999985pt/>.  If <img src="/docs/Scenes/tex/023bfdc737f856ed7c8314f05df2282f.svg?invert_in_darkmode&sanitize=true" align=middle width=43.02498749999999pt height=22.465723500000017pt/>, the two values are equal and there is only one point formed by the intersection of <img src="/docs/Scenes/tex/9b325b9e31e85137d1de765f43c0f8bc.svg?invert_in_darkmode&sanitize=true" align=middle width=12.92464304999999pt height=22.465723500000017pt/> and <img src="/docs/Scenes/tex/ddcb483302ed36a59286424aa5e0be17.svg?invert_in_darkmode&sanitize=true" align=middle width=11.18724254999999pt height=22.465723500000017pt/>.  If <img src="/docs/Scenes/tex/185424e1f15ba5541cbf3b49e0d6601a.svg?invert_in_darkmode&sanitize=true" align=middle width=43.02498749999999pt height=22.465723500000017pt/>, then there is no intersection.
+So the points lie at <img src="/docs/Scenes/tex/88b6ae92dc45e65fe3ca08e37c808f5e.svg?invert_in_darkmode&sanitize=true" align=middle width=116.50112429999999pt height=30.173662199999985pt/>.  If <img src="/docs/Scenes/tex/023bfdc737f856ed7c8314f05df2282f.svg?invert_in_darkmode&sanitize=true" align=middle width=43.02498749999999pt height=22.465723500000017pt/>, the two values are equal and there is only one point formed by the intersection of <img src="/docs/Scenes/tex/9b325b9e31e85137d1de765f43c0f8bc.svg?invert_in_darkmode&sanitize=true" align=middle width=12.92464304999999pt height=22.465723500000017pt/> and <img src="/docs/Scenes/tex/ddcb483302ed36a59286424aa5e0be17.svg?invert_in_darkmode&sanitize=true" align=middle width=11.18724254999999pt height=22.465723500000017pt/>.  If <img src="/docs/Scenes/tex/185424e1f15ba5541cbf3b49e0d6601a.svg?invert_in_darkmode&sanitize=true" align=middle width=43.02498749999999pt height=22.465723500000017pt/>, then there is no intersection.
 
 [//]: # add a diagram to illustrate
 
@@ -122,7 +122,7 @@ Consider a sphere <img src="/docs/Scenes/tex/e257acd1ccbe7fcb654708f1a866bfe9.sv
 If the intersection occurs at a height less than the radius of the sphere, the cross-section will be a circlular plane. Let this circle's radius be <img src="/docs/Scenes/tex/89f2e0d2d24bcf44db73aab8fc03252c.svg?invert_in_darkmode&sanitize=true" align=middle width=7.87295519999999pt height=14.15524440000002pt/>. Using the Pythagorean Theorem, the value of <img src="/docs/Scenes/tex/89f2e0d2d24bcf44db73aab8fc03252c.svg?invert_in_darkmode&sanitize=true" align=middle width=7.87295519999999pt height=14.15524440000002pt/> can be calculated with 
 <p align="center"><img src="/docs/Scenes/tex/bab904fcd080433ae760f7fa8768d11a.svg?invert_in_darkmode&sanitize=true" align=middle width=116.50112429999999pt height=19.998924pt/></p> 
 
-So the circle has a known radius <img src="/docs/Scenes/tex/89f2e0d2d24bcf44db73aab8fc03252c.svg?invert_in_darkmode&sanitize=true" align=middle width=7.87295519999999pt height=14.15524440000002pt/> at a height magnitude <img src="/docs/Scenes/tex/6dec54c48a0438a5fcde6053bdb9d712.svg?invert_in_darkmode&sanitize=true" align=middle width=8.49888434999999pt height=14.15524440000002pt/> from the center of the sphere. If the plane intersecting the sphere is outside the radius of the circle, there is no resulting cross-section. 
+So the circle has a known radius <img src="/docs/Scenes/tex/89f2e0d2d24bcf44db73aab8fc03252c.svg?invert_in_darkmode&sanitize=true" align=middle width=7.87295519999999pt height=14.15524440000002pt/> at a distance of magnitude <img src="/docs/Scenes/tex/6dec54c48a0438a5fcde6053bdb9d712.svg?invert_in_darkmode&sanitize=true" align=middle width=8.49888434999999pt height=14.15524440000002pt/> from the center of the sphere. If the plane intersecting the sphere is outside the radius of the circle, there is no resulting cross-section. 
 
 ```c#
 //if cross section only hits the edge of the circle
@@ -314,9 +314,9 @@ private Vector3 torusPosition(float alpha, float beta)
 
 ### Intersection of a hyperplane and a hypersphere (Makholm, 2015)
 
-If a (n-1) dimensional hyperplane intersects an n-dimensional hypersphere, the result is an (n-1) dimensional hypersphere.  In particular, the intersection of a 3-plane and a 3-sphere is a 2-sphere.
+If an (n-1) dimensional hyperplane intersects an n-dimensional hypersphere, the result is an (n-1) dimensional hypersphere. In particular, the intersection of a 3-plane and a 3-sphere is a 2-sphere.
 
-If we take the 3-plane to be the 3-dimensional renderings space, the center of the 2-sphere appears fixed for all cross-sections (suppose this is at the origin).  Additionally, we can relate ther radius <img src="/docs/Scenes/tex/89f2e0d2d24bcf44db73aab8fc03252c.svg?invert_in_darkmode&sanitize=true" align=middle width=7.87295519999999pt height=14.15524440000002pt/> of the 2-sphere to the radius <img src="/docs/Scenes/tex/1e438235ef9ec72fc51ac5025516017c.svg?invert_in_darkmode&sanitize=true" align=middle width=12.60847334999999pt height=22.465723500000017pt/> of the 3-sphere and the "height" <img src="/docs/Scenes/tex/2ad9d098b937e46f9f58968551adac57.svg?invert_in_darkmode&sanitize=true" align=middle width=9.47111549999999pt height=22.831056599999986pt/> of the hyperplane by <img src="/docs/Scenes/tex/8261e5c490c1e693d8f0ee4865e18b64.svg?invert_in_darkmode&sanitize=true" align=middle width=93.26282789999998pt height=26.76175259999998pt/> (Makholm, 2015).
+If we take the 3-plane to be the 3-dimensional rendering's space, the center of the 2-sphere appears fixed for all cross-sections (suppose this is at the origin). Additionally, we can relate their radius <img src="/docs/Scenes/tex/89f2e0d2d24bcf44db73aab8fc03252c.svg?invert_in_darkmode&sanitize=true" align=middle width=7.87295519999999pt height=14.15524440000002pt/> of the 2-sphere to the radius <img src="/docs/Scenes/tex/1e438235ef9ec72fc51ac5025516017c.svg?invert_in_darkmode&sanitize=true" align=middle width=12.60847334999999pt height=22.465723500000017pt/> of the 3-sphere and the "height" <img src="/docs/Scenes/tex/2ad9d098b937e46f9f58968551adac57.svg?invert_in_darkmode&sanitize=true" align=middle width=9.47111549999999pt height=22.831056599999986pt/> of the hyperplane by <img src="/docs/Scenes/tex/8261e5c490c1e693d8f0ee4865e18b64.svg?invert_in_darkmode&sanitize=true" align=middle width=93.26282789999998pt height=26.76175259999998pt/> (Makholm, 2015).
 
 ``` c#
 renderSphere(Mathf.Sqrt(radius*radius-sliderval*sliderval));
@@ -330,7 +330,7 @@ renderSphere(Mathf.Sqrt(radius*radius-sliderval*sliderval));
 
 ### Intersection of a hyperplane and a three-torus (Hartley, 2007)
 
-We limit the case of the hyperplane and three-torus intersection to a three-torus to be cross-sected along axises perpendicular to the revolutions used to construct the three torus.
+We limit the case of the hyperplane and three-torus intersection to a three-torus to be cross-sected along axes perpendicular to the revolutions used to construct the three torus.
 We also choose our three-dimensional perpsective to be embedded within the hyperplane.
 
 Hartley (2007) describes a set of parametric equations for a three-torus.
@@ -343,7 +343,7 @@ Hartley (2007) describes a set of parametric equations for a three-torus.
 We are only interested in cross-sections where either <img src="/docs/Scenes/tex/7f4304bf2e52f41a41fc13b12bd19e48.svg?invert_in_darkmode&sanitize=true" align=middle width=58.69858169999999pt height=22.465723500000017pt/> or <img src="/docs/Scenes/tex/5b51bd2e6f329245d425b8002d7cf942.svg?invert_in_darkmode&sanitize=true" align=middle width=12.397274999999992pt height=22.465723500000017pt/> are fixed. We choose our coordinate system to map <img src="/docs/Scenes/tex/244be3c7db382d3e1400c7c4caa1023a.svg?invert_in_darkmode&sanitize=true" align=middle width=41.02358204999999pt height=14.15524440000002pt/> to the remaining three axis.
 We need a function that maps <img src="/docs/Scenes/tex/d7093223b4d827e8c29d4ed84b7ae088.svg?invert_in_darkmode&sanitize=true" align=middle width=28.047932549999988pt height=22.831056599999986pt/> ranging from <img src="/docs/Scenes/tex/29632a9bf827ce0200454dd32fc3be82.svg?invert_in_darkmode&sanitize=true" align=middle width=8.219209349999991pt height=21.18721440000001pt/> to <img src="/docs/Scenes/tex/034d0a6be0424bffe9a6e7ac9236c0f5.svg?invert_in_darkmode&sanitize=true" align=middle width=8.219209349999991pt height=21.18721440000001pt/> to <img src="/docs/Scenes/tex/244be3c7db382d3e1400c7c4caa1023a.svg?invert_in_darkmode&sanitize=true" align=middle width=41.02358204999999pt height=14.15524440000002pt/>.
 Fix a value of <img src="/docs/Scenes/tex/2ad9d098b937e46f9f58968551adac57.svg?invert_in_darkmode&sanitize=true" align=middle width=9.47111549999999pt height=22.831056599999986pt/>, the cross-section height. 
-For any choice of <img src="/docs/Scenes/tex/e427f148d4d1d76000bc79cdbffe89dc.svg?invert_in_darkmode&sanitize=true" align=middle width=73.83551504999998pt height=22.465723500000017pt/> to be fixed to the value of <img src="/docs/Scenes/tex/2ad9d098b937e46f9f58968551adac57.svg?invert_in_darkmode&sanitize=true" align=middle width=9.47111549999999pt height=22.831056599999986pt/>, we can map <img src="/docs/Scenes/tex/d7093223b4d827e8c29d4ed84b7ae088.svg?invert_in_darkmode&sanitize=true" align=middle width=28.047932549999988pt height=22.831056599999986pt/> to a subset of <img src="/docs/Scenes/tex/0b1666db7be254fa8998cf3a27c985bb.svg?invert_in_darkmode&sanitize=true" align=middle width=37.46952164999999pt height=22.831056599999986pt/> and solve for the remainign variable (e.g. choose <img src="/docs/Scenes/tex/12976e89aecd7544d72cc0e1be762587.svg?invert_in_darkmode&sanitize=true" align=middle width=43.78601369999999pt height=22.831056599999986pt/>, sovle for <img src="/docs/Scenes/tex/44bc9d542a92714cac84e01cbbb7fd61.svg?invert_in_darkmode&sanitize=true" align=middle width=8.68915409999999pt height=14.15524440000002pt/>, map <img src="/docs/Scenes/tex/42fb6671e7cd0870e192c254b9ab6e03.svg?invert_in_darkmode&sanitize=true" align=middle width=49.87425464999999pt height=22.465723500000017pt/>, <img src="/docs/Scenes/tex/2fc51e4b14b71b4013218ff011414820.svg?invert_in_darkmode&sanitize=true" align=middle width=47.416205099999985pt height=22.465723500000017pt/>, <img src="/docs/Scenes/tex/6cdedf141f3dcfe676d88f25575c9280.svg?invert_in_darkmode&sanitize=true" align=middle width=51.74647994999999pt height=22.465723500000017pt/>) for those values of <img src="/docs/Scenes/tex/d7093223b4d827e8c29d4ed84b7ae088.svg?invert_in_darkmode&sanitize=true" align=middle width=28.047932549999988pt height=22.831056599999986pt/>.
+For any choice of <img src="/docs/Scenes/tex/e427f148d4d1d76000bc79cdbffe89dc.svg?invert_in_darkmode&sanitize=true" align=middle width=73.83551504999998pt height=22.465723500000017pt/> to be fixed to the value of <img src="/docs/Scenes/tex/2ad9d098b937e46f9f58968551adac57.svg?invert_in_darkmode&sanitize=true" align=middle width=9.47111549999999pt height=22.831056599999986pt/>, we can map <img src="/docs/Scenes/tex/d7093223b4d827e8c29d4ed84b7ae088.svg?invert_in_darkmode&sanitize=true" align=middle width=28.047932549999988pt height=22.831056599999986pt/> to a subset of <img src="/docs/Scenes/tex/0b1666db7be254fa8998cf3a27c985bb.svg?invert_in_darkmode&sanitize=true" align=middle width=37.46952164999999pt height=22.831056599999986pt/> and solve for the remaining variable (e.g. choose <img src="/docs/Scenes/tex/12976e89aecd7544d72cc0e1be762587.svg?invert_in_darkmode&sanitize=true" align=middle width=43.78601369999999pt height=22.831056599999986pt/>, sovle for <img src="/docs/Scenes/tex/44bc9d542a92714cac84e01cbbb7fd61.svg?invert_in_darkmode&sanitize=true" align=middle width=8.68915409999999pt height=14.15524440000002pt/>, map <img src="/docs/Scenes/tex/42fb6671e7cd0870e192c254b9ab6e03.svg?invert_in_darkmode&sanitize=true" align=middle width=49.87425464999999pt height=22.465723500000017pt/>, <img src="/docs/Scenes/tex/2fc51e4b14b71b4013218ff011414820.svg?invert_in_darkmode&sanitize=true" align=middle width=47.416205099999985pt height=22.465723500000017pt/>, <img src="/docs/Scenes/tex/6cdedf141f3dcfe676d88f25575c9280.svg?invert_in_darkmode&sanitize=true" align=middle width=51.74647994999999pt height=22.465723500000017pt/>) for those values of <img src="/docs/Scenes/tex/d7093223b4d827e8c29d4ed84b7ae088.svg?invert_in_darkmode&sanitize=true" align=middle width=28.047932549999988pt height=22.831056599999986pt/>.
 
 ``` c#
 private float3 HyperToricSection(float alpha, float beta, float h)
@@ -456,7 +456,7 @@ break;
 
 ### Equaliaterial Triangle
 
-The net of a triangle is three congruant line segments.  In it's unfolded state, the line segments are colinear. To fold the triangle net, hold the middle segment fixed and rotate the other two segments (clockwise and counterclockwise, respectively) by <img src="/docs/Scenes/tex/90ba29b77077491b320c9da207fbeceb.svg?invert_in_darkmode&sanitize=true" align=middle width=18.485245349999996pt height=27.77565449999998pt/> radians.
+The net of a triangle is three congruent line segments. In its unfolded state, the line segments are colinear. To fold the triangle net, hold the middle segment fixed and rotate the other two segments (clockwise and counterclockwise, respectively) by <img src="/docs/Scenes/tex/90ba29b77077491b320c9da207fbeceb.svg?invert_in_darkmode&sanitize=true" align=middle width=18.485245349999996pt height=27.77565449999998pt/> radians.
 
 ```C#
 //angle of rotation in degrees (Unity.Mathematics works in degrees)
@@ -473,7 +473,7 @@ result[3] = result[2] + Quaternion.AngleAxis(-t, Vector3.up) * Vector3.left;
 
 ### Square
 
-The net of a square is four congruant line segments.  In it's unfolded state, the line segments are colinear.  To fold the square net, hold one of the middle segments fixed.  Rotate the two adjacent segments around their respective endpoints by <img src="/docs/Scenes/tex/4eb105c60f67ef131323b9c0969450b8.svg?invert_in_darkmode&sanitize=true" align=middle width=8.099960549999997pt height=22.853275500000024pt/> radians. The remaining segment is adjacent to one of the rotated segments (segment A).  Rotate that segment by ninety degrees around it's joining endpoint, with respect to the direction of segment A.  In effect, this vertex is rotated by <img src="/docs/Scenes/tex/06798cd2c8dafc8ea4b2e78028094f67.svg?invert_in_darkmode&sanitize=true" align=middle width=8.099960549999997pt height=22.853275500000024pt/> with respect to it's origional direction.
+The net of a square is four congruent line segments. In its unfolded state, the line segments are colinear. To fold the square net, hold one of the middle segments fixed. Rotate the two adjacent segments around their respective endpoints by <img src="/docs/Scenes/tex/4eb105c60f67ef131323b9c0969450b8.svg?invert_in_darkmode&sanitize=true" align=middle width=8.099960549999997pt height=22.853275500000024pt/> radians. The remaining segment is adjacent to one of the rotated segments (segment A).  Rotate that segment by ninety degrees around its joining endpoint, with respect to the direction of segment A.  In effect, this vertex is rotated by <img src="/docs/Scenes/tex/06798cd2c8dafc8ea4b2e78028094f67.svg?invert_in_darkmode&sanitize=true" align=middle width=8.099960549999997pt height=22.853275500000024pt/> with respect to its origional direction.
 
 ```c#
 //angle of rotation in degrees (Unity.Mathematics works in degrees)
@@ -492,11 +492,11 @@ result[4] = result[3] + Quaternion.AngleAxis(-2 * angle, Vector3.up) * Vector3.l
 
 ### Cube
 
-The net of a cube is a collection of six congruent squares,
+The net of a cube is a collection of six congruent squares.
 One square remains fixed in the center.  
 Four squares share an edge with the center square, and rotate around that edge by <img src="/docs/Scenes/tex/4eb105c60f67ef131323b9c0969450b8.svg?invert_in_darkmode&sanitize=true" align=middle width=8.099960549999997pt height=22.853275500000024pt/> to fold up the net.
 On one of those four squares, a final square is constructed sharing the opposite edge.
-The final square is rotated by <img src="/docs/Scenes/tex/4eb105c60f67ef131323b9c0969450b8.svg?invert_in_darkmode&sanitize=true" align=middle width=8.099960549999997pt height=22.853275500000024pt/> with respect to the adjacent square, or <img src="/docs/Scenes/tex/06798cd2c8dafc8ea4b2e78028094f67.svg?invert_in_darkmode&sanitize=true" align=middle width=8.099960549999997pt height=22.853275500000024pt/> with respect to it's origional orientation, around it's shared edge, and becomes the "top" square face.
+The final square is rotated by <img src="/docs/Scenes/tex/4eb105c60f67ef131323b9c0969450b8.svg?invert_in_darkmode&sanitize=true" align=middle width=8.099960549999997pt height=22.853275500000024pt/> with respect to the adjacent square, or <img src="/docs/Scenes/tex/06798cd2c8dafc8ea4b2e78028094f67.svg?invert_in_darkmode&sanitize=true" align=middle width=8.099960549999997pt height=22.853275500000024pt/> with respect to its origional orientation, around it's shared edge, and becomes the "top" square face.
 ```c        
 float degreeFolded = percentFolded * 90f + 180f;
 //14 points on cube net
@@ -537,7 +537,7 @@ float degreeFolded)
 
 ### Regular Tetrahedron
 
-The net of a tetrahedron is a collection of four congruant equilaterial triangles.  One traingle remains fixed in the center, and each of the remaining triangles shares their bottom edge with the center triangle.  All triangles except the center rotate up around their shared edge by <img src="/docs/Scenes/tex/d198a46d6c0cc6400dd3ea7ebfe0c709.svg?invert_in_darkmode&sanitize=true" align=middle width=55.237455899999986pt height=27.77565449999998pt/>.
+The net of a tetrahedron is a collection of four congruent equilaterial triangles. One traingle remains fixed in the center, and each of the remaining triangles shares their bottom edge with the center triangle. All triangles except the center rotate up around their shared edge by <img src="/docs/Scenes/tex/d198a46d6c0cc6400dd3ea7ebfe0c709.svg?invert_in_darkmode&sanitize=true" align=middle width=55.237455899999986pt height=27.77565449999998pt/>.
 
 ```c#
 //scale the degree folded by the diehdral angle of the folded tetrahedron of ~70.52
@@ -568,9 +568,9 @@ private static Vector3 triVert(Vector3 nSegmentA, Vector3 nSegmentB, Vector3 opp
 }
 ```
 
-### Regular 5-cell
+### Regular 5-cell (Hypertetrahedron)
 
-The regular 5-cell is a collection of four congruant regular tetrahedrons.  One regular tetrahedron is fixed at the center.  Four tetrahedrons are constructed to share a face with the center tetrahedron.
+The regular 5-cell is a collection of four congruent regular tetrahedrons. One regular tetrahedron is fixed at the center. Four tetrahedrons are constructed to share a face with the center tetrahedron.
 
 In this algorithm we calculate the folded state of the folded 5-cell net to determine the angle needed to fully fold the 5-cell net into a five-cell.  Below the apex is the value of the folded state of the vertex opposite to the face shared with the centra tetrahedron for each of the outer tetrahedrons.
 
