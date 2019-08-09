@@ -1,10 +1,11 @@
 ﻿using System.Linq;
+using UnityEngine;
 
 namespace IMRE.HandWaver.HigherDimensions
 {
     /// <summary>
-    ///     Net of hypercube for scale and dimension study
-    ///     Projected to 3D
+    /// Net of hypercube for scale and dimension study
+    /// Projected to 3D
     /// </summary>
     public class HypercubeNet : AbstractHigherDimSolid, IMRE.HandWaver.ScaleStudy.ISliderInput
     {
@@ -86,6 +87,69 @@ namespace IMRE.HandWaver.HigherDimensions
                 }
 
                 return _triangles;
+            }
+        }
+
+        public override Color[] colors
+        {
+            get
+            {
+                Color[] result = new Color[4 * 9];
+
+                //core cube (does not fold)
+                result[0] = Color.cyan;
+                result[1] = Color.cyan;
+                result[2] = Color.cyan;
+                result[3] = Color.cyan;
+
+                result[4] = Color.cyan;
+                result[5] = Color.cyan;
+                result[6] = Color.cyan;
+                result[7] = Color.cyan;
+
+                //above up face.            
+                result[8] = Color.magenta;
+                result[9] = Color.magenta;
+                result[10] = Color.magenta;
+                result[11] = Color.magenta;
+
+                //below down face
+                result[12] = Color.red;
+                result[13] = Color.red;
+                result[14] = Color.red;
+                result[15] = Color.red;
+
+                //right of right face;
+                result[16] = Color.yellow;
+                result[17] = Color.yellow;
+                result[18] = Color.yellow;
+                result[19] = Color.yellow;
+
+                //left of left face
+                result[20] = Color.green;
+                result[21] = Color.green;
+                result[22] = Color.green;
+                result[23] = Color.green;
+
+                //forward of forward face.
+                result[24] = Color.white;
+                result[25] = Color.white;
+                result[26] = Color.white;
+                result[27] = Color.white;
+
+                //back of back face.
+                result[28] = Color.blue;
+                result[29] = Color.blue;
+                result[30] = Color.blue;
+                result[31] = Color.blue;
+
+                //down of double down.
+                result[32] = Color.grey;
+                result[33] = Color.grey;
+                result[34] = Color.grey;
+                result[35] = Color.grey;
+
+                return result;
             }
         }
 
@@ -221,5 +285,6 @@ namespace IMRE.HandWaver.HigherDimensions
                 a1, a2, a6, a5 //left
             };
         }
+
     }
 }

@@ -7,7 +7,6 @@ www.imrelab.org
 
 namespace IMRE.Chess3D
 {
-    [UnityEngine.RequireComponent(typeof(Leap.Unity.Interaction.InteractionBehaviour))]
     /// <summary>
     /// An abstracted version of the chess piece.
     /// </summary>

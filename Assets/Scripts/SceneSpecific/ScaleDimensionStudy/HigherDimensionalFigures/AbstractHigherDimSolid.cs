@@ -1,4 +1,6 @@
-﻿namespace IMRE.HandWaver.HigherDimensions
+﻿using UnityEngine;
+
+namespace IMRE.HandWaver.HigherDimensions
 {
     [UnityEngine.RequireComponent(typeof(UnityEngine.MeshFilter))]
     [UnityEngine.RequireComponent(typeof(UnityEngine.MeshRenderer))]
@@ -53,6 +55,7 @@
 
         public abstract UnityEngine.Vector2[] uvs { get; }
         public abstract int[] triangles { get; }
+        public abstract Color[] colors { get; }
 
         private void Start()
         {
@@ -61,6 +64,7 @@
             mesh.vertices = ProjectedVerticiesV3;
             mesh.uv = uvs;
             mesh.triangles = triangles;
+            mesh.colors = colors;
             mesh.RecalculateNormals();
             mesh.RecalculateBounds();
         }

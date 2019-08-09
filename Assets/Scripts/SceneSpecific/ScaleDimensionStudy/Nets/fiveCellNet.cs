@@ -96,6 +96,8 @@ namespace IMRE.HandWaver.HigherDimensions
                 3, 1, 7
             };
 
+        public override Color[] colors { get; }
+
         public float slider
         {
             set => PercentFolded = !sliderOverride ? value : 1f;
