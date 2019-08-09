@@ -52,7 +52,7 @@ namespace IMRE.EmbodiedUserInput
         public void Awake()
         {
             mainCamera = Camera.main;
-
+            FindObjectOfType<ViveHandTracking.GestureProvider>().enabled = enableViveSense;
             bodyInput = BodyInput.newInput();
             bodyInput.FullBodyTracking = false;
             bodyInput.HandTracking = false;
