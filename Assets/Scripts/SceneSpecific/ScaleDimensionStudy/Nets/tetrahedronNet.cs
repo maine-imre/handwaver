@@ -1,4 +1,5 @@
 ﻿using Enumerable = System.Linq.Enumerable;
+using UnityEngine;
 
 namespace IMRE.HandWaver.ScaleStudy
 {
@@ -22,6 +23,17 @@ namespace IMRE.HandWaver.ScaleStudy
                                                             new UnityEngine.Vector3(-1, 1, -1)) / 2f));
         private void Start()
         {
+            //uvs
+            Vector2[] uvs = new Vector2[6];
+            uvs[0] = new Vector2(0f, 0f);
+            uvs[1] = new Vector2(0.5f, 0f);
+            uvs[2] = new Vector2(1f, 0f);
+            uvs[3] = new Vector2(0.75f, 0.5f * Unity.Mathematics.math.sin(60f * Mathf.Deg2Rad));
+            uvs[4] = new Vector2(0.5f, 2f * 0.5f * Unity.Mathematics.math.sin(60f * Mathf.Deg2Rad));
+            uvs[5] = new Vector2(0.25f, 0.5f * Unity.Mathematics.math.sin(60f * Mathf.Deg2Rad));
+
+            mesh.uv = uvs;
+            
             //unfolded shape(degree of fold = 0)
             mesh.vertices = meshVerts(0);
             //triangles for unfolded shape

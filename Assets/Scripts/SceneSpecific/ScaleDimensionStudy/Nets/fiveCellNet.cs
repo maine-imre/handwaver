@@ -97,7 +97,30 @@ namespace IMRE.HandWaver.HigherDimensions
                 3, 1, 7
             };
 
-        public override Color[] colors { get; }
+        public override Color[] colors
+        {
+            get
+            {
+                Color[] result = new Color[8];
+                
+                //core tetrahedron
+                result[0] = Color.white;
+                result[1] = Color.white;
+                result[2] = Color.white;
+                result[3] = Color.white;
+
+                //apex of tetrahedron for each additional tetrahedron(from faces of first)
+                result[4] = Color.red;
+
+                result[5] = Color.green;
+
+                result[6] = Color.yellow;
+
+                result[7] = Color.magenta;
+
+                return result;
+            }
+        }
 
         public float slider
         {
