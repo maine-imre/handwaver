@@ -24,6 +24,8 @@ namespace IMRE.HandWaver.HigherDimensions
         private float _foldPercent;
 
         private int[] _triangles;
+        
+        public static Unity.Mathematics.float4 offset = new Unity.Mathematics.float4(2f,2f,2f,2f);
 
         private UnityEngine.Vector2[] _uvs;
         public bool sliderOverride;
@@ -252,7 +254,7 @@ namespace IMRE.HandWaver.HigherDimensions
 
             for (int i = 0; i < result.Length; i++)
             {
-                result[i] += new Unity.Mathematics.float4(2f,2f,2f,2f);
+                result[i] += offset;
             }
             
             return result;

@@ -10,6 +10,7 @@ namespace IMRE.HandWaver.HigherDimensions
         //initialize fold
         //read only static float GoldenRatio = (1f + Mathf.Sqrt(5f)) / 2f;
         private float _percentFolded;
+        public static Unity.Mathematics.float4 offset = new Unity.Mathematics.float4(2f,2f,2f,2f);
 
         private UnityEngine.Vector2[] _uvs;
         public bool sliderOverride;
@@ -38,7 +39,7 @@ namespace IMRE.HandWaver.HigherDimensions
                 //the calculated result for the dihedral angle is about 91 degrees
                 //float dihedralAngle = IMRE.Math.Operations.Angle(dir1, apex - center1);
                 //this is a rough guess for the value by an empirical approach.
-                float dihedralAngle = 104.7f;
+                float dihedralAngle = 104.4856f;
 
                 _percentFolded = value;
                 //TODO find this value.			
@@ -152,6 +153,11 @@ namespace IMRE.HandWaver.HigherDimensions
             
             //Debug.Log(Math.Operations.Angle(dir1, apex-center1) + " : " + Math.Operations.Angle(dir2, apex-center2) + " : " + Math.Operations.Angle(dir3, apex-center3) + " : " + Math.Operations.Angle(dir4, apex-center4));
 
+            for (int i = 0; i < result.Length; i++)
+            {
+                result[i] += offset;
+            }
+            
             return result;
         }
 
