@@ -10,7 +10,7 @@ namespace IMRE.HandWaver.Kernel.GeoGebraInterface
     [Serializable]
     public struct ggbOutput : IComponentData
     {
-        private string cmd;
+        private NativeString512 cmd;
     }
 
 
@@ -19,7 +19,7 @@ namespace IMRE.HandWaver.Kernel.GeoGebraInterface
         // OnUpdate runs on the main thread.
         protected override JobHandle OnUpdate(JobHandle inputDependencies)
         {
-            var job = new PointDataJob();
+            var job = new GeoElementJob();
 
             return job.Schedule(this, inputDependencies);
         }
@@ -27,7 +27,7 @@ namespace IMRE.HandWaver.Kernel.GeoGebraInterface
         //This is a template for the jobs we will use.  See GitHub issue for a list of all possible types.
         // Use the [BurstCompile] attribute to compile a job with Burst. You may see significant speed ups, so try it!
         [BurstCompile]
-        private struct PointDataJob : IJobForEach<GeoElement, ggbOutput>
+        private struct GeoElementJob : IJobForEach<GeoElement, ggbOutput>
         {
             // The [ReadOnly] attribute tells the job scheduler that this job will not write to rotSpeedIJobForEach
             public void Execute(ref GeoElement target, [ReadOnly] ref ggbOutput DataGGB)

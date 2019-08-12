@@ -1,8 +1,9 @@
-#if LeapMotion
+using System;
 using System.Collections.Generic;
-using Leap.Unity;
 using Unity.Mathematics;
 using UnityEngine;
+#if LeapMotion
+using Leap.Unity;
 #endif
 #if ViveSense
 using ViveHandTracking;
