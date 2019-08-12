@@ -1,4 +1,5 @@
 using System;
+using System.Text.RegularExpressions;
 using IMRE.HandWaver.Kernel.Geos;
 using Unity.Burst;
 using Unity.Collections;
@@ -10,12 +11,14 @@ namespace IMRE.HandWaver.Kernel.GeoGebraInterface
     [Serializable]
     public struct ggbOutput : IComponentData
     {
-        private NativeString512 cmd;
+        internal NativeString512 cmd;
     }
 
 
-    public class GeoGebraInterface : JobComponentSystem
+    public class GeoGebraCommandEvalSystem : JobComponentSystem
     {
+
+
         // OnUpdate runs on the main thread.
         protected override JobHandle OnUpdate(JobHandle inputDependencies)
         {
@@ -32,9 +35,11 @@ namespace IMRE.HandWaver.Kernel.GeoGebraInterface
             // The [ReadOnly] attribute tells the job scheduler that this job will not write to rotSpeedIJobForEach
             public void Execute(ref GeoElement target, [ReadOnly] ref ggbOutput DataGGB)
             {
+
+              
                 //update data in GeoElement to reflect GGB Input
                 //TODO
-
+                
                 //update Mesh/Line/etc. Data to reflect new Object Definition.
                 //TODO
             }

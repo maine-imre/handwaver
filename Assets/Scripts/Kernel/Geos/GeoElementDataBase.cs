@@ -7,20 +7,22 @@ namespace IMRE.HandWaver.Kernel.Geos
     public static class GeoElementDataBase
     {
         /// <summary>
-        /// Dictionary to keep track of the Geoelement's id based on the string name
+        /// Dictionary to keep track of the Geoelement's id based on the string name.
+        /// Key is element name as a string (max 30 characters).
         /// </summary>
         private static Dictionary<String, int> GeoNameDb;
 
         /// <summary>
-        /// List of all GeoElements within the scene.
+        /// Dictionary of all GeoElements within the scene.
+        /// Key is element id as int.
         /// </summary>
-        private static List<GeoElement> GeoElements = new List<GeoElement>();
+        private static Dictionary<int,GeoElement> GeoElements = new Dictionary<int,GeoElement>();
         
         /// <summary>
-        /// List of all GeoElement meshes.
-        /// 
+        /// Dictionary of all GeoElement meshes.
+        /// Key is element id as int.
         /// </summary>
-        private static List<Mesh> GeoElementMesh = new List<Mesh>();
+        private static Dictionary<int,Mesh> GeoElementMesh = new Dictionary<int,Mesh>();
 
         /// <summary>
         /// Interface method to return element id from element name.
@@ -46,7 +48,11 @@ namespace IMRE.HandWaver.Kernel.Geos
         
         public static void AddElement(GeoElement e)
         {
-            GeoElements[e.ElementId] = e;
+            if(GeoElements.ContainsKey(e.ElementId))
+            {
+                throw new Exception("Element id already exists with in the system");
+            }
+            GeoElements.Add(e.ElementId, e);
             GeoNameDb.Add(e.ElementName.ToString(), e.ElementId);
         }
     }
