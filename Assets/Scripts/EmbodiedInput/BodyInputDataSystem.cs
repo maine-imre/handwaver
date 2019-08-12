@@ -52,7 +52,6 @@ namespace IMRE.EmbodiedUserInput
         public void Awake()
         {
             mainCamera = Camera.main;
-
             bodyInput = BodyInput.newInput();
             bodyInput.FullBodyTracking = false;
             bodyInput.HandTracking = false;
