@@ -186,27 +186,35 @@ namespace IMRE.HandWaver.Space
         public Transform RSDESStar;
         
         private bool gLat;
-        public bool GlobalLatitude{
-        		set{
-				bool lat = myLatMode == latitudeMode.both || myLatMode == latitudeMode.incremental;
-				bool specialLat = myLatMode == latitudeMode.both || myLatMode == latitudeMode.special;
-				bool dec = !(myLatMode == latitudeMode.special);
-				bool specialDec = specialLat;
-        		for (int i = 0; i < latRenderer.Length; i++){
-        			if (i < nLatDivisions)
+
+        public bool GlobalLatitude
+        {
+            set
+            {
+                bool lat = myLatMode == latitudeMode.both || myLatMode == latitudeMode.incremental;
+                bool specialLat = myLatMode == latitudeMode.both || myLatMode == latitudeMode.special;
+                bool dec = !(myLatMode == latitudeMode.special);
+                bool specialDec = specialLat;
+                for (int i = 0; i < latRenderer.Length; i++)
                 {
-                    latRenderer[i].enabled = lat && value;
-                    decRenderer[i].enabled = dec && value;
+                    if (i < nLatDivisions)
+                    {
+                        latRenderer[i].enabled = lat && value;
+                        decRenderer[i].enabled = dec && value;
+                    }
+                    else
+                    {
+                        latRenderer[i].enabled = specialLat && value;
+                        decRenderer[i].enabled = specialDec && value;
+                    }
+
+                    gLat = value;
                 }
-                else
-                {
-                    latRenderer[i].enabled = specialLat && value;
-                    decRenderer[i].enabled = specialDec && value;
-                }
-                gLat = value;
-        		}
-        		get => gLat;
+
+                get => gLat;
+            }
         }
+
         private bool gLong;
         public bool GlobalLongitude{
         		set{
