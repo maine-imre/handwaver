@@ -572,7 +572,7 @@ private static Vector3 triVert(Vector3 nSegmentA, Vector3 nSegmentB, Vector3 opp
 
 The regular 5-cell is a collection of four congruent regular tetrahedrons. One regular tetrahedron is fixed at the center. Four tetrahedrons are constructed to share a face with the center tetrahedron.
 
-In this algorithm we calculate the folded state of the folded 5-cell net to determine the angle needed to fully fold the 5-cell net into a five-cell.  Below the apex is the value of the folded state of the vertex opposite to the face shared with the centra tetrahedron for each of the outer tetrahedrons.
+In this algorithm we calculate the folded state of the five-cell net to determine the angle needed to fully fold the net into a five-cell. Below the apex is the value of the folded state of the vertex opposite to the face shared with the center tetrahedron for each of the outer tetrahedrons.
 
 ```c#
 //8 points on unfolded fivecell
@@ -609,11 +609,11 @@ result[7] = center4 + Math.Operations.rotate(dir4, apex - center4, degreeFolded)
 
 ### Regular 8-cell
 
-The net of a regular 8-cell or hypercube is a collection of eight congruant cubes.  One cube is fixed at the center.  Six cubes are constructed from the faces of the center cube.  The remaining cube is constructed on the opposite face of one of the six outer cubes.
+The net of a regular 8-cell (or hypercube) is a collection of eight congruent cubes. One cube is fixed at the center. Six cubes are constructed from the faces of the center cube. The remaining cube is constructed on the opposite face of one of the six outer cubes.
 
-To fold the net of the tetrahedron, the verticies of the opposite faces of the an outer cube are rotated in a 2-plane (whose basis is constructed from a vector orthagonal to all of the faces of the adjacent cube and the cross-product of the sides of the face shared with an adjacent cube).  If two faces are shared with an adjacent cube, choose the adjacent cube to be the core (center) cube.  A vertex is rotated around the vertex of the opposite face which shares a segment of the cube.
+To fold the net of the hypercube, the verticies of the opposite faces of an outer cube are rotated in a 2-plane (whose basis is constructed from a vector orthagonal to all of the faces of the adjacent cube and the cross-product of the sides of the face shared with an adjacent cube). If two faces are shared with an adjacent cube, choose the adjacent cube to be the core (center) cube. A vertex is rotated around the vertex of the opposite face which shares a segment of the cube.
 
-Note that the 8th cube (below: down of down) is rotated with respect to its adjacent cube and not the core cube.  Effectively, it is rotated by twice the angle, with respect to the lower cube.
+Note that the 8th cube (below: down of down) is rotated with respect to its adjacent cube and not the core cube. Effectively, it is rotated by twice the angle, with respect to the lower cube.
 
 The cubes of the regular 8-cell net are folded by 90-degrees to construct the regular 8-cell.
 
@@ -730,9 +730,9 @@ That is, $v' = (NorthPole-v)*\frac{|NorthPole|}{((NorthPole-v)\cdot \frac{NorthP
 ```
 
 ### Projections of Segments and Quads
-Each segment and quad (mesh) is projected according to the given method.  In the case of stereogrphaic projection, segments and quads are inflated to lie on the surface of the hypersphere.
+Each segment and quad (mesh) is projected according to the given method. In the case of stereogrphaic projection, segments and quads are inflated to lie on the surface of the hypersphere.
 
-A triangle is treated as a quad where two verticies lie at the same point.  This may be refactored in the future.  As a result, the density of subtriangles is greater near one of the verticies.
+A triangle is treated as a quad where two verticies lie at the same point. This may be refactored in the future. As a result, the density of subtriangles is greater near one of the verticies.
 
 ```c#
 public static Unity.Mathematics.float3[] projectSegment(Unity.Mathematics.float4 a, Unity.Mathematics.float4 b, int n, Unity.Mathematics.float4x3 inputBasis, ProjectionMethod method,
@@ -793,11 +793,11 @@ public static Unity.Mathematics.float3[] projectSegment(Unity.Mathematics.float4
 
 
 ## Projection from 3D to 2D
-We have used a virtual camera and rendered that camera's perspective on a plane surface, using the UnityEngine to project 3D figures into 2D.  This avoids manipulation of meshes and line renderers and allows for Parallel and Projective perspecitves.
+We have used a virtual camera and rendered that camera's perspective on a plane surface, using the UnityEngine to project 3D figures into 2D. This avoids manipulation of meshes and line renderers and allows for Parallel and Projective perspecitves.
 
 ## Mathematics Library Extensions
 
-We have extended Unity.Mathematics to include serveral operations for float3 and float4.  While System.Mathematics duplicates some of these operations, they require the varaible to be cast as a Vector3.
+We have extended Unity.Mathematics to include serveral operations for float3 and float4. While System.Mathematics duplicates some of these operations, they require the varaible to be cast as a Vector3.
 
 ### Angle between two float3
 ```c#
