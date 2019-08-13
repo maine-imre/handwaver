@@ -18,7 +18,10 @@
 /Assets/ViveHandTracking/*
 /[Aa]ssets/[Ll]eap[Mm]otion/*
 /Assets/MixCast/*
-# /Assets/Plugins/*
+/Assets/Plugins/*
+!/Assets/Plugins/socket.io/*
+!/Assets/Plugins/Newtonsoft.Json.dll
+!/Assets/Plugins/UniRx
 /Assets/Photon Unity Networking/*
 /Assets/PhotonChatApi/*
 /Assets/PoolManagerExampleFiles/*
