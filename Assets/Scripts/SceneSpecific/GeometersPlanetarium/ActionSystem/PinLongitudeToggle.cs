@@ -1,11 +1,12 @@
 ﻿using IMRE.EmbodiedUserInput;
+using Unity.Mathematics;
 
 namespace IMRE.HandWaver.Space
 {
-public class PinLongitudeToggle : EmbodiedAction
+public class PinLongitudeToggle : PinFunctions
     {
-    		public override float desiredAngle = 0f;
-    		public override Unity.Mathematics.float3 pinDirection(RSDESPin pin){
+    		public float desiredAngle = 0f;
+    		public Unity.Mathematics.float3 pinDirection(RSDESPin pin){
     			return new float3(0f,1f,0f);
     		}
     		

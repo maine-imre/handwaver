@@ -12,7 +12,7 @@ namespace IMRE.HandWaver.Space
     [RequireComponent(typeof(LineRenderer), typeof(InteractionBehaviour),
         typeof(AnchorableBehaviour))]
     /// <summary>
-    /// Handels user interaction with the RSDES Pins and renders features local to the pin.
+    /// Handles user interaction with the RSDES Pins and renders features local to the pin.
     /// The main contributor(s) to this script is NG
     /// Status: WORKING
     /// </summary>

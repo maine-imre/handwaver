@@ -14,8 +14,8 @@ namespace IMRE.HandWaver.Space
         		float bestDist = tolerance;
         		pinData pin = null;
         		//find closest point
-        		for(i = 0; i < RSDESManager.ins.pinnedPoints.Length; i++){
-				if(Mathematics.Operations.magnitude(classifier.origin - pinnedPoints[i].pin.contactPoint) < dist && Mathematics.Operations.Angle(classifier.direction, pinDirection(pinnedPoints[i].pin) < angleTolerance)
+        		for(int i = 0; i < RSDESManager.ins.pinnedPoints.Length; i++){
+				if(Mathematics.Operations.magnitude(classifier.origin - pinnedPoints[i].pin.contactPoint) < dist && Mathematics.Operations.Angle(classifier.direction, pinDirection(pinnedPoints[i].pin) < angleTolerance))
 				{
 					pin = RSDESManager.ins.pinnedPoints[i];
 					dist = Mathematics.Operations.magnitude(classifier.origin - RSDESManager.ins.pinnedPoints[i].contactPoint);

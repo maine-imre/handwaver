@@ -1,18 +1,19 @@
 ﻿using IMRE.EmbodiedUserInput;
+using Unity.Mathematics;
+using UnityEngine;
 
 namespace IMRE.HandWaver.Space
 {
     public class GlobalLongitude : EmbodiedAction
     {
-/// <summary>
+            /// <summary>
     		/// degrees from north.
     		/// </summary>
     		public float desiredAngle = 0f;
     		public float angleTol = 15f;
         /// <summary>
-        /// Cooldown is used to limit how many pins are placed within how much time.
-        /// Without this a pin would be placed on every frame when a finger is close enough to
-        /// the surface of Earth
+        /// Cooldown is used to limit how many toggles take place within how much time.
+        /// Without this, the 
         /// </summary>
         public float cooldown = 2f;
         

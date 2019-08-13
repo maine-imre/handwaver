@@ -1,4 +1,5 @@
 ﻿using IMRE.EmbodiedUserInput;
+using Unity.Mathematics;
 
 namespace IMRE.HandWaver.Space
 {

@@ -2,9 +2,9 @@
 
 namespace IMRE.HandWaver.Space
 {
-public class PinTerminatorToggle : EmbodiedAction
+public class PinTerminatorToggle : PinFunctions
     {
-    		public override float desiredAngle = 90f;
+    		public float desiredAngle = 90f;
     		
     		public override void pinFunction(RSDESPin pin){
 			if(pin != null)
