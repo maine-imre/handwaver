@@ -17,8 +17,8 @@ namespace IMRE.HandWaver.ScaleStudy
             //uvs
             Vector2[] uvs = new Vector2[14];
             uvs[0] = new Vector2(0.25f, 1f/3f);
-            uvs[1] = new Vector2(0.25f, 0f);
-            uvs[2] = new Vector2(0.5f, 0f);
+            uvs[1] = new Vector2(0.25f, 2f/3f);
+            uvs[2] = new Vector2(0.5f, 2f/3f);
             uvs[3] = new Vector2(0.5f, 1f/3f);
             uvs[4] = new Vector2(0.75f, 1f/3f);
             uvs[5] = new Vector2(1f, 1f/3f);
