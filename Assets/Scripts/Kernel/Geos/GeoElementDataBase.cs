@@ -10,7 +10,7 @@ namespace IMRE.HandWaver.Kernel.Geos
         /// Dictionary to keep track of the Geoelement's id based on the string name.
         /// Key is element name as a string (max 30 characters).
         /// </summary>
-        private static Dictionary<String, int> GeoNameDb;
+        public static Dictionary<String, int> GeoNameDb;
 
         /// <summary>
         /// Dictionary of all GeoElements within the scene.
@@ -45,7 +45,11 @@ namespace IMRE.HandWaver.Kernel.Geos
         /// <returns>element labeled k</returns>
         public static GeoElement GetElement(string k) => GetElement(GetElementId(k));
         
-        
+        /// <summary>
+        /// Adds the GeoElement to the dictionaries
+        /// </summary>
+        /// <param name="e">Element to be added.</param>
+        /// <exception cref="Exception">Element already Found exception</exception>
         public static void AddElement(GeoElement e)
         {
             if(GeoElements.ContainsKey(e.ElementId))
@@ -54,6 +58,24 @@ namespace IMRE.HandWaver.Kernel.Geos
             }
             GeoElements.Add(e.ElementId, e);
             GeoNameDb.Add(e.ElementName.ToString(), e.ElementId);
+            GeoElementMesh.Add(e.ElementId, new Mesh());
         }
+
+        /// <summary>
+        /// Removes GeoElement from all dictionaries
+        /// </summary>
+        /// <param name="eName">Element Name</param>
+        public static void RemoveElement(string eName)
+        {
+            GeoElements.Remove(GetElementId(eName));
+            GeoElementMesh.Remove(GetElementId(eName));
+            
+            //Must be done last
+            GeoNameDb.Remove(eName);
+        }
+        
+        public static bool HasElement(GeoElement e) => GeoElements.ContainsKey(e.ElementId);
+        public static bool HasElement(string eName) => GeoNameDb.ContainsKey(eName);
+        public static bool HasElement(int eId) => GeoElements.ContainsKey(eId);
     }
 }
