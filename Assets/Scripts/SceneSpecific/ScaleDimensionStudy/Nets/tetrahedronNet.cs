@@ -25,22 +25,22 @@ namespace IMRE.HandWaver.ScaleStudy
         {
             //uvs
             Vector2[] uvs = new Vector2[6];
-            uvs[0] = new Vector2(0f, 0f);
-            uvs[1] = new Vector2(0.5f, 0f);
-            uvs[2] = new Vector2(1f, 0f);
+            uvs[0] = new Vector2(0.75f, 0.5f);
+            uvs[1] = new Vector2(0.25f, 0.5f);
+            uvs[2] = new Vector2(0.5f, 0f);
             //one should have a "u" value of .5 (the top) which has a "v" value of "1"
             //two should have a "v" value of .5 (the middle).  These should have "u" values of .5*cos(60) and 1-.5*cos(60)
             //since cos(60) = .5, then thy shoudl have a "V" value of .5 and a "u" value of .25 and .75
-            uvs[3] = new Vector2(0.75f, .5f);
-            uvs[4] = new Vector2(0.5f, 1f);
-            uvs[5] = new Vector2(0.25f, .5f);
+            uvs[3] = new Vector2(0.5f, 1f);
+            uvs[4] = new Vector2(0f, 0f);
+            uvs[5] = new Vector2(1f, 0f);
 
-            mesh.uv = uvs;
             
             //unfolded shape(degree of fold = 0)
             mesh.vertices = meshVerts(0);
             //triangles for unfolded shape
             mesh.triangles = meshTris();
+            mesh.uv = uvs;
             //11 vertices on trace of unfolded shape 
             lineRenderer.positionCount = 11;
             lineRenderer.useWorldSpace = false;
