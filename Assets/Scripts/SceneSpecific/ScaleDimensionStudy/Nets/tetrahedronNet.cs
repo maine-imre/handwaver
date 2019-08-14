@@ -28,9 +28,12 @@ namespace IMRE.HandWaver.ScaleStudy
             uvs[0] = new Vector2(0f, 0f);
             uvs[1] = new Vector2(0.5f, 0f);
             uvs[2] = new Vector2(1f, 0f);
-            uvs[3] = new Vector2(0.75f, 0.5f * Unity.Mathematics.math.sin(60f * Mathf.Deg2Rad));
-            uvs[4] = new Vector2(0.5f, 2f * 0.5f * Unity.Mathematics.math.sin(60f * Mathf.Deg2Rad));
-            uvs[5] = new Vector2(0.25f, 0.5f * Unity.Mathematics.math.sin(60f * Mathf.Deg2Rad));
+            //one should have a "u" value of .5 (the top) which has a "v" value of "1"
+            //two should have a "v" value of .5 (the middle).  These should have "u" values of .5*cos(60) and 1-.5*cos(60)
+            //since cos(60) = .5, then thy shoudl have a "V" value of .5 and a "u" value of .25 and .75
+            uvs[3] = new Vector2(0.75f, .5f);
+            uvs[4] = new Vector2(0.5f, 1f);
+            uvs[5] = new Vector2(0.25f, .5f);
 
             mesh.uv = uvs;
             
