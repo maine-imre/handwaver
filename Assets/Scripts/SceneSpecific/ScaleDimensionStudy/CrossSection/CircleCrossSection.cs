@@ -31,6 +31,8 @@
             crossSectionRenderer.material = crossSectionMaterial;
             crossSectionRenderer.startWidth = SpencerStudyControl.lineRendererWidth;
             crossSectionRenderer.endWidth = SpencerStudyControl.lineRendererWidth;
+            
+            crossSectionRenderer.enabled = debugRenderer;
 
             //generate four points to show crossSections.
             crossSectionPoints.Add(Instantiate(SpencerStudyControl.ins.pointPrefab));
@@ -113,6 +115,8 @@
                 crossSectionPoints[0].SetActive(false);
                 crossSectionPoints[1].SetActive(false);
             }
+            crossSectionRenderer.enabled = debugRenderer;
+
         }
 
         /// <summary>
