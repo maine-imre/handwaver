@@ -58,8 +58,8 @@ namespace IMRE.EmbodiedUserInput
             tSlider = gameObject.AddComponent<UnityEngine.LineRenderer>();
             tSlider.SetPosition(0, tSliderEndA);
             tSlider.SetPosition(1, tSliderEndB);
-            tSlider.startWidth = .05f;
-            tSlider.endWidth = .05f;
+            tSlider.startWidth = .01f;
+            tSlider.endWidth = .01f;
             tSlider.useWorldSpace = true;
             tSlider.material = slidermaterial;
             point = Instantiate(point);
