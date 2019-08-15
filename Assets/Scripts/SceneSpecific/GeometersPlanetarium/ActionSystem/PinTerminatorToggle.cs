@@ -14,7 +14,7 @@ public class PinTerminatorToggle : PinFunctions
 		}
 		
     		public override Unity.Mathematics.float3 pinDirection(RSDESPin pin){
-    			return (Unity.Mathematics.float3) pin.contactPoint;
+    			return (Unity.Mathematics.float3) pin.directionFromLatLong();
     		}
     }
 }

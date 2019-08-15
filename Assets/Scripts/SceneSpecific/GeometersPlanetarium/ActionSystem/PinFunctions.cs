@@ -1,4 +1,6 @@
 ﻿using IMRE.EmbodiedUserInput;
+using IMRE.Math;
+using Unity.Mathematics;
 
 namespace IMRE.HandWaver.Space
 {
@@ -12,17 +14,19 @@ namespace IMRE.HandWaver.Space
         public override void checkClassifier(EmbodiedClassifier classifier)
         {
         		float bestDist = tolerance;
-        		pinData pin = null;
+        		pinData pin = default(pinData);
         		//find closest point
-        		for(int i = 0; i < RSDESManager.ins.pinnedPoints.Length; i++){
-				if(Mathematics.Operations.magnitude(classifier.origin - pinnedPoints[i].pin.contactPoint) < dist && Mathematics.Operations.Angle(classifier.direction, pinDirection(pinnedPoints[i].pin) < angleTolerance))
+        		for(int i = 0; i < RSDESManager.ins.pinnedPoints.Count; i++){
+				if ((Operations.magnitude(classifier.origin - (float3) (RSDESManager.ins.pinnedPoints[i].contactPoint)) < bestDist) &&
+				                         (Operations.Angle(classifier.direction,
+					                         pinDirection(RSDESManager.ins.pinnedPoints[i].pin)) < angleTolerance))
 				{
 					pin = RSDESManager.ins.pinnedPoints[i];
-					dist = Mathematics.Operations.magnitude(classifier.origin - RSDESManager.ins.pinnedPoints[i].contactPoint);
+					bestDist = Operations.magnitude(classifier.origin - (float3) RSDESManager.ins.pinnedPoints[i].contactPoint);
 				}
 			}
-			if(pin != null){
-				pinFunction(pin);
+			if(!pin.Equals(default(pinData))){
+				pinFunction(pin.pin);
 			}
         }
 
@@ -32,6 +36,6 @@ namespace IMRE.HandWaver.Space
         }
         
         public abstract void pinFunction(RSDESPin pin);
-        public abstract Unity.Mathematics.float3 pinDirection(RSDESPin pin);
+        public abstract float3 pinDirection(RSDESPin pin);
     }
 }

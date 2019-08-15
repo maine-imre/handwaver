@@ -210,9 +210,9 @@ namespace IMRE.HandWaver.Space
 
                     gLat = value;
                 }
-
-                get => gLat;
             }
+            get => gLat;
+            
         }
 
         private bool gLong;

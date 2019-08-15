@@ -5,7 +5,7 @@ namespace IMRE.HandWaver.Space
 
     public class PinTangentPlaneToggle : PinFunctions
     {
-    		public override float desiredAngle = 90f;
+    		public float desiredAngle = 90f;
     		
     		public override void pinFunction(RSDESPin pin){
 			if(pin != null)
@@ -15,7 +15,7 @@ namespace IMRE.HandWaver.Space
 		}
 		
     		public override Unity.Mathematics.float3 pinDirection(RSDESPin pin){
-    			return (Unity.Mathematics.float3) pin.contactPoint;
+    			return (Unity.Mathematics.float3) pin.directionFromLatLong();
     		}
     }
 }

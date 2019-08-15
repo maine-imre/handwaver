@@ -1,5 +1,7 @@
 ﻿using IMRE.EmbodiedUserInput;
 using Unity.Mathematics;
+using UnityEngine;
+using IMRE.Math;
 
 namespace IMRE.HandWaver.Space
 {
@@ -25,7 +27,7 @@ namespace IMRE.HandWaver.Space
         private float startTime = 0f;
         public override void checkClassifier(EmbodiedClassifier classifier)
         {
-            if (Mathematics.Operations.Angle(classifier.direction, new float3(0,1,0)) - desiredAngle < angleTol && Time.time > startTime + cooldown)
+            if (Operations.Angle(classifier.direction, new float3(0,1,0)) - desiredAngle < angleTol && Time.time > startTime + cooldown)
             {
                     startTime = Time.time;
                     RSDESManager.ins.GlobalLatitude = !RSDESManager.ins.GlobalLatitude;
