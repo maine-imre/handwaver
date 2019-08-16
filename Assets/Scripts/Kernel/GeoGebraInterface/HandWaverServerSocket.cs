@@ -129,6 +129,7 @@ namespace IMRE.HandWaver.Kernel
                     default:
                         throw new ArgumentException("Misunderstood type \""+eType+"\"");
                 }
+                e.Updated = DateTime.Now;
             } 
         }
         public void renameFunc(string objName)
