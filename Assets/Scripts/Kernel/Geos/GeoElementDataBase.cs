@@ -16,7 +16,7 @@ namespace IMRE.HandWaver.Kernel.Geos
         /// Dictionary of all GeoElements within the scene.
         /// Key is element id as int.
         /// </summary>
-        private static Dictionary<int,GeoElement> GeoElements = new Dictionary<int,GeoElement>();
+        public static Dictionary<int,GeoElement> GeoElements = new Dictionary<int,GeoElement>();
         
         /// <summary>
         /// Dictionary of all GeoElement meshes.
@@ -52,13 +52,13 @@ namespace IMRE.HandWaver.Kernel.Geos
         /// <exception cref="Exception">Element already Found exception</exception>
         public static void AddElement(GeoElement e)
         {
-            if(GeoElements.ContainsKey(e.ElementId))
-            {
-                throw new Exception("Element id "+e.ElementId+" already exists with in the system as : "+GeoElements[e.ElementId].ToString());
-            }
-            GeoElements.Add(e.ElementId, e);
-            GeoNameDb.Add(e.ElementName.ToString(), e.ElementId);
-            GeoElementMesh.Add(e.ElementId, new Mesh());
+           if(GeoElements.ContainsKey(e.ElementId))
+           {
+               throw new Exception("Element id "+e.ElementId+" already exists with in the system as : "+GeoElements[e.ElementId]);
+           }
+           GeoElements.Add(e.ElementId, e);
+           GeoNameDb.Add(e.ElementName.ToString(), e.ElementId);
+           GeoElementMesh.Add(e.ElementId, new Mesh());
         }
 
         /// <summary>

@@ -243,8 +243,8 @@ namespace socket.io {
         public Action<Exception> OnConnectError { get; private set; }
         public Action<Exception> OnReconnectError { get; private set; }
 
-        readonly Dictionary<int, Action<string>> _acks = new Dictionary<int, Action<string>>();
-        readonly Dictionary<string, Action<string>> _handlers = new Dictionary<string, Action<string>>();
+        private Dictionary<int, Action<string>> _acks = new Dictionary<int, Action<string>>();
+        private Dictionary<string, Action<string>> _handlers = new Dictionary<string, Action<string>>();
 
         #endregion
 
@@ -316,7 +316,7 @@ namespace socket.io {
                         return;
                     }
 
-                    var seperateIndex = pkt.body.IndexOf(", ");
+                    var seperateIndex = pkt.body.IndexOf(",");
 
                     var seperatorLen = 2;
                     if (seperateIndex == -1) {

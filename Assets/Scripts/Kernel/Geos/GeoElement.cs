@@ -61,7 +61,11 @@ namespace IMRE.HandWaver.Kernel.Geos
             ElementId = eId;
             ElementName = eName;
             Updated = DateTime.Now;
-            GeoElementDataBase.AddElement(this);
+        }
+
+        public override string ToString()
+        {
+            return $"{ElementName} element :: {ElementId} id, {type} type, {deps} deps, {f0} f0\n";
         }
     }
 }
