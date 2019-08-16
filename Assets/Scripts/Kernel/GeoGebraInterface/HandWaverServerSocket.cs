@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using IMRE.HandWaver.Kernel.Geos;
@@ -34,8 +35,8 @@ namespace IMRE.HandWaver.Kernel
 
             initSession();
             sock = Socket.Connect("http://localhost:8080");
-
-            sock.On("connect", subscribeCallback);
+            
+            sock.On("connect", SubscribeCallback);
             sock.On("disconnect", () => { Debug.Log("disconnected"); });
             sock.On("connect_error", (string str) => { Debug.LogError(str); });
             sock.On("add", addFunc);
@@ -48,9 +49,9 @@ namespace IMRE.HandWaver.Kernel
             StartCoroutine(HandWaverServerTransport.execCommand("Line(A, B)"));          // Line f
         }
 
-        void subscribeCallback()
+        void SubscribeCallback()
         {
-            sock.Emit("subscribe", HandWaverServerTransport.sessionId);
+            sock.Emit("subscribe", HandWaverServerTransport.sessionId, Debug.Log);
         }
         public void addFunc(string objName)
         {
@@ -74,7 +75,31 @@ namespace IMRE.HandWaver.Kernel
                 string eType = cmd.Groups["type"].Value;
                 GeoElement e = GeoElementDataBase.GetElement(eName);
                 string[] args = cmd.Groups["args"].Value.Split(',');
-                
+
+                if (e.type == ElementType.err)
+                {
+                    switch (eType)
+                    {
+                        case "":
+                            e.type = ElementType.point;
+                            break;
+                        case "Line":
+                            e.type = ElementType.line;
+                            break;
+                        case "Plane":
+                            e.type = ElementType.plane;
+                            break;
+                        case "Sphere":
+                            e.type = ElementType.sphere;
+                            break;
+                        case "Circle":
+                            e.type = ElementType.circle;
+                            break;
+                        default:
+                            Debug.LogError("Misunderstood type \""+eType+"\"");
+                            break;
+                    }    
+                }
                 
                 switch (eType)
                 {

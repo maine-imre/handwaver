@@ -256,6 +256,7 @@ namespace IMRE.HandWaver.Kernel
                     try
                     {
                         Debug.Log("Established connection to server with session id " + sessionId);
+
                         sessionEstablished = true;
                         //TODO: check if there is a response of a session xml data.
                         //TODO: reconstruct scene using the xml data returned.

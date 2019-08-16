@@ -23,7 +23,7 @@ namespace socket.io {
                     .Sample(TimeSpan.FromSeconds(10f))
                     .Subscribe(_ => {
                         WebSocket.Send(Packet.Ping);
-                        Debug.LogFormat("socket.io => {0} ping~", WebSocket.Url.ToString());
+                        //Debug.LogFormat("socket.io => {0} ping~", WebSocket.Url.ToString());
                     });
             }
 
@@ -90,10 +90,10 @@ namespace socket.io {
 
             if (recvData == Packet.ProbeAnswer) {
                 IsProbed = true;
-                Debug.LogFormat("socket.io => {0} probed~", WebSocket.Url.ToString());
+                //Debug.LogFormat("socket.io => {0} probed~", WebSocket.Url.ToString());
             }
             else if (recvData == Packet.Pong) {
-                Debug.LogFormat("socket.io => {0} pong~", WebSocket.Url.ToString());
+                //Debug.LogFormat("socket.io => {0} pong~", WebSocket.Url.ToString());
             }
             else {
                 if (_onRecv != null)
