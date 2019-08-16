@@ -159,7 +159,7 @@ namespace Triangulator
 			//find the hole vertex with the largest X value
 			Vertex rightMostHoleVertex = holePolygon[0];
 			foreach (Vertex v in holePolygon)
-				if (v.Position.X > rightMostHoleVertex.Position.X)
+				//if (v.Position.X > rightMostHoleVertex.Position.X)
 					rightMostHoleVertex = v;
 
 			//construct a list of all line segments where at least one vertex
@@ -222,7 +222,7 @@ namespace Triangulator
 				foreach (Vertex v in interiorReflexVertices)
 				{
 					//compute the dot product of the vector against the UnitX
-					Vector2 d = Vector2.Normalize(v.Position - rightMostHoleVertex.Position);
+					//Vector2 d = Vector2.Normalize(v.Position - rightMostHoleVertex.Position);
 					float dot = Vector2.Dot(Vector2.UnitX, d);
 
 					//if this line is the closest we've found

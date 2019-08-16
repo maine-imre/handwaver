@@ -202,6 +202,11 @@ namespace IMRE.HandWaver.Rendering
             throw new NotImplementedException();
         }
 
+        public static bool Plane(float3 origin, float3 direction)
+        {
+            return true;
+        }
+
         public static bool Poly( /*Data needed to render*/)
         {
             throw new NotImplementedException();
@@ -270,6 +275,11 @@ namespace IMRE.HandWaver.Rendering
         public static bool Symbolic( /*Data needed to render*/)
         {
             throw new NotImplementedException();
+        }
+
+        public static void Sphere(float3 center, float3 radius)
+        {
+            
         }
 
         public static bool Vector2D( /*Data needed to render*/)
