@@ -49,16 +49,15 @@ namespace IMRE.HandWaver.Kernel.Geos
         /// Adds the GeoElement to the dictionaries
         /// </summary>
         /// <param name="e">Element to be added.</param>
-        /// <exception cref="Exception">Element already Found exception</exception>
         public static void AddElement(GeoElement e)
         {
-           if(GeoElements.ContainsKey(e.ElementId))
-           {
-               throw new Exception("Element id "+e.ElementId+" already exists with in the system as : "+GeoElements[e.ElementId]);
-           }
-           GeoElements.Add(e.ElementId, e);
-           GeoNameDb.Add(e.ElementName.ToString(), e.ElementId);
-           GeoElementMesh.Add(e.ElementId, new Mesh());
+            if(HasElement(e))
+            {
+                Debug.LogWarningFormat("Element {0} already exists within the current context.", e.ElementId);
+            }
+            GeoElements[e.ElementId] = e; 
+            GeoNameDb[e.ElementName] = e.ElementId; 
+            GeoElementMesh[e.ElementId] = new Mesh();
         }
 
         /// <summary>
