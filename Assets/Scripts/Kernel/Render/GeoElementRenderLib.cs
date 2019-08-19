@@ -48,30 +48,27 @@ namespace IMRE.HandWaver.Rendering
         // TODO: Determine input vars.
         // TODO: Implement functionality for base version of HW Rendering.
 
-        public static bool Line(float3 point, float3 direction)
+        public static void Line(float3 point, float3 direction)
         {
                 direction = Unity.Mathematics.math.normalize(direction);
-                return Segment(point + 100f * direction, point - 100f * direction);
+                Segment(point + 100f * direction, point - 100f * direction);
         }
 
-        public static bool Point(float3 location)
+        public static void Point(float3 location)
         {           
             //TODO a better visualization of a point
             float3 dir = (width/2f)*(new float3(1,1,1));
-            return Segment(location - dir, location + dir);
+            Segment(location - dir, location + dir);
         }
 
-        public static bool Segment(float3 endpointA, float3 endpointB)
+        public static void Segment(float3 endpointA, float3 endpointB)
         {
-            //TODO @Nathan review try catch
-            try
-            {
-
                 UnityEngine.Mesh mesh = new UnityEngine.Mesh();
                 float3 lineWidth = width * Unity.Mathematics.math.normalize(Unity.Mathematics.math.cross(
                                        endpointA - endpointB,
                                        (endpointA + endpointB) / 2f - headDirection));
 
+                //verts
                 UnityEngine.Vector3[] verts = new UnityEngine.Vector3[4];
                 verts[0] = endpointA + lineWidth;
                 verts[1] = endpointA - lineWidth;
@@ -99,21 +96,11 @@ namespace IMRE.HandWaver.Rendering
                 mesh.normals = normals;
 
                 render(mesh);
-
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
         }
 
-        public static bool Angle(UnityEngine.Vector3 center, UnityEngine.Vector3 segmentStart, UnityEngine.Vector3 segmentAEndpoint, 
+        public static void Angle(UnityEngine.Vector3 center, UnityEngine.Vector3 segmentStart, UnityEngine.Vector3 segmentAEndpoint, 
             UnityEngine.Vector3 segmentBEndpoint)
         {
-            try
-            {
-                
                 Segment(segmentStart, segmentAEndpoint);
                 Segment(segmentStart, segmentBEndpoint);
                 
@@ -143,76 +130,119 @@ namespace IMRE.HandWaver.Rendering
                 //semiCircleMesh.SetPositions(vertices);
                 render(semiCircleMesh);
                 #endregion           
+        }
 
-                return true;
-            }
-            catch
+        public static void Axis( /*Data needed to render*/)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static void Circle(float3 center, float3 edgePoint, float3 normalDirection)
+        {
+            const int n = 500;
+            
+            Mesh mesh = new Mesh();
+            
+            //normal vectors
+            Unity.Mathematics.float3 basis1 = Unity.Mathematics.math.normalize(edgePoint-center);
+            Unity.Mathematics.float3 basis2 = Unity.Mathematics.math.cross(basis1,normalDirection);
+            float radius = IMRE.Math.Operations.magnitude(edgePoint - center);
+            //array of vector3s for vertices
+            Unity.Mathematics.float3[] positions = new Unity.Mathematics.float3[n];
+            Unity.Mathematics.float3[] vertices = new Unity.Mathematics.float3[2*n];
+            Vector3[] verts = new Vector3[vertices.Length];
+
+            //math for rendering circle
+            for (int i = 0; i < n; i++)
             {
-                return false;
+                positions[i] = (radius * ((UnityEngine.Mathf.Sin((i * UnityEngine.Mathf.PI * 2) / (n - 1)) * basis1) +
+                                         (UnityEngine.Mathf.Cos((i * UnityEngine.Mathf.PI * 2) / (n - 1)) * basis2))) +
+                              Vector3.zero;
             }
+
+            for (int i = 0; i < n; i++)
+            {
+                float3 lineWidth = width * Unity.Mathematics.math.normalize(Unity.Mathematics.math.cross(
+                                       positions[(i-1) % n] - positions[(i+1) % n],
+                                       positions[i] / 2f - headDirection));
+                vertices[2 * i] = positions[i] + lineWidth;
+                vertices[2 * i + 1] = positions[i] - lineWidth;
+            }
+
+            for (int i = 0; i < vertices.Length; i++)
+            {
+                verts[i] = new Vector3(vertices[i].x, vertices[i].y, vertices[i].z);
+            }
+
+            mesh.vertices = verts;
+            
+            //triangles
+            //double check tris length
+            int[] tris = new int[6 * n];
+
+            for (int i = 0; i < tris.Length; i++)
+            {
+                
+            }
+            
         }
 
-        public static bool Axis( /*Data needed to render*/)
+        public static void Conic( /*Data needed to render*/)
         {
             throw new NotImplementedException();
         }
 
-        public static bool Conic( /*Data needed to render*/)
+        public static void ConicPart( /*Data needed to render*/)
         {
             throw new NotImplementedException();
         }
 
-        public static bool ConicPart( /*Data needed to render*/)
+        public static void CurveCartesian( /*Data needed to render*/)
         {
             throw new NotImplementedException();
         }
 
-        public static bool CurveCartesian( /*Data needed to render*/)
+        public static void Function( /*Data needed to render*/)
         {
             throw new NotImplementedException();
         }
 
-        public static bool Function( /*Data needed to render*/)
+        public static void FunctionND( /*Data needed to render*/)
         {
             throw new NotImplementedException();
         }
 
-        public static bool FunctionND( /*Data needed to render*/)
+        public static void Interval( /*Data needed to render*/)
         {
             throw new NotImplementedException();
         }
 
-        public static bool Interval( /*Data needed to render*/)
+        public static void Locus( /*Data needed to render*/)
         {
             throw new NotImplementedException();
         }
 
-        public static bool Locus( /*Data needed to render*/)
+        public static void LocusND( /*Data needed to render*/)
         {
             throw new NotImplementedException();
         }
 
-        public static bool LocusND( /*Data needed to render*/)
+        public static void Number( /*Data needed to render*/)
         {
             throw new NotImplementedException();
         }
 
-        public static bool Number( /*Data needed to render*/)
+        public static void Plane(float3 origin, float3 direction)
+        {
+            
+        }
+
+        public static void Poly( /*Data needed to render*/)
         {
             throw new NotImplementedException();
         }
 
-        public static bool Plane(float3 origin, float3 direction)
-        {
-            return true;
-        }
-
-        public static bool Poly( /*Data needed to render*/)
-        {
-            throw new NotImplementedException();
-        }
-
-        public static bool PolyLine( /*Data needed to render*/)
+        public static void PolyLine( /*Data needed to render*/)
         {
             throw new NotImplementedException();
         }
@@ -223,126 +253,65 @@ namespace IMRE.HandWaver.Rendering
         /// </summary>
         /// <param name="pointFloat3Array"></param>
         /// <returns></returns>
-        public static bool Polygon(float3[] pointFloat3Array)
+        public static void Polygon(float3[] pointFloat3Array)
         {
 
-            try
-            {
-                Vector3[] pointVectorArray = new Vector3[pointFloat3Array.Length];
-               
-                for (int i = 0; i < pointFloat3Array.Length; i++)
-                {
-                    pointVectorArray[i] = pointFloat3Array[i].ToVector3();
-                }
-
-                for (int i = 0; i < pointVectorArray.Length; i++)
-                {
-                    Segment(i, i + 1);
-                }
-                
-                Sort(pointVectorArray);
-
-                //vertices
-                UnityEngine.Mesh mesh = new UnityEngine.Mesh();
-                mesh.vertices = pointVectorArray;
-
-                //triangles
-                
-                
-                //uvs
-                
-                //normals
-
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
         }
 
-
-        public static bool Ray( /*Data needed to render*/)
+        public static void Ray( /*Data needed to render*/)
         {
             throw new NotImplementedException();
         }
-
-        public static bool SurfaceFinite( /*Data needed to render*/)
-        {
-            throw new NotImplementedException();
-        }
-
-        public static bool Symbolic( /*Data needed to render*/)
-        {
-            throw new NotImplementedException();
-        }
-
+        
         public static void Sphere(float3 center, float3 radius)
         {
             
         }
-
-        public static bool Vector2D( /*Data needed to render*/)
-        {
-            throw new NotImplementedException();
-        }
-
-        public static bool Vector3D( /*Data needed to render*/)
-        {
-            throw new NotImplementedException();
-        }
-
-        public static bool Text( /*Data needed to render*/)
-        {
-            throw new NotImplementedException();
-        }
-
-        public static bool Turtle( /*Data needed to render*/)
-        {
-            throw new NotImplementedException();
-        }
-
-        public static bool Video( /*Data needed to render*/)
-        {
-            throw new NotImplementedException();
-        }
-
-        public static bool Image( /*Data needed to render*/)
-        {
-            throw new NotImplementedException();
-        }
-
-        public static bool Slider( /*Data needed to render*/)
-        {
-            throw new NotImplementedException();
-        }
         
-        public static void Sort(Vector3[] data)
+        public static void SurfaceFinite( /*Data needed to render*/)
         {
-            Console.Write("\nSorted Array Elements :(Step by Step)\n\n");
-            int smallest; 
-            for (int i = 0; i < data.Length - 1; i++)
-            {
-                smallest = i;
-
-                for (int index = i + 1; index < data.Length; index++)
-                {
-                    if (data[index].x < data[smallest].x)
-                    {
-                        smallest = index;
-                    }
-                }
-                Swap(i, smallest, data);
-            }
-            	
+            throw new NotImplementedException();
         }
-        
-        public static void Swap(int first, int second, Vector3[] data)
+
+        public static void Symbolic( /*Data needed to render*/)
         {
-            Vector3 temporary = data[first];    
-            data[first] = data[second];  
-            data[second] = temporary;  
-        }  
+            throw new NotImplementedException();
+        }
+
+        public static void Vector2D( /*Data needed to render*/)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static void Vector3D( /*Data needed to render*/)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static void Text( /*Data needed to render*/)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static void Turtle( /*Data needed to render*/)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static void Video( /*Data needed to render*/)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static void Image( /*Data needed to render*/)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static void Slider( /*Data needed to render*/)
+        {
+            throw new NotImplementedException();
+        }
 
     }
 }
