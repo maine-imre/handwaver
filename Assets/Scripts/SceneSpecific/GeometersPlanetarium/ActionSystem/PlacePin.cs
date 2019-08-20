@@ -25,15 +25,15 @@ namespace IMRE.HandWaver.Space
         /// Otherwise it is set at the time when a finger places a pin on the Earth's surface.
         /// It is then used with cooldown to compare with the current time and limit pin placement
         /// </summary>
-        private float startTime = 0f;
+        private float _startTime = 0f;
         public override void checkClassifier(EmbodiedClassifier classifier)
         {
             //look at whether the gesture being performed is close to the surface of the Earth
             float dist = IMRE.Math.Operations.magnitude((float3) RSDESManager.earthPos - classifier.origin);
-            if (RSDESManager.EarthRadius - dist < tolerance && Time.time > startTime + cooldown)
+            if (RSDESManager.EarthRadius - dist < tolerance && Time.time > _startTime + cooldown)
             {
                     //figure out when the gesture began
-                    startTime = Time.time;
+                    _startTime = Time.time;
                     
                     //make a pin at a location on the Earth closest to where the gesture is
                     RSDESPin.Constructor(GeoPlanetMaths.latlong(classifier.origin, RSDESManager.earthPos));
