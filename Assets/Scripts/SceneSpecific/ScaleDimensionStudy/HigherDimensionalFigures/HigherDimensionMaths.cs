@@ -7,6 +7,14 @@
         parallel,
         stereographic
     }
+    
+   	public struct ProjectionData{
+		ProjectionMethod method;
+		Unity.Mathematics.float4x3 inputBasis;
+        float Vangle;
+        Unity.Mathematics.float4 eyePosition;
+        float viewingRadius;	
+    }
 
     /// <summary>
     ///     Maths for 4D to 3D projection.
