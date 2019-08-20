@@ -17,13 +17,13 @@ namespace IMRE.HandWaver.Space
 
         public static RSDESPin Constructor()
         {
-            return Instantiate(Resources.Load<GameObject>("Prefabs/RSDES/RSDESoushPinPrefab"))
+            return Instantiate(Resources.Load<GameObject>("Prefabs/RSDES/RSDESpushPinPrefab"))
                 .GetComponent<RSDESPin>();
         }
         
         public static RSDESPin Constructor(Vector2 latlong)
         {
-            RSDESPin pin = Instantiate(Resources.Load<GameObject>("Prefabs/RSDES/RSDESoushPinPrefab"))
+            RSDESPin pin = Instantiate(Resources.Load<GameObject>("Prefabs/RSDES/RSDESpushPinPrefab"))
                 .GetComponent<RSDESPin>();
             pin.Latlong = latlong;
             pin.setupPin();
@@ -47,7 +47,6 @@ namespace IMRE.HandWaver.Space
         }
 
         public pintype myPintype = pintype.Star;
-        public GameObject localPanel;
         public MeshRenderer pinHead;
         public Transform pinTip;
         public Color hoverColor = Color.grey;
@@ -92,18 +91,10 @@ namespace IMRE.HandWaver.Space
                 if (value || myPintype == pintype.northPole || myPintype == pintype.southPole)
                 {
                     RSDESManager.onEarthTilt += onEarthTilt;
-
-                    enableLocalPanel();
                 }
 
                 _onSurface = value;
             }
-        }
-
-        private void enableLocalPanel()
-        {
-            if (myPintype == pintype.Star)
-                localPanel.SetActive(true);
         }
 
         internal Color defaultColor = Color.white;
@@ -173,9 +164,9 @@ namespace IMRE.HandWaver.Space
                         break;
                 }
 
-                transform.position = GeoPlanetMaths.directionFromLatLong(latlong) * RSDESManager.EarthRadius +
-                                     RSDESManager.earthPos;
-                transform.rotation = Quaternion.FromToRotation(Vector3.down,
+                transform.position = GeoPlanetMaths.directionFromLatLong(latlong)
+                    .ScaleMultiplier(RSDESManager.EarthRadius).Translate(RSDESManager.earthPos);
+                transform.localRotation = Quaternion.FromToRotation(Vector3.down,
                     GeoPlanetMaths.directionFromLatLong(latlong).normalized) /**RSDESManager.earthRot*/;
 
                 if (latlongLabel != null)
@@ -469,7 +460,6 @@ namespace IMRE.HandWaver.Space
 
             //This handles the grasp events for the pin
             if (myPintype != pintype.Star) RSDESManager.onEarthTilt += onEarthTilt;
-            localPanel.SetActive(false);
             horizonPlaneObj.GetComponent<MeshRenderer>().material.SetColor("_TintColor", defaultColor);
 
             tuxPenguin.gameObject.SetActive(myPintype == pintype.southPole);

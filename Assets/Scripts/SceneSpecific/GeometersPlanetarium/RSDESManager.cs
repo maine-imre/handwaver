@@ -47,15 +47,6 @@ namespace IMRE.HandWaver.Space
         private bool activeMenus;
         public bool sunBetweenTropics = true;
 
-        public void enableNSPoleMenus()
-        {
-            activeMenus = !activeMenus;
-            northPolePin.localPanel.SetActive(activeMenus);
-            southPolePin.localPanel.SetActive(activeMenus);
-            sunPin.localPanel.SetActive(activeMenus);
-            moonPin.localPanel.SetActive(activeMenus);
-        }
-
         #region Variables
 
         public static RSDESManager ins;
@@ -393,12 +384,6 @@ namespace IMRE.HandWaver.Space
             onEarthTilt += updatePoleLine;
 
             //resetEarthTilt();
-        }
-
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.F12))
-                enableNSPoleMenus();
         }
 
         #endregion Monobehaviour Functions+
