@@ -178,13 +178,44 @@ namespace IMRE.HandWaver.Rendering
             
             //triangles
             //double check tris length
-            int[] tris = new int[6 * n];
-
-            for (int i = 0; i < tris.Length; i++)
+            int[] tris = new int[(6) * n];
+            
+            for(int i = 0; i < n; i++)
             {
-                
+                //triangle 0
+                tris[6*i] = (2*i) % (2*n);
+                tris[6*i + 1] = ((2*i)+1) % (2*n);
+                tris[6*i + 2] = (2*(i+1)) % (2*n);
+    
+                //triangle 1
+                tris[6*i + 3] = ((2*i)+1)% (2*n);
+                tris[6*i + 4] = (2*(i+1)) % (2*n);
+                tris[6*i + 5] = (2*(i+1)+1) % (2*n);
+            }
+
+            mesh.triangles = tris;
+            
+            //normals
+            UnityEngine.Vector3[] normals = mesh.normals;
+            for (int i = 0; i < verts.Length; i++)
+                normals[i] = Unity.Mathematics.math.normalize(headDirection);
+            
+            mesh.normals = normals;
+            
+            //uvs
+            UnityEngine.Vector2[] uvs = new Vector2[n];
+
+            for (int i = 0; i < n; i++)
+            {
+                //even indices
+                uvs[2 * i] = new Vector2(i / ( n - 1f), 0f);
+                    
+                //odd indices
+                uvs[2 * i + 1] = new Vector2(i / ( n - 1f), 1f);
             }
             
+            mesh.uv = uvs;
+
         }
 
         public static void Conic( /*Data needed to render*/)
@@ -263,9 +294,118 @@ namespace IMRE.HandWaver.Rendering
             throw new NotImplementedException();
         }
         
-        public static void Sphere(float3 center, float3 radius)
+        public static void Sphere(float3 center, float3 edgePoint)
         {
+            const int n = 500;
             
+            Mesh mesh = new Mesh();
+
+            float radius = IMRE.Math.Operations.magnitude(edgePoint - center);
+            
+            int nbLong = n;
+            int nbLat = n;
+
+            #region Vertices
+
+            UnityEngine.Vector3[] vertices = new UnityEngine.Vector3[((nbLong + 1) * nbLat) + 2];
+            float pi = UnityEngine.Mathf.PI;
+            float _2pi = pi * 2f;
+
+            vertices[0] = UnityEngine.Vector3.up * radius;
+            for (int lat = 0; lat < nbLat; lat++)
+            {
+                float a1 = (pi * (lat + 1)) / (nbLat + 1);
+                float sin1 = UnityEngine.Mathf.Sin(a1);
+                float cos1 = UnityEngine.Mathf.Cos(a1);
+
+                for (int lon = 0; lon <= nbLong; lon++)
+                {
+                    float a2 = (_2pi * (lon == nbLong ? 0 : lon)) / nbLong;
+                    float sin2 = UnityEngine.Mathf.Sin(a2);
+                    float cos2 = UnityEngine.Mathf.Cos(a2);
+
+                    vertices[lon + (lat * (nbLong + 1)) + 1] =
+                        new UnityEngine.Vector3(sin1 * cos2, cos1, sin1 * sin2) * radius;
+                }
+            }
+
+            vertices[vertices.Length - 1] = UnityEngine.Vector3.up * - radius;
+
+            mesh.vertices = vertices;
+
+            #endregion
+
+            #region Normals		
+
+            UnityEngine.Vector3[] normals = new UnityEngine.Vector3[vertices.Length];
+            for (int j = 0; j < vertices.Length; j++)
+                normals[j] = vertices[j].normalized;
+
+            mesh.normals = normals;
+
+            #endregion
+
+            #region UVs
+
+            UnityEngine.Vector2[] uvs = new UnityEngine.Vector2[vertices.Length];
+            uvs[0] = UnityEngine.Vector2.up;
+            uvs[uvs.Length - 1] = UnityEngine.Vector2.zero;
+            for (int lat = 0; lat < nbLat; lat++)
+            for (int lon = 0; lon <= nbLong; lon++)
+            {
+                uvs[lon + (lat * (nbLong + 1)) + 1] =
+                    new UnityEngine.Vector2((float) lon / nbLong, 1f - ((float) (lat + 1) / (nbLat + 1)));
+            }
+
+            mesh.uv = uvs;
+
+            #endregion
+
+            #region Triangles
+
+            int nbFaces = vertices.Length;
+            int nbTriangles = nbFaces * 2;
+            int nbIndexes = nbTriangles * 3;
+            int[] triangles = new int[nbIndexes];
+
+            //Top Cap
+            int i = 0;
+            for (int lon = 0; lon < nbLong; lon++)
+            {
+                triangles[i++] = lon + 2;
+                triangles[i++] = lon + 1;
+                triangles[i++] = 0;
+            }
+
+            //Middle
+            for (int lat = 0; lat < (nbLat - 1); lat++)
+            {
+                for (int lon = 0; lon < nbLong; lon++)
+                {
+                    int current = lon + (lat * (nbLong + 1)) + 1;
+                    int next = current + nbLong + 1;
+
+                    triangles[i++] = current;
+                    triangles[i++] = current + 1;
+                    triangles[i++] = next + 1;
+
+                    triangles[i++] = current;
+                    triangles[i++] = next + 1;
+                    triangles[i++] = next;
+                }
+            }
+
+            //Bottom Cap
+            for (int lon = 0; lon < nbLong; lon++)
+            {
+                triangles[i++] = vertices.Length - 1;
+                triangles[i++] = vertices.Length - (lon + 2) - 1;
+                triangles[i++] = vertices.Length - (lon + 1) - 1;
+            }
+
+            mesh.triangles = triangles;
+
+            #endregion
         }
         
         public static void SurfaceFinite( /*Data needed to render*/)
