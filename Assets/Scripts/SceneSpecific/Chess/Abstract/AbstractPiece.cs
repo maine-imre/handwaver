@@ -6,12 +6,10 @@ www.imrelab.org
 **/
 
 using System.Collections.Generic;
-using Leap.Unity.Interaction;
 using UnityEngine;
 
 namespace IMRE.Chess3D
 {
-    [RequireComponent(typeof(InteractionBehaviour))]
     /// <summary>
     /// An abstracted version of the chess piece.
     /// </summary>

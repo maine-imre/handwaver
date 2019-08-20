@@ -1,16 +1,12 @@
 ﻿using System;
 using System.Linq;
 using Leap.Unity;
-using Leap.Unity.Interaction;
-using Leap.Unity.LeapPaint_v3;
 using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace IMRE.HandWaver.Space
 {
-    [RequireComponent(typeof(LineRenderer), typeof(InteractionBehaviour),
-        typeof(AnchorableBehaviour))]
     /// <summary>
     /// Handles user interaction with the RSDES Pins and renders features local to the pin.
     /// The main contributor(s) to this script is NG
@@ -59,11 +55,8 @@ namespace IMRE.HandWaver.Space
         public Color selectColor = Color.yellow;
         public Transform star;
         public TextMeshPro latlongLabel;
-        public PressableUI selectButton;
 
         internal Action onPinMove;
-        private InteractionBehaviour iBehave;
-        private AnchorableBehaviour aBehave;
         private Vector3 recentContact;
         private LineRenderer myLR;
         private bool _onSurface;
@@ -172,23 +165,11 @@ namespace IMRE.HandWaver.Space
                     case pintype.northPole:
                         //star.transform.position = GeoPlanetMaths.directionFromLatLong(new Vector2(90,0)).ScaleMultiplier(RSDESManager.radiusOfLargerSphere).Translate(RSDESManager.earthPos);
                         latlong = new Vector2(90, 0);
-                        if (GetComponent<InteractionBehaviour>().isGrasped)
-                        {
-                            RSDESManager.earthRot = Quaternion.FromToRotation(Vector3.up,
-                                GeoPlanetMaths.directionFromLatLong(value));
-                            RSDESManager.ins.earthTilt();
-                        }
 
                         break;
 
                     case pintype.southPole:
                         latlong = new Vector2(-90, 0);
-                        if (GetComponent<InteractionBehaviour>().isGrasped)
-                        {
-                            RSDESManager.earthRot = Quaternion.FromToRotation(Vector3.down,
-                                GeoPlanetMaths.directionFromLatLong(value));
-                            RSDESManager.ins.earthTilt();
-                        }
 
                         break;
                 }
@@ -211,9 +192,7 @@ namespace IMRE.HandWaver.Space
 
         internal Action onDelete;
 
-        public PressableUI showLatitude;
 
-        public PressableUI showLongitude;
         //public PressableUI showAzimuth;  //do this with latitude
         //public PressableUI showAltitude;  //do this with longitude
 
@@ -221,11 +200,9 @@ namespace IMRE.HandWaver.Space
 
         private LineRenderer azimuthRenderer;
 
-        public PressableUI showTerminator;
 
         [Range(0, 1)] private static readonly float colorPercent = 0.15f;
 
-        public PressableUI starFieldMode;
         private LineRenderer[] starRays;
 
         public enum starFieldSelect
@@ -459,7 +436,6 @@ namespace IMRE.HandWaver.Space
             }
         }
 
-        public PressableUI horizonPlanes;
         private LineRenderer latRenderer;
         private LineRenderer longRenderer;
         private LineRenderer terminatorRenderer;
@@ -477,8 +453,6 @@ namespace IMRE.HandWaver.Space
             else
                 gameObject.name = myPintype + " RSDESPin " + count++;
 
-            iBehave = GetComponent<InteractionBehaviour>();
-            aBehave = GetComponent<AnchorableBehaviour>();
             myLR = GetComponent<LineRenderer>();
             var haloComponent = pinHead.gameObject.GetComponent("Halo");
             var haloEnabledProperty = haloComponent.GetType().GetProperty("enabled");
@@ -493,12 +467,8 @@ namespace IMRE.HandWaver.Space
             pinHead.material.color = Random.ColorHSV(0, 1, 0.9f, 1, .9f, 1);
             defaultColor = pinHead.material.color;
 
-            aBehave.OnAttachedToAnchor += onAttached;
-            aBehave.OnDetachedFromAnchor += onDetached;
 
             //This handles the grasp events for the pin
-            iBehave.OnGraspBegin += beginGrasp;
-            iBehave.OnHoverStay += hoverUpdate;
             if (myPintype != pintype.Star) RSDESManager.onEarthTilt += onEarthTilt;
             localPanel.SetActive(false);
             horizonPlaneObj.GetComponent<MeshRenderer>().material.SetColor("_TintColor", defaultColor);
@@ -508,51 +478,15 @@ namespace IMRE.HandWaver.Space
 
             onPinMove += updateStarMode;
             onPinMove += RSDESManager.ins.callUpdateStarFieldsGlobal;
-            if (myPintype == pintype.Moon || myPintype == pintype.Sun) iBehave.ignoreGrasping = true;
         }
 
         public pinData dbPinData => RSDESManager.ins.pinDB[this];
-
-        private void OnTriggerEnter(Collider collider)
-        {
-            if (myPintype == pintype.Star && iBehave != null && iBehave.isGrasped &&
-                collider.GetComponentInParent<RSDESManager>() != null)
-            {
-                onSurface = true;
-                setupPin();
-                iBehave.ReleaseFromGrasp();
-
-                //invoke onPinMove when the pin is placed on the surface.  This is needed for star rays, possibly for other features.
-                if (onPinMove != null && onPinMove.Method != null) onPinMove.Invoke();
-            }
-        }
 
         private void setupPin()
         {
             var myPinData = new pinData(this, pinTip.transform.position);
             RSDESManager.ins.PinnedPoints.Add(myPinData); //Might need a way to specify rather than all contact points
             if (!RSDESManager.ins.pinDB.ContainsKey(this)) RSDESManager.ins.pinDB.Add(this, myPinData);
-        }
-
-        private void OnTriggerStay(Collider collider)
-        {
-            //if (myPintype == pintype.Star)
-            {
-                if (iBehave != null && iBehave.isGrasped && collider.GetComponentInParent<RSDESManager>() != null &&
-                    GetComponent<InteractionBehaviour>().isGrasped) snapToSurface();
-            }
-        }
-
-        private void OnTriggerExit(Collider collider)
-        {
-            if (collider.GetComponentInParent<RSDESManager>() != null)
-            {
-                iBehave.ReleaseFromGrasp();
-                snapToSurface();
-            }
-
-            if (onPinMove != null && onPinMove.Method != null)
-                onPinMove.Invoke();
         }
 
         private void OnDisable()
@@ -605,9 +539,6 @@ namespace IMRE.HandWaver.Space
 
         public void toggleAltitude()
         {
-            if (!onSurface && !iBehave.isGrasped)
-                return;
-
             if (altitudeRenderer == null)
                 altitudeRenderer = RSDESGeneratedLine();
             altitudeRenderer.positionCount = 3;
@@ -625,9 +556,6 @@ namespace IMRE.HandWaver.Space
 
         public void toggleAzimuth()
         {
-            if (!onSurface && !iBehave.isGrasped)
-                return;
-
             if (azimuthRenderer == null)
                 azimuthRenderer = RSDESGeneratedLine();
             azimuthRenderer.positionCount = 3;
@@ -645,9 +573,6 @@ namespace IMRE.HandWaver.Space
 
         public void toggleLat()
         {
-            if (!onSurface && !iBehave.isGrasped)
-                return;
-
             if (latRenderer == null)
                 latRenderer = RSDESGeneratedLine();
             latRenderer.positionCount = RSDESManager.LR_Resolution;
@@ -665,9 +590,6 @@ namespace IMRE.HandWaver.Space
 
         public void toggleLong()
         {
-            if (!onSurface && !iBehave.isGrasped)
-                return;
-
             if (longRenderer == null)
                 longRenderer = RSDESGeneratedLine();
 
@@ -691,8 +613,6 @@ namespace IMRE.HandWaver.Space
 
         public void toggleTerminator()
         {
-            if (!onSurface && !iBehave.isGrasped)
-                return;
             if (terminatorRenderer == null)
                 terminatorRenderer = RSDESGeneratedLine();
             else
@@ -740,49 +660,10 @@ namespace IMRE.HandWaver.Space
         /// </summary>
         internal void onEarthTilt()
         {
-            if (iBehave != null && !iBehave.isGrasped)
-            {
                 Latlong = latlong;
                 if (latRenderer != null) latRenderer.SetPositions(this.latAtPoint());
                 if (longRenderer != null) longRenderer.SetPositions(this.longAtPoint());
                 if (terminatorRenderer != null) terminatorRenderer.SetPositions(this.terminatorOfStar());
-            }
-        }
-
-        private void onAttached()
-        {
-            transform.localScale *= 0.6f;
-
-            localPanel.SetActive(false);
-        }
-
-        private void onDetached()
-        {
-            transform.localScale /= 0.6f;
-        }
-
-        private void beginGrasp()
-        {
-            //RSDESManager.ins.PinnedPoints.RemoveAll(p => p.pin == this);
-        }
-
-        private void snapToSurface()
-        {
-            if (onSurface)
-            {
-                Latlong = (pinTip.transform.position - RSDESManager.earthPos).latlong();
-            }
-            else
-            {
-                Latlong = (pinTip.transform.position - RSDESManager.earthPos).latlong();
-                enableLocalPanel();
-            }
-        }
-
-        private void hoverUpdate()
-        {
-            var glow = Utils.Map(iBehave.closestHoveringControllerDistance, 0F, 0.2F, 1F, 0.0F);
-            pinHead.material.color = Color.Lerp(defaultColor, hoverColor, glow);
         }
 
         public void toggleSelection()

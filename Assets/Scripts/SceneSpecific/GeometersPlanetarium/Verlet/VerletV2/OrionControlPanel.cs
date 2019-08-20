@@ -1,30 +1,13 @@
-﻿using Leap.Unity.Interaction;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class OrionControlPanel : MonoBehaviour
 {
-    public InteractionSlider bodyScaleSlider;
-
-    public InteractionButton[] buttons = new InteractionButton[13];
     private VerletV3 ControlScript;
-    public InteractionSlider simulationScaleSlider;
-    public InteractionSlider timeSlider;
 
     // Use this for initialization
     private void Start()
     {
         ControlScript = (VerletV3) GetComponent("VerletV3");
-        buttons[0].OnPress += teleportToSol;
-        buttons[1].OnPress += teleportToMercury;
-        buttons[2].OnPress += teleportToVenus;
-        buttons[3].OnPress += teleportToEarth;
-        buttons[4].OnPress += teleportToMars;
-        buttons[5].OnPress += teleportToJupiter;
-        buttons[6].OnPress += teleportToSaturn;
-        buttons[7].OnPress += teleportToUranus;
-        buttons[8].OnPress += teleportToNeptune;
-        buttons[9].OnPress += teleportToPluto;
-        buttons[10].OnPress += teleportToMoon;
     }
 
     private void teleportToSol()
@@ -90,8 +73,8 @@ public class OrionControlPanel : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        ControlScript.timeStep = timeSlider.HorizontalSliderValue;
-        ControlScript.bodyScale = bodyScaleSlider.HorizontalSliderValue;
-        ControlScript.scale = simulationScaleSlider.HorizontalSliderValue;
+        //ControlScript.timeStep = timeSlider.HorizontalSliderValue;
+        //ControlScript.bodyScale = bodyScaleSlider.HorizontalSliderValue;
+        //ControlScript.scale = simulationScaleSlider.HorizontalSliderValue;
     }
 }
