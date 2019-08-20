@@ -204,11 +204,12 @@ namespace IMRE.HandWaver.Space
             LargeArray,
             off
         }
-
+        
         private starFieldSelect starMode = starFieldSelect.off;
 
         private void updateStarMode()
         {
+            UnityEngine.Debug.Log("Thing set to itself");
             StarMode = StarMode;
         }
 
@@ -320,7 +321,7 @@ namespace IMRE.HandWaver.Space
                             starRays[i].SetPositions(GeoPlanetMaths.starRayRendererCoordiantes(cachedPinData, pins[i]));
                         }
 
-                        //starRays[0].SetPositions(GeoPlanetMaths.starRayRendererCoordiantes(dbPinData));     //create new one
+                        //starRays[0].SetPositions(GeoPlanetMaths.starRayRendererCoordinates(dbPinData));     //create new one
 
                         Enumerable.ToList(starRays).ForEach(p => p.startWidth = RSDESManager.LR_width);
                         Enumerable.ToList(starRays).ForEach(p => p.endWidth = RSDESManager.LR_width);

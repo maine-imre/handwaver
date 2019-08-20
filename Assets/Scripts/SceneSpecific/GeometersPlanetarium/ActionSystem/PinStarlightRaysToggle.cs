@@ -1,6 +1,4 @@
-﻿using IMRE.EmbodiedUserInput;
-
-namespace IMRE.HandWaver.Space
+﻿namespace IMRE.HandWaver.Space
 {
 public class PinStarlightRaysToggle : PinFunctions
     {
@@ -14,7 +12,9 @@ public class PinStarlightRaysToggle : PinFunctions
 			if(pin != null)
 			{
 				//TODO fix this its failing
-				pin.StarMode ++;
+				UnityEngine.Debug.Log("I made it so far");
+				pin.StarMode = RSDESPin.starFieldSelect.single;
+				UnityEngine.Debug.Log("I am this: "+pin.StarMode);
 			}
 		}
     }
