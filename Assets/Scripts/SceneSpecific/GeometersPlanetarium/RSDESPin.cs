@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using Leap.Unity;
 using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -27,7 +26,7 @@ namespace IMRE.HandWaver.Space
             RSDESPin pin = Instantiate(Resources.Load<GameObject>("Prefabs/RSDES/RSDESoushPinPrefab"))
                 .GetComponent<RSDESPin>();
             pin.Latlong = latlong;
-
+            pin.setupPin();
             return pin;
         }
 
