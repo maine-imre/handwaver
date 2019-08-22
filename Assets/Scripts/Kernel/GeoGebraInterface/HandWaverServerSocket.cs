@@ -81,7 +81,7 @@ namespace IMRE.HandWaver.Kernel
                 GeoElement e = GeoElementDataBase.GetElement(eName);
                 string[] args = (cmd.Groups["args"].Value.Split(',').Select(s => s.Trim())).ToArray();
                 
-                UpdateElement(ref e, eType, args);
+                GeoElementDataBase.GeoElements[e.ElementId] = UpdateElement(e, eType, args);
             }
             outputElements();            
         }
@@ -104,7 +104,7 @@ namespace IMRE.HandWaver.Kernel
 
                 //Debug.LogFormat("*{0}* of type ({1}) with args **{2}** was updated", eName, eType, args.ToString());
                 
-                e = UpdateElement(ref e, eType, args);
+                GeoElementDataBase.GeoElements[e.ElementId] = UpdateElement(e, eType, args);
             } 
         }
 
@@ -115,27 +115,26 @@ namespace IMRE.HandWaver.Kernel
         /// <param name="eType">enum type of the element</param>
         /// <param name="args">arguments used to create element</param>
         /// <exception cref="ArgumentException">Unsupported type</exception>
-        private static GeoElement UpdateElement(ref GeoElement e, string eType, string[] args)
+        private static GeoElement UpdateElement(GeoElement e, string eType, string[] args)
         {
-            Debug.Log("old\n"+e);
-            if (e.type == ElementType.err)
+            if (e.Type == ElementType.err)
             {
                 switch (eType)
                 {
                     case "":
-                        e.type = ElementType.point;
+                        e.Type = ElementType.point;
                         break;
                     case "Line":
-                        e.type = ElementType.line;
+                        e.Type = ElementType.line;
                         break;
                     case "Plane":
-                        e.type = ElementType.plane;
+                        e.Type = ElementType.plane;
                         break;
                     case "Sphere":
-                        e.type = ElementType.sphere;
+                        e.Type = ElementType.sphere;
                         break;
                     case "Circle":
-                        e.type = ElementType.circle;
+                        e.Type = ElementType.circle;
                         break;
                     default:
                         Debug.LogError("Misunderstood type \"" + eType + "\"");
@@ -143,7 +142,8 @@ namespace IMRE.HandWaver.Kernel
                 }
             }
 
-            switch (e.type)
+            int4 eDeps = e.Deps;
+            switch (e.Type)
             {
                 case ElementType.point:
                     //Assumed Point
@@ -151,54 +151,54 @@ namespace IMRE.HandWaver.Kernel
                     // arg1 is y value.
                     // arg2 is z value.
                     float3 newPos = new float3(float.Parse(args[0]), float.Parse(args[1]), float.Parse(args[2]));
-                    e.f0 = newPos;
+                    e.F0 = newPos;
                     break;
                 case ElementType.line:
                     // arguments should be as follows
                     // arg0 is name of point A
                     // arg1 is name of point B
-                    e.deps[0] = GeoElementDataBase.GetElementId(args[0]);
-                    e.deps[1] = GeoElementDataBase.GetElementId(args[1]);
+                    eDeps[0] = GeoElementDataBase.GetElementId(args[0]);
+                    eDeps[1] = GeoElementDataBase.GetElementId(args[1]);
                     break;
                 case ElementType.plane:
 
                     if (args.Length == 3) //Assume construction method as follows Plane(PointA, PointB, PointC)
                     {
-                        e.deps[0] = GeoElementDataBase.GetElementId(args[0]);
-                        e.deps[1] = GeoElementDataBase.GetElementId(args[1]);
-                        e.deps[2] = GeoElementDataBase.GetElementId(args[2]);
+                        eDeps[0] = GeoElementDataBase.GetElementId(args[0]);
+                        eDeps[1] = GeoElementDataBase.GetElementId(args[1]);
+                        eDeps[2] = GeoElementDataBase.GetElementId(args[2]);
                         break;
                     }
 
                     // arguments should be as follows
                     // arg0 is name of point A
                     // arg1 is float 3 of normal dir
-                    e.deps[0] = GeoElementDataBase.GetElementId(args[0]);
-                    e.f0 = args[1].ParseFloat3();
+                    eDeps[0] = GeoElementDataBase.GetElementId(args[0]);
+                    e.F0 = args[1].ParseFloat3();
 
                     break;
                 case ElementType.sphere:
                     // arguments should be as follows
                     // arg0 is name of origin point
                     // arg1 is name of edge point
-                    e.deps[0] = GeoElementDataBase.GetElementId(args[0]);
-                    e.deps[1] = GeoElementDataBase.GetElementId(args[1]);
+                    eDeps[0] = GeoElementDataBase.GetElementId(args[0]);
+                    eDeps[1] = GeoElementDataBase.GetElementId(args[1]);
                     break;
                 case ElementType.circle:
                     // arguments should be as follows
                     // arg0 is name of origin point
                     // arg1 is name of edge point
                     // arg2 is the normal direction
-                    e.deps[0] = GeoElementDataBase.GetElementId(args[0]);
-                    e.deps[1] = GeoElementDataBase.GetElementId(args[1]);
-                    e.f0 = args[2].ParseFloat3();
+                    eDeps[0] = GeoElementDataBase.GetElementId(args[0]);
+                    eDeps[1] = GeoElementDataBase.GetElementId(args[1]);
+                    e.F0 = args[2].ParseFloat3();
                     break;
                 default:
                     throw new ArgumentException("Misunderstood type \"" + eType + "\"");
             }
 
+            e.Deps = eDeps;
             e.Updated = DateTime.Now;
-            Debug.Log("new\n"+e);
             return e;
         }
 

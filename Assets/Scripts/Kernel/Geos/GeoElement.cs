@@ -109,7 +109,7 @@ namespace IMRE.HandWaver.Kernel.Geos
 
         public override string ToString()
         {
-            return $"{_elementName} element :: {_elementId} id, {_type} type, {_deps} deps, {_f0} f0\n";
+            return $"{_elementName} element :: {_elementId} Id, {_type} Type, {_deps} Deps, {_f0} F0\n";
         }
     }
 }

@@ -56,7 +56,7 @@ namespace IMRE.HandWaver.Kernel.Geos
                 Debug.LogWarningFormat("Element {0} already exists within the current context.", e.ElementId);
             }
             GeoElements[e.ElementId] = e; 
-            GeoNameDb[e.ElementName] = e.ElementId; 
+            GeoNameDb[e.ElementName.ToString()] = e.ElementId; 
             GeoElementMesh[e.ElementId] = new Mesh();
         }
 
