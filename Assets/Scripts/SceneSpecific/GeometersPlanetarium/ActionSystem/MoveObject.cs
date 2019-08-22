@@ -1,17 +1,20 @@
 ﻿using IMRE.EmbodiedUserInput;
+using Unity.Mathematics;
+using Unity.Transforms;
+using UnityEngine.Rendering;
 
 namespace IMRE.HandWaver.Space
 {
-public class MoveObject : EmbodiedAction
+    public class MoveObject : PinFunctions
     {
-        public override void checkClassifier(EmbodiedClassifier classifier)
+        public override void pinFunction(RSDESPin pin, EmbodiedClassifier classifier)
         {
-            throw new System.NotImplementedException();
+            pin.Latlong = GeoPlanetMaths.latlong(classifier.origin, RSDESManager.earthPos);
         }
 
-        public override void endAction(EmbodiedClassifier classifier)
+        public override float3 pinDirection(RSDESPin pin)
         {
-            throw new System.NotImplementedException();
+            return (Unity.Mathematics.float3) pin.directionFromLatLong();
         }
     }
 }

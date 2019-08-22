@@ -10,7 +10,7 @@ public class PinStarlightRaysToggle : PinFunctions
 	            return (Unity.Mathematics.float3) pin.directionFromLatLong();
             }
     		
-        public override void pinFunction(RSDESPin pin){
+        public override void pinFunction(RSDESPin pin, EmbodiedClassifier classifier){
 			if(pin != null)
 			{
 				pin.StarMode ++;

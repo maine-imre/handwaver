@@ -1,15 +1,16 @@
 ﻿using IMRE.EmbodiedUserInput;
+using Unity.Mathematics;
 
 namespace IMRE.HandWaver.Space
 {
-public class PinGreatArc : EmbodiedAction
+public class PinGreatArc : PinFunctions
     {
-        public override void checkClassifier(EmbodiedClassifier classifier)
+        public override void pinFunction(RSDESPin pin, EmbodiedClassifier classifier)
         {
             throw new System.NotImplementedException();
         }
 
-        public override void endAction(EmbodiedClassifier classifier)
+        public override float3 pinDirection(RSDESPin pin)
         {
             throw new System.NotImplementedException();
         }

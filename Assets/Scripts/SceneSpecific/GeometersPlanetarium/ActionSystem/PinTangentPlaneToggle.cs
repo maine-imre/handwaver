@@ -7,7 +7,7 @@ namespace IMRE.HandWaver.Space
     {
     		public float desiredAngle = 90f;
     		
-    		public override void pinFunction(RSDESPin pin){
+    		public override void pinFunction(RSDESPin pin, EmbodiedClassifier classifier){
 			if(pin != null)
 			{
 				pin.toggleHorizonPlane();

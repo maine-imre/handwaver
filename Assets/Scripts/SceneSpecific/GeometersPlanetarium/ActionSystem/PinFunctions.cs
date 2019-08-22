@@ -26,7 +26,7 @@ namespace IMRE.HandWaver.Space
 				}
 			}
 			if(!pin.Equals(default(pinData))){
-				pinFunction(pin.pin);
+				pinFunction(pin.pin, classifier);
 			}
         }
 
@@ -35,7 +35,7 @@ namespace IMRE.HandWaver.Space
             throw new System.NotImplementedException();
         }
         
-        public abstract void pinFunction(RSDESPin pin);
+        public abstract void pinFunction(RSDESPin pin, EmbodiedClassifier classifier);
         public abstract float3 pinDirection(RSDESPin pin);
     }
 }

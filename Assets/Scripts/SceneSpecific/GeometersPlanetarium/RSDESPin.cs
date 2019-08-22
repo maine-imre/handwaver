@@ -17,13 +17,13 @@ namespace IMRE.HandWaver.Space
 
         public static RSDESPin Constructor()
         {
-            return Instantiate(Resources.Load<GameObject>("Prefabs/RSDES/RSDESoushPinPrefab"))
+            return Instantiate(Resources.Load<GameObject>("Prefabs/RSDES/RSDESpushPinPrefab"))
                 .GetComponent<RSDESPin>();
         }
         
         public static RSDESPin Constructor(Vector2 latlong)
         {
-            RSDESPin pin = Instantiate(Resources.Load<GameObject>("Prefabs/RSDES/RSDESoushPinPrefab"))
+            RSDESPin pin = Instantiate(Resources.Load<GameObject>("Prefabs/RSDES/RSDESpushPinPrefab"))
                 .GetComponent<RSDESPin>();
             pin.Latlong = latlong;
             pin.setupPin();
