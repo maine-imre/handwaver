@@ -30,7 +30,8 @@ namespace IMRE.HandWaver.Space
         {
             //look at whether the gesture being performed is close to the surface of the Earth
             float dist = IMRE.Math.Operations.magnitude((float3) RSDESManager.earthPos - classifier.origin);
-            if (RSDESManager.EarthRadius - dist < tolerance && Time.time > _startTime + cooldown)
+
+            if (Unity.Mathematics.math.abs(RSDESManager.EarthRadius - dist) < tolerance && Time.time > _startTime + cooldown)
             {
                     //figure out when the gesture began
                     _startTime = Time.time;

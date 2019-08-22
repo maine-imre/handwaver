@@ -1,6 +1,7 @@
 ﻿using IMRE.EmbodiedUserInput;
 using IMRE.Math;
 using Unity.Mathematics;
+using UnityEngine;
 
 namespace IMRE.HandWaver.Space
 {
@@ -32,7 +33,7 @@ namespace IMRE.HandWaver.Space
 
         public override void endAction(EmbodiedClassifier classifier)
         {
-            throw new System.NotImplementedException();
+            return;
         }
         
         public abstract void pinFunction(RSDESPin pin, EmbodiedClassifier classifier);
