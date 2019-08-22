@@ -1,6 +1,4 @@
-﻿using Enumerable = System.Linq.Enumerable;
-
-namespace IMRE.EmbodiedUserInput
+﻿namespace IMRE.EmbodiedUserInput
 {
     public class TouchSlider : UnityEngine.MonoBehaviour
     {
@@ -63,7 +61,8 @@ namespace IMRE.EmbodiedUserInput
             tSlider.SetPosition(0, tSliderEndA);
             tSlider.SetPosition(1, tSliderEndB);
 
-            Enumerable.ToList(Enumerable.Where(Enumerable.ToList(EmbodiedUserInputClassifierAuthoring.classifiers),
+            System.Linq.Enumerable.ToList(System.Linq.Enumerable.Where(
+                System.Linq.Enumerable.ToList(EmbodiedUserInputClassifierAuthoring.classifiers),
                 c => c.type == type)).ForEach(classifier => checkClassifier(classifier));
 
             //Where(classifier => classifier.isEligible && classifier.type == type).

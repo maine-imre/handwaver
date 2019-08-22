@@ -1,6 +1,4 @@
-﻿using Enumerable = System.Linq.Enumerable;
-
-namespace IMRE.HandWaver.Kernel
+﻿namespace IMRE.HandWaver.Kernel
 {
     public class HandWaverServerSocket : UnityEngine.MonoBehaviour
     {
@@ -75,7 +73,8 @@ namespace IMRE.HandWaver.Kernel
                 IMRE.HandWaver.Kernel.Geos.GeoElement e =
                     IMRE.HandWaver.Kernel.Geos.GeoElementDataBase.GetElement(eName);
                 string[] args =
-                    Enumerable.ToArray(Enumerable.Select(cmd.Groups["args"].Value.Split(','), s => s.Trim()));
+                    System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Select(cmd.Groups["args"].Value.Split(','),
+                        s => s.Trim()));
 
                 IMRE.HandWaver.Kernel.Geos.GeoElementDataBase.GeoElements[e.ElementId] = UpdateElement(e, eType, args);
             }
@@ -100,7 +99,8 @@ namespace IMRE.HandWaver.Kernel
                 IMRE.HandWaver.Kernel.Geos.GeoElement e =
                     IMRE.HandWaver.Kernel.Geos.GeoElementDataBase.GetElement(eName);
                 string[] args =
-                    Enumerable.ToArray(Enumerable.Select(cmd.Groups["args"].Value.Split(','), s => s.Trim()));
+                    System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Select(cmd.Groups["args"].Value.Split(','),
+                        s => s.Trim()));
                 ;
 
                 //Debug.LogFormat("*{0}* of type ({1}) with args **{2}** was updated", eName, eType, args.ToString());
@@ -214,7 +214,7 @@ namespace IMRE.HandWaver.Kernel
         public void testCMD()
         {
             //Test the command changes
-            StartCoroutine(HandWaverServerTransport.execCommand("A = (" + (xint++) + ", 2, 3)")); // Point A
+            StartCoroutine(HandWaverServerTransport.execCommand("A = (" + xint++ + ", 2, 3)")); // Point A
         }
 
         [UnityEngine.ContextMenu("Output Element Dictionary")]

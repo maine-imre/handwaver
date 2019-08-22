@@ -1,5 +1,3 @@
-using JobForEachExtensions = Unity.Entities.JobForEachExtensions;
-
 namespace IMRE.HandWaver.Kernel.GeoGebraInterface
 {
     [System.SerializableAttribute]
@@ -15,7 +13,7 @@ namespace IMRE.HandWaver.Kernel.GeoGebraInterface
         {
             GeoElementJob job = new GeoElementJob();
 
-            return JobForEachExtensions.Schedule(job, this, inputDependencies);
+            return Unity.Entities.JobForEachExtensions.Schedule(job, this, inputDependencies);
         }
 
         //This is a template for the jobs we will use.  See GitHub issue for a list of all possible types.

@@ -1,6 +1,4 @@
-﻿using Enumerable = System.Linq.Enumerable;
-
-namespace IMRE.EmbodiedUserInput
+﻿namespace IMRE.EmbodiedUserInput
 {
     //Classifiers are referring to gestures which can be performed.
     public enum classifierType
@@ -49,7 +47,8 @@ namespace IMRE.EmbodiedUserInput
             for (int i = 0; i < classifiers.Length; i++) Classify(ref classifiers[i]);
 
             if (printDebug)
-                Enumerable.ToList(Enumerable.Where(Enumerable.ToList(classifiers), c => c.isEligible))
+                System.Linq.Enumerable
+                    .ToList(System.Linq.Enumerable.Where(System.Linq.Enumerable.ToList(classifiers), c => c.isEligible))
                     .ForEach(c => UnityEngine.Debug.Log(c.type + " : " + c.Chirality));
         }
 
@@ -214,7 +213,7 @@ namespace IMRE.EmbodiedUserInput
                     //where is the palm?
                     embodiedClassifier.origin = hand.Palm.Position;
                     //if all fingers are extended, the palm is open
-                    return Enumerable.Count(hand.Fingers, finger => finger.IsExtended) == 5;
+                    return System.Linq.Enumerable.Count(hand.Fingers, finger => finger.IsExtended) == 5;
 
                 #endregion
 
@@ -236,7 +235,8 @@ namespace IMRE.EmbodiedUserInput
                     angle = Unity.Mathematics.math.abs(IMRE.Math.Operations.Angle(velocity,
                         embodiedClassifier.direction));
 //TODO check the tolerances here.
-                    return Enumerable.Count(hand.Fingers, finger => finger.IsExtended) == 5 && speed > .5f &&
+                    return System.Linq.Enumerable.Count(hand.Fingers, finger => finger.IsExtended) == 5 &&
+                           speed > .5f &&
                            angle < 30f;
 
                 #endregion
@@ -259,7 +259,8 @@ namespace IMRE.EmbodiedUserInput
 //TODO check the tolerances here.
                     //if the palm is open and moving, then note the plane it is moving through and activate the
                     //gesture for swiping
-                    return Enumerable.Count(hand.Fingers, finger => finger.IsExtended) == 5 && speed > .5f &&
+                    return System.Linq.Enumerable.Count(hand.Fingers, finger => finger.IsExtended) == 5 &&
+                           speed > .5f &&
                            angle < 30f;
 
                 #endregion

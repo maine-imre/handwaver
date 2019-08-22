@@ -1,6 +1,4 @@
-﻿using Enumerable = System.Linq.Enumerable;
-
-/// <summary>
+﻿/// <summary>
 ///     This script does ___.
 ///     The main contributor(s) to this script is __
 ///     Status: ???
@@ -22,7 +20,7 @@ public class cubeNet : UnityEngine.MonoBehaviour
         {
             fold = value;
             lr.SetPositions(lineRendererVerts(fold));
-            m.SetVertices(Enumerable.ToList(meshVerts(fold)));
+            m.SetVertices(System.Linq.Enumerable.ToList(meshVerts(fold)));
         }
     }
 

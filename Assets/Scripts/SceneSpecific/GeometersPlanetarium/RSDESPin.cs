@@ -1,7 +1,4 @@
-﻿using Enumerable = System.Linq.Enumerable;
-using Utils = Leap.Unity.Utils;
-
-namespace IMRE.HandWaver.Space
+﻿namespace IMRE.HandWaver.Space
 {
     [UnityEngine.RequireComponent(typeof(UnityEngine.LineRenderer), typeof(Leap.Unity.Interaction.InteractionBehaviour),
         typeof(Leap.Unity.Interaction.AnchorableBehaviour))]
@@ -267,20 +264,20 @@ namespace IMRE.HandWaver.Space
                     switch (starMode)
                     {
                         case starFieldSelect.allPins:
-                            initialize = starRays.Length != Enumerable.Count(
-                                             Enumerable.Where(RSDESManager.ins.pinnedPoints,
+                            initialize = starRays.Length != System.Linq.Enumerable.Count(
+                                             System.Linq.Enumerable.Where(RSDESManager.ins.pinnedPoints,
                                                  p => p.pin.myPintype == pintype.Star));
                             break;
                         case starFieldSelect.allPinsEqualAltitude:
-                            initialize = starRays.Length / 50 != Enumerable.Count(
-                                             Enumerable.Where(RSDESManager.ins.pinnedPoints,
+                            initialize = starRays.Length / 50 != System.Linq.Enumerable.Count(
+                                             System.Linq.Enumerable.Where(RSDESManager.ins.pinnedPoints,
                                                  p => p.pin.myPintype == pintype.Star && p.pin.name != name));
                             break;
                     }
 
                 //why aren't always deleting.
                 if (initialize && starRays != null && starRays.Length > 0)
-                    Enumerable.ToList(Enumerable.Where(Enumerable.ToList(starRays),
+                    System.Linq.Enumerable.ToList(System.Linq.Enumerable.Where(System.Linq.Enumerable.ToList(starRays),
                             sr => sr != null && sr.GetComponent<UnityEngine.LineRenderer>() != null))
                         .ForEach(sr => Destroy(sr));
 
@@ -295,16 +292,16 @@ namespace IMRE.HandWaver.Space
                         }
 
                         starRays[0].SetPositions(GeoPlanetMaths.starRayRendererCoordiantes(dbPinData));
-                        Enumerable.ToList(starRays).ForEach(p => p.startWidth = RSDESManager.LR_width);
-                        Enumerable.ToList(starRays).ForEach(p => p.endWidth = RSDESManager.LR_width);
-                        Enumerable.ToList(starRays).ForEach(p => p.positionCount = 2);
+                        System.Linq.Enumerable.ToList(starRays).ForEach(p => p.startWidth = RSDESManager.LR_width);
+                        System.Linq.Enumerable.ToList(starRays).ForEach(p => p.endWidth = RSDESManager.LR_width);
+                        System.Linq.Enumerable.ToList(starRays).ForEach(p => p.positionCount = 2);
                         break;
 
                     case starFieldSelect.allPins:
                         //single + all points
 
-                        System.Collections.Generic.List<pinData> pins = Enumerable.ToList(
-                            Enumerable.Where(RSDESManager.ins.pinnedPoints,
+                        System.Collections.Generic.List<pinData> pins = System.Linq.Enumerable.ToList(
+                            System.Linq.Enumerable.Where(RSDESManager.ins.pinnedPoints,
                                 p => p.pin.myPintype == pintype.Star || p.pin == this));
                         if (pins.Count > 0)
                         {
@@ -329,7 +326,7 @@ namespace IMRE.HandWaver.Space
                             {
                                 starRays[i] = spawnStarRay();
                                 System.Collections.Generic.List<UnityEngine.LineRenderer> l =
-                                    Enumerable.ToList(starRays);
+                                    System.Linq.Enumerable.ToList(starRays);
                                 l.RemoveAll(p => p == null);
                                 l.ForEach(p => p.GetComponent<UnityEngine.LineRenderer>().startColor = defaultColor);
                                 l.ForEach(p => p.GetComponent<UnityEngine.LineRenderer>().endColor = defaultColor);
@@ -340,16 +337,16 @@ namespace IMRE.HandWaver.Space
 
                         //starRays[0].SetPositions(GeoPlanetMaths.starRayRendererCoordiantes(dbPinData));     //create new one
 
-                        Enumerable.ToList(starRays).ForEach(p => p.startWidth = RSDESManager.LR_width);
-                        Enumerable.ToList(starRays).ForEach(p => p.endWidth = RSDESManager.LR_width);
-                        Enumerable.ToList(starRays).ForEach(p => p.positionCount = 2);
+                        System.Linq.Enumerable.ToList(starRays).ForEach(p => p.startWidth = RSDESManager.LR_width);
+                        System.Linq.Enumerable.ToList(starRays).ForEach(p => p.endWidth = RSDESManager.LR_width);
+                        System.Linq.Enumerable.ToList(starRays).ForEach(p => p.positionCount = 2);
 
                         break;
 
                     case starFieldSelect.allPinsEqualAltitude:
                         // all pins equal altitude
-                        System.Collections.Generic.List<pinData> points = Enumerable.ToList(
-                            Enumerable.Where(RSDESManager.ins.PinnedPoints,
+                        System.Collections.Generic.List<pinData> points = System.Linq.Enumerable.ToList(
+                            System.Linq.Enumerable.Where(RSDESManager.ins.PinnedPoints,
                                 p => p.pin.myPintype == pintype.Star && p.pin.name != name));
 
                         if (initialize) starRays = new UnityEngine.LineRenderer[equalAltitudeCount * points.Count];
@@ -380,9 +377,9 @@ namespace IMRE.HandWaver.Space
                             }
                         }
 
-                        Enumerable.ToList(starRays).ForEach(p => p.startWidth = RSDESManager.LR_width);
-                        Enumerable.ToList(starRays).ForEach(p => p.endWidth = RSDESManager.LR_width);
-                        Enumerable.ToList(starRays).ForEach(p => p.positionCount = 2);
+                        System.Linq.Enumerable.ToList(starRays).ForEach(p => p.startWidth = RSDESManager.LR_width);
+                        System.Linq.Enumerable.ToList(starRays).ForEach(p => p.endWidth = RSDESManager.LR_width);
+                        System.Linq.Enumerable.ToList(starRays).ForEach(p => p.positionCount = 2);
 
                         break;
 
@@ -436,9 +433,9 @@ namespace IMRE.HandWaver.Space
 
                 if (initialize && starMode != starFieldSelect.allPinsEqualAltitude)
                 {
-                    Enumerable.ToList(starRays).ForEach(p =>
+                    System.Linq.Enumerable.ToList(starRays).ForEach(p =>
                         p.GetComponent<UnityEngine.LineRenderer>().startColor = defaultColor);
-                    Enumerable.ToList(starRays)
+                    System.Linq.Enumerable.ToList(starRays)
                         .ForEach(p => p.GetComponent<UnityEngine.LineRenderer>().endColor = defaultColor);
                 }
             }
@@ -766,7 +763,7 @@ namespace IMRE.HandWaver.Space
 
         private void hoverUpdate()
         {
-            float glow = Utils.Map(iBehave.closestHoveringControllerDistance, 0F, 0.2F, 1F, 0.0F);
+            float glow = Leap.Unity.Utils.Map(iBehave.closestHoveringControllerDistance, 0F, 0.2F, 1F, 0.0F);
             pinHead.material.color = UnityEngine.Color.Lerp(defaultColor, hoverColor, glow);
         }
 
@@ -774,7 +771,7 @@ namespace IMRE.HandWaver.Space
         {
             if (onSurface)
             {
-                if (Enumerable.Any(RSDESManager.ins.SelectedPoints, p => p.pin == this)) //deselect
+                if (System.Linq.Enumerable.Any(RSDESManager.ins.SelectedPoints, p => p.pin == this)) //deselect
                 {
                     if (RSDESManager.verboseLogging) UnityEngine.Debug.Log(name + " has been deselected!");
                     selectState = !selectState;
@@ -885,7 +882,7 @@ namespace IMRE.HandWaver.Space
             UnityEngine.Debug.Log("****");
             UnityEngine.Debug.Log(name);
             UnityEngine.Debug.Log("Is found in pins list: " +
-                                  Enumerable.Any(RSDESManager.ins.PinnedPoints, p => p.pin == this));
+                                  System.Linq.Enumerable.Any(RSDESManager.ins.PinnedPoints, p => p.pin == this));
             UnityEngine.Debug.Log("Is pin data found: " + RSDESManager.ins.pinDB[this]);
             UnityEngine.Debug.Log("Is pin valid: " + RSDESManager.ins.pinDB[this].pin.name);
             UnityEngine.Debug.Log("****");
@@ -898,9 +895,10 @@ namespace IMRE.HandWaver.Space
             UnityEngine.Debug.Log(name);
             UnityEngine.Debug.Log("Is intended to be selected: " + selectState);
             UnityEngine.Debug.Log("Is found in selected pins list: " +
-                                  Enumerable.Any(RSDESManager.ins.SelectedPoints, p => p.pin == this));
+                                  System.Linq.Enumerable.Any(RSDESManager.ins.SelectedPoints, p => p.pin == this));
             UnityEngine.Debug.Log("Success: " +
-                                  (selectState == Enumerable.Any(RSDESManager.ins.SelectedPoints, p => p.pin == this)));
+                                  (selectState == System.Linq.Enumerable.Any(RSDESManager.ins.SelectedPoints,
+                                       p => p.pin == this)));
             UnityEngine.Debug.Log("****");
         }
 

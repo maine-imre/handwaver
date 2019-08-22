@@ -1,6 +1,4 @@
-﻿using Enumerable = System.Linq.Enumerable;
-
-namespace IMRE.HandWaver.Space
+﻿namespace IMRE.HandWaver.Space
 {
     /// <summary>
     ///     A control for data collection in the Geometer's Planetarium Scene.
@@ -14,7 +12,7 @@ namespace IMRE.HandWaver.Space
             get
             {
                 //Creates list and adds pins that are placed to that list
-                return Enumerable.ToList(Enumerable.Where(man.PinnedPoints,
+                return System.Linq.Enumerable.ToList(System.Linq.Enumerable.Where(man.PinnedPoints,
                     p => p.pin.myPintype == RSDESPin.pintype.Star));
             }
         }

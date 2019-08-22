@@ -1,6 +1,4 @@
-﻿using Enumerable = System.Linq.Enumerable;
-
-/// <summary>
+﻿/// <summary>
 ///     A net of a tetrahedron that folds into a tetrahedron.
 ///     used in study of scale and dimension
 ///     not integrated with kernel.
@@ -19,7 +17,7 @@ public class tetrahedronNet : UnityEngine.MonoBehaviour
         {
             fold = value;
             lr.SetPositions(lineRendererVerts(fold));
-            m.SetVertices(Enumerable.ToList(meshVerts(fold)));
+            m.SetVertices(System.Linq.Enumerable.ToList(meshVerts(fold)));
         }
     }
 
