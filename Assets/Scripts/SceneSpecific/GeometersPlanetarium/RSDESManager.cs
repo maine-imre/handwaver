@@ -1,28 +1,20 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using Leap.Unity;
-using Leap.Unity.LeapPaint_v3;
-using TMPro;
-using UnityEngine;
-
-namespace IMRE.HandWaver.Space
+﻿namespace IMRE.HandWaver.Space
 {
     #region Structs
 
-    [Serializable]
+    [System.SerializableAttribute]
     public struct pinData
     {
         public RSDESPin pin;
-        public Vector3 contactPoint;
+        public UnityEngine.Vector3 contactPoint;
 
-        public Vector2 latLong
+        public UnityEngine.Vector2 latLong
         {
             get => pin.Latlong;
             set => pin.Latlong = value;
         }
 
-        public pinData(RSDESPin pin, Vector3 contactPoint)
+        public pinData(RSDESPin pin, UnityEngine.Vector3 contactPoint)
         {
             RSDESManager.onEarthTilt += pin.onEarthTilt;
             this.pin = pin;
@@ -41,7 +33,7 @@ namespace IMRE.HandWaver.Space
     ///     The main contributor(s) to this script is NG
     ///     Status: WORKING
     /// </summary>
-    public class RSDESManager : MonoBehaviour
+    public class RSDESManager : UnityEngine.MonoBehaviour
     {
         private readonly float realEarthtilt = 23.44f;
         private bool activeMenus;
@@ -60,22 +52,22 @@ namespace IMRE.HandWaver.Space
 
         public static RSDESManager ins;
         internal static bool verboseLogging = false;
-        public List<pinData> pinnedPoints = new List<pinData>();
+        public System.Collections.Generic.List<pinData> pinnedPoints = new System.Collections.Generic.List<pinData>();
 
-        private List<pinData>
-            selectedPoints = new List<pinData>();
+        private System.Collections.Generic.List<pinData>
+            selectedPoints = new System.Collections.Generic.List<pinData>();
 
-        internal Dictionary<RSDESPin, pinData> pinDB =
-            new Dictionary<RSDESPin, pinData>();
+        internal System.Collections.Generic.Dictionary<RSDESPin, pinData> pinDB =
+            new System.Collections.Generic.Dictionary<RSDESPin, pinData>();
 
-        public List<pinData> PinnedPoints
+        public System.Collections.Generic.List<pinData> PinnedPoints
         {
             get => pinnedPoints;
 
             set => pinnedPoints = value;
         }
 
-        public List<pinData> SelectedPoints
+        public System.Collections.Generic.List<pinData> SelectedPoints
         {
             get
             {
@@ -86,7 +78,7 @@ namespace IMRE.HandWaver.Space
             set
             {
                 if (verboseLogging)
-                    Debug.Log(value + " is being selected");
+                    UnityEngine.Debug.Log(value + " is being selected");
                 selectedPoints = value;
 
                 ////this should also change visibility of buttons.
@@ -114,7 +106,7 @@ namespace IMRE.HandWaver.Space
             }
         }
 
-        public Action updateStarFieldsGlobal;
+        public System.Action updateStarFieldsGlobal;
 
         public void callUpdateStarFieldsGlobal()
         {
@@ -162,10 +154,10 @@ namespace IMRE.HandWaver.Space
             starParent.gameObject.SetActive(!starParent.gameObject.activeSelf);
         }
 
-        public static Vector3 earthPos;
-        public static Quaternion earthRot;
-        internal static Action onEarthTilt;
-        private DateTime simulationTime;
+        public static UnityEngine.Vector3 earthPos;
+        public static UnityEngine.Quaternion earthRot;
+        internal static System.Action onEarthTilt;
+        private System.DateTime simulationTime;
 
         public static RSDESPin sunPin;
         public static RSDESPin moonPin;
@@ -176,14 +168,14 @@ namespace IMRE.HandWaver.Space
         internal static float moonDist = 384472282; //meters 384,000,000
         internal static float earthTrueRadius = 6371393; //meters 6,371,393
 
-        public Light globalLight;
+        public UnityEngine.Light globalLight;
 
-        public Transform Sun;
-        public Material SunMaterial;
-        public Transform Moon;
-        public Material MoonMaterial;
+        public UnityEngine.Transform Sun;
+        public UnityEngine.Material SunMaterial;
+        public UnityEngine.Transform Moon;
+        public UnityEngine.Material MoonMaterial;
 
-        public Transform RSDESStar;
+        public UnityEngine.Transform RSDESStar;
 
         //public leapButtonToggleExtension showSun;
         //public leapButtonToggleExtension showMoon;
@@ -192,11 +184,11 @@ namespace IMRE.HandWaver.Space
         //public TMPro.TextMeshPro timeText;
         //public InteractionSlider dateSlider;
         //public TMPro.TextMeshPro dateText;
-        [Range(-2f, 5f)] public float timeScale = 1f;
+        [UnityEngine.RangeAttribute(-2f, 5f)] public float timeScale = 1f;
 
-        public TextMeshPro timeDateGlobalMenuText;
+        public TMPro.TextMeshPro timeDateGlobalMenuText;
 
-        internal DateTime SimulationTime
+        internal System.DateTime SimulationTime
         {
             get => simulationTime;
 
@@ -207,19 +199,19 @@ namespace IMRE.HandWaver.Space
                 if (timeDateGlobalMenuText != null)
                     timeDateGlobalMenuText.SetText(value.ToString("yyyy/MM/dd HH:mm"));
 
-                var ScaleFactor = earthTrueRadius / EarthRadius;
+                float ScaleFactor = earthTrueRadius / EarthRadius;
             }
         }
 
         private void SetSunMoonPositions()
         {
-            var EarthOffset = Vector3.zero;
+            UnityEngine.Vector3 EarthOffset = UnityEngine.Vector3.zero;
             if (Horizons.planetsHaveValues) EarthOffset = Horizons.Planets.Find(p => p.id == 399).position;
             if (Sun != null && sunPin != null && Horizons.planetsHaveValues)
             {
                 if (sunBetweenTropics)
                 {
-                    var tmp = (Horizons.Planets.Find(p => p.id == 10).position - EarthOffset).latlong();
+                    UnityEngine.Vector2 tmp = (Horizons.Planets.Find(p => p.id == 10).position - EarthOffset).latlong();
                     tmp.x = tmp.x / realEarthtilt * earthTiltDeg;
                     sunPin.Latlong = tmp;
                 }
@@ -230,7 +222,7 @@ namespace IMRE.HandWaver.Space
             }
             else
             {
-                Debug.LogWarning("Sun, " + Sun + " ,or Sunpin, " + sunPin + " ,are not set.");
+                UnityEngine.Debug.LogWarning("Sun, " + Sun + " ,or Sunpin, " + sunPin + " ,are not set.");
                 RSDESPin.Constructor().GetComponent<RSDESPin>().setupSun();
             }
 
@@ -240,14 +232,14 @@ namespace IMRE.HandWaver.Space
             }
             else
             {
-                Debug.LogWarning("moon, " + Moon + " ,or moonpin, " + moonPin + " ,are not set.");
+                UnityEngine.Debug.LogWarning("moon, " + Moon + " ,or moonpin, " + moonPin + " ,are not set.");
                 RSDESPin.Constructor().GetComponent<RSDESPin>().setupMoon();
             }
         }
 
         //public leapButtonToggleExtension allowTiltButton;
-        public CapsuleCollider axisCollider;
-        public MeshRenderer axisRenderer;
+        public UnityEngine.CapsuleCollider axisCollider;
+        public UnityEngine.MeshRenderer axisRenderer;
 
         //public leapButtonToggleExtension showLatitude;
         //public leapButtonToggleExtension showLongitude;
@@ -256,14 +248,14 @@ namespace IMRE.HandWaver.Space
         //public leapButtonToggleExtension showGreatArc;
         //public leapButtonToggleExtension showEarth;
         //public leapButtonToggleExtension showLights;
-        public PressableSlider timeScaleSlider;
-        public TextMeshPro timeScaleDisplay;
+        public Leap.Unity.LeapPaint_v3.PressableSlider timeScaleSlider;
+        public TMPro.TextMeshPro timeScaleDisplay;
 
-        private LineRenderer[] latRenderer;
-        private LineRenderer[] longRenderer;
-        private LineRenderer[] ghaRenderer;
-        private LineRenderer[] decRenderer;
-        private LineRenderer poleRenderer;
+        private UnityEngine.LineRenderer[] latRenderer;
+        private UnityEngine.LineRenderer[] longRenderer;
+        private UnityEngine.LineRenderer[] ghaRenderer;
+        private UnityEngine.LineRenderer[] decRenderer;
+        private UnityEngine.LineRenderer poleRenderer;
 
         private readonly float[] _specialLat = {0f, 0f, 0f, 0f, 0f};
 
@@ -276,33 +268,33 @@ namespace IMRE.HandWaver.Space
         private static readonly float celestialSphereMinRadius = 50f;
 
         internal static float radiusOfLargerSphere =>
-            Mathf.Max(celestialSphereMinRadius * EarthRadius, celestialSphereMinRadius);
+            UnityEngine.Mathf.Max(celestialSphereMinRadius * EarthRadius, celestialSphereMinRadius);
 
         //public leapButtonToggleExtension drawCircle;
 
-        private readonly Dictionary<List<pinData>,
-                LineRenderer>
+        private readonly System.Collections.Generic.Dictionary<System.Collections.Generic.List<pinData>,
+                UnityEngine.LineRenderer>
             greatArcsLRs =
-                new Dictionary<List<pinData>,
-                    LineRenderer>();
+                new System.Collections.Generic.Dictionary<System.Collections.Generic.List<pinData>,
+                    UnityEngine.LineRenderer>();
 
         //public leapButtonToggleExtension findDistance;
 
-        private List<RSDESLineData> arcLineData =
-            new List<RSDESLineData>();
+        private System.Collections.Generic.List<RSDESLineData> arcLineData =
+            new System.Collections.Generic.List<RSDESLineData>();
 
         #endregion Variables
 
         #region Monobehaviour Functions
 
-        private IEnumerator clock;
+        private System.Collections.IEnumerator clock;
 
-        private IEnumerator clockUpdate()
+        private System.Collections.IEnumerator clockUpdate()
         {
             while (true)
             {
-                SimulationTime = DateTime.UtcNow;
-                yield return new WaitForSecondsRealtime(60f);
+                SimulationTime = System.DateTime.UtcNow;
+                yield return new UnityEngine.WaitForSecondsRealtime(60f);
             }
         }
 
@@ -310,8 +302,8 @@ namespace IMRE.HandWaver.Space
         {
             spawnNightSky();
             //set the viewable distance to be big.
-            FindObjectOfType<LeapXRServiceProvider>().GetComponent<Camera>().farClipPlane =
-                Mathf.Pow(10, 17);
+            FindObjectOfType<Leap.Unity.LeapXRServiceProvider>().GetComponent<UnityEngine.Camera>().farClipPlane =
+                UnityEngine.Mathf.Pow(10, 17);
             //timeScaleSlider.OnSliderValueChanged.AddListener(setTimeScale);
             clock = clockUpdate();
             StartCoroutine(clock);
@@ -323,7 +315,7 @@ namespace IMRE.HandWaver.Space
             ins = this;
             EarthRadius = 1f;
             //initialize system scales to agree.
-            SimulationTime = DateTime.UtcNow;
+            SimulationTime = System.DateTime.UtcNow;
             simulationScale = earthRadius / earthTrueRadius;
 //			worldScaleModifier.ins.AbsoluteScale = simulationScale;
 
@@ -346,7 +338,7 @@ namespace IMRE.HandWaver.Space
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.F12))
+            if (UnityEngine.Input.GetKeyDown(UnityEngine.KeyCode.F12))
                 enableNSPoleMenus();
         }
 
@@ -361,7 +353,7 @@ namespace IMRE.HandWaver.Space
         {
             transform.rotation = earthRot;
 
-            earthTiltDeg = Vector3.Angle(Vector3.up, transform.up);
+            earthTiltDeg = UnityEngine.Vector3.Angle(UnityEngine.Vector3.up, transform.up);
             _specialLat[0] = 90 - earthTiltDeg; //arctic
             _specialLat[1] = -90 + earthTiltDeg; //ant arctic
             _specialLat[2] = 0 - earthTiltDeg; //tropic of cancer
@@ -380,30 +372,32 @@ namespace IMRE.HandWaver.Space
             //timeText.SetText(SimulationTime.ToShortTimeString());
         }
 
-        private Transform starParent;
+        private UnityEngine.Transform starParent;
 
-        private readonly Dictionary<Transform, StellarData.Star> starDataMap =
-            new Dictionary<Transform, StellarData.Star>();
+        private readonly System.Collections.Generic.Dictionary<UnityEngine.Transform, StellarData.Star> starDataMap =
+            new System.Collections.Generic.Dictionary<UnityEngine.Transform, StellarData.Star>();
 
         internal void spawnNightSky()
         {
-            starParent = Instantiate(new GameObject()).transform;
+            starParent = Instantiate(new UnityEngine.GameObject()).transform;
             starParent.name = "Star Container";
             StellarData.getData(earthPos);
-            foreach (var cStar in StellarData.Stars)
+            foreach (StellarData.Star cStar in StellarData.Stars)
+            {
                 if (cStar.VisualMagnitude <= 6)
                 {
-                    var Pos =
-                        new Vector3(cStar.position.x * 4841427, cStar.position.y * 4841427,
+                    UnityEngine.Vector3 Pos =
+                        new UnityEngine.Vector3(cStar.position.x * 4841427, cStar.position.y * 4841427,
                                 cStar.position.z * 4841427).normalized.ScaleMultiplier(radiusOfLargerSphere)
                             .Translate(earthPos);
 
                     RSDESStar = Instantiate(
-                        Resources.Load<GameObject>("Prefabs/RSDES/RSDESStar_CS"), Pos,
-                        Quaternion.identity, starParent).transform;
+                        UnityEngine.Resources.Load<UnityEngine.GameObject>("Prefabs/RSDES/RSDESStar_CS"), Pos,
+                        UnityEngine.Quaternion.identity, starParent).transform;
 
                     starDataMap.Add(RSDESStar, cStar);
                 }
+            }
 
             //turn off night sky.
             toggleNightSky();
@@ -411,11 +405,13 @@ namespace IMRE.HandWaver.Space
 
         internal void updateNightSky()
         {
-            foreach (var star in starDataMap.Keys)
+            foreach (UnityEngine.Transform star in starDataMap.Keys)
+            {
                 star.position =
-                    new Vector3(starDataMap[star].position.x * 4841427,
+                    new UnityEngine.Vector3(starDataMap[star].position.x * 4841427,
                             starDataMap[star].position.y * 4841427, starDataMap[star].position.z * 4841427).normalized
                         .ScaleMultiplier(radiusOfLargerSphere).Translate(earthPos);
+            }
         }
 
         #endregion Behaviour Functions
@@ -437,19 +433,19 @@ namespace IMRE.HandWaver.Space
             //northPolePin.overrideNorthPoleLock = true;
             //northPolePin.Latlong = (Quaternion.Euler(23.4f, 0, 0)*Vector3.up).latlong();
             //northPolePin.overrideNorthPoleLock = false;
-            earthRot = Quaternion.Euler(23.4f, 0, 0);
+            earthRot = UnityEngine.Quaternion.Euler(23.4f, 0, 0);
             earthTilt();
         }
 
         public void toggleSun()
         {
-            Sun.GetComponent<Renderer>().enabled = !Sun.GetComponent<Renderer>().enabled;
-            Sun.GetComponent<Light>().enabled = !Sun.GetComponent<Light>().enabled;
+            Sun.GetComponent<UnityEngine.Renderer>().enabled = !Sun.GetComponent<UnityEngine.Renderer>().enabled;
+            Sun.GetComponent<UnityEngine.Light>().enabled = !Sun.GetComponent<UnityEngine.Light>().enabled;
         }
 
         public void toggleMoon()
         {
-            Moon.GetComponent<Renderer>().enabled = !Moon.GetComponent<Renderer>().enabled;
+            Moon.GetComponent<UnityEngine.Renderer>().enabled = !Moon.GetComponent<UnityEngine.Renderer>().enabled;
         }
 
         public void switchLat()
@@ -478,16 +474,16 @@ namespace IMRE.HandWaver.Space
         //this needs to be incremented by a button.
         public latitudeMode myLatMode = latitudeMode.off;
 
-        public Color articRenderer;
-        public Color tropicsRenderer;
-        public Color equatorRenderer;
+        public UnityEngine.Color articRenderer;
+        public UnityEngine.Color tropicsRenderer;
+        public UnityEngine.Color equatorRenderer;
 
         public void updateLatLongLines()
         {
             if (latRenderer == null)
             {
-                latRenderer = new LineRenderer[nLatDivisions + specialLatitudeCount];
-                for (var i = 0; i < nLatDivisions + specialLatitudeCount; i++)
+                latRenderer = new UnityEngine.LineRenderer[nLatDivisions + specialLatitudeCount];
+                for (int i = 0; i < nLatDivisions + specialLatitudeCount; i++)
                 {
                     latRenderer[i] = RSDESGeneratedLine();
                     latRenderer[i].positionCount = LR_Resolution;
@@ -508,8 +504,8 @@ namespace IMRE.HandWaver.Space
 
             if (decRenderer == null)
             {
-                decRenderer = new LineRenderer[nLatDivisions + specialLatitudeCount];
-                for (var i = 0; i < nLatDivisions + specialLatitudeCount; i++)
+                decRenderer = new UnityEngine.LineRenderer[nLatDivisions + specialLatitudeCount];
+                for (int i = 0; i < nLatDivisions + specialLatitudeCount; i++)
                 {
                     decRenderer[i] = RSDESGeneratedLine();
                     decRenderer[i].positionCount = LR_Resolution;
@@ -531,8 +527,8 @@ namespace IMRE.HandWaver.Space
             //need to add subdivided grid.
             if (longRenderer == null)
             {
-                longRenderer = new LineRenderer[nLongDivisions];
-                for (var i = 0; i < nLongDivisions; i++)
+                longRenderer = new UnityEngine.LineRenderer[nLongDivisions];
+                for (int i = 0; i < nLongDivisions; i++)
                 {
                     {
                         longRenderer[i] = RSDESGeneratedLine();
@@ -555,8 +551,8 @@ namespace IMRE.HandWaver.Space
 
             if (ghaRenderer == null)
             {
-                ghaRenderer = new LineRenderer[nLongDivisions];
-                for (var i = 0; i < nLongDivisions; i++)
+                ghaRenderer = new UnityEngine.LineRenderer[nLongDivisions];
+                for (int i = 0; i < nLongDivisions; i++)
                 {
                     ghaRenderer[i] = RSDESGeneratedLine();
                     ghaRenderer[i].positionCount = LR_Resolution;
@@ -575,17 +571,17 @@ namespace IMRE.HandWaver.Space
                 }
             }
 
-            var lat = myLatMode == latitudeMode.both || myLatMode == latitudeMode.incremental;
-            var specialLat = myLatMode == latitudeMode.both || myLatMode == latitudeMode.special;
-            var dec = !(myLatMode == latitudeMode.special);
-            var specialDec = specialLat;
-            for (var i = 0; i < nLatDivisions + specialLatitudeCount; i++)
+            bool lat = myLatMode == latitudeMode.both || myLatMode == latitudeMode.incremental;
+            bool specialLat = myLatMode == latitudeMode.both || myLatMode == latitudeMode.special;
+            bool dec = !(myLatMode == latitudeMode.special);
+            bool specialDec = specialLat;
+            for (int i = 0; i < nLatDivisions + specialLatitudeCount; i++)
             {
                 if (lat || dec || specialLat)
                 {
-                    var theta = i * 180f / (nLatDivisions - 1) - 90f;
+                    float theta = i * 180f / (nLatDivisions - 1) - 90f;
                     if (i >= nLatDivisions) theta = _specialLat[i - nLatDivisions];
-                    var positions = GeoPlanetMaths
+                    UnityEngine.Vector3[] positions = GeoPlanetMaths
                         .latAtPoint(GeoPlanetMaths.directionFromLatLong(theta, 0) + earthPos, LR_Resolution)
                         .Translate(-earthPos).ScaleMultiplier(EarthRadius).Translate(earthPos);
                     latRenderer[i].SetPositions(positions);
@@ -624,15 +620,15 @@ namespace IMRE.HandWaver.Space
                 decRenderer[nLatDivisions + 3].endColor = tropicsRenderer;
             }
 
-            var sLong = true;
-            var sGHA = true;
-            for (var i = 0; i < nLongDivisions; i++)
+            bool sLong = true;
+            bool sGHA = true;
+            for (int i = 0; i < nLongDivisions; i++)
             {
                 if (sLong || sGHA)
                 {
                     //we only need to consider positive longitude since they are great circles.				
-                    var positions = GeoPlanetMaths.longAtPoint(
-                        GeoPlanetMaths.directionFromLatLong(new Vector2(0, 180f / nLongDivisions * i)) +
+                    UnityEngine.Vector3[] positions = GeoPlanetMaths.longAtPoint(
+                        GeoPlanetMaths.directionFromLatLong(new UnityEngine.Vector2(0, 180f / nLongDivisions * i)) +
                         earthPos, LR_Resolution);
                     longRenderer[i].SetPositions(positions);
                     ghaRenderer[i].SetPositions(positions.Translate(-earthPos)
@@ -652,7 +648,7 @@ namespace IMRE.HandWaver.Space
             }
             else
             {
-                var positions = new Vector3[2];
+                UnityEngine.Vector3[] positions = new UnityEngine.Vector3[2];
                 positions[0] = northPolePin.pinTip.transform.position;
                 positions[1] = southPolePin.pinTip.transform.position;
                 //polesExist.Add(northPolePin.gameObject.name + southPolePin.gameObject.name);
@@ -663,14 +659,14 @@ namespace IMRE.HandWaver.Space
             }
         }
 
-        private readonly List<string> circlesExist =
-            new List<string>();
+        private readonly System.Collections.Generic.List<string> circlesExist =
+            new System.Collections.Generic.List<string>();
 
         public void toggleCircles()
         {
             if (SelectedPoints.Count >= 2)
-                for (var i = 0; i < selectedPoints.Count - 1; i++)
-                for (var j = i + 1; j < selectedPoints.Count; j++)
+                for (int i = 0; i < selectedPoints.Count - 1; i++)
+                for (int j = i + 1; j < selectedPoints.Count; j++)
                     instantiateGreatCircle(selectedPoints[i], selectedPoints[j]);
         }
 
@@ -679,37 +675,37 @@ namespace IMRE.HandWaver.Space
             if (!circlesExist.Contains(pinA.pin.name + pinB.pin.name))
             {
                 circlesExist.Add(pinA.pin.name + pinB.pin.name);
-                var newLR = RSDESGeneratedLine();
+                UnityEngine.LineRenderer newLR = RSDESGeneratedLine();
                 newLR.GetComponent<RSDESLineData>().associatedPins =
-                    new List<pinData> {pinA, pinB};
+                    new System.Collections.Generic.List<pinData> {pinA, pinB};
                 newLR.GetComponent<RSDESLineData>().LineType = lineType.circle;
                 newLR.startWidth = LR_width;
                 newLR.endWidth = LR_width;
                 newLR.positionCount = LR_Resolution;
                 newLR.SetPositions(GeoPlanetMaths.greatCircleCoordinates(pinA.pin.transform.position,
                     pinB.pin.transform.position, LR_Resolution));
-                if (verboseLogging) Debug.Log(newLR.name + " was created for the two points.");
+                if (verboseLogging) UnityEngine.Debug.Log(newLR.name + " was created for the two points.");
                 newLR.loop = true;
             }
         }
 
-        private readonly List<string> greatArcsExist =
-            new List<string>();
+        private readonly System.Collections.Generic.List<string> greatArcsExist =
+            new System.Collections.Generic.List<string>();
 
         public void toggleGreatArcs()
         {
             {
                 if (SelectedPoints.Count >= 2)
-                    for (var i = 0; i < selectedPoints.Count - 1; i++)
-                    for (var j = i + 1; j < selectedPoints.Count; j++)
+                    for (int i = 0; i < selectedPoints.Count - 1; i++)
+                    for (int j = i + 1; j < selectedPoints.Count; j++)
                         instantiateGreatArc(selectedPoints[i], selectedPoints[j]);
             }
         }
 
-        private LineRenderer RSDESGeneratedLine()
+        private UnityEngine.LineRenderer RSDESGeneratedLine()
         {
-            return Instantiate(Resources.Load<GameObject>("Prefabs/RSDES/RSDESGeneratedLine"))
-                .GetComponent<LineRenderer>();
+            return Instantiate(UnityEngine.Resources.Load<UnityEngine.GameObject>("Prefabs/RSDES/RSDESGeneratedLine"))
+                .GetComponent<UnityEngine.LineRenderer>();
         }
 
         public void instantiateGreatArc(pinData pinA, pinData pinB)
@@ -717,11 +713,11 @@ namespace IMRE.HandWaver.Space
             if (!greatArcsExist.Contains(pinA.pin.name + pinB.pin.name))
             {
                 greatArcsExist.Add(pinA.pin.name + pinB.pin.name);
-                var newLR = RSDESGeneratedLine();
+                UnityEngine.LineRenderer newLR = RSDESGeneratedLine();
                 newLR.GetComponent<RSDESLineData>().associatedPins =
-                    new List<pinData> {pinA, pinB};
+                    new System.Collections.Generic.List<pinData> {pinA, pinB};
                 newLR.GetComponent<RSDESLineData>().LineType = lineType.arc;
-                greatArcsLRs.Add(new List<pinData> {pinA, pinB}, newLR);
+                greatArcsLRs.Add(new System.Collections.Generic.List<pinData> {pinA, pinB}, newLR);
                 newLR.startWidth = LR_width;
                 newLR.endWidth = LR_width;
                 newLR.positionCount = LR_Resolution;
@@ -734,7 +730,7 @@ namespace IMRE.HandWaver.Space
         public void toggleDistance()
         {
             if (verboseLogging)
-                Debug.Log("DISTANCE toggled");
+                UnityEngine.Debug.Log("DISTANCE toggled");
             //if (arcLineData.Count == 0)
             //	Debug.Log("no arc line data found.");
             //arcLineData.ForEach(a => a.isDistTextEnabled = findDistance.ToggleState);

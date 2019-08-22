@@ -1,17 +1,15 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
+﻿using Enumerable = System.Linq.Enumerable;
 
 namespace IMRE.HandWaver.Space
 {
     /// <summary>
     ///     A control for data collection in the Geometer's Planetarium Scene.
     /// </summary>
-    public class RSDESExperimentControl : MonoBehaviour
+    public class RSDESExperimentControl : UnityEngine.MonoBehaviour
     {
         private RSDESManager man => RSDESManager.ins;
 
-        private List<pinData> pins
+        private System.Collections.Generic.List<pinData> pins
         {
             get
             {

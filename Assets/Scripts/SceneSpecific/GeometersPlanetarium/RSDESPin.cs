@@ -1,28 +1,22 @@
-﻿using System;
-using System.Linq;
-using Leap.Unity;
-using Leap.Unity.Interaction;
-using Leap.Unity.LeapPaint_v3;
-using TMPro;
-using UnityEngine;
-using Random = UnityEngine.Random;
+﻿using Enumerable = System.Linq.Enumerable;
+using Utils = Leap.Unity.Utils;
 
 namespace IMRE.HandWaver.Space
 {
-    [RequireComponent(typeof(LineRenderer), typeof(InteractionBehaviour),
-        typeof(AnchorableBehaviour))]
+    [UnityEngine.RequireComponent(typeof(UnityEngine.LineRenderer), typeof(Leap.Unity.Interaction.InteractionBehaviour),
+        typeof(Leap.Unity.Interaction.AnchorableBehaviour))]
     /// <summary>
     /// Handels user interaction with the RSDES Pins and renders features local to the pin.
     /// The main contributor(s) to this script is NG
     /// Status: WORKING
     /// </summary>
-    public class RSDESPin : MonoBehaviour
+    public class RSDESPin : UnityEngine.MonoBehaviour
     {
         #region Constructors
 
         public static RSDESPin Constructor()
         {
-            return Instantiate(Resources.Load<GameObject>("Prefabs/RSDES/RSDESoushPinPrefab"))
+            return Instantiate(UnityEngine.Resources.Load<UnityEngine.GameObject>("Prefabs/RSDES/RSDESoushPinPrefab"))
                 .GetComponent<RSDESPin>();
         }
 
@@ -43,39 +37,39 @@ namespace IMRE.HandWaver.Space
         }
 
         public pintype myPintype = pintype.Star;
-        public GameObject localPanel;
-        public MeshRenderer pinHead;
-        public Transform pinTip;
-        public Color hoverColor = Color.grey;
-        public Color selectColor = Color.yellow;
-        public Transform star;
-        public TextMeshPro latlongLabel;
-        public PressableUI selectButton;
+        public UnityEngine.GameObject localPanel;
+        public UnityEngine.MeshRenderer pinHead;
+        public UnityEngine.Transform pinTip;
+        public UnityEngine.Color hoverColor = UnityEngine.Color.grey;
+        public UnityEngine.Color selectColor = UnityEngine.Color.yellow;
+        public UnityEngine.Transform star;
+        public TMPro.TextMeshPro latlongLabel;
+        public Leap.Unity.LeapPaint_v3.PressableUI selectButton;
 
-        internal Action onPinMove;
-        private InteractionBehaviour iBehave;
-        private AnchorableBehaviour aBehave;
-        private Vector3 recentContact;
-        private LineRenderer myLR;
+        internal System.Action onPinMove;
+        private Leap.Unity.Interaction.InteractionBehaviour iBehave;
+        private Leap.Unity.Interaction.AnchorableBehaviour aBehave;
+        private UnityEngine.Vector3 recentContact;
+        private UnityEngine.LineRenderer myLR;
         private bool _onSurface;
         private bool selectState;
         private readonly float onSurfaceTolerance = 0.001f;
 
-        public Transform polarBear;
-        public Transform tuxPenguin;
+        public UnityEngine.Transform polarBear;
+        public UnityEngine.Transform tuxPenguin;
 
         private readonly float moonRad = 1737000f;
         private readonly float sunRad = 695508000f;
 
         private bool onSurface
         {
-            get => Vector3.Distance(pinTip.position, RSDESManager.earthPos) - RSDESManager.EarthRadius <
+            get => UnityEngine.Vector3.Distance(pinTip.position, RSDESManager.earthPos) - RSDESManager.EarthRadius <
                    onSurfaceTolerance;
 
             set
             {
                 if (RSDESManager.verboseLogging)
-                    Debug.Log(value + name);
+                    UnityEngine.Debug.Log(value + name);
 
                 if (latRenderer != null) latRenderer.enabled = value;
 
@@ -105,13 +99,13 @@ namespace IMRE.HandWaver.Space
                 localPanel.SetActive(true);
         }
 
-        internal Color defaultColor = Color.white;
+        internal UnityEngine.Color defaultColor = UnityEngine.Color.white;
 
-        public Vector3 Offset;
+        public UnityEngine.Vector3 Offset;
 
-        private Vector2 latlong;
+        private UnityEngine.Vector2 latlong;
 
-        public Vector2 Latlong
+        public UnityEngine.Vector2 Latlong
         {
             get => latlong;
 
@@ -125,9 +119,9 @@ namespace IMRE.HandWaver.Space
                         if (star == null)
                         {
                             star = Instantiate(
-                                    Resources.Load<GameObject>("Prefabs/RSDES/RSDESStar_CS"))
+                                    UnityEngine.Resources.Load<UnityEngine.GameObject>("Prefabs/RSDES/RSDESStar_CS"))
                                 .transform;
-                            star.GetComponent<MeshRenderer>().material.color = defaultColor;
+                            star.GetComponent<UnityEngine.MeshRenderer>().material.color = defaultColor;
                         }
 
                         star.transform.position = GeoPlanetMaths.directionFromLatLong(latlong)
@@ -137,35 +131,35 @@ namespace IMRE.HandWaver.Space
                     case pintype.Sun:
                         //udpateTimeFromSun();
                         latlong = value;
-                        star.GetComponent<MeshRenderer>().material = RSDESManager.ins.SunMaterial;
-                        star.localScale = Vector3.one * sunRad * RSDESManager.SimulationScale;
+                        star.GetComponent<UnityEngine.MeshRenderer>().material = RSDESManager.ins.SunMaterial;
+                        star.localScale = UnityEngine.Vector3.one * sunRad * RSDESManager.SimulationScale;
                         star.transform.position = GeoPlanetMaths.directionFromLatLong(latlong)
                             .ScaleMultiplier(RSDESManager.sunDist * RSDESManager.SimulationScale)
                             .Translate(RSDESManager.earthPos);
 
-                        if (pinHead.GetComponent<MeshRenderer>() != null)
-                            pinHead.GetComponent<MeshRenderer>().material = RSDESManager.ins.SunMaterial;
+                        if (pinHead.GetComponent<UnityEngine.MeshRenderer>() != null)
+                            pinHead.GetComponent<UnityEngine.MeshRenderer>().material = RSDESManager.ins.SunMaterial;
                         break;
 
                     case pintype.Moon:
                         //updateTimeFromMoon();
                         latlong = value;
-                        star.GetComponent<MeshRenderer>().material = RSDESManager.ins.MoonMaterial;
-                        star.localScale = Vector3.one * moonRad * RSDESManager.SimulationScale;
+                        star.GetComponent<UnityEngine.MeshRenderer>().material = RSDESManager.ins.MoonMaterial;
+                        star.localScale = UnityEngine.Vector3.one * moonRad * RSDESManager.SimulationScale;
                         star.transform.position = GeoPlanetMaths.directionFromLatLong(latlong)
                             .ScaleMultiplier(RSDESManager.moonDist * RSDESManager.SimulationScale)
                             .Translate(RSDESManager.earthPos);
 
-                        if (pinHead.GetComponent<MeshRenderer>() != null)
-                            pinHead.GetComponent<MeshRenderer>().material = RSDESManager.ins.MoonMaterial;
+                        if (pinHead.GetComponent<UnityEngine.MeshRenderer>() != null)
+                            pinHead.GetComponent<UnityEngine.MeshRenderer>().material = RSDESManager.ins.MoonMaterial;
                         break;
 
                     case pintype.northPole:
                         //star.transform.position = GeoPlanetMaths.directionFromLatLong(new Vector2(90,0)).ScaleMultiplier(RSDESManager.radiusOfLargerSphere).Translate(RSDESManager.earthPos);
-                        latlong = new Vector2(90, 0);
-                        if (GetComponent<InteractionBehaviour>().isGrasped)
+                        latlong = new UnityEngine.Vector2(90, 0);
+                        if (GetComponent<Leap.Unity.Interaction.InteractionBehaviour>().isGrasped)
                         {
-                            RSDESManager.earthRot = Quaternion.FromToRotation(Vector3.up,
+                            RSDESManager.earthRot = UnityEngine.Quaternion.FromToRotation(UnityEngine.Vector3.up,
                                 GeoPlanetMaths.directionFromLatLong(value));
                             RSDESManager.ins.earthTilt();
                         }
@@ -173,10 +167,10 @@ namespace IMRE.HandWaver.Space
                         break;
 
                     case pintype.southPole:
-                        latlong = new Vector2(-90, 0);
-                        if (GetComponent<InteractionBehaviour>().isGrasped)
+                        latlong = new UnityEngine.Vector2(-90, 0);
+                        if (GetComponent<Leap.Unity.Interaction.InteractionBehaviour>().isGrasped)
                         {
-                            RSDESManager.earthRot = Quaternion.FromToRotation(Vector3.down,
+                            RSDESManager.earthRot = UnityEngine.Quaternion.FromToRotation(UnityEngine.Vector3.down,
                                 GeoPlanetMaths.directionFromLatLong(value));
                             RSDESManager.ins.earthTilt();
                         }
@@ -186,7 +180,7 @@ namespace IMRE.HandWaver.Space
 
                 transform.position = GeoPlanetMaths.directionFromLatLong(latlong) * RSDESManager.EarthRadius +
                                      RSDESManager.earthPos;
-                transform.rotation = Quaternion.FromToRotation(Vector3.down,
+                transform.rotation = UnityEngine.Quaternion.FromToRotation(UnityEngine.Vector3.down,
                     GeoPlanetMaths.directionFromLatLong(latlong).normalized) /**RSDESManager.earthRot*/;
 
                 if (latlongLabel != null)
@@ -197,27 +191,27 @@ namespace IMRE.HandWaver.Space
 
         internal void playParticleEffect()
         {
-            GetComponentInChildren<ParticleSystem>().Play();
+            GetComponentInChildren<UnityEngine.ParticleSystem>().Play();
         }
 
-        internal Action onDelete;
+        internal System.Action onDelete;
 
-        public PressableUI showLatitude;
+        public Leap.Unity.LeapPaint_v3.PressableUI showLatitude;
 
-        public PressableUI showLongitude;
+        public Leap.Unity.LeapPaint_v3.PressableUI showLongitude;
         //public PressableUI showAzimuth;  //do this with latitude
         //public PressableUI showAltitude;  //do this with longitude
 
-        private LineRenderer altitudeRenderer;
+        private UnityEngine.LineRenderer altitudeRenderer;
 
-        private LineRenderer azimuthRenderer;
+        private UnityEngine.LineRenderer azimuthRenderer;
 
-        public PressableUI showTerminator;
+        public Leap.Unity.LeapPaint_v3.PressableUI showTerminator;
 
-        [Range(0, 1)] private static readonly float colorPercent = 0.15f;
+        [UnityEngine.RangeAttribute(0, 1)] private static readonly float colorPercent = 0.15f;
 
-        public PressableUI starFieldMode;
-        private LineRenderer[] starRays;
+        public Leap.Unity.LeapPaint_v3.PressableUI starFieldMode;
+        private UnityEngine.LineRenderer[] starRays;
 
         public enum starFieldSelect
         {
@@ -245,11 +239,11 @@ namespace IMRE.HandWaver.Space
 
         private readonly int equalAltitudeCount = 50;
 
-        private LineRenderer spawnStarRay()
+        private UnityEngine.LineRenderer spawnStarRay()
         {
-            var tmp =
-                Instantiate(Resources.Load<GameObject>("Prefabs/RSDES/StarRay"))
-                    .GetComponent<LineRenderer>();
+            UnityEngine.LineRenderer tmp =
+                Instantiate(UnityEngine.Resources.Load<UnityEngine.GameObject>("Prefabs/RSDES/StarRay"))
+                    .GetComponent<UnityEngine.LineRenderer>();
             tmp.transform.parent = transform;
             return tmp;
         }
@@ -268,7 +262,7 @@ namespace IMRE.HandWaver.Space
                         RSDESManager.ins.updateStarFieldsGlobal -= updateStarMode;
                 }
 
-                var initialize = value != starMode;
+                bool initialize = value != starMode;
                 if (!initialize)
                     switch (starMode)
                     {
@@ -287,7 +281,7 @@ namespace IMRE.HandWaver.Space
                 //why aren't always deleting.
                 if (initialize && starRays != null && starRays.Length > 0)
                     Enumerable.ToList(Enumerable.Where(Enumerable.ToList(starRays),
-                            sr => sr != null && sr.GetComponent<LineRenderer>() != null))
+                            sr => sr != null && sr.GetComponent<UnityEngine.LineRenderer>() != null))
                         .ForEach(sr => Destroy(sr));
 
                 switch (starMode)
@@ -296,7 +290,7 @@ namespace IMRE.HandWaver.Space
                         //single
                         if (initialize)
                         {
-                            starRays = new LineRenderer[1];
+                            starRays = new UnityEngine.LineRenderer[1];
                             starRays[0] = spawnStarRay();
                         }
 
@@ -309,15 +303,15 @@ namespace IMRE.HandWaver.Space
                     case starFieldSelect.allPins:
                         //single + all points
 
-                        var pins = Enumerable.ToList(
+                        System.Collections.Generic.List<pinData> pins = Enumerable.ToList(
                             Enumerable.Where(RSDESManager.ins.pinnedPoints,
                                 p => p.pin.myPintype == pintype.Star || p.pin == this));
                         if (pins.Count > 0)
                         {
                             if (initialize)
                             {
-                                var currStarRay = starRays[0];
-                                starRays = new LineRenderer[pins.Count];
+                                UnityEngine.LineRenderer currStarRay = starRays[0];
+                                starRays = new UnityEngine.LineRenderer[pins.Count];
                                 starRays[0] = currStarRay;
                             }
 
@@ -327,18 +321,18 @@ namespace IMRE.HandWaver.Space
                             starRays[0].endColor = defaultColor;
                         }
 
-                        var cachedPinData = dbPinData;
+                        pinData cachedPinData = dbPinData;
 
-                        for (var i = 0; i < pins.Count; i++)
+                        for (int i = 0; i < pins.Count; i++)
                         {
                             if (initialize)
                             {
                                 starRays[i] = spawnStarRay();
-                                var l =
+                                System.Collections.Generic.List<UnityEngine.LineRenderer> l =
                                     Enumerable.ToList(starRays);
                                 l.RemoveAll(p => p == null);
-                                l.ForEach(p => p.GetComponent<LineRenderer>().startColor = defaultColor);
-                                l.ForEach(p => p.GetComponent<LineRenderer>().endColor = defaultColor);
+                                l.ForEach(p => p.GetComponent<UnityEngine.LineRenderer>().startColor = defaultColor);
+                                l.ForEach(p => p.GetComponent<UnityEngine.LineRenderer>().endColor = defaultColor);
                             }
 
                             starRays[i].SetPositions(GeoPlanetMaths.starRayRendererCoordiantes(cachedPinData, pins[i]));
@@ -354,21 +348,21 @@ namespace IMRE.HandWaver.Space
 
                     case starFieldSelect.allPinsEqualAltitude:
                         // all pins equal altitude
-                        var points = Enumerable.ToList(
+                        System.Collections.Generic.List<pinData> points = Enumerable.ToList(
                             Enumerable.Where(RSDESManager.ins.PinnedPoints,
                                 p => p.pin.myPintype == pintype.Star && p.pin.name != name));
 
-                        if (initialize) starRays = new LineRenderer[equalAltitudeCount * points.Count];
+                        if (initialize) starRays = new UnityEngine.LineRenderer[equalAltitudeCount * points.Count];
 
                         if (points.Count > 0)
                         {
-                            var thisPinDirection = this.directionFromLatLong();
-                            for (var i = 0; i < points.Count; i++)
+                            UnityEngine.Vector3 thisPinDirection = this.directionFromLatLong();
+                            for (int i = 0; i < points.Count; i++)
                             {
-                                var diff =
+                                UnityEngine.Vector3 diff =
                                     points[i].pin.directionFromLatLong() - this.directionFromLatLong();
-                                var pinBcolor = points[i].pin.defaultColor;
-                                for (var j = 0; j < equalAltitudeCount; j++)
+                                UnityEngine.Color pinBcolor = points[i].pin.defaultColor;
+                                for (int j = 0; j < equalAltitudeCount; j++)
                                 {
                                     if (initialize)
                                     {
@@ -380,7 +374,7 @@ namespace IMRE.HandWaver.Space
                                     starRays[equalAltitudeCount * i + j].SetPositions(
                                         GeoPlanetMaths.starRayRendererCoordiantes(dbPinData,
                                             (thisPinDirection +
-                                             Quaternion.AngleAxis(j * 360 / equalAltitudeCount,
+                                             UnityEngine.Quaternion.AngleAxis(j * 360 / equalAltitudeCount,
                                                  thisPinDirection) * diff).latlong()));
                                 }
                             }
@@ -394,14 +388,14 @@ namespace IMRE.HandWaver.Space
 
                     case starFieldSelect.withinEarth:
                         //corase grid limited to the rays that pass through earth.
-                        var starRayData2 =
+                        UnityEngine.Vector3[,] starRayData2 =
                             GeoPlanetMaths.starRayRendererCoordiantesWithinEarth(transform.position, starRayGridSize);
 
                         if (initialize || starRays == null)
-                            starRays = new LineRenderer[starRayData2.GetLength(1)];
+                            starRays = new UnityEngine.LineRenderer[starRayData2.GetLength(1)];
 
                         //can this be optimized with Linq?
-                        for (var i = 0; i < starRayData2.GetLength(1); i++)
+                        for (int i = 0; i < starRayData2.GetLength(1); i++)
                         {
                             if (initialize) starRays[i] = spawnStarRay();
                             starRays[i].startWidth = RSDESManager.LR_width;
@@ -415,14 +409,14 @@ namespace IMRE.HandWaver.Space
 
                     case starFieldSelect.LargeArray:
                         //grid
-                        var starRayData = GeoPlanetMaths.starRayRendererCoordiantes(
+                        UnityEngine.Vector3[,] starRayData = GeoPlanetMaths.starRayRendererCoordiantes(
                             transform.position, RSDESManager.SimulationScale * starRayGridSpacing, starRayGridSize,
                             GeoPlanetMaths.coordinateSystem.cartesian);
                         if (initialize || starRays == null)
-                            starRays = new LineRenderer[starRayData.GetLength(1)];
+                            starRays = new UnityEngine.LineRenderer[starRayData.GetLength(1)];
 
                         //can this be optimized with Linq?
-                        for (var i = 0; i < starRayData.GetLength(1); i++)
+                        for (int i = 0; i < starRayData.GetLength(1); i++)
                         {
                             if (initialize) starRays[i] = spawnStarRay();
                             starRays[i].startWidth = RSDESManager.LR_width;
@@ -436,25 +430,25 @@ namespace IMRE.HandWaver.Space
 
                     case starFieldSelect.off:
                         //off
-                        if (initialize || starRays == null) starRays = new LineRenderer[0];
+                        if (initialize || starRays == null) starRays = new UnityEngine.LineRenderer[0];
                         break;
                 }
 
                 if (initialize && starMode != starFieldSelect.allPinsEqualAltitude)
                 {
                     Enumerable.ToList(starRays).ForEach(p =>
-                        p.GetComponent<LineRenderer>().startColor = defaultColor);
+                        p.GetComponent<UnityEngine.LineRenderer>().startColor = defaultColor);
                     Enumerable.ToList(starRays)
-                        .ForEach(p => p.GetComponent<LineRenderer>().endColor = defaultColor);
+                        .ForEach(p => p.GetComponent<UnityEngine.LineRenderer>().endColor = defaultColor);
                 }
             }
         }
 
-        public PressableUI horizonPlanes;
-        private LineRenderer latRenderer;
-        private LineRenderer longRenderer;
-        private LineRenderer terminatorRenderer;
-        public GameObject horizonPlaneObj;
+        public Leap.Unity.LeapPaint_v3.PressableUI horizonPlanes;
+        private UnityEngine.LineRenderer latRenderer;
+        private UnityEngine.LineRenderer longRenderer;
+        private UnityEngine.LineRenderer terminatorRenderer;
+        public UnityEngine.GameObject horizonPlaneObj;
         private bool horizonStatus;
 
         #endregion Variables
@@ -468,20 +462,20 @@ namespace IMRE.HandWaver.Space
             else
                 gameObject.name = myPintype + " RSDESPin " + count++;
 
-            iBehave = GetComponent<InteractionBehaviour>();
-            aBehave = GetComponent<AnchorableBehaviour>();
-            myLR = GetComponent<LineRenderer>();
-            var haloComponent = pinHead.gameObject.GetComponent("Halo");
-            var haloEnabledProperty = haloComponent.GetType().GetProperty("enabled");
+            iBehave = GetComponent<Leap.Unity.Interaction.InteractionBehaviour>();
+            aBehave = GetComponent<Leap.Unity.Interaction.AnchorableBehaviour>();
+            myLR = GetComponent<UnityEngine.LineRenderer>();
+            UnityEngine.Component haloComponent = pinHead.gameObject.GetComponent("Halo");
+            System.Reflection.PropertyInfo haloEnabledProperty = haloComponent.GetType().GetProperty("enabled");
             haloEnabledProperty.SetValue(haloComponent, false, null);
             //This handles the pin head color changes
             if (pinHead == null)
             {
-                Debug.Log("pinHead not set in " + name);
+                UnityEngine.Debug.Log("pinHead not set in " + name);
                 gameObject.SetActive(false);
             }
 
-            pinHead.material.color = Random.ColorHSV(0, 1, 0.9f, 1, .9f, 1);
+            pinHead.material.color = UnityEngine.Random.ColorHSV(0, 1, 0.9f, 1, .9f, 1);
             defaultColor = pinHead.material.color;
 
             aBehave.OnAttachedToAnchor += onAttached;
@@ -492,7 +486,7 @@ namespace IMRE.HandWaver.Space
             iBehave.OnHoverStay += hoverUpdate;
             if (myPintype != pintype.Star) RSDESManager.onEarthTilt += onEarthTilt;
             localPanel.SetActive(false);
-            horizonPlaneObj.GetComponent<MeshRenderer>().material.SetColor("_TintColor", defaultColor);
+            horizonPlaneObj.GetComponent<UnityEngine.MeshRenderer>().material.SetColor("_TintColor", defaultColor);
 
             tuxPenguin.gameObject.SetActive(myPintype == pintype.southPole);
             polarBear.gameObject.SetActive(myPintype == pintype.northPole);
@@ -504,7 +498,7 @@ namespace IMRE.HandWaver.Space
 
         public pinData dbPinData => RSDESManager.ins.pinDB[this];
 
-        private void OnTriggerEnter(Collider collider)
+        private void OnTriggerEnter(UnityEngine.Collider collider)
         {
             if (myPintype == pintype.Star && iBehave != null && iBehave.isGrasped &&
                 collider.GetComponentInParent<RSDESManager>() != null)
@@ -520,21 +514,21 @@ namespace IMRE.HandWaver.Space
 
         private void setupPin()
         {
-            var myPinData = new pinData(this, pinTip.transform.position);
+            pinData myPinData = new pinData(this, pinTip.transform.position);
             RSDESManager.ins.PinnedPoints.Add(myPinData); //Might need a way to specify rather than all contact points
             if (!RSDESManager.ins.pinDB.ContainsKey(this)) RSDESManager.ins.pinDB.Add(this, myPinData);
         }
 
-        private void OnTriggerStay(Collider collider)
+        private void OnTriggerStay(UnityEngine.Collider collider)
         {
             //if (myPintype == pintype.Star)
             {
                 if (iBehave != null && iBehave.isGrasped && collider.GetComponentInParent<RSDESManager>() != null &&
-                    GetComponent<InteractionBehaviour>().isGrasped) snapToSurface();
+                    GetComponent<Leap.Unity.Interaction.InteractionBehaviour>().isGrasped) snapToSurface();
             }
         }
 
-        private void OnTriggerExit(Collider collider)
+        private void OnTriggerExit(UnityEngine.Collider collider)
         {
             if (collider.GetComponentInParent<RSDESManager>() != null)
             {
@@ -580,18 +574,18 @@ namespace IMRE.HandWaver.Space
 
         private void updateTimeFromMoon()
         {
-            throw new NotImplementedException();
+            throw new System.NotImplementedException();
         }
 
         private void udpateTimeFromSun()
         {
-            throw new NotImplementedException();
+            throw new System.NotImplementedException();
         }
 
-        private LineRenderer RSDESGeneratedLine()
+        private UnityEngine.LineRenderer RSDESGeneratedLine()
         {
-            return Instantiate(Resources.Load<GameObject>("Prefabs/RSDES/RSDESGeneratedLine"))
-                .GetComponent<LineRenderer>();
+            return Instantiate(UnityEngine.Resources.Load<UnityEngine.GameObject>("Prefabs/RSDES/RSDESGeneratedLine"))
+                .GetComponent<UnityEngine.LineRenderer>();
         }
 
         public void toggleAltitude()
@@ -605,8 +599,8 @@ namespace IMRE.HandWaver.Space
             altitudeRenderer.startWidth = RSDESManager.LR_width;
             altitudeRenderer.endWidth = RSDESManager.LR_width;
             altitudeRenderer.useWorldSpace = true;
-            altitudeRenderer.startColor = Color.Lerp(defaultColor, Color.white, colorPercent);
-            altitudeRenderer.endColor = Color.Lerp(defaultColor, Color.white, colorPercent);
+            altitudeRenderer.startColor = UnityEngine.Color.Lerp(defaultColor, UnityEngine.Color.white, colorPercent);
+            altitudeRenderer.endColor = UnityEngine.Color.Lerp(defaultColor, UnityEngine.Color.white, colorPercent);
 
             setAltitudePos();
             altitudeRenderer.loop = false;
@@ -625,8 +619,8 @@ namespace IMRE.HandWaver.Space
             azimuthRenderer.startWidth = RSDESManager.LR_width;
             azimuthRenderer.endWidth = RSDESManager.LR_width;
             azimuthRenderer.useWorldSpace = true;
-            azimuthRenderer.startColor = Color.Lerp(defaultColor, Color.white, colorPercent);
-            azimuthRenderer.endColor = Color.Lerp(defaultColor, Color.white, colorPercent);
+            azimuthRenderer.startColor = UnityEngine.Color.Lerp(defaultColor, UnityEngine.Color.white, colorPercent);
+            azimuthRenderer.endColor = UnityEngine.Color.Lerp(defaultColor, UnityEngine.Color.white, colorPercent);
 
             setAzimuthPos();
             azimuthRenderer.loop = false;
@@ -645,8 +639,8 @@ namespace IMRE.HandWaver.Space
             latRenderer.startWidth = RSDESManager.LR_width;
             latRenderer.endWidth = RSDESManager.LR_width;
             latRenderer.useWorldSpace = true;
-            latRenderer.startColor = Color.Lerp(defaultColor, Color.white, colorPercent);
-            latRenderer.endColor = Color.Lerp(defaultColor, Color.white, colorPercent);
+            latRenderer.startColor = UnityEngine.Color.Lerp(defaultColor, UnityEngine.Color.white, colorPercent);
+            latRenderer.endColor = UnityEngine.Color.Lerp(defaultColor, UnityEngine.Color.white, colorPercent);
 
             setLatPos();
             latRenderer.loop = true;
@@ -666,8 +660,8 @@ namespace IMRE.HandWaver.Space
             longRenderer.startWidth = RSDESManager.LR_width;
             longRenderer.endWidth = RSDESManager.LR_width;
             longRenderer.useWorldSpace = true;
-            longRenderer.startColor = Color.Lerp(defaultColor, Color.white, colorPercent);
-            longRenderer.endColor = Color.Lerp(defaultColor, Color.white, colorPercent);
+            longRenderer.startColor = UnityEngine.Color.Lerp(defaultColor, UnityEngine.Color.white, colorPercent);
+            longRenderer.endColor = UnityEngine.Color.Lerp(defaultColor, UnityEngine.Color.white, colorPercent);
 
             setLongPos();
             longRenderer.loop = true;
@@ -693,8 +687,8 @@ namespace IMRE.HandWaver.Space
             terminatorRenderer.startWidth = RSDESManager.LR_width;
             terminatorRenderer.endWidth = RSDESManager.LR_width;
             terminatorRenderer.useWorldSpace = true;
-            terminatorRenderer.startColor = Color.Lerp(defaultColor, Color.white, colorPercent);
-            terminatorRenderer.endColor = Color.Lerp(defaultColor, Color.white, colorPercent);
+            terminatorRenderer.startColor = UnityEngine.Color.Lerp(defaultColor, UnityEngine.Color.white, colorPercent);
+            terminatorRenderer.endColor = UnityEngine.Color.Lerp(defaultColor, UnityEngine.Color.white, colorPercent);
 
             setTerminatorPos();
             onPinMove += setTerminatorPos;
@@ -772,8 +766,8 @@ namespace IMRE.HandWaver.Space
 
         private void hoverUpdate()
         {
-            var glow = Utils.Map(iBehave.closestHoveringControllerDistance, 0F, 0.2F, 1F, 0.0F);
-            pinHead.material.color = Color.Lerp(defaultColor, hoverColor, glow);
+            float glow = Utils.Map(iBehave.closestHoveringControllerDistance, 0F, 0.2F, 1F, 0.0F);
+            pinHead.material.color = UnityEngine.Color.Lerp(defaultColor, hoverColor, glow);
         }
 
         public void toggleSelection()
@@ -782,27 +776,27 @@ namespace IMRE.HandWaver.Space
             {
                 if (Enumerable.Any(RSDESManager.ins.SelectedPoints, p => p.pin == this)) //deselect
                 {
-                    if (RSDESManager.verboseLogging) Debug.Log(name + " has been deselected!");
+                    if (RSDESManager.verboseLogging) UnityEngine.Debug.Log(name + " has been deselected!");
                     selectState = !selectState;
-                    var haloComponent = pinHead.gameObject.GetComponent("Halo");
-                    var haloEnabledProperty = haloComponent.GetType().GetProperty("enabled");
+                    UnityEngine.Component haloComponent = pinHead.gameObject.GetComponent("Halo");
+                    System.Reflection.PropertyInfo haloEnabledProperty = haloComponent.GetType().GetProperty("enabled");
                     haloEnabledProperty.SetValue(haloComponent, selectState, null);
                     RSDESManager.ins.SelectedPoints.RemoveAll(p => p.pin == this);
                 }
                 else //select
                 {
-                    if (RSDESManager.verboseLogging) Debug.Log(name + " has been selected!");
+                    if (RSDESManager.verboseLogging) UnityEngine.Debug.Log(name + " has been selected!");
                     selectState = !selectState;
 
                     RSDESManager.ins.SelectedPoints.Add(RSDESManager.ins.PinnedPoints.Find(p => p.pin == this));
-                    var haloComponent = pinHead.gameObject.GetComponent("Halo");
-                    var haloEnabledProperty = haloComponent.GetType().GetProperty("enabled");
+                    UnityEngine.Component haloComponent = pinHead.gameObject.GetComponent("Halo");
+                    System.Reflection.PropertyInfo haloEnabledProperty = haloComponent.GetType().GetProperty("enabled");
                     haloEnabledProperty.SetValue(haloComponent, selectState, null);
                 }
             }
             else
             {
-                Debug.Log("IM NOT ON THE SURFACE");
+                UnityEngine.Debug.Log("IM NOT ON THE SURFACE");
             }
         }
 
@@ -844,7 +838,7 @@ namespace IMRE.HandWaver.Space
             RSDESManager.sunPin = this;
             setupPin();
 
-            star.GetComponent<MeshRenderer>().material = RSDESManager.ins.SunMaterial;
+            star.GetComponent<UnityEngine.MeshRenderer>().material = RSDESManager.ins.SunMaterial;
         }
 
         internal void setupMoon()
@@ -854,7 +848,7 @@ namespace IMRE.HandWaver.Space
             RSDESManager.moonPin = this;
             setupPin();
 
-            star.GetComponent<MeshRenderer>().material = RSDESManager.ins.MoonMaterial;
+            star.GetComponent<UnityEngine.MeshRenderer>().material = RSDESManager.ins.MoonMaterial;
         }
 
         internal void setupNorthPole()
@@ -862,7 +856,7 @@ namespace IMRE.HandWaver.Space
             myPintype = pintype.northPole;
             star = null;
             RSDESManager.northPolePin = this;
-            Latlong = new Vector2(90, 0);
+            Latlong = new UnityEngine.Vector2(90, 0);
             setupPin();
 
             //this.transform.position = GeoPlanetMaths.directionFromLatLong(latlong) * RSDESManager.EarthRadius + RSDESManager.earthPos;
@@ -874,7 +868,7 @@ namespace IMRE.HandWaver.Space
             myPintype = pintype.southPole;
             star = null;
             RSDESManager.southPolePin = this;
-            Latlong = new Vector2(-90, 0);
+            Latlong = new UnityEngine.Vector2(-90, 0);
             setupPin();
 
             //this.transform.position = GeoPlanetMaths.directionFromLatLong(latlong) * RSDESManager.EarthRadius + RSDESManager.earthPos;
@@ -885,39 +879,38 @@ namespace IMRE.HandWaver.Space
 
         #region Editor Functions
 
-        [ContextMenu("Show If in pinnedpoints")]
+        [UnityEngine.ContextMenu("Show If in pinnedpoints")]
         public void showPinned()
         {
-            Debug.Log("****");
-            Debug.Log(name);
-            Debug.Log("Is found in pins list: " +
-                      Enumerable.Any(RSDESManager.ins.PinnedPoints, p => p.pin == this));
-            Debug.Log("Is pin data found: " + RSDESManager.ins.pinDB[this]);
-            Debug.Log("Is pin valid: " + RSDESManager.ins.pinDB[this].pin.name);
-            Debug.Log("****");
+            UnityEngine.Debug.Log("****");
+            UnityEngine.Debug.Log(name);
+            UnityEngine.Debug.Log("Is found in pins list: " +
+                                  Enumerable.Any(RSDESManager.ins.PinnedPoints, p => p.pin == this));
+            UnityEngine.Debug.Log("Is pin data found: " + RSDESManager.ins.pinDB[this]);
+            UnityEngine.Debug.Log("Is pin valid: " + RSDESManager.ins.pinDB[this].pin.name);
+            UnityEngine.Debug.Log("****");
         }
 
-        [ContextMenu("Show If Selected")]
+        [UnityEngine.ContextMenu("Show If Selected")]
         public void showSelectionStatus()
         {
-            Debug.Log("****");
-            Debug.Log(name);
-            Debug.Log("Is intended to be selected: " + selectState);
-            Debug.Log("Is found in selected pins list: " +
-                      Enumerable.Any(RSDESManager.ins.SelectedPoints, p => p.pin == this));
-            Debug.Log("Success: " +
-                      (selectState == Enumerable.Any(RSDESManager.ins.SelectedPoints,
-                           p => p.pin == this)));
-            Debug.Log("****");
+            UnityEngine.Debug.Log("****");
+            UnityEngine.Debug.Log(name);
+            UnityEngine.Debug.Log("Is intended to be selected: " + selectState);
+            UnityEngine.Debug.Log("Is found in selected pins list: " +
+                                  Enumerable.Any(RSDESManager.ins.SelectedPoints, p => p.pin == this));
+            UnityEngine.Debug.Log("Success: " +
+                                  (selectState == Enumerable.Any(RSDESManager.ins.SelectedPoints, p => p.pin == this)));
+            UnityEngine.Debug.Log("****");
         }
 
-        [ContextMenu("Select This Pin")]
+        [UnityEngine.ContextMenu("Select This Pin")]
         public void selectPin()
         {
             toggleSelection();
         }
 
-        [ContextMenu("StarRay")]
+        [UnityEngine.ContextMenu("StarRay")]
         public void starRayTest()
         {
             toggleStarField();

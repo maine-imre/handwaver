@@ -1,8 +1,4 @@
-﻿using System;
-using System.Xml;
-using UnityEngine;
-
-public class HorizonsV3 : MonoBehaviour
+﻿public class HorizonsV3 : UnityEngine.MonoBehaviour
 {
     //public GameObject defaultBody;		//The default version of a massive object
     private string bodyName = ""; //The given name of the object
@@ -22,21 +18,22 @@ public class HorizonsV3 : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
-        var dataFile = new XmlDocument(); //The file of data about the bodies
+        System.Xml.XmlDocument dataFile = new System.Xml.XmlDocument(); //The file of data about the bodies
         dataFile.Load(@"Assets/Big-Birtha/PlanetaryData/filename.xml");
-        var orbitFile = new XmlDocument(); //The file of the orbit data for each body
+        System.Xml.XmlDocument orbitFile = new System.Xml.XmlDocument(); //The file of the orbit data for each body
         orbitFile.Load(@"Assets/Big-Birtha/PlanetaryData/orbitData.xml");
-        foreach (XmlNode node in dataFile.DocumentElement.ChildNodes)
+        foreach (System.Xml.XmlNode node in dataFile.DocumentElement.ChildNodes)
         {
             //For every body
             bodyName = node.Attributes["name"].Value; //Name the body
-            foreach (XmlNode subnode in node.ChildNodes)
+            foreach (System.Xml.XmlNode subnode in node.ChildNodes)
                 //For all accociated data
+            {
                 if (subnode.Name == "mass")
                 {
                     //Get the mass
                     //mass = float.Parse(subnode.InnerText);
-                    var successfullyParsed = float.TryParse(subnode.InnerText, out mass);
+                    bool successfullyParsed = float.TryParse(subnode.InnerText, out mass);
                     if (!successfullyParsed)
                     {
                         flag = true;
@@ -52,9 +49,10 @@ public class HorizonsV3 : MonoBehaviour
                 {
                     rotation = float.Parse(subnode.InnerText);
                 }
+            }
 
-            var currenttime = DateTime.Now; //The current date/time
-            var currentMonth = "";
+            System.DateTime currenttime = System.DateTime.Now; //The current date/time
+            string currentMonth = "";
             switch (currenttime.Month)
             {
                 //Getting the month correct
@@ -96,17 +94,19 @@ public class HorizonsV3 : MonoBehaviour
                     break;
             }
 
-            var targetDateTime = currenttime.Year + "-" + currentMonth + "-";
+            string targetDateTime = currenttime.Year + "-" + currentMonth + "-";
             if (currenttime.Day < 10) targetDateTime += "0";
             targetDateTime += currenttime.Day + " ";
             if (currenttime.Hour < 10) targetDateTime += "0";
             targetDateTime += currenttime.Hour + ":00:00.0000";
 
-            foreach (XmlNode orbitNode in orbitFile.DocumentElement.ChildNodes)
+            foreach (System.Xml.XmlNode orbitNode in orbitFile.DocumentElement.ChildNodes)
                 //For every planet
+            {
                 if (orbitNode.Attributes["name"].Value == bodyName)
-                    foreach (XmlNode orbitsubnode in orbitNode.ChildNodes)
+                    foreach (System.Xml.XmlNode orbitsubnode in orbitNode.ChildNodes)
                         //For every orbit datapoint
+                    {
                         if (orbitsubnode.Attributes["timeStamp"].Value == targetDateTime)
                         {
                             x = float.Parse(orbitsubnode["X"].InnerText); //(above) if the timestamp is the reqested one
@@ -116,16 +116,18 @@ public class HorizonsV3 : MonoBehaviour
                             vy = float.Parse(orbitsubnode["VY"].InnerText);
                             vz = float.Parse(orbitsubnode["VZ"].InnerText);
                         }
+                    }
+            }
 
             if (!flag)
             {
                 //Flag prevents bad input
                 //defaultBody.name = bodyName;										//This code sets the default body values to the given data and instantiates it
-                var df = VerletObjectV3.Constructor();
+                VerletObjectV3 df = VerletObjectV3.Constructor();
                 df.gameObject.name = bodyName;
                 df.mass = mass;
-                df.inputPosition = new Vector3(x, y, z);
-                df.inputVelocity = new Vector3(vx, vy, vz);
+                df.inputPosition = new UnityEngine.Vector3(x, y, z);
+                df.inputVelocity = new UnityEngine.Vector3(vx, vy, vz);
                 df.radius = radius;
                 df.rotation = rotation;
                 //GameObject body = Instantiate(defaultBody);

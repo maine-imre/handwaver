@@ -1,19 +1,18 @@
-﻿using System.Linq;
-using UnityEngine;
+﻿using Enumerable = System.Linq.Enumerable;
 
 /// <summary>
 ///     This script does ___.
 ///     The main contributor(s) to this script is __
 ///     Status: ???
 /// </summary>
-public class cubeNet : MonoBehaviour
+public class cubeNet : UnityEngine.MonoBehaviour
 {
     private float fold;
 
-    private LineRenderer lr;
+    private UnityEngine.LineRenderer lr;
 
     //public DateTime startTime;
-    private Mesh m;
+    private UnityEngine.Mesh m;
 
     public float Fold
     {
@@ -29,11 +28,11 @@ public class cubeNet : MonoBehaviour
 
     private void Start()
     {
-        m = GetComponent<MeshFilter>().mesh;
+        m = GetComponent<UnityEngine.MeshFilter>().mesh;
         m.vertices = meshVerts(0);
         m.triangles = meshTris();
 
-        lr = GetComponent<LineRenderer>();
+        lr = GetComponent<UnityEngine.LineRenderer>();
         lr.positionCount = 22;
         lr.useWorldSpace = false;
         lr.startWidth = .01f;
@@ -43,14 +42,14 @@ public class cubeNet : MonoBehaviour
         //startTime = DateTime.Now;
     }
 
-    private static Vector3[] meshVerts(float t)
+    private static UnityEngine.Vector3[] meshVerts(float t)
     {
-        var result = new Vector3[14];
+        UnityEngine.Vector3[] result = new UnityEngine.Vector3[14];
 
-        result[0] = .5f * (Vector3.forward + Vector3.right);
-        result[1] = .5f * (Vector3.forward + Vector3.left);
-        result[2] = .5f * (Vector3.back + Vector3.left);
-        result[3] = .5f * (Vector3.back + Vector3.right);
+        result[0] = .5f * (UnityEngine.Vector3.forward + UnityEngine.Vector3.right);
+        result[1] = .5f * (UnityEngine.Vector3.forward + UnityEngine.Vector3.left);
+        result[2] = .5f * (UnityEngine.Vector3.back + UnityEngine.Vector3.left);
+        result[3] = .5f * (UnityEngine.Vector3.back + UnityEngine.Vector3.right);
 
         result[4] = squareVert(result[3], result[0], result[1], t);
         result[5] = squareVert(result[3], result[0], result[2], t);
@@ -70,10 +69,10 @@ public class cubeNet : MonoBehaviour
         return result;
     }
 
-    private static Vector3 squareVert(Vector3 nSegmentA, Vector3 nSegmentB,
-        Vector3 oppositePoint, float t)
+    private static UnityEngine.Vector3 squareVert(UnityEngine.Vector3 nSegmentA, UnityEngine.Vector3 nSegmentB,
+        UnityEngine.Vector3 oppositePoint, float t)
     {
-        return Quaternion.AngleAxis(t, (nSegmentA - nSegmentB).normalized) *
+        return UnityEngine.Quaternion.AngleAxis(t, (nSegmentA - nSegmentB).normalized) *
                (oppositePoint - (nSegmentA + nSegmentB) / 2f) + (nSegmentA + nSegmentB) / 2f;
     }
 
@@ -84,7 +83,7 @@ public class cubeNet : MonoBehaviour
 
     private static int[] meshTris()
     {
-        var result = new int[6 * 6];
+        int[] result = new int[6 * 6];
         meshQuad(0, 4, 5, 3).CopyTo(result, 0);
         meshQuad(0, 3, 2, 1).CopyTo(result, 6);
         meshQuad(3, 9, 8, 2).CopyTo(result, 12);
@@ -94,11 +93,11 @@ public class cubeNet : MonoBehaviour
         return result;
     }
 
-    private static Vector3[] lineRendererVerts(float t)
+    private static UnityEngine.Vector3[] lineRendererVerts(float t)
     {
-        var result = new Vector3[22];
+        UnityEngine.Vector3[] result = new UnityEngine.Vector3[22];
 
-        var tmp = meshVerts(t);
+        UnityEngine.Vector3[] tmp = meshVerts(t);
         result[0] = tmp[0];
         result[1] = tmp[4];
         result[2] = tmp[5];

@@ -5,9 +5,6 @@ See license info in readme.md.
 www.imrelab.org
 **/
 
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace IMRE.Chess3D
 {
     /// <summary>
@@ -17,7 +14,7 @@ namespace IMRE.Chess3D
     {
         private void Start()
         {
-            Board = GameObject.Find("chessBoard").GetComponent<chessBoard>();
+            Board = UnityEngine.GameObject.Find("chessBoard").GetComponent<chessBoard>();
             PieceType = chessBoard.PieceType.pawn;
         }
 
@@ -26,13 +23,13 @@ namespace IMRE.Chess3D
             Board.pieceCaptured(this);
         }
 
-        public override bool IsValid(Vector3 attemptedMove)
+        public override bool IsValid(UnityEngine.Vector3 attemptedMove)
         {
-            var possibleMoves = validMoves();
+            System.Collections.Generic.List<UnityEngine.Vector3> possibleMoves = validMoves();
             return possibleMoves.Contains(attemptedMove);
         }
 
-        public override List<Vector3> validMoves()
+        public override System.Collections.Generic.List<UnityEngine.Vector3> validMoves()
         {
             return allValidMoves.pawnMoves(Location, otherTeam(), myTeam(), Team);
         }

@@ -5,10 +5,6 @@ See license info in readme.md.
 www.imrelab.org
 **/
 
-using System;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace IMRE.Chess3D
 {
     /// <summary>
@@ -18,7 +14,7 @@ namespace IMRE.Chess3D
     {
         private void Start()
         {
-            Board = GameObject.Find("chessBoard").GetComponent<chessBoard>();
+            Board = UnityEngine.GameObject.Find("chessBoard").GetComponent<chessBoard>();
             PieceType = chessBoard.PieceType.rook;
         }
 
@@ -27,10 +23,10 @@ namespace IMRE.Chess3D
             Board.pieceCaptured(this);
         }
 
-        public override bool IsValid(Vector3 moveToTest)
+        public override bool IsValid(UnityEngine.Vector3 moveToTest)
         {
-            var tmp = moveToTest - Location;
-            if (tmp == Vector3.zero)
+            UnityEngine.Vector3 tmp = moveToTest - Location;
+            if (tmp == UnityEngine.Vector3.zero)
                 return false;
             if (tmp.y == 0 && tmp.z == 0)
                 return true;
@@ -41,9 +37,9 @@ namespace IMRE.Chess3D
             return false;
         }
 
-        public override List<Vector3> validMoves()
+        public override System.Collections.Generic.List<UnityEngine.Vector3> validMoves()
         {
-            throw new NotImplementedException();
+            throw new System.NotImplementedException();
         }
     }
 }

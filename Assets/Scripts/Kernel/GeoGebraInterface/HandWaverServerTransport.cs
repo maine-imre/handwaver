@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.IO;
-using System.Xml;
-using JetBrains.Annotations;
-using UnityEngine;
-using UnityEngine.Networking;
-
-namespace IMRE.HandWaver.Kernel
+﻿namespace IMRE.HandWaver.Kernel
 {
     /// <summary>
     ///     This static class will be used to communicate with the HandWaver servers.
@@ -35,14 +27,13 @@ namespace IMRE.HandWaver.Kernel
         ///     Internal Guid representation of the
         ///     <para>_sessionId</para>
         /// </summary>
-        private static Guid _guid;
+        private static System.Guid _guid;
 
         /// <summary>
-        /// Returns true when a valid session is established with a server.
+        ///     Returns true when a valid session is established with a server.
         /// </summary>
-        private static bool sessionEstablished = false;
-        
-        
+        private static bool sessionEstablished;
+
         /// <summary>
         ///     Public access to the session id string.
         ///     This should be used for getting/setting
@@ -56,12 +47,12 @@ namespace IMRE.HandWaver.Kernel
             set
             {
                 // Is it a valid Guid
-                if (Guid.TryParse(value, out _guid))
+                if (System.Guid.TryParse(value, out _guid))
                     // assign
                     _sessionId = value;
                 else
                     //Throw a format exception
-                    throw new FormatException(value + " is not in valid Guid format!");
+                    throw new System.FormatException(value + " is not in valid Guid format!");
             }
         }
 
@@ -72,16 +63,18 @@ namespace IMRE.HandWaver.Kernel
         /// </summary>
         /// <param name="path">If saving the texture, pass in the location to be used here.</param>
         /// <returns></returns>
-        public static IEnumerator getPNG([CanBeNull] string path)
+        public static System.Collections.IEnumerator getPNG([JetBrains.Annotations.CanBeNullAttribute]
+            string path)
         {
-            using (var req = UnityWebRequest.Get(HOSTURL + "/getPNG?sessionId=" + sessionId))
+            using (UnityEngine.Networking.UnityWebRequest req =
+                UnityEngine.Networking.UnityWebRequest.Get(HOSTURL + "/getPNG?sessionId=" + sessionId))
             {
                 //request and wait for response
                 yield return req.SendWebRequest();
 
                 if (req.isNetworkError)
                 {
-                    Debug.Log(": Error: " + req.error);
+                    UnityEngine.Debug.Log(": Error: " + req.error);
                     req.Dispose();
                 }
                 else
@@ -89,12 +82,13 @@ namespace IMRE.HandWaver.Kernel
                     try
                     {
                         // Get a cached copy of the texture.
-                        Texture tex = ((DownloadHandlerTexture) req.downloadHandler).texture;
+                        UnityEngine.Texture tex = ((UnityEngine.Networking.DownloadHandlerTexture) req.downloadHandler)
+                            .texture;
 
                         // If the path is null or empty skip saving.
                         if (string.IsNullOrEmpty(path)) yield break;
-                        var bytes = ((Texture2D) tex).EncodeToPNG();
-                        File.WriteAllBytes(path, bytes);
+                        byte[] bytes = UnityEngine.ImageConversion.EncodeToPNG((UnityEngine.Texture2D) tex);
+                        System.IO.File.WriteAllBytes(path, bytes);
                     }
                     finally
                     {
@@ -111,35 +105,37 @@ namespace IMRE.HandWaver.Kernel
         /// </summary>
         /// <param name="path">Where you want the xml document to be saved.</param>
         /// <returns></returns>
-        public static IEnumerator saveCurrSession([CanBeNull] string path)
+        public static System.Collections.IEnumerator saveCurrSession([JetBrains.Annotations.CanBeNullAttribute]
+            string path)
         {
-            var form = new WWWForm();
+            UnityEngine.WWWForm form = new UnityEngine.WWWForm();
             form.AddField("sessionId", sessionId);
 
-            using (var req = UnityWebRequest.Post(HOSTURL + "/saveCurrSession", form))
+            using (UnityEngine.Networking.UnityWebRequest req =
+                UnityEngine.Networking.UnityWebRequest.Post(HOSTURL + "/saveCurrSession", form))
             {
                 //request and wait for response
                 yield return req.SendWebRequest();
 
                 if (req.isNetworkError || req.isHttpError)
                 {
-                    Debug.Log(req.error);
+                    UnityEngine.Debug.Log(req.error);
                     req.Dispose();
                 }
                 else
                 {
                     try
                     {
-                        Debug.Log("Session saved!");
+                        UnityEngine.Debug.Log("Session saved!");
 
                         // If the path doesnt exist. Skip saving.
                         if (string.IsNullOrEmpty(path)) yield break;
 
                         // Create XML Document
-                        var currSession = new XmlDocument();
+                        System.Xml.XmlDocument currSession = new System.Xml.XmlDocument();
 
                         // Load in data from response body
-                        currSession.LoadXml(((DownloadHandlerFile) req.downloadHandler).text);
+                        currSession.LoadXml(((UnityEngine.Networking.DownloadHandlerFile) req.downloadHandler).text);
 
 
                         // Save the xmldocument to the path provided.
@@ -159,34 +155,35 @@ namespace IMRE.HandWaver.Kernel
         /// </summary>
         /// <param name="path">Where we locally save the returned session data</param>
         /// <returns></returns>
-        public static IEnumerator getCurrSession(string path)
+        public static System.Collections.IEnumerator getCurrSession(string path)
         {
-            using (var req = UnityWebRequest.Get(HOSTURL + "/getCurrSession?sessionId=" + sessionId))
+            using (UnityEngine.Networking.UnityWebRequest req =
+                UnityEngine.Networking.UnityWebRequest.Get(HOSTURL + "/getCurrSession?sessionId=" + sessionId))
             {
                 //request and wait for response
                 yield return req.SendWebRequest();
 
                 if (req.isNetworkError)
                 {
-                    Debug.Log(": Error: " + req.error);
+                    UnityEngine.Debug.Log(": Error: " + req.error);
                     req.Dispose();
                 }
                 else
                 {
                     try
                     {
-                        Debug.Log("Session saved!");
+                        UnityEngine.Debug.Log("Session saved!");
 
                         // Create XML Document
-                        var currSession = new XmlDocument();
+                        System.Xml.XmlDocument currSession = new System.Xml.XmlDocument();
 
                         // Load in data from response body
-                        currSession.LoadXml(((DownloadHandlerFile) req.downloadHandler).text);
+                        currSession.LoadXml(((UnityEngine.Networking.DownloadHandlerFile) req.downloadHandler).text);
 
                         // If the path doesnt exist. Skip saving.
                         if (string.IsNullOrEmpty(path))
                         {
-                            Debug.LogError("Path provided is null or empty: " + path);
+                            UnityEngine.Debug.LogError("Path provided is null or empty: " + path);
                             yield break;
                         }
 
@@ -209,27 +206,25 @@ namespace IMRE.HandWaver.Kernel
         /// </summary>
         /// <param name="cmdString">A string containing a geogebra command. This is not checked before being sent.</param>
         /// <returns></returns>
-        public static IEnumerator execCommand(string cmdString)
+        public static System.Collections.IEnumerator execCommand(string cmdString)
         {
-            while (!sessionEstablished)
-            {
-                yield return new WaitForEndOfFrame();
-            }
+            while (!sessionEstablished) yield return new UnityEngine.WaitForEndOfFrame();
             // Request body
-            var form = new WWWForm();
+            UnityEngine.WWWForm form = new UnityEngine.WWWForm();
             // Populate request body
             form.AddField("sessionId", sessionId);
             form.AddField("command", cmdString);
 
-            using (var req = UnityWebRequest.Post(HOSTURL + "/command", form))
+            using (UnityEngine.Networking.UnityWebRequest req =
+                UnityEngine.Networking.UnityWebRequest.Post(HOSTURL + "/command", form))
             {
                 //request and wait for response
                 yield return req.SendWebRequest();
 
                 if (req.isNetworkError || req.isHttpError)
-                    Debug.Log(req.error);
+                    UnityEngine.Debug.Log(req.error);
                 else
-                    Debug.Log("command sent!\n" + cmdString);
+                    UnityEngine.Debug.Log("command sent!\n" + cmdString);
                 // Dispose of the request that we are done using.
                 req.Dispose();
             }
@@ -240,22 +235,24 @@ namespace IMRE.HandWaver.Kernel
         ///     If the sessionId is already within the system, it returns the xml data for scene recreation.
         /// </summary>
         /// <returns></returns>
-        public static IEnumerator serverHandhake()
+        public static System.Collections.IEnumerator serverHandhake()
         {
-            using (var req = UnityWebRequest.Get(HOSTURL + "/handshake?sessionId=" + sessionId + "&version=" + VERSION))
+            using (UnityEngine.Networking.UnityWebRequest req =
+                UnityEngine.Networking.UnityWebRequest.Get(HOSTURL + "/handshake?sessionId=" + sessionId + "&version=" +
+                                                           VERSION))
             {
                 //request and wait for response
                 yield return req.SendWebRequest();
                 if (req.isNetworkError)
                 {
-                    Debug.Log(": Error: " + req.error);
+                    UnityEngine.Debug.Log(": Error: " + req.error);
                     req.Dispose();
                 }
                 else
                 {
                     try
                     {
-                        Debug.Log("Established connection to server with session id " + sessionId);
+                        UnityEngine.Debug.Log("Established connection to server with session id " + sessionId);
 
                         sessionEstablished = true;
                         //TODO: check if there is a response of a session xml data.

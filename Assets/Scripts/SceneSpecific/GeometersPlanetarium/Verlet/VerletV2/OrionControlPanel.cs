@@ -1,14 +1,11 @@
-﻿using Leap.Unity.Interaction;
-using UnityEngine;
-
-public class OrionControlPanel : MonoBehaviour
+﻿public class OrionControlPanel : UnityEngine.MonoBehaviour
 {
-    public InteractionSlider bodyScaleSlider;
+    public Leap.Unity.Interaction.InteractionSlider bodyScaleSlider;
 
-    public InteractionButton[] buttons = new InteractionButton[13];
+    public Leap.Unity.Interaction.InteractionButton[] buttons = new Leap.Unity.Interaction.InteractionButton[13];
     private VerletV3 ControlScript;
-    public InteractionSlider simulationScaleSlider;
-    public InteractionSlider timeSlider;
+    public Leap.Unity.Interaction.InteractionSlider simulationScaleSlider;
+    public Leap.Unity.Interaction.InteractionSlider timeSlider;
 
     // Use this for initialization
     private void Start()

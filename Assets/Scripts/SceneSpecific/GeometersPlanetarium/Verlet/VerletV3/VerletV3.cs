@@ -1,13 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class VerletV3 : MonoBehaviour
+﻿public class VerletV3 : UnityEngine.MonoBehaviour
 {
     private readonly VerletV2Thread[] multithreadedJobs = new VerletV2Thread[0]; //List of all of the active threads
     public float bodyScale = 1; //Multipliciative scale of the size of the bodies in the system
     public string CenterBody = "Sol";
-    public Vector3d CenterBodyOffset = new Vector3d(0, 0, 0);
+    public UnityEngine.Vector3d CenterBodyOffset = new UnityEngine.Vector3d(0, 0, 0);
 
     //Below are DEBUG variables
     private int counter = 0; //Counter of the number of thread loops
@@ -15,7 +11,7 @@ public class VerletV3 : MonoBehaviour
     //stuff for controlling the timestep
     public bool lastFrameCompleted = true;
 
-    public GameObject[]
+    public UnityEngine.GameObject[]
         massObject; //A list of the rest of the bodies (Note to self: Bring down to nLog(n) using control script)
 
     public double masterDaysCounter;
@@ -31,7 +27,7 @@ public class VerletV3 : MonoBehaviour
     public int stepsPerFrame = 1;
     public float stepTimeStep = 10;
     public float stepTimeStepP = 10;
-    private List<string> threadIdent = new List<string>();
+    private System.Collections.Generic.List<string> threadIdent = new System.Collections.Generic.List<string>();
     public float timeStep = 1; //The length of the timestep in seconds
 
     // Use this for initialization
@@ -44,7 +40,7 @@ public class VerletV3 : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        var center = (VerletObjectV3) GameObject.Find(CenterBody).GetComponent("VerletObjectV3");
+        VerletObjectV3 center = (VerletObjectV3) UnityEngine.GameObject.Find(CenterBody).GetComponent("VerletObjectV3");
         CenterBodyOffset = center.position;
         minicounter++;
         masterDaysCounter = masterTimeCounter / 86400;
@@ -59,26 +55,26 @@ public class VerletV3 : MonoBehaviour
             //If the threads have completed
             if (timeStep != 0 && timeStep == previousTimeStep)
             {
-                Debug.Log(lastFrameCompleted + "	" + stepTimeStep + "	" + timeStep + "	" +
-                          stepTimeStep / timeStep + "	" +
-                          Mathf.CeilToInt(stepTimeStep / timeStep));
+                UnityEngine.Debug.Log(lastFrameCompleted + "	" + stepTimeStep + "	" + timeStep + "	" +
+                                      stepTimeStep / timeStep + "	" +
+                                      UnityEngine.Mathf.CeilToInt(stepTimeStep / timeStep));
                 //Debug.Log(lastFrameCompleted + "	" + multiple + "	" + stepTimeStep + "	" + (multiple - Mathf.Log(Mathf.Pow(multiple, 1/6))));
                 if (lastFrameCompleted && multiple >= 1.05)
                 {
                     stepTimeStep = stepTimeStep / multiple;
-                    stepsPerFrame = Mathd.CeilToInt(timeStep / stepTimeStep);
+                    stepsPerFrame = UnityEngine.Mathd.CeilToInt(timeStep / stepTimeStep);
                 }
 
                 if (!lastFrameCompleted && multiple >= 1.05)
                 {
                     stepTimeStep = stepTimeStep * multiple;
-                    stepsPerFrame = Mathd.CeilToInt(timeStep / stepTimeStep);
-                    multiple = multiple - Mathf.Log(Mathf.Pow(multiple, 1 / 6));
+                    stepsPerFrame = UnityEngine.Mathd.CeilToInt(timeStep / stepTimeStep);
+                    multiple = multiple - UnityEngine.Mathf.Log(UnityEngine.Mathf.Pow(multiple, 1 / 6));
                 }
 
-                if (lastFrameCompleted && multiple < 1.05 || Mathf.Abs(stepTimeStep) < 0.05)
+                if (lastFrameCompleted && multiple < 1.05 || UnityEngine.Mathf.Abs(stepTimeStep) < 0.05)
                 {
-                    Debug.Log("Ping");
+                    UnityEngine.Debug.Log("Ping");
                     multiple = 1;
                 }
 
@@ -92,18 +88,18 @@ public class VerletV3 : MonoBehaviour
 
             multiThreadFlag = 0;
             massObject =
-                GameObject
+                UnityEngine.GameObject
                     .FindGameObjectsWithTag("massObject"); //Gathers all of the massObjects for calculation
-            var masses = new float[massObject.Length]; //Gathers all of the masses in order
-            var
-                positions = new Vector3d[massObject
+            float[] masses = new float[massObject.Length]; //Gathers all of the masses in order
+            UnityEngine.Vector3d[]
+                positions = new UnityEngine.Vector3d[massObject
                     .Length]; //Gathers all of the vectors of the objects in order
-            var names = new string[massObject.Length];
-            var previousPositions = new Vector3d[massObject.Length];
-            for (var i = 0; i < massObject.Length; i++)
+            string[] names = new string[massObject.Length];
+            UnityEngine.Vector3d[] previousPositions = new UnityEngine.Vector3d[massObject.Length];
+            for (int i = 0; i < massObject.Length; i++)
             {
                 //For every object, get data for mass and position
-                var obj = (VerletObjectV3) massObject[i].GetComponent("VerletObjectV3");
+                VerletObjectV3 obj = (VerletObjectV3) massObject[i].GetComponent("VerletObjectV3");
                 masses[i] = obj.mass;
                 positions[i] = obj.position;
                 names[i] = obj.name;
@@ -129,13 +125,13 @@ public class VerletV3 : MonoBehaviour
         }
     }
 
-    private IEnumerator finished(VerletV3ControlThread myJob)
+    private System.Collections.IEnumerator finished(VerletV3ControlThread myJob)
     {
         yield return StartCoroutine(myJob.WaitFor());
         //Debug.Log("finished "+myJob.ThreadName+"	it was: "+myJob.p);
-        for (var i = 0; i < myJob.names.Length; i++)
+        for (int i = 0; i < myJob.names.Length; i++)
         {
-            var thisObject = (VerletObjectV3) massObject[i].GetComponent("VerletObjectV3");
+            VerletObjectV3 thisObject = (VerletObjectV3) massObject[i].GetComponent("VerletObjectV3");
             thisObject.newPos(myJob.positions[i]);
             thisObject.previousPosition = myJob.previousPositions[i];
         }

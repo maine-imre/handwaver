@@ -1,7 +1,4 @@
-﻿using System;
-using UnityEngine;
-
-public class VerletV3ControlThread : AbstractThread
+﻿public class VerletV3ControlThread : AbstractThread
 {
     public bool frameCompleted;
     public float[] masses;
@@ -14,11 +11,11 @@ public class VerletV3ControlThread : AbstractThread
     //Information for the next thread
     public int multiThreadFlag;
     public string[] names;
-    public Vector3d[] positions;
-    public Vector3d[] previousPositions;
+    public UnityEngine.Vector3d[] positions;
+    public UnityEngine.Vector3d[] previousPositions;
     public float previousTimeStep;
 
-    public Vector3d returnvalue; //Define all variables needed for the function here
+    public UnityEngine.Vector3d returnvalue; //Define all variables needed for the function here
     public int stepCounter;
     public float steps;
 
@@ -30,7 +27,7 @@ public class VerletV3ControlThread : AbstractThread
         testfunction(); //Calls this function
     }
 
-    protected override Vector3d OnFinished()
+    protected override UnityEngine.Vector3d OnFinished()
     {
         return returnvalue;
     }
@@ -39,17 +36,17 @@ public class VerletV3ControlThread : AbstractThread
     {
         if (multiThreadFlag == multithreadedJobs.Length && timestep != 0)
         {
-            var start = DateTime.Now.AddMilliseconds(6);
-            while (DateTime.Now < start || stepCounter < steps)
+            System.DateTime start = System.DateTime.Now.AddMilliseconds(6);
+            while (System.DateTime.Now < start || stepCounter < steps)
             {
                 stepCounter++;
                 masterTimeCounter += timestep; //Problematic
                 multiThreadFlag = 0;
                 multithreadedJobs = new VerletV2Thread[names.Length];
-                for (var i = 0; i < names.Length; i++)
+                for (int i = 0; i < names.Length; i++)
                 {
                     multithreadedJobs[i] = new VerletV2Thread();
-                    var thisJob = multithreadedJobs[i];
+                    VerletV2Thread thisJob = multithreadedJobs[i];
                     thisJob.ThreadName = names[i] + i; //Assign name
                     thisJob.thisIndex = i; //Assign index (Unused I think)
                     thisJob.m = masses[i]; //Assign mass
@@ -63,19 +60,21 @@ public class VerletV3ControlThread : AbstractThread
                     multithreadedJobs[i].Start(); //Start thread
                 }
 
-                var allFinished = false;
+                bool allFinished = false;
                 while (!allFinished)
                 {
-                    var counter = 0;
-                    for (var i = 0; i < multithreadedJobs.Length; i++)
+                    int counter = 0;
+                    for (int i = 0; i < multithreadedJobs.Length; i++)
+                    {
                         if (multithreadedJobs[i].IsDone)
                             counter += 1;
+                    }
 
                     if (counter == multithreadedJobs.Length) allFinished = true;
                 }
 
                 //code for starting next step
-                for (var i = 0; i < multithreadedJobs.Length; i++)
+                for (int i = 0; i < multithreadedJobs.Length; i++)
                 {
                     previousPositions[i] = positions[i];
                     positions[i] = multithreadedJobs[i].outputPosition;

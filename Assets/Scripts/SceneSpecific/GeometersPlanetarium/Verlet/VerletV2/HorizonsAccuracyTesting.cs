@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Xml;
-using UnityEngine;
-
-public class HorizonsAccuracyTesting : MonoBehaviour
+﻿public class HorizonsAccuracyTesting : UnityEngine.MonoBehaviour
 {
-    private readonly List<DateTime> UpdateTimes =
-        new List<DateTime>();
+    private readonly System.Collections.Generic.List<System.DateTime> UpdateTimes =
+        new System.Collections.Generic.List<System.DateTime>();
 
     //public GameObject defaultBody;		//The default version of a massive object
     private string bodyName = ""; //The given name of the object
@@ -17,7 +12,7 @@ public class HorizonsAccuracyTesting : MonoBehaviour
     private float mass = 1; //The mass of the object
     private float radius = 1; //The radius of the object (if the object is close to circular)
     private float rotation;
-    private DateTime STARTTIME;
+    private System.DateTime STARTTIME;
     private string time; //The current time (assists above)
     private bool timePassedFlag = false;
 
@@ -31,27 +26,28 @@ public class HorizonsAccuracyTesting : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
-        STARTTIME = DateTime.Now;
-        for (var i = 0; i < 29; i++) UpdateTimes.Add(STARTTIME.AddDays(i));
+        STARTTIME = System.DateTime.Now;
+        for (int i = 0; i < 29; i++) UpdateTimes.Add(STARTTIME.AddDays(i));
     }
 
-    private void TestTime(DateTime currenttime, string body)
+    private void TestTime(System.DateTime currenttime, string body)
     {
-        var dataFile = new XmlDocument(); //The file of data about the bodies
+        System.Xml.XmlDocument dataFile = new System.Xml.XmlDocument(); //The file of data about the bodies
         dataFile.Load(@"Assets/Big-Birtha/PlanetaryData/filename.xml");
-        var orbitFile = new XmlDocument(); //The file of the orbit data for each body
+        System.Xml.XmlDocument orbitFile = new System.Xml.XmlDocument(); //The file of the orbit data for each body
         orbitFile.Load(@"Assets/Big-Birtha/PlanetaryData/orbitData.xml");
-        foreach (XmlNode node in dataFile.DocumentElement.ChildNodes)
+        foreach (System.Xml.XmlNode node in dataFile.DocumentElement.ChildNodes)
         {
             //For every body
             bodyName = node.Attributes["name"].Value; //Name the body
-            foreach (XmlNode subnode in node.ChildNodes)
+            foreach (System.Xml.XmlNode subnode in node.ChildNodes)
                 //For all accociated data
+            {
                 if (subnode.Name == "mass")
                 {
                     //Get the mass
                     //mass = float.Parse(subnode.InnerText);
-                    var successfullyParsed = float.TryParse(subnode.InnerText, out mass);
+                    bool successfullyParsed = float.TryParse(subnode.InnerText, out mass);
                     if (!successfullyParsed)
                     {
                         flag = true;
@@ -67,8 +63,9 @@ public class HorizonsAccuracyTesting : MonoBehaviour
                 {
                     rotation = float.Parse(subnode.InnerText);
                 }
+            }
 
-            var currentMonth = "";
+            string currentMonth = "";
             switch (currenttime.Month)
             {
                 //Getting the month correct
@@ -110,17 +107,19 @@ public class HorizonsAccuracyTesting : MonoBehaviour
                     break;
             }
 
-            var targetDateTime = currenttime.Year + "-" + currentMonth + "-";
+            string targetDateTime = currenttime.Year + "-" + currentMonth + "-";
             if (currenttime.Day < 10) targetDateTime += "0";
             targetDateTime += currenttime.Day + " ";
             if (currenttime.Hour < 10) targetDateTime += "0";
             targetDateTime += currenttime.Hour + ":00:00.0000";
 
-            foreach (XmlNode orbitNode in orbitFile.DocumentElement.ChildNodes)
+            foreach (System.Xml.XmlNode orbitNode in orbitFile.DocumentElement.ChildNodes)
                 //For every planet
+            {
                 if (orbitNode.Attributes["name"].Value == bodyName)
-                    foreach (XmlNode orbitsubnode in orbitNode.ChildNodes)
+                    foreach (System.Xml.XmlNode orbitsubnode in orbitNode.ChildNodes)
                         //For every orbit datapoint
+                    {
                         if (orbitsubnode.Attributes["timeStamp"].Value == targetDateTime)
                         {
                             x = float.Parse(orbitsubnode["X"].InnerText); //(above) if the timestamp is the reqested one
@@ -130,6 +129,8 @@ public class HorizonsAccuracyTesting : MonoBehaviour
                             vy = float.Parse(orbitsubnode["VY"].InnerText);
                             vz = float.Parse(orbitsubnode["VZ"].InnerText);
                         }
+                    }
+            }
 
             if (!flag)
             {
@@ -137,10 +138,10 @@ public class HorizonsAccuracyTesting : MonoBehaviour
                 //defaultBody.name = bodyName;										//This code sets the default body values to the given data and instantiates it
                 if (bodyName == body)
                 {
-                    var theBody =
-                        (VerletObjectV2) GameObject.Find(body).GetComponent("VerletObjectV2");
-                    var drift = dist(theBody.position, new Vector3d(x, y, z));
-                    Debug.Log(drift);
+                    VerletObjectV2 theBody =
+                        (VerletObjectV2) UnityEngine.GameObject.Find(body).GetComponent("VerletObjectV2");
+                    double drift = dist(theBody.position, new UnityEngine.Vector3d(x, y, z));
+                    UnityEngine.Debug.Log(drift);
                 }
             }
             else
@@ -150,16 +151,16 @@ public class HorizonsAccuracyTesting : MonoBehaviour
         }
     }
 
-    private double dist(Vector3d p, Vector3d mO)
+    private double dist(UnityEngine.Vector3d p, UnityEngine.Vector3d mO)
     {
-        return Mathd.Sqrt(Mathd.Pow(p.x - mO.x, 2) + Mathd.Pow(p.y - mO.y, 2) +
-                          Mathd.Pow(p.z - mO.z, 2));
+        return UnityEngine.Mathd.Sqrt(UnityEngine.Mathd.Pow(p.x - mO.x, 2) + UnityEngine.Mathd.Pow(p.y - mO.y, 2) +
+                                      UnityEngine.Mathd.Pow(p.z - mO.z, 2));
     }
 
     // Update is called once per frame
     private void Update()
     {
-        var duration = UpdateTimes.ToArray()[0] - STARTTIME;
+        System.TimeSpan duration = UpdateTimes.ToArray()[0] - STARTTIME;
         if (controlScript.masterTimeCounter > duration.TotalSeconds)
         {
             TestTime(UpdateTimes.ToArray()[0], bodyName);
