@@ -18,8 +18,7 @@ namespace IMRE.HandWaver.Rendering
         {
             get
             {
-                //TODO attach to emboided input
-                return float3.zero;
+                return Camera.main.transform.position;
                 
             }
         }
@@ -61,20 +60,20 @@ namespace IMRE.HandWaver.Rendering
             Segment(location - dir, location + dir);
         }
 
-        public static void Segment(float3 endpointA, float3 endpointB)
+        public static Mesh Segment(float3 endpointA, float3 endpointB)
         {
-                UnityEngine.Mesh mesh = new UnityEngine.Mesh();
-                float3 lineWidth = width * Unity.Mathematics.math.normalize(Unity.Mathematics.math.cross(
+                Mesh mesh = new UnityEngine.Mesh();
+                float3 lineWidth = width * math.normalize(math.cross(
                                        endpointA - endpointB,
                                        (endpointA + endpointB) / 2f - headDirection));
 
                 //verts
-                UnityEngine.Vector3[] verts = new UnityEngine.Vector3[4];
+                Vector3[] verts = new Vector3[4];
                 verts[0] = endpointA + lineWidth;
                 verts[1] = endpointA - lineWidth;
                 verts[2] = endpointB - lineWidth;
                 verts[3] = endpointB + lineWidth;
-
+                
                 mesh.vertices = verts;
 
                 //triangles
@@ -83,19 +82,20 @@ namespace IMRE.HandWaver.Rendering
                 mesh.triangles = tris;
 
                 //uvs
-                UnityEngine.Vector2[] uvs = {new UnityEngine.Vector2(0,1), new UnityEngine.Vector2(0,0), 
+                Vector2[] uvs = {new UnityEngine.Vector2(0,1), new UnityEngine.Vector2(0,0), 
                     new UnityEngine.Vector2(1,0), new UnityEngine.Vector2(1,1) };
                 mesh.uv = uvs;
-
+                
                 mesh.RecalculateNormals();
 
                 //normals
                 UnityEngine.Vector3[] normals = mesh.normals;
                 for (int i = 0; i < verts.Length; i++)
-                    normals[i] = Unity.Mathematics.math.normalize(headDirection);
+                    normals[i] = math.normalize(headDirection);
                 mesh.normals = normals;
 
-                render(mesh);
+                return mesh;
+                //render(mesh);
         }
 
         public static void Angle(UnityEngine.Vector3 center, UnityEngine.Vector3 segmentStart, UnityEngine.Vector3 segmentAEndpoint, 
@@ -137,9 +137,9 @@ namespace IMRE.HandWaver.Rendering
             throw new NotImplementedException();
         }
 
-        public static void Circle(float3 center, float3 edgePoint, float3 normalDirection)
+        public static Mesh Circle(float3 center, float3 edgePoint, float3 normalDirection)
         {
-            const int n = 500;
+            const int n = 50;
             
             Mesh mesh = new Mesh();
             
@@ -156,14 +156,13 @@ namespace IMRE.HandWaver.Rendering
             for (int i = 0; i < n; i++)
             {
                 positions[i] = (radius * ((UnityEngine.Mathf.Sin((i * UnityEngine.Mathf.PI * 2) / (n - 1)) * basis1) +
-                                         (UnityEngine.Mathf.Cos((i * UnityEngine.Mathf.PI * 2) / (n - 1)) * basis2))) +
-                              Vector3.zero;
+                                         (UnityEngine.Mathf.Cos((i * UnityEngine.Mathf.PI * 2) / (n - 1)) * basis2)));
             }
 
             for (int i = 0; i < n; i++)
             {
                 float3 lineWidth = width * Unity.Mathematics.math.normalize(Unity.Mathematics.math.cross(
-                                       positions[(i-1) % n] - positions[(i+1) % n],
+                                       positions[((i-1)+n) % n] - positions[(i+1) % n],
                                        positions[i] / 2f - headDirection));
                 vertices[2 * i] = positions[i] + lineWidth;
                 vertices[2 * i + 1] = positions[i] - lineWidth;
@@ -197,13 +196,13 @@ namespace IMRE.HandWaver.Rendering
             
             //normals
             UnityEngine.Vector3[] normals = mesh.normals;
-            for (int i = 0; i < verts.Length; i++)
+            for (int i = 0; i < normals.Length; i++)
                 normals[i] = Unity.Mathematics.math.normalize(headDirection);
             
             mesh.normals = normals;
             
             //uvs
-            UnityEngine.Vector2[] uvs = new Vector2[n];
+            UnityEngine.Vector2[] uvs = new Vector2[2*n];
 
             for (int i = 0; i < n; i++)
             {
@@ -215,6 +214,8 @@ namespace IMRE.HandWaver.Rendering
             }
             
             mesh.uv = uvs;
+
+            return mesh;
 
         }
 
@@ -294,9 +295,9 @@ namespace IMRE.HandWaver.Rendering
             throw new NotImplementedException();
         }
         
-        public static void Sphere(float3 center, float3 edgePoint)
+        public static Mesh Sphere(float3 center, float3 edgePoint)
         {
-            const int n = 500;
+            const int n = 50;
             
             Mesh mesh = new Mesh();
 
@@ -406,6 +407,8 @@ namespace IMRE.HandWaver.Rendering
             mesh.triangles = triangles;
 
             #endregion
+
+            return mesh;
         }
         
         public static void SurfaceFinite( /*Data needed to render*/)
