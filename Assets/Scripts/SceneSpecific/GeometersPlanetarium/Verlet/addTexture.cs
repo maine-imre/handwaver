@@ -1,12 +1,10 @@
-﻿using UnityEngine;
-
-public class addTexture : MonoBehaviour
+﻿public class addTexture : UnityEngine.MonoBehaviour
 {
-    public Material[] materials;
+    public UnityEngine.Material[] materials;
 
     private string name = "";
 
-    private Material thisMat;
+    private UnityEngine.Material thisMat;
 
     // Use this for initialization
     private void Start()
@@ -16,87 +14,107 @@ public class addTexture : MonoBehaviour
         {
             //Getting the month correct
             case "Earth":
-                Debug.Log("Earth");
-                foreach (var item in materials)
+                UnityEngine.Debug.Log("Earth");
+                foreach (UnityEngine.Material item in materials)
+                {
                     if (item.name == "earth")
                         thisMat = item;
+                }
 
-                ((MeshRenderer) gameObject.GetComponent("MeshRenderer")).material = thisMat;
+                ((UnityEngine.MeshRenderer) gameObject.GetComponent("MeshRenderer")).material = thisMat;
                 break;
             case "Moon":
-                Debug.Log("Moon");
-                foreach (var item in materials)
+                UnityEngine.Debug.Log("Moon");
+                foreach (UnityEngine.Material item in materials)
+                {
                     if (item.name == "moon")
                         thisMat = item;
+                }
 
-                ((MeshRenderer) gameObject.GetComponent("MeshRenderer")).material = thisMat;
+                ((UnityEngine.MeshRenderer) gameObject.GetComponent("MeshRenderer")).material = thisMat;
                 break;
             case "Mars":
-                Debug.Log("Mars");
-                foreach (var item in materials)
+                UnityEngine.Debug.Log("Mars");
+                foreach (UnityEngine.Material item in materials)
+                {
                     if (item.name == "mars")
                         thisMat = item;
+                }
 
-                ((MeshRenderer) gameObject.GetComponent("MeshRenderer")).material = thisMat;
+                ((UnityEngine.MeshRenderer) gameObject.GetComponent("MeshRenderer")).material = thisMat;
                 break;
             case "Jupiter":
-                Debug.Log("Jupiter");
-                foreach (var item in materials)
+                UnityEngine.Debug.Log("Jupiter");
+                foreach (UnityEngine.Material item in materials)
+                {
                     if (item.name == "jupiter")
                         thisMat = item;
+                }
 
-                ((MeshRenderer) gameObject.GetComponent("MeshRenderer")).material = thisMat;
+                ((UnityEngine.MeshRenderer) gameObject.GetComponent("MeshRenderer")).material = thisMat;
                 break;
             case "Saturn":
-                Debug.Log("Saturn");
-                foreach (var item in materials)
+                UnityEngine.Debug.Log("Saturn");
+                foreach (UnityEngine.Material item in materials)
+                {
                     if (item.name == "saturn")
                         thisMat = item;
+                }
 
-                ((MeshRenderer) gameObject.GetComponent("MeshRenderer")).material = thisMat;
+                ((UnityEngine.MeshRenderer) gameObject.GetComponent("MeshRenderer")).material = thisMat;
                 break;
             case "Venus":
-                Debug.Log("Venus");
-                foreach (var item in materials)
+                UnityEngine.Debug.Log("Venus");
+                foreach (UnityEngine.Material item in materials)
+                {
                     if (item.name == "venus")
                         thisMat = item;
+                }
 
-                ((MeshRenderer) gameObject.GetComponent("MeshRenderer")).material = thisMat;
+                ((UnityEngine.MeshRenderer) gameObject.GetComponent("MeshRenderer")).material = thisMat;
                 break;
             case "Mercury":
-                Debug.Log("Mercury");
-                foreach (var item in materials)
+                UnityEngine.Debug.Log("Mercury");
+                foreach (UnityEngine.Material item in materials)
+                {
                     if (item.name == "mercury")
                         thisMat = item;
+                }
 
-                ((MeshRenderer) gameObject.GetComponent("MeshRenderer")).material = thisMat;
+                ((UnityEngine.MeshRenderer) gameObject.GetComponent("MeshRenderer")).material = thisMat;
                 break;
             case "Uranus":
-                Debug.Log("Uranus");
-                foreach (var item in materials)
+                UnityEngine.Debug.Log("Uranus");
+                foreach (UnityEngine.Material item in materials)
+                {
                     if (item.name == "uranus")
                         thisMat = item;
+                }
 
-                ((MeshRenderer) gameObject.GetComponent("MeshRenderer")).material = thisMat;
+                ((UnityEngine.MeshRenderer) gameObject.GetComponent("MeshRenderer")).material = thisMat;
                 break;
             case "Neptune":
-                Debug.Log("Neptune");
-                foreach (var item in materials)
+                UnityEngine.Debug.Log("Neptune");
+                foreach (UnityEngine.Material item in materials)
+                {
                     if (item.name == "neptune")
                         thisMat = item;
+                }
 
-                ((MeshRenderer) gameObject.GetComponent("MeshRenderer")).material = thisMat;
+                ((UnityEngine.MeshRenderer) gameObject.GetComponent("MeshRenderer")).material = thisMat;
                 break;
             case "Pluto":
-                Debug.Log("Pluto");
-                foreach (var item in materials)
+                UnityEngine.Debug.Log("Pluto");
+                foreach (UnityEngine.Material item in materials)
+                {
                     if (item.name == "pluto")
                         thisMat = item;
+                }
 
-                ((MeshRenderer) gameObject.GetComponent("MeshRenderer")).material = thisMat;
+                ((UnityEngine.MeshRenderer) gameObject.GetComponent("MeshRenderer")).material = thisMat;
                 break;
             default:
-                Debug.Log("Other");
+                UnityEngine.Debug.Log("Other");
                 break;
         }
     }

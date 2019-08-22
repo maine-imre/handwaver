@@ -1,22 +1,18 @@
-﻿using System.Linq;
-using Unity.Mathematics;
-using UnityEngine;
-
-namespace IMRE.EmbodiedUserInput
+﻿namespace IMRE.EmbodiedUserInput
 {
-    public class TouchSlider : MonoBehaviour
+    public class TouchSlider : UnityEngine.MonoBehaviour
     {
         /// <summary>
         ///     internal percentage of slider
         /// </summary>
-        [Range(0, 1)] private float _sliderValue;
+        [UnityEngine.RangeAttribute(0, 1)] private float _sliderValue;
 
         /// <summary>
         ///     The point for visual representation on the line
         /// </summary>
-        public Transform point;
+        public UnityEngine.Transform point;
 
-        public Material slidermaterial;
+        public UnityEngine.Material slidermaterial;
 
         /// <summary>
         ///     Max distance for finger to point interaction to trigger
@@ -26,10 +22,10 @@ namespace IMRE.EmbodiedUserInput
         /// <summary>
         ///     Slider line renderer
         /// </summary>
-        private LineRenderer tSlider;
+        private UnityEngine.LineRenderer tSlider;
 
-        public float3 tSliderEndA;
-        public float3 tSliderEndB;
+        public Unity.Mathematics.float3 tSliderEndA;
+        public Unity.Mathematics.float3 tSliderEndB;
 
         public classifierType type;
 
@@ -50,7 +46,7 @@ namespace IMRE.EmbodiedUserInput
         {
             //make our instance of line renderer equal to the component line renderer on the same Unity
             //game object as the script
-            tSlider = gameObject.AddComponent<LineRenderer>();
+            tSlider = gameObject.AddComponent<UnityEngine.LineRenderer>();
             tSlider.SetPosition(0, tSliderEndA);
             tSlider.SetPosition(1, tSliderEndB);
             tSlider.startWidth = .05f;
@@ -65,7 +61,8 @@ namespace IMRE.EmbodiedUserInput
             tSlider.SetPosition(0, tSliderEndA);
             tSlider.SetPosition(1, tSliderEndB);
 
-            Enumerable.ToList(Enumerable.Where(Enumerable.ToList(EmbodiedUserInputClassifierAuthoring.classifiers),
+            System.Linq.Enumerable.ToList(System.Linq.Enumerable.Where(
+                System.Linq.Enumerable.ToList(EmbodiedUserInputClassifierAuthoring.classifiers),
                 c => c.type == type)).ForEach(classifier => checkClassifier(classifier));
 
             //Where(classifier => classifier.isEligible && classifier.type == type).
@@ -85,16 +82,16 @@ namespace IMRE.EmbodiedUserInput
             {
                 //Notice that this code is totally generic and can be used for any classifier - doesn't need to be pinch.
                 //think lego blocks.   
-                float3 tSliderProjection =
-                    Vector3.Project(classifier.origin - tSliderEndA, tSliderEndB - tSliderEndA)
-                    + (Vector3) tSliderEndA;
-                if (Vector3.Magnitude(tSliderProjection - classifier.origin) < tolerance)
-                    SliderValue = Vector3.Magnitude(Vector3.Project(
+                Unity.Mathematics.float3 tSliderProjection =
+                    UnityEngine.Vector3.Project(classifier.origin - tSliderEndA, tSliderEndB - tSliderEndA)
+                    + (UnityEngine.Vector3) tSliderEndA;
+                if (UnityEngine.Vector3.Magnitude(tSliderProjection - classifier.origin) < tolerance)
+                    SliderValue = UnityEngine.Vector3.Magnitude(UnityEngine.Vector3.Project(
                                       classifier.origin - tSliderEndA,
                                       tSliderEndB - tSliderEndA)) /
-                                  Vector3.Magnitude(tSliderEndB - tSliderEndA);
+                                  UnityEngine.Vector3.Magnitude(tSliderEndB - tSliderEndA);
                 else
-                    Debug.Log(Vector3.Magnitude(tSliderProjection - classifier.origin));
+                    UnityEngine.Debug.Log(UnityEngine.Vector3.Magnitude(tSliderProjection - classifier.origin));
             }
         }
     }

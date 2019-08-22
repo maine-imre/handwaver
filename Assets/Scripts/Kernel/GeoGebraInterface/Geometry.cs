@@ -1,12 +1,10 @@
-﻿using UnityEngine;
-
-namespace IMRE.HandWaver.Kernel.GGBFunctions
+﻿namespace IMRE.HandWaver.Kernel.GGBFunctions
 {
     /// <summary>
     ///     Geometry functions to be used within Geogebra session
     /// </summary>
     /// TODO:  Comment
-    public class Geometry : MonoBehaviour
+    public class Geometry : UnityEngine.MonoBehaviour
     {
         //TODO: Pull from specific class into generic helper functions
         public string ObjectFromID(int id)

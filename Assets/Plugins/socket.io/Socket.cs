@@ -243,8 +243,8 @@ namespace socket.io {
         public Action<Exception> OnConnectError { get; private set; }
         public Action<Exception> OnReconnectError { get; private set; }
 
-        readonly Dictionary<int, Action<string>> _acks = new Dictionary<int, Action<string>>();
-        readonly Dictionary<string, Action<string>> _handlers = new Dictionary<string, Action<string>>();
+        private Dictionary<int, Action<string>> _acks = new Dictionary<int, Action<string>>();
+        private Dictionary<string, Action<string>> _handlers = new Dictionary<string, Action<string>>();
 
         #endregion
 
@@ -316,7 +316,7 @@ namespace socket.io {
                         return;
                     }
 
-                    var seperateIndex = pkt.body.IndexOf(", ");
+                    var seperateIndex = pkt.body.IndexOf(',');
 
                     var seperatorLen = 2;
                     if (seperateIndex == -1) {
@@ -330,7 +330,9 @@ namespace socket.io {
                         break;
                     }
 
-                    var data = pkt.body.Substring(seperateIndex + seperatorLen, pkt.body.Length - seperateIndex - seperatorLen - 1);
+                    //var data = pkt.body.Substring(seperateIndex + seperatorLen, pkt.body.Length - seperateIndex - seperatorLen - 1);
+                    //For some reason it was cutting 1 less than it was suppose to.
+                    var data = pkt.body.Substring(seperateIndex + seperatorLen, pkt.body.Length - seperateIndex - seperatorLen - 2);
                     _handlers[eventName](data);
                     break;
 

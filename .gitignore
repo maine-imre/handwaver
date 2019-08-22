@@ -18,6 +18,7 @@
 /Assets/ViveHandTracking/*
 /[Aa]ssets/[Ll]eap[Mm]otion/*
 /Assets/MixCast/*
+/Assets/Photon.meta
 /Assets/Plugins/*
 !/Assets/Plugins/socket.io/*
 !/Assets/Plugins/Newtonsoft.Json.dll

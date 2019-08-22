@@ -1,13 +1,11 @@
-﻿using Unity.Mathematics;
-
-namespace IMRE.Math
+﻿namespace IMRE.Math
 {
     public static class Operations
     {
-        public static float Angle(float3 from, float3 to)
+        public static float Angle(Unity.Mathematics.float3 from, Unity.Mathematics.float3 to)
         {
-            return math.acos(math.dot(math.normalize(from),
-                math.normalize(to)));
+            return Unity.Mathematics.math.acos(Unity.Mathematics.math.dot(Unity.Mathematics.math.normalize(from),
+                Unity.Mathematics.math.normalize(to)));
         }
     }
 }

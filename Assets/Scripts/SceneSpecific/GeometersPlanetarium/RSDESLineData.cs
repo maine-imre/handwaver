@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using TMPro;
-using UnityEngine;
-
-namespace IMRE.HandWaver.Space
+﻿namespace IMRE.HandWaver.Space
 {
     #region Enumerators
 
@@ -14,26 +10,26 @@ namespace IMRE.HandWaver.Space
 
     #endregion
 
-    [RequireComponent(typeof(LineRenderer))]
+    [UnityEngine.RequireComponent(typeof(UnityEngine.LineRenderer))]
     /// <summary>
     /// This script allows for circles and arcs to be made between RSDESpushPinPreFabs in the RSDES scene.
     /// Also allows for the calculatino and display of the distance of arcs between RSDESpushPinPreFabs.
     /// The main contributor(s) to this script is NG
     /// Status: WORKING
     /// </summary>
-    public class RSDESLineData : MonoBehaviour
+    public class RSDESLineData : UnityEngine.MonoBehaviour
     {
         #region Monobehaviour Functions
 
         private void Start()
         {
-            thisLR = GetComponent<LineRenderer>();
+            thisLR = GetComponent<UnityEngine.LineRenderer>();
             if (associatedPins != null && associatedPins.Count > 0)
             {
                 associatedPins.ForEach(p => p.pin.onPinMove += updateLineRenderers);
                 associatedPins.ForEach(p => p.pin.onDelete += despawn);
-                GetComponentInParent<LineRenderer>().startColor = associatedPins[0].pin.defaultColor;
-                GetComponentInParent<LineRenderer>().endColor = associatedPins[1].pin.defaultColor;
+                GetComponentInParent<UnityEngine.LineRenderer>().startColor = associatedPins[0].pin.defaultColor;
+                GetComponentInParent<UnityEngine.LineRenderer>().endColor = associatedPins[1].pin.defaultColor;
             }
 
             if (RSDESManager.ins != null)
@@ -46,7 +42,7 @@ namespace IMRE.HandWaver.Space
 
         #region Variables
 
-        public List<pinData> associatedPins = new List<pinData>();
+        public System.Collections.Generic.List<pinData> associatedPins = new System.Collections.Generic.List<pinData>();
         public lineType LineType;
 
         private float _distance;
@@ -67,9 +63,9 @@ namespace IMRE.HandWaver.Space
         /// <summary>
         ///     This is the position value
         /// </summary>
-        private Vector3 _distanceTextPosition;
+        private UnityEngine.Vector3 _distanceTextPosition;
 
-        private LineRenderer thisLR;
+        private UnityEngine.LineRenderer thisLR;
 
         private bool _isVisible;
 
@@ -87,7 +83,7 @@ namespace IMRE.HandWaver.Space
             get => _isVisible;
         }
 
-        public TextMeshPro distanceText;
+        public TMPro.TextMeshPro distanceText;
         private bool _isDistTextEnabled;
 
         /// <summary>
@@ -139,13 +135,13 @@ namespace IMRE.HandWaver.Space
         private void calculateDist()
         {
             _distance = GeoPlanetMaths.greatArcLength(associatedPins[0], associatedPins[1]);
-            _distanceTextPosition = thisLR.GetPosition(Mathf.FloorToInt(thisLR.positionCount / 2));
+            _distanceTextPosition = thisLR.GetPosition(UnityEngine.Mathf.FloorToInt(thisLR.positionCount / 2));
         }
 
         private void updateDistanceText()
         {
             //distanceText.SetText(distance + " RAD");
-            distanceText.SetText(distance * Mathf.Rad2Deg + " DEG");
+            distanceText.SetText(distance * UnityEngine.Mathf.Rad2Deg + " DEG");
             distanceText.transform.position = _distanceTextPosition * (1f + .01f * RSDESManager.EarthRadius);
         }
 
