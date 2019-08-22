@@ -6,29 +6,26 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Scenes/BaseScenes/HandWaverBase.unity
-    guid: 27967793b29ceac48856dd6e75479d1f
-  - enabled: 0
     path: Assets/Scenes/Environments/darkPrototype.unity
     guid: ec7e2c37a44c8044c9e8391c4355bc7e
   - enabled: 0
     path: Assets/Scenes/BaseScenes/GeometersPlanetariumBase.unity
     guid: 84a93c9ef7681214ea120ea53d790e88
   - enabled: 0
-    path: Assets/Scenes/BaseScenes/networkingBase.unity
-    guid: 6821c7a9f6e1c304ca79321aedb7646e
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 0
-    path: Assets/Scenes/ContentLayers/LatticeLand.unity
-    guid: ab0a990c63207794d81e29ef881a739a
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 0
-    path: Assets/Scenes/ContentLayers/PlatonicSolids.unity
-    guid: 7de70915bc37f9b4c934000a476d2fae
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 0
-    path: Assets/Scenes/ContentLayers/ThreeTorus.unity
-    guid: 636c41b23556dcf45b158ccb87c93c67
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 0
-    path: Assets/Scenes/ContentLayers/VolumeOptimization.unity
-    guid: d408caa43e5faa940a71bf6f716db835
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 0
     path: Assets/Scenes/ContentLayers/GeometersPlanetariumContent/RSDES.unity
     guid: a5cb8c55a5a107744991c0a90562d371
