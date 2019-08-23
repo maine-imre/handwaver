@@ -63,11 +63,17 @@ namespace IMRE.HandWaver.Rendering
         public static Mesh Segment(float3 endpointA, float3 endpointB)
         {
             
-            //TODO: 
+            //TODO: check why this does not work with endpointA at the origin
             Mesh mesh = new UnityEngine.Mesh();
-            float3 lineWidth = width * math.normalize(math.cross(
-                                       endpointA - endpointB,
-                                       (endpointA + endpointB) / 2f - headDirection));
+            float3 lineWidth = math.cross(
+                endpointA - endpointB,
+                (endpointA + endpointB) / 2f - headDirection);
+            if (IMRE.Math.Operations.magnitude(lineWidth) == 0f)
+            {
+                Debug.LogWarning("Line Segment in Direction of Vision");
+                return new Mesh();
+            }
+            lineWidth = width * math.normalize(lineWidth);
 
             //verts
             Vector3[] verts = new Vector3[4];
@@ -75,6 +81,11 @@ namespace IMRE.HandWaver.Rendering
             verts[1] = endpointA - lineWidth;
             verts[2] = endpointB - lineWidth;
             verts[3] = endpointB + lineWidth;
+            
+            foreach (Vector3 vector3 in verts)
+            {
+                UnityEngine.Debug.Log(vector3);
+            }
                 
             mesh.vertices = verts;
 
@@ -265,8 +276,61 @@ namespace IMRE.HandWaver.Rendering
             throw new NotImplementedException();
         }
 
-        public static void Plane(float3 origin, float3 direction)
+        public static Mesh Plane(float3 origin, float3 direction)
         {
+            const float planeSize = 5f;
+            
+            //check if normal direction causes error
+            if (IMRE.Math.Operations.magnitude(direction) == 0f)
+            {
+                UnityEngine.Debug.LogError("Normal Direction Must Be Non Zero");
+                return new Mesh();
+            }
+
+            direction = Unity.Mathematics.math.normalize(direction);
+            float3 basis0 =
+                (IMRE.Math.Operations.magnitude(Unity.Mathematics.math.cross(direction, new float3(1f, 0f, 0f))) == 0f)
+                    ? Unity.Mathematics.math.cross(direction, new float3(0f, 1f, 0f))
+                    : Unity.Mathematics.math.cross(
+                        direction, new float3(1f, 0f, 0f));
+            basis0 = Unity.Mathematics.math.normalize(basis0);
+            float3 basis1 = Unity.Mathematics.math.cross(direction, basis0);
+            basis1 = Unity.Mathematics.math.normalize(basis1);
+            
+            UnityEngine.Debug.Log(IMRE.Math.Operations.magnitude(basis0) + " : " + IMRE.Math.Operations.magnitude(basis1));
+
+                        
+            //TODO: check why this does not work with endpointA at the origin
+            Mesh mesh = new UnityEngine.Mesh();
+            
+            //verts
+            Vector3[] verts = new Vector3[4];
+            verts[0] = origin + (basis0 + basis1) * planeSize;
+            verts[1] = origin + (basis0 - basis1) * planeSize;
+            verts[2] = origin + (-basis0 - basis1) * planeSize;
+            verts[3] = origin + (-basis0 + basis1) * planeSize;
+                
+            mesh.vertices = verts;
+
+            //triangles
+            //TODO check clockwise vs counterclockwise
+            int[] tris = {1, 3, 0, 1, 2, 3};
+            mesh.triangles = tris;
+
+            //uvs
+            Vector2[] uvs = {new UnityEngine.Vector2(0,1), new UnityEngine.Vector2(0,0), 
+                new UnityEngine.Vector2(1,0), new UnityEngine.Vector2(1,1) };
+            mesh.uv = uvs;
+                
+            mesh.RecalculateNormals();
+
+            //normals
+            UnityEngine.Vector3[] normals = mesh.normals;
+            for (int i = 0; i < verts.Length; i++)
+                normals[i] = math.normalize(headDirection);
+            mesh.normals = normals;
+
+            return mesh;
             
         }
 

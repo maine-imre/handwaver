@@ -14,8 +14,7 @@ namespace IMRE.HandWaver.Rendering
             gameObject.AddComponent<MeshRenderer>();
             gameObject.AddComponent<MeshFilter>();
             myMesh = GetComponent<MeshFilter>();
-            myMesh.mesh = GeoElementRenderLib.Circle(new float3(1f, 1f, 1f), new float3(2f, 1f, 1f), 
-                new float3(1f, 1f, 1f));           
+            myMesh.mesh = GeoElementRenderLib.Segment(new float3(0f, 0f, 0f), new float3(1f, 1f, 0f));
         }
 
     }
