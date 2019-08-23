@@ -62,40 +62,41 @@ namespace IMRE.HandWaver.Rendering
 
         public static Mesh Segment(float3 endpointA, float3 endpointB)
         {
-                Mesh mesh = new UnityEngine.Mesh();
-                float3 lineWidth = width * math.normalize(math.cross(
+            
+            //TODO: 
+            Mesh mesh = new UnityEngine.Mesh();
+            float3 lineWidth = width * math.normalize(math.cross(
                                        endpointA - endpointB,
                                        (endpointA + endpointB) / 2f - headDirection));
 
-                //verts
-                Vector3[] verts = new Vector3[4];
-                verts[0] = endpointA + lineWidth;
-                verts[1] = endpointA - lineWidth;
-                verts[2] = endpointB - lineWidth;
-                verts[3] = endpointB + lineWidth;
+            //verts
+            Vector3[] verts = new Vector3[4];
+            verts[0] = endpointA + lineWidth;
+            verts[1] = endpointA - lineWidth;
+            verts[2] = endpointB - lineWidth;
+            verts[3] = endpointB + lineWidth;
                 
-                mesh.vertices = verts;
+            mesh.vertices = verts;
 
-                //triangles
-                //TODO check clockwise vs counterclockwise
-                int[] tris = {1, 3, 0, 1, 2, 3};
-                mesh.triangles = tris;
+            //triangles
+            //TODO check clockwise vs counterclockwise
+            int[] tris = {1, 3, 0, 1, 2, 3};
+            mesh.triangles = tris;
 
-                //uvs
-                Vector2[] uvs = {new UnityEngine.Vector2(0,1), new UnityEngine.Vector2(0,0), 
-                    new UnityEngine.Vector2(1,0), new UnityEngine.Vector2(1,1) };
-                mesh.uv = uvs;
+            //uvs
+            Vector2[] uvs = {new UnityEngine.Vector2(0,1), new UnityEngine.Vector2(0,0), 
+                new UnityEngine.Vector2(1,0), new UnityEngine.Vector2(1,1) };
+            mesh.uv = uvs;
                 
-                mesh.RecalculateNormals();
+            mesh.RecalculateNormals();
 
-                //normals
-                UnityEngine.Vector3[] normals = mesh.normals;
-                for (int i = 0; i < verts.Length; i++)
-                    normals[i] = math.normalize(headDirection);
-                mesh.normals = normals;
+            //normals
+            UnityEngine.Vector3[] normals = mesh.normals;
+            for (int i = 0; i < verts.Length; i++)
+                normals[i] = math.normalize(headDirection);
+            mesh.normals = normals;
 
-                return mesh;
-                //render(mesh);
+            return mesh;
         }
 
         public static void Angle(UnityEngine.Vector3 center, UnityEngine.Vector3 segmentStart, UnityEngine.Vector3 segmentAEndpoint, 
