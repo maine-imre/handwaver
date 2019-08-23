@@ -74,8 +74,7 @@ namespace IMRE.Math
                 Debug.LogWarning("Basis is not orthogonal : " + math.dot(basis0, basis1));
             else if (System.Math.Abs(math.dot(v2, basis0) - 1f) > TOLERANCE ||
                      System.Math.Abs(Vector4.Dot(v, basis1)) > TOLERANCE)
-                Debug.LogWarning(
-                    "Original Vector does not lie in the same plane as the first basis vector.");
+                Debug.LogWarning("Original Vector does not lie in the same plane as the first basis vector.");
 
             return Vector4.Dot(v, basis0) *
                    (math.cos(theta) * basis0 + basis1 * math.sin(theta)) +
