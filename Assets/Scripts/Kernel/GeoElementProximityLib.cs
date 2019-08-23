@@ -1,12 +1,14 @@
+
 namespace IMRE.HandWaver.Kernel{
 
 	public static class GeoElementProximityLib{
 		public static float distToGeo(GeoElement geo, Unity.Mathematics.float3 pos)
 		{
-			return 0f;
+			return IMRE.Math.Operations.magnitude(pos - cloesetPosition(geo,pos));
 		}
 		public static Unity.Mathematics.float3 closestPosition(GeoElement geo, Unity.Mathematics.float3 pos)
 		{
+			//TODO switch by type
 			return Unity.Mathematics.float3.zero;
 		}
 		
