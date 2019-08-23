@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelUserStore">
+    <attachedFolders />
+    <explicitIncludes>
+      <Path>Library/PackageCache/com.unity.ads@2.0.8</Path>
+      <Path>Library/PackageCache/com.unity.analytics@3.3.2</Path>
+      <Path>Library/PackageCache/com.unity.burst@1.0.4</Path>
+      <Path>Library/PackageCache/com.unity.collab-proxy@1.2.16</Path>
+      <Path>Library/PackageCache/com.unity.collections@0.0.9-preview.20</Path>
+      <Path>Library/PackageCache/com.unity.entities@0.0.12-preview.33</Path>
+      <Path>Library/PackageCache/com.unity.jobs@0.0.7-preview.13</Path>
+      <Path>Library/PackageCache/com.unity.mathematics@1.0.1</Path>
+      <Path>Library/PackageCache/com.unity.properties@0.5.0-preview</Path>
+      <Path>Library/PackageCache/com.unity.purchasing@2.0.6</Path>
+      <Path>Library/PackageCache/com.unity.rendering.hybrid@0.0.1-preview.13</Path>
+      <Path>Library/PackageCache/com.unity.test-framework.performance@1.0.9-preview</Path>
+      <Path>Library/PackageCache/com.unity.textmeshpro@2.0.1</Path>
+      <Path>Library/PackageCache/com.unity.xr.legacyinputhelpers@2.0.2</Path>
+      <Path>Library/PackageCache/com.unity.xr.openvr.standalone@1.0.5</Path>
+      <Path>Library/PackageCache/nuget.mono-cecil@0.1.6-preview</Path>
+      <Path>Packages</Path>
+      <Path>ProjectSettings</Path>
+    </explicitIncludes>
+    <explicitExcludes>
+      <Path>.git</Path>
+      <Path>.github</Path>
+      <Path>.idea</Path>
+      <Path>Library</Path>
+      <Path>Temp</Path>
+      <Path>docs</Path>
+      <Path>obj</Path>
+    </explicitExcludes>
+  </component>
+</project>

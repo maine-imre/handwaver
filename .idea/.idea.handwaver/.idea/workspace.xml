@@ -1,0 +1,1232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="3a05f7bb-55ef-40b1-a581-43bb93569b57" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Kernel/ActionSystem/GeoElementFunction.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Kernel/ActionSystem/GeoElementFunction.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Kernel/ActionSystem/GeoElementProximityLib.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Kernel/ActionSystem/GeoElementProximityLib.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Math/Operations.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Math/Operations.cs" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/Scripts/Kernel/ActionSystem/GeoElementFunction.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="336">
+              <caret line="21" column="31" selection-start-line="21" selection-start-column="31" selection-end-line="21" selection-end-column="31" />
+              <folding>
+                <marker date="1566571590783" expanded="true" signature="6:134" ph="..." />
+                <marker date="1566571590783" expanded="true" signature="173:1687" ph="{...}" />
+                <marker date="1566571590783" expanded="true" signature="237:1685" ph="{...}" />
+                <marker date="1566571590783" expanded="true" signature="443:1471" ph="{...}" />
+                <marker date="1566571590783" expanded="true" signature="648:1329" ph="{...}" />
+                <marker date="1566571590783" expanded="true" signature="729:795" ph="{...}" />
+                <marker date="1566571590783" expanded="true" signature="1139:1315" ph="{...}" />
+                <marker date="1566571590783" expanded="true" signature="1380:1461" ph="{...}" />
+                <marker date="1566571590783" expanded="true" signature="1542:1582" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Assets/Scripts/Kernel/Geos/GeoElementDataBase.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="496">
+              <caret line="31" column="9" lean-forward="true" selection-start-line="31" selection-start-column="9" selection-end-line="31" selection-end-column="9" />
+              <folding>
+                <marker date="1566570098788" expanded="true" signature="36:3441" ph="{...}" />
+                <marker date="1566570098788" expanded="true" signature="81:3439" ph="{...}" />
+                <marker date="1566570098788" expanded="true" signature="96:291" ph="///     Dictionary to keep track of the Geoelement's id based on the string name. ... " />
+                <marker date="1566570098788" expanded="true" signature="456:598" ph="///     Dictionary of all GeoElements within the scene. ... " />
+                <marker date="1566570098788" expanded="true" signature="773:904" ph="///     Dictionary of all GeoElement meshes. ... " />
+                <marker date="1566570098788" expanded="true" signature="1104:1304" ph="///     Interface method to return element id from element name. ... " />
+                <marker date="1566570098788" expanded="true" signature="1353:1406" ph="{...}" />
+                <marker date="1566570098788" expanded="true" signature="1416:1625" ph="///     Interface method to return the geoelement data from element id ... " />
+                <marker date="1566570098788" expanded="true" signature="1676:1731" ph="{...}" />
+                <marker date="1566570098788" expanded="true" signature="1741:1956" ph="///     Interface method to return the geoelement data from element name ... " />
+                <marker date="1566570098788" expanded="true" signature="2010:2078" ph="{...}" />
+                <marker date="1566570098788" expanded="true" signature="2088:2237" ph="///     Adds the GeoElement to the dictionaries ... " />
+                <marker date="1566570098788" expanded="true" signature="2289:2654" ph="{...}" />
+                <marker date="1566570098788" expanded="true" signature="2664:2810" ph="///     Removes GeoElement from all dictionaries ... " />
+                <marker date="1566570098788" expanded="true" signature="2865:3064" ph="{...}" />
+                <marker date="1566570098788" expanded="true" signature="3117:3194" ph="{...}" />
+                <marker date="1566570098788" expanded="true" signature="3247:3316" ph="{...}" />
+                <marker date="1566570098788" expanded="true" signature="3364:3433" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/Scripts/Kernel/ActionSystem/GeoElementProximityLib.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret lean-forward="true" />
+              <folding>
+                <marker date="1566571446441" expanded="true" signature="67:1714" ph="{...}" />
+                <marker date="1566571446441" expanded="true" signature="113:1712" ph="{...}" />
+                <marker date="1566571446441" expanded="true" signature="192:274" ph="{...}" />
+                <marker date="1566571446441" expanded="true" signature="377:451" ph="{...}" />
+                <marker date="1566571446441" expanded="true" signature="607:687" ph="{...}" />
+                <marker date="1566571446441" expanded="true" signature="860:947" ph="{...}" />
+                <marker date="1566571446441" expanded="true" signature="1120:1216" ph="{...}" />
+                <marker date="1566571446441" expanded="true" signature="1344:1366" ph="{...}" />
+                <marker date="1566571446441" expanded="true" signature="1561:1709" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Assets/Scripts/Math/Operations.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="668">
+              <caret line="93" column="5" lean-forward="true" selection-start-line="93" selection-start-column="5" selection-end-line="93" selection-end-column="5" />
+              <folding>
+                <marker date="1566571436343" expanded="true" signature="45:3368" ph="{...}" />
+                <marker date="1566571436343" expanded="true" signature="82:3366" ph="{...}" />
+                <marker date="1566571436343" expanded="true" signature="205:358" ph="{...}" />
+                <marker date="1566571436343" expanded="true" signature="417:570" ph="{...}" />
+                <marker date="1566571436343" expanded="true" signature="624:715" ph="{...}" />
+                <marker date="1566571436343" expanded="true" signature="769:874" ph="{...}" />
+                <marker date="1566571436343" expanded="true" signature="940:1634" ph="{...}" />
+                <marker date="1566571436343" expanded="true" signature="1720:1930" ph="{...}" />
+                <marker date="1566571436343" expanded="true" signature="2032:3083" ph="{...}" />
+                <marker date="1566571436343" expanded="true" signature="3143:3222" ph="{...}" />
+                <marker date="1566571436343" expanded="true" signature="3281:3360" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>socket.io =&gt; {0} probed</find>
+      <find>socket.io =&gt; {0}</find>
+      <find>GeoElements.Add</find>
+      <find>earthTrueRadius</find>
+      <find>EarthRadius</find>
+      <find>earthpos</find>
+      <find>earthPos</find>
+      <find>awake</find>
+      <find>starmode</find>
+      <find>e.deps</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>e.Type</replace>
+      <replace>e.Deps</replace>
+    </replaceStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/Photon/PhotonUnityNetworking/Code/Editor/AccountService.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Kernel/ActionSystem/GeoElementProximityLib.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Kernel/Geos/GeoElementDataBase.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Kernel/ActionSystem/GeoElementFunction.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Kernel/ActionSystem/EmbodiedAction.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Math/Operations.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/01CB6F2B-7D21-4FC6-9F80-1D6B3ABCA40A/b6/f03004bc/Dictionary`2.cs" root0="SKIP_HIGHLIGHTING" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/Assets/Scripts/EmbodiedInput/BodyInput.cs" />
+        <option value="$PROJECT_DIR$/Assets/Photon/PhotonUnityNetworking/Code/Editor/AccountService.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Kernel/GeoGebraInterface/GeoGebraInterface.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Kernel/GeoGebraInterface/GeoGebraCommandEvalSystem.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Kernel/Geos/PointElement.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/UserInterface/OnScreenMenu.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/EmbodiedInput/BodyInputDataSystem.cs" />
+        <option value="$PROJECT_DIR$/Assets/Plugins/socket.io/WebSocketTrigger.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Kernel/GeoGebraInterface/HandWaverServerTransport.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/SceneSpecific/Chess/Abstract/AbstractPiece.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/SceneSpecific/GeometersPlanetarium/Verlet/VerletV2/OrionControlPanel.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/SceneSpecific/ScaleDimension/HigherDimExperimentControl.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/SceneSpecific/GeometersPlanetarium/ActionSystem/PinGreatArc.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/SceneSpecific/GeometersPlanetarium/ActionSystem/PlacePin.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/SceneSpecific/GeometersPlanetarium/RSDESManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/SceneSpecific/GeometersPlanetarium/ActionSystem/PinFunctions.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/SceneSpecific/GeometersPlanetarium/RSDESPin.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Kernel/Geos/GeoElementDataBase.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Kernel/GeoGebraInterface/HandWaverServerSocket.cs" />
+        <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch.txt" />
+        <option value="$PROJECT_DIR$/Assets/Plugins/socket.io/Socket.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Kernel/Geos/GeoElement.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/SceneSpecific/GeometersPlanetarium/ActionSystem/PinStarlightRaysToggle.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/ActionSystem/GeoElementFunctions.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/ActionSystem/GeoElementFunction.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/ActionSystem/MoveObject.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/ActionSystem/GeoElementProximityLib.cs.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/SceneSpecific/HandWaver/ActionSystem/MoveObject.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/SceneSpecific/HandWaver/ActionSystem/GeoElementFunction.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Kernel/ActionSystem/EmbodiedAction.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Math/Operations.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Kernel/ActionSystem/GeoElementProximityLib.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Kernel/ActionSystem/GeoElementFunction.cs" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="1912" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="UnityExplorer" proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="SolutionExplorer">
+        <subPane>
+          <expand>
+            <path>
+              <item name="" type="784c90a0:SolutionExplorerRootNode" />
+              <item name="handwaver" type="24d0babc:SolutionExplorerModelNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+        <option name="show-all-files" value="false" />
+      </pane>
+      <pane id="AssemblyExplorer" />
+      <pane id="UnityExplorer">
+        <option name="show-hidden-items" value="false" />
+        <option name="show-project-names" value="true" />
+      </pane>
+      <pane id="FileSystemExplorer" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="Discover.Launch.Via.Unity" value="true" />
+    <property name="Rider.DefaultBreakpoints.AreToggled" value="true" />
+    <property name="Rider.ProjectViewActivator.IsNotFirstRun" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="TEXT" />
+    <property name="do_not_show_solution_notification" value="true" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.C#" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
+    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+      <option name="allowRunningInParallel" value="false" />
+      <option name="listenPortForConnections" value="false" />
+      <option name="pid" />
+      <option name="userSelectedPid" value="false" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+      <option name="allowRunningInParallel" value="false" />
+      <option name="listenPortForConnections" value="false" />
+      <option name="pid" />
+      <option name="userSelectedPid" value="false" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3a05f7bb-55ef-40b1-a581-43bb93569b57" name="Default Changelist" comment="" />
+      <created>1565114511451</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1565114511451</updated>
+      <workItem from="1565114517264" duration="188000" />
+      <workItem from="1565115276976" duration="281000" />
+      <workItem from="1565380769192" duration="1251000" />
+      <workItem from="1565620615427" duration="6520000" />
+      <workItem from="1565712146676" duration="5284000" />
+      <workItem from="1565962955593" duration="2139000" />
+      <workItem from="1565968289750" duration="4048000" />
+      <workItem from="1565974235362" duration="5659000" />
+      <workItem from="1566312524056" duration="15000" />
+      <workItem from="1566312577187" duration="435000" />
+      <workItem from="1566313248475" duration="1516000" />
+      <workItem from="1566320088938" duration="9277000" />
+      <workItem from="1566488211946" duration="2239000" />
+      <workItem from="1566498985205" duration="2656000" />
+      <workItem from="1566509660052" duration="2722000" />
+      <workItem from="1566569904688" duration="318000" />
+      <workItem from="1566570526457" duration="1143000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="45691000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="1912" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.29621738" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32977587" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="NuGet" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Performance Profiler" order="8" />
+      <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="10" />
+      <window_info anchor="bottom" id="Unity" order="11" />
+      <window_info anchor="bottom" id="Database Changes" order="12" />
+      <window_info anchor="bottom" id="Unit Tests" order="13" />
+      <window_info anchor="bottom" id="Terminal" order="14" />
+      <window_info anchor="bottom" id="Event Log" order="15" side_tool="true" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.24986681" />
+      <window_info anchor="right" id="Errors In Solution" order="3" />
+      <window_info anchor="right" id="Database" order="4" />
+      <window_info anchor="right" id="Unit Tests Coverage" order="5" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
+  <component name="UnityUnitTestConfiguration" currentTestLauncher="EditMode" />
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/SceneSpecific/menu/MenuTraversalManager.cs" />
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/EmbodiedInput/BodyInput.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <marker date="1565620311689" expanded="false" signature="6:57" ph="..." />
+            <marker date="1565620311689" expanded="true" signature="91:8822" ph="{...}" />
+            <marker date="1565620311689" expanded="true" signature="98:185" ph="///     Generic tracking data for a body and hands ... " />
+            <marker date="1565620311689" expanded="true" signature="232:5318" ph="{...}" />
+            <marker date="1565620311689" expanded="false" signature="247:1000" ph="Tracking Modes" />
+            <marker date="1565620311689" expanded="true" signature="279:358" ph="///     Is the body being tracked? ... " />
+            <marker date="1565620311689" expanded="true" signature="406:518" ph="///     Are hands being tracked (that is the fingers of each hand)? ... " />
+            <marker date="1565620311689" expanded="true" signature="562:648" ph="///     Is hand tracking being simulated? ... " />
+            <marker date="1565620311689" expanded="true" signature="701:790" ph="///     Is the head being tracked (OSVR etc) ... " />
+            <marker date="1565620311689" expanded="true" signature="834:937" ph="///     Is the head tracking simulated (Stationary Viewer) ... " />
+            <marker date="1565620311689" expanded="false" signature="1010:2553" ph="Tracking Data" />
+            <marker date="1565620311689" expanded="true" signature="1041:1130" ph="///     The head, usually tracked by the HMD ... " />
+            <marker date="1565620311689" expanded="true" signature="1175:1258" ph="///     The neck (center of shoulders) ... " />
+            <marker date="1565620311689" expanded="true" signature="1303:1379" ph="///     The center of the chest ... " />
+            <marker date="1565620311689" expanded="true" signature="1425:1502" ph="///     Center of hips at waist. ... " />
+            <marker date="1565620311689" expanded="true" signature="1548:1689" ph="///     The right leg. ... " />
+            <marker date="1565620311689" expanded="true" signature="1740:1880" ph="///     The left leg. ... " />
+            <marker date="1565620311689" expanded="true" signature="1930:2078" ph="///     The right arm. ... " />
+            <marker date="1565620311689" expanded="true" signature="2129:2277" ph="///     The right arm. ... " />
+            <marker date="1565620311689" expanded="true" signature="2327:2394" ph="///     The left hand. ... " />
+            <marker date="1565620311689" expanded="true" signature="2434:2502" ph="///     The right hand. ... " />
+            <marker date="1565620311689" expanded="true" signature="2563:2874" ph="///     Generates an initialized value BodyInput. ... " />
+            <marker date="1565620311689" expanded="true" signature="2917:3627" ph="{...}" />
+            <marker date="1565620311689" expanded="true" signature="2973:3616" ph="{...}" />
+            <marker date="1565620311689" expanded="true" signature="3637:3756" ph="///     Sets up a new hand ... " />
+            <marker date="1565620311689" expanded="true" signature="3794:4136" ph="{...}" />
+            <marker date="1565620311689" expanded="true" signature="3845:4125" ph="{...}" />
+            <marker date="1565620311689" expanded="true" signature="4146:4269" ph="///     Sets up a new finger ... " />
+            <marker date="1565620311689" expanded="true" signature="4311:4544" ph="{...}" />
+            <marker date="1565620311689" expanded="true" signature="4364:4533" ph="{...}" />
+            <marker date="1565620311689" expanded="true" signature="4554:4704" ph="///     Generates an initialized body component ... " />
+            <marker date="1565620311689" expanded="true" signature="4760:4969" ph="{...}" />
+            <marker date="1565620311689" expanded="true" signature="4820:4958" ph="{...}" />
+            <marker date="1565620311689" expanded="true" signature="5019:5312" ph="{...}" />
+            <marker date="1565620311689" expanded="true" signature="5060:5302" ph="{...}" />
+            <marker date="1565620311689" expanded="true" signature="5324:5424" ph="///     The generic tracking data for a generic body component. ... " />
+            <marker date="1565620311689" expanded="true" signature="5475:6454" ph="{...}" />
+            <marker date="1565620311689" expanded="true" signature="5522:5604" ph="///     The position of a given joint ... " />
+            <marker date="1565620311689" expanded="true" signature="5635:5719" ph="{...}" />
+            <marker date="1565620311689" expanded="true" signature="5729:5941" ph="///     The direction of a joint. ... " />
+            <marker date="1565620311689" expanded="true" signature="5973:6057" ph="{...}" />
+            <marker date="1565620311689" expanded="true" signature="6067:6333" ph="///     The average velocity of the component over the last 10 frames. ... " />
+            <marker date="1565620311689" expanded="true" signature="6364:6448" ph="{...}" />
+            <marker date="1565620311689" expanded="true" signature="6500:6554" ph="{...}" />
+            <marker date="1565620311689" expanded="true" signature="6560:6643" ph="///     A generic tracking data from a finger. ... " />
+            <marker date="1565620311689" expanded="true" signature="6687:7160" ph="{...}" />
+            <marker date="1565620311689" expanded="true" signature="6702:6834" ph="///     A list of joints for each figner. (four joints per finger, indexed 0 through 3) ... " />
+            <marker date="1565620311689" expanded="true" signature="6883:6980" ph="///     the direction a given finger is pointing in. ... " />
+            <marker date="1565620311689" expanded="true" signature="7023:7122" ph="///     Wheter or not a finger is extended (pointing). ... " />
+            <marker date="1565620311689" expanded="true" signature="7166:7248" ph="///     The generic tracking data for a Hand. ... " />
+            <marker date="1565620311689" expanded="true" signature="7290:8820" ph="{...}" />
+            <marker date="1565620311689" expanded="true" signature="7305:7436" ph="///     This controls how pinched a hand must be to qualify for the isPinching boolean ... " />
+            <marker date="1565620311689" expanded="true" signature="7527:7607" ph="///     The handedness of the hand. ... " />
+            <marker date="1565620311689" expanded="true" signature="7642:7871" ph="{...}" />
+            <marker date="1565620311689" expanded="true" signature="7668:7807" ph="{...}" />
+            <marker date="1565620311689" expanded="true" signature="7881:8118" ph="///     An array of fingers. ... " />
+            <marker date="1565620311689" expanded="true" signature="8161:8253" ph="///     The palm.  Direction is normal to palm. ... " />
+            <marker date="1565620311689" expanded="true" signature="8298:8407" ph="///     Wrist.  Direction is from wrist to first joint of finger ... " />
+            <marker date="1565620311689" expanded="true" signature="8453:8600" ph="///     How close the thumb and pointer finger are as a measure form 0 to 1 where 1 is fully &quot;pinched&quot; ... " />
+            <marker date="1565620311689" expanded="true" signature="8646:8747" ph="///     Is the pinch strength sufficient to be pinching? ... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Photon/PhotonUnityNetworking/Code/Editor/AccountService.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="393">
+          <caret line="199" column="51" selection-start-line="199" selection-start-column="51" selection-end-line="199" selection-end-column="51" />
+          <folding>
+            <marker date="1565620668196" expanded="true" signature="0:491" ph="/*   Provides methods to register a new user-account for the Photon Cloud and ... */" />
+            <marker date="1565620668196" expanded="true" signature="500:696" ph="..." />
+            <marker date="1565620668196" expanded="true" signature="718:9356" ph="{...}" />
+            <marker date="1565620668196" expanded="true" signature="752:9354" ph="{...}" />
+            <marker date="1565620668196" expanded="true" signature="1424:1544" ph="{...}" />
+            <marker date="1565620668196" expanded="true" signature="1555:1680" ph="/// Creates a instance of the Account Service to register Photon Cloud accounts. ... " />
+            <marker date="1565620668196" expanded="true" signature="1712:1860" ph="{...}" />
+            <marker date="1565620668196" expanded="true" signature="1989:2072" ph="{...}" />
+            <marker date="1565620668196" expanded="true" signature="2082:2521" ph="/// Attempts to create a Photon Cloud Account. ... " />
+            <marker date="1565620668196" expanded="true" signature="2613:3534" ph="{...}" />
+            <marker date="1565620668196" expanded="true" signature="2867:3248" ph="{...}" />
+            <marker date="1565620668196" expanded="true" signature="3281:3485" ph="{...}" />
+            <marker date="1565620668196" expanded="true" signature="3544:4108" ph="/// Attempts to create a Photon Cloud Account asynchronously. ... " />
+            <marker date="1565620668196" expanded="true" signature="4238:5110" ph="{...}" />
+            <marker date="1565620668196" expanded="true" signature="4469:4743" ph="{...}" />
+            <marker date="1565620668196" expanded="true" signature="4776:5100" ph="{...}" />
+            <marker date="1565620668196" expanded="true" signature="4997:5086" ph="{...}" />
+            <marker date="1565620668196" expanded="true" signature="5120:5287" ph="/// Internal callback with result of async HttpWebRequest (in RegisterByEmailAsync). ... " />
+            <marker date="1565620668196" expanded="true" signature="5352:6583" ph="{...}" />
+            <marker date="1565620668196" expanded="true" signature="5378:6178" ph="{...}" />
+            <marker date="1565620668196" expanded="true" signature="5638:5915" ph="{...}" />
+            <marker date="1565620668196" expanded="true" signature="5936:6164" ph="{...}" />
+            <marker date="1565620668196" expanded="true" signature="6211:6444" ph="{...}" />
+            <marker date="1565620668196" expanded="true" signature="6496:6573" ph="{...}" />
+            <marker date="1565620668196" expanded="true" signature="6593:7045" ph="/// Creates the service-call Uri, escaping the email for security reasons. ... " />
+            <marker date="1565620668196" expanded="true" signature="7128:7498" ph="{...}" />
+            <marker date="1565620668196" expanded="true" signature="7175:7247" ph="{...}" />
+            <marker date="1565620668196" expanded="true" signature="7508:7658" ph="/// Reads the Json response and applies it to local properties. ... " />
+            <marker date="1565620668196" expanded="true" signature="7706:9348" ph="{...}" />
+            <marker date="1565620668196" expanded="true" signature="7762:7951" ph="{...}" />
+            <marker date="1565620668196" expanded="true" signature="8099:8259" ph="{...}" />
+            <marker date="1565620668196" expanded="true" signature="8755:9027" ph="{...}" />
+            <marker date="1565620668196" expanded="true" signature="8926:9013" ph="{...}" />
+            <marker date="1565620668196" expanded="true" signature="9044:9338" ph="{...}" />
+            <marker date="1565620668196" expanded="true" signature="9200:9284" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Kernel/GeoGebraInterface/GeoGebraCommandEvalSystem.cs" />
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/EmbodiedInput/BodyInputDataSystem.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="9" column="6" lean-forward="true" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
+          <folding>
+            <marker date="1565715461029" expanded="true" signature="6:91" ph="..." />
+            <marker date="1565715461029" expanded="true" signature="257:18799" ph="{...}" />
+            <marker date="1565715461029" expanded="true" signature="264:372" ph="///     A class that makes tracking data from different sources generic ... " />
+            <marker date="1565715461029" expanded="true" signature="425:18797" ph="{...}" />
+            <marker date="1565715461029" expanded="true" signature="640:959" ph="///     The struct that stores tracking data in a generic form. ... " />
+            <marker date="1565715461029" expanded="true" signature="1142:1259" ph="/* public event HeadTrackingLost ; ... */" />
+            <marker date="1565715461029" expanded="true" signature="1350:1439" ph="///     Setup the BodyInput for each source. ... " />
+            <marker date="1565715461029" expanded="true" signature="1467:3322" ph="{...}" />
+            <marker date="1565715461029" expanded="true" signature="3332:3432" ph="///     Every 1/90th of a second, update the Body Input ... " />
+            <marker date="1565715461029" expanded="true" signature="3466:7520" ph="{...}" />
+            <marker date="1565715461029" expanded="true" signature="3750:4089" ph="/* this will enter here only when there is at least one hand with no new data from the vive pro tracking ... */" />
+            <marker date="1565715461029" expanded="true" signature="7321:7428" ph="{...}" />
+            <marker date="1565715461029" expanded="true" signature="7614:7893" ph="/* bodyInput.Head = SteamVR_Input_Sources.Head ... */" />
+            <marker date="1565715461029" expanded="true" signature="13632:13985" ph="{...}" />
+            <marker date="1565715461029" expanded="true" signature="14044:14234" ph="{...}" />
+            <marker date="1565715461029" expanded="true" signature="14270:14341" ph="{...}" />
+            <marker date="1565715461029" expanded="true" signature="14378:14449" ph="{...}" />
+            <marker date="1565715461029" expanded="true" signature="14493:17603" ph="{...}" />
+            <marker date="1565715461029" expanded="true" signature="14724:14978" ph="/* This should loop from the most recent to the least recent pairs of frames. ... */" />
+            <marker date="1565715461029" expanded="true" signature="15028:17593" ph="{...}" />
+            <marker date="1565715461029" expanded="true" signature="16357:16991" ph="{...}" />
+            <marker date="1565715461029" expanded="true" signature="17080:17579" ph="{...}" />
+            <marker date="1565715461029" expanded="true" signature="17666:18791" ph="{...}" />
+            <marker date="1565715461029" expanded="true" signature="18207:18501" ph="{...}" />
+            <marker date="1565715461029" expanded="true" signature="18582:18781" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/UserInterface/OnScreenMenu.cs" />
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Kernel/Geos/PointElement.cs" />
+    <entry file="file://$PROJECT_DIR$/Assets/Plugins/UniRx/Scripts/UnityEngineBridge/Triggers/ObservableDestroyTrigger.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-391">
+          <folding>
+            <marker date="1565620311555" expanded="false" signature="6:74" ph="..." />
+            <marker date="1565620311555" expanded="true" signature="100:2172" ph="{...}" />
+            <marker date="1565620311555" expanded="true" signature="192:2170" ph="{...}" />
+            <marker date="1565620311555" expanded="true" signature="475:686" ph="/// Check called OnDestroy. ... " />
+            <marker date="1565620311555" expanded="true" signature="780:832" ph="{...}" />
+            <marker date="1565620311555" expanded="true" signature="955:1255" ph="{...}" />
+            <marker date="1565620311555" expanded="true" signature="997:1245" ph="{...}" />
+            <marker date="1565620311555" expanded="true" signature="1410:1638" ph="{...}" />
+            <marker date="1565620311555" expanded="true" signature="1763:1808" ph="{...}" />
+            <marker date="1565620311555" expanded="true" signature="1876:2164" ph="{...}" />
+            <marker date="1565620311555" expanded="true" signature="1917:2007" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Plugins/socket.io/WebSocketTrigger.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="320">
+          <caret line="25" column="26" selection-start-line="25" selection-start-column="26" selection-end-line="25" selection-end-column="26" />
+          <folding>
+            <marker date="1565970736708" expanded="false" signature="6:112" ph="..." />
+            <marker date="1565970736708" expanded="true" signature="135:3859" ph="{...}" />
+            <marker date="1565970736708" expanded="true" signature="142:225" ph="/// Streams out received packets as observable ... " />
+            <marker date="1565970736708" expanded="true" signature="284:3856" ph="{...}" />
+            <marker date="1565970736708" expanded="true" signature="295:435" ph="/// Observes received packets and also starts Ping-Pong routine ... " />
+            <marker date="1565970736708" expanded="true" signature="498:1009" ph="{...}" />
+            <marker date="1565970736708" expanded="true" signature="541:887" ph="{...}" />
+            <marker date="1565970736708" expanded="true" signature="700:871" ph="{...}" />
+            <marker date="1565970736708" expanded="true" signature="1079:1417" ph="{...}" />
+            <marker date="1565970736708" expanded="true" signature="1122:1220" ph="{...}" />
+            <marker date="1565970736708" expanded="true" signature="1255:1341" ph="{...}" />
+            <marker date="1565970736708" expanded="true" signature="1498:1567" ph="/// WebSocket object ref ... " />
+            <marker date="1565970736708" expanded="true" signature="1633:1715" ph="/// Holds the last error on WebSocket ... " />
+            <marker date="1565970736708" expanded="true" signature="1812:1894" ph="{...}" />
+            <marker date="1565970736708" expanded="true" signature="2017:2338" ph="{...}" />
+            <marker date="1565970736708" expanded="true" signature="2138:2258" ph="{...}" />
+            <marker date="1565970736708" expanded="true" signature="2376:2957" ph="{...}" />
+            <marker date="1565970736708" expanded="true" signature="2545:2682" ph="{...}" />
+            <marker date="1565970736708" expanded="true" signature="2729:2831" ph="{...}" />
+            <marker date="1565970736708" expanded="true" signature="2831:2947" ph="{...}" />
+            <marker date="1565970736708" expanded="true" signature="3016:3841" ph="{...}" />
+            <marker date="1565970736708" expanded="true" signature="3105:3570" ph="{...}" />
+            <marker date="1565970736708" expanded="true" signature="3447:3556" ph="{...}" />
+            <marker date="1565970736708" expanded="true" signature="3637:3831" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Plugins/socket.io/SocketManager.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="174">
+          <caret line="82" column="17" lean-forward="true" selection-start-line="82" selection-start-column="17" selection-end-line="82" selection-end-column="17" />
+          <folding>
+            <marker date="1565620311597" expanded="false" signature="6:98" ph="..." />
+            <marker date="1565620311597" expanded="true" signature="121:7282" ph="{...}" />
+            <marker date="1565620311597" expanded="true" signature="128:228" ph="/// SocketManager manages Socket and WebSocketTrigger instances ... " />
+            <marker date="1565620311597" expanded="true" signature="291:7279" ph="{...}" />
+            <marker date="1565620311597" expanded="true" signature="302:502" ph="/// connection timeout before a connect_error and connect_timeout events are emitted  ... " />
+            <marker date="1565620311597" expanded="true" signature="553:664" ph="/// whether to reconnect automatically (The default value is true) ... " />
+            <marker date="1565620311597" expanded="true" signature="721:850" ph="/// number of reconnection attempts before giving up (The default value is infinity) ... " />
+            <marker date="1565620311597" expanded="true" signature="914:1095" ph="/// how long to initially wait before attempting a new reconnection ... " />
+            <marker date="1565620311597" expanded="true" signature="1191:1288" ph="{...}" />
+            <marker date="1565620311597" expanded="true" signature="1298:1561" ph="/// Reconnect method (Users seldom call this method, instead SocketManager will call when Reconnection property i ... " />
+            <marker date="1565620311597" expanded="true" signature="1633:2110" ph="{...}" />
+            <marker date="1565620311597" expanded="true" signature="2133:2366" ph="{...}" />
+            <marker date="1565620311597" expanded="true" signature="2416:2616" ph="/// The pended requests to connect a server ... " />
+            <marker date="1565620311597" expanded="true" signature="2763:2894" ph="/// WebSocketTrigger instances (WebSocketTrigger is almost same with a session object) ... " />
+            <marker date="1565620311597" expanded="true" signature="3111:3244" ph="{...}" />
+            <marker date="1565620311597" expanded="true" signature="3254:3375" ph="/// Return a WebSocketTrigger instance if there is a connection to url param ... " />
+            <marker date="1565620311597" expanded="true" signature="3440:3540" ph="{...}" />
+            <marker date="1565620311597" expanded="true" signature="3550:3732" ph="/// Return a Socket instance if there is a connection to url param ... " />
+            <marker date="1565620311597" expanded="true" signature="3777:3933" ph="{...}" />
+            <marker date="1565620311597" expanded="true" signature="3943:4090" ph="/// Current async connection request (If this value is not null, it means a connection is on running~) ... " />
+            <marker date="1565620311597" expanded="true" signature="4157:7272" ph="{...}" />
+            <marker date="1565620311597" expanded="true" signature="4683:6642" ph="{...}" />
+            <marker date="1565620311597" expanded="true" signature="4734:5124" ph="{...}" />
+            <marker date="1565620311597" expanded="true" signature="5180:5494" ph="{...}" />
+            <marker date="1565620311597" expanded="true" signature="5494:5815" ph="{...}" />
+            <marker date="1565620311597" expanded="true" signature="5869:6330" ph="{...}" />
+            <marker date="1565620311597" expanded="true" signature="6330:6524" ph="{...}" />
+            <marker date="1565620311597" expanded="true" signature="6683:7229" ph="{...}" />
+            <marker date="1565620311597" expanded="true" signature="6737:6928" ph="{...}" />
+            <marker date="1565620311597" expanded="true" signature="6928:7111" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Kernel/GeoGebraInterface/HandWaverServerTransport.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="231" column="40" selection-start-line="231" selection-end-line="232" />
+          <folding>
+            <marker date="1565971703718" expanded="false" signature="6:152" ph="..." />
+            <marker date="1565971703718" expanded="true" signature="185:9963" ph="{...}" />
+            <marker date="1565971703718" expanded="true" signature="192:310" ph="///     This static class will be used to communicate with the HandWaver servers. ... " />
+            <marker date="1565971703718" expanded="true" signature="359:9961" ph="{...}" />
+            <marker date="1565971703718" expanded="true" signature="374:500" ph="///     Version number for use of validation of current app and or compat issues. ... " />
+            <marker date="1565971703718" expanded="true" signature="560:806" ph="///     This is the host url that all requests are sent to. ... " />
+            <marker date="1565971703718" expanded="true" signature="874:1018" ph="///     Internal cache of session id. ... " />
+            <marker date="1565971703718" expanded="true" signature="1111:1239" ph="///     Internal Guid representation of the ... " />
+            <marker date="1565971703718" expanded="true" signature="1284:1396" ph="/// Returns true when a valid session is established with a server. ... " />
+            <marker date="1565971703718" expanded="true" signature="1479:1627" ph="///     Public access to the session id string. ... " />
+            <marker date="1565971703718" expanded="true" signature="1666:2273" ph="{...}" />
+            <marker date="1565971703718" expanded="true" signature="1918:2263" ph="{...}" />
+            <marker date="1565971703718" expanded="true" signature="2283:2628" ph="///     Gets a PNG of the current session. ... " />
+            <marker date="1565971703718" expanded="true" signature="2694:3837" ph="{...}" />
+            <marker date="1565971703718" expanded="true" signature="2811:3827" ph="{...}" />
+            <marker date="1565971703718" expanded="true" signature="2952:3079" ph="{...}" />
+            <marker date="1565971703718" expanded="true" signature="3100:3813" ph="{...}" />
+            <marker date="1565971703718" expanded="true" signature="3142:3606" ph="{...}" />
+            <marker date="1565971703718" expanded="true" signature="3634:3795" ph="{...}" />
+            <marker date="1565971703718" expanded="true" signature="3847:4145" ph="///     Sends a request to the server to save the current session. ... " />
+            <marker date="1565971703718" expanded="true" signature="4220:5600" ph="{...}" />
+            <marker date="1565971703718" expanded="true" signature="4420:5590" ph="{...}" />
+            <marker date="1565971703718" expanded="true" signature="4580:4693" ph="{...}" />
+            <marker date="1565971703718" expanded="true" signature="4714:5576" ph="{...}" />
+            <marker date="1565971703718" expanded="true" signature="4756:5373" ph="{...}" />
+            <marker date="1565971703718" expanded="true" signature="5401:5558" ph="{...}" />
+            <marker date="1565971703718" expanded="true" signature="5610:5823" ph="///     Gets the current session from the server. ... " />
+            <marker date="1565971703718" expanded="true" signature="5885:7351" ph="{...}" />
+            <marker date="1565971703718" expanded="true" signature="6010:7341" ph="{...}" />
+            <marker date="1565971703718" expanded="true" signature="6151:6278" ph="{...}" />
+            <marker date="1565971703718" expanded="true" signature="6299:7327" ph="{...}" />
+            <marker date="1565971703718" expanded="true" signature="6341:7124" ph="{...}" />
+            <marker date="1565971703718" expanded="true" signature="6803:6983" ph="{...}" />
+            <marker date="1565971703718" expanded="true" signature="7152:7309" ph="{...}" />
+            <marker date="1565971703718" expanded="true" signature="7361:7687" ph="///     Sends a geogebra command to the server at the ... " />
+            <marker date="1565971703718" expanded="true" signature="7751:8585" ph="{...}" />
+            <marker date="1565971703718" expanded="true" signature="7801:7883" ph="{...}" />
+            <marker date="1565971703718" expanded="true" signature="8179:8575" ph="{...}" />
+            <marker date="1565971703718" expanded="true" signature="8595:8844" ph="///     Sends a request to establish a session with the server. ... " />
+            <marker date="1565971703718" expanded="true" signature="8895:9955" ph="{...}" />
+            <marker date="1565971703718" expanded="true" signature="9039:9945" ph="{...}" />
+            <marker date="1565971703718" expanded="true" signature="9179:9306" ph="{...}" />
+            <marker date="1565971703718" expanded="true" signature="9327:9931" ph="{...}" />
+            <marker date="1565971703718" expanded="true" signature="9369:9728" ph="{...}" />
+            <marker date="1565971703718" expanded="true" signature="9568:9706" ph="/* TODO: check if there is a response of a session xml data. ... */" />
+            <marker date="1565971703718" expanded="true" signature="9756:9913" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/SceneSpecific/Chess/Abstract/AbstractPiece.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="896">
+          <caret line="56" column="8" lean-forward="true" selection-start-line="56" selection-start-column="8" selection-end-line="56" selection-end-column="8" />
+          <folding>
+            <marker date="1566312589410" expanded="true" signature="0:193" ph="/* HandWaver, developed at the Maine IMRE Lab at the University of Maine's College of Education and Human Develop ... */" />
+            <marker date="1566312589410" expanded="true" signature="201:247" ph="..." />
+            <marker date="1566312589410" expanded="true" signature="271:2266" ph="{...}" />
+            <marker date="1566312589410" expanded="true" signature="278:360" ph="/// An abstracted version of the chess piece. ... " />
+            <marker date="1566312589410" expanded="true" signature="416:2264" ph="{...}" />
+            <marker date="1566312589410" expanded="true" signature="466:525" ph="{...}" />
+            <marker date="1566312589410" expanded="true" signature="573:635" ph="{...}" />
+            <marker date="1566312589410" expanded="true" signature="645:903" ph="///     Tests requested move compared to current location ... " />
+            <marker date="1566312589410" expanded="true" signature="1027:1113" ph="///     Called when the peice is captured ... " />
+            <marker date="1566312589410" expanded="true" signature="1163:1356" ph="///     Moves the piece after testing if it is a valid move ... " />
+            <marker date="1566312589410" expanded="true" signature="1404:1756" ph="{...}" />
+            <marker date="1566312589410" expanded="true" signature="1454:1746" ph="{...}" />
+            <marker date="1566312589410" expanded="true" signature="1766:2258" ph="GettersSetters" />
+            <marker date="1566312589410" expanded="true" signature="1798:1880" ph="///     Current location of the piece ... " />
+            <marker date="1566312589410" expanded="true" signature="1936:2018" ph="///     Is piece captured by opponent ... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/SceneSpecific/ScaleDimension/HigherDimExperimentControl.cs" />
+    <entry file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.entities@0.0.12-preview.33/Unity.Entities/Types/TypeManager.cs" />
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/SceneSpecific/GeometersPlanetarium/ActionSystem/PinGreatArc.cs" />
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/SceneSpecific/GeometersPlanetarium/ActionSystem/GreatArc.cs" />
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/SceneSpecific/GeometersPlanetarium/ActionSystem/MoveObject.cs" />
+    <entry file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.entities@0.0.12-preview.33/Unity.Entities/World.cs" />
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/SceneSpecific/GeometersPlanetarium/ActionSystem/PinTerminatorToggle.cs" />
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/SceneSpecific/GeometersPlanetarium/ActionSystem/PlacePin.cs" />
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/SceneSpecific/GeometersPlanetarium/GeoPlanetMaths.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2144">
+          <caret line="161" column="46" selection-start-line="161" selection-start-column="46" selection-end-line="161" selection-end-column="46" />
+          <folding>
+            <marker date="1565620311710" expanded="false" signature="6:32" ph="..." />
+            <marker date="1565620311710" expanded="true" signature="64:24843" ph="{...}" />
+            <marker date="1565620311710" expanded="true" signature="71:403" ph="///     Includes all nececssary calculations for the Geometer's Planetarium scene. ... " />
+            <marker date="1565620311710" expanded="true" signature="442:24841" ph="{...}" />
+            <marker date="1565620311710" expanded="true" signature="536:659" ph="{...}" />
+            <marker date="1565620311710" expanded="true" signature="745:861" ph="{...}" />
+            <marker date="1565620311710" expanded="true" signature="946:1021" ph="{...}" />
+            <marker date="1565620311710" expanded="true" signature="1103:1179" ph="{...}" />
+            <marker date="1565620311710" expanded="true" signature="1189:1497" ph="///     Returns the degree min second representation of the latitude or longitude ... " />
+            <marker date="1565620311710" expanded="true" signature="1565:1950" ph="{...}" />
+            <marker date="1565620311710" expanded="true" signature="2004:2361" ph="{...}" />
+            <marker date="1565620311710" expanded="true" signature="2371:6496" ph="Find Latitude and Longitude" />
+            <marker date="1565620311710" expanded="true" signature="2416:2701" ph="///     given coordinates in world space, and the earth's center, find the lattidue and longitude of the point. ... " />
+            <marker date="1565620311710" expanded="true" signature="2784:3051" ph="{...}" />
+            <marker date="1565620311710" expanded="true" signature="3061:3283" ph="///     Given coordiates local to earth, find the latitude and longitude of the point. ... " />
+            <marker date="1565620311710" expanded="true" signature="3359:4340" ph="{...}" />
+            <marker date="1565620311710" expanded="true" signature="3539:3837" ph="/* define the prime meridian to be in the Vector3.right direction. ... */" />
+            <marker date="1565620311710" expanded="true" signature="4350:4656" ph="///     A function for the differences of latitude and longitude that takes into account the cuts made in the arg ... " />
+            <marker date="1565620311710" expanded="true" signature="4738:4888" ph="{...}" />
+            <marker date="1565620311710" expanded="true" signature="4898:5213" ph="///     A function for the differences of angles that takes into account the cuts made in the argument branch ... " />
+            <marker date="1565620311710" expanded="true" signature="5285:5587" ph="{...}" />
+            <marker date="1565620311710" expanded="true" signature="5658:5836" ph="{...}" />
+            <marker date="1565620311710" expanded="true" signature="5905:6296" ph="{...}" />
+            <marker date="1565620311710" expanded="true" signature="6381:6476" ph="{...}" />
+            <marker date="1565620311710" expanded="false" signature="6506:14086" ph="Define verticies of circles and arcs" />
+            <marker date="1565620311710" expanded="true" signature="6614:6753" ph="{...}" />
+            <marker date="1565620311710" expanded="true" signature="6816:6997" ph="{...}" />
+            <marker date="1565620311710" expanded="true" signature="7077:7284" ph="{...}" />
+            <marker date="1565620311710" expanded="true" signature="7294:7612" ph="///     Outputs the latitude of a point, assuming that the radius of the larger earth is given by the magnitude o ... " />
+            <marker date="1565620311710" expanded="true" signature="7690:8040" ph="{...}" />
+            <marker date="1565620311710" expanded="true" signature="8121:8210" ph="{...}" />
+            <marker date="1565620311710" expanded="true" signature="8294:8983" ph="{...}" />
+            <marker date="1565620311710" expanded="true" signature="8317:8414" ph="/* we have a plane through the earth's center with normal direction of ... */" />
+            <marker date="1565620311710" expanded="true" signature="9067:9321" ph="{...}" />
+            <marker date="1565620311710" expanded="true" signature="9450:9889" ph="{...}" />
+            <marker date="1565620311710" expanded="true" signature="9970:10398" ph="{...}" />
+            <marker date="1565620311710" expanded="true" signature="10524:10685" ph="{...}" />
+            <marker date="1565620311710" expanded="true" signature="10805:10899" ph="{...}" />
+            <marker date="1565620311710" expanded="true" signature="11050:11448" ph="{...}" />
+            <marker date="1565620311710" expanded="true" signature="11603:12649" ph="{...}" />
+            <marker date="1565620311710" expanded="true" signature="12018:12223" ph="{...}" />
+            <marker date="1565620311710" expanded="true" signature="12844:14066" ph="{...}" />
+            <marker date="1565620311710" expanded="true" signature="13444:13524" ph="/* handle the cut in the argument's branch. ... */" />
+            <marker date="1565620311710" expanded="true" signature="13731:14028" ph="{...}" />
+            <marker date="1565620311710" expanded="false" signature="14096:17590" ph="Find information at a point" />
+            <marker date="1565620311710" expanded="true" signature="14141:14404" ph="///     Find the normal direction of a plane tangent to the earth's surface at a point. ... " />
+            <marker date="1565620311710" expanded="true" signature="14514:14607" ph="{...}" />
+            <marker date="1565620311710" expanded="true" signature="14686:14755" ph="{...}" />
+            <marker date="1565620311710" expanded="true" signature="14824:14983" ph="{...}" />
+            <marker date="1565620311710" expanded="true" signature="15098:15195" ph="{...}" />
+            <marker date="1565620311710" expanded="true" signature="15205:15393" ph="///     Linear model.  Obslete b/c of @Tim's Horizons scripts ... " />
+            <marker date="1565620311710" expanded="true" signature="15463:15986" ph="{...}" />
+            <marker date="1565620311710" expanded="true" signature="15486:15601" ph="/* eventually this will query data base and interpolate. ... */" />
+            <marker date="1565620311710" expanded="true" signature="15996:16184" ph="///     Linear model.  Obslete b/c of @Tim's Horizons scripts ... " />
+            <marker date="1565620311710" expanded="true" signature="16255:16651" ph="{...}" />
+            <marker date="1565620311710" expanded="true" signature="16723:17570" ph="{...}" />
+            <marker date="1565620311710" expanded="true" signature="17078:17158" ph="{...}" />
+            <marker date="1565620311710" expanded="true" signature="17187:17267" ph="{...}" />
+            <marker date="1565620311710" expanded="false" signature="17600:19037" ph="Find information between points" />
+            <marker date="1565620311710" expanded="true" signature="17752:18196" ph="{...}" />
+            <marker date="1565620311710" expanded="true" signature="18206:18454" ph="///     A function that finds the great arc angle measure between two pins. ... " />
+            <marker date="1565620311710" expanded="true" signature="18525:19017" ph="{...}" />
+            <marker date="1565620311710" expanded="false" signature="19047:24835" ph="Star Field Stuff" />
+            <marker date="1565620311710" expanded="true" signature="19081:19397" ph="///     Make a polar grid of star rays. ... " />
+            <marker date="1565620311710" expanded="true" signature="19509:19686" ph="{...}" />
+            <marker date="1565620311710" expanded="true" signature="19814:19931" ph="{...}" />
+            <marker date="1565620311710" expanded="true" signature="19969:20030" ph="{...}" />
+            <marker date="1565620311710" expanded="true" signature="20040:20398" ph="///     Generate two points to define every starRay. ... " />
+            <marker date="1565620311710" expanded="true" signature="20535:23545" ph="{...}" />
+            <marker date="1565620311710" expanded="true" signature="20595:20879" ph="{...}" />
+            <marker date="1565620311710" expanded="true" signature="21437:21823" ph="{...}" />
+            <marker date="1565620311710" expanded="true" signature="21848:23507" ph="{...}" />
+            <marker date="1565620311710" expanded="true" signature="22033:22460" ph="{...}" />
+            <marker date="1565620311710" expanded="true" signature="22585:23315" ph="{...}" />
+            <marker date="1565620311710" expanded="true" signature="22782:23293" ph="{...}" />
+            <marker date="1565620311710" expanded="true" signature="23639:23732" ph="{...}" />
+            <marker date="1565620311710" expanded="true" signature="23826:24815" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/SceneSpecific/GeometersPlanetarium/RSDESManager.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1248">
+          <caret line="116" column="37" selection-start-line="116" selection-start-column="37" selection-end-line="116" selection-end-column="37" />
+          <folding>
+            <marker date="1566498659641" expanded="false" signature="6:154" ph="..." />
+            <marker date="1566498659641" expanded="true" signature="186:29273" ph="{...}" />
+            <marker date="1566498659641" expanded="false" signature="193:816" ph="Structs" />
+            <marker date="1566498659641" expanded="true" signature="254:792" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="358:450" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="510:786" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="822:1122" ph="///     Handles interactions between pins and the Room-scale dynamic earth. ... " />
+            <marker date="1566498659641" expanded="true" signature="1168:1319" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="1350:1639" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="1649:9825" ph="Variables" />
+            <marker date="1566498659641" expanded="true" signature="2054:2149" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="2194:3618" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="2220:2349" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="2366:3608" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="2535:3594" ph="/* this should also change visibility of buttons. ... */" />
+            <marker date="1566498659641" expanded="true" signature="3715:3873" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="4055:4302" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="4114:4292" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="4394:4780" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="4457:4770" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="4545:4714" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="4820:4920" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="5707:5988" ph="/* public leapButtonToggleExtension showSun; ... */" />
+            <marker date="1566498659641" expanded="true" signature="6136:6532" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="6198:6522" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="6576:7965" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="6815:7300" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="6868:7117" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="7138:7286" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="7317:7516" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="7596:7734" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="7751:7955" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="8123:8507" ph="/* public leapButtonToggleExtension showLatitude; ... */" />
+            <marker date="1566498659641" expanded="false" signature="9835:11702" ph="Monobehaviour Functions" />
+            <marker date="1566498659641" expanded="true" signature="9945:10130" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="9980:10120" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="10160:10599" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="10629:11522" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="11553:11657" ph="{...}" />
+            <marker date="1566498659641" expanded="false" signature="11712:14504" ph="Behaviour Functions" />
+            <marker date="1566498659641" expanded="true" signature="11749:11846" ph="///     Calls any function subscribed to onEarthTilt ... " />
+            <marker date="1566498659641" expanded="true" signature="11880:12356" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="12389:12912" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="12412:12902" ph="/* float time = timeSlider.HorizontalSliderPercent; ... */" />
+            <marker date="1566498659641" expanded="true" signature="13129:14046" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="13397:13971" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="14086:14464" ph="{...}" />
+            <marker date="1566498659641" expanded="false" signature="14514:27872" ph="Toggles and Interface Functions" />
+            <marker date="1566498659641" expanded="true" signature="14589:14672" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="14707:14803" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="14841:15146" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="14864:15057" ph="/* northPolePin.overrideNorthPoleLock = true; ... */" />
+            <marker date="1566498659641" expanded="true" signature="15179:15373" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="15407:15519" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="15552:15875" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="15593:15830" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="15909:16009" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="16275:23339" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="16322:17158" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="16501:17144" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="16701:16877" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="16902:17068" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="17196:18032" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="17375:18018" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="17575:17751" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="17776:17942" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="18114:18941" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="18250:18927" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="18479:18657" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="18682:18850" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="18979:19750" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="19114:19736" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="19293:19469" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="19494:19660" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="20120:22462" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="20180:20864" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="20904:21040" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="21061:21211" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="22575:23329" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="22624:23218" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="23377:24164" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="23425:23506" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="23523:24154" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="23744:23955" ph="/* polesExist.Add(northPolePin.gameObject.name + southPolePin.gameObject.name); ... */" />
+            <marker date="1566498659641" expanded="true" signature="24287:24566" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="24638:25513" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="24719:25503" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="25640:25960" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="26011:26173" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="26242:27093" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="26325:27083" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="27131:27668" ph="{...}" />
+            <marker date="1566498659641" expanded="true" signature="27233:27658" ph="/* if (arcLineData.Count == 0) ... */" />
+            <marker date="1566498659641" expanded="true" signature="27715:27820" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/SceneSpecific/GeometersPlanetarium/ActionSystem/PinLatitudeToggle.cs" />
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/SceneSpecific/GeometersPlanetarium/AlignEarthModel.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <marker date="1565620311709" expanded="true" signature="57:259" ph="///     This script aligns the Earth model to the correct Latitude/Longitude positioning in the RSDES scene. ... " />
+            <marker date="1565620311709" expanded="true" signature="308:917" ph="{...}" />
+            <marker date="1565620311709" expanded="true" signature="382:911" ph="{...}" />
+            <marker date="1565620311709" expanded="true" signature="559:876" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/SceneSpecific/GeometersPlanetarium/RSDESExperimentControl.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <marker date="1565620311712" expanded="false" signature="6:71" ph="..." />
+            <marker date="1565620311712" expanded="true" signature="110:221" ph="///     A control for data collection in the Geometer's Planetarium Scene. ... " />
+            <marker date="1565620311712" expanded="true" signature="277:662" ph="{...}" />
+            <marker date="1565620311712" expanded="true" signature="373:656" ph="{...}" />
+            <marker date="1565620311712" expanded="true" signature="399:646" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/SceneSpecific/GeometersPlanetarium/RSDESPin.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3264">
+          <caret line="230" selection-start-line="230" selection-end-line="230" />
+          <folding>
+            <element signature="e#0#99#0" expanded="true" />
+            <marker date="1566498659642" expanded="false" signature="6:39" ph="..." />
+            <marker date="1566498659642" expanded="true" signature="26821:32585" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="217:324" ph="[...]" />
+            <marker date="1566498659642" expanded="true" signature="329:530" ph="/* Handels user interaction with the RSDES Pins and renders features local to the pin. ... */" />
+            <marker date="1566498659642" expanded="true" signature="26821:32583" ph="{...}" />
+            <marker date="1566498659642" expanded="false" signature="587:831" ph="Constructors" />
+            <marker date="1566498659642" expanded="true" signature="653:811" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="841:19505" ph="Variables" />
+            <marker date="1566498659642" expanded="true" signature="970:1088" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="1992:3024" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="2163:3014" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="2825:2963" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="3065:3172" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="3322:7613" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="3377:7603" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="3513:6990" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="3653:3984" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="6176:6453" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="6661:6940" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="7657:7738" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="7867:7994" ph="/* public PressableUI showAzimuth;  //do this with latitude ... */" />
+            <marker date="1566498659642" expanded="true" signature="8329:8489" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="8593:8646" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="8708:8808" ph="///     Distance between star ray grid in earth meters. ... " />
+            <marker date="1566498659642" expanded="true" signature="8970:9214" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="9255:19219" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="9311:19209" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="9364:9698" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="9822:10604" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="10988:18787" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="11128:11298" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="12088:12730" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="12158:12413" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="12848:13564" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="12918:13416" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="14511:15990" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="14684:15964" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="15014:15934" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="15100:15471" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="16897:17384" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="18052:18537" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="18872:19195" ph="{...}" />
+            <marker date="1566498659642" expanded="false" signature="19515:23275" ph="Monobehaviour Functions" />
+            <marker date="1566498659642" expanded="true" signature="19576:21388" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="20258:20388" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="21511:22043" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="21677:22033" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="22076:22393" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="22448:22743" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="22798:23094" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="22879:22984" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="23128:23231" ph="{...}" />
+            <marker date="1566498659642" expanded="false" signature="26821:28287" ph="Behaviour Functions" />
+            <marker date="1566498659642" expanded="true" signature="23375:23462" ph="///     Use this function to delete a pin. ... " />
+            <marker date="1566498659642" expanded="true" signature="23494:24255" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="23534:24245" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="24298:24367" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="24409:24478" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="24529:24691" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="24729:25519" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="25556:26333" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="26366:27115" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="27149:27912" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="27948:28027" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="28067:28884" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="28925:29015" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="29054:29365" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="29094:29330" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="29407:29551" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="29561:29659" ph="///     This is called each frame the earth is tilted ... " />
+            <marker date="1566498659642" expanded="true" signature="29695:30114" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="29760:30104" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="30149:30253" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="30288:30350" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="30385:30480" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="30518:30852" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="30555:30672" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="30689:30842" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="26821:26833" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="26872:28247" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="26909:28140" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="27023:27545" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="27575:28126" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="28157:28237" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="28297:31182" ph="Setup Functions" />
+            <marker date="1566498659642" expanded="true" signature="28354:28431" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="28469:28983" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="29022:29540" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="29574:29824" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="29859:30113" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="30153:30629" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="30357:30619" ph="/* this.transform.position = GeoPlanetMaths.directionFromLatLong(latlong) * RSDESManager.EarthRadius + RSDESManag ... */" />
+            <marker date="1566498659642" expanded="true" signature="30669:31146" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="30874:31136" ph="/* this.transform.position = GeoPlanetMaths.directionFromLatLong(latlong) * RSDESManager.EarthRadius + RSDESManag ... */" />
+            <marker date="1566498659642" expanded="true" signature="31192:32577" ph="Editor Functions" />
+            <marker date="1566498659642" expanded="true" signature="31299:31708" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="31793:32296" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="32370:32421" ph="{...}" />
+            <marker date="1566498659642" expanded="true" signature="32489:32540" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/SceneSpecific/GeometersPlanetarium/Verlet/VerletV2/OrionControlPanel.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="13" selection-start-line="13" selection-end-line="13" />
+          <folding>
+            <marker date="1566498659643" expanded="false" signature="6:48" ph="..." />
+            <marker date="1566498659643" expanded="true" signature="1415:1489" ph="{...}" />
+            <marker date="1566498659643" expanded="true" signature="403:998" ph="{...}" />
+            <marker date="1566498659643" expanded="true" signature="1032:1071" ph="{...}" />
+            <marker date="1566498659643" expanded="true" signature="1109:1152" ph="{...}" />
+            <marker date="1566498659643" expanded="true" signature="1188:1229" ph="{...}" />
+            <marker date="1566498659643" expanded="true" signature="1265:1306" ph="{...}" />
+            <marker date="1566498659643" expanded="true" signature="1341:1381" ph="{...}" />
+            <marker date="1566498659643" expanded="true" signature="1419:1462" ph="{...}" />
+            <marker date="1566498659643" expanded="true" signature="1499:1541" ph="{...}" />
+            <marker date="1566498659643" expanded="true" signature="1578:1620" ph="{...}" />
+            <marker date="1566498659643" expanded="true" signature="1658:1701" ph="{...}" />
+            <marker date="1566498659643" expanded="true" signature="1737:1778" ph="{...}" />
+            <marker date="1566498659643" expanded="true" signature="1813:1853" ph="{...}" />
+            <marker date="1566498659643" expanded="true" signature="1895:1948" ph="{...}" />
+            <marker date="1566498659643" expanded="true" signature="1415:1487" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/01CB6F2B-7D21-4FC6-9F80-1D6B3ABCA40A/b6/f03004bc/Dictionary`2.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="296">
+          <caret line="187" column="16" selection-start-line="187" selection-start-column="16" selection-end-line="187" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="5" column="14" selection-start-line="5" selection-start-column="14" selection-end-line="5" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Kernel/Geos/GeoElement.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="11" column="5" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="5" />
+          <folding>
+            <marker date="1566498659619" expanded="true" signature="6:35" ph="..." />
+            <marker date="1566498659619" expanded="true" signature="73:255" ph="{...}" />
+            <marker date="1566498659619" expanded="true" signature="140:253" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Plugins/socket.io/Socket.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-391">
+          <caret line="295" selection-start-line="295" selection-end-line="295" />
+          <folding>
+            <marker date="1566498659592" expanded="false" signature="6:66" ph="..." />
+            <marker date="1566498659592" expanded="true" signature="88:12156" ph="{...}" />
+            <marker date="1566498659592" expanded="true" signature="95:165" ph="/// socket.io interface component ... " />
+            <marker date="1566498659592" expanded="true" signature="206:12153" ph="{...}" />
+            <marker date="1566498659592" expanded="true" signature="217:404" ph="/// Establishes a connection to a given url ... " />
+            <marker date="1566498659592" expanded="true" signature="454:768" ph="{...}" />
+            <marker date="1566498659592" expanded="true" signature="778:5584" ph="On/Off methods" />
+            <marker date="1566498659592" expanded="true" signature="868:1260" ph="{...}" />
+            <marker date="1566498659592" expanded="true" signature="930:1080" ph="{...}" />
+            <marker date="1566498659592" expanded="true" signature="1320:1398" ph="{...}" />
+            <marker date="1566498659592" expanded="true" signature="1463:1541" ph="{...}" />
+            <marker date="1566498659592" expanded="true" signature="1612:1690" ph="{...}" />
+            <marker date="1566498659592" expanded="true" signature="1734:2173" ph="{...}" />
+            <marker date="1566498659592" expanded="true" signature="1846:1890" ph="{...}" />
+            <marker date="1566498659592" expanded="true" signature="1890:2163" ph="{...}" />
+            <marker date="1566498659592" expanded="true" signature="2236:3103" ph="{...}" />
+            <marker date="1566498659592" expanded="true" signature="2266:3093" ph="{...}" />
+            <marker date="1566498659592" expanded="true" signature="3171:3664" ph="{...}" />
+            <marker date="1566498659592" expanded="true" signature="3201:3654" ph="{...}" />
+            <marker date="1566498659592" expanded="true" signature="3738:4247" ph="{...}" />
+            <marker date="1566498659592" expanded="true" signature="3768:4237" ph="{...}" />
+            <marker date="1566498659592" expanded="true" signature="4294:5564" ph="{...}" />
+            <marker date="1566498659592" expanded="true" signature="4324:5554" ph="{...}" />
+            <marker date="1566498659592" expanded="false" signature="5594:8312" ph="Emit methods" />
+            <marker date="1566498659592" expanded="true" signature="5659:5719" ph="{...}" />
+            <marker date="1566498659592" expanded="true" signature="5777:5829" ph="{...}" />
+            <marker date="1566498659592" expanded="true" signature="5895:5955" ph="{...}" />
+            <marker date="1566498659592" expanded="true" signature="6033:7047" ph="{...}" />
+            <marker date="1566498659592" expanded="true" signature="6131:6611" ph="{...}" />
+            <marker date="1566498659592" expanded="true" signature="6611:7037" ph="{...}" />
+            <marker date="1566498659592" expanded="true" signature="7133:8155" ph="{...}" />
+            <marker date="1566498659592" expanded="true" signature="7231:7715" ph="{...}" />
+            <marker date="1566498659592" expanded="true" signature="7715:8145" ph="{...}" />
+            <marker date="1566498659592" expanded="true" signature="8165:8261" ph="/// The unique value generator for acks message id. ... " />
+            <marker date="1566498659592" expanded="true" signature="8322:9132" ph="Event handlers" />
+            <marker date="1566498659592" expanded="true" signature="9142:9240" ph="/// The URL of the remote host which socket connected ... " />
+            <marker date="1566498659592" expanded="true" signature="9303:9422" ph="/// Namespace (&quot;/&quot; is the default namespace which means global namespace.) ... " />
+            <marker date="1566498659592" expanded="true" signature="9455:9533" ph="{...}" />
+            <marker date="1566498659592" expanded="true" signature="9568:9624" ph="{...}" />
+            <marker date="1566498659592" expanded="true" signature="9658:9944" ph="{...}" />
+            <marker date="1566498659592" expanded="true" signature="9676:9934" ph="{...}" />
+            <marker date="1566498659592" expanded="true" signature="9998:10250" ph="{...}" />
+            <marker date="1566498659592" expanded="true" signature="10016:10240" ph="{...}" />
+            <marker date="1566498659592" expanded="true" signature="10359:10480" ph="{...}" />
+            <marker date="1566498659592" expanded="true" signature="10522:12146" ph="{...}" />
+            <marker date="1566498659592" expanded="true" signature="10727:12136" ph="{...}" />
+            <marker date="1566498659592" expanded="true" signature="10809:10945" ph="{...}" />
+            <marker date="1566498659592" expanded="true" signature="11146:11290" ph="{...}" />
+            <marker date="1566498659592" expanded="true" signature="11444:11572" ph="{...}" />
+            <marker date="1566498659592" expanded="true" signature="11711:11860" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Kernel/GeoGebraInterface/HandWaverServerSocket.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="265">
+          <caret line="23" column="18" selection-start-line="23" selection-start-column="18" selection-end-line="23" selection-end-column="18" />
+          <folding>
+            <marker date="1566498659617" expanded="true" signature="6:49" ph="..." />
+            <marker date="1566498659617" expanded="true" signature="82:2236" ph="{...}" />
+            <marker date="1566498659617" expanded="true" signature="139:2234" ph="{...}" />
+            <marker date="1566498659617" expanded="true" signature="154:291" ph="///     If this is set, the session will use this session ID rather than generate a new one. ... " />
+            <marker date="1566498659617" expanded="true" signature="363:1638" ph="{...}" />
+            <marker date="1566498659617" expanded="true" signature="1312:1628" ph="/* StartCoroutine(HandWaverServerTransport.execCommand(&quot;Point({3, 5, 1})&quot;));    // Point B ... */" />
+            <marker date="1566498659617" expanded="true" signature="1673:1721" ph="{...}" />
+            <marker date="1566498659617" expanded="true" signature="1767:1960" ph="///     Initializes the Session ID within the HWServer Transport. ... " />
+            <marker date="1566498659617" expanded="true" signature="1995:2228" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/SceneSpecific/GeometersPlanetarium/ActionSystem/PinStarlightRaysToggle.cs" />
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/ActionSystem/MoveObject.cs" />
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/ActionSystem/GeoElementFunction.cs" />
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/ActionSystem/GeoElementProximityLib.cs.cs" />
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/SceneSpecific/GeometersPlanetarium/ActionSystem/PinFunctions.cs" />
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/SceneSpecific/HandWaver/ActionSystem/GeoElementFunction.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#259#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/SceneSpecific/HandWaver/ActionSystem/GeoElementProximityLib.cs.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="320">
+          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+          <folding>
+            <element signature="e#0#137#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/SceneSpecific/HandWaver/ActionSystem/MoveObject.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="48">
+          <caret line="8" column="1" lean-forward="true" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Kernel/ActionSystem/MoveGeoElement.cs" />
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Kernel/ActionSystem/EmbodiedAction.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="18" lean-forward="true" selection-start-column="18" selection-end-column="18" />
+          <folding>
+            <marker date="1566570858659" expanded="true" signature="52:810" ph="{...}" />
+            <marker date="1566570858659" expanded="true" signature="121:808" ph="{...}" />
+            <marker date="1566570858659" expanded="true" signature="187:491" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Math/Operations.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="668">
+          <caret line="93" column="5" lean-forward="true" selection-start-line="93" selection-start-column="5" selection-end-line="93" selection-end-column="5" />
+          <folding>
+            <marker date="1566571436343" expanded="true" signature="45:3368" ph="{...}" />
+            <marker date="1566571436343" expanded="true" signature="82:3366" ph="{...}" />
+            <marker date="1566571436343" expanded="true" signature="205:358" ph="{...}" />
+            <marker date="1566571436343" expanded="true" signature="417:570" ph="{...}" />
+            <marker date="1566571436343" expanded="true" signature="624:715" ph="{...}" />
+            <marker date="1566571436343" expanded="true" signature="769:874" ph="{...}" />
+            <marker date="1566571436343" expanded="true" signature="940:1634" ph="{...}" />
+            <marker date="1566571436343" expanded="true" signature="1720:1930" ph="{...}" />
+            <marker date="1566571436343" expanded="true" signature="2032:3083" ph="{...}" />
+            <marker date="1566571436343" expanded="true" signature="3143:3222" ph="{...}" />
+            <marker date="1566571436343" expanded="true" signature="3281:3360" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Kernel/ActionSystem/GeoElementProximityLib.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret lean-forward="true" />
+          <folding>
+            <marker date="1566571446441" expanded="true" signature="67:1714" ph="{...}" />
+            <marker date="1566571446441" expanded="true" signature="113:1712" ph="{...}" />
+            <marker date="1566571446441" expanded="true" signature="192:274" ph="{...}" />
+            <marker date="1566571446441" expanded="true" signature="377:451" ph="{...}" />
+            <marker date="1566571446441" expanded="true" signature="607:687" ph="{...}" />
+            <marker date="1566571446441" expanded="true" signature="860:947" ph="{...}" />
+            <marker date="1566571446441" expanded="true" signature="1120:1216" ph="{...}" />
+            <marker date="1566571446441" expanded="true" signature="1344:1366" ph="{...}" />
+            <marker date="1566571446441" expanded="true" signature="1561:1709" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Kernel/ActionSystem/GeoElementFunction.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="21" column="31" selection-start-line="21" selection-start-column="31" selection-end-line="21" selection-end-column="31" />
+          <folding>
+            <marker date="1566571590783" expanded="true" signature="6:134" ph="..." />
+            <marker date="1566571590783" expanded="true" signature="173:1687" ph="{...}" />
+            <marker date="1566571590783" expanded="true" signature="237:1685" ph="{...}" />
+            <marker date="1566571590783" expanded="true" signature="443:1471" ph="{...}" />
+            <marker date="1566571590783" expanded="true" signature="648:1329" ph="{...}" />
+            <marker date="1566571590783" expanded="true" signature="729:795" ph="{...}" />
+            <marker date="1566571590783" expanded="true" signature="1139:1315" ph="{...}" />
+            <marker date="1566571590783" expanded="true" signature="1380:1461" ph="{...}" />
+            <marker date="1566571590783" expanded="true" signature="1542:1582" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Kernel/Geos/GeoElementDataBase.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="496">
+          <caret line="31" column="9" lean-forward="true" selection-start-line="31" selection-start-column="9" selection-end-line="31" selection-end-column="9" />
+          <folding>
+            <marker date="1566570098788" expanded="true" signature="36:3441" ph="{...}" />
+            <marker date="1566570098788" expanded="true" signature="81:3439" ph="{...}" />
+            <marker date="1566570098788" expanded="true" signature="96:291" ph="///     Dictionary to keep track of the Geoelement's id based on the string name. ... " />
+            <marker date="1566570098788" expanded="true" signature="456:598" ph="///     Dictionary of all GeoElements within the scene. ... " />
+            <marker date="1566570098788" expanded="true" signature="773:904" ph="///     Dictionary of all GeoElement meshes. ... " />
+            <marker date="1566570098788" expanded="true" signature="1104:1304" ph="///     Interface method to return element id from element name. ... " />
+            <marker date="1566570098788" expanded="true" signature="1353:1406" ph="{...}" />
+            <marker date="1566570098788" expanded="true" signature="1416:1625" ph="///     Interface method to return the geoelement data from element id ... " />
+            <marker date="1566570098788" expanded="true" signature="1676:1731" ph="{...}" />
+            <marker date="1566570098788" expanded="true" signature="1741:1956" ph="///     Interface method to return the geoelement data from element name ... " />
+            <marker date="1566570098788" expanded="true" signature="2010:2078" ph="{...}" />
+            <marker date="1566570098788" expanded="true" signature="2088:2237" ph="///     Adds the GeoElement to the dictionaries ... " />
+            <marker date="1566570098788" expanded="true" signature="2289:2654" ph="{...}" />
+            <marker date="1566570098788" expanded="true" signature="2664:2810" ph="///     Removes GeoElement from all dictionaries ... " />
+            <marker date="1566570098788" expanded="true" signature="2865:3064" ph="{...}" />
+            <marker date="1566570098788" expanded="true" signature="3117:3194" ph="{...}" />
+            <marker date="1566570098788" expanded="true" signature="3247:3316" ph="{...}" />
+            <marker date="1566570098788" expanded="true" signature="3364:3433" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
