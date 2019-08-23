@@ -1,29 +1,36 @@
+using System;
+using IMRE.HandWaver.Kernel.Geos;
+using Unity.Burst;
+using Unity.Collections;
+using Unity.Entities;
+using Unity.Jobs;
+
 namespace IMRE.HandWaver.Kernel.GeoGebraInterface
 {
-    [System.SerializableAttribute]
-    public struct ggbOutput : Unity.Entities.IComponentData
+    [Serializable]
+    public struct ggbOutput : IComponentData
     {
-        internal Unity.Entities.NativeString512 cmd;
+        internal NativeString512 cmd;
     }
 
-    public class GeoGebraCommandEvalSystem : Unity.Entities.JobComponentSystem
+    public class GeoGebraCommandEvalSystem : JobComponentSystem
     {
         // OnUpdate runs on the main thread.
-        protected override Unity.Jobs.JobHandle OnUpdate(Unity.Jobs.JobHandle inputDependencies)
+        protected override JobHandle OnUpdate(JobHandle inputDependencies)
         {
-            GeoElementJob job = new GeoElementJob();
+            var job = new GeoElementJob();
 
-            return Unity.Entities.JobForEachExtensions.Schedule(job, this, inputDependencies);
+            return JobForEachExtensions.Schedule(job, this, inputDependencies);
         }
 
         //This is a template for the jobs we will use.  See GitHub issue for a list of all possible types.
         // Use the [BurstCompile] attribute to compile a job with Burst. You may see significant speed ups, so try it!
-        [Unity.Burst.BurstCompileAttribute]
-        private struct GeoElementJob : Unity.Entities.IJobForEach<IMRE.HandWaver.Kernel.Geos.GeoElement, ggbOutput>
+        [BurstCompile]
+        private struct GeoElementJob : IJobForEach<GeoElement, ggbOutput>
         {
             // The [ReadOnly] attribute tells the job scheduler that this job will not write to rotSpeedIJobForEach
-            public void Execute(ref IMRE.HandWaver.Kernel.Geos.GeoElement target,
-                [Unity.Collections.ReadOnlyAttribute] ref ggbOutput DataGGB)
+            public void Execute(ref GeoElement target,
+                [ReadOnly] ref ggbOutput DataGGB)
             {
                 //update data in GeoElement to reflect GGB Input
                 //TODO

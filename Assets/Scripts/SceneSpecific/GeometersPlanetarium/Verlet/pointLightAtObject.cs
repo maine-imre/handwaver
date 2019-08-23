@@ -1,13 +1,15 @@
-﻿namespace IMRE.HandWaver.Space.BigBertha
+﻿using UnityEngine;
+
+namespace IMRE.HandWaver.Space.BigBertha
 {
     /// <summary>
     ///     This script does ___.
     ///     The main contributor(s) to this script is TB
     ///     Status: WORKING
     /// </summary>
-    public class pointLightAtObject : UnityEngine.MonoBehaviour
+    public class pointLightAtObject : MonoBehaviour
     {
-        public UnityEngine.GameObject target;
+        public GameObject target;
 
         // Use this for initialization
         private void Start()

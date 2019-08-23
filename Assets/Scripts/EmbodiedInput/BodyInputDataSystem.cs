@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using UnityEngine;
+
 #if LeapMotion
 using Leap.Unity;
 #endif
@@ -15,7 +18,7 @@ namespace IMRE.EmbodiedUserInput
     /// <summary>
     ///     A class that makes tracking data from different sources generic
     /// </summary>
-    public class BodyInputDataSystem : UnityEngine.MonoBehaviour
+    public class BodyInputDataSystem : MonoBehaviour
     {
         public bool enableLeapMotion = true;
         public bool enableViveSense = true;
@@ -30,10 +33,10 @@ namespace IMRE.EmbodiedUserInput
         /// </summary>
         public static BodyInput bodyInput;
 
-        private readonly System.Collections.Generic.Queue<BodyInput> bodyInputQue =
-            new System.Collections.Generic.Queue<BodyInput>();
+        private readonly Queue<BodyInput> bodyInputQue =
+            new Queue<BodyInput>();
 
-        private UnityEngine.Camera mainCamera;
+        private Camera mainCamera;
 
         //public event HeadTrackingLost ;
         //public event HandTrackingLost ;
@@ -48,7 +51,7 @@ namespace IMRE.EmbodiedUserInput
         /// </summary>
         public void Awake()
         {
-            mainCamera = UnityEngine.Camera.main;
+            mainCamera = Camera.main;
 
             bodyInput = BodyInput.newInput();
             bodyInput.FullBodyTracking = false;
@@ -379,15 +382,15 @@ namespace IMRE.EmbodiedUserInput
         private static bool isFingerExtended(Hand currHand, int fingerIndex)
         {
             //TODO make this better, consider curl
-            return UnityEngine.Mathf.Abs(UnityEngine.Vector3.Angle(currHand.Fingers[fingerIndex].Joints[3].Direction,
+            return Mathf.Abs(Vector3.Angle(currHand.Fingers[fingerIndex].Joints[3].Direction,
                        currHand.Fingers[fingerIndex].Joints[0].Direction)) < 30f;
             //return Vector3.Dot(currHand.Fingers[fingerIndex].Direction, currHand.Palm.Direction) < .1f;
         }
 
         private static float pinchStrength(Hand currHand)
         {
-            return 1 - UnityEngine.Vector3.Magnitude(currHand.Fingers[0].Joints[3].Position -
-                                                     currHand.Fingers[1].Joints[3].Position) * 10f;
+            return 1 - Vector3.Magnitude(currHand.Fingers[0].Joints[3].Position -
+                                         currHand.Fingers[1].Joints[3].Position) * 10f;
         }
 
         private void setupAvatar()
@@ -404,20 +407,20 @@ namespace IMRE.EmbodiedUserInput
         {
             resetVelocities(bodyInput);
 
-            int queueLength = bodyInputQue.Count;
+            var queueLength = bodyInputQue.Count;
 
-            float frameRate = 90f; // consider automating this
+            var frameRate = 90f; // consider automating this
 
-            BodyInput[] queueArray = bodyInputQue.ToArray();
+            var queueArray = bodyInputQue.ToArray();
 
             // This should loop from the most recent to the least recent pairs of frames.
             // For example an array of length 5, the loop would do 5/4, 4/3, 3/2, 2/1, 1/0. 
             // This should have the behaviour stopping at K = 1 such that k-1 is 0.
-            for (int k = queueLength; k > 2; k--)
+            for (var k = queueLength; k > 2; k--)
             {
                 //take the diff for each frame and divide by framerate
-                BodyInput frame0 = queueArray[k - 1];
-                BodyInput frame1 = queueArray[k - 2];
+                var frame0 = queueArray[k - 1];
+                var frame1 = queueArray[k - 2];
 
                 bodyInput.Head.Velocity +=
                     (frame0.Head.Position - frame1.Head.Position) / frameRate;
@@ -436,7 +439,7 @@ namespace IMRE.EmbodiedUserInput
                 bodyInput.LeftHand.Wrist.Velocity +=
                     (frame0.LeftHand.Wrist.Position - frame1.LeftHand.Wrist.Position) / frameRate;
 
-                for (int i = 0; i < 3; i++)
+                for (var i = 0; i < 3; i++)
                 {
                     bodyInput.LeftArm[i].Velocity +=
                         (frame0.LeftArm[i].Position - frame1.LeftArm[i].Position) / frameRate;
@@ -448,8 +451,8 @@ namespace IMRE.EmbodiedUserInput
                         (frame0.RightLeg[i].Position - frame1.RightLeg[i].Position) / frameRate;
                 }
 
-                for (int i = 0; i < 5; i++)
-                for (int j = 0; j < 4; j++)
+                for (var i = 0; i < 5; i++)
+                for (var j = 0; j < 4; j++)
                 {
                     bodyInput.LeftHand.Fingers[i].Joints[j].Velocity +=
                         (frame0.LeftHand.Fingers[i].Joints[j].Position -
@@ -463,28 +466,28 @@ namespace IMRE.EmbodiedUserInput
 
         private void resetVelocities(BodyInput currBodyInput)
         {
-            currBodyInput.Head.Velocity = UnityEngine.Vector3.zero;
-            currBodyInput.Neck.Velocity = UnityEngine.Vector3.zero;
-            currBodyInput.Chest.Velocity = UnityEngine.Vector3.zero;
-            currBodyInput.Waist.Velocity = UnityEngine.Vector3.zero;
-            currBodyInput.RightHand.Palm.Velocity = UnityEngine.Vector3.zero;
-            currBodyInput.LeftHand.Palm.Velocity = UnityEngine.Vector3.zero;
-            currBodyInput.RightHand.Wrist.Velocity = UnityEngine.Vector3.zero;
-            currBodyInput.LeftHand.Wrist.Velocity = UnityEngine.Vector3.zero;
+            currBodyInput.Head.Velocity = Vector3.zero;
+            currBodyInput.Neck.Velocity = Vector3.zero;
+            currBodyInput.Chest.Velocity = Vector3.zero;
+            currBodyInput.Waist.Velocity = Vector3.zero;
+            currBodyInput.RightHand.Palm.Velocity = Vector3.zero;
+            currBodyInput.LeftHand.Palm.Velocity = Vector3.zero;
+            currBodyInput.RightHand.Wrist.Velocity = Vector3.zero;
+            currBodyInput.LeftHand.Wrist.Velocity = Vector3.zero;
 
-            for (int i = 0; i < 3; i++)
+            for (var i = 0; i < 3; i++)
             {
-                currBodyInput.LeftArm[i].Velocity = UnityEngine.Vector3.zero;
-                currBodyInput.RightArm[i].Velocity = UnityEngine.Vector3.zero;
-                currBodyInput.LeftLeg[i].Velocity = UnityEngine.Vector3.zero;
-                currBodyInput.RightLeg[i].Velocity = UnityEngine.Vector3.zero;
+                currBodyInput.LeftArm[i].Velocity = Vector3.zero;
+                currBodyInput.RightArm[i].Velocity = Vector3.zero;
+                currBodyInput.LeftLeg[i].Velocity = Vector3.zero;
+                currBodyInput.RightLeg[i].Velocity = Vector3.zero;
             }
 
-            for (int i = 0; i < 5; i++)
-            for (int j = 0; j < 4; j++)
+            for (var i = 0; i < 5; i++)
+            for (var j = 0; j < 4; j++)
             {
-                currBodyInput.LeftHand.Fingers[i].Joints[j].Velocity = UnityEngine.Vector3.zero;
-                currBodyInput.RightHand.Fingers[i].Joints[j].Velocity = UnityEngine.Vector3.zero;
+                currBodyInput.LeftHand.Fingers[i].Joints[j].Velocity = Vector3.zero;
+                currBodyInput.RightHand.Fingers[i].Joints[j].Velocity = Vector3.zero;
             }
         }
     }

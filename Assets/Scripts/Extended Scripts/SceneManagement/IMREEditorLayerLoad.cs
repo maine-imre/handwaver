@@ -5,12 +5,15 @@ See license info in readme.md.
 www.imrelab.org
 **/
 
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
 namespace IMRE.HandWaver
 {
     /// <summary>
     ///     A script to extend the Unity editor that adds buttons to switch to important scenes for our build.
     /// </summary>
-    public class IMREEditorLayerLoad : UnityEngine.MonoBehaviour
+    public class IMREEditorLayerLoad : MonoBehaviour
     {
         public string baseScene = "LeapVive_GeoBase";
 
@@ -19,12 +22,12 @@ namespace IMRE.HandWaver
             if (!SceneContains())
             {
 #if UNITY_EDITOR
-                string cScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
-                UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(baseScene,
-                    UnityEngine.SceneManagement.LoadSceneMode.Additive);
-                UnityEngine.SceneManagement.SceneManager.MoveGameObjectToScene(gameObject,
-                    UnityEngine.SceneManagement.SceneManager.GetSceneByName(baseScene));
-                UnityEngine.Debug.LogWarning(
+                var cScene = SceneManager.GetActiveScene().name;
+                SceneManager.LoadSceneAsync(baseScene,
+                    LoadSceneMode.Additive);
+                SceneManager.MoveGameObjectToScene(gameObject,
+                    SceneManager.GetSceneByName(baseScene));
+                Debug.LogWarning(
                     "Hey Stupid, you loaded the base scene layer after the additive scene layer. Do not expect things to work well; just saying.");
                 //reloadcScenes();
 #endif
@@ -52,11 +55,9 @@ namespace IMRE.HandWaver
 
         private bool SceneContains()
         {
-            for (int i = 0; i < UnityEngine.SceneManagement.SceneManager.sceneCount; i++)
-            {
-                if (UnityEngine.SceneManagement.SceneManager.GetSceneAt(i).name == baseScene)
+            for (var i = 0; i < SceneManager.sceneCount; i++)
+                if (SceneManager.GetSceneAt(i).name == baseScene)
                     return true;
-            }
 
             return false;
         }

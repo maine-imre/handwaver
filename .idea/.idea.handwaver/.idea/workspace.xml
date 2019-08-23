@@ -38,7 +38,7 @@
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/Kernel/Geos/GeoElementDataBase.cs">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="496">
-              <caret line="31" column="9" lean-forward="true" selection-start-line="31" selection-start-column="9" selection-end-line="31" selection-end-column="9" />
+              <caret line="31" column="9" selection-start-line="31" selection-start-column="9" selection-end-line="31" selection-end-column="9" />
               <folding>
                 <marker date="1566570098788" expanded="true" signature="36:3441" ph="{...}" />
                 <marker date="1566570098788" expanded="true" signature="81:3439" ph="{...}" />
@@ -67,7 +67,6 @@
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/Kernel/ActionSystem/GeoElementProximityLib.cs">
           <provider selected="true" editor-type-id="text-editor">
             <state>
-              <caret lean-forward="true" />
               <folding>
                 <marker date="1566571446441" expanded="true" signature="67:1714" ph="{...}" />
                 <marker date="1566571446441" expanded="true" signature="113:1712" ph="{...}" />
@@ -87,7 +86,7 @@
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/Math/Operations.cs">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="668">
-              <caret line="93" column="5" lean-forward="true" selection-start-line="93" selection-start-column="5" selection-end-line="93" selection-end-column="5" />
+              <caret line="93" column="5" selection-start-line="93" selection-start-column="5" selection-end-line="93" selection-end-column="5" />
               <folding>
                 <marker date="1566571436343" expanded="true" signature="45:3368" ph="{...}" />
                 <marker date="1566571436343" expanded="true" signature="82:3366" ph="{...}" />
@@ -214,7 +213,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="TEXT" />
     <property name="do_not_show_solution_notification" value="true" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.C#" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -267,12 +266,12 @@
       <workItem from="1566498985205" duration="2656000" />
       <workItem from="1566509660052" duration="2722000" />
       <workItem from="1566569904688" duration="318000" />
-      <workItem from="1566570526457" duration="1143000" />
+      <workItem from="1566570526457" duration="1621000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="45691000" />
+    <option name="totallyTimeSpent" value="46169000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1148,7 +1147,7 @@
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/Math/Operations.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="668">
-          <caret line="93" column="5" lean-forward="true" selection-start-line="93" selection-start-column="5" selection-end-line="93" selection-end-column="5" />
+          <caret line="93" column="5" selection-start-line="93" selection-start-column="5" selection-end-line="93" selection-end-column="5" />
           <folding>
             <marker date="1566571436343" expanded="true" signature="45:3368" ph="{...}" />
             <marker date="1566571436343" expanded="true" signature="82:3366" ph="{...}" />
@@ -1168,7 +1167,6 @@
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/Kernel/ActionSystem/GeoElementProximityLib.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state>
-          <caret lean-forward="true" />
           <folding>
             <marker date="1566571446441" expanded="true" signature="67:1714" ph="{...}" />
             <marker date="1566571446441" expanded="true" signature="113:1712" ph="{...}" />
@@ -1204,7 +1202,7 @@
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/Kernel/Geos/GeoElementDataBase.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="496">
-          <caret line="31" column="9" lean-forward="true" selection-start-line="31" selection-start-column="9" selection-end-line="31" selection-end-column="9" />
+          <caret line="31" column="9" selection-start-line="31" selection-start-column="9" selection-end-line="31" selection-end-column="9" />
           <folding>
             <marker date="1566570098788" expanded="true" signature="36:3441" ph="{...}" />
             <marker date="1566570098788" expanded="true" signature="81:3439" ph="{...}" />

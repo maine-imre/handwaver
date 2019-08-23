@@ -2,6 +2,8 @@
 // Assembly: UnityEngine, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // Assembly location: C:\Program Files (x86)\Unity\Editor\Data\Managed\UnityEngine.dll
 
+using System;
+
 namespace UnityEngine
 {
     public struct Vector3d
@@ -24,7 +26,7 @@ namespace UnityEngine
                     case 2:
                         return z;
                     default:
-                        throw new System.IndexOutOfRangeException("Invalid index!");
+                        throw new IndexOutOfRangeException("Invalid index!");
                 }
             }
             set
@@ -41,14 +43,14 @@ namespace UnityEngine
                         z = value;
                         break;
                     default:
-                        throw new System.IndexOutOfRangeException("Invalid Vector3d index!");
+                        throw new IndexOutOfRangeException("Invalid Vector3d index!");
                 }
             }
         }
 
         public Vector3d normalized => Normalize(this);
 
-        public double magnitude => System.Math.Sqrt(x * x + y * y + z * z);
+        public double magnitude => Math.Sqrt(x * x + y * y + z * z);
 
         public double sqrMagnitude => x * x + y * y + z * z;
 
@@ -68,7 +70,7 @@ namespace UnityEngine
 
         public static Vector3d right => new Vector3d(1d, 0d, 0d);
 
-        [System.ObsoleteAttribute("Use Vector3d.forward instead.")]
+        [Obsolete("Use Vector3d.forward instead.")]
         public static Vector3d fwd => new Vector3d(0d, 0d, 1d);
 
         public Vector3d(double x, double y, double z)
@@ -153,14 +155,14 @@ namespace UnityEngine
 
         public static Vector3d Slerp(Vector3d from, Vector3d to, double t)
         {
-            Vector3 v3 = Vector3.Slerp((Vector3) from, (Vector3) to, (float) t);
+            var v3 = Vector3.Slerp((Vector3) from, (Vector3) to, (float) t);
             return new Vector3d(v3);
         }
 
         public static void OrthoNormalize(ref Vector3d normal, ref Vector3d tangent)
         {
-            Vector3 v3normal = new Vector3();
-            Vector3 v3tangent = new Vector3();
+            var v3normal = new Vector3();
+            var v3tangent = new Vector3();
             v3normal = (Vector3) normal;
             v3tangent = (Vector3) tangent;
             Vector3.OrthoNormalize(ref v3normal, ref v3tangent);
@@ -170,9 +172,9 @@ namespace UnityEngine
 
         public static void OrthoNormalize(ref Vector3d normal, ref Vector3d tangent, ref Vector3d binormal)
         {
-            Vector3 v3normal = new Vector3();
-            Vector3 v3tangent = new Vector3();
-            Vector3 v3binormal = new Vector3();
+            var v3normal = new Vector3();
+            var v3tangent = new Vector3();
+            var v3binormal = new Vector3();
             v3normal = (Vector3) normal;
             v3tangent = (Vector3) tangent;
             v3binormal = (Vector3) binormal;
@@ -184,8 +186,8 @@ namespace UnityEngine
 
         public static Vector3d MoveTowards(Vector3d current, Vector3d target, double maxDistanceDelta)
         {
-            Vector3d vector3 = target - current;
-            double magnitude = vector3.magnitude;
+            var vector3 = target - current;
+            var magnitude = vector3.magnitude;
             if (magnitude <= maxDistanceDelta || magnitude == 0.0d)
                 return target;
             return current + vector3 / magnitude * maxDistanceDelta;
@@ -194,7 +196,7 @@ namespace UnityEngine
         public static Vector3d RotateTowards(Vector3d current, Vector3d target, double maxRadiansDelta,
             double maxMagnitudeDelta)
         {
-            Vector3 v3 = Vector3.RotateTowards((Vector3) current, (Vector3) target, (float) maxRadiansDelta,
+            var v3 = Vector3.RotateTowards((Vector3) current, (Vector3) target, (float) maxRadiansDelta,
                 (float) maxMagnitudeDelta);
             return new Vector3d(v3);
         }
@@ -210,7 +212,7 @@ namespace UnityEngine
             double smoothTime)
         {
             double deltaTime = Time.deltaTime;
-            double maxSpeed = double.PositiveInfinity;
+            var maxSpeed = double.PositiveInfinity;
             return SmoothDamp(current, target, ref currentVelocity, smoothTime, maxSpeed, deltaTime);
         }
 
@@ -218,18 +220,18 @@ namespace UnityEngine
             double smoothTime, double maxSpeed, double deltaTime)
         {
             smoothTime = Mathd.Max(0.0001d, smoothTime);
-            double num1 = 2d / smoothTime;
-            double num2 = num1 * deltaTime;
-            double num3 = 1.0d / (1.0d + num2 + 0.479999989271164d * num2 * num2 +
-                                  0.234999999403954d * num2 * num2 * num2);
-            Vector3d vector = current - target;
-            Vector3d vector3_1 = target;
-            double maxLength = maxSpeed * smoothTime;
-            Vector3d vector3_2 = ClampMagnitude(vector, maxLength);
+            var num1 = 2d / smoothTime;
+            var num2 = num1 * deltaTime;
+            var num3 = 1.0d / (1.0d + num2 + 0.479999989271164d * num2 * num2 +
+                               0.234999999403954d * num2 * num2 * num2);
+            var vector = current - target;
+            var vector3_1 = target;
+            var maxLength = maxSpeed * smoothTime;
+            var vector3_2 = ClampMagnitude(vector, maxLength);
             target = current - vector3_2;
-            Vector3d vector3_3 = (currentVelocity + num1 * vector3_2) * deltaTime;
+            var vector3_3 = (currentVelocity + num1 * vector3_2) * deltaTime;
             currentVelocity = (currentVelocity - num1 * vector3_3) * num3;
-            Vector3d vector3_4 = target + (vector3_2 + vector3_3) * num3;
+            var vector3_4 = target + (vector3_2 + vector3_3) * num3;
             if (Dot(vector3_1 - current, vector3_4 - vector3_1) > 0.0)
             {
                 vector3_4 = vector3_1;
@@ -273,7 +275,7 @@ namespace UnityEngine
         {
             if (!(other is Vector3d))
                 return false;
-            Vector3d vector3d = (Vector3d) other;
+            var vector3d = (Vector3d) other;
             if (x.Equals(vector3d.x) && y.Equals(vector3d.y))
                 return z.Equals(vector3d.z);
             return false;
@@ -286,7 +288,7 @@ namespace UnityEngine
 
         public static Vector3d Normalize(Vector3d value)
         {
-            double num = Magnitude(value);
+            var num = Magnitude(value);
             if (num > 9.99999974737875E-06)
                 return value / num;
             return zero;
@@ -294,7 +296,7 @@ namespace UnityEngine
 
         public void Normalize()
         {
-            double num = Magnitude(this);
+            var num = Magnitude(this);
             if (num > 9.99999974737875E-06)
                 this = this / num;
             else
@@ -314,7 +316,7 @@ namespace UnityEngine
 
         public static Vector3d Project(Vector3d vector, Vector3d onNormal)
         {
-            double num = Dot(onNormal, onNormal);
+            var num = Dot(onNormal, onNormal);
             if (num < 1.40129846432482E-45d)
                 return zero;
             return onNormal * Dot(vector, onNormal) / num;
@@ -332,8 +334,8 @@ namespace UnityEngine
 
         public static double Distance(Vector3d a, Vector3d b)
         {
-            Vector3d vector3d = new Vector3d(a.x - b.x, a.y - b.y, a.z - b.z);
-            return System.Math.Sqrt(vector3d.x * vector3d.x + vector3d.y * vector3d.y + vector3d.z * vector3d.z);
+            var vector3d = new Vector3d(a.x - b.x, a.y - b.y, a.z - b.z);
+            return Math.Sqrt(vector3d.x * vector3d.x + vector3d.y * vector3d.y + vector3d.z * vector3d.z);
         }
 
         public static Vector3d ClampMagnitude(Vector3d vector, double maxLength)
@@ -345,7 +347,7 @@ namespace UnityEngine
 
         public static double Magnitude(Vector3d a)
         {
-            return System.Math.Sqrt(a.x * a.x + a.y * a.y + a.z * a.z);
+            return Math.Sqrt(a.x * a.x + a.y * a.y + a.z * a.z);
         }
 
         public static double SqrMagnitude(Vector3d a)
@@ -363,7 +365,7 @@ namespace UnityEngine
             return new Vector3d(Mathd.Max(lhs.x, rhs.x), Mathd.Max(lhs.y, rhs.y), Mathd.Max(lhs.z, rhs.z));
         }
 
-        [System.ObsoleteAttribute(
+        [Obsolete(
             "Use Vector3d.Angle instead. AngleBetween uses radians instead of degrees and was deprecated for this reason")]
         public static double AngleBetween(Vector3d from, Vector3d to)
         {

@@ -1,3 +1,7 @@
+using System;
+using Unity.Entities;
+using Unity.Mathematics;
+
 namespace IMRE.HandWaver.Kernel.Geos
 {
     internal enum ElementType
@@ -10,8 +14,8 @@ namespace IMRE.HandWaver.Kernel.Geos
         circle
     }
 
-    [System.SerializableAttribute]
-    public struct GeoElement : Unity.Entities.IComponentData
+    [Serializable]
+    public struct GeoElement : IComponentData
     {
         /// <summary>
         ///     Integer ID for the object. This should be readonly after creation.
@@ -27,24 +31,24 @@ namespace IMRE.HandWaver.Kernel.Geos
         /// <summary>
         ///     The last time this element was updated.
         /// </summary>
-        internal System.DateTime Updated
+        internal DateTime Updated
         {
             get => _updated;
             set => _updated = value;
         }
 
-        private System.DateTime _updated;
+        private DateTime _updated;
 
         /// <summary>
         ///     Element name. (Max 30 characters)
         /// </summary>
-        internal Unity.Entities.NativeString64 ElementName
+        internal NativeString64 ElementName
         {
             get => _elementName;
             set => _elementName = value;
         }
 
-        private Unity.Entities.NativeString64 _elementName;
+        private NativeString64 _elementName;
 
         /// <summary>
         ///     The type of the element.
@@ -62,35 +66,35 @@ namespace IMRE.HandWaver.Kernel.Geos
         /// <summary>
         ///     Up to 4 dependencies can be stored by ID here.
         /// </summary>
-        internal Unity.Mathematics.int4 Deps
+        internal int4 Deps
         {
             get => _deps;
             set => _deps = value;
         }
 
-        private Unity.Mathematics.int4 _deps;
+        private int4 _deps;
 
         /// <summary>
         ///     Any relevant float3 data can be stored here.
         /// </summary>
-        internal Unity.Mathematics.float3 F0
+        internal float3 F0
         {
             get => _f0;
             set => _f0 = value;
         }
 
-        private Unity.Mathematics.float3 _f0;
+        private float3 _f0;
 
         /// <summary>
         ///     Cosntructor for an element
         /// </summary>
         /// <param name="eId"> element id from ggb server</param>
         /// <param name="eName">element name from ggb server. Max 30 characters.</param>
-        internal GeoElement(int eId, Unity.Entities.NativeString64 eName) : this()
+        internal GeoElement(int eId, NativeString64 eName) : this()
         {
             ElementId = eId;
             ElementName = eName;
-            Updated = System.DateTime.Now;
+            Updated = DateTime.Now;
         }
 
         public override string ToString()

@@ -1,22 +1,32 @@
-﻿public class AbstractThread
+﻿using System.Collections;
+using System.Threading;
+using UnityEngine;
+
+public class AbstractThread
 {
     private readonly object m_Handle = new object();
     private bool m_IsDone;
     private string m_Name;
-    private System.Threading.Thread m_Thread;
+    private Thread m_Thread;
 
     public string ThreadName
     {
         get
         {
             string tmp;
-            lock (m_Handle) tmp = m_Name;
+            lock (m_Handle)
+            {
+                tmp = m_Name;
+            }
 
             return tmp;
         }
         set
         {
-            lock (m_Handle) m_Name = value;
+            lock (m_Handle)
+            {
+                m_Name = value;
+            }
         }
     }
 
@@ -25,19 +35,25 @@
         get
         {
             bool tmp;
-            lock (m_Handle) tmp = m_IsDone;
+            lock (m_Handle)
+            {
+                tmp = m_IsDone;
+            }
 
             return tmp;
         }
         set
         {
-            lock (m_Handle) m_IsDone = value;
+            lock (m_Handle)
+            {
+                m_IsDone = value;
+            }
         }
     }
 
     public virtual void Start()
     {
-        m_Thread = new System.Threading.Thread(Run);
+        m_Thread = new Thread(Run);
         m_Thread.Start();
     }
 
@@ -50,9 +66,9 @@
     {
     }
 
-    protected virtual UnityEngine.Vector3d OnFinished()
+    protected virtual Vector3d OnFinished()
     {
-        return new UnityEngine.Vector3d();
+        return new Vector3d();
     }
 
     public virtual bool Update()
@@ -66,7 +82,7 @@
         return false;
     }
 
-    public System.Collections.IEnumerator WaitFor()
+    public IEnumerator WaitFor()
     {
         while (!Update()) yield return null;
     }

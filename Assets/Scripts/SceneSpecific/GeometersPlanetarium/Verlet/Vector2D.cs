@@ -2,6 +2,8 @@
 // Assembly: UnityEngine, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // Assembly location: C:\Program Files (x86)\Unity\Editor\Data\Managed\UnityEngine.dll
 
+using System;
+
 namespace UnityEngine
 {
     public struct Vector2d
@@ -21,7 +23,7 @@ namespace UnityEngine
                     case 1:
                         return y;
                     default:
-                        throw new System.IndexOutOfRangeException("Invalid Vector2d index!");
+                        throw new IndexOutOfRangeException("Invalid Vector2d index!");
                 }
             }
             set
@@ -35,7 +37,7 @@ namespace UnityEngine
                         y = value;
                         break;
                     default:
-                        throw new System.IndexOutOfRangeException("Invalid Vector2d index!");
+                        throw new IndexOutOfRangeException("Invalid Vector2d index!");
                 }
             }
         }
@@ -44,7 +46,7 @@ namespace UnityEngine
         {
             get
             {
-                Vector2d vector2d = new Vector2d(x, y);
+                var vector2d = new Vector2d(x, y);
                 vector2d.Normalize();
                 return vector2d;
             }
@@ -132,8 +134,8 @@ namespace UnityEngine
 
         public static Vector2d MoveTowards(Vector2d current, Vector2d target, double maxDistanceDelta)
         {
-            Vector2d vector2 = target - current;
-            double magnitude = vector2.magnitude;
+            var vector2 = target - current;
+            var magnitude = vector2.magnitude;
             if (magnitude <= maxDistanceDelta || magnitude == 0.0d)
                 return target;
             return current + vector2 / magnitude * maxDistanceDelta;
@@ -152,7 +154,7 @@ namespace UnityEngine
 
         public void Normalize()
         {
-            double magnitude = this.magnitude;
+            var magnitude = this.magnitude;
             if (magnitude > 9.99999974737875E-06)
                 this = this / magnitude;
             else
@@ -200,7 +202,7 @@ namespace UnityEngine
         {
             if (!(other is Vector2d))
                 return false;
-            Vector2d vector2d = (Vector2d) other;
+            var vector2d = (Vector2d) other;
             if (x.Equals(vector2d.x))
                 return y.Equals(vector2d.y);
             return false;

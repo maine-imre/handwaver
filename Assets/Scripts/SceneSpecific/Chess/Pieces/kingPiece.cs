@@ -5,6 +5,9 @@ See license info in readme.md.
 www.imrelab.org
 **/
 
+using System.Collections.Generic;
+using UnityEngine;
+
 namespace IMRE.Chess3D
 {
     /// <summary>
@@ -14,35 +17,35 @@ namespace IMRE.Chess3D
     {
         private void Start()
         {
-            Board = UnityEngine.GameObject.Find("chessBoard").GetComponent<chessBoard>();
+            Board = GameObject.Find("chessBoard").GetComponent<chessBoard>();
             PieceType = chessBoard.PieceType.king;
         }
 
         public override void capture()
         {
-            UnityEngine.Debug.Log("Game Ends! " + Team + " lost the game.");
+            Debug.Log("Game Ends! " + Team + " lost the game.");
         }
 
-        public override bool IsValid(UnityEngine.Vector3 moveToTest)
+        public override bool IsValid(Vector3 moveToTest)
         {
-            UnityEngine.Vector3 tmp = moveToTest - Location;
-            if (tmp == UnityEngine.Vector3.zero)
+            var tmp = moveToTest - Location;
+            if (tmp == Vector3.zero)
                 return false;
             if (Board.TestLocation(moveToTest) != null)
                 if (Board.TestLocation(moveToTest).Team == Team)
                     return false;
 
-            if (UnityEngine.Mathf.Abs(UnityEngine.Vector3.Dot(tmp, UnityEngine.Vector3.right)) > 1) return false;
+            if (Mathf.Abs(Vector3.Dot(tmp, Vector3.right)) > 1) return false;
 
-            if (UnityEngine.Mathf.Abs(UnityEngine.Vector3.Dot(tmp, UnityEngine.Vector3.up)) > 1) return false;
-            if (UnityEngine.Mathf.Abs(UnityEngine.Vector3.Dot(tmp, UnityEngine.Vector3.forward)) > 1) return false;
+            if (Mathf.Abs(Vector3.Dot(tmp, Vector3.up)) > 1) return false;
+            if (Mathf.Abs(Vector3.Dot(tmp, Vector3.forward)) > 1) return false;
 
             if (Board.placeSelfInCheck(this, moveToTest)) return false;
             return true;
             //check if in check
         }
 
-        public override System.Collections.Generic.List<UnityEngine.Vector3> validMoves()
+        public override List<Vector3> validMoves()
         {
             return allValidMoves.kingMoves(Location, Board.myTeam(Team));
         }

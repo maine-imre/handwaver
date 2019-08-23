@@ -1,9 +1,13 @@
+using System;
+using Unity.Mathematics;
+using UnityEngine;
+
 namespace IMRE.EmbodiedUserInput
 {
     /// <summary>
     ///     Generic tracking data for a body and hands
     /// </summary>
-    [System.SerializableAttribute]
+    [Serializable]
     public struct BodyInput
     {
         #region Tracking Modes
@@ -149,7 +153,7 @@ namespace IMRE.EmbodiedUserInput
             return new Finger
             {
                 Joints = new[] {newBodyComponent(), newBodyComponent(), newBodyComponent(), newBodyComponent()},
-                Direction = UnityEngine.Vector3.zero
+                Direction = Vector3.zero
             };
         }
 
@@ -161,9 +165,9 @@ namespace IMRE.EmbodiedUserInput
         {
             return new BodyComponent
             {
-                Direction = UnityEngine.Vector3.zero,
-                Position = UnityEngine.Vector3.zero,
-                Velocity = UnityEngine.Vector3.zero
+                Direction = Vector3.zero,
+                Position = Vector3.zero,
+                Velocity = Vector3.zero
             };
         }
 
@@ -184,15 +188,15 @@ namespace IMRE.EmbodiedUserInput
     /// <summary>
     ///     The generic tracking data for a generic body component.
     /// </summary>
-    [System.SerializableAttribute]
+    [Serializable]
     public struct BodyComponent
     {
-        private Unity.Mathematics.float3x3 data;
+        private float3x3 data;
 
         /// <summary>
         ///     The position of a given joint
         /// </summary>
-        public Unity.Mathematics.float3 Position
+        public float3 Position
         {
             get => data.c0;
             set => data.c0 = value;
@@ -203,7 +207,7 @@ namespace IMRE.EmbodiedUserInput
         ///     Unless otherwise noted, this is a assumeed to be the radial direction
         ///     of the previous connecting bone
         /// </summary>
-        public Unity.Mathematics.float3 Direction
+        public float3 Direction
         {
             get => data.c1;
             set => data.c1 = value;
@@ -214,14 +218,14 @@ namespace IMRE.EmbodiedUserInput
         ///     This is done on seperate calculation, and it is not needed to be updated outside of
         ///     <see cref="BodyInputDataSystem" />
         /// </summary>
-        public Unity.Mathematics.float3 Velocity
+        public float3 Velocity
         {
             get => data.c2;
             set => data.c2 = value;
         }
     }
 
-    [System.SerializableAttribute]
+    [Serializable]
     public enum Chirality
     {
         Left,
@@ -232,7 +236,7 @@ namespace IMRE.EmbodiedUserInput
     /// <summary>
     ///     A generic tracking data from a finger.
     /// </summary>
-    [System.SerializableAttribute]
+    [Serializable]
     public struct Finger
     {
         /// <summary>
@@ -243,7 +247,7 @@ namespace IMRE.EmbodiedUserInput
         /// <summary>
         ///     the direction a given finger is pointing in.
         /// </summary>
-        public Unity.Mathematics.float3 Direction;
+        public float3 Direction;
 
         /// <summary>
         ///     Wheter or not a finger is extended (pointing).
@@ -254,7 +258,7 @@ namespace IMRE.EmbodiedUserInput
     /// <summary>
     ///     The generic tracking data for a Hand.
     /// </summary>
-    [System.SerializableAttribute]
+    [Serializable]
     public struct Hand
     {
         /// <summary>

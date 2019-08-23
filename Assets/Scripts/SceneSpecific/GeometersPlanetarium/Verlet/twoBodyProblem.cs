@@ -1,11 +1,13 @@
-﻿namespace IMRE.HandWaver.Space.BigBertha
+﻿using UnityEngine;
+
+namespace IMRE.HandWaver.Space.BigBertha
 {
     /// <summary>
     ///     This script does ___.
     ///     The main contributor(s) to this script is TB
     ///     Status: WORKING
     /// </summary>
-    public class twoBodyProblem : UnityEngine.MonoBehaviour
+    public class twoBodyProblem : MonoBehaviour
     {
         private void twoBodyAlgorithm()
         {

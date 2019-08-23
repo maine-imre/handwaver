@@ -2,6 +2,8 @@
 // Assembly: UnityEngine, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 // Assembly location: C:\Program Files (x86)\Unity\Editor\Data\Managed\UnityEngine.dll
 
+using System;
+
 namespace UnityEngine
 {
     public struct Mathd
@@ -15,52 +17,52 @@ namespace UnityEngine
 
         public static double Sin(double d)
         {
-            return System.Math.Sin(d);
+            return Math.Sin(d);
         }
 
         public static double Cos(double d)
         {
-            return System.Math.Cos(d);
+            return Math.Cos(d);
         }
 
         public static double Tan(double d)
         {
-            return System.Math.Tan(d);
+            return Math.Tan(d);
         }
 
         public static double Asin(double d)
         {
-            return System.Math.Asin(d);
+            return Math.Asin(d);
         }
 
         public static double Acos(double d)
         {
-            return System.Math.Acos(d);
+            return Math.Acos(d);
         }
 
         public static double Atan(double d)
         {
-            return System.Math.Atan(d);
+            return Math.Atan(d);
         }
 
         public static double Atan2(double y, double x)
         {
-            return System.Math.Atan2(y, x);
+            return Math.Atan2(y, x);
         }
 
         public static double Sqrt(double d)
         {
-            return System.Math.Sqrt(d);
+            return Math.Sqrt(d);
         }
 
         public static double Abs(double d)
         {
-            return System.Math.Abs(d);
+            return Math.Abs(d);
         }
 
         public static int Abs(int value)
         {
-            return System.Math.Abs(value);
+            return Math.Abs(value);
         }
 
         public static double Min(double a, double b)
@@ -72,15 +74,13 @@ namespace UnityEngine
 
         public static double Min(params double[] values)
         {
-            int length = values.Length;
+            var length = values.Length;
             if (length == 0)
                 return 0.0d;
-            double num = values[0];
-            for (int index = 1; index < length; ++index)
-            {
+            var num = values[0];
+            for (var index = 1; index < length; ++index)
                 if (values[index] < num)
                     num = values[index];
-            }
 
             return num;
         }
@@ -94,15 +94,13 @@ namespace UnityEngine
 
         public static int Min(params int[] values)
         {
-            int length = values.Length;
+            var length = values.Length;
             if (length == 0)
                 return 0;
-            int num = values[0];
-            for (int index = 1; index < length; ++index)
-            {
+            var num = values[0];
+            for (var index = 1; index < length; ++index)
                 if (values[index] < num)
                     num = values[index];
-            }
 
             return num;
         }
@@ -116,15 +114,13 @@ namespace UnityEngine
 
         public static double Max(params double[] values)
         {
-            int length = values.Length;
+            var length = values.Length;
             if (length == 0)
                 return 0d;
-            double num = values[0];
-            for (int index = 1; index < length; ++index)
-            {
+            var num = values[0];
+            for (var index = 1; index < length; ++index)
                 if (values[index] > num)
                     num = values[index];
-            }
 
             return num;
         }
@@ -138,72 +134,70 @@ namespace UnityEngine
 
         public static int Max(params int[] values)
         {
-            int length = values.Length;
+            var length = values.Length;
             if (length == 0)
                 return 0;
-            int num = values[0];
-            for (int index = 1; index < length; ++index)
-            {
+            var num = values[0];
+            for (var index = 1; index < length; ++index)
                 if (values[index] > num)
                     num = values[index];
-            }
 
             return num;
         }
 
         public static double Pow(double d, double p)
         {
-            return System.Math.Pow(d, p);
+            return Math.Pow(d, p);
         }
 
         public static double Exp(double power)
         {
-            return System.Math.Exp(power);
+            return Math.Exp(power);
         }
 
         public static double Log(double d, double p)
         {
-            return System.Math.Log(d, p);
+            return Math.Log(d, p);
         }
 
         public static double Log(double d)
         {
-            return System.Math.Log(d);
+            return Math.Log(d);
         }
 
         public static double Log10(double d)
         {
-            return System.Math.Log10(d);
+            return Math.Log10(d);
         }
 
         public static double Ceil(double d)
         {
-            return System.Math.Ceiling(d);
+            return Math.Ceiling(d);
         }
 
         public static double Floor(double d)
         {
-            return System.Math.Floor(d);
+            return Math.Floor(d);
         }
 
         public static double Round(double d)
         {
-            return System.Math.Round(d);
+            return Math.Round(d);
         }
 
         public static int CeilToInt(double d)
         {
-            return (int) System.Math.Ceiling(d);
+            return (int) Math.Ceiling(d);
         }
 
         public static int FloorToInt(double d)
         {
-            return (int) System.Math.Floor(d);
+            return (int) Math.Floor(d);
         }
 
         public static int RoundToInt(double d)
         {
-            return (int) System.Math.Round(d);
+            return (int) Math.Round(d);
         }
 
         public static double Sign(double d)
@@ -245,7 +239,7 @@ namespace UnityEngine
 
         public static double LerpAngle(double a, double b, double t)
         {
-            double num = Repeat(b - a, 360d);
+            var num = Repeat(b - a, 360d);
             if (num > 180.0d)
                 num -= 360d;
             return a + num * Clamp01(t);
@@ -273,10 +267,10 @@ namespace UnityEngine
 
         public static double Gamma(double value, double absmax, double gamma)
         {
-            bool flag = false;
+            var flag = false;
             if (value < 0.0)
                 flag = true;
-            double num1 = Abs(value);
+            var num1 = Abs(value);
             if (num1 > absmax)
             {
                 if (flag)
@@ -284,7 +278,7 @@ namespace UnityEngine
                 return num1;
             }
 
-            double num2 = Pow(num1 / absmax, gamma) * absmax;
+            var num2 = Pow(num1 / absmax, gamma) * absmax;
             if (flag)
                 return -num2;
             return num2;
@@ -305,7 +299,7 @@ namespace UnityEngine
         public static double SmoothDamp(double current, double target, ref double currentVelocity, double smoothTime)
         {
             double deltaTime = Time.deltaTime;
-            double maxSpeed = double.PositiveInfinity;
+            var maxSpeed = double.PositiveInfinity;
             return SmoothDamp(current, target, ref currentVelocity, smoothTime, maxSpeed, deltaTime);
         }
 
@@ -313,18 +307,18 @@ namespace UnityEngine
             double maxSpeed, double deltaTime)
         {
             smoothTime = Max(0.0001d, smoothTime);
-            double num1 = 2d / smoothTime;
-            double num2 = num1 * deltaTime;
-            double num3 = 1.0d / (1.0d + num2 + 0.479999989271164d * num2 * num2 +
-                                  0.234999999403954d * num2 * num2 * num2);
-            double num4 = current - target;
-            double num5 = target;
-            double max = maxSpeed * smoothTime;
-            double num6 = Clamp(num4, -max, max);
+            var num1 = 2d / smoothTime;
+            var num2 = num1 * deltaTime;
+            var num3 = 1.0d / (1.0d + num2 + 0.479999989271164d * num2 * num2 +
+                               0.234999999403954d * num2 * num2 * num2);
+            var num4 = current - target;
+            var num5 = target;
+            var max = maxSpeed * smoothTime;
+            var num6 = Clamp(num4, -max, max);
             target = current - num6;
-            double num7 = (currentVelocity + num1 * num6) * deltaTime;
+            var num7 = (currentVelocity + num1 * num6) * deltaTime;
             currentVelocity = (currentVelocity - num1 * num7) * num3;
-            double num8 = target + (num6 + num7) * num3;
+            var num8 = target + (num6 + num7) * num3;
             if (num5 - current > 0.0 == num8 > num5)
             {
                 num8 = num5;
@@ -345,7 +339,7 @@ namespace UnityEngine
             double smoothTime)
         {
             double deltaTime = Time.deltaTime;
-            double maxSpeed = double.PositiveInfinity;
+            var maxSpeed = double.PositiveInfinity;
             return SmoothDampAngle(current, target, ref currentVelocity, smoothTime, maxSpeed, deltaTime);
         }
 
@@ -391,7 +385,7 @@ namespace UnityEngine
 
         public static double DeltaAngle(double current, double target)
         {
-            double num = Repeat(target - current, 360d);
+            var num = Repeat(target - current, 360d);
             if (num > 180.0d)
                 num -= 360d;
             return num;
@@ -399,16 +393,16 @@ namespace UnityEngine
 
         internal static bool LineIntersection(Vector2d p1, Vector2d p2, Vector2d p3, Vector2d p4, ref Vector2d result)
         {
-            double num1 = p2.x - p1.x;
-            double num2 = p2.y - p1.y;
-            double num3 = p4.x - p3.x;
-            double num4 = p4.y - p3.y;
-            double num5 = num1 * num4 - num2 * num3;
+            var num1 = p2.x - p1.x;
+            var num2 = p2.y - p1.y;
+            var num3 = p4.x - p3.x;
+            var num4 = p4.y - p3.y;
+            var num5 = num1 * num4 - num2 * num3;
             if (num5 == 0.0d)
                 return false;
-            double num6 = p3.x - p1.x;
-            double num7 = p3.y - p1.y;
-            double num8 = (num6 * num4 - num7 * num3) / num5;
+            var num6 = p3.x - p1.x;
+            var num7 = p3.y - p1.y;
+            var num8 = (num6 * num4 - num7 * num3) / num5;
             result = new Vector2d(p1.x + num8 * num1, p1.y + num8 * num2);
             return true;
         }
@@ -416,19 +410,19 @@ namespace UnityEngine
         internal static bool LineSegmentIntersection(Vector2d p1, Vector2d p2, Vector2d p3, Vector2d p4,
             ref Vector2d result)
         {
-            double num1 = p2.x - p1.x;
-            double num2 = p2.y - p1.y;
-            double num3 = p4.x - p3.x;
-            double num4 = p4.y - p3.y;
-            double num5 = num1 * num4 - num2 * num3;
+            var num1 = p2.x - p1.x;
+            var num2 = p2.y - p1.y;
+            var num3 = p4.x - p3.x;
+            var num4 = p4.y - p3.y;
+            var num5 = num1 * num4 - num2 * num3;
             if (num5 == 0.0d)
                 return false;
-            double num6 = p3.x - p1.x;
-            double num7 = p3.y - p1.y;
-            double num8 = (num6 * num4 - num7 * num3) / num5;
+            var num6 = p3.x - p1.x;
+            var num7 = p3.y - p1.y;
+            var num8 = (num6 * num4 - num7 * num3) / num5;
             if (num8 < 0.0d || num8 > 1.0d)
                 return false;
-            double num9 = (num6 * num2 - num7 * num1) / num5;
+            var num9 = (num6 * num2 - num7 * num1) / num5;
             if (num9 < 0.0d || num9 > 1.0d)
                 return false;
             result = new Vector2d(p1.x + num8 * num1, p1.y + num8 * num2);

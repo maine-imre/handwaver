@@ -1,18 +1,20 @@
-﻿namespace IMRE.HandWaver.Space.BigBertha
+﻿using UnityEngine;
+
+namespace IMRE.HandWaver.Space.BigBertha
 {
     /// <summary>
     ///     This script does ___.
     ///     The main contributor(s) to this script is TB
     ///     Status: WORKING
     /// </summary>
-    public class GravationalObjectV2 : UnityEngine.MonoBehaviour
+    public class GravationalObjectV2 : MonoBehaviour
     {
         public float mass;
 
-        [UnityEngine.HideInInspector] public double scale = 1;
+        [HideInInspector] public double scale = 1;
 
-        public UnityEngine.Vector3 VelocityVector; //Used for initial velocity, not calculation
-        public UnityEngine.Vector3d VVec;
+        public Vector3 VelocityVector; //Used for initial velocity, not calculation
+        public Vector3d VVec;
         public double x;
         public double y;
 
@@ -29,7 +31,7 @@
         // Update is called once per frame
         private void Update()
         {
-            transform.position = new UnityEngine.Vector3((float) (x * scale), (float) (y * scale), (float) (z * scale));
+            transform.position = new Vector3((float) (x * scale), (float) (y * scale), (float) (z * scale));
         }
     }
 }

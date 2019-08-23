@@ -1,38 +1,47 @@
+using IMRE.HandWaver.Kernel.Geos;
+using IMRE.Math;
+using Unity.Mathematics;
 
-namespace IMRE.HandWaver.Kernel{
+namespace IMRE.HandWaver.Kernel
+{
+    public static class GeoElementProximityLib
+    {
+        public static float distToGeo(GeoElement geo, float3 pos)
+        {
+            return Operations.Magnitude(pos - closestPosition(geo, pos));
+        }
 
-	public static class GeoElementProximityLib{
-		public static float distToGeo(GeoElement geo, Unity.Mathematics.float3 pos)
-		{
-			return IMRE.Math.Operations.magnitude(pos - cloesetPosition(geo,pos));
-		}
-		public static Unity.Mathematics.float3 closestPosition(GeoElement geo, Unity.Mathematics.float3 pos)
-		{
-			//TODO switch by type
-			return Unity.Mathematics.float3.zero;
-		}
-		
-		private static Unity.Mathematics.float3 closestPositionSphere(Unity.Mathematics.float3 sphereCenter, float sphereRadius, Unity.Mathematics.float3 pos){
-			return Unity.Mathematics.math.normalize(pos-sphereCenter)*sphereRadius;
-		}
-		
-		private static Unity.Mathematics.float3 closestPositionPlane(Unity.Mathematics.float3 pointOnPlane, Unity.Mathematics.float3 planeNormal, Unity.Mathematics.float3 pos)
-		{
-			return pos - IMRE.Math.Operations.project(pos - pointOnPlane, planeNormal);
-		}
-		
-		private static Unity.Mathematics.float3 closestPositionLine(Unity.Mathematics.float3 pointOnLine, Unity.Mathematics.float3 lineDirection, Unity.Mathematics.float3 pos)
-		{
-			return IMRE.Math.Operations.project(pos - pointOnLine, lineDirection) + pointOneLine;
-		}
-		
-		private static Unity.Mathematics.float3 closestPositionPoint(Unity.Mathematics.float3 point, Unity.Mathematics.float3 pos){
-			return point;
-		}
-		
-		private static Unity.Mathematics.float3 closestPositionCircle(Unity.Mathematics.float3 circleCenter, float circleRadius, Unity.Mathematics.float3 circleNormal, Unity.Mathematics.float3 pos)
-		{
-			return Unity.Mathematics.math.normalize(closestPositionPlane(circleCenter, circleNormal, pos) - circleCenter)*circleRadius+circleCenter;
-		}
-	}
+        public static float3 closestPosition(GeoElement geo, float3 pos)
+        {
+            //TODO switch by type
+            return float3.zero;
+        }
+
+        private static float3 closestPositionSphere(float3 sphereCenter, float sphereRadius, float3 pos)
+        {
+            return math.normalize(pos - sphereCenter) * sphereRadius;
+        }
+
+        private static float3 closestPositionPlane(float3 pointOnPlane, float3 planeNormal, float3 pos)
+        {
+            return pos - Operations.Project(pos - pointOnPlane, planeNormal);
+        }
+
+        private static float3 closestPositionLine(float3 pointOnLine, float3 lineDirection, float3 pos)
+        {
+            return Operations.Project(pos - pointOnLine, lineDirection) + pointOnLine;
+        }
+
+        private static float3 closestPositionPoint(float3 point, float3 pos)
+        {
+            return point;
+        }
+
+        private static float3 closestPositionCircle(float3 circleCenter, float circleRadius, float3 circleNormal,
+            float3 pos)
+        {
+            return math.normalize(closestPositionPlane(circleCenter, circleNormal, pos) - circleCenter) * circleRadius +
+                   circleCenter;
+        }
+    }
 }

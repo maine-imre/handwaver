@@ -1,9 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using IMRE.HandWaver.ActionSystem;
-using UnityEngine;
+﻿using IMRE.HandWaver.ActionSystem;
 
 public class MoveGeoElement : GeoElementFunction
 {
-    
 }

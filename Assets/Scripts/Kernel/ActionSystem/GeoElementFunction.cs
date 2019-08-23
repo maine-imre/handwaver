@@ -1,44 +1,40 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using IMRE.EmbodiedUserInput;
-using IMRE.HandWaver.Space;
+﻿using IMRE.EmbodiedUserInput;
+using IMRE.HandWaver.Kernel;
+using IMRE.HandWaver.Kernel.Geos;
 using IMRE.Math;
-using Unity.Mathematics;
-using UnityEngine;
 
 namespace IMRE.HandWaver.ActionSystem
 {
-    public class GeoElementFunction : EmbodiedAction
+    public abstract class GeoElementFunction : EmbodiedAction
     {
-        public float tolerance = .05f;
         public float angleTolerance = 15f;
         private float desiredAngle = 0f;
+        public float tolerance = .05f;
 
         public override void checkClassifier(EmbodiedClassifier classifier)
         {
-            float bestDist = tolerance;
-            GeoElement geo = new GeoElement();
+            var bestDist = tolerance;
+            var geo = new GeoElement();
             //find closest point
-            for (int i = 0; i < GeoElementDatabase.GeoElements.Values.Count; i++)
+            for (var i = 0; i < GeoElementDataBase.GeoElements.Count; i++)
             {
-                float3 closestPoint = GeoElementProximityLib.closestPointOnSurface(GeoElementDatabase.GeoElements.Values[i]);
-                if ((Operations.magnitude(classifier.origin - closestPoint) < bestDist) &&
-                    (Operations.Angle(classifier.direction,classifier.origin - closestPoint) < angleTolerance))
+                if (GeoElementDataBase.GeoNameDb.ContainsValue(i)) continue;
+
+                var closestPoint =
+                    GeoElementProximityLib.closestPosition(GeoElementDataBase.GeoElements[i], classifier.origin);
+                if ((classifier.origin - closestPoint).Magnitude() < bestDist &&
+                    Operations.Angle(classifier.direction, classifier.origin - closestPoint) < angleTolerance)
                 {
-                    geo = GeoElementDatabase.GeoElements.Values[i];
-                    bestDist = Operations.magnitude(classifier.origin - closestPoint);
+                    geo = GeoElementDataBase.GeoElements[i];
+                    bestDist = (classifier.origin - closestPoint).Magnitude();
                 }
             }
 
-            if (!geo.Equals(default(GeoElement)))
-            {
-                geoElementFunction(geo, classifier);
-            }
+            if (!geo.Equals(default(GeoElement))) geoElementFunction(geo, classifier);
         }
 
         public override void endAction(EmbodiedClassifier classifier)
         {
-            return;
         }
 
         public abstract void geoElementFunction(GeoElement geo, EmbodiedClassifier classifier);

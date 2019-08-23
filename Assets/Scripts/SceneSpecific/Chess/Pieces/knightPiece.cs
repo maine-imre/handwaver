@@ -5,6 +5,10 @@ See license info in readme.md.
 www.imrelab.org
 **/
 
+using System;
+using System.Collections.Generic;
+using UnityEngine;
+
 namespace IMRE.Chess3D
 {
     /// <summary>
@@ -14,21 +18,21 @@ namespace IMRE.Chess3D
     {
         public override void capture()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
-        public override bool IsValid(UnityEngine.Vector3 attemptedMove)
+        public override bool IsValid(Vector3 attemptedMove)
         {
-            UnityEngine.Vector3 tmp = Location - attemptedMove;
-            if (tmp == UnityEngine.Vector3.zero) return false;
+            var tmp = Location - attemptedMove;
+            if (tmp == Vector3.zero) return false;
 
-            System.Collections.Generic.List<UnityEngine.Vector3> possible = validMoves();
+            var possible = validMoves();
             if (possible.Contains(Location))
                 return true;
             return false;
         }
 
-        public override System.Collections.Generic.List<UnityEngine.Vector3> validMoves()
+        public override List<Vector3> validMoves()
         {
             return allValidMoves.kingMoves(Location, Board.myTeam(Team));
         }

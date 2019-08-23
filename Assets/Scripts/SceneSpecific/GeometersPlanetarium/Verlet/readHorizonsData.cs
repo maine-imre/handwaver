@@ -1,15 +1,19 @@
-﻿namespace IMRE.HandWaver.Space.BigBertha
+﻿using System;
+using System.Xml;
+using UnityEngine;
+
+namespace IMRE.HandWaver.Space.BigBertha
 {
     /// <summary>
     ///     This script does ___.
     ///     The main contributor(s) to this script is TB
     ///     Status: WORKING
     /// </summary>
-    public class readHorizonsData : UnityEngine.MonoBehaviour
+    public class readHorizonsData : MonoBehaviour
     {
         private string bodyName = ""; //The given name of the object
         private string date; //The current date (for getting the current to the hour data)
-        public UnityEngine.GameObject defaultBody; //The default version of a massive object
+        public GameObject defaultBody; //The default version of a massive object
         private float mass = 1; //The mass of the object
         private float radius = 1; //The radius of the object (if the object is close to circular)
         private string time; //The current time (assists above)
@@ -23,24 +27,22 @@
         // Use this for initialization
         private void Start()
         {
-            System.Xml.XmlDocument dataFile = new System.Xml.XmlDocument(); //The file of data about the bodies
+            var dataFile = new XmlDocument(); //The file of data about the bodies
             dataFile.Load(@"Assets/PlanetaryData/filename.xml");
-            System.Xml.XmlDocument orbitFile = new System.Xml.XmlDocument(); //The file of the orbit data for each body
+            var orbitFile = new XmlDocument(); //The file of the orbit data for each body
             orbitFile.Load(@"Assets/PlanetaryData/orbitData.xml");
-            foreach (System.Xml.XmlNode node in dataFile.DocumentElement.ChildNodes)
+            foreach (XmlNode node in dataFile.DocumentElement.ChildNodes)
             {
                 //For every body
                 bodyName = node.Attributes["name"].Value; //Name the body
-                foreach (System.Xml.XmlNode subnode in node.ChildNodes)
+                foreach (XmlNode subnode in node.ChildNodes)
                     //For all accociated data
-                {
                     if (subnode.Name == "mass")
                         mass = float.Parse(subnode.InnerText);
                     else if (subnode.Name == "radius") radius = float.Parse(subnode.InnerText);
-                }
 
-                System.DateTime currenttime = System.DateTime.Now; //The current date/time
-                string currentMonth = "";
+                var currenttime = DateTime.Now; //The current date/time
+                var currentMonth = "";
                 switch (currenttime.Month)
                 {
                     //Getting the month correct
@@ -82,24 +84,22 @@
                         break;
                 }
 
-                UnityEngine.Debug.Log(currenttime.Hour);
-                string targetDateTime = "";
+                Debug.Log(currenttime.Hour);
+                var targetDateTime = "";
                 if (currenttime.Hour == 0)
                     targetDateTime = currenttime.Year + "-" + currentMonth + "-" + currenttime.Day + " 0" +
                                      currenttime.Hour + ":00:00.0000";
                 else
                     targetDateTime = currenttime.Year + "-" + currentMonth + "-" + currenttime.Day + " " +
                                      currenttime.Hour + ":00:00.0000";
-                foreach (System.Xml.XmlNode orbitNode in orbitFile.DocumentElement.ChildNodes)
+                foreach (XmlNode orbitNode in orbitFile.DocumentElement.ChildNodes)
                     //For every planet
-                {
                     if (orbitNode.Attributes["name"].Value == bodyName)
                     {
-                        UnityEngine.Debug.Log("START");
-                        UnityEngine.Debug.Log(targetDateTime);
-                        foreach (System.Xml.XmlNode orbitsubnode in orbitNode.ChildNodes)
+                        Debug.Log("START");
+                        Debug.Log(targetDateTime);
+                        foreach (XmlNode orbitsubnode in orbitNode.ChildNodes)
                             //For every orbit datapoint
-                        {
                             if (orbitsubnode.Attributes["timeStamp"].Value == targetDateTime)
                             {
                                 x = float.Parse(orbitsubnode["X"]
@@ -110,17 +110,15 @@
                                 vy = float.Parse(orbitsubnode["VY"].InnerText);
                                 vz = float.Parse(orbitsubnode["VZ"].InnerText);
                             }
-                        }
                     }
-                }
 
                 //defaultBody.name = bodyName;										//This code sets the default body values to the given data and instantiates it
-                VerletObjectV1 df = defaultBody.GetComponent<VerletObjectV1>();
+                var df = defaultBody.GetComponent<VerletObjectV1>();
                 df.mass = mass;
-                df.inputPosition = new UnityEngine.Vector3(x, y, z);
-                df.inputVelocity = new UnityEngine.Vector3(vx, vy, vz);
+                df.inputPosition = new Vector3(x, y, z);
+                df.inputVelocity = new Vector3(vx, vy, vz);
                 df.radius = radius;
-                UnityEngine.GameObject body = Instantiate(defaultBody);
+                var body = Instantiate(defaultBody);
                 body.name = bodyName;
             }
         }

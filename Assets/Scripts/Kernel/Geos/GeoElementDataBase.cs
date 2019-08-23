@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using UnityEngine;
+
 namespace IMRE.HandWaver.Kernel.Geos
 {
     public static class GeoElementDataBase
@@ -6,22 +9,22 @@ namespace IMRE.HandWaver.Kernel.Geos
         ///     Dictionary to keep track of the Geoelement's id based on the string name.
         ///     Key is element name as a string (max 30 characters).
         /// </summary>
-        public static System.Collections.Generic.Dictionary<string, int> GeoNameDb =
-            new System.Collections.Generic.Dictionary<string, int>();
+        public static Dictionary<string, int> GeoNameDb =
+            new Dictionary<string, int>();
 
         /// <summary>
         ///     Dictionary of all GeoElements within the scene.
         ///     Key is element id as int.
         /// </summary>
-        public static System.Collections.Generic.Dictionary<int, GeoElement> GeoElements =
-            new System.Collections.Generic.Dictionary<int, GeoElement>();
+        public static Dictionary<int, GeoElement> GeoElements =
+            new Dictionary<int, GeoElement>();
 
         /// <summary>
         ///     Dictionary of all GeoElement meshes.
         ///     Key is element id as int.
         /// </summary>
-        private static readonly System.Collections.Generic.Dictionary<int, UnityEngine.Mesh> GeoElementMesh =
-            new System.Collections.Generic.Dictionary<int, UnityEngine.Mesh>();
+        private static readonly Dictionary<int, Mesh> GeoElementMesh =
+            new Dictionary<int, Mesh>();
 
         /// <summary>
         ///     Interface method to return element id from element name.
@@ -60,11 +63,11 @@ namespace IMRE.HandWaver.Kernel.Geos
         public static void AddElement(GeoElement e)
         {
             if (HasElement(e))
-                UnityEngine.Debug.LogWarningFormat("Element {0} already exists within the current context.",
+                Debug.LogWarningFormat("Element {0} already exists within the current context.",
                     e.ElementId);
             GeoElements[e.ElementId] = e;
             GeoNameDb[e.ElementName.ToString()] = e.ElementId;
-            GeoElementMesh[e.ElementId] = new UnityEngine.Mesh();
+            GeoElementMesh[e.ElementId] = new Mesh();
         }
 
         /// <summary>
