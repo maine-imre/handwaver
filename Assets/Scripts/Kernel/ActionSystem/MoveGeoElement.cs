@@ -2,10 +2,13 @@
 using IMRE.HandWaver.ActionSystem;
 using IMRE.HandWaver.Kernel.Geos;
 
-public class MoveGeoElement : GeoElementFunction
+namespace IMRE.HandWaver.Kernel.ActionSystem
 {
-    public override void geoElementFunction(GeoElement geo, EmbodiedClassifier classifier)
+    public class MoveGeoElement : GeoElementFunction
     {
-        throw new System.NotImplementedException();
+        public override void geoElementFunction(GeoElement geo, EmbodiedClassifier classifier)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
