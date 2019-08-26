@@ -18,12 +18,6 @@ namespace IMRE.HandWaver.Rendering
 
         private static float3 headDirection => float3.zero;
 
-        private static void render(Mesh mesh)
-        {
-            //TODO @Nathan - how do we do this with ECS?
-            throw new NotImplementedException();
-        }
-
         // TODO: Group by element type.
         //    -- Point
         //    -- Path
@@ -39,10 +33,10 @@ namespace IMRE.HandWaver.Rendering
         /// </summary>
         /// <param name="point"></param>
         /// <param name="direction"></param>
-        public static void Line(float3 point, float3 direction)
+        public static Mesh Line(float3 point, float3 direction)
         {
             direction = math.normalize(direction);
-            Segment(point + 100f * direction, point - 100f * direction);
+            return Segment(point + 100f * direction, point - 100f * direction);
         }
 
         /// <summary>
@@ -50,11 +44,11 @@ namespace IMRE.HandWaver.Rendering
         /// Currently being rendered as a very tiny line segment-revise this
         /// </summary>
         /// <param name="location"></param>
-        public static void Point(float3 location)
+        public static Mesh Point(float3 location)
         {
             //TODO a better visualization of a point
             var dir = width / 2f * new float3(1, 1, 1);
-            Segment(location - dir, location + dir);
+            return Segment(location - dir, location + dir);
         }
 
         /// <summary>
@@ -116,7 +110,7 @@ namespace IMRE.HandWaver.Rendering
             return mesh;
         }
 
-        public static void Angle(Vector3 center, Vector3 segmentStart, Vector3 segmentAEndpoint,
+        public static Mesh Angle(Vector3 center, Vector3 segmentStart, Vector3 segmentAEndpoint,
             Vector3 segmentBEndpoint)
         {
             Segment(segmentStart, segmentAEndpoint);
@@ -145,12 +139,12 @@ namespace IMRE.HandWaver.Rendering
 
             semiCircleMesh.vertices = vertices;
             //semiCircleMesh.SetPositions(vertices);
-            render(semiCircleMesh);
-
             #endregion
+            return semiCircleMesh;
+
         }
 
-        public static void Axis( /*Data needed to render*/)
+        public static Mesh Axis( /*Data needed to render*/)
         {
             throw new NotImplementedException();
         }
@@ -240,47 +234,47 @@ namespace IMRE.HandWaver.Rendering
             return mesh;
         }
 
-        public static void Conic( /*Data needed to render*/)
+        public static Mesh Conic( /*Data needed to render*/)
         {
             throw new NotImplementedException();
         }
 
-        public static void ConicPart( /*Data needed to render*/)
+        public static Mesh ConicPart( /*Data needed to render*/)
         {
             throw new NotImplementedException();
         }
 
-        public static void CurveCartesian( /*Data needed to render*/)
+        public static Mesh CurveCartesian( /*Data needed to render*/)
         {
             throw new NotImplementedException();
         }
 
-        public static void Function( /*Data needed to render*/)
+        public static Mesh Function( /*Data needed to render*/)
         {
             throw new NotImplementedException();
         }
 
-        public static void FunctionND( /*Data needed to render*/)
+        public static Mesh FunctionND( /*Data needed to render*/)
         {
             throw new NotImplementedException();
         }
 
-        public static void Interval( /*Data needed to render*/)
+        public static Mesh Interval( /*Data needed to render*/)
         {
             throw new NotImplementedException();
         }
 
-        public static void Locus( /*Data needed to render*/)
+        public static Mesh Locus( /*Data needed to render*/)
         {
             throw new NotImplementedException();
         }
 
-        public static void LocusND( /*Data needed to render*/)
+        public static Mesh LocusND( /*Data needed to render*/)
         {
             throw new NotImplementedException();
         }
 
-        public static void Number( /*Data needed to render*/)
+        public static Mesh Number( /*Data needed to render*/)
         {
             throw new NotImplementedException();
         }
@@ -350,12 +344,12 @@ namespace IMRE.HandWaver.Rendering
             return mesh;
         }
 
-        public static void Poly( /*Data needed to render*/)
+        public static Mesh Poly( /*Data needed to render*/)
         {
             throw new NotImplementedException();
         }
 
-        public static void PolyLine( /*Data needed to render*/)
+        public static Mesh PolyLine( /*Data needed to render*/)
         {
             throw new NotImplementedException();
         }
@@ -364,11 +358,11 @@ namespace IMRE.HandWaver.Rendering
         /// </summary>
         /// <param name="pointFloat3Array"></param>
         /// <returns></returns>
-        public static void Polygon(float3[] pointFloat3Array)
+        public static Mesh Polygon(float3[] pointFloat3Array)
         {
         }
 
-        public static void Ray( /*Data needed to render*/)
+        public static Mesh Ray( /*Data needed to render*/)
         {
             throw new NotImplementedException();
         }
@@ -491,47 +485,47 @@ namespace IMRE.HandWaver.Rendering
             return mesh;
         }
 
-        public static void SurfaceFinite( /*Data needed to render*/)
+        public static Mesh SurfaceFinite( /*Data needed to render*/)
         {
             throw new NotImplementedException();
         }
 
-        public static void Symbolic( /*Data needed to render*/)
+        public static Mesh Symbolic( /*Data needed to render*/)
         {
             throw new NotImplementedException();
         }
 
-        public static void Vector2D( /*Data needed to render*/)
+        public static Mesh Vector2D( /*Data needed to render*/)
         {
             throw new NotImplementedException();
         }
 
-        public static void Vector3D( /*Data needed to render*/)
+        public static Mesh Vector3D( /*Data needed to render*/)
         {
             throw new NotImplementedException();
         }
 
-        public static void Text( /*Data needed to render*/)
+        public static Mesh Text( /*Data needed to render*/)
         {
             throw new NotImplementedException();
         }
 
-        public static void Turtle( /*Data needed to render*/)
+        public static Mesh Turtle( /*Data needed to render*/)
         {
             throw new NotImplementedException();
         }
 
-        public static void Video( /*Data needed to render*/)
+        public static Mesh Video( /*Data needed to render*/)
         {
             throw new NotImplementedException();
         }
 
-        public static void Image( /*Data needed to render*/)
+        public static Mesh Image( /*Data needed to render*/)
         {
             throw new NotImplementedException();
         }
 
-        public static void Slider( /*Data needed to render*/)
+        public static Mesh Slider( /*Data needed to render*/)
         {
             throw new NotImplementedException();
         }
