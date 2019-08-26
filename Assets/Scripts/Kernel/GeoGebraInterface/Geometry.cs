@@ -9,10 +9,7 @@ namespace IMRE.HandWaver.Kernel.GGBFunctions
     public class Geometry : MonoBehaviour
     {
         //TODO: Pull from specific class into generic helper functions
-        public string ObjectFromID(int id)
-        {
-            return "";
-        }
+        public string ObjectFromID(int id) => GeoElementDataBase.GetElement(id);
 
         #region AffineRatio
 
