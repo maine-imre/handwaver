@@ -900,6 +900,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1166667189}
+  - component: {fileID: 1166667191}
+  - component: {fileID: 1166667190}
   m_Layer: 0
   m_Name: ActionSystem
   m_TagString: Untagged
@@ -921,6 +923,37 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1166667190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1166667188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f1c2908c2595fb45ac9bd913a494bac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 0
+  angleTolerance: 15
+  tolerance: 0.05
+--- !u!114 &1166667191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1166667188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4eaa964ba629a58468279e72589b53df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 0
+  angleTolerance: 15
+  tolerance: 0.05
+  cooldown: 2
 --- !u!43 &1264397799
 Mesh:
   m_ObjectHideFlags: 0
