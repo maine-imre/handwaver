@@ -1,3 +1,4 @@
+using System;
 using IMRE.HandWaver.Kernel.Geos;
 using IMRE.Math;
 using Unity.Mathematics;
@@ -8,13 +9,33 @@ namespace IMRE.HandWaver.Kernel
     {
         public static float distToGeo(GeoElement geo, float3 pos)
         {
-            return Operations.Magnitude(pos - closestPosition(geo, pos));
+            return (pos - closestPosition(geo, pos)).Magnitude();
         }
 
         public static float3 closestPosition(GeoElement geo, float3 pos)
         {
-            //TODO switch by type
-            return float3.zero;
+            switch (geo.Type)
+            {
+                case ElementType.point:
+                    return closestPositionPoint(geo.F0, pos);
+                case ElementType.line:
+                    return closestPositionLine(GeoElementDataBase.GeoElements[geo.Deps[0]].F0, 
+                        (GeoElementDataBase.GeoElements[geo.Deps[1]].F0 - GeoElementDataBase.GeoElements[geo.Deps[0]].F0), pos);
+                case ElementType.plane:
+                    //TODO Handle case where plane is defined by 3 points.
+                    return closestPositionPlane(GeoElementDataBase.GeoElements[geo.Deps[0]].F0, geo.F0, pos);
+                case ElementType.sphere:
+                    return closestPositionSphere(GeoElementDataBase.GeoElements[geo.Deps[0]].F0,
+                        (GeoElementDataBase.GeoElements[geo.Deps[1]].F0 -
+                         GeoElementDataBase.GeoElements[geo.Deps[0]].F0).Magnitude()
+                        , pos);
+                case ElementType.circle:
+                    return closestPositionCircle(GeoElementDataBase.GeoElements[geo.Deps[0]].F0,
+                        (GeoElementDataBase.GeoElements[geo.Deps[1]].F0 -
+                         GeoElementDataBase.GeoElements[geo.Deps[0]].F0).Magnitude(), geo.F0, pos);
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
         private static float3 closestPositionSphere(float3 sphereCenter, float sphereRadius, float3 pos)
