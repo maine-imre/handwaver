@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3a05f7bb-55ef-40b1-a581-43bb93569b57" name="Default Changelist" comment="" />
+    <list default="true" id="3a05f7bb-55ef-40b1-a581-43bb93569b57" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.handwaver/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.handwaver/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.handwaver/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.handwaver/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Kernel/Geos/GeoElement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Kernel/Geos/GeoElement.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Kernel/Geos/GeoElementDataBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Kernel/Geos/GeoElementDataBase.cs" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -9,93 +14,79 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Assets/Scripts/Kernel/ActionSystem/GeoElementFunction.cs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="320">
-              <caret line="20" column="31" selection-start-line="20" selection-start-column="31" selection-end-line="20" selection-end-column="31" />
-              <folding>
-                <marker date="1566572285889" expanded="true" signature="6:109" ph="..." />
-                <marker date="1566572285889" expanded="true" signature="148:1531" ph="{...}" />
-                <marker date="1566572285889" expanded="true" signature="212:1529" ph="{...}" />
-                <marker date="1566572285889" expanded="true" signature="418:1335" ph="{...}" />
-                <marker date="1566572285889" expanded="true" signature="614:1237" ph="{...}" />
-                <marker date="1566572285889" expanded="true" signature="1047:1223" ph="{...}" />
-                <marker date="1566572285889" expanded="true" signature="1406:1426" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/Kernel/Geos/GeoElementDataBase.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="48">
-              <caret line="3" column="30" selection-start-line="3" selection-start-column="30" selection-end-line="3" selection-end-column="30" />
+            <state relative-caret-position="512">
+              <caret line="71" selection-start-line="71" selection-end-line="71" />
               <folding>
-                <marker date="1566572403940" expanded="true" signature="6:52" ph="..." />
-                <marker date="1566572403940" expanded="true" signature="90:3285" ph="{...}" />
-                <marker date="1566572403940" expanded="true" signature="135:3283" ph="{...}" />
-                <marker date="1566572403940" expanded="true" signature="150:345" ph="///     Dictionary to keep track of the Geoelement's id based on the string name. ... " />
-                <marker date="1566572403940" expanded="true" signature="456:598" ph="///     Dictionary of all GeoElements within the scene. ... " />
-                <marker date="1566572403940" expanded="true" signature="719:850" ph="///     Dictionary of all GeoElement meshes. ... " />
-                <marker date="1566572403940" expanded="true" signature="972:1172" ph="///     Interface method to return element id from element name. ... " />
-                <marker date="1566572403940" expanded="true" signature="1221:1274" ph="{...}" />
-                <marker date="1566572403940" expanded="true" signature="1284:1493" ph="///     Interface method to return the geoelement data from element id ... " />
-                <marker date="1566572403940" expanded="true" signature="1544:1599" ph="{...}" />
-                <marker date="1566572403940" expanded="true" signature="1609:1824" ph="///     Interface method to return the geoelement data from element name ... " />
-                <marker date="1566572403940" expanded="true" signature="1878:1946" ph="{...}" />
-                <marker date="1566572403940" expanded="true" signature="1956:2105" ph="///     Adds the GeoElement to the dictionaries ... " />
-                <marker date="1566572403940" expanded="true" signature="2157:2498" ph="{...}" />
-                <marker date="1566572403940" expanded="true" signature="2508:2654" ph="///     Removes GeoElement from all dictionaries ... " />
-                <marker date="1566572403940" expanded="true" signature="2709:2908" ph="{...}" />
-                <marker date="1566572403940" expanded="true" signature="2961:3038" ph="{...}" />
-                <marker date="1566572403940" expanded="true" signature="3091:3160" ph="{...}" />
-                <marker date="1566572403940" expanded="true" signature="3208:3277" ph="{...}" />
+                <marker date="1566830142302" expanded="true" signature="6:52" ph="..." />
+                <marker date="1566830142302" expanded="true" signature="90:2922" ph="{...}" />
+                <marker date="1566830142302" expanded="true" signature="135:2920" ph="{...}" />
+                <marker date="1566830142302" expanded="true" signature="150:345" ph="///     Dictionary to keep track of the Geoelement's id based on the string name. ... " />
+                <marker date="1566830142302" expanded="true" signature="456:598" ph="///     Dictionary of all GeoElements within the scene. ... " />
+                <marker date="1566830142302" expanded="true" signature="719:919" ph="///     Interface method to return element id from element name. ... " />
+                <marker date="1566830142302" expanded="true" signature="968:1021" ph="{...}" />
+                <marker date="1566830142302" expanded="true" signature="1031:1240" ph="///     Interface method to return the geoelement data from element id ... " />
+                <marker date="1566830142302" expanded="true" signature="1291:1346" ph="{...}" />
+                <marker date="1566830142302" expanded="true" signature="1356:1571" ph="///     Interface method to return the geoelement data from element name ... " />
+                <marker date="1566830142302" expanded="true" signature="1625:1693" ph="{...}" />
+                <marker date="1566830142302" expanded="true" signature="1703:1852" ph="///     Adds the GeoElement to the dictionaries ... " />
+                <marker date="1566830142302" expanded="true" signature="1904:2191" ph="{...}" />
+                <marker date="1566830142302" expanded="true" signature="2201:2347" ph="///     Removes GeoElement from all dictionaries ... " />
+                <marker date="1566830142302" expanded="true" signature="2402:2545" ph="{...}" />
+                <marker date="1566830142302" expanded="true" signature="2598:2675" ph="{...}" />
+                <marker date="1566830142302" expanded="true" signature="2728:2797" ph="{...}" />
+                <marker date="1566830142302" expanded="true" signature="2845:2914" ph="{...}" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Assets/Scripts/Kernel/ActionSystem/MoveGeoElement.cs">
+        <entry file="file://$PROJECT_DIR$/Assets/Scripts/Kernel/Geos/GeoElement.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="208">
-              <caret line="13" column="1" lean-forward="true" selection-start-line="13" selection-start-column="1" selection-end-line="13" selection-end-column="1" />
+            <state relative-caret-position="-791">
+              <caret line="25" column="10" selection-start-line="25" selection-start-column="10" selection-end-line="25" selection-end-column="10" />
               <folding>
-                <marker date="1566572410738" expanded="true" signature="6:98" ph="..." />
-                <marker date="1566572410738" expanded="true" signature="144:384" ph="{...}" />
-                <marker date="1566572410738" expanded="true" signature="199:382" ph="{...}" />
-                <marker date="1566572410738" expanded="true" signature="300:376" ph="{...}" />
+                <marker date="1566830147948" expanded="false" signature="6:83" ph="..." />
+                <marker date="1566830147948" expanded="true" signature="121:2802" ph="{...}" />
+                <marker date="1566830147948" expanded="true" signature="153:253" ph="{...}" />
+                <marker date="1566830147948" expanded="true" signature="323:2800" ph="{...}" />
+                <marker date="1566830147948" expanded="true" signature="369:452" ph="{...}" />
+                <marker date="1566830147948" expanded="true" signature="520:639" ph="///     Integer ID for the object. This should be readonly after creation. ... " />
+                <marker date="1566830147948" expanded="true" signature="670:760" ph="{...}" />
+                <marker date="1566830147948" expanded="true" signature="803:895" ph="///     The last time this element was updated. ... " />
+                <marker date="1566830147948" expanded="true" signature="929:1015" ph="{...}" />
+                <marker date="1566830147948" expanded="true" signature="1061:1147" ph="///     Element name. (Max 30 characters) ... " />
+                <marker date="1566830147948" expanded="true" signature="1191:1285" ph="{...}" />
+                <marker date="1566830147948" expanded="true" signature="1341:1562" ph="///     The type of the element. ... " />
+                <marker date="1566830147948" expanded="true" signature="1596:1676" ph="{...}" />
+                <marker date="1566830147948" expanded="true" signature="1722:1821" ph="///     Up to 4 dependencies can be stored by ID here. ... " />
+                <marker date="1566830147948" expanded="true" signature="1848:1928" ph="{...}" />
+                <marker date="1566830147948" expanded="true" signature="1967:2064" ph="///     Any relevant float3 data can be stored here. ... " />
+                <marker date="1566830147948" expanded="true" signature="2091:2167" ph="{...}" />
+                <marker date="1566830147948" expanded="true" signature="2206:2440" ph="///     Cosntructor for an element ... " />
+                <marker date="1566830147948" expanded="true" signature="2508:2626" ph="{...}" />
+                <marker date="1566830147948" expanded="true" signature="2669:2794" ph="{...}" />
               </folding>
             </state>
           </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Assets/Scripts/Kernel/ActionSystem/GeoElementProximityLib.cs">
-          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Assets/Scripts/Math/Operations.cs">
+        <entry file="file://$PROJECT_DIR$/Assets/Scripts/Kernel/Render/RenderSystem.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5">
-              <caret line="60" column="60" lean-forward="true" selection-start-line="60" selection-start-column="60" selection-end-line="60" selection-end-column="60" />
+            <state relative-caret-position="112">
+              <caret line="7" selection-start-line="7" selection-end-line="7" />
               <folding>
-                <marker date="1566572285901" expanded="true" signature="6:43" ph="..." />
-                <marker date="1566572285901" expanded="true" signature="64:3208" ph="{...}" />
-                <marker date="1566572285901" expanded="true" signature="101:3206" ph="{...}" />
-                <marker date="1566572285901" expanded="true" signature="216:357" ph="{...}" />
-                <marker date="1566572285901" expanded="true" signature="416:557" ph="{...}" />
-                <marker date="1566572285901" expanded="true" signature="611:696" ph="{...}" />
-                <marker date="1566572285901" expanded="true" signature="750:847" ph="{...}" />
-                <marker date="1566572285901" expanded="true" signature="913:1555" ph="{...}" />
-                <marker date="1566572285901" expanded="true" signature="1641:1845" ph="{...}" />
-                <marker date="1566572285901" expanded="true" signature="1947:2922" ph="{...}" />
-                <marker date="1566572285901" expanded="true" signature="2982:3061" ph="{...}" />
-                <marker date="1566572285901" expanded="true" signature="3121:3200" ph="{...}" />
+                <marker date="1566830411943" expanded="true" signature="6:92" ph="..." />
+                <marker date="1566830411943" expanded="true" signature="140:881" ph="{...}" />
+                <marker date="1566830411943" expanded="true" signature="215:376" ph="{...}" />
+                <marker date="1566830411943" expanded="true" signature="294:370" ph="{...}" />
+                <marker date="1566830411943" expanded="true" signature="452:879" ph="{...}" />
+                <marker date="1566830411943" expanded="true" signature="517:729" ph="/* Assign values to the fields on your job here, so that it has ... */" />
               </folding>
             </state>
           </provider>
@@ -130,6 +121,8 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Kernel/ActionSystem/GeoElementProximityLib.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Kernel/Geos/GeoElementDataBase.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Kernel/ActionSystem/GeoElementFunction.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Kernel/Geos/GeoElement.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Kernel/Render/RenderSystem.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Kernel/ActionSystem/EmbodiedAction.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Math/Operations.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/01CB6F2B-7D21-4FC6-9F80-1D6B3ABCA40A/b6/f03004bc/Dictionary`2.cs" root0="SKIP_HIGHLIGHTING" />
@@ -157,7 +150,6 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Kernel/GeoGebraInterface/HandWaverServerSocket.cs" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch.txt" />
         <option value="$PROJECT_DIR$/Assets/Plugins/socket.io/Socket.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Kernel/Geos/GeoElement.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/SceneSpecific/GeometersPlanetarium/ActionSystem/PinStarlightRaysToggle.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/ActionSystem/GeoElementFunctions.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/ActionSystem/GeoElementFunction.cs" />
@@ -169,8 +161,11 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Math/Operations.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Kernel/ActionSystem/GeoElementProximityLib.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Kernel/ActionSystem/GeoElementFunction.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Kernel/Geos/GeoElementDataBase.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Kernel/ActionSystem/MoveGeoElement.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Kernel/Geos/GeoElement.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Kernel/Geos/GeoElementDataBase.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Kernel/Geos/RenderAuthor.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Kernel/Render/RenderSystem.cs" />
       </list>
     </option>
   </component>
@@ -192,6 +187,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="AssemblyExplorer" />
+      <pane id="FileSystemExplorer" />
       <pane id="SolutionExplorer">
         <subPane>
           <expand>
@@ -204,21 +201,10 @@
         </subPane>
         <option name="show-all-files" value="false" />
       </pane>
-      <pane id="AssemblyExplorer" />
       <pane id="UnityExplorer">
-        <subPane>
-          <expand>
-            <path>
-              <item name="" type="e068e287:UnityExplorerRootNode" />
-              <item name="Assets" type="8711f2a6:AssetsRoot" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
         <option name="show-hidden-items" value="false" />
         <option name="show-project-names" value="true" />
       </pane>
-      <pane id="FileSystemExplorer" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -283,11 +269,12 @@
       <workItem from="1566509660052" duration="2722000" />
       <workItem from="1566569904688" duration="318000" />
       <workItem from="1566570526457" duration="2219000" />
+      <workItem from="1566829921675" duration="490000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="46767000" />
+    <option name="totallyTimeSpent" value="47257000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -302,7 +289,7 @@
     <frame x="1912" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.29621738" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.29941395" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -558,13 +545,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Kernel/Geos/GeoElement.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="11" column="5" selection-start-line="11" selection-start-column="5" selection-end-line="11" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Plugins/socket.io/Socket.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-391">
@@ -636,33 +616,9 @@
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/ActionSystem/GeoElementFunction.cs" />
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/ActionSystem/GeoElementProximityLib.cs.cs" />
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/SceneSpecific/GeometersPlanetarium/ActionSystem/PinFunctions.cs" />
-    <entry file="file://$PROJECT_DIR$/Assets/Scripts/SceneSpecific/HandWaver/ActionSystem/GeoElementFunction.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
-          <folding>
-            <element signature="e#0#259#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Scripts/SceneSpecific/HandWaver/ActionSystem/GeoElementProximityLib.cs.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
-          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
-          <folding>
-            <element signature="e#0#137#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Scripts/SceneSpecific/HandWaver/ActionSystem/MoveObject.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="48">
-          <caret line="8" column="1" lean-forward="true" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/SceneSpecific/HandWaver/ActionSystem/GeoElementFunction.cs" />
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/SceneSpecific/HandWaver/ActionSystem/GeoElementProximityLib.cs.cs" />
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/SceneSpecific/HandWaver/ActionSystem/MoveObject.cs" />
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/Kernel/ActionSystem/EmbodiedAction.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -675,12 +631,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Kernel/ActionSystem/GeoElementProximityLib.cs">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/Kernel/ActionSystem/GeoElementFunction.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
+        <state relative-caret-position="240">
           <caret line="20" column="31" selection-start-line="20" selection-start-column="31" selection-end-line="20" selection-end-column="31" />
           <folding>
             <marker date="1566572285889" expanded="true" signature="6:109" ph="..." />
@@ -694,38 +647,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Kernel/Geos/GeoElementDataBase.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="48">
-          <caret line="3" column="30" selection-start-line="3" selection-start-column="30" selection-end-line="3" selection-end-column="30" />
-          <folding>
-            <marker date="1566572403940" expanded="true" signature="6:52" ph="..." />
-            <marker date="1566572403940" expanded="true" signature="90:3285" ph="{...}" />
-            <marker date="1566572403940" expanded="true" signature="135:3283" ph="{...}" />
-            <marker date="1566572403940" expanded="true" signature="150:345" ph="///     Dictionary to keep track of the Geoelement's id based on the string name. ... " />
-            <marker date="1566572403940" expanded="true" signature="456:598" ph="///     Dictionary of all GeoElements within the scene. ... " />
-            <marker date="1566572403940" expanded="true" signature="719:850" ph="///     Dictionary of all GeoElement meshes. ... " />
-            <marker date="1566572403940" expanded="true" signature="972:1172" ph="///     Interface method to return element id from element name. ... " />
-            <marker date="1566572403940" expanded="true" signature="1221:1274" ph="{...}" />
-            <marker date="1566572403940" expanded="true" signature="1284:1493" ph="///     Interface method to return the geoelement data from element id ... " />
-            <marker date="1566572403940" expanded="true" signature="1544:1599" ph="{...}" />
-            <marker date="1566572403940" expanded="true" signature="1609:1824" ph="///     Interface method to return the geoelement data from element name ... " />
-            <marker date="1566572403940" expanded="true" signature="1878:1946" ph="{...}" />
-            <marker date="1566572403940" expanded="true" signature="1956:2105" ph="///     Adds the GeoElement to the dictionaries ... " />
-            <marker date="1566572403940" expanded="true" signature="2157:2498" ph="{...}" />
-            <marker date="1566572403940" expanded="true" signature="2508:2654" ph="///     Removes GeoElement from all dictionaries ... " />
-            <marker date="1566572403940" expanded="true" signature="2709:2908" ph="{...}" />
-            <marker date="1566572403940" expanded="true" signature="2961:3038" ph="{...}" />
-            <marker date="1566572403940" expanded="true" signature="3091:3160" ph="{...}" />
-            <marker date="1566572403940" expanded="true" signature="3208:3277" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/Kernel/ActionSystem/MoveGeoElement.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="13" column="1" lean-forward="true" selection-start-line="13" selection-start-column="1" selection-end-line="13" selection-end-column="1" />
+        <state relative-caret-position="144">
+          <caret line="13" column="1" selection-start-line="13" selection-start-column="1" selection-end-line="13" selection-end-column="1" />
           <folding>
             <marker date="1566572410738" expanded="true" signature="6:98" ph="..." />
             <marker date="1566572410738" expanded="true" signature="144:384" ph="{...}" />
@@ -735,23 +660,119 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Kernel/ActionSystem/GeoElementProximityLib.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <marker date="1566572285878" expanded="false" signature="6:75" ph="..." />
+            <marker date="1566572285878" expanded="true" signature="108:1539" ph="{...}" />
+            <marker date="1566572285878" expanded="true" signature="157:1537" ph="{...}" />
+            <marker date="1566572285878" expanded="true" signature="229:323" ph="{...}" />
+            <marker date="1566572285878" expanded="true" signature="397:483" ph="{...}" />
+            <marker date="1566572285878" expanded="true" signature="589:679" ph="{...}" />
+            <marker date="1566572285878" expanded="true" signature="784:882" ph="{...}" />
+            <marker date="1566572285878" expanded="true" signature="987:1094" ph="{...}" />
+            <marker date="1566572285878" expanded="true" signature="1172:1218" ph="{...}" />
+            <marker date="1566572285878" expanded="true" signature="1357:1531" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/Math/Operations.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5">
-          <caret line="60" column="60" lean-forward="true" selection-start-line="60" selection-start-column="60" selection-end-line="60" selection-end-column="60" />
+        <state relative-caret-position="816">
+          <caret line="60" column="60" selection-start-line="60" selection-start-column="60" selection-end-line="60" selection-end-column="60" />
           <folding>
-            <marker date="1566572285901" expanded="true" signature="6:43" ph="..." />
-            <marker date="1566572285901" expanded="true" signature="64:3208" ph="{...}" />
-            <marker date="1566572285901" expanded="true" signature="101:3206" ph="{...}" />
-            <marker date="1566572285901" expanded="true" signature="216:357" ph="{...}" />
-            <marker date="1566572285901" expanded="true" signature="416:557" ph="{...}" />
-            <marker date="1566572285901" expanded="true" signature="611:696" ph="{...}" />
-            <marker date="1566572285901" expanded="true" signature="750:847" ph="{...}" />
-            <marker date="1566572285901" expanded="true" signature="913:1555" ph="{...}" />
-            <marker date="1566572285901" expanded="true" signature="1641:1845" ph="{...}" />
-            <marker date="1566572285901" expanded="true" signature="1947:2922" ph="{...}" />
-            <marker date="1566572285901" expanded="true" signature="2982:3061" ph="{...}" />
-            <marker date="1566572285901" expanded="true" signature="3121:3200" ph="{...}" />
+            <marker date="1566572757130" expanded="false" signature="6:43" ph="..." />
+            <marker date="1566572757130" expanded="true" signature="64:3187" ph="{...}" />
+            <marker date="1566572757130" expanded="true" signature="101:3185" ph="{...}" />
+            <marker date="1566572757130" expanded="true" signature="216:357" ph="{...}" />
+            <marker date="1566572757130" expanded="true" signature="416:557" ph="{...}" />
+            <marker date="1566572757130" expanded="true" signature="611:696" ph="{...}" />
+            <marker date="1566572757130" expanded="true" signature="750:847" ph="{...}" />
+            <marker date="1566572757130" expanded="true" signature="913:1555" ph="{...}" />
+            <marker date="1566572757130" expanded="true" signature="1641:1845" ph="{...}" />
+            <marker date="1566572757130" expanded="true" signature="1947:2901" ph="{...}" />
+            <marker date="1566572757130" expanded="true" signature="2961:3040" ph="{...}" />
+            <marker date="1566572757130" expanded="true" signature="3100:3179" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Kernel/Geos/RenderAuthor.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="32" column="8" lean-forward="true" selection-start-line="32" selection-start-column="8" selection-end-line="32" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Kernel/Geos/GeoElement.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-791">
+          <caret line="25" column="10" selection-start-line="25" selection-start-column="10" selection-end-line="25" selection-end-column="10" />
+          <folding>
+            <marker date="1566830147948" expanded="false" signature="6:83" ph="..." />
+            <marker date="1566830147948" expanded="true" signature="121:2802" ph="{...}" />
+            <marker date="1566830147948" expanded="true" signature="153:253" ph="{...}" />
+            <marker date="1566830147948" expanded="true" signature="323:2800" ph="{...}" />
+            <marker date="1566830147948" expanded="true" signature="369:452" ph="{...}" />
+            <marker date="1566830147948" expanded="true" signature="520:639" ph="///     Integer ID for the object. This should be readonly after creation. ... " />
+            <marker date="1566830147948" expanded="true" signature="670:760" ph="{...}" />
+            <marker date="1566830147948" expanded="true" signature="803:895" ph="///     The last time this element was updated. ... " />
+            <marker date="1566830147948" expanded="true" signature="929:1015" ph="{...}" />
+            <marker date="1566830147948" expanded="true" signature="1061:1147" ph="///     Element name. (Max 30 characters) ... " />
+            <marker date="1566830147948" expanded="true" signature="1191:1285" ph="{...}" />
+            <marker date="1566830147948" expanded="true" signature="1341:1562" ph="///     The type of the element. ... " />
+            <marker date="1566830147948" expanded="true" signature="1596:1676" ph="{...}" />
+            <marker date="1566830147948" expanded="true" signature="1722:1821" ph="///     Up to 4 dependencies can be stored by ID here. ... " />
+            <marker date="1566830147948" expanded="true" signature="1848:1928" ph="{...}" />
+            <marker date="1566830147948" expanded="true" signature="1967:2064" ph="///     Any relevant float3 data can be stored here. ... " />
+            <marker date="1566830147948" expanded="true" signature="2091:2167" ph="{...}" />
+            <marker date="1566830147948" expanded="true" signature="2206:2440" ph="///     Cosntructor for an element ... " />
+            <marker date="1566830147948" expanded="true" signature="2508:2626" ph="{...}" />
+            <marker date="1566830147948" expanded="true" signature="2669:2794" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Kernel/Geos/GeoElementDataBase.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="512">
+          <caret line="71" selection-start-line="71" selection-end-line="71" />
+          <folding>
+            <marker date="1566830142302" expanded="true" signature="6:52" ph="..." />
+            <marker date="1566830142302" expanded="true" signature="90:2922" ph="{...}" />
+            <marker date="1566830142302" expanded="true" signature="135:2920" ph="{...}" />
+            <marker date="1566830142302" expanded="true" signature="150:345" ph="///     Dictionary to keep track of the Geoelement's id based on the string name. ... " />
+            <marker date="1566830142302" expanded="true" signature="456:598" ph="///     Dictionary of all GeoElements within the scene. ... " />
+            <marker date="1566830142302" expanded="true" signature="719:919" ph="///     Interface method to return element id from element name. ... " />
+            <marker date="1566830142302" expanded="true" signature="968:1021" ph="{...}" />
+            <marker date="1566830142302" expanded="true" signature="1031:1240" ph="///     Interface method to return the geoelement data from element id ... " />
+            <marker date="1566830142302" expanded="true" signature="1291:1346" ph="{...}" />
+            <marker date="1566830142302" expanded="true" signature="1356:1571" ph="///     Interface method to return the geoelement data from element name ... " />
+            <marker date="1566830142302" expanded="true" signature="1625:1693" ph="{...}" />
+            <marker date="1566830142302" expanded="true" signature="1703:1852" ph="///     Adds the GeoElement to the dictionaries ... " />
+            <marker date="1566830142302" expanded="true" signature="1904:2191" ph="{...}" />
+            <marker date="1566830142302" expanded="true" signature="2201:2347" ph="///     Removes GeoElement from all dictionaries ... " />
+            <marker date="1566830142302" expanded="true" signature="2402:2545" ph="{...}" />
+            <marker date="1566830142302" expanded="true" signature="2598:2675" ph="{...}" />
+            <marker date="1566830142302" expanded="true" signature="2728:2797" ph="{...}" />
+            <marker date="1566830142302" expanded="true" signature="2845:2914" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Assets/Scripts/Kernel/Render/RenderSystem.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
+          <folding>
+            <marker date="1566830411943" expanded="true" signature="6:92" ph="..." />
+            <marker date="1566830411943" expanded="true" signature="140:881" ph="{...}" />
+            <marker date="1566830411943" expanded="true" signature="215:376" ph="{...}" />
+            <marker date="1566830411943" expanded="true" signature="294:370" ph="{...}" />
+            <marker date="1566830411943" expanded="true" signature="452:879" ph="{...}" />
+            <marker date="1566830411943" expanded="true" signature="517:729" ph="/* Assign values to the fields on your job here, so that it has ... */" />
           </folding>
         </state>
       </provider>

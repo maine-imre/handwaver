@@ -330,6 +330,8 @@ paket-files/
 
 # JetBrains Rider
 *.sln.iml
+.idea/*
+!.idea/.idea.handwaver/.idea/codeStyles
 
 # CodeRush
 .cr/

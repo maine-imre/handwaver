@@ -1,6 +1,7 @@
 using System;
 using Unity.Entities;
 using Unity.Mathematics;
+using Unity.Rendering;
 
 namespace IMRE.HandWaver.Kernel.Geos
 {
@@ -13,10 +14,18 @@ namespace IMRE.HandWaver.Kernel.Geos
         sphere,
         circle
     }
-
+    
     [Serializable]
     public struct GeoElement : IComponentData
     {
+        internal RenderMesh RenderMesh {
+            get => _renderMesh;
+            set => _renderMesh = value;
+        }
+        
+        private RenderMesh _renderMesh;
+
+        
         /// <summary>
         ///     Integer ID for the object. This should be readonly after creation.
         /// </summary>

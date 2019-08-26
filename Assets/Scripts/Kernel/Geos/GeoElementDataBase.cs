@@ -20,13 +20,6 @@ namespace IMRE.HandWaver.Kernel.Geos
             new Dictionary<int, GeoElement>();
 
         /// <summary>
-        ///     Dictionary of all GeoElement meshes.
-        ///     Key is element id as int.
-        /// </summary>
-        private static readonly Dictionary<int, Mesh> GeoElementMesh =
-            new Dictionary<int, Mesh>();
-
-        /// <summary>
         ///     Interface method to return element id from element name.
         /// </summary>
         /// <param name="k">Element Name</param>
@@ -67,7 +60,6 @@ namespace IMRE.HandWaver.Kernel.Geos
                     e.ElementId);
             GeoElements[e.ElementId] = e;
             GeoNameDb[e.ElementName.ToString()] = e.ElementId;
-            GeoElementMesh[e.ElementId] = new Mesh();
         }
 
         /// <summary>
@@ -77,7 +69,6 @@ namespace IMRE.HandWaver.Kernel.Geos
         public static void RemoveElement(string eName)
         {
             GeoElements.Remove(GetElementId(eName));
-            GeoElementMesh.Remove(GetElementId(eName));
 
             //Must be done last
             GeoNameDb.Remove(eName);

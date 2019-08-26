@@ -1287,6 +1287,7 @@
               <e p="EmbodiedAction.cs" t="Include" />
               <e p="GeoElementFunction.cs" t="Include" />
               <e p="GeoElementProximityLib.cs" t="Include" />
+              <e p="MakePoint.cs" t="Include" />
               <e p="MoveGeoElement.cs" t="Include" />
             </e>
             <e p="GeoGebraInterface" t="Include">
@@ -1301,6 +1302,7 @@
             </e>
             <e p="Render" t="Include">
               <e p="GeoElementRenderLib.cs" t="Include" />
+              <e p="RenderSystem.cs" t="Include" />
             </e>
           </e>
           <e p="Math" t="Include">
