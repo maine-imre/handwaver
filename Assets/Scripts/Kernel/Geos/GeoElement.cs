@@ -1,4 +1,5 @@
 using System;
+using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Rendering;
@@ -75,13 +76,13 @@ namespace IMRE.HandWaver.Kernel.Geos
         /// <summary>
         ///     Up to 4 dependencies can be stored by ID here.
         /// </summary>
-        internal int4 Deps
+        internal NativeArray<int> Deps
         {
             get => _deps;
             set => _deps = value;
         }
 
-        private int4 _deps;
+        private NativeArray<int> _deps;
 
         /// <summary>
         ///     Any relevant float3 data can be stored here.
@@ -104,6 +105,7 @@ namespace IMRE.HandWaver.Kernel.Geos
             ElementId = eId;
             ElementName = eName;
             Updated = DateTime.Now;
+            Deps = new NativeArray<int>(8, Allocator.Persistent);
         }
 
         public override string ToString()
