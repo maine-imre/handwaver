@@ -1,4 +1,5 @@
 ﻿using IMRE.HandWaver.Kernel.Geos;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace IMRE.HandWaver.Kernel.GGBFunctions
@@ -17,6 +18,8 @@ namespace IMRE.HandWaver.Kernel.GGBFunctions
         //TODO: Pull from specific class into generic helper functions
         public static string ObjectFromID(int id) => GeoElementDataBase.GetElement(id).ElementName.ToString();
 
+        public static string Float3Value(float3 f) => $"{f.x}, {f.y}, {f.z}";
+        
         private void Start()
         {
             ins = this;
