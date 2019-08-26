@@ -10,13 +10,13 @@ namespace IMRE.HandWaver.Rendering
     /// </summary>
     public static class GeoElementRenderLib
     {
-        private const float width = .0025f;
-        private const float vertexCount = 3000f;
-        private const float angleRadius = 0.5f;
+        private const float Width = .0025f;
+        private const float VertexCount = 3000f;
+        private const float AngleRadius = 0.5f;
 
-        private static float3 headPosition => Camera.main.transform.position;
+        private static float3 HeadPosition => Camera.main.transform.position;
 
-        private static float3 headDirection => float3.zero;
+        private static float3 HeadDirection => float3.zero;
 
         // TODO: Group by element type.
         //    -- Point
@@ -47,7 +47,7 @@ namespace IMRE.HandWaver.Rendering
         public static Mesh Point(float3 location)
         {
             //TODO a better visualization of a point
-            var dir = width / 2f * new float3(1, 1, 1);
+            var dir = Width / 2f * new float3(1, 1, 1);
             return Segment(location - dir, location + dir);
         }
 
@@ -65,7 +65,7 @@ namespace IMRE.HandWaver.Rendering
 
             var lineWidth = math.cross(
                 endpointA - endpointB,
-                (endpointA + endpointB) / 2f - headDirection);
+                (endpointA + endpointB) / 2f - HeadDirection);
 
             //If segment is not visible, debug out a warning as to why and return empty mesh
             if (lineWidth.Magnitude() == 0f)
@@ -74,7 +74,7 @@ namespace IMRE.HandWaver.Rendering
                 return new Mesh();
             }
 
-            lineWidth = width * math.normalize(lineWidth);
+            lineWidth = Width * math.normalize(lineWidth);
 
             //verts
             var verts = new Vector3[4];
@@ -104,7 +104,7 @@ namespace IMRE.HandWaver.Rendering
             //normals
             var normals = mesh.normals;
             for (var i = 0; i < verts.Length; i++)
-                normals[i] = math.normalize(headDirection);
+                normals[i] = math.normalize(HeadDirection);
             mesh.normals = normals;
 
             return mesh;
@@ -126,15 +126,15 @@ namespace IMRE.HandWaver.Rendering
             var norm2 = Vector3.right;
 
             //array of vector3s for vertices
-            var vertices = new Vector3[(int) vertexCount];
+            var vertices = new Vector3[(int) VertexCount];
 
             //math for rendering circle
-            for (var i = 0; i < vertexCount; i++)
-                vertices[i] = angleRadius *
+            for (var i = 0; i < VertexCount; i++)
+                vertices[i] = AngleRadius *
                               (Mathf.Sin(i * Vector3.Angle(segmentStart - segmentAEndpoint,
-                                             segmentStart - segmentBEndpoint) / (vertexCount - 1)) * norm1 +
+                                             segmentStart - segmentBEndpoint) / (VertexCount - 1)) * norm1 +
                                Mathf.Cos(i * Vector3.Angle(segmentStart - segmentAEndpoint,
-                                             segmentStart - segmentBEndpoint) / (vertexCount - 1)) * norm2) +
+                                             segmentStart - segmentBEndpoint) / (VertexCount - 1)) * norm2) +
                               center;
 
             semiCircleMesh.vertices = vertices;
@@ -179,9 +179,9 @@ namespace IMRE.HandWaver.Rendering
 
             for (var i = 0; i < n; i++)
             {
-                var lineWidth = width * math.normalize(math.cross(
+                var lineWidth = Width * math.normalize(math.cross(
                                     positions[(i - 1 + n) % n] - positions[(i + 1) % n],
-                                    positions[i] / 2f - headDirection));
+                                    positions[i] / 2f - HeadDirection));
                 vertices[2 * i] = positions[i] + lineWidth;
                 vertices[2 * i + 1] = positions[i] - lineWidth;
             }
@@ -213,7 +213,7 @@ namespace IMRE.HandWaver.Rendering
             //normals
             var normals = mesh.normals;
             for (var i = 0; i < normals.Length; i++)
-                normals[i] = math.normalize(headDirection);
+                normals[i] = math.normalize(HeadDirection);
 
             mesh.normals = normals;
 
@@ -254,7 +254,7 @@ namespace IMRE.HandWaver.Rendering
             throw new NotImplementedException();
         }
 
-        public static Mesh FunctionND( /*Data needed to render*/)
+        public static Mesh FunctionNd( /*Data needed to render*/)
         {
             throw new NotImplementedException();
         }
@@ -269,7 +269,7 @@ namespace IMRE.HandWaver.Rendering
             throw new NotImplementedException();
         }
 
-        public static Mesh LocusND( /*Data needed to render*/)
+        public static Mesh LocusNd( /*Data needed to render*/)
         {
             throw new NotImplementedException();
         }
@@ -338,7 +338,7 @@ namespace IMRE.HandWaver.Rendering
             //normals
             var normals = mesh.normals;
             for (var i = 0; i < verts.Length; i++)
-                normals[i] = math.normalize(headDirection);
+                normals[i] = math.normalize(HeadDirection);
             mesh.normals = normals;
 
             return mesh;
@@ -360,6 +360,7 @@ namespace IMRE.HandWaver.Rendering
         /// <returns></returns>
         public static Mesh Polygon(float3[] pointFloat3Array)
         {
+            throw new NotImplementedException();
         }
 
         public static Mesh Ray( /*Data needed to render*/)
