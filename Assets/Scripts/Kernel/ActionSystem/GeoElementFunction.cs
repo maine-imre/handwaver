@@ -21,7 +21,7 @@ namespace IMRE.HandWaver.ActionSystem
                 if (GeoElementDataBase.GeoNameDb.ContainsValue(i)) continue;
 
                 var closestPoint =
-                    GeoElementProximityLib.closestPosition(GeoElementDataBase.GeoElements[i], classifier.origin);
+                    GeoElementProximityLib.ClosestPosition(GeoElementDataBase.GeoElements[i], classifier.origin);
                 if ((classifier.origin - closestPoint).Magnitude() < bestDist &&
                     Operations.Angle(classifier.direction, classifier.origin - closestPoint) < angleTolerance)
                 {

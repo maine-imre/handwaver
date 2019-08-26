@@ -7,30 +7,30 @@ namespace IMRE.HandWaver.Kernel
 {
     public static class GeoElementProximityLib
     {
-        public static float distToGeo(GeoElement geo, float3 pos)
+        public static float DistToGeo(GeoElement geo, float3 pos)
         {
-            return (pos - closestPosition(geo, pos)).Magnitude();
+            return (pos - ClosestPosition(geo, pos)).Magnitude();
         }
 
-        public static float3 closestPosition(GeoElement geo, float3 pos)
+        public static float3 ClosestPosition(GeoElement geo, float3 pos)
         {
             switch (geo.Type)
             {
                 case ElementType.point:
-                    return closestPositionPoint(geo.F0, pos);
+                    return ClosestPositionPoint(geo.F0, pos);
                 case ElementType.line:
-                    return closestPositionLine(GeoElementDataBase.GeoElements[geo.Deps[0]].F0, 
+                    return ClosestPositionLine(GeoElementDataBase.GeoElements[geo.Deps[0]].F0, 
                         (GeoElementDataBase.GeoElements[geo.Deps[1]].F0 - GeoElementDataBase.GeoElements[geo.Deps[0]].F0), pos);
                 case ElementType.plane:
                     //TODO Handle case where plane is defined by 3 points.
-                    return closestPositionPlane(GeoElementDataBase.GeoElements[geo.Deps[0]].F0, geo.F0, pos);
+                    return ClosestPositionPlane(GeoElementDataBase.GeoElements[geo.Deps[0]].F0, geo.F0, pos);
                 case ElementType.sphere:
-                    return closestPositionSphere(GeoElementDataBase.GeoElements[geo.Deps[0]].F0,
+                    return ClosestPositionSphere(GeoElementDataBase.GeoElements[geo.Deps[0]].F0,
                         (GeoElementDataBase.GeoElements[geo.Deps[1]].F0 -
                          GeoElementDataBase.GeoElements[geo.Deps[0]].F0).Magnitude()
                         , pos);
                 case ElementType.circle:
-                    return closestPositionCircle(GeoElementDataBase.GeoElements[geo.Deps[0]].F0,
+                    return ClosestPositionCircle(GeoElementDataBase.GeoElements[geo.Deps[0]].F0,
                         (GeoElementDataBase.GeoElements[geo.Deps[1]].F0 -
                          GeoElementDataBase.GeoElements[geo.Deps[0]].F0).Magnitude(), geo.F0, pos);
                 default:
@@ -38,30 +38,30 @@ namespace IMRE.HandWaver.Kernel
             }
         }
 
-        private static float3 closestPositionSphere(float3 sphereCenter, float sphereRadius, float3 pos)
+        private static float3 ClosestPositionSphere(float3 sphereCenter, float sphereRadius, float3 pos)
         {
             return math.normalize(pos - sphereCenter) * sphereRadius;
         }
 
-        private static float3 closestPositionPlane(float3 pointOnPlane, float3 planeNormal, float3 pos)
+        private static float3 ClosestPositionPlane(float3 pointOnPlane, float3 planeNormal, float3 pos)
         {
             return pos - Operations.Project(pos - pointOnPlane, planeNormal);
         }
 
-        private static float3 closestPositionLine(float3 pointOnLine, float3 lineDirection, float3 pos)
+        private static float3 ClosestPositionLine(float3 pointOnLine, float3 lineDirection, float3 pos)
         {
             return Operations.Project(pos - pointOnLine, lineDirection) + pointOnLine;
         }
 
-        private static float3 closestPositionPoint(float3 point, float3 pos)
+        private static float3 ClosestPositionPoint(float3 point, float3 pos)
         {
             return point;
         }
 
-        private static float3 closestPositionCircle(float3 circleCenter, float circleRadius, float3 circleNormal,
+        private static float3 ClosestPositionCircle(float3 circleCenter, float circleRadius, float3 circleNormal,
             float3 pos)
         {
-            return math.normalize(closestPositionPlane(circleCenter, circleNormal, pos) - circleCenter) * circleRadius +
+            return math.normalize(ClosestPositionPlane(circleCenter, circleNormal, pos) - circleCenter) * circleRadius +
                    circleCenter;
         }
     }
