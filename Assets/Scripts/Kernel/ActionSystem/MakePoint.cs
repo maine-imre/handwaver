@@ -1,4 +1,5 @@
-﻿using IMRE.EmbodiedUserInput;
+﻿using System.Reflection;
+using IMRE.EmbodiedUserInput;
 using IMRE.HandWaver.ActionSystem;
 using IMRE.HandWaver.Kernel.Geos;
 using IMRE.HandWaver.Kernel.GGBFunctions;
@@ -9,7 +10,8 @@ namespace IMRE.HandWaver.Kernel.ActionSystem
     {
         public override void geoElementFunction(GeoElement geo, EmbodiedClassifier classifier)
         {
-            HandWaverServerTransport.execCommand("Point(" + classifier.origin.ToString() + ")");
+            IMRE.HandWaver.Kernel.GGBFunctions.Geometry.Point(""+classifier.origin.ToString());
+            //HandWaverServerTransport.execCommand("Point(" + classifier.origin.ToString() + ")");
         }
 
     }
