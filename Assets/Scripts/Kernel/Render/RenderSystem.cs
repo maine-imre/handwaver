@@ -7,11 +7,9 @@ using Unity.Jobs;
 
 public class RenderSystem : JobComponentSystem
 {
-
     [BurstCompile]
-    struct RenderSystemJob : IJobForEach<GeoElement>
+    private struct RenderSystemJob : IJobForEach<GeoElement>
     {
-        
         public void Execute([ChangedFilter] ref GeoElement geo)
         {
             //TODO: After merge with render branch, link these to the proper functions within GeoElementRenderLib.
@@ -33,18 +31,17 @@ public class RenderSystem : JobComponentSystem
             }*/
         }
     }
-    
+
     protected override JobHandle OnUpdate(JobHandle inputDependencies)
     {
         var job = new RenderSystemJob();
-        
+
         // Assign values to the fields on your job here, so that it has
         // everything it needs to do its work when it runs later.
         // For example,
         //     job.deltaTime = UnityEngine.Time.deltaTime;
-        
-        
-        
+
+
         // Now that the job is set up, schedule it to be run. 
         return job.Schedule(this, inputDependencies);
     }

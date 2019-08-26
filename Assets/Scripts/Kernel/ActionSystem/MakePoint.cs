@@ -10,9 +10,8 @@ namespace IMRE.HandWaver.Kernel.ActionSystem
     {
         public override void geoElementFunction(GeoElement geo, EmbodiedClassifier classifier)
         {
-            IMRE.HandWaver.Kernel.GGBFunctions.Geometry.Point(""+classifier.origin.ToString());
+            Geometry.Point("" + classifier.origin.ToString());
             //HandWaverServerTransport.execCommand("Point(" + classifier.origin.ToString() + ")");
         }
-
     }
 }

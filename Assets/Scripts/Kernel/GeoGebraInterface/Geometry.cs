@@ -14,12 +14,18 @@ namespace IMRE.HandWaver.Kernel.GGBFunctions
         /// Creates static reference to instance within scene.
         /// </summary>
         private static Geometry ins;
-        
-        //TODO: Pull from specific class into generic helper functions
-        public static string ObjectFromID(int id) => GeoElementDataBase.GetElement(id).ElementName.ToString();
 
-        public static string Float3Value(float3 f) => $"{f.x}, {f.y}, {f.z}";
-        
+        //TODO: Pull from specific class into generic helper functions
+        public static string ObjectFromID(int id)
+        {
+            return GeoElementDataBase.GetElement(id).ElementName.ToString();
+        }
+
+        public static string Float3Value(float3 f)
+        {
+            return $"{f.x}, {f.y}, {f.z}";
+        }
+
         private void Start()
         {
             ins = this;
@@ -29,13 +35,13 @@ namespace IMRE.HandWaver.Kernel.GGBFunctions
 
         public static void AffineRatio(int idA, int idB, int idC)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(
-                cmdString: "AffineRatio(" + ObjectFromID(id: idA) + "," + ObjectFromID(id: idB) + "," + ObjectFromID(id: idC) + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(
+                "AffineRatio(" + ObjectFromID(idA) + "," + ObjectFromID(idB) + "," + ObjectFromID(idC) + ")"));
         }
 
         public static void AffineRatio(string input)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: " AffineRatio(" + input + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(" AffineRatio(" + input + ")"));
         }
 
         #endregion
@@ -44,31 +50,31 @@ namespace IMRE.HandWaver.Kernel.GGBFunctions
 
         public static void Angle(int idA)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: "Angle(" + ObjectFromID(id: idA) + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand("Angle(" + ObjectFromID(idA) + ")"));
         }
 
         public static void Angle(int idA, int idB)
         {
             ins.StartCoroutine(
-                routine: HandWaverServerTransport.execCommand(cmdString: "Angle(" + ObjectFromID(id: idA) + "," + ObjectFromID(id: idB) + ")"));
+                HandWaverServerTransport.execCommand("Angle(" + ObjectFromID(idA) + "," + ObjectFromID(idB) + ")"));
         }
 
         public static void Angle(int idA, int idB, int idC)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(
-                cmdString: "Angle(" + ObjectFromID(id: idA) + "," + ObjectFromID(id: idB) + "," + ObjectFromID(id: idC) + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(
+                "Angle(" + ObjectFromID(idA) + "," + ObjectFromID(idB) + "," + ObjectFromID(idC) + ")"));
         }
 
         public static void Angle(int idA, int idB, int idC, int idD)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(
-                cmdString: "Angle(" + ObjectFromID(id: idA) + "," + ObjectFromID(id: idB) + "," + ObjectFromID(id: idC) + "," +
-                ObjectFromID(id: idD) + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(
+                "Angle(" + ObjectFromID(idA) + "," + ObjectFromID(idB) + "," + ObjectFromID(idC) + "," +
+                ObjectFromID(idD) + ")"));
         }
 
         public static void Angle(string input)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: " Angle(" + input + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(" Angle(" + input + ")"));
         }
 
         #endregion
@@ -78,19 +84,19 @@ namespace IMRE.HandWaver.Kernel.GGBFunctions
         public static void AngleBisector(int idA, int idB)
         {
             ins.StartCoroutine(
-                routine: HandWaverServerTransport.execCommand(cmdString: "AngleBisector(" + ObjectFromID(id: idA) + "," + ObjectFromID(id: idB) +
+                HandWaverServerTransport.execCommand("AngleBisector(" + ObjectFromID(idA) + "," + ObjectFromID(idB) +
                                                      ")"));
         }
 
         public static void AngleBisector(int idA, int idB, int idC)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(
-                cmdString: "AngleBisector(" + ObjectFromID(id: idA) + "," + ObjectFromID(id: idB) + "," + ObjectFromID(id: idC) + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(
+                "AngleBisector(" + ObjectFromID(idA) + "," + ObjectFromID(idB) + "," + ObjectFromID(idC) + ")"));
         }
 
         public static void AngleBisector(string input)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: " AngleBisector(" + input + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(" AngleBisector(" + input + ")"));
         }
 
         #endregion
@@ -99,13 +105,13 @@ namespace IMRE.HandWaver.Kernel.GGBFunctions
 
         public static void Arc(int idA, int idB, int idC)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(
-                cmdString: "Arc(" + ObjectFromID(id: idA) + "," + ObjectFromID(id: idB) + "," + ObjectFromID(id: idC) + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(
+                "Arc(" + ObjectFromID(idA) + "," + ObjectFromID(idB) + "," + ObjectFromID(idC) + ")"));
         }
 
         public static void Arc(string input)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: " Arc(" + input + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(" Arc(" + input + ")"));
         }
 
         #endregion
@@ -114,13 +120,13 @@ namespace IMRE.HandWaver.Kernel.GGBFunctions
 
         public static void AreCollinear(int idA, int idB, int idC)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(
-                cmdString: "AreCollinear(" + ObjectFromID(id: idA) + "," + ObjectFromID(id: idB) + "," + ObjectFromID(id: idC) + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(
+                "AreCollinear(" + ObjectFromID(idA) + "," + ObjectFromID(idB) + "," + ObjectFromID(idC) + ")"));
         }
 
         public static void AreCollinear(string input)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: " AreCollinear(" + input + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(" AreCollinear(" + input + ")"));
         }
 
         #endregion
@@ -129,13 +135,13 @@ namespace IMRE.HandWaver.Kernel.GGBFunctions
 
         public static void AreConcurrent(int idA, int idB, int idC)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(
-                cmdString: "AreConcurrent(" + ObjectFromID(id: idA) + "," + ObjectFromID(id: idB) + "," + ObjectFromID(id: idC) + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(
+                "AreConcurrent(" + ObjectFromID(idA) + "," + ObjectFromID(idB) + "," + ObjectFromID(idC) + ")"));
         }
 
         public static void AreConcurrent(string input)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: " AreConcurrent(" + input + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(" AreConcurrent(" + input + ")"));
         }
 
         #endregion
@@ -144,14 +150,14 @@ namespace IMRE.HandWaver.Kernel.GGBFunctions
 
         public static void AreConcyclic(int idA, int idB, int idC, int idD)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(
-                cmdString: "AreConcyclic(" + ObjectFromID(id: idA) + "," + ObjectFromID(id: idB) + "," + ObjectFromID(id: idC) + "," +
-                ObjectFromID(id: idD) + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(
+                "AreConcyclic(" + ObjectFromID(idA) + "," + ObjectFromID(idB) + "," + ObjectFromID(idC) + "," +
+                ObjectFromID(idD) + ")"));
         }
 
         public static void AreConcyclic(string input)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: " AreConcyclic(" + input + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(" AreConcyclic(" + input + ")"));
         }
 
         #endregion
@@ -161,13 +167,13 @@ namespace IMRE.HandWaver.Kernel.GGBFunctions
         public static void AreCongruent(int idA, int idB)
         {
             ins.StartCoroutine(
-                routine: HandWaverServerTransport.execCommand(
-                    cmdString: "AreCongruent(" + ObjectFromID(id: idA) + "," + ObjectFromID(id: idB) + ")"));
+                HandWaverServerTransport.execCommand(
+                    "AreCongruent(" + ObjectFromID(idA) + "," + ObjectFromID(idB) + ")"));
         }
 
         public static void AreCongruent(string input)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: " AreCongruent(" + input + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(" AreCongruent(" + input + ")"));
         }
 
         #endregion
@@ -177,12 +183,12 @@ namespace IMRE.HandWaver.Kernel.GGBFunctions
         public static void AreEqual(int idA, int idB)
         {
             ins.StartCoroutine(
-                routine: HandWaverServerTransport.execCommand(cmdString: "AreEqual(" + ObjectFromID(id: idA) + "," + ObjectFromID(id: idB) + ")"));
+                HandWaverServerTransport.execCommand("AreEqual(" + ObjectFromID(idA) + "," + ObjectFromID(idB) + ")"));
         }
 
         public static void AreEqual(string input)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: " AreEqual(" + input + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(" AreEqual(" + input + ")"));
         }
 
         #endregion
@@ -192,13 +198,13 @@ namespace IMRE.HandWaver.Kernel.GGBFunctions
         public static void AreParallel(int idA, int idB)
         {
             ins.StartCoroutine(
-                routine: HandWaverServerTransport.execCommand(cmdString: "AreParallel(" + ObjectFromID(id: idA) + "," + ObjectFromID(id: idB) +
+                HandWaverServerTransport.execCommand("AreParallel(" + ObjectFromID(idA) + "," + ObjectFromID(idB) +
                                                      ")"));
         }
 
         public static void AreParallel(string input)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: " AreParallel(" + input + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(" AreParallel(" + input + ")"));
         }
 
         #endregion
@@ -208,13 +214,13 @@ namespace IMRE.HandWaver.Kernel.GGBFunctions
         public static void ArePerpendicular(int idA, int idB)
         {
             ins.StartCoroutine(
-                routine: HandWaverServerTransport.execCommand(cmdString: "ArePerpendicular(" + ObjectFromID(id: idA) + "," + ObjectFromID(id: idB) +
+                HandWaverServerTransport.execCommand("ArePerpendicular(" + ObjectFromID(idA) + "," + ObjectFromID(idB) +
                                                      ")"));
         }
 
         public static void ArePerpendicular(string input)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: " ArePerpendicular(" + input + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(" ArePerpendicular(" + input + ")"));
         }
 
         #endregion
@@ -223,38 +229,38 @@ namespace IMRE.HandWaver.Kernel.GGBFunctions
 
         public static void Area(int idA)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: "Area(" + ObjectFromID(id: idA) + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand("Area(" + ObjectFromID(idA) + ")"));
         }
 
         public static void Area(int idA, int idB)
         {
             ins.StartCoroutine(
-                routine: HandWaverServerTransport.execCommand(cmdString: "Area(" + ObjectFromID(id: idA) + "," + ObjectFromID(id: idB) + ")"));
+                HandWaverServerTransport.execCommand("Area(" + ObjectFromID(idA) + "," + ObjectFromID(idB) + ")"));
         }
 
         public static void Area(int idA, int idB, int idC)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(
-                cmdString: "Area(" + ObjectFromID(id: idA) + "," + ObjectFromID(id: idB) + "," + ObjectFromID(id: idC) + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(
+                "Area(" + ObjectFromID(idA) + "," + ObjectFromID(idB) + "," + ObjectFromID(idC) + ")"));
         }
 
         public static void Area(int idA, int idB, int idC, int idD)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(
-                cmdString: "Area(" + ObjectFromID(id: idA) + "," + ObjectFromID(id: idB) + "," + ObjectFromID(id: idC) + "," +
-                ObjectFromID(id: idD) + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(
+                "Area(" + ObjectFromID(idA) + "," + ObjectFromID(idB) + "," + ObjectFromID(idC) + "," +
+                ObjectFromID(idD) + ")"));
         }
 
         public static void Area(int idA, int idB, int idC, int idD, int idE)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(
-                cmdString: "Area(" + ObjectFromID(id: idA) + "," + ObjectFromID(id: idB) + "," + ObjectFromID(id: idC) + "," +
-                ObjectFromID(id: idD) + "," + ObjectFromID(id: idE) + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(
+                "Area(" + ObjectFromID(idA) + "," + ObjectFromID(idB) + "," + ObjectFromID(idC) + "," +
+                ObjectFromID(idD) + "," + ObjectFromID(idE) + ")"));
         }
 
         public static void Area(string input)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: " Area(" + input + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(" Area(" + input + ")"));
         }
 
         #endregion
@@ -264,13 +270,13 @@ namespace IMRE.HandWaver.Kernel.GGBFunctions
         public static void Barycenter(int idA, int idB)
         {
             ins.StartCoroutine(
-                routine: HandWaverServerTransport.execCommand(cmdString: "Barycenter(" + ObjectFromID(id: idA) + "," + ObjectFromID(id: idB) +
+                HandWaverServerTransport.execCommand("Barycenter(" + ObjectFromID(idA) + "," + ObjectFromID(idB) +
                                                      ")"));
         }
 
         public static void Barycenter(string input)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: " Barycenter(" + input + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(" Barycenter(" + input + ")"));
         }
 
         #endregion
@@ -279,12 +285,12 @@ namespace IMRE.HandWaver.Kernel.GGBFunctions
 
         public static void Centroid(int idA)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: "Centroid(" + ObjectFromID(id: idA) + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand("Centroid(" + ObjectFromID(idA) + ")"));
         }
 
         public static void Centroid(string input)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: " Centroid(" + input + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(" Centroid(" + input + ")"));
         }
 
         #endregion
@@ -293,13 +299,13 @@ namespace IMRE.HandWaver.Kernel.GGBFunctions
 
         public static void CircularArc(int idA, int idB, int idC)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(
-                cmdString: "CircularArc(" + ObjectFromID(id: idA) + "," + ObjectFromID(id: idB) + "," + ObjectFromID(id: idC) + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(
+                "CircularArc(" + ObjectFromID(idA) + "," + ObjectFromID(idB) + "," + ObjectFromID(idC) + ")"));
         }
 
         public static void CircularArc(string input)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: " CircularArc(" + input + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(" CircularArc(" + input + ")"));
         }
 
         #endregion
@@ -308,13 +314,13 @@ namespace IMRE.HandWaver.Kernel.GGBFunctions
 
         public static void CircularSector(int idA, int idB, int idC)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(
-                cmdString: "CircularSector(" + ObjectFromID(id: idA) + "," + ObjectFromID(id: idB) + "," + ObjectFromID(id: idC) + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(
+                "CircularSector(" + ObjectFromID(idA) + "," + ObjectFromID(idB) + "," + ObjectFromID(idC) + ")"));
         }
 
         public static void CircularSector(string input)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: " CircularSector(" + input + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(" CircularSector(" + input + ")"));
         }
 
         #endregion
@@ -323,13 +329,13 @@ namespace IMRE.HandWaver.Kernel.GGBFunctions
 
         public static void CircumcircularArc(int idA, int idB, int idC)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(
-                cmdString: "CircumcircularArc(" + ObjectFromID(id: idA) + "," + ObjectFromID(id: idB) + "," + ObjectFromID(id: idC) + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(
+                "CircumcircularArc(" + ObjectFromID(idA) + "," + ObjectFromID(idB) + "," + ObjectFromID(idC) + ")"));
         }
 
         public static void CircumcircularArc(string input)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: " CircumcircularArc(" + input + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(" CircumcircularArc(" + input + ")"));
         }
 
         #endregion
@@ -338,13 +344,13 @@ namespace IMRE.HandWaver.Kernel.GGBFunctions
 
         public static void CircumcircularSector(int idA, int idB, int idC)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(
-                cmdString: "CircumcircularSector(" + ObjectFromID(id: idA) + "," + ObjectFromID(id: idB) + "," + ObjectFromID(id: idC) + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(
+                "CircumcircularSector(" + ObjectFromID(idA) + "," + ObjectFromID(idB) + "," + ObjectFromID(idC) + ")"));
         }
 
         public static void CircumcircularSector(string input)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: " CircumcircularSector(" + input + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(" CircumcircularSector(" + input + ")"));
         }
 
         #endregion
@@ -353,12 +359,12 @@ namespace IMRE.HandWaver.Kernel.GGBFunctions
 
         public static void Circumference(int idA)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: "Circumference(" + ObjectFromID(id: idA) + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand("Circumference(" + ObjectFromID(idA) + ")"));
         }
 
         public static void Circumference(string input)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: " Circumference(" + input + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(" Circumference(" + input + ")"));
         }
 
         #endregion
@@ -368,13 +374,13 @@ namespace IMRE.HandWaver.Kernel.GGBFunctions
         public static void ClosestPoint(int idA, int idB)
         {
             ins.StartCoroutine(
-                routine: HandWaverServerTransport.execCommand(
-                    cmdString: "ClosestPoint(" + ObjectFromID(id: idA) + "," + ObjectFromID(id: idB) + ")"));
+                HandWaverServerTransport.execCommand(
+                    "ClosestPoint(" + ObjectFromID(idA) + "," + ObjectFromID(idB) + ")"));
         }
 
         public static void ClosestPoint(string input)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: " ClosestPoint(" + input + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(" ClosestPoint(" + input + ")"));
         }
 
         #endregion
@@ -384,13 +390,13 @@ namespace IMRE.HandWaver.Kernel.GGBFunctions
         public static void ClosestPointRegion(int idA, int idB)
         {
             ins.StartCoroutine(
-                routine: HandWaverServerTransport.execCommand(cmdString: "ClosestPointRegion(" + ObjectFromID(id: idA) + "," +
-                                                     ObjectFromID(id: idB) + ")"));
+                HandWaverServerTransport.execCommand("ClosestPointRegion(" + ObjectFromID(idA) + "," +
+                                                     ObjectFromID(idB) + ")"));
         }
 
         public static void ClosestPointRegion(string input)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: " ClosestPointRegion(" + input + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(" ClosestPointRegion(" + input + ")"));
         }
 
         #endregion
@@ -399,14 +405,14 @@ namespace IMRE.HandWaver.Kernel.GGBFunctions
 
         public static void CrossRatio(int idA, int idB, int idC, int idD)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(
-                cmdString: "CrossRatio(" + ObjectFromID(id: idA) + "," + ObjectFromID(id: idB) + "," + ObjectFromID(id: idC) + "," +
-                ObjectFromID(id: idD) + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(
+                "CrossRatio(" + ObjectFromID(idA) + "," + ObjectFromID(idB) + "," + ObjectFromID(idC) + "," +
+                ObjectFromID(idD) + ")"));
         }
 
         public static void CrossRatio(string input)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: " CrossRatio(" + input + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(" CrossRatio(" + input + ")"));
         }
 
         #endregion
@@ -415,14 +421,14 @@ namespace IMRE.HandWaver.Kernel.GGBFunctions
 
         public static void Cubic(int idA, int idB, int idC, int idD)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(
-                cmdString: "Cubic(" + ObjectFromID(id: idA) + "," + ObjectFromID(id: idB) + "," + ObjectFromID(id: idC) + "," +
-                ObjectFromID(id: idD) + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(
+                "Cubic(" + ObjectFromID(idA) + "," + ObjectFromID(idB) + "," + ObjectFromID(idC) + "," +
+                ObjectFromID(idD) + ")"));
         }
 
         public static void Cubic(string input)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: " Cubic(" + input + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(" Cubic(" + input + ")"));
         }
 
         #endregion
@@ -431,12 +437,12 @@ namespace IMRE.HandWaver.Kernel.GGBFunctions
 
         public static void Direction(int idA)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: "Direction(" + ObjectFromID(id: idA) + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand("Direction(" + ObjectFromID(idA) + ")"));
         }
 
         public static void Direction(string input)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: " Direction(" + input + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(" Direction(" + input + ")"));
         }
 
         #endregion
@@ -446,12 +452,12 @@ namespace IMRE.HandWaver.Kernel.GGBFunctions
         public static void Distance(int idA, int idB)
         {
             ins.StartCoroutine(
-                routine: HandWaverServerTransport.execCommand(cmdString: "Distance(" + ObjectFromID(id: idA) + "," + ObjectFromID(id: idB) + ")"));
+                HandWaverServerTransport.execCommand("Distance(" + ObjectFromID(idA) + "," + ObjectFromID(idB) + ")"));
         }
 
         public static void Distance(string input)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: " Distance(" + input + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(" Distance(" + input + ")"));
         }
 
         #endregion
@@ -461,12 +467,12 @@ namespace IMRE.HandWaver.Kernel.GGBFunctions
         public static void Envelope(int idA, int idB)
         {
             ins.StartCoroutine(
-                routine: HandWaverServerTransport.execCommand(cmdString: "Envelope(" + ObjectFromID(id: idA) + "," + ObjectFromID(id: idB) + ")"));
+                HandWaverServerTransport.execCommand("Envelope(" + ObjectFromID(idA) + "," + ObjectFromID(idB) + ")"));
         }
 
         public static void Envelope(string input)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: " Envelope(" + input + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(" Envelope(" + input + ")"));
         }
 
         #endregion
@@ -476,25 +482,25 @@ namespace IMRE.HandWaver.Kernel.GGBFunctions
         public static void Intersect(int idA, int idB)
         {
             ins.StartCoroutine(
-                routine: HandWaverServerTransport.execCommand(cmdString: "Intersect(" + ObjectFromID(id: idA) + "," + ObjectFromID(id: idB) + ")"));
+                HandWaverServerTransport.execCommand("Intersect(" + ObjectFromID(idA) + "," + ObjectFromID(idB) + ")"));
         }
 
         public static void Intersect(int idA, int idB, int idC)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(
-                cmdString: "Intersect(" + ObjectFromID(id: idA) + "," + ObjectFromID(id: idB) + "," + ObjectFromID(id: idC) + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(
+                "Intersect(" + ObjectFromID(idA) + "," + ObjectFromID(idB) + "," + ObjectFromID(idC) + ")"));
         }
 
         public static void Intersect(int idA, int idB, int idC, int idD)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(
-                cmdString: "Intersect(" + ObjectFromID(id: idA) + "," + ObjectFromID(id: idB) + "," + ObjectFromID(id: idC) + "," +
-                ObjectFromID(id: idD) + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(
+                "Intersect(" + ObjectFromID(idA) + "," + ObjectFromID(idB) + "," + ObjectFromID(idC) + "," +
+                ObjectFromID(idD) + ")"));
         }
 
         public static void Intersect(string input)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: " Intersect(" + input + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(" Intersect(" + input + ")"));
         }
 
         #endregion
@@ -504,13 +510,13 @@ namespace IMRE.HandWaver.Kernel.GGBFunctions
         public static void IntersectPath(int idA, int idB)
         {
             ins.StartCoroutine(
-                routine: HandWaverServerTransport.execCommand(cmdString: "IntersectPath(" + ObjectFromID(id: idA) + "," + ObjectFromID(id: idB) +
+                HandWaverServerTransport.execCommand("IntersectPath(" + ObjectFromID(idA) + "," + ObjectFromID(idB) +
                                                      ")"));
         }
 
         public static void IntersectPath(string input)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: " IntersectPath(" + input + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(" IntersectPath(" + input + ")"));
         }
 
         #endregion
@@ -520,13 +526,13 @@ namespace IMRE.HandWaver.Kernel.GGBFunctions
         public static void Intersection(int idA, int idB)
         {
             ins.StartCoroutine(
-                routine: HandWaverServerTransport.execCommand(
-                    cmdString: "Intersection(" + ObjectFromID(id: idA) + "," + ObjectFromID(id: idB) + ")"));
+                HandWaverServerTransport.execCommand(
+                    "Intersection(" + ObjectFromID(idA) + "," + ObjectFromID(idB) + ")"));
         }
 
         public static void Intersection(string input)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: " Intersection(" + input + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(" Intersection(" + input + ")"));
         }
 
         #endregion
@@ -535,25 +541,25 @@ namespace IMRE.HandWaver.Kernel.GGBFunctions
 
         public static void Length(int idA)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: "Length(" + ObjectFromID(id: idA) + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand("Length(" + ObjectFromID(idA) + ")"));
         }
 
         public static void Length(int idA, int idB, int idC)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(
-                cmdString: "Length(" + ObjectFromID(id: idA) + "," + ObjectFromID(id: idB) + "," + ObjectFromID(id: idC) + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(
+                "Length(" + ObjectFromID(idA) + "," + ObjectFromID(idB) + "," + ObjectFromID(idC) + ")"));
         }
 
         public static void Length(int idA, int idB, int idC, int idD)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(
-                cmdString: "Length(" + ObjectFromID(id: idA) + "," + ObjectFromID(id: idB) + "," + ObjectFromID(id: idC) + "," +
-                ObjectFromID(id: idD) + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(
+                "Length(" + ObjectFromID(idA) + "," + ObjectFromID(idB) + "," + ObjectFromID(idC) + "," +
+                ObjectFromID(idD) + ")"));
         }
 
         public static void Length(string input)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: " Length(" + input + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(" Length(" + input + ")"));
         }
 
         #endregion
@@ -563,12 +569,12 @@ namespace IMRE.HandWaver.Kernel.GGBFunctions
         public static void Line(int idA, int idB)
         {
             ins.StartCoroutine(
-                routine: HandWaverServerTransport.execCommand(cmdString: "Line(" + ObjectFromID(id: idA) + "," + ObjectFromID(id: idB) + ")"));
+                HandWaverServerTransport.execCommand("Line(" + ObjectFromID(idA) + "," + ObjectFromID(idB) + ")"));
         }
 
         public static void Line(string input)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: " Line(" + input + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(" Line(" + input + ")"));
         }
 
         #endregion
@@ -578,12 +584,12 @@ namespace IMRE.HandWaver.Kernel.GGBFunctions
         public static void Locus(int idA, int idB)
         {
             ins.StartCoroutine(
-                routine: HandWaverServerTransport.execCommand(cmdString: "Locus(" + ObjectFromID(id: idA) + "," + ObjectFromID(id: idB) + ")"));
+                HandWaverServerTransport.execCommand("Locus(" + ObjectFromID(idA) + "," + ObjectFromID(idB) + ")"));
         }
 
         public static void Locus(string input)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: " Locus(" + input + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(" Locus(" + input + ")"));
         }
 
         #endregion
@@ -592,19 +598,19 @@ namespace IMRE.HandWaver.Kernel.GGBFunctions
 
         public static void LocusEquation(int idA)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: "LocusEquation(" + ObjectFromID(id: idA) + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand("LocusEquation(" + ObjectFromID(idA) + ")"));
         }
 
         public static void LocusEquation(int idA, int idB)
         {
             ins.StartCoroutine(
-                routine: HandWaverServerTransport.execCommand(cmdString: "LocusEquation(" + ObjectFromID(id: idA) + "," + ObjectFromID(id: idB) +
+                HandWaverServerTransport.execCommand("LocusEquation(" + ObjectFromID(idA) + "," + ObjectFromID(idB) +
                                                      ")"));
         }
 
         public static void LocusEquation(string input)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: " LocusEquation(" + input + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(" LocusEquation(" + input + ")"));
         }
 
         #endregion
@@ -613,18 +619,18 @@ namespace IMRE.HandWaver.Kernel.GGBFunctions
 
         public static void Midpoint(int idA)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: "Midpoint(" + ObjectFromID(id: idA) + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand("Midpoint(" + ObjectFromID(idA) + ")"));
         }
 
         public static void Midpoint(int idA, int idB)
         {
             ins.StartCoroutine(
-                routine: HandWaverServerTransport.execCommand(cmdString: "Midpoint(" + ObjectFromID(id: idA) + "," + ObjectFromID(id: idB) + ")"));
+                HandWaverServerTransport.execCommand("Midpoint(" + ObjectFromID(idA) + "," + ObjectFromID(idB) + ")"));
         }
 
         public static void Midpoint(string input)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: " Midpoint(" + input + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(" Midpoint(" + input + ")"));
         }
 
         #endregion
@@ -633,12 +639,12 @@ namespace IMRE.HandWaver.Kernel.GGBFunctions
 
         public static void Perimeter(int idA)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: "Perimeter(" + ObjectFromID(id: idA) + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand("Perimeter(" + ObjectFromID(idA) + ")"));
         }
 
         public static void Perimeter(string input)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: " Perimeter(" + input + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(" Perimeter(" + input + ")"));
         }
 
         #endregion
@@ -647,26 +653,27 @@ namespace IMRE.HandWaver.Kernel.GGBFunctions
 
         public static void PerpendicularBisector(int idA)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: "PerpendicularBisector(" + ObjectFromID(id: idA) + ")"));
+            ins.StartCoroutine(
+                HandWaverServerTransport.execCommand("PerpendicularBisector(" + ObjectFromID(idA) + ")"));
         }
 
         public static void PerpendicularBisector(int idA, int idB)
         {
             ins.StartCoroutine(
-                routine: HandWaverServerTransport.execCommand(cmdString: "PerpendicularBisector(" + ObjectFromID(id: idA) + "," +
-                                                     ObjectFromID(id: idB) + ")"));
+                HandWaverServerTransport.execCommand("PerpendicularBisector(" + ObjectFromID(idA) + "," +
+                                                     ObjectFromID(idB) + ")"));
         }
 
         public static void PerpendicularBisector(int idA, int idB, int idC)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(
-                cmdString: "PerpendicularBisector(" + ObjectFromID(id: idA) + "," + ObjectFromID(id: idB) + "," + ObjectFromID(id: idC) +
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(
+                "PerpendicularBisector(" + ObjectFromID(idA) + "," + ObjectFromID(idB) + "," + ObjectFromID(idC) +
                 ")"));
         }
 
         public static void PerpendicularBisector(string input)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: " PerpendicularBisector(" + input + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(" PerpendicularBisector(" + input + ")"));
         }
 
         #endregion
@@ -676,19 +683,19 @@ namespace IMRE.HandWaver.Kernel.GGBFunctions
         public static void PerpendicularLine(int idA, int idB)
         {
             ins.StartCoroutine(
-                routine: HandWaverServerTransport.execCommand(cmdString: "PerpendicularLine(" + ObjectFromID(id: idA) + "," +
-                                                     ObjectFromID(id: idB) + ")"));
+                HandWaverServerTransport.execCommand("PerpendicularLine(" + ObjectFromID(idA) + "," +
+                                                     ObjectFromID(idB) + ")"));
         }
 
         public static void PerpendicularLine(int idA, int idB, int idC)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(
-                cmdString: "PerpendicularLine(" + ObjectFromID(id: idA) + "," + ObjectFromID(id: idB) + "," + ObjectFromID(id: idC) + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(
+                "PerpendicularLine(" + ObjectFromID(idA) + "," + ObjectFromID(idB) + "," + ObjectFromID(idC) + ")"));
         }
 
         public static void PerpendicularLine(string input)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: " PerpendicularLine(" + input + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(" PerpendicularLine(" + input + ")"));
         }
 
         #endregion
@@ -697,18 +704,18 @@ namespace IMRE.HandWaver.Kernel.GGBFunctions
 
         public static void Point(int idA)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: "Point(" + ObjectFromID(id: idA) + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand("Point(" + ObjectFromID(idA) + ")"));
         }
 
         public static void Point(int idA, int idB)
         {
             ins.StartCoroutine(
-                routine: HandWaverServerTransport.execCommand(cmdString: "Point(" + ObjectFromID(id: idA) + "," + ObjectFromID(id: idB) + ")"));
+                HandWaverServerTransport.execCommand("Point(" + ObjectFromID(idA) + "," + ObjectFromID(idB) + ")"));
         }
 
         public static void Point(string input)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: " Point(" + input + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(" Point(" + input + ")"));
         }
 
         #endregion
@@ -717,12 +724,12 @@ namespace IMRE.HandWaver.Kernel.GGBFunctions
 
         public static void PointIn(int idA)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: "PointIn(" + ObjectFromID(id: idA) + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand("PointIn(" + ObjectFromID(idA) + ")"));
         }
 
         public static void PointIn(string input)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: " PointIn(" + input + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(" PointIn(" + input + ")"));
         }
 
         #endregion
@@ -731,38 +738,38 @@ namespace IMRE.HandWaver.Kernel.GGBFunctions
 
         public static void Polygon(int idA)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: "Polygon(" + ObjectFromID(id: idA) + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand("Polygon(" + ObjectFromID(idA) + ")"));
         }
 
         public static void Polygon(int idA, int idB)
         {
             ins.StartCoroutine(
-                routine: HandWaverServerTransport.execCommand(cmdString: "Polygon(" + ObjectFromID(id: idA) + "," + ObjectFromID(id: idB) + ")"));
+                HandWaverServerTransport.execCommand("Polygon(" + ObjectFromID(idA) + "," + ObjectFromID(idB) + ")"));
         }
 
         public static void Polygon(int idA, int idB, int idC)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(
-                cmdString: "Polygon(" + ObjectFromID(id: idA) + "," + ObjectFromID(id: idB) + "," + ObjectFromID(id: idC) + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(
+                "Polygon(" + ObjectFromID(idA) + "," + ObjectFromID(idB) + "," + ObjectFromID(idC) + ")"));
         }
 
         public static void Polygon(int idA, int idB, int idC, int idD)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(
-                cmdString: "Polygon(" + ObjectFromID(id: idA) + "," + ObjectFromID(id: idB) + "," + ObjectFromID(id: idC) + "," +
-                ObjectFromID(id: idD) + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(
+                "Polygon(" + ObjectFromID(idA) + "," + ObjectFromID(idB) + "," + ObjectFromID(idC) + "," +
+                ObjectFromID(idD) + ")"));
         }
 
         public static void Polygon(int idA, int idB, int idC, int idD, int idE)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(
-                cmdString: "Polygon(" + ObjectFromID(id: idA) + "," + ObjectFromID(id: idB) + "," + ObjectFromID(id: idC) + "," +
-                ObjectFromID(id: idD) + "," + ObjectFromID(id: idE) + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(
+                "Polygon(" + ObjectFromID(idA) + "," + ObjectFromID(idB) + "," + ObjectFromID(idC) + "," +
+                ObjectFromID(idD) + "," + ObjectFromID(idE) + ")"));
         }
 
         public static void Polygon(string input)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: " Polygon(" + input + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(" Polygon(" + input + ")"));
         }
 
         #endregion
@@ -771,38 +778,38 @@ namespace IMRE.HandWaver.Kernel.GGBFunctions
 
         public static void Polyline(int idA)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: "Polyline(" + ObjectFromID(id: idA) + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand("Polyline(" + ObjectFromID(idA) + ")"));
         }
 
         public static void Polyline(int idA, int idB)
         {
             ins.StartCoroutine(
-                routine: HandWaverServerTransport.execCommand(cmdString: "Polyline(" + ObjectFromID(id: idA) + "," + ObjectFromID(id: idB) + ")"));
+                HandWaverServerTransport.execCommand("Polyline(" + ObjectFromID(idA) + "," + ObjectFromID(idB) + ")"));
         }
 
         public static void Polyline(int idA, int idB, int idC)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(
-                cmdString: "Polyline(" + ObjectFromID(id: idA) + "," + ObjectFromID(id: idB) + "," + ObjectFromID(id: idC) + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(
+                "Polyline(" + ObjectFromID(idA) + "," + ObjectFromID(idB) + "," + ObjectFromID(idC) + ")"));
         }
 
         public static void Polyline(int idA, int idB, int idC, int idD)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(
-                cmdString: "Polyline(" + ObjectFromID(id: idA) + "," + ObjectFromID(id: idB) + "," + ObjectFromID(id: idC) + "," +
-                ObjectFromID(id: idD) + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(
+                "Polyline(" + ObjectFromID(idA) + "," + ObjectFromID(idB) + "," + ObjectFromID(idC) + "," +
+                ObjectFromID(idD) + ")"));
         }
 
         public static void Polyline(int idA, int idB, int idC, int idD, int idE)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(
-                cmdString: "Polyline(" + ObjectFromID(id: idA) + "," + ObjectFromID(id: idB) + "," + ObjectFromID(id: idC) + "," +
-                ObjectFromID(id: idD) + "," + ObjectFromID(id: idE) + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(
+                "Polyline(" + ObjectFromID(idA) + "," + ObjectFromID(idB) + "," + ObjectFromID(idC) + "," +
+                ObjectFromID(idD) + "," + ObjectFromID(idE) + ")"));
         }
 
         public static void Polyline(string input)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: " Polyline(" + input + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(" Polyline(" + input + ")"));
         }
 
         #endregion
@@ -811,12 +818,12 @@ namespace IMRE.HandWaver.Kernel.GGBFunctions
 
         public static void Prove(int idA)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: "Prove(" + ObjectFromID(id: idA) + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand("Prove(" + ObjectFromID(idA) + ")"));
         }
 
         public static void Prove(string input)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: " Prove(" + input + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(" Prove(" + input + ")"));
         }
 
         #endregion
@@ -825,12 +832,12 @@ namespace IMRE.HandWaver.Kernel.GGBFunctions
 
         public static void ProveDetails(int idA)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: "ProveDetails(" + ObjectFromID(id: idA) + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand("ProveDetails(" + ObjectFromID(idA) + ")"));
         }
 
         public static void ProveDetails(string input)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: " ProveDetails(" + input + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(" ProveDetails(" + input + ")"));
         }
 
         #endregion
@@ -839,12 +846,12 @@ namespace IMRE.HandWaver.Kernel.GGBFunctions
 
         public static void Radius(int idA)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: "Radius(" + ObjectFromID(id: idA) + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand("Radius(" + ObjectFromID(idA) + ")"));
         }
 
         public static void Radius(string input)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: " Radius(" + input + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(" Radius(" + input + ")"));
         }
 
         #endregion
@@ -854,12 +861,12 @@ namespace IMRE.HandWaver.Kernel.GGBFunctions
         public static void Ray(int idA, int idB)
         {
             ins.StartCoroutine(
-                routine: HandWaverServerTransport.execCommand(cmdString: "Ray(" + ObjectFromID(id: idA) + "," + ObjectFromID(id: idB) + ")"));
+                HandWaverServerTransport.execCommand("Ray(" + ObjectFromID(idA) + "," + ObjectFromID(idB) + ")"));
         }
 
         public static void Ray(string input)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: " Ray(" + input + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(" Ray(" + input + ")"));
         }
 
         #endregion
@@ -868,39 +875,39 @@ namespace IMRE.HandWaver.Kernel.GGBFunctions
 
         public static void RigidPolygon(int idA)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: "RigidPolygon(" + ObjectFromID(id: idA) + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand("RigidPolygon(" + ObjectFromID(idA) + ")"));
         }
 
         public static void RigidPolygon(int idA, int idB)
         {
             ins.StartCoroutine(
-                routine: HandWaverServerTransport.execCommand(
-                    cmdString: "RigidPolygon(" + ObjectFromID(id: idA) + "," + ObjectFromID(id: idB) + ")"));
+                HandWaverServerTransport.execCommand(
+                    "RigidPolygon(" + ObjectFromID(idA) + "," + ObjectFromID(idB) + ")"));
         }
 
         public static void RigidPolygon(int idA, int idB, int idC)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(
-                cmdString: "RigidPolygon(" + ObjectFromID(id: idA) + "," + ObjectFromID(id: idB) + "," + ObjectFromID(id: idC) + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(
+                "RigidPolygon(" + ObjectFromID(idA) + "," + ObjectFromID(idB) + "," + ObjectFromID(idC) + ")"));
         }
 
         public static void RigidPolygon(int idA, int idB, int idC, int idD)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(
-                cmdString: "RigidPolygon(" + ObjectFromID(id: idA) + "," + ObjectFromID(id: idB) + "," + ObjectFromID(id: idC) + "," +
-                ObjectFromID(id: idD) + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(
+                "RigidPolygon(" + ObjectFromID(idA) + "," + ObjectFromID(idB) + "," + ObjectFromID(idC) + "," +
+                ObjectFromID(idD) + ")"));
         }
 
         public static void RigidPolygon(int idA, int idB, int idC, int idD, int idE)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(
-                cmdString: "RigidPolygon(" + ObjectFromID(id: idA) + "," + ObjectFromID(id: idB) + "," + ObjectFromID(id: idC) + "," +
-                ObjectFromID(id: idD) + "," + ObjectFromID(id: idE) + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(
+                "RigidPolygon(" + ObjectFromID(idA) + "," + ObjectFromID(idB) + "," + ObjectFromID(idC) + "," +
+                ObjectFromID(idD) + "," + ObjectFromID(idE) + ")"));
         }
 
         public static void RigidPolygon(string input)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: " RigidPolygon(" + input + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(" RigidPolygon(" + input + ")"));
         }
 
         #endregion
@@ -909,13 +916,13 @@ namespace IMRE.HandWaver.Kernel.GGBFunctions
 
         public static void Sector(int idA, int idB, int idC)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(
-                cmdString: "Sector(" + ObjectFromID(id: idA) + "," + ObjectFromID(id: idB) + "," + ObjectFromID(id: idC) + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(
+                "Sector(" + ObjectFromID(idA) + "," + ObjectFromID(idB) + "," + ObjectFromID(idC) + ")"));
         }
 
         public static void Sector(string input)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: " Sector(" + input + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(" Sector(" + input + ")"));
         }
 
         #endregion
@@ -925,12 +932,12 @@ namespace IMRE.HandWaver.Kernel.GGBFunctions
         public static void Segment(int idA, int idB)
         {
             ins.StartCoroutine(
-                routine: HandWaverServerTransport.execCommand(cmdString: "Segment(" + ObjectFromID(id: idA) + "," + ObjectFromID(id: idB) + ")"));
+                HandWaverServerTransport.execCommand("Segment(" + ObjectFromID(idA) + "," + ObjectFromID(idB) + ")"));
         }
 
         public static void Segment(string input)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: " Segment(" + input + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(" Segment(" + input + ")"));
         }
 
         #endregion
@@ -939,12 +946,12 @@ namespace IMRE.HandWaver.Kernel.GGBFunctions
 
         public static void Slope(int idA)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: "Slope(" + ObjectFromID(id: idA) + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand("Slope(" + ObjectFromID(idA) + ")"));
         }
 
         public static void Slope(string input)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: " Slope(" + input + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(" Slope(" + input + ")"));
         }
 
         #endregion
@@ -954,12 +961,12 @@ namespace IMRE.HandWaver.Kernel.GGBFunctions
         public static void Tangent(int idA, int idB)
         {
             ins.StartCoroutine(
-                routine: HandWaverServerTransport.execCommand(cmdString: "Tangent(" + ObjectFromID(id: idA) + "," + ObjectFromID(id: idB) + ")"));
+                HandWaverServerTransport.execCommand("Tangent(" + ObjectFromID(idA) + "," + ObjectFromID(idB) + ")"));
         }
 
         public static void Tangent(string input)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: " Tangent(" + input + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(" Tangent(" + input + ")"));
         }
 
         #endregion
@@ -968,14 +975,14 @@ namespace IMRE.HandWaver.Kernel.GGBFunctions
 
         public static void TriangleCenter(int idA, int idB, int idC, int idD)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(
-                cmdString: "TriangleCenter(" + ObjectFromID(id: idA) + "," + ObjectFromID(id: idB) + "," + ObjectFromID(id: idC) + "," +
-                ObjectFromID(id: idD) + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(
+                "TriangleCenter(" + ObjectFromID(idA) + "," + ObjectFromID(idB) + "," + ObjectFromID(idC) + "," +
+                ObjectFromID(idD) + ")"));
         }
 
         public static void TriangleCenter(string input)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: " TriangleCenter(" + input + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(" TriangleCenter(" + input + ")"));
         }
 
         #endregion
@@ -984,14 +991,14 @@ namespace IMRE.HandWaver.Kernel.GGBFunctions
 
         public static void TriangleCurve(int idA, int idB, int idC, int idD)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(
-                cmdString: "TriangleCurve(" + ObjectFromID(id: idA) + "," + ObjectFromID(id: idB) + "," + ObjectFromID(id: idC) + "," +
-                ObjectFromID(id: idD) + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(
+                "TriangleCurve(" + ObjectFromID(idA) + "," + ObjectFromID(idB) + "," + ObjectFromID(idC) + "," +
+                ObjectFromID(idD) + ")"));
         }
 
         public static void TriangleCurve(string input)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: " TriangleCurve(" + input + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(" TriangleCurve(" + input + ")"));
         }
 
         #endregion
@@ -1000,14 +1007,14 @@ namespace IMRE.HandWaver.Kernel.GGBFunctions
 
         public static void Trilinear(int idA, int idB, int idC, int idD, int idE, int idF)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(
-                cmdString: "Trilinear(" + ObjectFromID(id: idA) + "," + ObjectFromID(id: idB) + "," + ObjectFromID(id: idC) + "," +
-                ObjectFromID(id: idD) + "," + ObjectFromID(id: idE) + "," + ObjectFromID(id: idF) + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(
+                "Trilinear(" + ObjectFromID(idA) + "," + ObjectFromID(idB) + "," + ObjectFromID(idC) + "," +
+                ObjectFromID(idD) + "," + ObjectFromID(idE) + "," + ObjectFromID(idF) + ")"));
         }
 
         public static void Trilinear(string input)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: " Trilinear(" + input + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(" Trilinear(" + input + ")"));
         }
 
         #endregion
@@ -1016,18 +1023,18 @@ namespace IMRE.HandWaver.Kernel.GGBFunctions
 
         public static void Vertex(int idA)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: "Vertex(" + ObjectFromID(id: idA) + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand("Vertex(" + ObjectFromID(idA) + ")"));
         }
 
         public static void Vertex(int idA, int idB)
         {
             ins.StartCoroutine(
-                routine: HandWaverServerTransport.execCommand(cmdString: "Vertex(" + ObjectFromID(id: idA) + "," + ObjectFromID(id: idB) + ")"));
+                HandWaverServerTransport.execCommand("Vertex(" + ObjectFromID(idA) + "," + ObjectFromID(idB) + ")"));
         }
 
         public static void Vertex(string input)
         {
-            ins.StartCoroutine(routine: HandWaverServerTransport.execCommand(cmdString: " Vertex(" + input + ")"));
+            ins.StartCoroutine(HandWaverServerTransport.execCommand(" Vertex(" + input + ")"));
         }
 
         #endregion
