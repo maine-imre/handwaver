@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 8cc9ad898a8c56d4597932c193e966b9
+=======
+guid: c0dcffb20add2734b96f8287ddcd46eb
+>>>>>>> rendering-pipeline
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 2100000
