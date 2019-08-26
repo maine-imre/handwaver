@@ -47,12 +47,23 @@ namespace IMRE.HandWaver.Rendering
         // TODO: Determine input vars.
         // TODO: Implement functionality for base version of HW Rendering.
 
+        /// <summary>
+        /// Function that renders a line based on a point and direction
+        /// Currently being rendered as a very long segment-revise this
+        /// </summary>
+        /// <param name="point"></param>
+        /// <param name="direction"></param>
         public static void Line(float3 point, float3 direction)
         {
                 direction = Unity.Mathematics.math.normalize(direction);
                 Segment(point + 100f * direction, point - 100f * direction);
         }
 
+        /// <summary>
+        /// Function that renders a point at a given location
+        /// Currently being rendered as a very tiny line segment-revise this
+        /// </summary>
+        /// <param name="location"></param>
         public static void Point(float3 location)
         {           
             //TODO a better visualization of a point
@@ -60,14 +71,24 @@ namespace IMRE.HandWaver.Rendering
             Segment(location - dir, location + dir);
         }
 
+        /// <summary>
+        /// Function to render a line segment based on two endpoints
+        /// Using the two endpoints, calculate corners of the segment with the location as endpointA/B +/- lineWidth
+        /// </summary>
+        /// <param name="endpointA"></param>
+        /// <param name="endpointB"></param>
+        /// <returns></returns>
         public static Mesh Segment(float3 endpointA, float3 endpointB)
         {
             
             //TODO: check why this does not work with endpointA at the origin
             Mesh mesh = new UnityEngine.Mesh();
+            
             float3 lineWidth = math.cross(
                 endpointA - endpointB,
                 (endpointA + endpointB) / 2f - headDirection);
+            
+            //If segment is not visible, debug out a warning as to why and return empty mesh
             if (IMRE.Math.Operations.magnitude(lineWidth) == 0f)
             {
                 Debug.LogWarning("Line Segment in Direction of Vision");
@@ -89,8 +110,7 @@ namespace IMRE.HandWaver.Rendering
                 
             mesh.vertices = verts;
 
-            //triangles
-            //TODO check clockwise vs counterclockwise
+            //triangles-counterclockwise
             int[] tris = {1, 3, 0, 1, 2, 3};
             mesh.triangles = tris;
 
@@ -149,6 +169,13 @@ namespace IMRE.HandWaver.Rendering
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Function that renders a circle based on centerpoint, point on the edge, and normal direction 
+        /// </summary>
+        /// <param name="center"></param>
+        /// <param name="edgePoint"></param>
+        /// <param name="normalDirection"></param>
+        /// <returns></returns>
         public static Mesh Circle(float3 center, float3 edgePoint, float3 normalDirection)
         {
             const int n = 50;
@@ -159,6 +186,7 @@ namespace IMRE.HandWaver.Rendering
             Unity.Mathematics.float3 basis1 = Unity.Mathematics.math.normalize(edgePoint-center);
             Unity.Mathematics.float3 basis2 = Unity.Mathematics.math.cross(basis1,normalDirection);
             float radius = IMRE.Math.Operations.magnitude(edgePoint - center);
+           
             //array of vector3s for vertices
             Unity.Mathematics.float3[] positions = new Unity.Mathematics.float3[n];
             Unity.Mathematics.float3[] vertices = new Unity.Mathematics.float3[2*n];
@@ -276,6 +304,12 @@ namespace IMRE.HandWaver.Rendering
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Function that renders a plane (very large rectangle) based on an origin and direction
+        /// </summary>
+        /// <param name="origin"></param>
+        /// <param name="direction"></param>
+        /// <returns></returns>
         public static Mesh Plane(float3 origin, float3 direction)
         {
             const float planeSize = 5f;
@@ -312,8 +346,7 @@ namespace IMRE.HandWaver.Rendering
                 
             mesh.vertices = verts;
 
-            //triangles
-            //TODO check clockwise vs counterclockwise
+            //triangles-counterclockwise
             int[] tris = {1, 3, 0, 1, 2, 3};
             mesh.triangles = tris;
 
@@ -345,8 +378,6 @@ namespace IMRE.HandWaver.Rendering
         }
         
         /// <summary>
-        /// Render a polygon from an input of an array of points
-        /// Function is passed points in clockwise connection of dots
         /// </summary>
         /// <param name="pointFloat3Array"></param>
         /// <returns></returns>
@@ -359,7 +390,13 @@ namespace IMRE.HandWaver.Rendering
         {
             throw new NotImplementedException();
         }
-        
+    
+        /// <summary>
+        /// Function that renders a sphere based on a centerpoint and a point on the adge
+        /// </summary>
+        /// <param name="center"></param>
+        /// <param name="edgePoint"></param>
+        /// <returns></returns>
         public static Mesh Sphere(float3 center, float3 edgePoint)
         {
             const int n = 50;
