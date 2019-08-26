@@ -336,10 +336,10 @@ namespace IMRE.HandWaver.Rendering
             mesh.RecalculateNormals();
 
             //normals
-            var normals = mesh.normals;
+            /*var normals = mesh.normals;
             for (var i = 0; i < verts.Length; i++)
                 normals[i] = math.normalize(HeadDirection);
-            mesh.normals = normals;
+            mesh.normals = normals;*/
 
             return mesh;
         }
