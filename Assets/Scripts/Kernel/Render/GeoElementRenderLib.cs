@@ -360,6 +360,7 @@ namespace IMRE.HandWaver.Rendering
         /// <returns></returns>
         public static Mesh Polygon(float3[] pointFloat3Array)
         {
+            throw new NotImplementedException();
         }
 
         public static Mesh Ray( /*Data needed to render*/)
