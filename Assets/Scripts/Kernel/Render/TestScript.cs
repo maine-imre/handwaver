@@ -13,8 +13,8 @@ namespace IMRE.HandWaver.Rendering
         private void Start()
         {
             gameObject.AddComponent<MeshRenderer>();
-            gameObject.AddComponent<MeshFilter>();
-            myMesh = GetComponent<MeshFilter>();
+            
+            myMesh = gameObject.AddComponent<MeshFilter>();
             myMesh.mesh = GeoElementRenderLib.Segment(new float3(0f, 0f, 0f), new float3(1f, 1f, 0f));
         }
     }
