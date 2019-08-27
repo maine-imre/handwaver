@@ -254,7 +254,7 @@ namespace IMRE.HandWaver.Rendering
             if (Operations.Magnitude(direction) == 0f)
             {
                 UnityEngine.Debug.LogError("Normal Direction Must Be Non Zero");
-                return new UnityEngine.Mesh();
+                direction = new Unity.Mathematics.float3(1f,0f,0f);            
             }
 
             direction = Unity.Mathematics.math.normalize(direction);
