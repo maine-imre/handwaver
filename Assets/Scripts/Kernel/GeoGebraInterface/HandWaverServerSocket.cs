@@ -54,9 +54,9 @@ namespace IMRE.HandWaver.Kernel
         private IEnumerator delayedStart()
         {
             while (!connect) yield return new WaitForEndOfFrame();
-            testCMD();
+            StartCoroutine(HandWaverServerTransport.execCommand("A = (1,1,1)")); // Point B
             yield return new WaitForEndOfFrame();
-            StartCoroutine(HandWaverServerTransport.execCommand("B = (5,5,6)")); // Point B
+            StartCoroutine(HandWaverServerTransport.execCommand("B = (0,1,1)")); // Point B
             yield return new WaitForEndOfFrame();
             StartCoroutine(HandWaverServerTransport.execCommand("Line(A, B)")); // Line f
         }
@@ -222,7 +222,7 @@ namespace IMRE.HandWaver.Kernel
         public void testCMD()
         {
             //Test the command changes
-            StartCoroutine(HandWaverServerTransport.execCommand("A = (" + xint++ + ", 2, 3)")); // Point A
+            StartCoroutine(HandWaverServerTransport.execCommand("A = (1, 1, 0")); // Point A
         }
 
         [ContextMenu("Output Element Dictionary")]

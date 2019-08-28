@@ -293,6 +293,7 @@ namespace socket.io {
         }
 
         void DispatchPacket(Packet pkt) {
+            
             if (pkt.nsp != Namespace)
                 return;
 
@@ -329,10 +330,11 @@ namespace socket.io {
                         Debug.LogWarningFormat("{0} event doesn't have a handler", eventName);
                         break;
                     }
-
+                    
                     //var data = pkt.body.Substring(seperateIndex + seperatorLen, pkt.body.Length - seperateIndex - seperatorLen - 1);
                     //For some reason it was cutting 1 less than it was suppose to.
-                    var data = pkt.body.Substring(seperateIndex + seperatorLen, pkt.body.Length - seperateIndex - seperatorLen - 2);
+                    var data = pkt.body.Substring(seperateIndex + seperatorLen, pkt.body.Length - seperateIndex - seperatorLen - 1);
+                    //Debug.Log(eventName + " " +data);
                     _handlers[eventName](data);
                     break;
 

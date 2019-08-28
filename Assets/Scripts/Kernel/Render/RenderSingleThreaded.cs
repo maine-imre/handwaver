@@ -40,7 +40,7 @@ public class RenderSingleThreaded : MonoBehaviour
                 newMesh = GeoElementRenderLib.Point(geo.F0);
                 break;
             case ElementType.line:
-                newMesh = GeoElementRenderLib.Segment(GeoElementDataBase.GeoElements[geo.Deps[0]].F0,
+                newMesh = GeoElementRenderLib.Line(GeoElementDataBase.GeoElements[geo.Deps[0]].F0,
                     GeoElementDataBase.GeoElements[geo.Deps[1]].F0 -
                     GeoElementDataBase.GeoElements[geo.Deps[0]].F0);
                 break;

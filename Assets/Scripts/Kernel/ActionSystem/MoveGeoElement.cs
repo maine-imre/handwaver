@@ -14,7 +14,9 @@ namespace IMRE.HandWaver.Kernel.ActionSystem
                 switch (geo.Type)
                 {
                     case ElementType.point:
-                        Geometry.Point(Geometry.Float3Value(classifier.origin));
+                        HandWaverServerTransport.execCommand(
+                            geo.ElementName.ToString() + " = (" + Geometry.Float3Value(classifier.origin) + ")");
+                        Debug.Log("I'm here");
                         break;
                     case ElementType.line:
                         //design discussion needed here
