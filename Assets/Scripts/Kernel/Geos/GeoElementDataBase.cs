@@ -20,7 +20,7 @@ namespace IMRE.HandWaver.Kernel.Geos
         /// </summary>
         public static NativeHashMap<int, GeoElement> GeoElements = new NativeHashMap<int, GeoElement>(200, Allocator.Persistent);
         
-        public static NativeHashMap<int, RenderMesh> GeoRenderMeshs = new NativeHashMap<int, RenderMesh>(200, Allocator.Persistent);
+        public static Dictionary<int, RenderMesh> GeoRenderMeshs = new Dictionary<int, RenderMesh>();
 
 
         /// <summary>
@@ -84,6 +84,14 @@ namespace IMRE.HandWaver.Kernel.Geos
             GeoElements.Remove(eId);
         }
 
+        public static void AssignMesh(int eId, Mesh newMesh)
+        {
+            var tmpRenderMesh = GeoRenderMeshs[eId];
+            tmpRenderMesh.mesh =  newMesh;
+            GeoRenderMeshs[eId] = tmpRenderMesh;
+        }
+
+        
         public static bool HasElement(GeoElement e)
         {
             return GeoElements.ContainsKey(e.ElementId);

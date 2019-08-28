@@ -80,7 +80,7 @@ namespace IMRE.HandWaver.Rendering
             verts[2] = endpointB - lineWidth;
             verts[3] = endpointB + lineWidth;
 
-            foreach (UnityEngine.Vector3 vector3 in verts) UnityEngine.Debug.Log(vector3);
+            //foreach (UnityEngine.Vector3 vector3 in verts) UnityEngine.Debug.Log(vector3);
 
             mesh.vertices = verts;
 

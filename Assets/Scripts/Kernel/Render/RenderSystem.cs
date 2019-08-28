@@ -1,4 +1,4 @@
-﻿using System;
+﻿/*using System;
 using IMRE.HandWaver.Kernel.Geos;
 using IMRE.Math;
 using Unity.Burst;
@@ -53,10 +53,10 @@ namespace IMRE.HandWaver.Rendering
                 }
 
                 //Assign updated rendermesh to the geoelement.
-                GeoElementDataBase.GeoRenderMeshs[geo.ElementId] = newRenderMesh;
+                GeoElementDataBase.AssignMesh(geo.ElementId, newRenderMesh.mesh);
             }
         }
-
+        
         protected override JobHandle OnUpdate(JobHandle inputDependencies)
         {
             var job = new RenderSystemJob();
@@ -71,4 +71,4 @@ namespace IMRE.HandWaver.Rendering
             return job.Schedule(this, inputDependencies);
         }
     }
-}
+}*/

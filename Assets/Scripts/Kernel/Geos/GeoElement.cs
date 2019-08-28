@@ -101,7 +101,7 @@ namespace IMRE.HandWaver.Kernel.Geos
             Updated = DateTime.MinValue;
             //Deps = new NativeArray<int>(8, Allocator.Persistent);
         }
-
+        
         public override string ToString()
         {
             return $"{_elementName} element :: {_elementId} Id, {_type} Type, {_deps} Deps, {_f0} F0\n";
