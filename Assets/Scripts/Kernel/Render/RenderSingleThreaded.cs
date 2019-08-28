@@ -14,7 +14,7 @@ public class RenderSingleThreaded : MonoBehaviour
 {
 
     Dictionary<int, GameObject> DictElements = new Dictionary<int, GameObject>();
-    
+
     void Update()
     {
         foreach (GeoElement geoElement in GeoElementDataBase.GeoElements.GetValueArray(Allocator.Persistent))
@@ -22,14 +22,14 @@ public class RenderSingleThreaded : MonoBehaviour
             updateMesh(geoElement);
         }
     }
-    
+
     public void updateMesh(GeoElement geo)
     {
         if (geo.Updated == DateTime.MinValue)
         {
             return;
         }
-                
+
         // Store a local copy of the render mesh.
         var newMesh = new Mesh();
 
@@ -76,7 +76,7 @@ public class RenderSingleThreaded : MonoBehaviour
             newGameObject.GetComponent<MeshFilter>().mesh = newMesh;
             DictElements[geo.ElementId] = newGameObject;
         }
-        
+
     }
-    
+
 }

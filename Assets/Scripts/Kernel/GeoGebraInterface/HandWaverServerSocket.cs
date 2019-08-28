@@ -222,7 +222,7 @@ namespace IMRE.HandWaver.Kernel
         public void testCMD()
         {
             //Test the command changes
-            StartCoroutine(HandWaverServerTransport.execCommand("A = (1, 1, 0")); // Point A
+            StartCoroutine(HandWaverServerTransport.execCommand("A = (1, 5, 0)")); // Point A
         }
 
         [ContextMenu("Output Element Dictionary")]

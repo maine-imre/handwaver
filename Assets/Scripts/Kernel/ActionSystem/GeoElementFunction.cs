@@ -14,13 +14,11 @@ namespace IMRE.HandWaver.ActionSystem
 
         public override void checkClassifier(EmbodiedClassifier classifier)
         {
-            Debug.Log( GeoElementDataBase.GeoElements.Length);
             var bestDist = tolerance;
             var geo = new GeoElement();
             //find closest point
             for (var i = 0; i < GeoElementDataBase.GeoElements.Length; i++)
             {
-                Debug.Log(GeoElementDataBase.GeoElements[i].ElementName);
                 if (!GeoElementDataBase.HasElement(i)) continue;
 
                 var closestPoint =
