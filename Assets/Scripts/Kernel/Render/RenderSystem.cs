@@ -15,8 +15,13 @@ namespace IMRE.HandWaver.Rendering
         {
             public void Execute([ChangedFilter] ref GeoElement geo)
             {
+                if (geo.Updated == DateTime.MinValue)
+                {
+                    return;
+                }
+                
                 // Store a local copy of the render mesh.
-                var newRenderMesh = geo.RenderMesh;
+                var newRenderMesh = GeoElementDataBase.GeoRenderMeshs[geo.ElementId];
 
                 // Switch through the types of elements. Update the mesh based on type.
                 switch (geo.Type)
@@ -48,7 +53,7 @@ namespace IMRE.HandWaver.Rendering
                 }
 
                 //Assign updated rendermesh to the geoelement.
-                geo.RenderMesh = newRenderMesh;
+                GeoElementDataBase.GeoRenderMeshs[geo.ElementId] = newRenderMesh;
             }
         }
 

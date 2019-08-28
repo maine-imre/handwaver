@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using IMRE.HandWaver.Kernel.Geos;
 using socket.io;
+using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
 using UnityEngine;
@@ -83,13 +84,11 @@ namespace IMRE.HandWaver.Kernel
                 var e =
                     GeoElementDataBase.GetElement(eName);
                 var args =
-                    Enumerable.ToArray(Enumerable.Select(cmd.Groups["args"].Value.Split(','),
-                        s => s.Trim()));
+                    cmd.Groups["args"].Value.Split(',').Select(s => s.Trim()).ToArray();
 
                 GeoElementDataBase.GeoElements[e.ElementId] = UpdateElement(e, eType, args);
             }
 
-            outputElements();
         }
 
         public void removeFunc(string objName)
@@ -109,8 +108,7 @@ namespace IMRE.HandWaver.Kernel
                 var e =
                     GeoElementDataBase.GetElement(eName);
                 var args =
-                    Enumerable.ToArray(Enumerable.Select(cmd.Groups["args"].Value.Split(','),
-                        s => s.Trim()));
+                    cmd.Groups["args"].Value.Split(',').Select(s => s.Trim()).ToArray();
                 ;
 
                 //Debug.LogFormat("*{0}* of type ({1}) with args **{2}** was updated", eName, eType, args.ToString());
@@ -231,7 +229,7 @@ namespace IMRE.HandWaver.Kernel
         public void outputElements()
         {
             foreach (var geo in GeoElementDataBase
-                    .GeoElements.Values) //for each named element
+                    .GeoElements.GetValueArray(Allocator.Temp)) //for each named element
                 //debug out name, deps values, and f0 value
                 Debug.Log(geo);
         }

@@ -1,4 +1,7 @@
 using System.Collections.Generic;
+using Unity.Collections;
+using Unity.Entities;
+using Unity.Rendering;
 using UnityEngine;
 
 namespace IMRE.HandWaver.Kernel.Geos
@@ -9,15 +12,16 @@ namespace IMRE.HandWaver.Kernel.Geos
         ///     Dictionary to keep track of the Geoelement's id based on the string name.
         ///     Key is element name as a string (max 30 characters).
         /// </summary>
-        public static Dictionary<string, int> GeoNameDb =
-            new Dictionary<string, int>();
+        public static NativeHashMap<NativeString64, int> GeoNameDb = new NativeHashMap<NativeString64, int>(200, Allocator.Persistent);
 
         /// <summary>
         ///     Dictionary of all GeoElements within the scene.
         ///     Key is element id as int.
         /// </summary>
-        public static Dictionary<int, GeoElement> GeoElements =
-            new Dictionary<int, GeoElement>();
+        public static NativeHashMap<int, GeoElement> GeoElements = new NativeHashMap<int, GeoElement>(200, Allocator.Persistent);
+        
+        public static NativeHashMap<int, RenderMesh> GeoRenderMeshs = new NativeHashMap<int, RenderMesh>(200, Allocator.Persistent);
+
 
         /// <summary>
         ///     Interface method to return element id from element name.
@@ -26,7 +30,7 @@ namespace IMRE.HandWaver.Kernel.Geos
         /// <returns>Element Id</returns>
         public static int GetElementId(string k)
         {
-            return GeoNameDb[k];
+            return GeoNameDb[new NativeString64(k)];
         }
 
         /// <summary>
@@ -55,11 +59,9 @@ namespace IMRE.HandWaver.Kernel.Geos
         /// <param name="e">Element to be added.</param>
         public static void AddElement(GeoElement e)
         {
-            if (HasElement(e))
-                Debug.LogWarningFormat("Element {0} already exists within the current context.",
-                    e.ElementId);
             GeoElements[e.ElementId] = e;
-            GeoNameDb[e.ElementName.ToString()] = e.ElementId;
+            GeoRenderMeshs[e.ElementId] = new RenderMesh();
+            GeoNameDb[e.ElementName] = e.ElementId;
         }
 
         /// <summary>
@@ -69,9 +71,17 @@ namespace IMRE.HandWaver.Kernel.Geos
         public static void RemoveElement(string eName)
         {
             GeoElements.Remove(GetElementId(eName));
-
-            //Must be done last
-            GeoNameDb.Remove(eName);
+            GeoRenderMeshs.Remove(GetElementId(eName));
+            //Must be done last if removed by Name
+            GeoNameDb.Remove(new NativeString64(eName));
+        }
+        
+        public static void RemoveElement(int eId)
+        {
+            GeoNameDb.Remove(GetElement(eId).ElementName);
+            GeoRenderMeshs.Remove(eId);
+            //Must be done last if removed by Id
+            GeoElements.Remove(eId);
         }
 
         public static bool HasElement(GeoElement e)
@@ -81,7 +91,7 @@ namespace IMRE.HandWaver.Kernel.Geos
 
         public static bool HasElement(string eName)
         {
-            return GeoNameDb.ContainsKey(eName);
+            return GeoNameDb.ContainsKey(new NativeString64(eName));
         }
 
         public static bool HasElement(int eId)

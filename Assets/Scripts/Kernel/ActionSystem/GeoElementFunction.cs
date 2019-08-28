@@ -16,18 +16,17 @@ namespace IMRE.HandWaver.ActionSystem
             var bestDist = tolerance;
             var geo = new GeoElement();
             //find closest point
-            for (var i = 0; i < GeoElementDataBase.GeoElements.Count; i++)
+            for (var i = 0; i < GeoElementDataBase.GeoElements.Length; i++)
             {
-                if (GeoElementDataBase.GeoNameDb.ContainsValue(i)) continue;
+                if (GeoElementDataBase.HasElement(i)) continue;
 
                 var closestPoint =
                     GeoElementProximityLib.ClosestPosition(GeoElementDataBase.GeoElements[i], classifier.origin);
-                if ((classifier.origin - closestPoint).Magnitude() < bestDist &&
-                    Operations.Angle(classifier.direction, classifier.origin - closestPoint) < angleTolerance)
-                {
-                    geo = GeoElementDataBase.GeoElements[i];
-                    bestDist = (classifier.origin - closestPoint).Magnitude();
-                }
+                if (!((classifier.origin - closestPoint).Magnitude() < bestDist) ||
+                    !(Operations.Angle(classifier.direction, classifier.origin - closestPoint) <
+                      angleTolerance)) continue;
+                geo = GeoElementDataBase.GeoElements[i];
+                bestDist = (classifier.origin - closestPoint).Magnitude();
             }
 
             if (!geo.Equals(default(GeoElement))) geoElementFunction(geo, classifier);

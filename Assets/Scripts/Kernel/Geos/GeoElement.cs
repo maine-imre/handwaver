@@ -19,15 +19,6 @@ namespace IMRE.HandWaver.Kernel.Geos
     [Serializable]
     public struct GeoElement : IComponentData
     {
-        internal RenderMesh RenderMesh
-        {
-            get => _renderMesh;
-            set => _renderMesh = value;
-        }
-
-        private RenderMesh _renderMesh;
-
-
         /// <summary>
         ///     Integer ID for the object. This should be readonly after creation.
         /// </summary>
@@ -41,6 +32,8 @@ namespace IMRE.HandWaver.Kernel.Geos
 
         /// <summary>
         ///     The last time this element was updated.
+        ///     The DateTime.MinValue is used as a sentinel for a previously un-updated version to signal that the
+        ///         system doesnt need to process until data is added.
         /// </summary>
         internal DateTime Updated
         {
@@ -77,13 +70,13 @@ namespace IMRE.HandWaver.Kernel.Geos
         /// <summary>
         ///     Up to 4 dependencies can be stored by ID here.
         /// </summary>
-        internal NativeArray<int> Deps
+        internal int4 Deps
         {
             get => _deps;
             set => _deps = value;
         }
 
-        private NativeArray<int> _deps;
+        private int4 _deps;
 
         /// <summary>
         ///     Any relevant float3 data can be stored here.
@@ -105,8 +98,8 @@ namespace IMRE.HandWaver.Kernel.Geos
         {
             ElementId = eId;
             ElementName = eName;
-            Updated = DateTime.Now;
-            Deps = new NativeArray<int>(8, Allocator.Persistent);
+            Updated = DateTime.MinValue;
+            //Deps = new NativeArray<int>(8, Allocator.Persistent);
         }
 
         public override string ToString()
