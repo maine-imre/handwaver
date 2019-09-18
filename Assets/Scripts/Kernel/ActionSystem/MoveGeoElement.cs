@@ -13,6 +13,7 @@ namespace IMRE.HandWaver.Kernel.ActionSystem
         public override void geoElementFunction(GeoElement geo, EmbodiedClassifier classifier)
         {
             //TODO add rotations to this script.  As written, the script only handles translations.
+            //TODO Convert script into using a centralized script for object creation/update.
             float3 diff = (classifier.origin - GeoElementProximityLib.ClosestPosition(geo, classifier.origin));
 
             float3 pointA;
