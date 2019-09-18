@@ -18,7 +18,7 @@ namespace IMRE.HandWaver.Kernel
         /// </summary>
         public static string overrideSID;
 
-        private static readonly string pattern = @"(?'elementName'\w+)\s*\=\s*(?'type'[\w]*)\((?'args'[\w{}.,\s]+)\)";
+        private static readonly string pattern = @"(?'elementName'\w+)\s*\=\s*(?'type'[\w]*)\((?'args'[\w{}\-.,\s]+)\)";
 
         private static readonly RegexOptions options =
             RegexOptions.Multiline;
@@ -111,7 +111,7 @@ namespace IMRE.HandWaver.Kernel
                     cmd.Groups["args"].Value.Split(',').Select(s => s.Trim()).ToArray();
                 ;
 
-                //Debug.LogFormat("*{0}* of type ({1}) with args **{2}** was updated", eName, eType, args.ToString());
+                Debug.LogFormat("*{0}* of type ({1}) with args **{2}** was updated", eName, eType, args.ToString());
 
                 GeoElementDataBase.GeoElements[e.ElementId] = UpdateElement(e, eType, args);
             }
@@ -222,7 +222,7 @@ namespace IMRE.HandWaver.Kernel
         public void testCMD()
         {
             //Test the command changes
-            StartCoroutine(HandWaverServerTransport.execCommand("A = (1, 5, 0)")); // Point A
+            StartCoroutine(HandWaverServerTransport.execCommand("A = (-1, 5, 0)")); // Point A
         }
 
         [ContextMenu("Output Element Dictionary")]
@@ -270,6 +270,7 @@ namespace IMRE.HandWaver.Kernel
                 float.Parse(sArray[1]),
                 float.Parse(sArray[2]));
 
+            Debug.LogFormat("Parsed {0} as {1}", value, result);
             return result;
         }
     }
