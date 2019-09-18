@@ -111,7 +111,7 @@ namespace IMRE.HandWaver.Kernel
                     cmd.Groups["args"].Value.Split(',').Select(s => s.Trim()).ToArray();
                 ;
 
-                Debug.LogFormat("*{0}* of type ({1}) with args **{2}** was updated", eName, eType, args.ToString());
+                //Debug.LogFormat("*{0}* of type ({1}) with args **{2}** was updated", eName, eType, args.ToString());
 
                 GeoElementDataBase.GeoElements[e.ElementId] = UpdateElement(e, eType, args);
             }
@@ -270,7 +270,7 @@ namespace IMRE.HandWaver.Kernel
                 float.Parse(sArray[1]),
                 float.Parse(sArray[2]));
 
-            Debug.LogFormat("Parsed {0} as {1}", value, result);
+            //Debug.LogFormat("Parsed {0} as {1}", value, result);
             return result;
         }
     }
