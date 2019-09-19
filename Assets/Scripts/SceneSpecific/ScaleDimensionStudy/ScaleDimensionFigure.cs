@@ -20,7 +20,8 @@ namespace IMRE.HandWaver.ScaleDimension{
 		public Unity.Mathematics.float4 translationVector;
 		public IMRE.HandWaver.Higherdimensions.ProjectionData projectionValues;
 		
-		internal UnityEngine.Mesh mf_mesh{
+		internal UnityEngine.Mesh mf_mesh
+		{
 			get{return GetComponent<MeshFilter>().mesh;}
 		}
 

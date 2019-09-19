@@ -1,62 +1,47 @@
-﻿namespace IMRE.HandWaver.ScaleStudyusing
+﻿using UnityEngine;
+using Unity.Mathematics;
+
+namespace IMRE.HandWaver.ScaleStudy
+
 {
 
-    public class TriangleCrossSection : UnityEngine.MonoBehaviour, IMRE.HandWaver.ScaleStudy.ISliderInput
+    public class TriangleCrossSection : UnityEngine.MonoBehaviour//, IMRE.HandWaver.ScaleStudy.ISliderInput
     {
-
-        public float slider
+       /// <summary>
+       /// Function to render the intersetion of a plane and a triangle
+       /// </summary>
+       /// <param name="height"></param>
+       /// <param name="vertices"></param>
+       /// <param name="crossSectionRenderer"></param>
+        public void crossSectTri(float height, Vector3[] vertices, LineRenderer crossSectionRenderer)
         {
-            get => slider;
-        }
-        
-        void Start()
-        {
+            Vector3 segmentEndPoint0, segmentEndPoint1;
+            Vector3 triangleTop = vertices[0];
+            Vector3 bottomRight = vertices[1];
+            Vector3 bottomLeft = vertices[2];
+
+            //TODO: determine what we want to do with points
+            if (height == triangleTop.y)
+            {
+                segmentEndPoint0 = triangleTop;
+                crossSectionRenderer.enabled = true;
+                crossSectionRenderer.SetPosition(0, segmentEndPoint0);
+                crossSectionRenderer.SetPosition(1, segmentEndPoint0);
+            }
+
+            if (height < triangleTop.y)
+            {
+                segmentEndPoint0 = new Vector3(0, triangleTop.y - height, -(height / math.sqrt(3)));
+                segmentEndPoint1 = new Vector3(0, triangleTop.y - height, -(height / math.sqrt(3)));
+                crossSectionRenderer.enabled = true;
+                crossSectionRenderer.SetPosition(0, segmentEndPoint0);
+                crossSectionRenderer.SetPosition(1, segmentEndPoint1);
+            }
+                
+               
 
         }
 
-        public void crossSectTriangle(float height)
-        {
-            
-        }
-
-        public void renderTriangle()
-        {                
-            //intitial 4 vertices (one extra point that merges with another)
-            GetComponent<UnityEngine.LineRenderer>().positionCount = 4;
-            GetComponent<UnityEngine.LineRenderer>().useWorldSpace = false;
-            //start and end width of line
-            GetComponent<UnityEngine.LineRenderer>().startWidth = .008f;
-            GetComponent<UnityEngine.LineRenderer>().endWidth = .008f;
-
-            foldPoints.Add(Instantiate(IMRE.HandWaver.ScaleStudy.SpencerStudyControl.ins.pointPrefab));
-            foldPoints.Add(Instantiate(IMRE.HandWaver.ScaleStudy.SpencerStudyControl.ins.pointPrefab));
-            foldPoints.Add(Instantiate(IMRE.HandWaver.ScaleStudy.SpencerStudyControl.ins.pointPrefab));
-            foldPoints.Add(Instantiate(IMRE.HandWaver.ScaleStudy.SpencerStudyControl.ins.pointPrefab));
-            foldPoints.ForEach(p => p.transform.SetParent(transform));
-            
-            const float t = 120f;
-            //matrix of vertices 
-            UnityEngine.Vector3[] result = new UnityEngine.Vector3[4];
-            //initial vertices
-            result[2] = UnityEngine.Vector3.zero;
-            result[1] = UnityEngine.Vector3.right;
-            //rotate vertex by t or -t around (0, 1, 0) with appropriate vector manipulation to connect triangle
-            result[0] = result[1] + (UnityEngine.Quaternion.AngleAxis(t, UnityEngine.Vector3.up) *
-                                     UnityEngine.Vector3.right);
-            result[3] = result[2] + (UnityEngine.Quaternion.AngleAxis(-t, UnityEngine.Vector3.up) *
-                                     UnityEngine.Vector3.left);
-
-            foldPoints[0].transform.localPosition = result[0];
-            foldPoints[1].transform.localPosition = result[1];
-            foldPoints[2].transform.localPosition = result[2];
-            foldPoints[3].transform.localPosition = result[0];
-
-            foldPoints[0].SetActive(true);
-            foldPoints[1].SetActive(true);
-            foldPoints[2].SetActive(true);
-            foldPoints[3].SetActive(true);
-
-        }
 
 
     }
