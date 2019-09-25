@@ -7,68 +7,111 @@ namespace IMRE.HandWaver.ScaleStudy
 
     public class TriangleCrossSection : UnityEngine.MonoBehaviour
     {
-       /// <summary>
-       /// Function to render the intersection of a plane and a triangle
-       /// </summary>
-       /// <param name="height"></param>
-       /// <param name="vertices"></param>
-       /// <param name="crossSectionRenderer"></param>
+        /// <summary>
+        /// Function to render the intersection of a plane and a triangle
+        /// </summary>
+        /// <param name="height"></param>
+        /// <param name="vertices"></param>
+        /// <param name="crossSectionRenderer"></param>
         public void crossSectTri(float3 point, float3 direction, Vector3[] vertices, LineRenderer crossSectionRenderer)
-       {
+        {
+            //Vertices are organized in clockwise manner
+            float3 a = vertices[0];
+            float3 b = vertices[1];
+            float3 c = vertices[2];
 
-           crossSectionRenderer = new LineRenderer();
+            float3 lineDirection = direction - point;
+
+            float3 ac_hat = (c - a) / Vector3.Magnitude(c - a);
+            float3 ab_hat = (b - a) / Vector3.Magnitude(b - a);
+            float3 bc_hat = (c - b) / Vector3.Magnitude(c - b);
+
+            float3 ac_star = intersectLines(point, lineDirection, a, ac_hat);
+            float3 ab_star = intersectLines(point, lineDirection, a, ab_hat);
+            float3 bc_star = intersectLines(point, lineDirection, b, bc_hat);
+
+            bool ac_star_isEndpoint;
+            ac_star_isEndpoint == (ac_star == a) || (ac_star == c);
+            bool ab_star_isEndpoint;
+            ab_star_isEndpoint == (ab_star == a) || (ab_star == b);
+            bool bc_star_isEndpoint;
+            bc_star_isEndpoint == (bc_star == b) || (bc_star == c);
+
+            //correct Vec3 arithmetic to float3
+            bool ac_star_onSegment = (Vector3.Magnitude(ac_star - a) > Vector3.Magnitude(c - a) ||
+                                      Vector3.Magnitude(ac_star - c) > Vector3.Magnitude(c - a));
+            bool ab_star_onSegment = (Vector3.Magnitude(ab_star - a) > Vector3.Magnitude(b - a) ||
+                                      Vector3.Magnitude(ab_star - c) > Vector3.Magnitude(b - a));
+            bool bc_star_onSegment = (Vector3.Magnitude(bc_star - b) > Vector3.Magnitude(c - b) ||
+                                      Vector3.Magnitude(bc_star - c) > Vector3.Magnitude(c - b));
+
+            int endpointCount = 0;
+            if (ac_star_isEndpoint)
+                endpointCount++;
+            if (ab_star_isEndpoint)
+                endpointCount++;
+            if (bc_star_isEndpoint)
+                endpointCount++;
+
+            //If plane does not hit triangle
+            if (!(ab_star_onSegment || ac_star_onSegment || bc_star_onSegment))
+            {
+                crossSectionRenderer.enabled = false;
+                Debug.Log("Line does not intersect with any of triangle sides.");
+            }
+            
+            else if (endpointCount >= 2 && ((ab_star != ac_star) || (ab_star != bc_star) || (ac_star != bc_star)))
+            {
+                if (intersectLines(point, lineDirection, a, ac_star) == point)
+                {
+                    
+                }
+                else if (intersectLines(point, lineDirection, c, ac_star) == point)
+                {
+                    
+                }
+                
+            }
+            else if (endpointCount == 2 && ((ab_star == ac_star) || (ab_star == bc_star) || (ac_star == bc_star)))
+            {
+                
+            }
+            else
+            {
+                
+            }
+        }
+
+
+        private float3 intersectLines(float3 p, float3 u, float3 q, float3 v)
+        {
+           //using method described here: http://geomalgorithms.com/a05-_intersect-1.html
+           float3 w = q - p;
+           float3 v_perp =
+               math.normalize(math.cross(math.cross(u, v), v));
+           float3 u_perp =
+               math.normalize(math.cross(math.cross(u, v), u));
+           float s = Unity.Mathematics.math.dot(-1 * v_perp, w) / math.dot(-1 * v_perp, u);
            
-           //Vertices are organized in clockwise manner
-           float3 a = vertices[0];
-           float3 b = vertices[1];
-           float3 c = vertices[2];
+           //note if s == 0, lines are parallel
+           float3 solution = p + s * u;
 
-           float3 segmentab = b - a;
-           float3 segmentac = c - a;
-           float3 segmentbc = c - b;
-           float3 intersectionLine = direction - point;
+           //the next couple of lines don't calculate a solution but can validate our solution.
+           float t = math.dot(-1 * u_perp, w) / math.dot(-1 * u_perp, v);
            
-           float3 ac_hat = (c - a) / Vector3.Magnitude(c - a);
-           float3 ab_hat = (b - a) / Vector3.Magnitude(b - a);
-           float3 bc_hat = (c - b) / Vector3.Magnitude(c - b);
+           //note that if t == 0, lines are parallel
+           float3 solution_alt = q + t * v;
 
-           float3 ac_star = Vector3.Project(intersectionLine - segmentac, ac_hat) + new Vector3(a.x, a.y, a.z);
-           float3 ab_star = Vector3.Project(intersectionLine - segmentab, ab_hat) + new Vector3(a.x, a.y, a.z);
-           float3 bc_star = Vector3.Project(intersectionLine - segmentbc, bc_hat) + new Vector3(b.x, b.y, b.z);
-
-           //If plane does not hit triangle
-           if (Vector3.Magnitude(ac_star - a) > Vector3.Magnitude(c - a) ||
-               Vector3.Magnitude(ac_star - c) > Vector3.Magnitude(c - a))
+           if (solution == solution_alt)
            {
-               Debug.Log("Plane does not intersect with triangle.");
+               return solution;
            }
-
-           //Point of intersection is a vertex (a or c)
-           else if (Vector3.Magnitude(ac_star - a) == 0 || Vector3.Magnitude(ac_star - c) == 0)
-           {
-               crossSectionRenderer.enabled = true;
-
-           }
-           //Point of intersection is a or b
-           else if (Vector3.Magnitude(ab_star - a) == 0 || Vector3.Magnitude(ab_star - b) == 0)
-           {
-               crossSectionRenderer.enabled = true;
-
-           }
-           
-           else if (Vector3.Magnitude(bc_star - b) == 0 || Vector3.Magnitude(bc_star - c) == 0)
-           {
-               crossSectionRenderer.enabled = true;
-               
-              
-           }
-           
-           //c_star is on segmentac
            else
            {
-               
+               Debug.LogWarning("IntersectionFailed");
+               return new float3(0, 0, 0);
            }
-       }
+        }
 
 
 
