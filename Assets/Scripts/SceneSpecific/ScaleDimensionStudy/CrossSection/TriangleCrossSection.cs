@@ -62,23 +62,107 @@ namespace IMRE.HandWaver.ScaleStudy
             
             else if (endpointCount >= 2 && ((ab_star != ac_star) || (ab_star != bc_star) || (ac_star != bc_star)))
             {
-                if (intersectLines(point, lineDirection, a, ac_star) == point)
+                crossSectionRenderer.enabled = true;
+
+                if (ab_star != ac_star)
                 {
+                    if (intersectLines(point, direction, a, ab_star) == point || intersectLines(point, direction, a, ac_star) == point)
+                    {
+                        crossSectionRenderer.SetPosition(0, b);
+                        crossSectionRenderer.SetPosition(1, c);
+                    }
+                    else if (intersectLines(point, direction, b, ab_star) == point)
+                    {
+                        crossSectionRenderer.SetPosition(0, a);
+                        crossSectionRenderer.SetPosition(1, c);
+                    }
+                    else if (intersectLines(point, direction, c, ac_star) == point)
+                    {
+                        crossSectionRenderer.SetPosition(0, a);
+                        crossSectionRenderer.SetPosition(1, b);
+                    }
                     
                 }
-                else if (intersectLines(point, lineDirection, c, ac_star) == point)
+                
+                else if (ab_star != bc_star)
                 {
-                    
+                    if (intersectLines(point, direction, a, ab_star) == point)
+                    {
+                        crossSectionRenderer.SetPosition(0, b);
+                        crossSectionRenderer.SetPosition(1, c);
+                    }
+                    else if (intersectLines(point, direction, b, ab_star) == point || intersectLines(point, direction, b, bc_star) == point)
+                    {
+                        crossSectionRenderer.SetPosition(0, a);
+                        crossSectionRenderer.SetPosition(1, c);
+                    }
+                    else if (intersectLines(point, direction, c, bc_star) == point)
+                    {
+                        crossSectionRenderer.SetPosition(0, a);
+                        crossSectionRenderer.SetPosition(1, b);
+                    }
+                }
+
+                if (ac_star != bc_star)
+                {
+                    if (intersectLines(point, direction, a, ac_star) == point)
+                    {
+                        crossSectionRenderer.SetPosition(0, b);
+                        crossSectionRenderer.SetPosition(1, c);
+                    }
+                    else if (intersectLines(point, direction, c, ac_star) == point || intersectLines(point, direction, c, bc_star) == point)
+                    {
+                        crossSectionRenderer.SetPosition(0, a);
+                        crossSectionRenderer.SetPosition(1, b);
+                    }
+                    else if (intersectLines(point, direction, b, bc_star) == point)
+                    {
+                        crossSectionRenderer.SetPosition(0, a);
+                        crossSectionRenderer.SetPosition(1, c);
+                    }                
                 }
                 
             }
             else if (endpointCount == 2 && ((ab_star == ac_star) || (ab_star == bc_star) || (ac_star == bc_star)))
             {
+                crossSectionRenderer.enabled = true;
+
+                if (ab_star == ac_star)
+                {
+                    crossSectionRenderer.SetPosition(0, a);
+                    crossSectionRenderer.SetPosition(1, bc_star);
+                }
+                else if (ab_star == bc_star)
+                {
+                    crossSectionRenderer.SetPosition(0, b);
+                    crossSectionRenderer.SetPosition(1, ac_star);
+                }
+                else if (ac_star == bc_star)
+                {
+                    crossSectionRenderer.SetPosition(0, c);
+                    crossSectionRenderer.SetPosition(1, ab_star);
+                }
                 
             }
             else
             {
-                
+                crossSectionRenderer.enabled = true;
+
+                if (ac_star_onSegment && ab_star_onSegment)
+                {
+                    crossSectionRenderer.SetPosition(0, ac_star);
+                    crossSectionRenderer.SetPosition(1, ab_star);
+                }
+                else if (ac_star_onSegment && bc_star_onSegment)
+                {
+                    crossSectionRenderer.SetPosition(0, ac_star);
+                    crossSectionRenderer.SetPosition(1, bc_star);
+                }
+                else
+                {
+                    crossSectionRenderer.SetPosition(0, ab_star);
+                    crossSectionRenderer.SetPosition(1, bc_star);
+                }
             }
         }
 
@@ -102,13 +186,13 @@ namespace IMRE.HandWaver.ScaleStudy
            //note that if t == 0, lines are parallel
            float3 solution_alt = q + t * v;
 
-           if (solution == solution_alt)
+           if ((solution == solution_alt))
            {
                return solution;
            }
            else
            {
-               Debug.LogWarning("IntersectionFailed");
+               Debug.Log("IntersectionFailed");
                return new float3(0, 0, 0);
            }
         }
