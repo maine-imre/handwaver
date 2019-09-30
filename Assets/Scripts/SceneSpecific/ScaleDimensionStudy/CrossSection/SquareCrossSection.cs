@@ -26,12 +26,47 @@ namespace IMRE.HandWaver.ScaleStudy
 
             float3 lineDirection = direction - point;
             
-            float3 ac_hat = (c - a) / Vector3.Magnitude(c - a);
             float3 ab_hat = (b - a) / Vector3.Magnitude(b - a);
-            float3 ad_hat = (d - a) / Vector3.Magnitude(d - a);
             float3 bc_hat = (c - b) / Vector3.Magnitude(c - b);
-            float3 bd_hat = (d - b) / Vector3.Magnitude(d - b);
             float3 cd_hat = (d - c) / Vector3.Magnitude(d - c);
+            float3 ad_hat = (a - d) / Vector3.Magnitude(a - d);
+
+
+            float3 ab_star = intersectLines(point, direction, a, ab_hat);
+            float3 bc_star = intersectLines(point, direction, b, bc_hat);
+            float3 cd_star = intersectLines(point, direction, c, cd_hat);
+            float3 ad_star = intersectLines(point, direction, d, ad_hat);
+
+            bool ab_star_isEndpoint = isEqual(ab_star, a) || isEqual(ab_star, b);
+            bool bc_star_isEndpoint = isEqual(bc_star, b) || isEqual(bc_star, c);
+            bool cd_star_isEndpoint = isEqual(cd_star, c) || isEqual(cd_star, d);
+            bool ad_star_isEndpoint = isEqual(ad_star, d) || isEqual(ad_star, d);
+
+            bool ab_star_onSegment = Vector3.Magnitude(ab_star - a) > Vector3.Magnitude(b - a) ||
+                                     Vector3.Magnitude(ab_star - b) > Vector3.Magnitude(b - a);
+            bool bc_star_onSegment = Vector3.Magnitude(bc_star - b) > Vector3.Magnitude(c - b) ||
+                                     Vector3.Magnitude(bc_star - c) > Vector3.Magnitude(c - b);
+            bool cd_star_onSegment = Vector3.Magnitude(cd_star - c) > Vector3.Magnitude(d - c) ||
+                                     Vector3.Magnitude(cd_star - d) > Vector3.Magnitude(d - c);
+            bool ad_star_onSegment = Vector3.Magnitude(ad_star - d) > Vector3.Magnitude(a - d) ||
+                                     Vector3.Magnitude(ad_star - a) > Vector3.Magnitude(a - d);
+            
+            int endpointCount = 0;
+            if (ab_star_isEndpoint)
+                endpointCount++;
+            if (bc_star_isEndpoint)
+                endpointCount++;
+            if (cd_star_isEndpoint)
+                endpointCount++;
+            if (ad_star_isEndpoint)
+                endpointCount++;
+            
+            if (!(ab_star_onSegment || bc_star_onSegment || cd_star_onSegment || ad_star_onSegment))
+            {
+                crossSectionRenderer.enabled = false;
+                Debug.Log("Line does not intersect with any of triangle sides.");
+            }
+            
 
 
         }
