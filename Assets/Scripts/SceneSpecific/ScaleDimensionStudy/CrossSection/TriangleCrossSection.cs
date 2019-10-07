@@ -60,6 +60,7 @@ namespace IMRE.HandWaver.ScaleStudy
                 Debug.Log("Line does not intersect with any of triangle sides.");
             }
             
+            //intersection is a side of the triangle
             else if (endpointCount >= 2 && (!isEqual(ab_star, ac_star) || !isEqual(ab_star, bc_star) || !isEqual(ac_star, bc_star)))
             {
                 crossSectionRenderer.enabled = true;
@@ -123,6 +124,8 @@ namespace IMRE.HandWaver.ScaleStudy
                 }
                 
             }
+            
+            //intersection hits one vertice on triangle and one segment
             else if (endpointCount == 2 && (isEqual(ab_star, ac_star) || isEqual(ab_star, bc_star) || isEqual(ac_star, bc_star)))
             {
                 crossSectionRenderer.enabled = true;
@@ -144,6 +147,8 @@ namespace IMRE.HandWaver.ScaleStudy
                 }
                 
             }
+            
+            //intersection hits two segments of triangle
             else
             {
                 crossSectionRenderer.enabled = true;

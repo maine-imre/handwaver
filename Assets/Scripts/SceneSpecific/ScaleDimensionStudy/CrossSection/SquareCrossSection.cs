@@ -29,18 +29,18 @@ namespace IMRE.HandWaver.ScaleStudy
             float3 ab_hat = (b - a) / Vector3.Magnitude(b - a);
             float3 bc_hat = (c - b) / Vector3.Magnitude(c - b);
             float3 cd_hat = (d - c) / Vector3.Magnitude(d - c);
-            float3 ad_hat = (a - d) / Vector3.Magnitude(a - d);
+            float3 da_hat = (a - d) / Vector3.Magnitude(a - d);
 
 
             float3 ab_star = intersectLines(point, direction, a, ab_hat);
             float3 bc_star = intersectLines(point, direction, b, bc_hat);
             float3 cd_star = intersectLines(point, direction, c, cd_hat);
-            float3 ad_star = intersectLines(point, direction, d, ad_hat);
+            float3 da_star = intersectLines(point, direction, d, da_hat);
 
             bool ab_star_isEndpoint = isEqual(ab_star, a) || isEqual(ab_star, b);
             bool bc_star_isEndpoint = isEqual(bc_star, b) || isEqual(bc_star, c);
             bool cd_star_isEndpoint = isEqual(cd_star, c) || isEqual(cd_star, d);
-            bool ad_star_isEndpoint = isEqual(ad_star, d) || isEqual(ad_star, d);
+            bool ad_star_isEndpoint = isEqual(da_star, d) || isEqual(da_star, d);
 
             bool ab_star_onSegment = Vector3.Magnitude(ab_star - a) > Vector3.Magnitude(b - a) ||
                                      Vector3.Magnitude(ab_star - b) > Vector3.Magnitude(b - a);
@@ -48,8 +48,8 @@ namespace IMRE.HandWaver.ScaleStudy
                                      Vector3.Magnitude(bc_star - c) > Vector3.Magnitude(c - b);
             bool cd_star_onSegment = Vector3.Magnitude(cd_star - c) > Vector3.Magnitude(d - c) ||
                                      Vector3.Magnitude(cd_star - d) > Vector3.Magnitude(d - c);
-            bool ad_star_onSegment = Vector3.Magnitude(ad_star - d) > Vector3.Magnitude(a - d) ||
-                                     Vector3.Magnitude(ad_star - a) > Vector3.Magnitude(a - d);
+            bool ad_star_onSegment = Vector3.Magnitude(da_star - d) > Vector3.Magnitude(a - d) ||
+                                     Vector3.Magnitude(da_star - a) > Vector3.Magnitude(a - d);
             
             int endpointCount = 0;
             if (ab_star_isEndpoint)
@@ -67,6 +67,21 @@ namespace IMRE.HandWaver.ScaleStudy
                 Debug.Log("Line does not intersect with any of triangle sides.");
             }
             
+            else if (endpointCount >= 3 &&
+                     (!isEqual(ab_star, bc_star) || !isEqual(ab_star, da_star) || !isEqual(bc_star, cd_star) || !isEqual(cd_star, da_star)))
+            {
+                crossSectionRenderer.enabled = true;
+                
+                if(!isEqual(ab_star, bc_star))
+                {
+                    if (isEqual(intersectLines(point, direction, b, ab_star), point) ||
+                        isEqual(intersectLines(point, direction, b, bc_star), point))
+                    {
+                        
+                    }
+                }
+            }
+
 
 
         }
