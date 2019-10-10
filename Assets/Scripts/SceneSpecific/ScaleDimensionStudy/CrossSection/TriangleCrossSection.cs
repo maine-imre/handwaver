@@ -31,11 +31,11 @@ namespace IMRE.HandWaver.ScaleStudy
             float3 bc_star = intersectLines(point, lineDirection, b, bc_hat);
 
             bool ac_star_isEndpoint;
-            ac_star_isEndpoint = isEqual(ac_star, a) || isEqual(ac_star, c);
+            ac_star_isEndpoint = ac_star.Equals(a) || ac_star.Equals(c);
             bool ab_star_isEndpoint;
-            ab_star_isEndpoint = isEqual(ab_star, a) || isEqual(ab_star, b);
+            ab_star_isEndpoint = ab_star.Equals(a) || ab_star.Equals(b);
             bool bc_star_isEndpoint;
-            bc_star_isEndpoint = isEqual(bc_star, b) || isEqual(bc_star, c);
+            bc_star_isEndpoint = bc_star.Equals(c) || bc_star.Equals(c);
 
             //correct Vec3 arithmetic to float3
             bool ac_star_onSegment = (Vector3.Magnitude(ac_star - a) > Vector3.Magnitude(c - a) ||
@@ -61,23 +61,23 @@ namespace IMRE.HandWaver.ScaleStudy
             }
             
             //intersection is a side of the triangle
-            else if (endpointCount >= 2 && (!isEqual(ab_star, ac_star) || !isEqual(ab_star, bc_star) || !isEqual(ac_star, bc_star)))
+            else if (endpointCount >= 2 && (!ab_star.Equals(ac_star) || !ab_star.Equals(bc_star) || !ac_star.Equals(bc_star)))
             {
                 crossSectionRenderer.enabled = true;
 
-                if (!isEqual(ab_star, ac_star))
+                if (!ab_star.Equals(ac_star))
                 {
-                    if (isEqual(intersectLines(point, direction, a, ab_star), point) || isEqual(intersectLines(point, direction, a, ac_star), point))
+                    if (intersectLines(point, direction, a, ab_star).Equals(point) || intersectLines(point, direction, a, ab_star).Equals(point))
                     {
                         crossSectionRenderer.SetPosition(0, b);
                         crossSectionRenderer.SetPosition(1, c);
                     }
-                    else if (isEqual(intersectLines(point, direction, b, ab_star), point))
+                    else if (intersectLines(point, direction, b, ab_star).Equals(point))
                     {
                         crossSectionRenderer.SetPosition(0, a);
                         crossSectionRenderer.SetPosition(1, c);
                     }
-                    else if (isEqual(intersectLines(point, direction, c, ac_star), point))
+                    else if (intersectLines(point, direction, c, ac_star).Equals(point))
                     {
                         crossSectionRenderer.SetPosition(0, a);
                         crossSectionRenderer.SetPosition(1, b);
@@ -85,38 +85,38 @@ namespace IMRE.HandWaver.ScaleStudy
                     
                 }
                 
-                else if (!isEqual(ab_star, bc_star))
+                else if (!ab_star.Equals(bc_star))
                 {
-                    if (isEqual(intersectLines(point, direction, a, ab_star), point))
+                    if(intersectLines(point, direction, a, ab_star).Equals(point))
                     {
                         crossSectionRenderer.SetPosition(0, b);
                         crossSectionRenderer.SetPosition(1, c);
                     }
-                    else if (isEqual(intersectLines(point, direction, b, ab_star), point) || isEqual(intersectLines(point, direction, b, bc_star), point))
+                    else if (intersectLines(point, direction, b, ab_star).Equals(point) || intersectLines(point, direction, b, bc_star).Equals(point))
                     {
                         crossSectionRenderer.SetPosition(0, a);
                         crossSectionRenderer.SetPosition(1, c);
                     }
-                    else if (isEqual(intersectLines(point, direction, c, bc_star), point))
+                    else if (intersectLines(point, direction, c, bc_star).Equals(point))
                     {
                         crossSectionRenderer.SetPosition(0, a);
                         crossSectionRenderer.SetPosition(1, b);
                     }
                 }
 
-                if (!isEqual(ac_star, bc_star))
+                if (!ac_star.Equals(bc_star))
                 {
-                    if (isEqual(intersectLines(point, direction, a, ac_star), point))
+                    if (intersectLines(point, direction, a, ac_star).Equals(point))
                     {
                         crossSectionRenderer.SetPosition(0, b);
                         crossSectionRenderer.SetPosition(1, c);
                     }
-                    else if (isEqual(intersectLines(point, direction, c, ac_star), point) || isEqual(intersectLines(point, direction, c, bc_star), point))
+                    else if (intersectLines(point, direction, c, ac_star).Equals(point) || intersectLines(point, direction, c, bc_star).Equals(point))
                     {
                         crossSectionRenderer.SetPosition(0, a);
                         crossSectionRenderer.SetPosition(1, b);
                     }
-                    else if (isEqual(intersectLines(point, direction, b, bc_star), point))
+                    else if (intersectLines(point, direction, b, bc_star).Equals(point))
                     {
                         crossSectionRenderer.SetPosition(0, a);
                         crossSectionRenderer.SetPosition(1, c);
@@ -125,29 +125,28 @@ namespace IMRE.HandWaver.ScaleStudy
                 
             }
             
-            //intersection hits one vertice on triangle and one segment
-            else if (endpointCount == 2 && (isEqual(ab_star, ac_star) || isEqual(ab_star, bc_star) || isEqual(ac_star, bc_star)))
+            //intersection hits one vertex on triangle and one segment
+            else if (endpointCount == 2 && (ab_star.Equals(ac_star) ) || ab_star.Equals(bc_star) || ac_star.Equals(bc_star))
             {
                 crossSectionRenderer.enabled = true;
 
-                if (isEqual(ab_star, ac_star))
+                if (ab_star.Equals(ac_star))
                 {
                     crossSectionRenderer.SetPosition(0, a);
                     crossSectionRenderer.SetPosition(1, bc_star);
                 }
-                else if (isEqual(ab_star, bc_star))
+                else if (ab_star.Equals(bc_star))
                 {
                     crossSectionRenderer.SetPosition(0, b);
                     crossSectionRenderer.SetPosition(1, ac_star);
                 }
-                else if (isEqual(ac_star, bc_star))
+                else if (ac_star.Equals(bc_star))
                 {
                     crossSectionRenderer.SetPosition(0, c);
                     crossSectionRenderer.SetPosition(1, ab_star);
                 }
                 
             }
-            
             //intersection hits two segments of triangle
             else
             {
@@ -198,7 +197,7 @@ namespace IMRE.HandWaver.ScaleStudy
            //note that if t == 0, lines are parallel
            float3 solution_alt = q + t * v;
 
-           if (isEqual(solution, solution_alt))
+           if (solution.Equals(solution_alt))
            {
                return solution;
            }
@@ -208,20 +207,7 @@ namespace IMRE.HandWaver.ScaleStudy
                return new float3(0, 0, 0);
            }
         }
-
-        /// <summary>
-        /// Function to determine if two float3's have equal components
-        /// Created to deal with errors generated from bool3/bool logic
-        /// </summary>
-        /// <param name="first"></param>
-        /// <param name="second"></param>
-        /// <returns></returns>
-        private bool isEqual(float3 first, float3 second)
-        {
-            return (first.x == second.x && first.y == second.y && first.x == second.z);
-        }
-
-
+        
 
     }
 }
