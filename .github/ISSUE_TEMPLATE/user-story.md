@@ -1,14 +1,14 @@
 ---
 name: User Story
 about: Start with default formatting of a User Story
-title: User Story HW-0
+title: This is a placeholder of a user story.
 labels: User Story
 assignees: ''
 
 ---
 
-- User Story
-  - This is a placeholder of a user story.
+- User Story ID
+  - 0
 
 - Value (0-10)
   - XX
