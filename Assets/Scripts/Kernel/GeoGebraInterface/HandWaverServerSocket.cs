@@ -3,6 +3,8 @@ using System.Collections;
 using System.Linq;
 using System.Text.RegularExpressions;
 using IMRE.HandWaver.Kernel.Geos;
+using JetBrains.Annotations;
+using Newtonsoft.Json;
 using socket.io;
 using Unity.Collections;
 using Unity.Entities;
@@ -16,7 +18,7 @@ namespace IMRE.HandWaver.Kernel
         /// <summary>
         ///     If this is set, the session will use this session ID rather than generate a new one.
         /// </summary>
-        public static string overrideSID;
+        public static string overrideSID = "e1c5761e-b7c3-4822-936a-b5c6b2f68b10";
 
         private static readonly string pattern = @"(?'elementName'\w+)\s*\=\s*(?'type'[\w]*)\((?'args'[\w{}\-.,\s]+)\)";
 
@@ -70,10 +72,12 @@ namespace IMRE.HandWaver.Kernel
 
         public void addFunc(string objCmd)
         {
-            Debug.Log("server added!\n " + objCmd);
+            ElementInfo objInfo =  parseJSON(objCmd);
+            
+            Debug.Log("server added!\n " + objInfo.Name);
             // Should add element to GeoElementDataBase
 
-            foreach (Match cmd in Regex.Matches(objCmd,
+            foreach (Match cmd in Regex.Matches(objInfo.Command,
                 pattern, options))
             {
                 var eName = cmd.Groups["elementName"].Value;
@@ -99,8 +103,10 @@ namespace IMRE.HandWaver.Kernel
 
         public void updateFunc(string objCmd)
         {
-            Debug.Log("server updated!\n " + objCmd);
-            foreach (Match cmd in Regex.Matches(objCmd,
+            ElementInfo objInfo =  parseJSON(objCmd);
+            
+            Debug.Log("server added!\n " + objInfo.Name);
+            foreach (Match cmd in Regex.Matches(objInfo.Command,
                 pattern, options))
             {
                 var eName = cmd.Groups["elementName"].Value.Trim();
@@ -244,6 +250,21 @@ namespace IMRE.HandWaver.Kernel
                 string.IsNullOrEmpty(overrideSID) ? Guid.NewGuid().ToString() : overrideSID;
             StartCoroutine(HandWaverServerTransport.serverHandhake());
         }
+
+
+    private ElementInfo parseJSON(string objCmd)
+    {
+        return JsonConvert.DeserializeObject<ElementInfo>(objCmd.Replace("\\" , ""));
+    }
+    
+}
+    [UsedImplicitly]
+    internal class ElementInfo
+    {
+        internal string Name;
+        internal string Command;
+        internal string Value;
+        internal string Type;
     }
 
     public static class Float3Ext
