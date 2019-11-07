@@ -8,6 +8,8 @@ namespace IMRE.EmbodiedUserInput
         public classifierType type;
         
         private IEnumerator coroutine;
+        
+        //TODO consider making frequency adaptive.
         public int frequency = 30;
         private float deltaTime => 1f/((float) frequency);
         
