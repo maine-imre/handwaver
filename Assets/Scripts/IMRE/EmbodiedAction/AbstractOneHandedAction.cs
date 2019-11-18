@@ -57,4 +57,8 @@ namespace IMRE.EmbodiedAction
 
         public abstract void ActionImplementation(SteamVR_Input_Sources fromSource);
     }
+
+    public class SteamVRAction_Pose
+    {
+    }
 }
