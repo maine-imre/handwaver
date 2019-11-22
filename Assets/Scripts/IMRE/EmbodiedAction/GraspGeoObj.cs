@@ -1,4 +1,5 @@
-﻿using IMRE.HandWaver.Kernel;
+﻿using System;
+using IMRE.HandWaver.Kernel;
 using IMRE.HandWaver.Kernel.Geos;
 using IMRE.Math;
 using Unity.Mathematics;
@@ -7,17 +8,26 @@ using Valve.VR;
 
 namespace IMRE.EmbodiedAction
 {
-    public class GraspGeoObj : AbstractOneHandedAction
+    public class GraspGeoObj : MonoBehaviour
     {
         public float tolerance = .05f;
-        public override void ActionImplementation(SteamVR_Input_Sources fromSource)
+        private SteamVR_Behaviour_Pose trigger;
+
+        private void Start()
         {
+            trigger = GetComponent<SteamVR_Behaviour_Pose>();
+            trigger.onTransformChanged.AddListener(UpdatePosition);
+        }
+
+        private void UpdatePosition(SteamVR_Behaviour_Pose arg0, SteamVR_Input_Sources arg1)
+        {
+            if (!trigger.isValid){Debug.Log("I'm running in an invalid state, add a condition somewhere.");}
             GeoElement geo = new GeoElement();
             //find closest point
             for (var i = 0; i < GeoElementDataBase.GeoElements.Length; i++)
             {
                 //TODO address this to the correct location. @Joey
-                float3 origin = float3.zero; //float3.zero is a standin for the center of the active grasp.
+                float3 origin = trigger.origin.transform.position;
                 
                 if (!GeoElementDataBase.HasElement(i)) continue;
                 float bestDist = tolerance;
@@ -29,7 +39,7 @@ namespace IMRE.EmbodiedAction
                 bestDist = (origin - closestPoint).Magnitude();
             }
 
-            if (!geo.Equals(default(GeoElement))) GeoElementFunction(geo, fromSource);        
+            if (!geo.Equals(default(GeoElement))) GeoElementFunction(geo, arg1);        
         }
         
         private void GeoElementFunction(GeoElement geo, SteamVR_Input_Sources fromSource)

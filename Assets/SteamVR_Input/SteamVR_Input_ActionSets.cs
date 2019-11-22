@@ -25,7 +25,7 @@ namespace Valve.VR
         
         private static SteamVR_Input_ActionSet_mixedreality p_mixedreality;
         
-        private static SteamVR_Input_ActionSet_TESTING p_TESTING;
+        private static SteamVR_Input_ActionSet_IMRE_Actions p_IMRE_Actions;
         
         public static SteamVR_Input_ActionSet_default _default
         {
@@ -59,11 +59,11 @@ namespace Valve.VR
             }
         }
         
-        public static SteamVR_Input_ActionSet_TESTING TESTING
+        public static SteamVR_Input_ActionSet_IMRE_Actions IMRE_Actions
         {
             get
             {
-                return SteamVR_Actions.p_TESTING.GetCopy<SteamVR_Input_ActionSet_TESTING>();
+                return SteamVR_Actions.p_IMRE_Actions.GetCopy<SteamVR_Input_ActionSet_IMRE_Actions>();
             }
         }
         
@@ -73,13 +73,13 @@ namespace Valve.VR
             SteamVR_Actions.p_platformer = ((SteamVR_Input_ActionSet_platformer)(SteamVR_ActionSet.Create<SteamVR_Input_ActionSet_platformer>("/actions/platformer")));
             SteamVR_Actions.p_buggy = ((SteamVR_Input_ActionSet_buggy)(SteamVR_ActionSet.Create<SteamVR_Input_ActionSet_buggy>("/actions/buggy")));
             SteamVR_Actions.p_mixedreality = ((SteamVR_Input_ActionSet_mixedreality)(SteamVR_ActionSet.Create<SteamVR_Input_ActionSet_mixedreality>("/actions/mixedreality")));
-            SteamVR_Actions.p_TESTING = ((SteamVR_Input_ActionSet_TESTING)(SteamVR_ActionSet.Create<SteamVR_Input_ActionSet_TESTING>("/actions/TESTING")));
+            SteamVR_Actions.p_IMRE_Actions = ((SteamVR_Input_ActionSet_IMRE_Actions)(SteamVR_ActionSet.Create<SteamVR_Input_ActionSet_IMRE_Actions>("/actions/IMRE_Actions")));
             Valve.VR.SteamVR_Input.actionSets = new Valve.VR.SteamVR_ActionSet[] {
                     SteamVR_Actions._default,
                     SteamVR_Actions.platformer,
                     SteamVR_Actions.buggy,
                     SteamVR_Actions.mixedreality,
-                    SteamVR_Actions.TESTING};
+                    SteamVR_Actions.IMRE_Actions};
         }
     }
 }
