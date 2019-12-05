@@ -18,7 +18,7 @@ namespace IMRE.HandWaver.Kernel
         /// <summary>
         ///     If this is set, the session will use this session ID rather than generate a new one.
         /// </summary>
-        public static string overrideSID = "e1c5761e-b7c3-4822-936a-b5c6b2f68b10";
+        public static string overrideSID;
 
         private static readonly string pattern = @"(?'elementName'\w+)\s*\=\s*(?'type'[\w]*)\((?'args'[\w{}\-.,\s]+)\)";
 
@@ -55,6 +55,7 @@ namespace IMRE.HandWaver.Kernel
 
         private IEnumerator delayedStart()
         {
+            Debug.Log(elementNameManager.GenerateName());
             while (!connect) yield return new WaitForEndOfFrame();
             StartCoroutine(HandWaverServerTransport.execCommand("A = (1,1,1)")); // Point B
             yield return new WaitForEndOfFrame();
@@ -72,26 +73,19 @@ namespace IMRE.HandWaver.Kernel
 
         public void addFunc(string objCmd)
         {
-            ElementInfo objInfo =  parseJSON(objCmd);
-            
-            Debug.Log("server added!\n " + objInfo.Name);
+            ElementInfo objInfo =  ElementInfo.CreateFromJSON(objCmd);
+            Debug.Log("server added!\n " + objInfo.name);
             // Should add element to GeoElementDataBase
-
-            foreach (Match cmd in Regex.Matches(objInfo.Command,
-                pattern, options))
-            {
-                var eName = cmd.Groups["elementName"].Value;
-                var eType = cmd.Groups["type"].Value;
+            
                 GeoElementDataBase.AddElement(
-                    new GeoElement(id++, new NativeString64(eName)));
+                    new GeoElement(id++, new NativeString64(objInfo.name)));
 
                 var e =
-                    GeoElementDataBase.GetElement(eName);
+                    GeoElementDataBase.GetElement(objInfo.name);
                 var args =
-                    cmd.Groups["args"].Value.Split(',').Select(s => s.Trim()).ToArray();
+                    (objInfo.command.Replace(")", "").Replace("(","")).Split(',').Select(s => s.Trim()).ToArray();
 
-                GeoElementDataBase.GeoElements[e.ElementId] = UpdateElement(e, eType, args);
-            }
+                GeoElementDataBase.GeoElements[e.ElementId] = UpdateElement(e, objInfo.type, args);
 
         }
 
@@ -103,24 +97,12 @@ namespace IMRE.HandWaver.Kernel
 
         public void updateFunc(string objCmd)
         {
-            ElementInfo objInfo =  parseJSON(objCmd);
+            ElementInfo objInfo =  ElementInfo.CreateFromJSON(objCmd);
             
-            Debug.Log("server added!\n " + objInfo.Name);
-            foreach (Match cmd in Regex.Matches(objInfo.Command,
-                pattern, options))
-            {
-                var eName = cmd.Groups["elementName"].Value.Trim();
-                var eType = cmd.Groups["type"].Value;
-                var e =
-                    GeoElementDataBase.GetElement(eName);
-                var args =
-                    cmd.Groups["args"].Value.Split(',').Select(s => s.Trim()).ToArray();
-                ;
-
-                //Debug.LogFormat("*{0}* of type ({1}) with args **{2}** was updated", eName, eType, args.ToString());
-
-                GeoElementDataBase.GeoElements[e.ElementId] = UpdateElement(e, eType, args);
-            }
+            Debug.Log("server added!\n " + objInfo.name);
+            var e =GeoElementDataBase.GetElement(objInfo.name);
+            //Debug.LogFormat("*{0}* of type ({1}) with args **{2}** was updated", eName, eType, args.ToString());
+            GeoElementDataBase.GeoElements[e.ElementId] = UpdateElement(e, objInfo.type, (objInfo.command.Replace(")", "").Replace("(","")).Split(',').Select(s => s.Trim()).ToArray());
         }
 
         /// <summary>
@@ -136,19 +118,19 @@ namespace IMRE.HandWaver.Kernel
             if (e.Type == ElementType.err)
                 switch (eType)
                 {
-                    case "":
+                    case "point":
                         e.Type = ElementType.point;
                         break;
-                    case "Line":
+                    case "line":
                         e.Type = ElementType.line;
                         break;
-                    case "Plane":
+                    case "plane":
                         e.Type = ElementType.plane;
                         break;
-                    case "Sphere":
+                    case "sphere":
                         e.Type = ElementType.sphere;
                         break;
-                    case "Circle":
+                    case "circle":
                         e.Type = ElementType.circle;
                         break;
                     default:
@@ -160,7 +142,6 @@ namespace IMRE.HandWaver.Kernel
             switch (e.Type)
             {
                 case ElementType.point:
-                    //Assumed Point
                     // arg0 is x value
                     // arg1 is y value.
                     // arg2 is z value.
@@ -250,21 +231,22 @@ namespace IMRE.HandWaver.Kernel
                 string.IsNullOrEmpty(overrideSID) ? Guid.NewGuid().ToString() : overrideSID;
             StartCoroutine(HandWaverServerTransport.serverHandhake());
         }
-
-
-    private ElementInfo parseJSON(string objCmd)
-    {
-        return JsonConvert.DeserializeObject<ElementInfo>(objCmd.Replace("\\" , ""));
-    }
-    
+        
 }
     [UsedImplicitly]
+    [Serializable]
     internal class ElementInfo
     {
-        internal string Name;
-        internal string Command;
-        internal string Value;
-        internal string Type;
+        public string name;
+        public string command;
+        public string value;
+        public string type;
+
+        public static ElementInfo CreateFromJSON(string jsonString)
+        {
+            String tmp = @jsonString.Replace("\\", "");
+            return JsonUtility.FromJson<ElementInfo>(tmp.Substring(0, tmp.Length-1));
+        }
     }
 
     public static class Float3Ext

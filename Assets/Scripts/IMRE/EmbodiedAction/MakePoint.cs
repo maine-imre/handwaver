@@ -9,7 +9,7 @@ namespace IMRE.EmbodiedAction
 {
     public class MakePoint : MonoBehaviour
     {
-        public SteamVR_Action_Boolean makePointAction;
+        public SteamVR_Action_Boolean Action;
         
         public Hand hand;
 
@@ -19,19 +19,19 @@ namespace IMRE.EmbodiedAction
             if (hand == null)
                 hand = this.GetComponent<Hand>();
 
-            if (makePointAction == null)
+            if (Action == null)
             {
                 Debug.LogError("<b>[SteamVR Interaction]</b> No plant action assigned", this);
                 return;
             }
 
-            makePointAction.AddOnChangeListener(OnMakePointActionChange, hand.handType);
+            Action.AddOnChangeListener(OnMakePointActionChange, hand.handType);
         }
         
         private void OnDisable()
         {
-            if (makePointAction != null)
-                makePointAction.RemoveOnChangeListener(OnMakePointActionChange, hand.handType);
+            if (Action != null)
+                Action.RemoveOnChangeListener(OnMakePointActionChange, hand.handType);
         }
         
         private void OnMakePointActionChange(SteamVR_Action_Boolean actionIn, SteamVR_Input_Sources inputSource, bool newValue)
@@ -44,9 +44,11 @@ namespace IMRE.EmbodiedAction
 
         private void SpawnPoint()
         {
-                float3 origin = hand.transform.position;
+            float3 origin = hand.transform.position;
+            
+            Debug.Log("Spawn at " + origin);
                 StartCoroutine(HandWaverServerTransport.execCommand(
-                    "A = (" + origin.x + "," + origin.y + "," + origin.z + ")"));
+                    elementNameManager.GenerateName()+" = (" + origin.x + "," + origin.y + "," + origin.z + ")"));
                 //TODO can the new obj be called something other than A?
         }
     }

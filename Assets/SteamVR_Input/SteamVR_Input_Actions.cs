@@ -57,11 +57,13 @@ namespace Valve.VR
         
         private static SteamVR_Action_Boolean p_iMRE_Actions_MakePointAction;
         
-        private static SteamVR_Action_Pose p_iMRE_Actions_MakeSphereAction;
+        private static SteamVR_Action_Boolean p_iMRE_Actions_MakeSphereAction;
         
-        private static SteamVR_Action_Pose p_iMRE_Actions_MakeLineAction;
+        private static SteamVR_Action_Boolean p_iMRE_Actions_MakeLineAction;
         
-        private static SteamVR_Action_Pose p_iMRE_Actions_MakePlaneAction;
+        private static SteamVR_Action_Boolean p_iMRE_Actions_MakePlaneAction;
+        
+        private static SteamVR_Action_Boolean p_iMRE_Actions_MoveGeoElement;
         
         public static SteamVR_Action_Boolean default_InteractUI
         {
@@ -223,27 +225,35 @@ namespace Valve.VR
             }
         }
         
-        public static SteamVR_Action_Pose iMRE_Actions_MakeSphereAction
+        public static SteamVR_Action_Boolean iMRE_Actions_MakeSphereAction
         {
             get
             {
-                return SteamVR_Actions.p_iMRE_Actions_MakeSphereAction.GetCopy<SteamVR_Action_Pose>();
+                return SteamVR_Actions.p_iMRE_Actions_MakeSphereAction.GetCopy<SteamVR_Action_Boolean>();
             }
         }
         
-        public static SteamVR_Action_Pose iMRE_Actions_MakeLineAction
+        public static SteamVR_Action_Boolean iMRE_Actions_MakeLineAction
         {
             get
             {
-                return SteamVR_Actions.p_iMRE_Actions_MakeLineAction.GetCopy<SteamVR_Action_Pose>();
+                return SteamVR_Actions.p_iMRE_Actions_MakeLineAction.GetCopy<SteamVR_Action_Boolean>();
             }
         }
         
-        public static SteamVR_Action_Pose iMRE_Actions_MakePlaneAction
+        public static SteamVR_Action_Boolean iMRE_Actions_MakePlaneAction
         {
             get
             {
-                return SteamVR_Actions.p_iMRE_Actions_MakePlaneAction.GetCopy<SteamVR_Action_Pose>();
+                return SteamVR_Actions.p_iMRE_Actions_MakePlaneAction.GetCopy<SteamVR_Action_Boolean>();
+            }
+        }
+        
+        public static SteamVR_Action_Boolean iMRE_Actions_MoveGeoElement
+        {
+            get
+            {
+                return SteamVR_Actions.p_iMRE_Actions_MoveGeoElement.GetCopy<SteamVR_Action_Boolean>();
             }
         }
         
@@ -272,7 +282,8 @@ namespace Valve.VR
                     SteamVR_Actions.iMRE_Actions_MakePointAction,
                     SteamVR_Actions.iMRE_Actions_MakeSphereAction,
                     SteamVR_Actions.iMRE_Actions_MakeLineAction,
-                    SteamVR_Actions.iMRE_Actions_MakePlaneAction};
+                    SteamVR_Actions.iMRE_Actions_MakePlaneAction,
+                    SteamVR_Actions.iMRE_Actions_MoveGeoElement};
             Valve.VR.SteamVR_Input.actionsIn = new Valve.VR.ISteamVR_Action_In[] {
                     SteamVR_Actions.default_InteractUI,
                     SteamVR_Actions.default_Teleport,
@@ -295,17 +306,15 @@ namespace Valve.VR
                     SteamVR_Actions.iMRE_Actions_MakePointAction,
                     SteamVR_Actions.iMRE_Actions_MakeSphereAction,
                     SteamVR_Actions.iMRE_Actions_MakeLineAction,
-                    SteamVR_Actions.iMRE_Actions_MakePlaneAction};
+                    SteamVR_Actions.iMRE_Actions_MakePlaneAction,
+                    SteamVR_Actions.iMRE_Actions_MoveGeoElement};
             Valve.VR.SteamVR_Input.actionsOut = new Valve.VR.ISteamVR_Action_Out[] {
                     SteamVR_Actions.default_Haptic};
             Valve.VR.SteamVR_Input.actionsVibration = new Valve.VR.SteamVR_Action_Vibration[] {
                     SteamVR_Actions.default_Haptic};
             Valve.VR.SteamVR_Input.actionsPose = new Valve.VR.SteamVR_Action_Pose[] {
                     SteamVR_Actions.default_Pose,
-                    SteamVR_Actions.mixedreality_ExternalCamera,
-                    SteamVR_Actions.iMRE_Actions_MakeSphereAction,
-                    SteamVR_Actions.iMRE_Actions_MakeLineAction,
-                    SteamVR_Actions.iMRE_Actions_MakePlaneAction};
+                    SteamVR_Actions.mixedreality_ExternalCamera};
             Valve.VR.SteamVR_Input.actionsBoolean = new Valve.VR.SteamVR_Action_Boolean[] {
                     SteamVR_Actions.default_InteractUI,
                     SteamVR_Actions.default_Teleport,
@@ -317,7 +326,11 @@ namespace Valve.VR
                     SteamVR_Actions.platformer_Jump,
                     SteamVR_Actions.buggy_Brake,
                     SteamVR_Actions.buggy_Reset,
-                    SteamVR_Actions.iMRE_Actions_MakePointAction};
+                    SteamVR_Actions.iMRE_Actions_MakePointAction,
+                    SteamVR_Actions.iMRE_Actions_MakeSphereAction,
+                    SteamVR_Actions.iMRE_Actions_MakeLineAction,
+                    SteamVR_Actions.iMRE_Actions_MakePlaneAction,
+                    SteamVR_Actions.iMRE_Actions_MoveGeoElement};
             Valve.VR.SteamVR_Input.actionsSingle = new Valve.VR.SteamVR_Action_Single[] {
                     SteamVR_Actions.default_Squeeze,
                     SteamVR_Actions.buggy_Throttle};
@@ -343,7 +356,11 @@ namespace Valve.VR
                     SteamVR_Actions.buggy_Throttle,
                     SteamVR_Actions.buggy_Brake,
                     SteamVR_Actions.buggy_Reset,
-                    SteamVR_Actions.iMRE_Actions_MakePointAction};
+                    SteamVR_Actions.iMRE_Actions_MakePointAction,
+                    SteamVR_Actions.iMRE_Actions_MakeSphereAction,
+                    SteamVR_Actions.iMRE_Actions_MakeLineAction,
+                    SteamVR_Actions.iMRE_Actions_MakePlaneAction,
+                    SteamVR_Actions.iMRE_Actions_MoveGeoElement};
         }
         
         private static void PreInitActions()
@@ -368,9 +385,10 @@ namespace Valve.VR
             SteamVR_Actions.p_buggy_Reset = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/buggy/in/Reset")));
             SteamVR_Actions.p_mixedreality_ExternalCamera = ((SteamVR_Action_Pose)(SteamVR_Action.Create<SteamVR_Action_Pose>("/actions/mixedreality/in/ExternalCamera")));
             SteamVR_Actions.p_iMRE_Actions_MakePointAction = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/IMRE_Actions/in/MakePointAction")));
-            SteamVR_Actions.p_iMRE_Actions_MakeSphereAction = ((SteamVR_Action_Pose)(SteamVR_Action.Create<SteamVR_Action_Pose>("/actions/IMRE_Actions/in/MakeSphereAction")));
-            SteamVR_Actions.p_iMRE_Actions_MakeLineAction = ((SteamVR_Action_Pose)(SteamVR_Action.Create<SteamVR_Action_Pose>("/actions/IMRE_Actions/in/MakeLineAction")));
-            SteamVR_Actions.p_iMRE_Actions_MakePlaneAction = ((SteamVR_Action_Pose)(SteamVR_Action.Create<SteamVR_Action_Pose>("/actions/IMRE_Actions/in/MakePlaneAction")));
+            SteamVR_Actions.p_iMRE_Actions_MakeSphereAction = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/IMRE_Actions/in/MakeSphereAction")));
+            SteamVR_Actions.p_iMRE_Actions_MakeLineAction = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/IMRE_Actions/in/MakeLineAction")));
+            SteamVR_Actions.p_iMRE_Actions_MakePlaneAction = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/IMRE_Actions/in/MakePlaneAction")));
+            SteamVR_Actions.p_iMRE_Actions_MoveGeoElement = ((SteamVR_Action_Boolean)(SteamVR_Action.Create<SteamVR_Action_Boolean>("/actions/IMRE_Actions/in/MoveGeoElement")));
         }
     }
 }
