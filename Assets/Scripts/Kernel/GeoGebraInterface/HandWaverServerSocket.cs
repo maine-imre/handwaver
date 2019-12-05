@@ -83,7 +83,7 @@ namespace IMRE.HandWaver.Kernel
                 var e =
                     GeoElementDataBase.GetElement(objInfo.name);
                 var args =
-                    (objInfo.command.Replace(")", "").Replace("(","")).Split(',').Select(s => s.Trim()).ToArray();
+                    (objInfo.command).Split(',').Select(s => s.Trim()).ToArray();
 
                 GeoElementDataBase.GeoElements[e.ElementId] = UpdateElement(e, objInfo.type, args);
 
@@ -102,7 +102,7 @@ namespace IMRE.HandWaver.Kernel
             Debug.Log("server added!\n " + objInfo.name);
             var e =GeoElementDataBase.GetElement(objInfo.name);
             //Debug.LogFormat("*{0}* of type ({1}) with args **{2}** was updated", eName, eType, args.ToString());
-            GeoElementDataBase.GeoElements[e.ElementId] = UpdateElement(e, objInfo.type, (objInfo.command.Replace(")", "").Replace("(","")).Split(',').Select(s => s.Trim()).ToArray());
+            GeoElementDataBase.GeoElements[e.ElementId] = UpdateElement(e, objInfo.type, (objInfo.command).Split(',').Select(s => s.Trim()).ToArray());
         }
 
         /// <summary>
