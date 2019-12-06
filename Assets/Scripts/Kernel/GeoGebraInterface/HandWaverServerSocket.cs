@@ -20,7 +20,7 @@ namespace IMRE.HandWaver.Kernel
         /// </summary>
         public static string overrideSID;
 
-        private static readonly string pattern = @"(?'elementName'\w+)\s*\=\s*(?'type'[\w]*)\((?'args'[\w{}\-.,\s]+)\)";
+        private static readonly string pattern = @".*?\((.*?)\)";
 
         private static readonly RegexOptions options =
             RegexOptions.Multiline;
@@ -74,16 +74,14 @@ namespace IMRE.HandWaver.Kernel
         public void addFunc(string objCmd)
         {
             ElementInfo objInfo =  ElementInfo.CreateFromJSON(objCmd);
-            Debug.Log("server added!\n " + objInfo.name);
+            Debug.Log("server added!\n " + objInfo.name);   
             // Should add element to GeoElementDataBase
             
                 GeoElementDataBase.AddElement(
                     new GeoElement(id++, new NativeString64(objInfo.name)));
 
-                var e =
-                    GeoElementDataBase.GetElement(objInfo.name);
-                var args =
-                    (objInfo.command).Split(',').Select(s => s.Trim()).ToArray();
+                var e = GeoElementDataBase.GetElement(objInfo.name);
+                string[] args = Regex.Match(objInfo.command, pattern, RegexOptions.Multiline)
 
                 GeoElementDataBase.GeoElements[e.ElementId] = UpdateElement(e, objInfo.type, args);
 
@@ -101,8 +99,9 @@ namespace IMRE.HandWaver.Kernel
             
             Debug.Log("server added!\n " + objInfo.name);
             var e =GeoElementDataBase.GetElement(objInfo.name);
+            string[] args = Regex.Match(objInfo.command, pattern, RegexOptions.Multiline)
             //Debug.LogFormat("*{0}* of type ({1}) with args **{2}** was updated", eName, eType, args.ToString());
-            GeoElementDataBase.GeoElements[e.ElementId] = UpdateElement(e, objInfo.type, (objInfo.command).Split(',').Select(s => s.Trim()).ToArray());
+            GeoElementDataBase.GeoElements[e.ElementId] = UpdateElement(e, objInfo.type, args);
         }
 
         /// <summary>

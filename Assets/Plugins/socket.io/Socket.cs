@@ -312,7 +312,6 @@ namespace socket.io {
                     break;
 
                 case SocketPacketTypes.EVENT:
-                    Debug.Log(pkt.body);
                     if (!pkt.HasBody) {
                         Debug.LogWarningFormat("{0} has no body(data)", pkt.ToString());
                         return;
