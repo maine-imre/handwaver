@@ -78,10 +78,10 @@ namespace IMRE.HandWaver
 			if (cast && Physics.Raycast(fingerRay, out hit, rayLength))
 			{
 
-				if (hit.collider.GetComponent<MasterGeoObj>() != null)
+				if (hit.collider.GetComponent<AbstractGeoObj>() != null)
 				{
 					StartCoroutine(castCoolDown(0.5f));
-					hit.collider.GetComponent<MasterGeoObj>().IsSelected = !hit.collider.GetComponent<MasterGeoObj>().IsSelected;
+					hit.collider.GetComponent<AbstractGeoObj>().IsSelected = !hit.collider.GetComponent<AbstractGeoObj>().IsSelected;
 				}
 			}
 		}

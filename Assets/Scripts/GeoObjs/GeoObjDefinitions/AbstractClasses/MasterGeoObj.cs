@@ -31,7 +31,7 @@ namespace IMRE.HandWaver
 /// Basic features that llow geo objs to interact wil controls
 /// Will be refactored in new geometery kernel.
 /// </summary>
-	internal abstract class MasterGeoObj : MonoBehaviour, UpdatableFigure
+	internal abstract class AbstractGeoObj : MonoBehaviour, UpdatableFigure
 	{
 
         #region Local Positions
@@ -165,7 +165,7 @@ namespace IMRE.HandWaver
 
         public bool intersectionFigure = false;
 
-        public MasterGeoObj setIntersectionFigure(int value)
+        public AbstractGeoObj setIntersectionFigure(int value)
         {
             intersectionMultipleIDX = value;
             intersectionFigure = true;
@@ -327,18 +327,18 @@ namespace IMRE.HandWaver
 		{
 			get
 			{
-				return thisSelectStatus == MasterGeoObj.SelectionStatus.selected;
+				return thisSelectStatus == AbstractGeoObj.SelectionStatus.selected;
 			}
 
 			set
 			{
 				if (value)
 				{
-					thisSelectStatus = MasterGeoObj.SelectionStatus.selected;
+					thisSelectStatus = AbstractGeoObj.SelectionStatus.selected;
 				}
 				else
 				{
-					thisSelectStatus = MasterGeoObj.SelectionStatus.none;
+					thisSelectStatus = AbstractGeoObj.SelectionStatus.none;
 				}
 			}
 		}
@@ -403,7 +403,7 @@ namespace IMRE.HandWaver
 			cUpdateRMan = UpdateRMan();
 			waitForStretch = WaitForStretch();
 			HW_GeoSolver.ins.addComponent(this);
-			transform.SetParent(masterParentObj);
+			transform.SetParent(parentGeoObj);
 		}
 
         void LateUpdate()
@@ -466,7 +466,7 @@ namespace IMRE.HandWaver
         }
 
 		private Node<string> myGraphNode;
-		internal static Transform masterParentObj;
+		internal static Transform parentGeoObj;
 		/// <summary>
 		/// Set true to disable streching for all objects of this type
 		/// </summary>
@@ -483,30 +483,30 @@ namespace IMRE.HandWaver
 
         public void OnTriggerStay(Collider other)
         {
-            if (other.GetComponent<MasterGeoObj>() != null)
+            if (other.GetComponent<AbstractGeoObj>() != null)
             {
 
                 //switch (geoManager.thisMode)
                 //{
                 //    case ObjManHelper.IntersectionMode.glue:
-                //        if(other.GetComponent<MasterGeoOBj>().figType == this.figType)
+                //        if(other.GetComponent<AbstractGeoObj>().figType == this.figType)
                 //        {
-                //            snapToFigure(other.GetComponent<MasterGeoOBj>());
+                //            snapToFigure(other.GetComponent<AbstractGeoObj>());
                 //        }
                 //        break;
 				//		case ObjManHelper.IntersectionMode.intersect:
-                //         geoManager.GetComponent<intersectionManager>().checkIntersection(this, other.GetComponent<MasterGeoOBj>());
+                //         geoManager.GetComponent<intersectionManager>().checkIntersection(this, other.GetComponent<AbstractGeoObj>());
                 //         break;
 				//		case ObjManHelper.IntersectionMode.snap:
-                        SnapToFigure(other.GetComponent<MasterGeoObj>());
+                        SnapToFigure(other.GetComponent<AbstractGeoObj>());
                 //        break;
                 //}
 
             }
         }
 
-        internal abstract void SnapToFigure(MasterGeoObj toObj);
-        internal abstract void GlueToFigure(MasterGeoObj toObj);
+        internal abstract void SnapToFigure(AbstractGeoObj toObj);
+        internal abstract void GlueToFigure(AbstractGeoObj toObj);
 
         public bool reactMotion(NodeList<string> inputNodeList)
         {
@@ -585,10 +585,10 @@ namespace IMRE.HandWaver
 
 		//public override bool Equals(object obj)
 		//{
-		//	return Equals(obj as MasterGeoObj);
+		//	return Equals(obj as AbstractGeoObj);
 		//}
 
-		//public bool Equals(MasterGeoObj other)
+		//public bool Equals(AbstractGeoObj other)
 		//{
 		//	return other != null &&
 		//		   base.Equals(other) &&

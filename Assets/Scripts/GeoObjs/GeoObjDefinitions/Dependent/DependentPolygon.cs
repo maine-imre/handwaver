@@ -43,7 +43,7 @@ namespace IMRE.HandWaver
 				if (!skewable && CheckSkewPolygon())
 				{
 					Debug.LogWarning("This polygon " + figName + " is a skew polygon.");
-					MasterGeoObj firstHit = inputNodeList.findMGOmatch(pointListMGO);
+					AbstractGeoObj firstHit = inputNodeList.findMGOmatch(pointListMGO);
 
 					switch (firstHit.figType)
 					{
@@ -112,12 +112,12 @@ namespace IMRE.HandWaver
 
 
 
-		internal override void SnapToFigure(MasterGeoObj toObj)
+		internal override void SnapToFigure(AbstractGeoObj toObj)
 		{
 			//do nothing
 		}
 
-		internal override void GlueToFigure(MasterGeoObj toObj)
+		internal override void GlueToFigure(AbstractGeoObj toObj)
         {
             throw new NotImplementedException();
         }

@@ -16,7 +16,7 @@ namespace IMRE.HandWaver
     /// Abstract solid.
     /// Will be refactored in new geometery kernel.
     /// </summary>
-	abstract class AbstractSolid : MasterGeoObj
+	abstract class AbstractSolid : AbstractGeoObj
     {
         abstract internal float volume { get; }
         abstract internal AbstractPolygon primaryBase { get; }

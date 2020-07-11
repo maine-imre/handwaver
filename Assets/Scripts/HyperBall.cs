@@ -86,7 +86,6 @@ namespace IMRE.HandWaver.FourthDimension {
 
 		private void endTakeOver()
 		{
-			//return ownership to master.
 			GetComponent<PhotonView>().TransferOwnership(0);
 		}
 

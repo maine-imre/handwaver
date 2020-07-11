@@ -37,8 +37,8 @@ namespace IMRE.HandWaver
 		private AnchorableBehaviour thisABehave;
 		private InteractionBehaviour iBehave;
 
-		private List<MasterGeoObj> mgoCanidates;
-		public MasterGeoObj activeMGO;
+		private List<AbstractGeoObj> mgoCanidates;
+		public AbstractGeoObj activeMGO;
 		private int canidateIDX;
 
 
@@ -78,7 +78,7 @@ namespace IMRE.HandWaver
 
 		private void deselectFunc()
 		{
-			foreach (MasterGeoObj obj in GameObject.FindObjectsOfType<MasterGeoObj>().Where(obj => obj.IsSelected))
+			foreach (AbstractGeoObj obj in GameObject.FindObjectsOfType<AbstractGeoObj>().Where(obj => obj.IsSelected))
 			{
 				obj.IsSelected = false;
 			}
@@ -91,19 +91,19 @@ namespace IMRE.HandWaver
 
 		private void selectMGO()
 		{
-			if (activeMGO.thisSelectStatus == MasterGeoObj.SelectionStatus.active)
+			if (activeMGO.thisSelectStatus == AbstractGeoObj.SelectionStatus.active)
 			{
-				activeMGO.thisSelectStatus = MasterGeoObj.SelectionStatus.selected;
+				activeMGO.thisSelectStatus = AbstractGeoObj.SelectionStatus.selected;
 			}
 			else
 			{
-				activeMGO.thisSelectStatus = MasterGeoObj.SelectionStatus.active;
+				activeMGO.thisSelectStatus = AbstractGeoObj.SelectionStatus.active;
 			}
 		}
 
 		private void nextActive()
 		{
-			activeMGO.thisSelectStatus = MasterGeoObj.SelectionStatus.canidate;
+			activeMGO.thisSelectStatus = AbstractGeoObj.SelectionStatus.canidate;
 			canidateIDX++;
 			if (canidateIDX > mgoCanidates.Count)
 			{
@@ -115,12 +115,12 @@ namespace IMRE.HandWaver
 			}
 
 			activeMGO = mgoCanidates[canidateIDX];
-			activeMGO.thisSelectStatus = MasterGeoObj.SelectionStatus.active;
+			activeMGO.thisSelectStatus = AbstractGeoObj.SelectionStatus.active;
 		}
 
 		private void prevActive()
 		{
-			activeMGO.thisSelectStatus = MasterGeoObj.SelectionStatus.canidate;
+			activeMGO.thisSelectStatus = AbstractGeoObj.SelectionStatus.canidate;
 
 			canidateIDX--;
 			if (canidateIDX > mgoCanidates.Count)
@@ -133,16 +133,16 @@ namespace IMRE.HandWaver
 			}
 
 			activeMGO = mgoCanidates[canidateIDX];
-			activeMGO.thisSelectStatus = MasterGeoObj.SelectionStatus.active;
+			activeMGO.thisSelectStatus = AbstractGeoObj.SelectionStatus.active;
 		}
 
 		private void interactionEnd()
 		{
-			mgoCanidates = new List<MasterGeoObj>();
+			mgoCanidates = new List<AbstractGeoObj>();
 			if (this.GetComponent<AnchorableBehaviour>().isAttached == false)
 			{
 
-				foreach (MasterGeoObj mgo in FindObjectsOfType<MasterGeoObj>().Where(g => (g.GetComponent<AnchorableBehaviour>() == null || (g.GetComponent<AnchorableBehaviour>() != null && !g.GetComponent<AnchorableBehaviour>().isAttached))))
+				foreach (AbstractGeoObj mgo in FindObjectsOfType<AbstractGeoObj>().Where(g => (g.GetComponent<AnchorableBehaviour>() == null || (g.GetComponent<AnchorableBehaviour>() != null && !g.GetComponent<AnchorableBehaviour>().isAttached))))
 				{
 					float distance = 15;
 					switch (mgo.figType)
@@ -192,18 +192,18 @@ namespace IMRE.HandWaver
 							Debug.LogWarning("Something went wrong in the selectionmanager.... :(");
 							break;
 					}
-					if (Mathf.Abs(distance) < selectionRadius && mgo.thisSelectStatus != MasterGeoObj.SelectionStatus.selected)
+					if (Mathf.Abs(distance) < selectionRadius && mgo.thisSelectStatus != AbstractGeoObj.SelectionStatus.selected)
 					{
-						mgo.thisSelectStatus = MasterGeoObj.SelectionStatus.canidate;
+						mgo.thisSelectStatus = AbstractGeoObj.SelectionStatus.canidate;
 						mgoCanidates.Add(mgo);
 					}
 					else if (Mathf.Abs(distance) < selectionRadius)
 					{
 						mgoCanidates.Add(mgo);
 					}
-					else if (mgo.thisSelectStatus == MasterGeoObj.SelectionStatus.canidate || mgo.thisSelectStatus == MasterGeoObj.SelectionStatus.active)
+					else if (mgo.thisSelectStatus == AbstractGeoObj.SelectionStatus.canidate || mgo.thisSelectStatus == AbstractGeoObj.SelectionStatus.active)
 					{
-						mgo.thisSelectStatus = MasterGeoObj.SelectionStatus.none;
+						mgo.thisSelectStatus = AbstractGeoObj.SelectionStatus.none;
 					}
 				}
 			}

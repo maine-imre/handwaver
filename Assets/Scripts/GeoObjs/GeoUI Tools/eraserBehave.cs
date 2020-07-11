@@ -75,14 +75,14 @@ namespace IMRE.HandWaver
 					//	other.GetComponent<CrossSectionBehave>().holsterCrossSection();		//return to holster
 					Destroy(other.gameObject);
 				}
-				else if (other.GetComponent<MasterGeoObj>() != null)
+				else if (other.GetComponent<AbstractGeoObj>() != null)
 				{
 					if(other.GetComponent<flatfaceBehave>() != null)
 					{
 						Destroy(other);
 						return;
 					}
-					other.GetComponent<MasterGeoObj>().DeleteGeoObj();
+					other.GetComponent<AbstractGeoObj>().DeleteGeoObj();
 					Debug.Log("Trying to erase GeoObject");
 				}
 				else if(other.GetComponent<Space.RSDESPin>() != null)

@@ -38,12 +38,12 @@ namespace IMRE.HandWaver
 			//do nothing.
         }
 
-        internal override void GlueToFigure(MasterGeoObj toObj)
+        internal override void GlueToFigure(AbstractGeoObj toObj)
         {
 			//do nothing.
 		}
 
-		internal override void SnapToFigure(MasterGeoObj toObj)
+		internal override void SnapToFigure(AbstractGeoObj toObj)
 		{
 			//do nothing
 		}

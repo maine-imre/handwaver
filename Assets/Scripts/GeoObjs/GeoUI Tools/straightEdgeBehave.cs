@@ -17,9 +17,9 @@ using System;
 namespace IMRE.HandWaver
 {
 /// <summary>
-/// A mastergeoobj for lines. These are rendered to be 100s of meters long, to approximate infinite lines.
+/// A AbstractGeoObj for lines. These are rendered to be 100s of meters long, to approximate infinite lines.
 /// </summary>
-	class straightEdgeBehave : MasterGeoObj
+	class straightEdgeBehave : AbstractGeoObj
 	{
         #region Constructors
         public static straightEdgeBehave Constructor(){
@@ -203,12 +203,12 @@ namespace IMRE.HandWaver
             }
         }
 
-        internal override void SnapToFigure(MasterGeoObj toObj)
+        internal override void SnapToFigure(AbstractGeoObj toObj)
 		{
 			//throw new NotImplementedException();
 		}
 
-		internal override void GlueToFigure(MasterGeoObj toObj)
+		internal override void GlueToFigure(AbstractGeoObj toObj)
 		{
 			throw new NotImplementedException();
 		}

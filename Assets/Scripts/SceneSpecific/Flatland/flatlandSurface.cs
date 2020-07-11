@@ -28,7 +28,7 @@ namespace IMRE.HandWaver
 
         public flatlandSurface otherFlatlandSurface;
 
-        public List<MasterGeoObj> attachedObjs;
+        public List<AbstractGeoObj> attachedObjs;
 
         private void Update()
         {
@@ -37,7 +37,7 @@ namespace IMRE.HandWaver
                 otherFlatlandSurface.transform.rotation = this.transform.rotation;
             }
 
-            foreach (MasterGeoObj obj in attachedObjs)
+            foreach (AbstractGeoObj obj in attachedObjs)
             {
                 Vector3 newPos = Vector3.ProjectOnPlane(obj.transform.position - this.transform.position, this.transform.up) + this.transform.position;
                 if (obj.transform.position != newPos)

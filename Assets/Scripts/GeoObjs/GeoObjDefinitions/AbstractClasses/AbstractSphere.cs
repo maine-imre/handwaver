@@ -17,7 +17,7 @@ namespace IMRE.HandWaver
 /// handles rendering
 /// Will be refactored in new geometery kernel.
 /// </summary>
-	abstract class AbstractSphere : MasterGeoObj
+	abstract class AbstractSphere : AbstractGeoObj
     {
 
         public Vector3 centerPosition;

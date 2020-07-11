@@ -17,7 +17,7 @@ using UnityEngine;
 namespace IMRE.HandWaver
 {
 
-    abstract class AbstractArc : MasterGeoObj
+    abstract class AbstractArc : AbstractGeoObj
     {
 		internal override Vector3 ClosestSystemPosition(Vector3 abstractPosition)
 		{

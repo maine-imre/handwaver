@@ -80,7 +80,7 @@ namespace IMRE.HandWaver.Shearing
 
 			cutoutRectanglePoly = GeoObjConstruction.dPolygon(cutoutLines, cutoutRectangle);
 
-			foreach (MasterGeoObj mgo in prism.transform.parent.GetComponentsInChildren<MasterGeoObj>())
+			foreach (AbstractGeoObj mgo in prism.transform.parent.GetComponentsInChildren<AbstractGeoObj>())
 			{
 				if (mgo != controllPoint)
 				{
@@ -149,7 +149,7 @@ namespace IMRE.HandWaver.Shearing
 				prismTopPoly.pointList[i].Position3 = prismBasePoly.pointList[i].Position3 + Mathf.Sign(xLen * (sideLength1 - 2 * xLen) * (sideLength2 - 2 * xLen)) *Vector3.up * xLen;
 			}
 
-			foreach (MasterGeoObj mgo in prism.vertexPoints)
+			foreach (AbstractGeoObj mgo in prism.vertexPoints)
 			{
 				mgo.AddToRManager();
 			}

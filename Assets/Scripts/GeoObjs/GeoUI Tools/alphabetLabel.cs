@@ -20,7 +20,7 @@ namespace IMRE.HandWaver
 	[RequireComponent(typeof(InteractionBehaviour), typeof(AnchorableBehaviour), typeof(TextMeshPro))]
 
 /// <summary>
-/// Labeling system for MasterGeoObjs.
+/// Labeling system for AbstractGeoObjs.
 /// Needs UX overhaul.
 /// Currently not used.
 /// </summary>
@@ -39,7 +39,7 @@ public static alphabetLabel Constructor(){
 		private TextMeshPro labelText;
 		private InteractionBehaviour thisIBehave;
 		private AnchorableBehaviour thisABehave;
-		public MasterGeoObj recentHit;
+		public AbstractGeoObj recentHit;
 		private bool setBool = false;
 		public static bool firstLabelMade = false;
 
@@ -69,7 +69,7 @@ public static alphabetLabel Constructor(){
 			}
 		}
 
-		public void spawnOnMGO(MasterGeoObj MGO, string label)
+		public void spawnOnMGO(AbstractGeoObj MGO, string label)
 		{
 			_thisCount = (int)(label.ToCharArray()[label.ToCharArray().Length - 1] - 65);
 			if (_thisCount > totalCount)
@@ -114,7 +114,7 @@ public static alphabetLabel Constructor(){
 			StartCoroutine(transformFollow(recentHit));
 		}
 
-		private IEnumerator transformFollow(MasterGeoObj followMGO)
+		private IEnumerator transformFollow(AbstractGeoObj followMGO)
 		{
 			while (followMGO.isActiveAndEnabled)
 			{
@@ -127,13 +127,13 @@ public static alphabetLabel Constructor(){
 
 		private void OnTriggerEnter(Collider other)
 		{
-			if (other.gameObject.GetComponent<MasterGeoObj>() != null)
-				recentHit = other.gameObject.GetComponent<MasterGeoObj>();
+			if (other.gameObject.GetComponent<AbstractGeoObj>() != null)
+				recentHit = other.gameObject.GetComponent<AbstractGeoObj>();
 		}
 
 		private void OnTriggerExit(Collider other)
 		{
-			if (other.gameObject.GetComponent<MasterGeoObj>() != null && other.gameObject.GetComponent<MasterGeoObj>() == recentHit)
+			if (other.gameObject.GetComponent<AbstractGeoObj>() != null && other.gameObject.GetComponent<AbstractGeoObj>() == recentHit)
 				recentHit = null;
 		}
 

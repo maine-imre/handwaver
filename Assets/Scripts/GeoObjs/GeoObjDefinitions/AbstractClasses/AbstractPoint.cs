@@ -18,7 +18,7 @@ namespace IMRE.HandWaver
 /// Point in space. zero dim figure.
 /// Will be refactored in new geometery kernel.
 /// </summary>
-	abstract class AbstractPoint : MasterGeoObj
+	abstract class AbstractPoint : AbstractGeoObj
     {
         public Vector3 initialScale;
         public bool changedNeighborNum;

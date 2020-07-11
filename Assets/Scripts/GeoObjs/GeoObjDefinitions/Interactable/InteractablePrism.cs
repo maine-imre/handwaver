@@ -220,12 +220,12 @@ namespace IMRE.HandWaver
 
 		private bool checkForPointsInNodeList(NodeList<string> nodeList)
 		{
-			List<MasterGeoObj> masterList = new List<MasterGeoObj>();
-			masterList.AddRange(bases.Cast<MasterGeoObj>().ToList());
-			masterList.AddRange(vertexPoints.Cast<MasterGeoObj>().ToList());
-			masterList.AddRange(sides.Cast<MasterGeoObj>().ToList());
+			List<AbstractGeoObj> childGeoObjList = new List<AbstractGeoObj>();
+			childGeoObjList.AddRange(bases.Cast<AbstractGeoObj>().ToList());
+			childGeoObjList.AddRange(vertexPoints.Cast<AbstractGeoObj>().ToList());
+			childGeoObjList.AddRange(sides.Cast<AbstractGeoObj>().ToList());
 
-			return nodeList.checkForMGOmatch(masterList);
+			return nodeList.checkForMGOmatch(childGeoObjList);
 		}
 
 		public override void Stretch(InteractionController obj)
@@ -288,12 +288,12 @@ namespace IMRE.HandWaver
 			transform.GetComponent<MeshFilter>().mesh.CombineMeshes(combine);
 		}
 
-		internal override void GlueToFigure(MasterGeoObj toObj)
+		internal override void GlueToFigure(AbstractGeoObj toObj)
 		{
 			throw new NotImplementedException();
 		}
 
-		internal override void SnapToFigure(MasterGeoObj toObj)
+		internal override void SnapToFigure(AbstractGeoObj toObj)
 		{
 			//do nothing
 		}

@@ -27,7 +27,7 @@ public class HorizonsAccuracyTesting : MonoBehaviour {
 	public VerletV2 controlScript;
 
 	// Use this for initialization
-	void Start () { 
+	void Start () {
 		STARTTIME = DateTime.Now;
 		for(int i = 0; i < 29; i++) {
 			UpdateTimes.Add(STARTTIME.AddDays(i));
@@ -129,14 +129,14 @@ public class HorizonsAccuracyTesting : MonoBehaviour {
 			}
 		}
 	}
-	
+
 	Double dist (Vector3d p, Vector3d mO) {
 		return Mathd.Sqrt(Mathd.Pow(p.x - mO.x,2) + Mathd.Pow(p.y - mO.y,2) +Mathd.Pow(p.z - mO.z,2));
 	}
 	// Update is called once per frame
 	void Update () {
 		TimeSpan duration = UpdateTimes.ToArray()[0] - STARTTIME;
-		if(controlScript.masterTimeCounter > duration.TotalSeconds) {
+		if(controlScript.controllTimeCounter > duration.TotalSeconds) {
 			TestTime(UpdateTimes.ToArray()[0], bodyName);
 			UpdateTimes.RemoveAt(0);
 		}

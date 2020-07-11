@@ -1,4 +1,4 @@
-All future changes to the repository must be made by means of the develop branch. To introduce those changes to the master branch, create a pull request and at least two people must approve the request. This is a QA and integration testing measure. It must compile and it must contain meaningful first party additions to the code base. All files on our repo must belong to us.
+All future changes to the repository must be made by means of the develop branch. To introduce those changes to the STABLE branch, create a pull request and at least two people must approve the request. This is a QA and integration testing measure. It must compile and it must contain meaningful first party additions to the code base. All files on our repo must belong to us.
 
 Commits made should ideally contain jira compliant format. The reference docs on this can be found here. https://confluence.atlassian.com/fisheye/using-smart-commits-960155400.html
 

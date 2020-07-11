@@ -161,14 +161,14 @@ namespace IMRE.HandWaver
 			return result;
 		}
 
-		internal bool checkForMGOmatch(MasterGeoObj mgo)
+		internal bool checkForMGOmatch(AbstractGeoObj mgo)
 		{
-			return checkForMGOmatch(new List<MasterGeoObj> { mgo });
+			return checkForMGOmatch(new List<AbstractGeoObj> { mgo });
 		}
 
-		internal bool checkForMGOmatch(List<MasterGeoObj> mgoList)
+		internal bool checkForMGOmatch(List<AbstractGeoObj> mgoList)
 		{
-			if(mgoList.Any<MasterGeoObj>(mgo => mgo.figType == GeoObjType.prism))
+			if(mgoList.Any<AbstractGeoObj>(mgo => mgo.figType == GeoObjType.prism))
 			{
 				Debug.Log("THERE WAS A PRISM CALLED BEFORE I WAS CALLED");
 			}
@@ -189,7 +189,7 @@ namespace IMRE.HandWaver
 			return listA.Intersect<string>(listB).Count() > 0;
 		}
 
-		internal MasterGeoObj findMGOmatch(List<MasterGeoObj> mgoList)
+		internal AbstractGeoObj findMGOmatch(List<AbstractGeoObj> mgoList)
 		{
 			string[] listA = new string[Items.Count];
 			string[] listB = new string[mgoList.Count];

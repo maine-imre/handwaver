@@ -54,7 +54,7 @@ namespace IMRE.HandWaver {
 		public float angleTolerance = 65f;
 
 
-		private MasterGeoObj closestObj;
+		private AbstractGeoObj closestObj;
 
 		[Space]
 
@@ -170,7 +170,7 @@ namespace IMRE.HandWaver {
 			float shortestDist = Mathf.Infinity;
 			closestObj = null;
 
-			foreach (MasterGeoObj mgo in FindObjectsOfType<MasterGeoObj>().Where(g => (g.GetComponent<AnchorableBehaviour>() == null || (g.GetComponent<AnchorableBehaviour>() != null && !g.GetComponent<AnchorableBehaviour>().isAttached))))
+			foreach (AbstractGeoObj mgo in FindObjectsOfType<AbstractGeoObj>().Where(g => (g.GetComponent<AnchorableBehaviour>() == null || (g.GetComponent<AnchorableBehaviour>() != null && !g.GetComponent<AnchorableBehaviour>().isAttached))))
 			{
 				float distance = mgo.LocalDistanceToClosestPoint(hand.Fingers[1].TipPosition.ToVector3());
 				float angle = mgo.PointingAngleDiff(hand.Fingers[1].TipPosition.ToVector3(), hand.Fingers[1].Direction.ToVector3());
@@ -212,9 +212,9 @@ namespace IMRE.HandWaver {
 				//				Select
 				//				Colour
 				if (closestObj.IsSelected)
-					closestObj.thisSelectStatus = MasterGeoObj.SelectionStatus.none;
+					closestObj.thisSelectStatus = AbstractGeoObj.SelectionStatus.none;
 				else
-					closestObj.thisSelectStatus = MasterGeoObj.SelectionStatus.selected;
+					closestObj.thisSelectStatus = AbstractGeoObj.SelectionStatus.selected;
 
 
 				playSuccessSound();

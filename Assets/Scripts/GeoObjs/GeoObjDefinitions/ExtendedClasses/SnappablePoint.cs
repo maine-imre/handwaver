@@ -27,11 +27,11 @@ namespace IMRE.HandWaver
 							return GameObject.Instantiate(PrefabManager.GetPrefab("SnappablePoint")).GetComponent<SnappablePoint>();
 						}
         #endregion
-		private List<MasterGeoObj> relativeObjects;
+		private List<AbstractGeoObj> relativeObjects;
         private List<float> relativeWeights;
 
 
-		internal MasterGeoObj attachedObject{
+		internal AbstractGeoObj attachedObject{
 			get
 			{
 				return _attachedObject;
@@ -47,7 +47,7 @@ namespace IMRE.HandWaver
 			}
 		}
 
-        private void setupRelativePosition(MasterGeoObj value)
+        private void setupRelativePosition(AbstractGeoObj value)
         {
             switch (value.figType)
             {
@@ -91,9 +91,9 @@ namespace IMRE.HandWaver
             }
         }
 
-        private MasterGeoObj _attachedObject;
+        private AbstractGeoObj _attachedObject;
 
-		internal override void SnapToFigure(MasterGeoObj toObj)
+		internal override void SnapToFigure(AbstractGeoObj toObj)
 		{
 			Debug.Log(name + " is attempting to snap to " + toObj.name + ".");
 			//if object and child objects are not being grasped

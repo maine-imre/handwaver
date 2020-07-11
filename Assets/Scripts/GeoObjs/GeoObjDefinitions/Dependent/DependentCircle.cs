@@ -67,12 +67,12 @@ namespace IMRE.HandWaver
 			throw new NotImplementedException();
 		}
 
-        internal override void GlueToFigure(MasterGeoObj toObj)
+        internal override void GlueToFigure(AbstractGeoObj toObj)
         {
             throw new NotImplementedException();
         }
 
-        internal override void SnapToFigure(MasterGeoObj toObj)
+        internal override void SnapToFigure(AbstractGeoObj toObj)
         {
 			//do nothing
 		}

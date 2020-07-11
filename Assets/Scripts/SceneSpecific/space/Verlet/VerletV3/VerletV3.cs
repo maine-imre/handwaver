@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class VerletV3 : MonoBehaviour {
 	public float timeStep = 1;					//The length of the timestep in seconds
-	public double masterTimeCounter = 0;
-	public double masterDaysCounter = 0;
+	public double controllTimeCounter = 0;
+	public double controllerDaysCounter = 0;
 	private float previousTimeStep;				//The previous timestep for time corrected verlet
 	public GameObject[] massObject;				//A list of the rest of the bodies (Note to self: Bring down to nLog(n) using control script)
 	public float scale = 1;						//Numerical scale of the distance between objects
@@ -41,7 +41,7 @@ public class VerletV3 : MonoBehaviour {
 		VerletObjectV3 center = (VerletObjectV3)GameObject.Find(CenterBody).GetComponent("VerletObjectV3");
 		CenterBodyOffset = center.position;
 		minicounter++;
-		masterDaysCounter = masterTimeCounter/86400;
+		controllerDaysCounter = controllTimeCounter/86400;
 		//Debug.Log("On frame : "+minicounter+", "+counter+" loops have completed.");
 		runThreads();
 	}
@@ -84,7 +84,7 @@ public class VerletV3 : MonoBehaviour {
 			simulationControlThread = new VerletV3ControlThread();
 			simulationControlThread.masses = masses;
 			simulationControlThread.massObjectNames = names;
-			simulationControlThread.masterTimeCounter = masterTimeCounter;
+			simulationControlThread.controllTimeCounter = controllTimeCounter;
 			simulationControlThread.positions = positions;
 			simulationControlThread.timestep = stepTimeStep;
 			simulationControlThread.steps = stepsPerFrame;
@@ -107,7 +107,7 @@ public class VerletV3 : MonoBehaviour {
 			thisObject.newPos(myJob.positions[i]);
 			thisObject.previousPosition = myJob.previousPositions[i];
 		}
-		masterTimeCounter = myJob.masterTimeCounter;
+		controllTimeCounter = myJob.controllTimeCounter;
 		lastFrameCompleted = myJob.frameCompleted;
 		multiThreadFlag += 1;
 		runThreads();

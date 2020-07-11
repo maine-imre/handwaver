@@ -135,7 +135,7 @@ namespace IMRE.HandWaver.Shearing {
             }
         }
 
-        private void setEmission(MasterGeoObj face, float value)
+        private void setEmission(AbstractGeoObj face, float value)
         {
             Material mat = face.GetComponent<MeshRenderer>().materials[0];
 

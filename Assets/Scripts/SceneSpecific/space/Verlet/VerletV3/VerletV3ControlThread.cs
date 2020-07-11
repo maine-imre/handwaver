@@ -4,7 +4,7 @@ public class VerletV3ControlThread : AbstractThread {
 	//Information for the next thread
 	public int multiThreadFlag = 0;
 	public VerletV2Thread[] multithreadedJobs;
-	public double masterTimeCounter;
+	public double controllTimeCounter;
 	public float[] masses;
 	public Vector3d[] positions;
 	public Vector3d[] previousPositions;
@@ -33,7 +33,7 @@ public class VerletV3ControlThread : AbstractThread {
 			DateTime start = DateTime.Now.AddMilliseconds(6);
 			while(DateTime.Now < start || stepCounter < steps) {
 				stepCounter ++;
-				masterTimeCounter += timestep;									//Problematic
+				controllTimeCounter += timestep;									//Problematic
 				multiThreadFlag = 0;
 				multithreadedJobs = new VerletV2Thread[names.Length];
 				for(int i = 0; i<names.Length; i++) {

@@ -40,7 +40,7 @@ namespace IMRE.HandWaver.Interface
 		public float angleTolerance = 65f;
 
 
-		private MasterGeoObj closestObj;
+		private AbstractGeoObj closestObj;
 
 		private LineRenderer thisLR {
 		get

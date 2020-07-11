@@ -21,7 +21,7 @@ namespace IMRE.HandWaver.Solver
 /// </summary>
 	class intersectionManager : MonoBehaviour
 	{
-		 public Dictionary<MasterGeoObj, MasterGeoObj[]> pastIntersections;
+		 public Dictionary<AbstractGeoObj, AbstractGeoObj[]> pastIntersections;
 		private HashSet<string> hashIntersectedFigs;
 		public HashSet<string> hashIntersectionProducts;
         internal static intersectionManager ins;
@@ -38,14 +38,14 @@ namespace IMRE.HandWaver.Solver
             //    if (hashIntersectionProducts.Contains(node.Value))
             //    {
             //        //run this on result figures not products.
-            //        updateIntersectionProduct(node.mytransform.GetComponent<MasterGeoObj>());
+            //        updateIntersectionProduct(node.mytransform.GetComponent<AbstractGeoObj>());
             //    }
             //}
         }
 
-        public void updateIntersectionProduct(MasterGeoObj mgo)
+        public void updateIntersectionProduct(AbstractGeoObj mgo)
         {
-            MasterGeoObj[] parents = pastIntersections[mgo];
+            AbstractGeoObj[] parents = pastIntersections[mgo];
 
             switch (parents[0].figType)
             {
@@ -135,9 +135,9 @@ namespace IMRE.HandWaver.Solver
             }
         }
 
-        private void updateLineLine(MasterGeoObj mgo, MasterGeoObj masterGeoObj1, MasterGeoObj masterGeoObj2)
+        private void updateLineLine(AbstractGeoObj mgo, AbstractGeoObj AbstractGeoObj1, AbstractGeoObj AbstractGeoObj2)
         {
-            intersectionFigData data = IntersectionMath.LineLineIntersection(masterGeoObj1.GetComponent<straightEdgeBehave>(), masterGeoObj2.GetComponent<straightEdgeBehave>());
+            intersectionFigData data = IntersectionMath.LineLineIntersection(AbstractGeoObj1.GetComponent<straightEdgeBehave>(), AbstractGeoObj2.GetComponent<straightEdgeBehave>());
             if (data.figtype == mgo.figType)
             {
                 //point only option.
@@ -154,9 +154,9 @@ namespace IMRE.HandWaver.Solver
             }
         }
 
-        private void updatePlaneLine(MasterGeoObj mgo, MasterGeoObj masterGeoObj1, MasterGeoObj masterGeoObj2)
+        private void updatePlaneLine(AbstractGeoObj mgo, AbstractGeoObj AbstractGeoObj1, AbstractGeoObj AbstractGeoObj2)
         {
-            intersectionFigData data = IntersectionMath.LinePlaneIntersection(masterGeoObj1.GetComponent<flatfaceBehave>(), masterGeoObj2.GetComponent<straightEdgeBehave>());
+            intersectionFigData data = IntersectionMath.LinePlaneIntersection(AbstractGeoObj1.GetComponent<flatfaceBehave>(), AbstractGeoObj2.GetComponent<straightEdgeBehave>());
             if (data.figtype == mgo.figType)
             {
                 //point only option;
@@ -173,9 +173,9 @@ namespace IMRE.HandWaver.Solver
             }
         }
 
-        private void updatePlanePlane(MasterGeoObj mgo, MasterGeoObj masterGeoObj1, MasterGeoObj masterGeoObj2)
+        private void updatePlanePlane(AbstractGeoObj mgo, AbstractGeoObj AbstractGeoObj1, AbstractGeoObj AbstractGeoObj2)
         {
-            intersectionFigData data = IntersectionMath.PlanePlaneIntersection(masterGeoObj1.GetComponent<flatfaceBehave>(), masterGeoObj2.GetComponent<flatfaceBehave>());
+            intersectionFigData data = IntersectionMath.PlanePlaneIntersection(AbstractGeoObj1.GetComponent<flatfaceBehave>(), AbstractGeoObj2.GetComponent<flatfaceBehave>());
             if (data.figtype == mgo.figType)
             {
                 //line only option
@@ -192,9 +192,9 @@ namespace IMRE.HandWaver.Solver
             }
         }
 
-        private void updateSphereLine(MasterGeoObj mgo, MasterGeoObj masterGeoObj1, MasterGeoObj masterGeoObj2)
+        private void updateSphereLine(AbstractGeoObj mgo, AbstractGeoObj AbstractGeoObj1, AbstractGeoObj AbstractGeoObj2)
         {
-            intersectionFigData data = IntersectionMath.SphereLineIntersection(masterGeoObj1.GetComponent<AbstractSphere>(), masterGeoObj2.GetComponent<straightEdgeBehave>());
+            intersectionFigData data = IntersectionMath.SphereLineIntersection(AbstractGeoObj1.GetComponent<AbstractSphere>(), AbstractGeoObj2.GetComponent<straightEdgeBehave>());
             if (data.figtype == mgo.figType)
             {
                 //point or points;
@@ -217,9 +217,9 @@ namespace IMRE.HandWaver.Solver
             }
         }
 
-        private void updateSpherePlane(MasterGeoObj mgo, MasterGeoObj masterGeoObj1, MasterGeoObj masterGeoObj2)
+        private void updateSpherePlane(AbstractGeoObj mgo, AbstractGeoObj AbstractGeoObj1, AbstractGeoObj AbstractGeoObj2)
         {
-            intersectionFigData data = IntersectionMath.SpherePlaneIntersection(masterGeoObj1.GetComponent<AbstractSphere>(), masterGeoObj2.GetComponent<flatfaceBehave>());
+            intersectionFigData data = IntersectionMath.SpherePlaneIntersection(AbstractGeoObj1.GetComponent<AbstractSphere>(), AbstractGeoObj2.GetComponent<flatfaceBehave>());
             if (data.figtype == mgo.figType)
             {
                 switch (data.figtype)
@@ -253,9 +253,9 @@ namespace IMRE.HandWaver.Solver
             }
         }
 
-        private void updateSphereSphere(MasterGeoObj mgo, MasterGeoObj masterGeoObj1, MasterGeoObj masterGeoObj2)
+        private void updateSphereSphere(AbstractGeoObj mgo, AbstractGeoObj AbstractGeoObj1, AbstractGeoObj AbstractGeoObj2)
         {
-            intersectionFigData data = IntersectionMath.SphereSphereIntersection(masterGeoObj1.GetComponent<AbstractSphere>(), masterGeoObj2.GetComponent<AbstractSphere>());
+            intersectionFigData data = IntersectionMath.SphereSphereIntersection(AbstractGeoObj1.GetComponent<AbstractSphere>(), AbstractGeoObj2.GetComponent<AbstractSphere>());
             if (data.figtype == mgo.figType)
             {
                 switch (data.figtype)
@@ -289,9 +289,9 @@ namespace IMRE.HandWaver.Solver
             }
         }
 
-        private void updateCirclePlane(MasterGeoObj mgo, MasterGeoObj masterGeoObj1, MasterGeoObj masterGeoObj2)
+        private void updateCirclePlane(AbstractGeoObj mgo, AbstractGeoObj AbstractGeoObj1, AbstractGeoObj AbstractGeoObj2)
         {
-            intersectionFigData data = IntersectionMath.CirclePlaneIntersection(masterGeoObj1.GetComponent<AbstractCircle>(), masterGeoObj2.GetComponent<flatfaceBehave>());
+            intersectionFigData data = IntersectionMath.CirclePlaneIntersection(AbstractGeoObj1.GetComponent<AbstractCircle>(), AbstractGeoObj2.GetComponent<flatfaceBehave>());
             if (data.figtype == mgo.figType)
             {
                 if (data.vectordata.Length > 1)
@@ -313,9 +313,9 @@ namespace IMRE.HandWaver.Solver
             }
         }
 
-        private void updateSphereCircle(MasterGeoObj mgo, MasterGeoObj masterGeoObj1, MasterGeoObj masterGeoObj2)
+        private void updateSphereCircle(AbstractGeoObj mgo, AbstractGeoObj AbstractGeoObj1, AbstractGeoObj AbstractGeoObj2)
         {
-            intersectionFigData data = IntersectionMath.SphereCircleIntersection(masterGeoObj1.GetComponent<AbstractSphere>(), masterGeoObj2.GetComponent<AbstractCircle>());
+            intersectionFigData data = IntersectionMath.SphereCircleIntersection(AbstractGeoObj1.GetComponent<AbstractSphere>(), AbstractGeoObj2.GetComponent<AbstractCircle>());
             if (data.figtype == mgo.figType)
             {
                 switch (data.figtype)
@@ -349,9 +349,9 @@ namespace IMRE.HandWaver.Solver
             }
         }
 
-        private void updateCircleCircle(MasterGeoObj mgo, MasterGeoObj masterGeoObj1, MasterGeoObj masterGeoObj2)
+        private void updateCircleCircle(AbstractGeoObj mgo, AbstractGeoObj AbstractGeoObj1, AbstractGeoObj AbstractGeoObj2)
         {
-            intersectionFigData data = IntersectionMath.CircleCircleIntersection(masterGeoObj1.GetComponent<AbstractCircle>(), masterGeoObj2.GetComponent<AbstractCircle>());
+            intersectionFigData data = IntersectionMath.CircleCircleIntersection(AbstractGeoObj1.GetComponent<AbstractCircle>(), AbstractGeoObj2.GetComponent<AbstractCircle>());
 
             if (data.figtype == mgo.figType)
             {
@@ -387,9 +387,9 @@ namespace IMRE.HandWaver.Solver
             }
         }
 
-        private void updateCircleLine(MasterGeoObj mgo, MasterGeoObj masterGeoObj1, MasterGeoObj masterGeoObj2)
+        private void updateCircleLine(AbstractGeoObj mgo, AbstractGeoObj AbstractGeoObj1, AbstractGeoObj AbstractGeoObj2)
         {
-            intersectionFigData data = IntersectionMath.CircleLineIntersection(masterGeoObj1.GetComponent<AbstractCircle>(), masterGeoObj2.GetComponent<straightEdgeBehave>());
+            intersectionFigData data = IntersectionMath.CircleLineIntersection(AbstractGeoObj1.GetComponent<AbstractCircle>(), AbstractGeoObj2.GetComponent<straightEdgeBehave>());
             if (data.figtype == mgo.figType)
             {
                 switch (data.figtype)
@@ -425,7 +425,7 @@ namespace IMRE.HandWaver.Solver
 
         private void Start()
 		{
-			pastIntersections = new Dictionary<MasterGeoObj, MasterGeoObj[]>();
+			pastIntersections = new Dictionary<AbstractGeoObj, AbstractGeoObj[]>();
 			hashIntersectedFigs = new HashSet<string>();
 			hashIntersectionProducts = new HashSet<string>();
 
@@ -438,17 +438,17 @@ namespace IMRE.HandWaver.Solver
             ins = this;
 		}
 
-		private void AddToDictionary(MasterGeoObj obj1, MasterGeoObj obj2, MasterGeoObj[] objList)
+		private void AddToDictionary(AbstractGeoObj obj1, AbstractGeoObj obj2, AbstractGeoObj[] objList)
 		{
 			if (objList != null && objList.Length > 0)
 			{
-				MasterGeoObj[] inputList = new MasterGeoObj[2];
+				AbstractGeoObj[] inputList = new AbstractGeoObj[2];
 				inputList[0] = obj1;
 				inputList[1] = obj2;
 
 				hashIntersectedFigs.Add(obj1.name+obj2.name);
 
-				foreach (MasterGeoObj obj in objList)
+				foreach (AbstractGeoObj obj in objList)
 				{
 					hashIntersectionProducts.Add(obj.name);
 					pastIntersections.Add(obj, inputList);
@@ -459,7 +459,7 @@ namespace IMRE.HandWaver.Solver
 			}
 		}
 
-		private bool checkInDictionary(MasterGeoObj obj1, MasterGeoObj obj2)
+		private bool checkInDictionary(AbstractGeoObj obj1, AbstractGeoObj obj2)
 		{
 			return (hashIntersectedFigs.Contains(obj1.name+obj2.name) || hashIntersectedFigs.Contains(obj1.name+ obj2.name));
 
@@ -480,11 +480,11 @@ namespace IMRE.HandWaver.Solver
 		/// </summary>
 		public void checkIntersectAny()
 		{
-			MasterGeoObj[] geoObjList = GameObject.FindObjectsOfType<MasterGeoObj>().Where(g => g.GetComponent<AbstractPoint>() == null).ToArray();
+			AbstractGeoObj[] geoObjList = GameObject.FindObjectsOfType<AbstractGeoObj>().Where(g => g.GetComponent<AbstractPoint>() == null).ToArray();
 
 			for (int i = 0; i < geoObjList.Length; i++)
 			{
-				MasterGeoObj obj1 = geoObjList[i];
+				AbstractGeoObj obj1 = geoObjList[i];
 				if (obj1.GetComponent<AnchorableBehaviour>() != null && (obj1.GetComponent<AnchorableBehaviour>().isAttached))
 					continue;
 				if(true)
@@ -492,7 +492,7 @@ namespace IMRE.HandWaver.Solver
 					for (int j = i + 1; j < geoObjList.Length; j++)
 					{
 
-						MasterGeoObj obj2 = geoObjList[j];
+						AbstractGeoObj obj2 = geoObjList[j];
 						if (obj2.GetComponent<AnchorableBehaviour>() != null && (obj2.GetComponent<AnchorableBehaviour>().isAttached))
 							continue;
 						if (obj1 != obj2)
@@ -505,9 +505,9 @@ namespace IMRE.HandWaver.Solver
 		}
 
 		/// <summary>
-		/// Given a pair of MasterGeoObjs, check to see if they intersect.
+		/// Given a pair of AbstractGeoObjs, check to see if they intersect.
 		/// </summary>
-		internal void checkIntersection(MasterGeoObj obj1, MasterGeoObj obj2)
+		internal void checkIntersection(AbstractGeoObj obj1, AbstractGeoObj obj2)
 		{
 
 			if (!checkInDictionary(obj1, obj2))
@@ -588,23 +588,23 @@ namespace IMRE.HandWaver.Solver
 			
 		}
 
-        private MasterGeoObj[] checkStraightedgeStraightedge(straightEdgeBehave straightEdgeBehave1, straightEdgeBehave straightEdgeBehave2)
+        private AbstractGeoObj[] checkStraightedgeStraightedge(straightEdgeBehave straightEdgeBehave1, straightEdgeBehave straightEdgeBehave2)
         {
             intersectionFigData data = IntersectionMath.LineLineIntersection(straightEdgeBehave1, straightEdgeBehave2);
 
-            MasterGeoObj[] mgoResult = null;
+            AbstractGeoObj[] mgoResult = null;
             if (data.figtype == GeoObjType.point)
             {
-                mgoResult = new MasterGeoObj[] { GeoObjConstruction.dPoint(data.vectordata[0]).setIntersectionFigure(0) };
+                mgoResult = new AbstractGeoObj[] { GeoObjConstruction.dPoint(data.vectordata[0]).setIntersectionFigure(0) };
             }
             return mgoResult;
         }
 
-        private MasterGeoObj[] checkFlatfaceFlatface(flatfaceBehave flatfaceBehave1, flatfaceBehave flatfaceBehave2)
+        private AbstractGeoObj[] checkFlatfaceFlatface(flatfaceBehave flatfaceBehave1, flatfaceBehave flatfaceBehave2)
         {
             intersectionFigData data = IntersectionMath.PlanePlaneIntersection(flatfaceBehave1, flatfaceBehave2);
 
-            MasterGeoObj[] mgoResult = null;
+            AbstractGeoObj[] mgoResult = null;
             if (data.figtype == GeoObjType.line)
             {
                 Debug.LogWarning("Need to Construct Line");
@@ -612,102 +612,102 @@ namespace IMRE.HandWaver.Solver
             return mgoResult;
         }
 
-        private MasterGeoObj[] checkFlatfaceStraightedge(flatfaceBehave flatfaceBehave, straightEdgeBehave straightEdgeBehave)
+        private AbstractGeoObj[] checkFlatfaceStraightedge(flatfaceBehave flatfaceBehave, straightEdgeBehave straightEdgeBehave)
         {
             intersectionFigData data = IntersectionMath.LinePlaneIntersection(flatfaceBehave, straightEdgeBehave);
 
-            MasterGeoObj[] mgoResult = null;
+            AbstractGeoObj[] mgoResult = null;
             if (data.figtype == GeoObjType.point)
             {
-                mgoResult = new MasterGeoObj[] { GeoObjConstruction.dPoint(data.vectordata[0]).setIntersectionFigure(0) };
+                mgoResult = new AbstractGeoObj[] { GeoObjConstruction.dPoint(data.vectordata[0]).setIntersectionFigure(0) };
             }
             return mgoResult;
         }
 
-        private MasterGeoObj[] checkCircleFlatface(AbstractCircle abstractCircle, flatfaceBehave flatfaceBehave)
+        private AbstractGeoObj[] checkCircleFlatface(AbstractCircle abstractCircle, flatfaceBehave flatfaceBehave)
         {
             intersectionFigData data = IntersectionMath.CirclePlaneIntersection(abstractCircle, flatfaceBehave);
 
-            MasterGeoObj[] mgoResult = null;
+            AbstractGeoObj[] mgoResult = null;
             if (data.figtype == GeoObjType.point)
             {
                 if (data.vectordata.Length == 1)
                 {
-                    mgoResult = new MasterGeoObj[] { GeoObjConstruction.dPoint(data.vectordata[0]).setIntersectionFigure(0) };
+                    mgoResult = new AbstractGeoObj[] { GeoObjConstruction.dPoint(data.vectordata[0]).setIntersectionFigure(0) };
                 }else if (data.vectordata.Length == 2)
                 {
-                    mgoResult = new MasterGeoObj[] { GeoObjConstruction.dPoint(data.vectordata[0]).setIntersectionFigure(0), GeoObjConstruction.dPoint(data.vectordata[1]).setIntersectionFigure(1) };
+                    mgoResult = new AbstractGeoObj[] { GeoObjConstruction.dPoint(data.vectordata[0]).setIntersectionFigure(0), GeoObjConstruction.dPoint(data.vectordata[1]).setIntersectionFigure(1) };
 
                 }
             }
             return mgoResult;
         }
 
-        private MasterGeoObj[] checkCircleStraightEdge(AbstractCircle abstractCircle, straightEdgeBehave straightEdgeBehave)
+        private AbstractGeoObj[] checkCircleStraightEdge(AbstractCircle abstractCircle, straightEdgeBehave straightEdgeBehave)
         {
             intersectionFigData data = IntersectionMath.CircleLineIntersection(abstractCircle, straightEdgeBehave);
 
-            MasterGeoObj[] mgoResult = null;
+            AbstractGeoObj[] mgoResult = null;
             if (data.figtype == GeoObjType.point)
             {
                 if (data.vectordata.Length == 1)
                 {
-                    mgoResult = new MasterGeoObj[] { GeoObjConstruction.dPoint(data.vectordata[0]).setIntersectionFigure(0) };
+                    mgoResult = new AbstractGeoObj[] { GeoObjConstruction.dPoint(data.vectordata[0]).setIntersectionFigure(0) };
                 }
                 else if (data.vectordata.Length == 2)
                 {
-                    mgoResult = new MasterGeoObj[] { GeoObjConstruction.dPoint(data.vectordata[0]).setIntersectionFigure(0), GeoObjConstruction.dPoint(data.vectordata[1]).setIntersectionFigure(1) };
+                    mgoResult = new AbstractGeoObj[] { GeoObjConstruction.dPoint(data.vectordata[0]).setIntersectionFigure(0), GeoObjConstruction.dPoint(data.vectordata[1]).setIntersectionFigure(1) };
 
                 }
             }
             return mgoResult;
         }
 
-        private MasterGeoObj[] CheckCircleCircle(AbstractCircle abstractCircle1, AbstractCircle abstractCircle2)
+        private AbstractGeoObj[] CheckCircleCircle(AbstractCircle abstractCircle1, AbstractCircle abstractCircle2)
         {
             intersectionFigData data = IntersectionMath.CircleCircleIntersection(abstractCircle1, abstractCircle2);
 
-            MasterGeoObj[] mgoResult = null;
+            AbstractGeoObj[] mgoResult = null;
             if (data.figtype == GeoObjType.point)
             {
                 if (data.vectordata.Length == 1)
                 {
-                    mgoResult = new MasterGeoObj[] { GeoObjConstruction.dPoint(data.vectordata[0]).setIntersectionFigure(0) };
+                    mgoResult = new AbstractGeoObj[] { GeoObjConstruction.dPoint(data.vectordata[0]).setIntersectionFigure(0) };
                 }
                 else if (data.vectordata.Length == 2)
                 {
-                    mgoResult = new MasterGeoObj[] { GeoObjConstruction.dPoint(data.vectordata[0]).setIntersectionFigure(0), GeoObjConstruction.dPoint(data.vectordata[1]).setIntersectionFigure(1) };
+                    mgoResult = new AbstractGeoObj[] { GeoObjConstruction.dPoint(data.vectordata[0]).setIntersectionFigure(0), GeoObjConstruction.dPoint(data.vectordata[1]).setIntersectionFigure(1) };
 
                 }
             }
             return mgoResult;
         }
 
-        private MasterGeoObj[] checkSpherecircle(AbstractSphere abstractSphere, AbstractCircle abstractCircle)
+        private AbstractGeoObj[] checkSpherecircle(AbstractSphere abstractSphere, AbstractCircle abstractCircle)
         {
             intersectionFigData data = IntersectionMath.SphereCircleIntersection(abstractSphere, abstractCircle);
 
-            MasterGeoObj[] mgoResult = null;
+            AbstractGeoObj[] mgoResult = null;
             if (data.figtype == GeoObjType.point)
             {
                 if (data.vectordata.Length == 1)
                 {
-                    mgoResult = new MasterGeoObj[] { GeoObjConstruction.dPoint(data.vectordata[0]).setIntersectionFigure(0) };
+                    mgoResult = new AbstractGeoObj[] { GeoObjConstruction.dPoint(data.vectordata[0]).setIntersectionFigure(0) };
                 }
                 else if (data.vectordata.Length == 2)
                 {
-                    mgoResult = new MasterGeoObj[] { GeoObjConstruction.dPoint(data.vectordata[0]).setIntersectionFigure(0), GeoObjConstruction.dPoint(data.vectordata[1]).setIntersectionFigure(1) };
+                    mgoResult = new AbstractGeoObj[] { GeoObjConstruction.dPoint(data.vectordata[0]).setIntersectionFigure(0), GeoObjConstruction.dPoint(data.vectordata[1]).setIntersectionFigure(1) };
 
                 }
             }
             return mgoResult;
         }
 
-        private MasterGeoObj[] checkSphereFlatface(AbstractSphere abstractSphere, flatfaceBehave flatfaceBehave)
+        private AbstractGeoObj[] checkSphereFlatface(AbstractSphere abstractSphere, flatfaceBehave flatfaceBehave)
         {
             intersectionFigData data = IntersectionMath.SpherePlaneIntersection(abstractSphere, flatfaceBehave);
 
-            MasterGeoObj[] mgoResult = null;
+            AbstractGeoObj[] mgoResult = null;
             if (data.figtype == GeoObjType.circle)
             {
                 DependentPoint centerPoint = GeoObjConstruction.dPoint(data.vectordata[0]);
@@ -720,43 +720,43 @@ namespace IMRE.HandWaver.Solver
 
                 DependentPoint edgePoint = GeoObjConstruction.dPoint(data.vectordata[0] + data.floatdata[0] * radiusDirection);
                 DependentCircle newCircle = GeoObjConstruction.dCircle(centerPoint, edgePoint, data.vectordata[1]);
-                mgoResult = new MasterGeoObj[] { centerPoint.setIntersectionFigure(0), edgePoint.setIntersectionFigure(1), newCircle.setIntersectionFigure(2) };
+                mgoResult = new AbstractGeoObj[] { centerPoint.setIntersectionFigure(0), edgePoint.setIntersectionFigure(1), newCircle.setIntersectionFigure(2) };
             }
             else if(data.figtype == GeoObjType.point)
             {
-                mgoResult = new MasterGeoObj[] { GeoObjConstruction.dPoint(data.vectordata[0]) };
+                mgoResult = new AbstractGeoObj[] { GeoObjConstruction.dPoint(data.vectordata[0]) };
             }
             return mgoResult;
         }
 
-        private MasterGeoObj[] checkSphereStraightEdge(AbstractSphere abstractSphere, straightEdgeBehave straightEdgeBehave)
+        private AbstractGeoObj[] checkSphereStraightEdge(AbstractSphere abstractSphere, straightEdgeBehave straightEdgeBehave)
         {
             intersectionFigData data = IntersectionMath.SphereLineIntersection(abstractSphere, straightEdgeBehave);
 
-            MasterGeoObj[] mgoResult = null;
+            AbstractGeoObj[] mgoResult = null;
             if (data.figtype == GeoObjType.point)
             {
                 if (data.vectordata.Length == 1)
                 {
-                    mgoResult = new MasterGeoObj[] { GeoObjConstruction.dPoint(data.vectordata[0]).setIntersectionFigure(0) };
+                    mgoResult = new AbstractGeoObj[] { GeoObjConstruction.dPoint(data.vectordata[0]).setIntersectionFigure(0) };
                 }
                 else if (data.vectordata.Length == 2)
                 {
-                    mgoResult = new MasterGeoObj[] { GeoObjConstruction.dPoint(data.vectordata[0]).setIntersectionFigure(0), GeoObjConstruction.dPoint(data.vectordata[1]).setIntersectionFigure(1) };
+                    mgoResult = new AbstractGeoObj[] { GeoObjConstruction.dPoint(data.vectordata[0]).setIntersectionFigure(0), GeoObjConstruction.dPoint(data.vectordata[1]).setIntersectionFigure(1) };
 
                 }
             }
             return mgoResult;
         }
 
-        private MasterGeoObj[] checkSphereSphere(AbstractSphere abstractSphere1, AbstractSphere abstractSphere2)
+        private AbstractGeoObj[] checkSphereSphere(AbstractSphere abstractSphere1, AbstractSphere abstractSphere2)
         {
             intersectionFigData data = IntersectionMath.SphereSphereIntersection(abstractSphere1, abstractSphere2);
 
 			Debug.Log("Data produces " + data.figtype.ToString());
 			Debug.Log("Point Value " + data.vectordata[0].ToString());
 
-            MasterGeoObj[] mgoResult = null;
+            AbstractGeoObj[] mgoResult = null;
             if (data.figtype == GeoObjType.circle)
             {
                 DependentPoint centerPoint = GeoObjConstruction.dPoint(data.vectordata[0]);
@@ -769,11 +769,11 @@ namespace IMRE.HandWaver.Solver
 
                 DependentPoint edgePoint = GeoObjConstruction.dPoint(data.vectordata[2]);
                 DependentCircle newCircle = GeoObjConstruction.dCircle(centerPoint, edgePoint, data.vectordata[1]);
-                mgoResult = new MasterGeoObj[] { centerPoint.setIntersectionFigure(0), edgePoint.setIntersectionFigure(0), newCircle.setIntersectionFigure(0) };
+                mgoResult = new AbstractGeoObj[] { centerPoint.setIntersectionFigure(0), edgePoint.setIntersectionFigure(0), newCircle.setIntersectionFigure(0) };
             }
             else if (data.figtype == GeoObjType.point)
             {
-                mgoResult = new MasterGeoObj[] { GeoObjConstruction.dPoint(data.vectordata[0]) };
+                mgoResult = new AbstractGeoObj[] { GeoObjConstruction.dPoint(data.vectordata[0]) };
             }
             return mgoResult;
         }

@@ -104,7 +104,7 @@ namespace IMRE.HandWaver.Shearing
 		/// </summary>
 		/// <param name="obj">object to change emission</param>
 		/// <param name="value">Between 0 and 1, percent brightness</param>
-        private void setEmission(MasterGeoObj obj, float value)
+        private void setEmission(AbstractGeoObj obj, float value)
         {
 			if (value > 1 || value < 0)
 				return;

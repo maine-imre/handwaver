@@ -103,7 +103,7 @@ namespace IMRE.HandWaver.Lattice
 						curr.transform.SetParent(transform);
 						//curr.GetComponent<InteractionBehaviour>().enabled = false;
 
-						curr.GetComponent<MasterGeoObj>().allowDelete = false;
+						curr.GetComponent<AbstractGeoObj>().allowDelete = false;
 					}
 				}
 			}

@@ -41,7 +41,7 @@ namespace IMRE.HandWaver {
 			return poly;
 		}
 
-		internal static SnappablePoint snapPoint(MasterGeoObj activeMGO, Vector3 position)
+		internal static SnappablePoint snapPoint(AbstractGeoObj activeMGO, Vector3 position)
 		{
 			SnappablePoint snap = SnappablePoint.Constructor();
 			snap.Position3 = position;
@@ -672,7 +672,7 @@ namespace IMRE.HandWaver {
             return pyramid;
         }
 
-		public static alphabetLabel label(MasterGeoObj obj, string labelText)
+		public static alphabetLabel label(AbstractGeoObj obj, string labelText)
 		{
 			alphabetLabel label = alphabetLabel.Constructor();
 			label.spawnOnMGO(obj, labelText);

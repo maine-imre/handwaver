@@ -23,7 +23,7 @@ namespace IMRE.HandWaver
 
 		private Vector3 vectorMap(Vector3 input)
 		{
-			return new Vector3(input.x + MasterGeoObj.LocalPosition(myPoly.Position3).x, functionMap(input), input.z + MasterGeoObj.LocalPosition(myPoly.Position3).z) +Vector3.up;
+			return new Vector3(input.x + AbstractGeoObj.LocalPosition(myPoly.Position3).x, functionMap(input), input.z + AbstractGeoObj.LocalPosition(myPoly.Position3).z) +Vector3.up;
 		}
 
 		private Vector3[] vectorMap(Vector3[] input)

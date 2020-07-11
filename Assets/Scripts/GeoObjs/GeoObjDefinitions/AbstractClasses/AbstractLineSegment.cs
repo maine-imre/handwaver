@@ -15,7 +15,7 @@ namespace IMRE.HandWaver
 /// Line segment with two abstract point endpoints
 /// Will be refactored in new geometery kernel.
 /// </summary>
-	abstract class AbstractLineSegment : MasterGeoObj
+	abstract class AbstractLineSegment : AbstractGeoObj
 	{
 		public Vector3 vertex0;
 		public Vector3 vertex1;

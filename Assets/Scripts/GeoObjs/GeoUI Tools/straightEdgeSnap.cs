@@ -12,7 +12,7 @@ using UnityEngine;
 namespace IMRE.HandWaver
 {
     /// <summary>
-    /// Allows MasterGeoObjs to snap to straightedgebehaves (lines)
+    /// Allows AbstractGeoObjs to snap to straightedgebehaves (lines)
     /// Currently depreciated.
     /// </summary>
 	public class straightEdgeSnap : MonoBehaviour
@@ -20,11 +20,11 @@ namespace IMRE.HandWaver
 
         private void OnTriggerStay(Collider other)
         {
-            if (other.GetComponent<MasterGeoObj>() && other.transform.parent != this.transform.parent && !other.CompareTag("CrossSectionContainer"))
+            if (other.GetComponent<AbstractGeoObj>() && other.transform.parent != this.transform.parent && !other.CompareTag("CrossSectionContainer"))
             {
                 if (other.transform.position != Vector3.Project(other.transform.position - this.GetComponentInParent<straightEdgeBehave>().center, this.GetComponentInParent<straightEdgeBehave>().normalDir) + this.GetComponentInParent<straightEdgeBehave>().center){
                     other.transform.position = Vector3.Project(other.transform.position - this.GetComponentInParent<straightEdgeBehave>().center, this.GetComponentInParent<straightEdgeBehave>().normalDir) + this.GetComponentInParent<straightEdgeBehave>().center;
-                    other.GetComponent<MasterGeoObj>().AddToRManager();
+                    other.GetComponent<AbstractGeoObj>().AddToRManager();
                 }
             }
         }

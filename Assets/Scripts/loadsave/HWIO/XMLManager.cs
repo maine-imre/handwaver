@@ -119,13 +119,13 @@ namespace IMRE.HandWaver.HWIO
 
 		//[ContextMenu("Load from Save")] for debugging make public and uncomment
 		private void xmlToMGO(){
-			Dictionary<string, MasterGeoObj> spawnedObjects = new Dictionary<string, MasterGeoObj>();
+			Dictionary<string, AbstractGeoObj> spawnedObjects = new Dictionary<string, AbstractGeoObj>();
 			foreach (GeoObj geo in GeoObjDB.list)
 			{
 				switch (geo.type)
 				{
 					case GeoObjType.point:
-						MasterGeoObj spawnedPoint = null;//initialzed as null so that cases that do not spawn still have it initialized but still fails a null check.
+						AbstractGeoObj spawnedPoint = null;//initialzed as null so that cases that do not spawn still have it initialized but still fails a null check.
 						switch (geo.definition)
 						{
 							case GeoObjDef.Abstract:
@@ -154,7 +154,7 @@ namespace IMRE.HandWaver.HWIO
 						}
 						break;
 					case GeoObjType.line:
-						MasterGeoObj spawnedLine = null;//initialzed as null so that cases that do not spawn still have it initialized but still fails a null check.
+						AbstractGeoObj spawnedLine = null;//initialzed as null so that cases that do not spawn still have it initialized but still fails a null check.
 						switch (geo.definition)
 						{
 							case GeoObjDef.Abstract:
@@ -183,7 +183,7 @@ namespace IMRE.HandWaver.HWIO
 						}
 						break;
 					case GeoObjType.polygon:
-						MasterGeoObj spawnedPoly = null;//initialzed as null so that cases that do not spawn still have it initialized but still fails a null check.
+						AbstractGeoObj spawnedPoly = null;//initialzed as null so that cases that do not spawn still have it initialized but still fails a null check.
 						List<AbstractLineSegment> lineList;
 						List<AbstractPoint> pointList;
 						switch (geo.definition)
@@ -222,7 +222,7 @@ namespace IMRE.HandWaver.HWIO
 						}
 						break;
 					case GeoObjType.prism:
-						MasterGeoObj spawnedPrism = null;//initialzed as null so that cases that do not spawn still have it initialized but still fails a null check.
+						AbstractGeoObj spawnedPrism = null;//initialzed as null so that cases that do not spawn still have it initialized but still fails a null check.
 						switch (geo.definition)
 						{
 							case GeoObjDef.Abstract:
@@ -264,7 +264,7 @@ namespace IMRE.HandWaver.HWIO
 						}
 						break;
 					case GeoObjType.pyramid:
-						MasterGeoObj spawnedPyramid = null;//initialzed as null so that cases that do not spawn still have it initialized but still fails a null check.
+						AbstractGeoObj spawnedPyramid = null;//initialzed as null so that cases that do not spawn still have it initialized but still fails a null check.
 
 						switch (geo.definition)
 						{
@@ -294,7 +294,7 @@ namespace IMRE.HandWaver.HWIO
 						}
 						break;
 					case GeoObjType.circle:
-							MasterGeoObj spawnedCircle = null;//initialzed as null so that cases that do not spawn still have it initialized but still fails a null check.
+							AbstractGeoObj spawnedCircle = null;//initialzed as null so that cases that do not spawn still have it initialized but still fails a null check.
 							switch (geo.definition)
 							{
 								case GeoObjDef.Abstract:
@@ -323,7 +323,7 @@ namespace IMRE.HandWaver.HWIO
 							}
 							break;
 					case GeoObjType.sphere:
-						MasterGeoObj spawnedSphere = null;//initialzed as null so that cases that do not spawn still have it initialized but still fails a null check.
+						AbstractGeoObj spawnedSphere = null;//initialzed as null so that cases that do not spawn still have it initialized but still fails a null check.
 						switch (geo.definition)
 						{
 							case GeoObjDef.Abstract:
@@ -352,7 +352,7 @@ namespace IMRE.HandWaver.HWIO
 						}
 						break;
 					case GeoObjType.revolvedsurface:
-						MasterGeoObj spawnedrevSurf = null;//initialzed as null so that cases that do not spawn still have it initialized but still fails a null check.
+						AbstractGeoObj spawnedrevSurf = null;//initialzed as null so that cases that do not spawn still have it initialized but still fails a null check.
 						switch (geo.definition)
 						{
 							case GeoObjDef.Abstract:
@@ -390,7 +390,7 @@ namespace IMRE.HandWaver.HWIO
 						flatface.transform.rotation = geo.rotation;
 						if (!String.IsNullOrEmpty(geo.label))
 							GeoObjConstruction.label(flatface.GetComponent<flatfaceBehave>(), geo.label);
-						spawnedObjects.Add(geo.figName, flatface.GetComponent<MasterGeoObj>());
+						spawnedObjects.Add(geo.figName, flatface.GetComponent<AbstractGeoObj>());
 						break;
 					case GeoObjType.straightedge:
 						Transform straightEdge = straightEdgeBehave.Constructor().transform;
@@ -398,7 +398,7 @@ namespace IMRE.HandWaver.HWIO
 						straightEdge.transform.rotation = geo.rotation;
 						if (!String.IsNullOrEmpty(geo.label))
 							GeoObjConstruction.label(straightEdge.GetComponent<straightEdgeBehave>(), geo.label);
-						spawnedObjects.Add(geo.figName, straightEdge.GetComponent<MasterGeoObj>());
+						spawnedObjects.Add(geo.figName, straightEdge.GetComponent<AbstractGeoObj>());
 						break;
 					default:
 						break;
@@ -408,7 +408,7 @@ namespace IMRE.HandWaver.HWIO
 
 		public void LogGeoObjs(string path)
 		{
-			masterGeoObjtoGeoObj(true);
+			AbstractGeoObjtoGeoObj(true);
 			if (GeoObjDB.list.Count == 0)
 				return;
 			using (FileStream stream = File.Open(path, FileMode.Append))
@@ -421,7 +421,7 @@ namespace IMRE.HandWaver.HWIO
 
 		public void SaveGeoObjs(string path)
 		{
-			masterGeoObjtoGeoObj(true);
+			AbstractGeoObjtoGeoObj(true);
 			if (GeoObjDB.list.Count == 0)
 				return;
 			using (FileStream stream = File.Create(path))
@@ -434,13 +434,13 @@ namespace IMRE.HandWaver.HWIO
 
 		//[ContextMenu("Saves to File")] for debugging uncomment and make public
 		/// <param name="clear">If true completely clears out the list of objects previously saved during session</param>
-		private void masterGeoObjtoGeoObj( bool clear)
+		private void AbstractGeoObjtoGeoObj( bool clear)
 		{
-			MasterGeoObj[] allObj = FindObjectsOfType<MasterGeoObj>().Where(g => (g.tag != "NoSave" && ((g.GetComponent<AnchorableBehaviour>() != null && !g.GetComponent<AnchorableBehaviour>().isAttached) || g.GetComponent<AnchorableBehaviour>() == null))).ToArray();
+			AbstractGeoObj[] allObj = FindObjectsOfType<AbstractGeoObj>().Where(g => (g.tag != "NoSave" && ((g.GetComponent<AnchorableBehaviour>() != null && !g.GetComponent<AnchorableBehaviour>().isAttached) || g.GetComponent<AnchorableBehaviour>() == null))).ToArray();
 			if(clear)
 				GeoObjDB.list = new List<GeoObj>();
 
-			foreach (MasterGeoObj obj in allObj)
+			foreach (AbstractGeoObj obj in allObj)
 			{
 				List<string> dependencyList = new List<string>();
 				GeoObjDef thisObjDef;
@@ -455,7 +455,7 @@ namespace IMRE.HandWaver.HWIO
 						AbstractLineSegment thisLineRef = obj.GetComponent<AbstractLineSegment>();
 						HW_GeoSolver.ins.geomanager.neighborsOfNode(thisLineRef.figName)
 							.Where(d => HW_GeoSolver.ins.geomanager.findGraphNode(d.Value).mytransform.GetComponent<AbstractPoint>() != null).ToList()
-							.ForEach(d => dependencyList.Add(HW_GeoSolver.ins.geomanager.findGraphNode(d.Value).mytransform.GetComponent<MasterGeoObj>().figName));
+							.ForEach(d => dependencyList.Add(HW_GeoSolver.ins.geomanager.findGraphNode(d.Value).mytransform.GetComponent<AbstractGeoObj>().figName));
 						GeoObjDB.list.Add(new GeoObj(obj.figName, obj.transform.position, obj.transform.rotation, new figData.line(thisLineRef.vertex0, thisLineRef.vertex1), thisObjDef, dependencyList, GeoObjType.line));
 						break;
 					case GeoObjType.polygon:
@@ -485,7 +485,7 @@ namespace IMRE.HandWaver.HWIO
 						thisObjDef = determineDef(obj, GeoObjType.pyramid);
 						DependentPyramid thisPyramidRef = GetComponent<DependentPyramid>();// no abstract version
 						HW_GeoSolver.ins.geomanager.neighborsOfNode(thisPyramidRef.figName).ToList()
-							.ForEach(d => dependencyList.Add(HW_GeoSolver.ins.geomanager.findGraphNode(d.Value).mytransform.GetComponent<MasterGeoObj>().figName));
+							.ForEach(d => dependencyList.Add(HW_GeoSolver.ins.geomanager.findGraphNode(d.Value).mytransform.GetComponent<AbstractGeoObj>().figName));
 						GeoObjDB.list.Add(new GeoObj(
 							obj.figName, obj.transform.position,
 							obj.transform.rotation, 
@@ -496,7 +496,7 @@ namespace IMRE.HandWaver.HWIO
 						thisObjDef = determineDef(obj, GeoObjType.circle);
 						AbstractCircle thisCircleRef = obj.GetComponent<AbstractCircle>();
 						HW_GeoSolver.ins.geomanager.neighborsOfNode(thisCircleRef.figName).ToList()
-							.ForEach(d => dependencyList.Add(HW_GeoSolver.ins.geomanager.findGraphNode(d.Value).mytransform.GetComponent<MasterGeoObj>().figName));
+							.ForEach(d => dependencyList.Add(HW_GeoSolver.ins.geomanager.findGraphNode(d.Value).mytransform.GetComponent<AbstractGeoObj>().figName));
 						GeoObjDB.list.Add(new GeoObj(
 							obj.figName, obj.transform.position, 
 							obj.transform.rotation, 
@@ -507,7 +507,7 @@ namespace IMRE.HandWaver.HWIO
 						thisObjDef = determineDef(obj, GeoObjType.sphere);
 						AbstractSphere thisSphereRef = obj.GetComponent<AbstractSphere>();
 						HW_GeoSolver.ins.geomanager.neighborsOfNode(thisSphereRef.figName).ToList()
-							.ForEach(d => dependencyList.Add(HW_GeoSolver.ins.geomanager.findGraphNode(d.Value).mytransform.GetComponent<MasterGeoObj>().figName));
+							.ForEach(d => dependencyList.Add(HW_GeoSolver.ins.geomanager.findGraphNode(d.Value).mytransform.GetComponent<AbstractGeoObj>().figName));
 						GeoObjDB.list.Add(new GeoObj(obj.figName, obj.transform.position, 
 							obj.transform.rotation, 
 							new figData.sphere(thisSphereRef.edgePosition), 
@@ -517,7 +517,7 @@ namespace IMRE.HandWaver.HWIO
 						thisObjDef = determineDef(obj, GeoObjType.revolvedsurface);
 						AbstractRevolvedSurface thisRevSurfRef = obj.GetComponent<AbstractRevolvedSurface>();
 						HW_GeoSolver.ins.geomanager.neighborsOfNode(thisRevSurfRef.figName).ToList()
-							.ForEach(d => dependencyList.Add(HW_GeoSolver.ins.geomanager.findGraphNode(d.Value).mytransform.GetComponent<MasterGeoObj>().figName));
+							.ForEach(d => dependencyList.Add(HW_GeoSolver.ins.geomanager.findGraphNode(d.Value).mytransform.GetComponent<AbstractGeoObj>().figName));
 						GeoObjDB.list.Add(new GeoObj(obj.figName, obj.transform.position, obj.transform.rotation, new figData.revSurf(thisRevSurfRef.normalDirection) ,thisObjDef , dependencyList, GeoObjType.revolvedsurface));
 						break;
 					//case GeoObjType.torus:
@@ -543,7 +543,7 @@ namespace IMRE.HandWaver.HWIO
 			}
 		}
 
-		private GeoObjDef determineDef(MasterGeoObj obj, GeoObjType figType)
+		private GeoObjDef determineDef(AbstractGeoObj obj, GeoObjType figType)
 		{
 			switch (figType)
 			{

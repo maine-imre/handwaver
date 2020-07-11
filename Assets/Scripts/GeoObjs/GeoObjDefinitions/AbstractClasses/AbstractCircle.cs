@@ -16,7 +16,7 @@ namespace IMRE.HandWaver
 /// Circle from radius
 /// Will be refactored in new geometery kernel.s
 /// </summary>
-	abstract class AbstractCircle : MasterGeoObj
+	abstract class AbstractCircle : AbstractGeoObj
     {
         public Vector3 centerPos;
         public Vector3 normalDir;

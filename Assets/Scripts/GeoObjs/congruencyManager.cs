@@ -39,17 +39,17 @@ namespace IMRE.HandWaver.Solver
 		///// <summary>
 		///// Used Internally to track objects that should be made congruent next pass. 
 		///// </summary>
-		//public List<MasterGeoOBj> objectsToMakeCongruent;//TODO: Make internal after testing
+		//public List<AbstractGeoObj> objectsToMakeCongruent;//TODO: Make internal after testing
 
 		///// <summary>
 		///// Objects that have been sucessfully made congruent and have been removed from objectsToMakeCongruent list.
 		///// </summary>
-		//public List<MasterGeoOBj> congruentObjects;
+		//public List<AbstractGeoObj> congruentObjects;
 
 		//void Start()
 		//{
-		//	objectsToMakeCongruent = new List<MasterGeoOBj>();
-		//	congruentObjects = new List<MasterGeoOBj>();
+		//	objectsToMakeCongruent = new List<AbstractGeoObj>();
+		//	congruentObjects = new List<AbstractGeoObj>();
 
 
 
@@ -58,7 +58,7 @@ namespace IMRE.HandWaver.Solver
 		////public void addToCongruencyManager()
 		////{
 		////	//Looks for objects not already on the list that are selected
-		////	objectsToMakeCongruent = FindObjectsOfType<MasterGeoOBj>().Where(geoObj => (geoObj.IsSelected && !objectsToMakeCongruent.Contains(geoObj))).ToList();
+		////	objectsToMakeCongruent = FindObjectsOfType<AbstractGeoObj>().Where(geoObj => (geoObj.IsSelected && !objectsToMakeCongruent.Contains(geoObj))).ToList();
 		////	objectsToMakeCongruent.ForEach(geoObj => geoObj.geoManager.geomanager.neighborsOfNode(geoObj.figName)leapInteraction = false);
 
 

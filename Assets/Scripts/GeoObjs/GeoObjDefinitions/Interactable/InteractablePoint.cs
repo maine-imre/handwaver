@@ -134,12 +134,12 @@ namespace IMRE.HandWaver
             }
         }
 
-		internal override void SnapToFigure(MasterGeoObj toObj)
+		internal override void SnapToFigure(AbstractGeoObj toObj)
 		{
 			//do nothing
 		}
 
-		internal override void GlueToFigure(MasterGeoObj toObj)
+		internal override void GlueToFigure(AbstractGeoObj toObj)
         {
             if ((toObj.gameObject.tag.Contains("Point") && (toObj.figIndex > this.figIndex)) && ((this.GetComponent<InteractionBehaviour>().isGrasped) || (toObj.transform.GetComponent<InteractionBehaviour>().isGrasped)))
             {
@@ -153,7 +153,7 @@ namespace IMRE.HandWaver
                         GraphNode<string> otherGraphNode = HW_GeoSolver.ins.geomanager.findGraphNode(toObj.figName);
                         if (newNeighborList.Contains(otherGraphNode) == false)
                         {
-                            HW_GeoSolver.ins.AddDependence(GameObject.Find(node.Value).GetComponent<MasterGeoObj>(), toObj);
+                            HW_GeoSolver.ins.AddDependence(GameObject.Find(node.Value).GetComponent<AbstractGeoObj>(), toObj);
                             HW_GeoSolver.ins.replaceDepentVar(GameObject.Find(node.Value).transform, this.transform, toObj.transform);
 
                         }

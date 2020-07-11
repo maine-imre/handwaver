@@ -73,7 +73,7 @@ namespace IMRE.HandWaver.Solver
 		public Color canidateColor;
 		public Color staticColor;
 		public Color dependentColor;
-			
+
 
 		public static HW_GeoSolver ins;
 
@@ -89,7 +89,7 @@ namespace IMRE.HandWaver.Solver
 		void Start()
         {
 			ins = this;
-			MasterGeoObj.masterParentObj = globalParentObj;
+			AbstractGeoObj.parentGeoObj = globalParentObj;
 			//we need to have an event here that tells us to log the scale change.
 			Interface.worldScaleModifier.ins.OnGestureDeactivated += logScaleChange;
         }
@@ -145,7 +145,7 @@ namespace IMRE.HandWaver.Solver
 				if (ScaleHasChanged)
 				{
 					ScaleHasChanged = false;
-					GameObject.FindObjectsOfType<MasterGeoObj>().ToList().ForEach(mgo => mgo.updateFigure());
+					GameObject.FindObjectsOfType<AbstractGeoObj>().ToList().ForEach(mgo => mgo.updateFigure());
 				}
                 return;
             }
@@ -175,7 +175,7 @@ namespace IMRE.HandWaver.Solver
 				if (ScaleHasChanged)
 				{
 					ScaleHasChanged = false;
-					GameObject.FindObjectsOfType<MasterGeoObj>().ToList().ForEach(mgo => mgo.updateFigure());
+					GameObject.FindObjectsOfType<AbstractGeoObj>().ToList().ForEach(mgo => mgo.updateFigure());
 				}
 			}
         }
@@ -192,7 +192,7 @@ namespace IMRE.HandWaver.Solver
             {
                 foreach (Node<string> neighbor in potentiallyaffectednodes.Where(p => !(newItems.Contains(p) || falseItems.Contains(p))))
                 {
-                    UpdatableFigure neighborUF = (UpdatableFigure)neighbor.mytransform.GetComponent<MasterGeoObj>();
+                    UpdatableFigure neighborUF = (UpdatableFigure)neighbor.mytransform.GetComponent<AbstractGeoObj>();
 
                     if (neighborUF.reactMotion(nodesmovinglist))
                     {
@@ -218,10 +218,10 @@ namespace IMRE.HandWaver.Solver
             List<Node<string>> NeedUpdate = rManNodeList.ToList();
 
             rManNodeList.ToList().ForEach(n => NeedUpdate.AddRange(n.RenderList));
-            NeedUpdate.ForEach(n => n.mytransform.GetComponent<MasterGeoObj>().updateFigure());
+            NeedUpdate.ForEach(n => n.mytransform.GetComponent<AbstractGeoObj>().updateFigure());
         }
 
-        internal void addComponent(MasterGeoObj geoComp)
+        internal void addComponent(AbstractGeoObj geoComp)
         {
             //set index
             GeoObjType type = geoComp.figType;
@@ -240,9 +240,9 @@ namespace IMRE.HandWaver.Solver
         ///// <summary>
         ///// Adds a dependence in the lifemanager and updatemanager and reactionmanager system
         ///// </summary>
-		internal void AddDependence(MasterGeoObj fromMGO, MasterGeoObj toMGO)
+		internal void AddDependence(AbstractGeoObj fromMGO, AbstractGeoObj toMGO)
 		{
-			//Debug.Log("adding directed edge from " + fromMGO.GetComponent<MasterGeoObj>().figName + " to " + toMGO.GetComponent<MasterGeoObj>().figName);
+			//Debug.Log("adding directed edge from " + fromMGO.GetComponent<AbstractGeoObj>().figName + " to " + toMGO.GetComponent<AbstractGeoObj>().figName);
 			if(string.IsNullOrEmpty(fromMGO.figName))
 			{
 				fromMGO.InitializeFigure();
@@ -261,10 +261,10 @@ namespace IMRE.HandWaver.Solver
 		/// <param name="geoComp2">GeoObj that will be removed from geoComp1 neighbor list</param>
 		public void removeDependence(Transform geoComp1, Transform geoComp2)
 		{
-			if (geoComp1.GetComponent<MasterGeoObj>() != null)
+			if (geoComp1.GetComponent<AbstractGeoObj>() != null)
 			{
-				GraphNode<string> fromNode = geomanager.findGraphNode(geoComp1.GetComponent<MasterGeoObj>().figName);
-				GraphNode<string> toNode = geomanager.findGraphNode(geoComp2.GetComponent<MasterGeoObj>().figName);
+				GraphNode<string> fromNode = geomanager.findGraphNode(geoComp1.GetComponent<AbstractGeoObj>().figName);
+				GraphNode<string> toNode = geomanager.findGraphNode(geoComp2.GetComponent<AbstractGeoObj>().figName);
 
 				fromNode.Neighbors.Remove(toNode);
 				fromNode.BidirectionalNeighbors.Remove(toNode);
@@ -273,7 +273,7 @@ namespace IMRE.HandWaver.Solver
 			}
 		}
 
-		internal void removeComponent(MasterGeoObj geoComp)
+		internal void removeComponent(AbstractGeoObj geoComp)
         {
 			Debug.Log(geoComp.figName + " is being removed from the graph. Refer to trace for reason.");
 
@@ -287,7 +287,7 @@ namespace IMRE.HandWaver.Solver
 
 
 				if (geoComp.GetComponent<straightEdgeBehave>() != null || geoComp.GetComponent<flatfaceBehave>() != null)
-				{	
+				{
 					Node<string> meNode = geoComp.FindGraphNode();
 					if (rManList.Contains(meNode))
 					{
@@ -321,7 +321,7 @@ namespace IMRE.HandWaver.Solver
             }
         }
 
-        internal void checkLifeRequirements(MasterGeoObj geoComp)
+        internal void checkLifeRequirements(AbstractGeoObj geoComp)
         {
             //add case for clones.
 
@@ -410,12 +410,12 @@ namespace IMRE.HandWaver.Solver
 
         internal int neighborTypeCount(NodeList<string> neighborList, GeoObjType value)
         {
-			return neighborList.Where(element => element.mytransform.GetComponent<MasterGeoObj>().figType == value).Count();
+			return neighborList.Where(element => element.mytransform.GetComponent<AbstractGeoObj>().figType == value).Count();
         }
 
         public void replaceDepentVar(Transform parent, Transform oldObj, Transform newObj)
         {
-            GeoObjType type = parent.transform.GetComponent<MasterGeoObj>().figType;
+            GeoObjType type = parent.transform.GetComponent<AbstractGeoObj>().figType;
 
             switch (type)
             {
@@ -432,7 +432,7 @@ namespace IMRE.HandWaver.Solver
                     }
                     break;
                 case GeoObjType.polygon:
-                    GeoObjType oldType = oldObj.transform.GetComponent<MasterGeoObj>().figType;
+                    GeoObjType oldType = oldObj.transform.GetComponent<AbstractGeoObj>().figType;
                     switch (oldType)
                     {
                         case GeoObjType.point:
@@ -475,10 +475,10 @@ namespace IMRE.HandWaver.Solver
             bool done = false;
             bool isPath = false;
 
-            NodeList<string> neighborList = geomanager.neighborsOfNode(startObj.GetComponent<MasterGeoObj>().figName);
+            NodeList<string> neighborList = geomanager.neighborsOfNode(startObj.GetComponent<AbstractGeoObj>().figName);
             NodeList<string> rmNeighborList = new NodeList<string>();
 
-            Node<string> target = geomanager.findGraphNode(endObj.GetComponent<MasterGeoObj>().figName);
+            Node<string> target = geomanager.findGraphNode(endObj.GetComponent<AbstractGeoObj>().figName);
 
             while (!done)
             {

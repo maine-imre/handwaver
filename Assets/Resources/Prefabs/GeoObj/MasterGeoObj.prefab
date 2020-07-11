@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5478154137892342226}
   - component: {fileID: 6277955849962211496}
   m_Layer: 0
-  m_Name: MasterGeoObj
+  m_Name: AbstractGeoObj
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

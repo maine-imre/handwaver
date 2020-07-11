@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class VerletV2 : MonoBehaviour {
 	public float timeStep = 1;					//The length of the timestep in seconds
-	public double masterTimeCounter = 0;
-	public double masterDaysCounter = 0;
+	public double controllTimeCounter = 0;
+	public double controllerDaysCounter = 0;
 	private float previousTimeStep;				//The previous timestep for time corrected verlet
 	public GameObject[] massObject;				//A list of the rest of the bodies (Note to self: Bring down to nLog(n) using control script)
 	public float scale = 1;						//Numerical scale of the distance between objects
@@ -25,13 +25,13 @@ public class VerletV2 : MonoBehaviour {
 		previousTimeStep = timeStep;			//Initial condition
 		runThreads();
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		VerletObjectV2 center = (VerletObjectV2)GameObject.Find(CenterBody).GetComponent("VerletObjectV2");
 		CenterBodyOffset = center.position;
 		minicounter++;
-		masterDaysCounter = masterTimeCounter/86400;
+		controllerDaysCounter = controllTimeCounter/86400;
 		//Debug.Log("On frame : "+minicounter+", "+counter+" loops have completed.");
 		runThreads();
 	}
@@ -40,7 +40,7 @@ public class VerletV2 : MonoBehaviour {
 		float tmpTs = timeStep;													//Temperory timestep to prevent input mess
 		if(multiThreadFlag == multithreadedJobs.Length && timeStep != 0) {		//If the threads have completed
 			float tmppTs = previousTimeStep;
-			masterTimeCounter += previousTimeStep;
+			controllTimeCounter += previousTimeStep;
 			counter += 1;														//Increase the counter of how many loops have gone through
 			multiThreadFlag = 0;												//Flag that there are threads running
 			massObject = GameObject.FindGameObjectsWithTag("massObject");		//Gathers all of the massObjects for calculation

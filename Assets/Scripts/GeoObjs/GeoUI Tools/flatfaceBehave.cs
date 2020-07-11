@@ -14,9 +14,9 @@ using UnityEngine;
 namespace IMRE.HandWaver
 {
 /// <summary>
-/// MasterGeoObj for planes.
+/// AbstractGeoObj for planes.
 /// </summary>
-	class flatfaceBehave : MasterGeoObj
+	class flatfaceBehave : AbstractGeoObj
 	{
 
 		#region Constructors
@@ -33,12 +33,12 @@ namespace IMRE.HandWaver
             }
         }
 
-        internal override void SnapToFigure(MasterGeoObj toObj)
+        internal override void SnapToFigure(AbstractGeoObj toObj)
 		{
 			// do nothing
 		}
 
-		internal override void GlueToFigure(MasterGeoObj toObj)
+		internal override void GlueToFigure(AbstractGeoObj toObj)
 		{
 			// do nothing
 		}

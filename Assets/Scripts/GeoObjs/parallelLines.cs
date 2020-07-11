@@ -35,7 +35,7 @@ namespace IMRE.HandWaver
 
         public straightEdgeBehave otherLine;
 
-        public List<MasterGeoObj> attachedObjs;
+        public List<AbstractGeoObj> attachedObjs;
 
         private void Update()
         {
@@ -45,7 +45,7 @@ namespace IMRE.HandWaver
                 otherLine.transform.rotation = this.transform.rotation;
             }
 
-            foreach (MasterGeoObj obj in attachedObjs)
+            foreach (AbstractGeoObj obj in attachedObjs)
             {
                 Vector3 newpos = Vector3.Project(obj.Position3 - this.Position3, normalDir) + this.Position3;
                 if (obj.Position3 != newpos)

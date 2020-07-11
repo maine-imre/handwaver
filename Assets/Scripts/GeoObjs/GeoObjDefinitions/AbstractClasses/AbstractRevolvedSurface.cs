@@ -16,7 +16,7 @@ namespace IMRE.HandWaver
 /// Revolved surface from line segment
 /// Will be refactored in new geometery kernel.
 /// </summary>
-	abstract class AbstractRevolvedSurface : MasterGeoObj
+	abstract class AbstractRevolvedSurface : AbstractGeoObj
     {
 
 		public Vector3 endpoint1;

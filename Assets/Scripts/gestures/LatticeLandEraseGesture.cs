@@ -16,7 +16,7 @@ namespace IMRE.HandWaver.Interface
 	public class LatticeLandEraseGesture : Leap.Unity.Gestures.OneHandedGesture
 	{
 		private float maximumRangeToSelect = .05f;
-		private MasterGeoObj closestObj;
+		private AbstractGeoObj closestObj;
 
 		protected override bool ShouldGestureActivate(Hand hand)
 		{
@@ -153,7 +153,7 @@ namespace IMRE.HandWaver.Interface
 			float shortestDist = Mathf.Infinity;
 			closestObj = null;
 
-			foreach (MasterGeoObj mgo in FindObjectsOfType<MasterGeoObj>().Where(g => (g.GetComponent<AnchorableBehaviour>() == null || (g.GetComponent<AnchorableBehaviour>() != null && !g.GetComponent<AnchorableBehaviour>().isAttached))).Where(g => g.GetComponent<MasterGeoObj>().figType != GeoObjType.point))
+			foreach (AbstractGeoObj mgo in FindObjectsOfType<AbstractGeoObj>().Where(g => (g.GetComponent<AnchorableBehaviour>() == null || (g.GetComponent<AnchorableBehaviour>() != null && !g.GetComponent<AnchorableBehaviour>().isAttached))).Where(g => g.GetComponent<AbstractGeoObj>().figType != GeoObjType.point))
 			{
 				float distance = mgo.LocalDistanceToClosestPoint(hand.PalmPosition.ToVector3());
 

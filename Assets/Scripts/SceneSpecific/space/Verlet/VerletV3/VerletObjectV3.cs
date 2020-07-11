@@ -39,7 +39,7 @@ public class VerletObjectV3 : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		double time = controlScript.masterTimeCounter;
+		double time = controlScript.controllTimeCounter;
 		scale = controlScript.scale;
 		if(rotation != 0){
 			this.transform.rotation *= Quaternion.AngleAxis((float)(time-oldSecondCounter)*(360/(rotation*86400)), Vector3.up);

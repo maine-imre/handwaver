@@ -16,16 +16,16 @@ namespace IMRE.HandWaver
 /// Polygon from list of points
 /// Will be refactored in new geometery kernel.
 /// </summary>
-	abstract class AbstractPolygon : MasterGeoObj
+	abstract class AbstractPolygon : AbstractGeoObj
 	{
 		public bool skewable = true;
 
 		public List<AbstractPoint> pointList = new List<AbstractPoint>();
-		public List<MasterGeoObj> pointListMGO
+		public List<AbstractGeoObj> pointListMGO
 		{
 			get
 			{
-				return pointList.Cast<MasterGeoObj>().ToList();
+				return pointList.Cast<AbstractGeoObj>().ToList();
 			}
 		}
 		public List<AbstractLineSegment> lineList = new List<AbstractLineSegment>(); //clockwise

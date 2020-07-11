@@ -162,7 +162,7 @@ namespace IMRE.HandWaver
 
 			DependentRevolvedSurface drs = GeoObjConstruction.dRevSurface(newPoint.GetComponent<AbstractPoint>(), attachedLine, normDir);
 			HW_GeoSolver.ins.AddDependence(drs, newPoint);
-            HW_GeoSolver.ins.AddDependence(drs, attachedLine.GetComponent<MasterGeoObj>());
+            HW_GeoSolver.ins.AddDependence(drs, attachedLine.GetComponent<AbstractGeoObj>());
 			#endregion
 		}
 
@@ -184,9 +184,9 @@ namespace IMRE.HandWaver
 
 
 			sphere.gameObject.tag = "Sphere";
-			sphere.GetComponent<MasterGeoObj>().figType = GeoObjType.sphere;
-			HW_GeoSolver.ins.addComponent(sphere.GetComponent<MasterGeoObj>());
-			HW_GeoSolver.ins.AddDependence(sphere, attachedArc.GetComponent<MasterGeoObj>());
+			sphere.GetComponent<AbstractGeoObj>().figType = GeoObjType.sphere;
+			HW_GeoSolver.ins.addComponent(sphere.GetComponent<AbstractGeoObj>());
+			HW_GeoSolver.ins.AddDependence(sphere, attachedArc.GetComponent<AbstractGeoObj>());
 			#endregion
 		}
 
@@ -218,7 +218,7 @@ namespace IMRE.HandWaver
 			Vector3 spindleCenter = parentSE.GetComponent<straightEdgeBehave>().center;
 			Vector3 normal = parentSE.GetComponent<straightEdgeBehave>().normalDir;
 
-			foreach (MasterGeoObj geoObj in FindObjectsOfType<MasterGeoObj>().Where(geoObj => (geoObj.IsSelected && geoObj.figType != GeoObjType.straightedge)))
+			foreach (AbstractGeoObj geoObj in FindObjectsOfType<AbstractGeoObj>().Where(geoObj => (geoObj.IsSelected && geoObj.figType != GeoObjType.straightedge)))
 			{
 				switch (geoObj.figType)
 				{
@@ -355,8 +355,8 @@ namespace IMRE.HandWaver
 		public void hoist()
 		{
 			#region Hoist
-			MasterGeoObj[] selObj = FindObjectsOfType<MasterGeoObj>().Where(o => ((o.figType != GeoObjType.point) && o.IsSelected)).ToArray();
-			foreach (MasterGeoObj currObj in selObj)
+			AbstractGeoObj[] selObj = FindObjectsOfType<AbstractGeoObj>().Where(o => ((o.figType != GeoObjType.point) && o.IsSelected)).ToArray();
+			foreach (AbstractGeoObj currObj in selObj)
 			{
 				switch (currObj.figType)
 				{
@@ -422,9 +422,9 @@ namespace IMRE.HandWaver
 		}
 		public void rotate()
 		{
-			List<MasterGeoObj> objToRotate = new List<MasterGeoObj>();
+			List<AbstractGeoObj> objToRotate = new List<AbstractGeoObj>();
 
-			foreach (MasterGeoObj geoObj in FindObjectsOfType<MasterGeoObj>().Where(geoObj => (geoObj.IsSelected && geoObj.figType != GeoObjType.straightedge)))
+			foreach (AbstractGeoObj geoObj in FindObjectsOfType<AbstractGeoObj>().Where(geoObj => (geoObj.IsSelected && geoObj.figType != GeoObjType.straightedge)))
 			{
 
 				switch (geoObj.figType)
@@ -438,16 +438,16 @@ namespace IMRE.HandWaver
 					case GeoObjType.line:
 						if (geoObj.GetComponent<InteractableLineSegment>() != null)
 						{
-							geoObj.GetComponent<MasterGeoObj>().AddToRManager();
+							geoObj.GetComponent<AbstractGeoObj>().AddToRManager();
 							geoObj.GetComponent<InteractableLineSegment>().point1.AddToRManager();
 							geoObj.GetComponent<InteractableLineSegment>().point2.AddToRManager();
-							if (!objToRotate.Contains(geoObj.GetComponent<InteractableLineSegment>().point1.GetComponent<MasterGeoObj>()))
+							if (!objToRotate.Contains(geoObj.GetComponent<InteractableLineSegment>().point1.GetComponent<AbstractGeoObj>()))
 							{
-								objToRotate.Add(geoObj.GetComponent<InteractableLineSegment>().point1.GetComponent<MasterGeoObj>());
+								objToRotate.Add(geoObj.GetComponent<InteractableLineSegment>().point1.GetComponent<AbstractGeoObj>());
 							}
-							if (!objToRotate.Contains(geoObj.GetComponent<InteractableLineSegment>().point2.GetComponent<MasterGeoObj>()))
+							if (!objToRotate.Contains(geoObj.GetComponent<InteractableLineSegment>().point2.GetComponent<AbstractGeoObj>()))
 							{
-								objToRotate.Add(geoObj.GetComponent<InteractableLineSegment>().point2.GetComponent<MasterGeoObj>());
+								objToRotate.Add(geoObj.GetComponent<InteractableLineSegment>().point2.GetComponent<AbstractGeoObj>());
 							}
 						}
 						break;
@@ -457,7 +457,7 @@ namespace IMRE.HandWaver
 							if (!objToRotate.Contains(point))
 							{
 								objToRotate.Add(point);
-								point.GetComponent<MasterGeoObj>().AddToRManager();
+								point.GetComponent<AbstractGeoObj>().AddToRManager();
 							}
 						}
 						break;
@@ -466,28 +466,28 @@ namespace IMRE.HandWaver
 						geoObj.GetComponent<AbstractCircle>().normalDir = Quaternion.AngleAxis(deltaRotate, parentSE.normalDir) * geoObj.GetComponent<AbstractCircle>().normalDir;
 						geoObj.transform.RotateAround(parentSE.center, parentSE.normalDir, deltaRotate);
 
-						geoObj.GetComponent<MasterGeoObj>().AddToRManager();
+						geoObj.GetComponent<AbstractGeoObj>().AddToRManager();
 
-						if (!geoObj.GetComponent<DependentCircle>().edge.GetComponent<MasterGeoObj>().IsSelected)
+						if (!geoObj.GetComponent<DependentCircle>().edge.GetComponent<AbstractGeoObj>().IsSelected)
 						{
 							attachedGeoObjs.Add(geoObj.GetComponent<DependentCircle>().edge.transform);
 						}
 						break;
 					case GeoObjType.revolvedsurface:
-						geoObj.GetComponent<MasterGeoObj>().AddToRManager();
+						geoObj.GetComponent<AbstractGeoObj>().AddToRManager();
 
 						attachedGeoObjs.Add(geoObj.transform);
-						if (!objToRotate.Contains(geoObj.GetComponent<DependentRevolvedSurface>().attachedLine.GetComponent<InteractableLineSegment>().point1.GetComponent<MasterGeoObj>()))
+						if (!objToRotate.Contains(geoObj.GetComponent<DependentRevolvedSurface>().attachedLine.GetComponent<InteractableLineSegment>().point1.GetComponent<AbstractGeoObj>()))
 						{
-							objToRotate.Add(geoObj.GetComponent<DependentRevolvedSurface>().attachedLine.GetComponent<InteractableLineSegment>().point1.GetComponent<MasterGeoObj>());
+							objToRotate.Add(geoObj.GetComponent<DependentRevolvedSurface>().attachedLine.GetComponent<InteractableLineSegment>().point1.GetComponent<AbstractGeoObj>());
 						}
-						if (!objToRotate.Contains(geoObj.GetComponent<DependentRevolvedSurface>().attachedLine.GetComponent<InteractableLineSegment>().point2.GetComponent<MasterGeoObj>()))
+						if (!objToRotate.Contains(geoObj.GetComponent<DependentRevolvedSurface>().attachedLine.GetComponent<InteractableLineSegment>().point2.GetComponent<AbstractGeoObj>()))
 						{
-							objToRotate.Add(geoObj.GetComponent<DependentRevolvedSurface>().attachedLine.GetComponent<InteractableLineSegment>().point2.GetComponent<MasterGeoObj>());
+							objToRotate.Add(geoObj.GetComponent<DependentRevolvedSurface>().attachedLine.GetComponent<InteractableLineSegment>().point2.GetComponent<AbstractGeoObj>());
 						}
 						break;
 					default:
-						geoObj.GetComponent<MasterGeoObj>().AddToRManager();
+						geoObj.GetComponent<AbstractGeoObj>().AddToRManager();
 
 						geoObj.transform.Rotate(parentSE.normalDir, deltaRotate);
 						//geoObj.transform.rotation = Quaternion.Euler(rotationVal, 0f, 0f);
@@ -497,7 +497,7 @@ namespace IMRE.HandWaver
 				}
 
 			}
-			foreach (MasterGeoObj geoObj in objToRotate)
+			foreach (AbstractGeoObj geoObj in objToRotate)
 			{
 				//this should only contain point for now, but we leave a switch for future uses...
 				switch (geoObj.figType)
@@ -505,7 +505,7 @@ namespace IMRE.HandWaver
 					case GeoObjType.point:
 						geoObj.transform.RotateAround(parentSE.center, parentSE.normalDir, deltaRotate);
 						geoObj.transform.Rotate(parentSE.normalDir, deltaRotate);
-						geoObj.GetComponent<MasterGeoObj>().AddToRManager();
+						geoObj.GetComponent<AbstractGeoObj>().AddToRManager();
 						break;
 				}
 			}
